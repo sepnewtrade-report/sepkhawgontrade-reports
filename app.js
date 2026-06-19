@@ -24,8 +24,8 @@ const elements = {
     
     // Stats
     statTotal: document.getElementById('stat-total-reports'),
-    statPreMarket: document.getElementById('stat-pre-market'),
-    statCosmic: document.getElementById('stat-cosmic'),
+    statSummary: document.getElementById('stat-summary'),
+    statSmallCap: document.getElementById('stat-small-cap'),
     
     // Reader Elements
     backBtn: document.getElementById('back-to-catalog'),
@@ -161,12 +161,12 @@ function closeMobileSidebar() {
 // Render Stats Section
 function renderStats() {
     const total = appState.reports.length;
-    const preMarket = appState.reports.filter(r => r.category === 'Pre-Market Analysis').length;
-    const cosmic = appState.reports.filter(r => r.category === 'Cosmic Trade Signal').length;
+    const summary = appState.reports.filter(r => r.category === 'Market Summary').length;
+    const smallCap = appState.reports.filter(r => r.category === 'Small Cap Radar').length;
     
     elements.statTotal.textContent = total;
-    elements.statPreMarket.textContent = preMarket;
-    elements.statCosmic.textContent = cosmic;
+    elements.statSummary.textContent = summary;
+    elements.statSmallCap.textContent = smallCap;
     document.getElementById('count-all').textContent = total;
 }
 

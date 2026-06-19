@@ -490,6 +490,11 @@ body {
     color: var(--accent-purple);
 }
 
+.stat-card.accent-gold .stat-icon {
+    background-color: var(--accent-gold-glow);
+    color: var(--accent-gold);
+}
+
 .stat-info {
     display: flex;
     flex-direction: column;
