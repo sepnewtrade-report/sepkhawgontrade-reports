@@ -64,6 +64,12 @@ function extractMetadata(filePath, relativePath) {
     title = headingMatch[1].replace(/[📊🌌🏆📈🚨📰🔥🔍💼💎👑]/g, '').trim(); // Strip emojis for cleaner indexing, but keep title
   }
 
+  // Check if it is a script file by content keywords in the heading
+  const titleLower = title.toLowerCase();
+  if (titleLower.includes('สคริปต์') || titleLower.includes('script') || titleLower.includes('youtube')) {
+    return null;
+  }
+
   const categoryInfo = getCategory(filename);
   const dateStr = parseDate(filename) || new Date(stats.mtime).toISOString().split('T')[0];
 
@@ -102,7 +108,10 @@ function scanDir(dir, relativeDir = '') {
           nameLower !== 'walkthrough.md' &&
           nameLower !== 'readme.md' &&
           !nameLower.includes('script')) {
-        results.push(extractMetadata(filePath, relPath));
+        const meta = extractMetadata(filePath, relPath);
+        if (meta) {
+          results.push(meta);
+        }
       }
     }
   });
