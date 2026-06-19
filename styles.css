@@ -1157,6 +1157,19 @@ body {
     text-align: center;
 }
 
+/* Mermaid Diagram Styling */
+.markdown-body .mermaid {
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+    overflow-x: auto;
+    width: 100%;
+}
+
 /* ==========================================================================
    Responsive Design & Mobile Overrides
    ========================================================================== */

@@ -490,6 +490,47 @@ function displayParsedHTML(markdown) {
             }
         }
     });
+
+    // 5. Post-process code blocks for Mermaid diagrams
+    const mermaidBlocks = elements.markdownContainer.querySelectorAll('pre code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+        mermaidBlocks.forEach((codeEl, index) => {
+            const preEl = codeEl.parentElement;
+            const mermaidCode = codeEl.textContent;
+            
+            const div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = mermaidCode;
+            
+            preEl.parentNode.replaceChild(div, preEl);
+        });
+        
+        // Render with Mermaid
+        const runMermaid = () => {
+            window.mermaid.run({
+                querySelector: '.mermaid'
+            }).catch(err => {
+                console.error('Error rendering Mermaid diagram:', err);
+            });
+        };
+        
+        if (window.mermaid) {
+            runMermaid();
+        } else {
+            // Fallback retry loop if the library is still loading
+            let retries = 0;
+            const interval = setInterval(() => {
+                retries++;
+                if (window.mermaid) {
+                    clearInterval(interval);
+                    runMermaid();
+                } else if (retries >= 50) {
+                    clearInterval(interval);
+                    console.error('Mermaid.js library loading timeout.');
+                }
+            }, 100);
+        }
+    }
 }
 
 // Clean [!ALERT] syntax out of blockquote paragraph markup
