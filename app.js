@@ -475,17 +475,24 @@ function displayParsedHTML(markdown) {
     });
 
     // 4. Adjust image source paths to make sure they display correctly
-    // If the image tag refers to "Logo master.png" or "logo.png" and is in a folder, fix it.
     const images = elements.markdownContainer.querySelectorAll('img');
     images.forEach(img => {
         const src = img.getAttribute('src');
-        if (src && !src.startsWith('http') && !src.startsWith('data:')) {
-            // If the report is in a subdirectory (e.g. 'MEMBERSHIP CONTENT SYSTEM/file.md'),
-            // but the image is actually at the root level, adjust the image path.
-            if (appState.selectedReport.path.includes('/')) {
-                // If img path is just 'Logo master.png', make it '../Logo master.png'
-                if (!src.includes('/')) {
-                    img.setAttribute('src', '../' + src);
+        if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/')) {
+            // URL decode and normalize to handle spaces, %20, and capitalization
+            const decodedSrc = decodeURIComponent(src).trim().toLowerCase();
+            
+            if (decodedSrc === 'logo master.png' || decodedSrc === 'logo.png') {
+                // The logo is always at the root of the site.
+                // Since index.html runs at the root, the path relative to index.html is simply 'Logo master.png'
+                img.setAttribute('src', 'Logo master.png');
+            } else {
+                // For other images, resolve them relative to the report's directory
+                const reportPath = appState.selectedReport.path;
+                const lastSlashIndex = reportPath.lastIndexOf('/');
+                if (lastSlashIndex !== -1) {
+                    const reportDir = reportPath.substring(0, lastSlashIndex + 1); // e.g. "Folder/"
+                    img.setAttribute('src', reportDir + src);
                 }
             }
         }
