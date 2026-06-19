@@ -1,3 +1,5 @@
+<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
+
 # 🌍 Global Market Recap — 2026-06-05
 **ช่วงวันที่:** 1 - 5 มิถุนายน 2026  
 **ผู้ดำเนินรายการ:** [ชื่อผู้ดำเนินรายการ/เสพข่าวก่อนเทรด]  

@@ -1,3 +1,5 @@
+<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
+
 # 📊 สรุปจบ ทันโลกหุ้น — 2026-06-10
 **ช่วง:** สรุปจบ ทันโลกหุ้น  
 **ประจำวันที่:** 10 มิถุนายน 2026  
