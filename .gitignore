@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Agent Config & Logs
+.agents/
+.gemini/
+*.log
+task.md
+implementation_plan.md
+walkthrough.md

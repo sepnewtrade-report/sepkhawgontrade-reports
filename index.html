@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เสพข่าวก่อนเทรด หุ้นอเมริกา | Premium Reports Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Glowing Gradient Bar -->
+    <div class="top-glow"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-wrapper">
+                    <img src="Logo master.png" alt="SepKhawGonTrade Logo" class="channel-logo" onerror="this.src='https://placehold.co/150x150/151c2c/ffffff?text=Logo';">
+                </div>
+                <h1 class="sidebar-title">เสพข่าวก่อนเทรด</h1>
+                <p class="sidebar-subtitle">หุ้นอเมริกา</p>
+            </div>
+
+            <!-- Search Area -->
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="ค้นหาบทวิเคราะห์..." autocomplete="off">
+                <button id="clear-search" class="clear-btn" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Categories list -->
+            <nav class="categories-nav">
+                <div class="nav-section-title">มิติต่างๆ ในตลาดการเงิน</div>
+                <ul class="category-list" id="category-list">
+                    <li class="category-item active" data-category="all">
+                        <i class="fa-solid fa-list-ul"></i>
+                        <span>รายงานทั้งหมด</span>
+                        <span class="badge count-badge" id="count-all">0</span>
+                    </li>
+                    <!-- Dynamic categories will be inserted here -->
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>&copy; 2026 SepKhawGonTrade</p>
+                <div class="social-links">
+                    <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" title="Premium Telegram"><i class="fa-solid fa-paper-plane"></i></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Mobile Navigation Bar -->
+            <header class="mobile-header">
+                <button id="mobile-toggle" class="menu-toggle-btn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+                <div class="mobile-logo-title">
+                    <span>เสพข่าวก่อนเทรด</span>
+                </div>
+                <div class="mobile-logo-placeholder">
+                    <img src="Logo master.png" alt="Logo" class="mobile-logo" onerror="this.style.display='none';">
+                </div>
+            </header>
+
+            <!-- Dashboard/Catalog View -->
+            <section id="catalog-view" class="content-section active">
+                <div class="section-header">
+                    <div class="header-text-group">
+                        <h2 class="section-title" id="section-title">คลังบทวิเคราะห์และรายงานล่าสุด</h2>
+                        <p class="section-subtitle">อัปเดตข้อมูลเจาะลึกตลาดหุ้นสหรัฐฯ เรียลไทม์ส่งตรงจากห้องเทรด</p>
+                    </div>
+                    <div class="status-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="indicator-text">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">รายงานทั้งหมด</span>
+                            <span class="stat-value" id="stat-total-reports">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card accent-green">
+                        <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">วิเคราะห์ Pre-Market</span>
+                            <span class="stat-value" id="stat-pre-market">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-card accent-purple">
+                        <div class="stat-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">สัญญาณเทรดดวงดาว</span>
+                            <span class="stat-value" id="stat-cosmic">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Grid -->
+                <div class="grid-controls">
+                    <div class="results-info" id="results-info">พบทั้งหมด 0 รายการ</div>
+                    <div class="sort-control">
+                        <label for="sort-select">เรียงตาม:</label>
+                        <select id="sort-select">
+                            <option value="newest">ใหม่ที่สุด</option>
+                            <option value="oldest">เก่าที่สุด</option>
+                            <option value="alphabetical">ชื่อบทความ A-Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="reports-grid" id="reports-grid">
+                    <!-- Dynamic report cards will be inserted here -->
+                    <div class="loading-spinner">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
+                        <p>กำลังดึงข้อมูลบทวิเคราะห์...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Reader View -->
+            <section id="reader-view" class="content-section">
+                <!-- Navigation back bar -->
+                <div class="reader-control-bar">
+                    <button id="back-to-catalog" class="back-btn">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                        <span>กลับไปหน้าคลังรายงาน</span>
+                    </button>
+                    
+                    <div class="reader-actions">
+                        <button id="btn-copy-link" class="action-btn" title="คัดลอกลิงก์รายงาน">
+                            <i class="fa-solid fa-link"></i>
+                        </button>
+                        <button id="btn-print" class="action-btn" title="พิมพ์หน้านี้ / บันทึกเป็น PDF">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                        <button id="btn-raw" class="action-btn" title="ดูซอร์สโค้ด Markdown">
+                            <i class="fa-solid fa-code"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Report Container Wrapper -->
+                <article class="report-article-wrapper">
+                    <!-- Custom Header area -->
+                    <div class="article-meta-header">
+                        <span class="article-category-badge" id="reader-category">PRE-MARKET ANALYSIS</span>
+                        <h1 class="article-title" id="reader-title">หัวข้อรายงานวิเคราะห์</h1>
+                        <div class="article-meta-info">
+                            <span class="meta-item"><i class="fa-regular fa-calendar"></i> <span id="reader-date">18 มิถุนายน 2026</span></span>
+                            <span class="meta-item"><i class="fa-regular fa-file-lines"></i> ขนาด <span id="reader-size">0 KB</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Rendered HTML Markdown Container -->
+                    <div class="markdown-body" id="markdown-container">
+                        <!-- Parsed content goes here -->
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Marked JS for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- DOMPurify for HTML sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <!-- Custom Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
