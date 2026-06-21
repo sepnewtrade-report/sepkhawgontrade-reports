@@ -144,6 +144,7 @@ function handleRouting() {
         openReport(filePath);
     } else {
         closeReport();
+        renderCatalog();
     }
 }
 
@@ -426,7 +427,7 @@ async function renderReportContent(reportMeta) {
         appState.rawMarkdown = markdown;
         
         // Render
-        displayParsedHTML(markdown);
+        await displayParsedHTML(markdown);
     } catch (error) {
         console.error('Error loading report file:', error);
         elements.markdownContainer.innerHTML = `
@@ -439,8 +440,28 @@ async function renderReportContent(reportMeta) {
     }
 }
 
+let mermaidLoaded = null;
+
+async function loadMermaid() {
+    if (mermaidLoaded) return mermaidLoaded;
+    try {
+        const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose'
+        });
+        window.mermaid = mermaid;
+        mermaidLoaded = mermaid;
+        return mermaid;
+    } catch (err) {
+        console.error('Failed to load Mermaid dynamically:', err);
+        throw err;
+    }
+}
+
 // Convert Markdown to HTML & Format Custom Elements (Alerts)
-function displayParsedHTML(markdown) {
+async function displayParsedHTML(markdown) {
     // 1. Compile Markdown using marked
     let rawHtml = marked.parse(markdown);
     
@@ -512,30 +533,14 @@ function displayParsedHTML(markdown) {
             preEl.parentNode.replaceChild(div, preEl);
         });
         
-        // Render with Mermaid
-        const runMermaid = () => {
-            window.mermaid.run({
+        // Dynamically load Mermaid and render
+        try {
+            const mermaid = await loadMermaid();
+            await mermaid.run({
                 querySelector: '.mermaid'
-            }).catch(err => {
-                console.error('Error rendering Mermaid diagram:', err);
             });
-        };
-        
-        if (window.mermaid) {
-            runMermaid();
-        } else {
-            // Fallback retry loop if the library is still loading
-            let retries = 0;
-            const interval = setInterval(() => {
-                retries++;
-                if (window.mermaid) {
-                    clearInterval(interval);
-                    runMermaid();
-                } else if (retries >= 50) {
-                    clearInterval(interval);
-                    console.error('Mermaid.js library loading timeout.');
-                }
-            }, 100);
+        } catch (err) {
+            console.error('Error rendering Mermaid diagram:', err);
         }
     }
 }
@@ -561,7 +566,7 @@ function closeReport() {
 }
 
 // Toggle between Rendered HTML and Raw Markdown view
-function toggleRawMarkdown() {
+async function toggleRawMarkdown() {
     if (appState.viewMode === 'html') {
         appState.viewMode = 'raw';
         elements.btnRaw.innerHTML = '<i class="fa-solid fa-eye"></i>';
@@ -582,7 +587,7 @@ function toggleRawMarkdown() {
         appState.viewMode = 'html';
         elements.btnRaw.innerHTML = '<i class="fa-solid fa-code"></i>';
         elements.btnRaw.title = 'ดูซอร์สโค้ด Markdown';
-        displayParsedHTML(appState.rawMarkdown);
+        await displayParsedHTML(appState.rawMarkdown);
     }
 }
 
