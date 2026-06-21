@@ -353,8 +353,18 @@ function renderCategoriesMenu() {
     
     // Clear dynamic items (keep first "all" item)
     const allItem = elements.categoryList.querySelector('[data-category="all"]');
+    if (allItem) {
+        const t = translations[appState.lang];
+        const textSpan = allItem.querySelector('span:not(.badge)');
+        if (textSpan) {
+            textSpan.textContent = t.allReports;
+        }
+    }
+    
     elements.categoryList.innerHTML = '';
-    elements.categoryList.appendChild(allItem);
+    if (allItem) {
+        elements.categoryList.appendChild(allItem);
+    }
     
     // Sort categories alphabetically
     uniqueCategories.sort().forEach(catName => {
