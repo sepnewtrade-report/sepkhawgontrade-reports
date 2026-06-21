@@ -5,8 +5,157 @@ let appState = {
     searchQuery: '',
     sortBy: 'newest',
     selectedReport: null,
-    viewMode: 'html' // 'html' or 'raw'
+    viewMode: 'html', // 'html' or 'raw'
+    lang: localStorage.getItem('sep_lang') || 'th'
 };
+
+const translations = {
+    th: {
+        channelTitle: "เสพข่าวก่อนเทรด",
+        channelSubtitle: "หุ้นอเมริกา",
+        searchPlaceholder: "ค้นหาบทวิเคราะห์...",
+        dimensionsTitle: "มิติต่างๆ ในตลาดการเงิน",
+        allReports: "รายงานทั้งหมด",
+        vaultTitle: "คลังบทวิเคราะห์และรายงานล่าสุด",
+        vaultSubtitle: "อัปเดตข้อมูลเจาะลึกตลาดหุ้นสหรัฐฯ เรียลไทม์ส่งตรงจากห้องเทรด",
+        statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว",
+        statTotalReports: "รายงานทั้งหมด",
+        statSummary: "สรุปจบ ทันโลกหุ้น",
+        statSmallCap: "Small Cap Radar",
+        foundCount: "พบทั้งหมด {count} รายการ",
+        sortByLabel: "เรียงตาม:",
+        sortNewest: "ใหม่ที่สุด",
+        sortOldest: "เก่าที่สุด",
+        sortAlphabetical: "ชื่อบทความ A-Z",
+        backToCatalog: "กลับไปหน้าคลังรายงาน",
+        copyLinkTitle: "คัดลอกลิงก์รายงาน",
+        printTitle: "พิมพ์หน้านี้ / บันทึกเป็น PDF",
+        rawCodeTitle: "ดูซอร์สโค้ด Markdown",
+        viewNormalTitle: "ดูหน้าเอกสารปกติ (HTML)",
+        metaSize: "ขนาด {size} KB",
+        errorLoading: "ไม่สามารถโหลดคลังรายงานได้",
+        errorLoadingSub: "กรุณาตรวจสอบว่าคุณได้รันสคริปต์ {code} เพื่อสร้างฐานข้อมูลแล้ว",
+        noResults: "ไม่พบผลการค้นหา",
+        noResultsSub: "กรุณาลองป้อนคำค้นหาอื่นหรือเลือกหมวดหมู่ที่ต่างออกไป",
+        loadingSpinner: "กำลังดึงข้อมูลบทวิเคราะห์...",
+        reportNotFound: "ไม่พบไฟล์รายงาน",
+        reportNotFoundSub: "ไฟล์รายงานที่ระบุ ({path}) ไม่มีอยู่ในสารบบคลังบทวิเคราะห์",
+        btnHome: "กลับสู่หน้าหลัก",
+        loadingDocument: "กำลังค้นหาเอกสารในสารบบ...",
+        failedToOpen: "ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้",
+        failedToOpenSub: "อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง ({error})",
+        readDetails: "อ่านรายละเอียด",
+        otherReports: "รายงานทั่วไป"
+    },
+    en: {
+        channelTitle: "SepKhawGonTrade",
+        channelSubtitle: "US Stocks",
+        searchPlaceholder: "Search analysis...",
+        dimensionsTitle: "Market Dimensions",
+        allReports: "All Reports",
+        vaultTitle: "Latest Analysis & Reports Hub",
+        vaultSubtitle: "In-depth US stock market updates, real-time from the trading floor",
+        statusConnected: "News Database Connected",
+        statTotalReports: "Total Reports",
+        statSummary: "Market Summary",
+        statSmallCap: "Small Cap Radar",
+        foundCount: "Found {count} items",
+        sortByLabel: "Sort by:",
+        sortNewest: "Newest First",
+        sortOldest: "Oldest First",
+        sortAlphabetical: "Title A-Z",
+        backToCatalog: "Back to Catalog",
+        copyLinkTitle: "Copy Permalink",
+        printTitle: "Print / Save as PDF",
+        rawCodeTitle: "View Markdown Source",
+        viewNormalTitle: "View Normal Document (HTML)",
+        metaSize: "Size {size} KB",
+        errorLoading: "Failed to Load Reports Hub",
+        errorLoadingSub: "Please check if you have run {code} to generate the database.",
+        noResults: "No Results Found",
+        noResultsSub: "Please try a different search query or select another category.",
+        loadingSpinner: "Fetching analysis reports...",
+        reportNotFound: "Report Not Found",
+        reportNotFoundSub: "The specified report ({path}) does not exist in the catalog directory.",
+        btnHome: "Back to Home",
+        loadingDocument: "Searching for document...",
+        failedToOpen: "Failed to Open Analysis File",
+        failedToOpenSub: "The file might be deleted, moved, or access is blocked ({error})",
+        readDetails: "Read Details",
+        otherReports: "General Reports"
+    }
+};
+
+function updateUILanguage() {
+    const lang = appState.lang;
+    const t = translations[lang];
+    
+    // Save language to localStorage
+    localStorage.setItem('sep_lang', lang);
+    
+    // Update text elements
+    document.querySelectorAll('.sidebar-title').forEach(el => el.textContent = t.channelTitle);
+    document.querySelectorAll('.sidebar-subtitle').forEach(el => el.textContent = t.channelSubtitle);
+    document.querySelectorAll('.mobile-logo-title span').forEach(el => el.textContent = t.channelTitle);
+    
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+    
+    const navSecTitle = document.querySelector('.nav-section-title');
+    if (navSecTitle) navSecTitle.textContent = t.dimensionsTitle;
+    
+    // Update Stats titles
+    const statLabels = document.querySelectorAll('.stat-card .stat-label');
+    if (statLabels.length >= 3) {
+        statLabels[0].textContent = t.statTotalReports;
+        statLabels[1].textContent = t.statSummary;
+        statLabels[2].textContent = t.statSmallCap;
+    }
+    
+    // Update Controls Sort By label
+    const sortLabel = document.querySelector('.sort-control label');
+    if (sortLabel) sortLabel.textContent = t.sortByLabel;
+    
+    // Update Sort Options
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect && sortSelect.options.length >= 3) {
+        sortSelect.options[0].text = t.sortNewest;
+        sortSelect.options[1].text = t.sortOldest;
+        sortSelect.options[2].text = t.sortAlphabetical;
+    }
+    
+    // Back to Catalog Button text
+    const backBtnSpan = document.querySelector('#back-to-catalog span');
+    if (backBtnSpan) backBtnSpan.textContent = t.backToCatalog;
+    
+    // Action buttons titles
+    if (elements.btnCopyLink) elements.btnCopyLink.title = t.copyLinkTitle;
+    if (elements.btnPrint) elements.btnPrint.title = t.printTitle;
+    if (elements.btnRaw) elements.btnRaw.title = appState.viewMode === 'html' ? t.rawCodeTitle : t.viewNormalTitle;
+    
+    // Update active class on switcher buttons
+    document.querySelectorAll('.lang-switcher').forEach(switcher => {
+        switcher.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === lang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    });
+    
+    // Refresh menus and catalog
+    renderCategoriesMenu();
+    renderCatalog();
+    
+    // Localize opened report headers if visible
+    if (appState.selectedReport) {
+        const report = appState.selectedReport;
+        if (elements.readerCategory) elements.readerCategory.textContent = lang === 'th' ? report.categoryThai : report.category;
+        if (elements.readerDate) elements.readerDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(report.date, lang)}`;
+        if (elements.readerSize) elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ${t.metaSize.replace('{size}', (report.size / 1024).toFixed(1))}`;
+    }
+}
 
 // DOM Elements
 const elements = {
@@ -58,6 +207,7 @@ if (document.readyState === 'loading') {
 async function initApp() {
     setupEventListeners();
     await fetchReportsIndex();
+    updateUILanguage();
     handleRouting();
 }
 
@@ -97,6 +247,19 @@ function setupEventListeners() {
     elements.btnPrint.addEventListener('click', () => window.print());
     elements.btnRaw.addEventListener('click', toggleRawMarkdown);
     
+    // Language Switchers
+    document.querySelectorAll('.lang-switcher').forEach(switcher => {
+        switcher.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetLang = btn.getAttribute('data-lang');
+                if (appState.lang !== targetLang) {
+                    appState.lang = targetLang;
+                    updateUILanguage();
+                }
+            });
+        });
+    });
+    
     // Listen for hash change for routing
     window.addEventListener('hashchange', handleRouting);
 }
@@ -128,11 +291,12 @@ async function fetchReportsIndex() {
         renderCategoriesMenu();
     } catch (error) {
         console.error('Error fetching index:', error);
+        const t = translations[appState.lang];
         elements.reportsGrid.innerHTML = `
             <div class="error-state">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <h3>ไม่สามารถโหลดคลังรายงานได้</h3>
-                <p>กรุณาตรวจสอบว่าคุณได้รันสคริปต์ <code>node generate-index.js</code> เพื่อสร้างฐานข้อมูลแล้ว</p>
+                <h3>${t.errorLoading}</h3>
+                <p>${t.errorLoadingSub.replace('{code}', '<code>node generate-index.js</code>')}</p>
             </div>
         `;
     }
@@ -194,7 +358,8 @@ function renderCategoriesMenu() {
     
     // Sort categories alphabetically
     uniqueCategories.sort().forEach(catName => {
-        const thaiName = appState.reports.find(r => r.category === catName)?.categoryThai || catName;
+        const catObj = appState.reports.find(r => r.category === catName);
+        const displayName = appState.lang === 'th' ? (catObj?.categoryThai || catName) : catName;
         
         // Assign icon based on category type
         let iconClass = 'fa-file-lines';
@@ -220,7 +385,7 @@ function renderCategoriesMenu() {
         li.setAttribute('data-category', catName);
         li.innerHTML = `
             <i class="fa-solid ${iconClass}"></i>
-            <span>${thaiName}</span>
+            <span>${displayName}</span>
             <span class="badge count-badge">${categoriesCount[catName]}</span>
         `;
         
@@ -252,13 +417,15 @@ function renderCategoriesMenu() {
 // Filter, Sort, and Render Reports List
 function renderCatalog() {
     let filtered = [...appState.reports];
+    const t = translations[appState.lang];
     
     // Update main section title
     if (appState.activeCategory === 'all') {
-        elements.sectionTitle.textContent = "คลังบทวิเคราะห์และรายงานล่าสุด";
+        elements.sectionTitle.textContent = t.vaultTitle;
     } else {
         const currentCat = appState.reports.find(r => r.category === appState.activeCategory);
-        elements.sectionTitle.textContent = currentCat ? currentCat.categoryThai : "บทวิเคราะห์";
+        const catNameDisplay = appState.lang === 'th' ? currentCat?.categoryThai : currentCat?.category;
+        elements.sectionTitle.textContent = catNameDisplay || appState.activeCategory;
     }
     
     // 1. Filter by category (On home page 'all', show ONLY the latest report of each category)
@@ -288,7 +455,7 @@ function renderCatalog() {
         filtered.sort((a, b) => a.title.localeCompare(b.title, 'th'));
     }
     
-    elements.resultsInfo.textContent = `พบทั้งหมด ${filtered.length} รายการ`;
+    elements.resultsInfo.textContent = t.foundCount.replace('{count}', filtered.length);
     
     // Clear grid
     elements.reportsGrid.innerHTML = '';
@@ -297,8 +464,8 @@ function renderCatalog() {
         elements.reportsGrid.innerHTML = `
             <div class="no-results">
                 <i class="fa-regular fa-folder-open"></i>
-                <h3>ไม่พบผลการค้นหา</h3>
-                <p>กรุณาลองป้อนคำค้นหาอื่นหรือเลือกหมวดหมู่ที่ต่างออกไป</p>
+                <h3>${t.noResults}</h3>
+                <p>${t.noResultsSub}</p>
             </div>
         `;
         return;
@@ -335,13 +502,13 @@ function renderCatalog() {
             <div class="card-badge-row">
                 <div style="display: flex; align-items: center; gap: 8px;">
                     ${newBadgeHtml}
-                    <span class="card-date">${formatThaiDate(report.date)}</span>
+                    <span class="card-date">${formatReportDate(report.date, appState.lang)}</span>
                 </div>
             </div>
             <h3 class="card-title">${report.title}</h3>
             <div class="card-footer">
                 <span class="card-size"><i class="fa-regular fa-file"></i> ${kbSize} KB</span>
-                <span class="card-action-text">อ่านรายละเอียด <i class="fa-solid fa-arrow-right"></i></span>
+                <span class="card-action-text">${t.readDetails} <i class="fa-solid fa-arrow-right"></i></span>
             </div>
         `;
         
@@ -354,7 +521,8 @@ function renderCatalog() {
         if (appState.activeCategory === 'all') {
             const group = document.createElement('div');
             group.className = 'report-card-group';
-            group.innerHTML = `<h4 class="report-group-title">${report.categoryThai}</h4>`;
+            const catDisplayName = appState.lang === 'th' ? report.categoryThai : report.category;
+            group.innerHTML = `<h4 class="report-group-title">${catDisplayName}</h4>`;
             group.appendChild(card);
             elements.reportsGrid.appendChild(group);
         } else {
@@ -366,13 +534,14 @@ function renderCatalog() {
 // Open and Render Selected Report
 async function openReport(filePath) {
     const reportMeta = appState.reports.find(r => r.path === filePath);
+    const t = translations[appState.lang];
     
     // Fallback if index hasn't loaded yet or path is not found
     if (!reportMeta) {
         elements.markdownContainer.innerHTML = `
             <div class="loading-spinner">
                 <i class="fa-solid fa-circle-notch fa-spin"></i>
-                <p>กำลังค้นหาเอกสารในสารบบ...</p>
+                <p>${t.loadingDocument}</p>
             </div>
         `;
         // Toggle views
@@ -388,9 +557,9 @@ async function openReport(filePath) {
                 elements.markdownContainer.innerHTML = `
                     <div class="error-state">
                         <i class="fa-solid fa-file-excel"></i>
-                        <h3>ไม่พบไฟล์รายงาน</h3>
-                        <p>ไฟล์รายงานที่ระบุ (<code>${filePath}</code>) ไม่มีอยู่ในสารบบคลังบทวิเคราะห์</p>
-                        <button class="back-btn" onclick="window.location.hash=''"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลัก</button>
+                        <h3>${t.reportNotFound}</h3>
+                        <p>${t.reportNotFoundSub.replace('{path}', `<code>${filePath}</code>`)}</p>
+                        <button class="back-btn" onclick="window.location.hash=''"><i class="fa-solid fa-house"></i> ${t.btnHome}</button>
                     </div>
                 `;
             }
@@ -404,8 +573,11 @@ async function openReport(filePath) {
 async function renderReportContent(reportMeta) {
     appState.selectedReport = reportMeta;
     appState.viewMode = 'html';
+    
+    const t = translations[appState.lang];
+    
     elements.btnRaw.innerHTML = '<i class="fa-solid fa-code"></i>';
-    elements.btnRaw.title = 'ดูซอร์สโค้ด Markdown';
+    elements.btnRaw.title = t.rawCodeTitle;
 
     // Set Header details
     elements.readerTitle.textContent = reportMeta.title;
@@ -612,23 +784,32 @@ function copyReportLink() {
     });
 }
 
-// Helpers: Thai Date formatter
-function formatThaiDate(dateString) {
+// Helpers: localized Date formatter
+function formatReportDate(dateString, lang) {
     if (!dateString) return '';
     
     // Check if the format is YYYY-MM-DD
     const parts = dateString.split('-');
     if (parts.length === 3) {
-        const months = [
+        const thaiMonths = [
             'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
             'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
         ];
+        const enMonths = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
         
         const day = parseInt(parts[2], 10);
-        const monthName = months[parseInt(parts[1], 10) - 1];
-        const year = parseInt(parts[0], 10) + 543; // Convert to Buddhist Era (BE)
+        const monthIndex = parseInt(parts[1], 10) - 1;
         
-        return `${day} ${monthName} ${year}`;
+        if (lang === 'th') {
+            const year = parseInt(parts[0], 10) + 543; // Convert to Buddhist Era (BE)
+            return `${day} ${thaiMonths[monthIndex]} ${year}`;
+        } else {
+            const year = parseInt(parts[0], 10); // Standard Common Era (CE)
+            return `${day} ${enMonths[monthIndex]} ${year}`;
+        }
     }
     
     // Return original string if it is formatted like 'June 2026'

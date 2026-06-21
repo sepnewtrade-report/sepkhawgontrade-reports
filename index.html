@@ -11,7 +11,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Style Sheet -->
-    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <link rel="stylesheet" href="styles.css?v=1.0.2">
 </head>
 <body>
     <!-- Top Glowing Gradient Bar -->
@@ -26,6 +26,11 @@
                 </div>
                 <h1 class="sidebar-title">เสพข่าวก่อนเทรด</h1>
                 <p class="sidebar-subtitle">หุ้นอเมริกา</p>
+                <!-- Language Switcher -->
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="th">TH</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
             </div>
 
             <!-- Search Area -->
@@ -67,6 +72,11 @@
                 </button>
                 <div class="mobile-logo-title">
                     <span>เสพข่าวก่อนเทรด</span>
+                </div>
+                <!-- Language Switcher for Mobile -->
+                <div class="lang-switcher mobile-lang-switcher">
+                    <button class="lang-btn active" data-lang="th">TH</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
                 </div>
                 <div class="mobile-logo-placeholder">
                     <img src="Logo master.png" alt="Logo" class="mobile-logo" onerror="this.style.display='none';">
@@ -184,6 +194,6 @@
     <!-- DOMPurify for HTML sanitization -->
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" defer></script>
     <!-- Custom Application Logic -->
-    <script src="app.js?v=1.0.1" defer></script>
+    <script src="app.js?v=1.0.2" defer></script>
 </body>
 </html>

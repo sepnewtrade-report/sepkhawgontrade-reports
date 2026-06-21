@@ -1170,6 +1170,58 @@ body {
     width: 100%;
 }
 
+/* Language Switcher Styling */
+.lang-switcher {
+    display: inline-flex;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2px;
+    margin-top: 14px;
+    align-items: center;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+.lang-btn:hover {
+    color: var(--text-primary);
+}
+
+.lang-btn.active {
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Sidebar Header Alignment */
+.sidebar-header .lang-switcher {
+    margin-top: 16px;
+}
+
+/* Mobile Header Adjustment */
+.mobile-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-lang-switcher {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: 12px;
+}
+
 /* ==========================================================================
    Responsive Design & Mobile Overrides
    ========================================================================== */
