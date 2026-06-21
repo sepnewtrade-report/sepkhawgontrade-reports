@@ -45,7 +45,9 @@ const translations = {
         failedToOpen: "ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้",
         failedToOpenSub: "อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง ({error})",
         readDetails: "อ่านรายละเอียด",
-        otherReports: "รายงานทั่วไป"
+        otherReports: "รายงานทั่วไป",
+        readFullReport: "อ่านรายงานฉบับเต็ม",
+        latestReportBadge: "รายงานล่าสุด"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -82,7 +84,9 @@ const translations = {
         failedToOpen: "Failed to Open Analysis File",
         failedToOpenSub: "The file might be deleted, moved, or access is blocked ({error})",
         readDetails: "Read Details",
-        otherReports: "General Reports"
+        otherReports: "General Reports",
+        readFullReport: "Read Full Report",
+        latestReportBadge: "Latest Report"
     }
 };
 
@@ -104,12 +108,12 @@ function updateUILanguage() {
     const navSecTitle = document.querySelector('.nav-section-title');
     if (navSecTitle) navSecTitle.textContent = t.dimensionsTitle;
     
-    // Update Stats titles
-    const statLabels = document.querySelectorAll('.stat-card .stat-label');
-    if (statLabels.length >= 3) {
-        statLabels[0].textContent = t.statTotalReports;
-        statLabels[1].textContent = t.statSummary;
-        statLabels[2].textContent = t.statSmallCap;
+    // Update Featured Report badge and read more button if visible
+    if (elements.featuredBadge) {
+        elements.featuredBadge.innerHTML = `<i class="fa-solid fa-star"></i> ${t.latestReportBadge}`;
+    }
+    if (elements.featuredReadMoreBtn) {
+        elements.featuredReadMoreBtn.innerHTML = `${t.readFullReport} <i class="fa-solid fa-arrow-right"></i>`;
     }
     
     // Update Controls Sort By label
@@ -171,10 +175,14 @@ const elements = {
     readerView: document.getElementById('reader-view'),
     sectionTitle: document.getElementById('section-title'),
     
-    // Stats
-    statTotal: document.getElementById('stat-total-reports'),
-    statSummary: document.getElementById('stat-summary'),
-    statSmallCap: document.getElementById('stat-small-cap'),
+    // Featured Report elements
+    featuredContainer: document.getElementById('featured-report-container'),
+    featuredTitle: document.getElementById('featured-title'),
+    featuredCategory: document.getElementById('featured-category'),
+    featuredDate: document.getElementById('featured-date'),
+    featuredMarkdown: document.getElementById('featured-markdown-container'),
+    featuredReadMoreBtn: document.getElementById('featured-read-more-btn'),
+    featuredBadge: document.querySelector('.featured-badge'),
     
     // Reader Elements
     backBtn: document.getElementById('back-to-catalog'),
@@ -287,7 +295,6 @@ async function fetchReportsIndex() {
         });
         
         // Populate stats & filters
-        renderStats();
         renderCategoriesMenu();
     } catch (error) {
         console.error('Error fetching index:', error);
@@ -327,17 +334,7 @@ function closeMobileSidebar() {
     elements.sidebarBackdrop.classList.remove('active');
 }
 
-// Render Stats Section
-function renderStats() {
-    const total = appState.reports.length;
-    const summary = appState.reports.filter(r => r.category === 'Market Summary').length;
-    const smallCap = appState.reports.filter(r => r.category === 'Small Cap Radar').length;
-    
-    elements.statTotal.textContent = total;
-    elements.statSummary.textContent = summary;
-    elements.statSmallCap.textContent = smallCap;
-    document.getElementById('count-all').textContent = total;
-}
+// Stats section removed
 
 // Render Categories Menu in Sidebar
 function renderCategoriesMenu() {
@@ -355,7 +352,7 @@ function renderCategoriesMenu() {
     const allItem = elements.categoryList.querySelector('[data-category="all"]');
     if (allItem) {
         const t = translations[appState.lang];
-        const textSpan = allItem.querySelector('span:not(.badge)');
+        const textSpan = allItem.querySelector('span');
         if (textSpan) {
             textSpan.textContent = t.allReports;
         }
@@ -414,14 +411,22 @@ function renderCategoriesMenu() {
     });
     
     // Setup listener for "All" tab
-    allItem.addEventListener('click', () => {
-        document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-        allItem.classList.add('active');
-        appState.activeCategory = 'all';
-        window.location.hash = ''; // Back to catalog list
-        renderCatalog();
-        closeMobileSidebar();
-    });
+    if (allItem) {
+        allItem.addEventListener('click', () => {
+            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+            allItem.classList.add('active');
+            appState.activeCategory = 'all';
+            window.location.hash = ''; // Back to catalog list
+            renderCatalog();
+            closeMobileSidebar();
+        });
+    }
+
+    // Update count-all badge
+    const countAllEl = document.getElementById('count-all');
+    if (countAllEl) {
+        countAllEl.textContent = appState.reports.length;
+    }
 }
 
 // Filter, Sort, and Render Reports List
@@ -436,6 +441,16 @@ function renderCatalog() {
         const currentCat = appState.reports.find(r => r.category === appState.activeCategory);
         const catNameDisplay = appState.lang === 'th' ? currentCat?.categoryThai : currentCat?.category;
         elements.sectionTitle.textContent = catNameDisplay || appState.activeCategory;
+    }
+    
+    // Show/hide featured report container
+    if (elements.featuredContainer) {
+        if (appState.activeCategory === 'all' && !appState.searchQuery && appState.reports.length > 0) {
+            elements.featuredContainer.style.display = 'block';
+            loadFeaturedReport(appState.reports[0]);
+        } else {
+            elements.featuredContainer.style.display = 'none';
+        }
     }
     
     // 1. Filter by category (On home page 'all', show ONLY the latest report of each category)
@@ -486,21 +501,7 @@ function renderCatalog() {
         const card = document.createElement('div');
         
         // Define card border/theme classes based on category
-        let categoryClass = 'general-report';
-        const catLower = report.category.toLowerCase();
-        if (catLower.includes('pre-market')) categoryClass = 'pre-market-analysis';
-        else if (catLower.includes('cosmic')) categoryClass = 'cosmic-trade-signal';
-        else if (catLower.includes('small cap') || catLower.includes('radar')) categoryClass = 'small-cap-research';
-        else if (catLower.includes('whale')) categoryClass = 'whale-flow';
-        else if (catLower.includes('oversold')) categoryClass = 'oversold-opportunity';
-        else if (catLower.includes('script')) categoryClass = 'daily-script';
-        else if (catLower.includes('hot stock')) categoryClass = 'hot-stock-today';
-        else if (catLower.includes('market summary')) categoryClass = 'market-summary-card';
-        else if (catLower.includes('bear squeeze')) categoryClass = 'bear-squeeze-card';
-        else if (catLower.includes('global market recap')) categoryClass = 'global-recap-card';
-        else if (catLower.includes('whats next')) categoryClass = 'whats-next-card';
-        else if (catLower.includes('thai')) categoryClass = 'thai-stock-card';
-        else if (catLower.includes('astro economy')) categoryClass = 'astro-economy-card';
+        const categoryClass = getCategoryClass(report.category);
 
         card.className = `report-card ${categoryClass}`;
         
@@ -591,9 +592,9 @@ async function renderReportContent(reportMeta) {
 
     // Set Header details
     elements.readerTitle.textContent = reportMeta.title;
-    elements.readerCategory.textContent = reportMeta.categoryThai;
-    elements.readerDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatThaiDate(reportMeta.date)}`;
-    elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ขนาด ${(reportMeta.size / 1024).toFixed(1)} KB`;
+    elements.readerCategory.textContent = appState.lang === 'th' ? reportMeta.categoryThai : reportMeta.category;
+    elements.readerDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(reportMeta.date, appState.lang)}`;
+    elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ${t.metaSize.replace('{size}', (reportMeta.size / 1024).toFixed(1))}`;
 
     // Toggle views
     elements.catalogView.classList.remove('active');
@@ -824,4 +825,140 @@ function formatReportDate(dateString, lang) {
     
     // Return original string if it is formatted like 'June 2026'
     return dateString;
+}
+
+function getCategoryClass(category) {
+    if (!category) return 'general-report';
+    const catLower = category.toLowerCase();
+    if (catLower.includes('pre-market')) return 'pre-market-analysis';
+    if (catLower.includes('cosmic')) return 'cosmic-trade-signal';
+    if (catLower.includes('small cap') || catLower.includes('radar')) return 'small-cap-research';
+    if (catLower.includes('whale')) return 'whale-flow';
+    if (catLower.includes('oversold')) return 'oversold-opportunity';
+    if (catLower.includes('script')) return 'daily-script';
+    if (catLower.includes('hot stock')) return 'hot-stock-today';
+    if (catLower.includes('market summary')) return 'market-summary-card';
+    if (catLower.includes('bear squeeze')) return 'bear-squeeze-card';
+    if (catLower.includes('global market recap')) return 'global-recap-card';
+    if (catLower.includes('whats next')) return 'whats-next-card';
+    if (catLower.includes('thai')) return 'thai-stock-card';
+    if (catLower.includes('astro economy')) return 'astro-economy-card';
+    return 'general-report';
+}
+
+let currentFeaturedPath = null;
+
+async function loadFeaturedReport(report) {
+    if (!report) {
+        elements.featuredContainer.style.display = 'none';
+        return;
+    }
+    
+    currentFeaturedPath = report.path;
+    
+    // Set static text first
+    elements.featuredTitle.textContent = report.title;
+    elements.featuredCategory.textContent = appState.lang === 'th' ? report.categoryThai : report.category;
+    elements.featuredCategory.className = `featured-category-badge ${getCategoryClass(report.category)}`;
+    elements.featuredDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(report.date, appState.lang)}`;
+    
+    // Render button translation
+    const t = translations[appState.lang];
+    elements.featuredBadge.innerHTML = `<i class="fa-solid fa-star"></i> ${t.latestReportBadge}`;
+    elements.featuredReadMoreBtn.innerHTML = `${t.readFullReport} <i class="fa-solid fa-arrow-right"></i>`;
+    
+    // Set up click handler to open the full report
+    elements.featuredReadMoreBtn.onclick = () => {
+        window.location.hash = `report=${encodeURIComponent(report.path)}`;
+    };
+    
+    try {
+        const response = await fetch(report.path);
+        if (!response.ok) throw new Error('File not found');
+        const markdown = await response.text();
+        
+        // Ensure this response is still the latest one requested
+        if (currentFeaturedPath !== report.path) return;
+        
+        // Parse and display HTML
+        let rawHtml = marked.parse(markdown);
+        let cleanHtml = DOMPurify.sanitize(rawHtml);
+        
+        // Inject into container
+        elements.featuredMarkdown.innerHTML = cleanHtml;
+        
+        // Post-process blockquotes (alerts)
+        const blockquotes = elements.featuredMarkdown.querySelectorAll('blockquote');
+        blockquotes.forEach(bq => {
+            const html = bq.innerHTML;
+            if (html.includes('[!NOTE]')) {
+                bq.classList.add('alert-note');
+                bq.innerHTML = cleanAlertText(html, '[!NOTE]');
+            } else if (html.includes('[!TIP]')) {
+                bq.classList.add('alert-tip');
+                bq.innerHTML = cleanAlertText(html, '[!TIP]');
+            } else if (html.includes('[!IMPORTANT]')) {
+                bq.classList.add('alert-important');
+                bq.innerHTML = cleanAlertText(html, '[!IMPORTANT]');
+            } else if (html.includes('[!WARNING]')) {
+                bq.classList.add('alert-warning');
+                bq.innerHTML = cleanAlertText(html, '[!WARNING]');
+            } else if (html.includes('[!CAUTION]')) {
+                bq.classList.add('alert-caution');
+                bq.innerHTML = cleanAlertText(html, '[!CAUTION]');
+            }
+        });
+        
+        // Adjust image paths
+        const images = elements.featuredMarkdown.querySelectorAll('img');
+        images.forEach(img => {
+            const src = img.getAttribute('src');
+            if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/')) {
+                const decodedSrc = decodeURIComponent(src).trim().toLowerCase();
+                if (decodedSrc === 'logo master.png' || decodedSrc === 'logo.png') {
+                    img.setAttribute('src', 'Logo master.png');
+                } else {
+                    const lastSlashIndex = report.path.lastIndexOf('/');
+                    if (lastSlashIndex !== -1) {
+                        const reportDir = report.path.substring(0, lastSlashIndex + 1);
+                        img.setAttribute('src', reportDir + src);
+                    }
+                }
+            }
+        });
+        
+        // Process Mermaid diagrams
+        const mermaidBlocks = elements.featuredMarkdown.querySelectorAll('pre code.language-mermaid');
+        if (mermaidBlocks.length > 0) {
+            mermaidBlocks.forEach((codeEl, index) => {
+                const preEl = codeEl.parentElement;
+                const mermaidCode = codeEl.textContent;
+                
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = mermaidCode;
+                
+                preEl.parentNode.replaceChild(div, preEl);
+            });
+            
+            try {
+                const mermaid = await loadMermaid();
+                await mermaid.run({
+                    querySelector: '.mermaid'
+                });
+            } catch (err) {
+                console.error('Error rendering Mermaid diagram:', err);
+            }
+        }
+        
+    } catch (error) {
+        console.error('Error loading featured report file:', error);
+        elements.featuredMarkdown.innerHTML = `
+            <div class="error-state">
+                <i class="fa-solid fa-file-excel"></i>
+                <h3>ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้</h3>
+                <p>อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง (<code>${error.message}</code>)</p>
+            </div>
+        `;
+    }
 }

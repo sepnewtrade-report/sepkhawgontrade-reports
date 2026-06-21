@@ -96,27 +96,25 @@
                     </div>
                 </div>
 
-                <!-- Stats Grid -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                        <div class="stat-info">
-                            <span class="stat-label">รายงานทั้งหมด</span>
-                            <span class="stat-value" id="stat-total-reports">0</span>
+                <!-- Featured Latest Report Panel -->
+                <div id="featured-report-container" class="featured-report-container" style="display: none;">
+                    <div class="featured-header">
+                        <span class="featured-badge"><i class="fa-solid fa-star"></i> รายงานล่าสุด</span>
+                        <h2 id="featured-title" class="featured-title"></h2>
+                        <div class="featured-meta">
+                            <span id="featured-category" class="featured-category-badge"></span>
+                            <span id="featured-date" class="featured-meta-item"></span>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-newspaper"></i></div>
-                        <div class="stat-info">
-                            <span class="stat-label">สรุปจบ ทันโลกหุ้น</span>
-                            <span class="stat-value" id="stat-summary">0</span>
+                    <div class="featured-markdown-wrapper" style="position: relative;">
+                        <div id="featured-markdown-container" class="markdown-body featured-markdown-content">
+                            <!-- Rendered HTML goes here -->
                         </div>
-                    </div>
-                    <div class="stat-card accent-gold">
-                        <div class="stat-icon"><i class="fa-solid fa-rocket"></i></div>
-                        <div class="stat-info">
-                            <span class="stat-label">Small Cap Radar</span>
-                            <span class="stat-value" id="stat-small-cap">0</span>
+                        <div class="featured-fade-overlay"></div>
+                        <div class="featured-read-more-wrapper">
+                            <button id="featured-read-more-btn" class="featured-read-more-btn">
+                                อ่านรายงานฉบับเต็ม <i class="fa-solid fa-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
