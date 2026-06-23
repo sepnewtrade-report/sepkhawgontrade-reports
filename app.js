@@ -7,7 +7,9 @@ let appState = {
     selectedReport: null,
     viewMode: 'html', // 'html' or 'raw'
     lang: localStorage.getItem('sep_lang') || 'th',
-    portfolioStocks: []
+    portfolioStocks: [],
+    totalVisits: 0,
+    activeOnline: 0
 };
 
 const translations = {
@@ -77,7 +79,10 @@ const translations = {
         beNoData: "ยังไม่มีข้อมูล",
         placeholderStockName: "ชื่อหุ้น",
         placeholderPrice: "ราคา ฿",
-        placeholderQty: "จำนวน"
+        placeholderQty: "จำนวน",
+        visitLabel: "ผู้เข้าชม:",
+        onlineLabel: "ออนไลน์:",
+        statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -145,7 +150,10 @@ const translations = {
         beNoData: "No data available",
         placeholderStockName: "Stock name",
         placeholderPrice: "Price ฿",
-        placeholderQty: "Qty"
+        placeholderQty: "Qty",
+        visitLabel: "Visits:",
+        onlineLabel: "Online:",
+        statusConnected: "Connected to News Database"
     }
 };
 
@@ -245,6 +253,16 @@ function updateUILanguage() {
     if (elements.portfolioView && elements.portfolioView.classList.contains('active')) {
         renderPortfolio();
     }
+    
+    // Update visitor counter translation and connected status labels
+    document.querySelectorAll('.lbl-status-connected').forEach(el => el.textContent = t.statusConnected);
+    document.querySelectorAll('.lbl-online').forEach(el => el.textContent = t.onlineLabel);
+    document.querySelectorAll('.lbl-visits').forEach(el => el.textContent = t.visitLabel);
+    
+    // Update visitor stats in the DOM
+    if (typeof updateVisitorStatsDOM === 'function') {
+        updateVisitorStatsDOM();
+    }
 }
 
 // DOM Elements
@@ -310,6 +328,9 @@ if (document.readyState === 'loading') {
 
 async function initApp() {
     setupEventListeners();
+    
+    // Initialize visitor statistics
+    initVisitorStats();
     
     // Load portfolio stocks from local storage
     try {
@@ -1467,4 +1488,50 @@ function updatePortfolioSummary() {
     
     const countUnit = translations[appState.lang].stocksCountUnit.replace('{count}', appState.portfolioStocks.length);
     document.getElementById('pt-count').textContent = countUnit;
+}
+
+// ==========================================================================
+// Visitor Counter & Online Simulation Functionality
+// ==========================================================================
+
+function initVisitorStats() {
+    // 1. Total Visits
+    try {
+        let visits = localStorage.getItem('sep_total_visits');
+        if (!visits) {
+            // Generate a premium-looking base count (between 128,000 and 132,000)
+            visits = Math.floor(Math.random() * 4000) + 128000;
+        } else {
+            visits = parseInt(visits, 10) || 128000;
+        }
+        
+        // Organic step increment on page load (1 to 3 visits)
+        const increment = Math.floor(Math.random() * 3) + 1;
+        appState.totalVisits = visits + increment;
+        localStorage.setItem('sep_total_visits', appState.totalVisits);
+    } catch (e) {
+        console.error('Failed to load total visits:', e);
+        appState.totalVisits = 128450;
+    }
+    
+    // 2. Active Online Users (Fluctuates between 8 and 22 dynamically)
+    appState.activeOnline = Math.floor(Math.random() * 15) + 8;
+    
+    // Periodically update active users to simulate organic traffic fluctuations
+    setInterval(() => {
+        // Step change of -2, -1, 0, +1, +2
+        const delta = Math.floor(Math.random() * 5) - 2;
+        appState.activeOnline = Math.max(6, Math.min(25, appState.activeOnline + delta));
+        updateVisitorStatsDOM();
+    }, Math.floor(Math.random() * 3000) + 4000); // 4-7 seconds interval
+    
+    updateVisitorStatsDOM();
+}
+
+function updateVisitorStatsDOM() {
+    const visits = appState.totalVisits.toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US');
+    const online = appState.activeOnline;
+    
+    document.querySelectorAll('.visit-count-val').forEach(el => el.textContent = visits);
+    document.querySelectorAll('.online-count-val').forEach(el => el.textContent = online);
 }
