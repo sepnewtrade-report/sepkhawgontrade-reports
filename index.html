@@ -53,6 +53,17 @@
                 </ul>
             </nav>
 
+            <!-- Member Tools Nav -->
+            <nav class="member-nav" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                <div class="nav-section-title" id="lbl-member-tools">เครื่องมือสมาชิก</div>
+                <ul class="category-list">
+                    <li class="category-item" id="nav-portfolio">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span id="lbl-nav-portfolio">Portfolio หุ้น</span>
+                    </li>
+                </ul>
+            </nav>
+            
             <div class="sidebar-footer">
                 <p>&copy; 2026 SepKhawGonTrade</p>
                 <div class="social-links">
@@ -137,6 +148,50 @@
                     <div class="loading-spinner">
                         <i class="fa-solid fa-circle-notch fa-spin"></i>
                         <p>กำลังดึงข้อมูลบทวิเคราะห์...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Tracker View -->
+            <section id="portfolio-view" class="content-section">
+                <div class="section-header">
+                    <div class="header-text-group">
+                        <h2 class="section-title" id="portfolio-title">📊 Portfolio หุ้น</h2>
+                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-wrap">
+                    <!-- Portfolio summary card -->
+                    <div class="portfolio-summary-card">
+                        <p class="portfolio-summary-title" id="lbl-portfolio-overview">ภาพรวม Portfolio</p>
+                        <div class="portfolio-summary-grid">
+                            <div class="portfolio-summary-item">
+                                <span class="summary-label" id="lbl-pt-cost">ต้นทุนรวมทั้ง portfolio</span>
+                                <span class="summary-value" id="pt-cost">฿0.00</span>
+                            </div>
+                            <div class="portfolio-summary-item">
+                                <span class="summary-label" id="lbl-pt-realized">กำไร/ขาดทุนที่ขายแล้ว</span>
+                                <span class="summary-value" id="pt-realized">฿0.00</span>
+                            </div>
+                            <div class="portfolio-summary-item">
+                                <span class="summary-label" id="lbl-pt-holding">ต้นทุนหุ้นที่ถืออยู่</span>
+                                <span class="summary-value" id="pt-holding">฿0.00</span>
+                            </div>
+                            <div class="portfolio-summary-item">
+                                <span class="summary-label" id="lbl-pt-count">จำนวนหุ้นในพอร์ต</span>
+                                <span class="summary-value" id="pt-count">0 ตัว</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Cards List -->
+                    <div id="stock-list" class="stock-list-container"></div>
+
+                    <!-- Bottom Controls -->
+                    <div class="portfolio-bottom-bar">
+                        <button class="portfolio-add-stock-btn" id="add-stock-btn">+ เพิ่มหุ้นใหม่</button>
+                        <button class="portfolio-refresh-btn" id="refresh-btn">↺ รีเฟรช</button>
                     </div>
                 </div>
             </section>

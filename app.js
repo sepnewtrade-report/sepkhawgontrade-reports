@@ -6,7 +6,8 @@ let appState = {
     sortBy: 'newest',
     selectedReport: null,
     viewMode: 'html', // 'html' or 'raw'
-    lang: localStorage.getItem('sep_lang') || 'th'
+    lang: localStorage.getItem('sep_lang') || 'th',
+    portfolioStocks: []
 };
 
 const translations = {
@@ -47,7 +48,36 @@ const translations = {
         readDetails: "อ่านรายละเอียด",
         otherReports: "รายงานทั่วไป",
         readFullReport: "อ่านรายงานฉบับเต็ม",
-        latestReportBadge: "รายงานล่าสุด"
+        latestReportBadge: "รายงานล่าสุด",
+        lblMemberTools: "เครื่องมือสมาชิก",
+        lblNavPortfolio: "Portfolio หุ้น",
+        portfolioTitle: "📊 Portfolio หุ้น",
+        portfolioSubtitle: "ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน",
+        portfolioOverview: "ภาพรวม Portfolio",
+        lblPtCost: "ต้นทุนรวมทั้ง portfolio",
+        lblPtRealized: "กำไร/ขาดทุนที่ขายแล้ว",
+        lblPtHolding: "ต้นทุนหุ้นที่ถืออยู่",
+        lblPtCount: "จำนวนหุ้นในพอร์ต",
+        stocksCountUnit: "{count} ตัว",
+        addStockBtn: "+ เพิ่มหุ้นใหม่",
+        refreshBtn: "↺ รีเฟรช",
+        emptyBuys: "ยังไม่มีรายการซื้อ",
+        emptySells: "ยังไม่มีรายการขาย",
+        avgLabel: "เฉลี่ย {price}",
+        tagBuy: "ซื้อ",
+        tagSell: "ขาย",
+        lblCost: "ต้นทุนรวม",
+        lblTotalShares: "หุ้นทั้งหมด",
+        sharesUnit: "{shares} หุ้น",
+        lblAvgCostPerShare: "ต้นทุนเฉลี่ย/หุ้น",
+        lblRemainShares: "หุ้นที่เหลือ",
+        lblRealizedPL: "กำไร/ขาดทุนที่ขายแล้วรวม",
+        lblBreakEvenForRemain: "ราคา break-even ของหุ้นที่เหลือ {remain} หุ้น",
+        beSoldOut: "ขายหุ้นหมดแล้ว",
+        beNoData: "ยังไม่มีข้อมูล",
+        placeholderStockName: "ชื่อหุ้น",
+        placeholderPrice: "ราคา ฿",
+        placeholderQty: "จำนวน"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -86,7 +116,36 @@ const translations = {
         readDetails: "Read Details",
         otherReports: "General Reports",
         readFullReport: "Read Full Report",
-        latestReportBadge: "Latest Report"
+        latestReportBadge: "Latest Report",
+        lblMemberTools: "Member Tools",
+        lblNavPortfolio: "Stock Portfolio",
+        portfolioTitle: "📊 Stock Portfolio",
+        portfolioSubtitle: "Calculate average cost, break-even price, and track realized P&L",
+        portfolioOverview: "Portfolio Overview",
+        lblPtCost: "Total Portfolio Cost",
+        lblPtRealized: "Realized P&L",
+        lblPtHolding: "Holding Cost",
+        lblPtCount: "Stocks in Portfolio",
+        stocksCountUnit: "{count} stocks",
+        addStockBtn: "+ Add New Stock",
+        refreshBtn: "↺ Refresh",
+        emptyBuys: "No buy transactions yet",
+        emptySells: "No sell transactions yet",
+        avgLabel: "Avg {price}",
+        tagBuy: "BUY",
+        tagSell: "SELL",
+        lblCost: "Total Cost",
+        lblTotalShares: "Total Shares",
+        sharesUnit: "{shares} shares",
+        lblAvgCostPerShare: "Avg Cost / Share",
+        lblRemainShares: "Remaining Shares",
+        lblRealizedPL: "Total Realized P&L",
+        lblBreakEvenForRemain: "Break-even price for remaining {remain} shares",
+        beSoldOut: "All shares sold out",
+        beNoData: "No data available",
+        placeholderStockName: "Stock name",
+        placeholderPrice: "Price ฿",
+        placeholderQty: "Qty"
     }
 };
 
@@ -156,8 +215,35 @@ function updateUILanguage() {
     if (appState.selectedReport) {
         const report = appState.selectedReport;
         if (elements.readerCategory) elements.readerCategory.textContent = lang === 'th' ? report.categoryThai : report.category;
-        if (elements.readerDate) elements.readerDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(report.date, lang)}`;
         if (elements.readerSize) elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ${t.metaSize.replace('{size}', (report.size / 1024).toFixed(1))}`;
+    }
+    
+    // Update Portfolio View translations
+    const portfolioTitleEl = document.getElementById('portfolio-title');
+    if (portfolioTitleEl) portfolioTitleEl.textContent = t.portfolioTitle;
+    
+    const portfolioSubtitleEl = document.getElementById('portfolio-subtitle');
+    if (portfolioSubtitleEl) portfolioSubtitleEl.textContent = t.portfolioSubtitle;
+    
+    const overviewEl = document.getElementById('lbl-portfolio-overview');
+    if (overviewEl) overviewEl.textContent = t.portfolioOverview;
+    
+    const memberToolsEl = document.getElementById('lbl-member-tools');
+    if (memberToolsEl) memberToolsEl.textContent = t.lblMemberTools;
+    
+    const navPortfolioEl = document.getElementById('lbl-nav-portfolio');
+    if (navPortfolioEl) navPortfolioEl.textContent = t.lblNavPortfolio;
+    
+    if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
+    if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
+    if (elements.lblPtHolding) elements.lblPtHolding.textContent = t.lblPtHolding;
+    if (elements.lblPtCount) elements.lblPtCount.textContent = t.lblPtCount;
+    if (elements.addStockBtn) elements.addStockBtn.textContent = t.addStockBtn;
+    if (elements.refreshBtn) elements.refreshBtn.textContent = t.refreshBtn;
+    
+    // Re-render portfolio content if it's currently active
+    if (elements.portfolioView && elements.portfolioView.classList.contains('active')) {
+        renderPortfolio();
     }
 }
 
@@ -200,7 +286,17 @@ const elements = {
     // Mobile Drawer
     mobileToggle: document.getElementById('mobile-toggle'),
     sidebar: document.getElementById('sidebar'),
-    sidebarBackdrop: document.getElementById('sidebar-backdrop')
+    sidebarBackdrop: document.getElementById('sidebar-backdrop'),
+    
+    // Portfolio Elements
+    portfolioView: document.getElementById('portfolio-view'),
+    lblPtCost: document.getElementById('lbl-pt-cost'),
+    lblPtRealized: document.getElementById('lbl-pt-realized'),
+    lblPtHolding: document.getElementById('lbl-pt-holding'),
+    lblPtCount: document.getElementById('lbl-pt-count'),
+    addStockBtn: document.getElementById('add-stock-btn'),
+    refreshBtn: document.getElementById('refresh-btn'),
+    stockList: document.getElementById('stock-list')
 };
 
 // Initialize Application
@@ -214,6 +310,24 @@ if (document.readyState === 'loading') {
 
 async function initApp() {
     setupEventListeners();
+    
+    // Load portfolio stocks from local storage
+    try {
+        const savedStocks = localStorage.getItem('sep_portfolio_stocks');
+        if (savedStocks) {
+            appState.portfolioStocks = JSON.parse(savedStocks);
+        } else {
+            // Fallback default mockup data
+            appState.portfolioStocks = [
+                {name: 'หุ้น A', open: true, buys: [{price: 100, shares: 100}, {price: 80, shares: 50}], sells: [{price: 90, shares: 50}]},
+                {name: 'หุ้น B', open: false, buys: [{price: 50, shares: 200}], sells: []}
+            ];
+        }
+    } catch (e) {
+        console.error('Failed to load portfolio:', e);
+        appState.portfolioStocks = [];
+    }
+    
     await fetchReportsIndex();
     updateUILanguage();
     handleRouting();
@@ -268,6 +382,40 @@ function setupEventListeners() {
         });
     });
     
+    // Portfolio triggers
+    if (elements.addStockBtn) {
+        elements.addStockBtn.addEventListener('click', () => {
+            const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+            const stockName = appState.lang === 'th' 
+                ? 'หุ้น ' + (labels[appState.portfolioStocks.length] || appState.portfolioStocks.length + 1)
+                : 'Stock ' + (labels[appState.portfolioStocks.length] || appState.portfolioStocks.length + 1);
+            appState.portfolioStocks.push({
+                name: stockName,
+                open: true,
+                buys: [{price: 0, shares: 0}],
+                sells: []
+            });
+            savePortfolio();
+            renderPortfolio();
+        });
+    }
+    
+    if (elements.refreshBtn) {
+        elements.refreshBtn.addEventListener('click', () => {
+            elements.refreshBtn.classList.add('spin');
+            setTimeout(() => elements.refreshBtn.classList.remove('spin'), 500);
+            renderPortfolio();
+        });
+    }
+    
+    const navPort = document.getElementById('nav-portfolio');
+    if (navPort) {
+        navPort.addEventListener('click', () => {
+            window.location.hash = 'portfolio';
+            closeMobileSidebar();
+        });
+    }
+    
     // Listen for hash change for routing
     window.addEventListener('hashchange', handleRouting);
 }
@@ -315,9 +463,14 @@ function handleRouting() {
     
     // Expected hash format: #report=category/file.md or #report=file.md
     if (hash && hash.startsWith('#report=')) {
+        closePortfolio();
         const filePath = decodeURIComponent(hash.substring(8));
         openReport(filePath);
+    } else if (hash === '#portfolio') {
+        closeReport();
+        openPortfolio();
     } else {
+        closePortfolio();
         closeReport();
         renderCatalog();
     }
@@ -752,6 +905,27 @@ function closeReport() {
     elements.catalogView.classList.add('active');
 }
 
+function openPortfolio() {
+    // Remove active category indicators
+    document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+    
+    // Add active class to portfolio menu item
+    const navPort = document.getElementById('nav-portfolio');
+    if (navPort) navPort.classList.add('active');
+    
+    elements.catalogView.classList.remove('active');
+    elements.readerView.classList.remove('active');
+    if (elements.portfolioView) elements.portfolioView.classList.add('active');
+    
+    renderPortfolio();
+}
+
+function closePortfolio() {
+    if (elements.portfolioView) elements.portfolioView.classList.remove('active');
+    const navPort = document.getElementById('nav-portfolio');
+    if (navPort) navPort.classList.remove('active');
+}
+
 // Toggle between Rendered HTML and Raw Markdown view
 async function toggleRawMarkdown() {
     if (appState.viewMode === 'html') {
@@ -961,4 +1135,336 @@ async function loadFeaturedReport(report) {
             </div>
         `;
     }
+}
+
+// ==========================================================================
+// Portfolio Tracker Functionality
+// ==========================================================================
+
+const fmt = n => isNaN(n) ? '0.00' : n.toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const fmtI = n => isNaN(n) ? '0' : Math.max(0, n).toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US');
+
+function savePortfolio() {
+    localStorage.setItem('sep_portfolio_stocks', JSON.stringify(appState.portfolioStocks));
+}
+
+function calculateStockMetrics(s) {
+    const vb = s.buys.filter(b => b.shares > 0);
+    const vs = s.sells.filter(v => v.shares > 0);
+    const totalCost = vb.reduce((a, b) => a + b.price * b.shares, 0);
+    const totalShares = vb.reduce((a, b) => a + b.shares, 0);
+    const avg = totalShares > 0 ? totalCost / totalShares : 0;
+    const soldShares = vs.reduce((a, v) => a + v.shares, 0);
+    const soldRevenue = vs.reduce((a, v) => a + v.price * v.shares, 0);
+    const realized = soldRevenue - soldShares * avg;
+    const remain = Math.max(0, totalShares - soldShares);
+    const remainCost = remain * avg;
+    const bePrice = remain > 0 ? (remainCost - realized) / remain : null;
+    return {totalCost, totalShares, avg, soldShares, realized, remain, remainCost, bePrice};
+}
+
+function makePortfolioInputWrap(val, isInt, placeholder, onChange) {
+    const wrap = document.createElement('div');
+    wrap.className = 'portfolio-iw';
+    
+    const inp = document.createElement('input');
+    inp.type = 'number';
+    inp.min = '0';
+    inp.step = isInt ? '1' : '0.01';
+    inp.value = val > 0 ? val : '';
+    inp.placeholder = placeholder;
+    
+    inp.addEventListener('input', () => {
+        onChange(inp.value);
+        savePortfolio();
+        updatePortfolioSummary();
+    });
+    
+    const clr = document.createElement('button');
+    clr.className = 'portfolio-ic';
+    clr.textContent = '✕';
+    clr.addEventListener('click', () => {
+        inp.value = '';
+        onChange('');
+        savePortfolio();
+        updatePortfolioSummary();
+    });
+    
+    wrap.append(inp, clr);
+    return wrap;
+}
+
+function makePortfolioEntryRow(labelA, valA, isIntA, placeA, onChangeA, labelB, valB, isIntB, placeB, onChangeB, onDel) {
+    const row = document.createElement('div');
+    row.className = 'portfolio-entry-row';
+    
+    const u1 = document.createElement('span');
+    u1.className = 'portfolio-unit';
+    u1.textContent = labelA;
+    
+    const u2 = document.createElement('span');
+    u2.className = 'portfolio-unit';
+    u2.textContent = labelB;
+    
+    const u3 = document.createElement('span');
+    u3.className = 'portfolio-unit';
+    u3.textContent = appState.lang === 'th' ? 'หุ้น' : 'shares';
+    
+    const del = document.createElement('button');
+    del.className = 'portfolio-del-row-btn';
+    del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    del.addEventListener('click', onDel);
+    
+    row.append(
+        u1, 
+        makePortfolioInputWrap(valA, isIntA, placeA, onChangeA), 
+        u2, 
+        makePortfolioInputWrap(valB, isIntB, placeB, onChangeB), 
+        u3, 
+        del
+    );
+    return row;
+}
+
+function makePortfolioSecDiv(tagClass, tagText) {
+    const d = document.createElement('div');
+    d.className = 'portfolio-sec-div';
+    
+    const sp = document.createElement('span');
+    sp.className = `portfolio-tag ${tagClass}`;
+    sp.textContent = tagText;
+    
+    d.appendChild(sp);
+    return d;
+}
+
+function renderPortfolioBody(s, body, stockIndex) {
+    const t = translations[appState.lang];
+    
+    // BUY
+    body.appendChild(makePortfolioSecDiv('portfolio-tb', t.tagBuy));
+    if (s.buys.length === 0) {
+        const p = document.createElement('p');
+        p.className = 'portfolio-empty-hint';
+        p.textContent = t.emptyBuys;
+        body.appendChild(p);
+    } else {
+        s.buys.forEach((b, bi) => {
+            body.appendChild(makePortfolioEntryRow(
+                t.placeholderPrice, b.price, false, '0.00', v => { s.buys[bi].price = parseFloat(v) || 0; },
+                t.placeholderQty, b.shares, true, '0', v => { s.buys[bi].shares = parseInt(v) || 0; },
+                () => {
+                    s.buys.splice(bi, 1);
+                    savePortfolio();
+                    renderPortfolio();
+                }
+            ));
+        });
+    }
+    
+    const ab = document.createElement('button');
+    ab.className = 'portfolio-add-btn';
+    ab.textContent = appState.lang === 'th' ? '+ เพิ่มรายการซื้อ' : '+ Add Buy Order';
+    ab.addEventListener('click', () => {
+        s.buys.push({price: 0, shares: 0});
+        savePortfolio();
+        renderPortfolio();
+    });
+    body.appendChild(ab);
+
+    // SELL
+    body.appendChild(makePortfolioSecDiv('portfolio-ts', t.tagSell));
+    if (s.sells.length === 0) {
+        const p = document.createElement('p');
+        p.className = 'portfolio-empty-hint';
+        p.textContent = t.emptySells;
+        body.appendChild(p);
+    } else {
+        s.sells.forEach((sv, vi) => {
+            body.appendChild(makePortfolioEntryRow(
+                t.placeholderPrice, sv.price, false, '0.00', v => { s.sells[vi].price = parseFloat(v) || 0; },
+                t.placeholderQty, sv.shares, true, '0', v => { s.sells[vi].shares = parseInt(v) || 0; },
+                () => {
+                    s.sells.splice(vi, 1);
+                    savePortfolio();
+                    renderPortfolio();
+                }
+            ));
+        });
+    }
+    
+    const as = document.createElement('button');
+    as.className = 'portfolio-add-btn';
+    as.textContent = appState.lang === 'th' ? '+ เพิ่มรายการขาย' : '+ Add Sell Order';
+    as.addEventListener('click', () => {
+        s.sells.push({price: 0, shares: 0});
+        savePortfolio();
+        renderPortfolio();
+    });
+    body.appendChild(as);
+
+    // Metrics grid
+    const r = calculateStockMetrics(s);
+    const mg = document.createElement('div');
+    mg.className = 'portfolio-metrics-grid';
+    
+    const sharesUnitText = t.sharesUnit.replace('{shares}', fmtI(r.totalShares));
+    const remainUnitText = t.sharesUnit.replace('{shares}', fmtI(r.remain));
+    
+    mg.innerHTML = `
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblCost}</p><p class="portfolio-mv">฿${fmt(r.totalCost)}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblTotalShares}</p><p class="portfolio-mv">${sharesUnitText}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblAvgCostPerShare}</p><p class="portfolio-mv">${r.totalShares > 0 ? '฿' + fmt(r.avg) : '-'}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblRemainShares}</p><p class="portfolio-mv">${remainUnitText}</p></div>
+    `;
+    body.appendChild(mg);
+
+    const hr = document.createElement('hr');
+    hr.className = 'portfolio-divider';
+    body.appendChild(hr);
+
+    const vs = s.sells.filter(v => v.shares > 0);
+    vs.forEach((sv, vi) => {
+        const pnl = sv.price * sv.shares - sv.shares * r.avg;
+        const sr = document.createElement('div');
+        sr.className = 'portfolio-srow';
+        const saleText = appState.lang === 'th' 
+            ? `ขาย ${vi + 1}: ${fmtI(sv.shares)} หุ้น × ฿${fmt(sv.price)}`
+            : `Sell ${vi + 1}: ${fmtI(sv.shares)} sh × ฿${fmt(sv.price)}`;
+        sr.innerHTML = `<span class="portfolio-k">${saleText}</span><span class="${pnl >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${pnl >= 0 ? '+' : ''}฿${fmt(pnl)}</span>`;
+        body.appendChild(sr);
+    });
+
+    if (vs.length > 0) {
+        const tr = document.createElement('div');
+        tr.className = 'portfolio-srow';
+        tr.style.marginTop = '8px';
+        tr.innerHTML = `<span class="portfolio-k" style="font-weight:600">${t.lblRealizedPL}</span><span class="${r.realized >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${r.realized >= 0 ? '+' : ''}฿${fmt(r.realized)}</span>`;
+        body.appendChild(tr);
+    }
+
+    const be = document.createElement('div');
+    if (r.bePrice !== null) {
+        be.className = `portfolio-be-box ${r.bePrice <= r.avg ? 'green' : 'red'}`;
+        const beLabel = t.lblBreakEvenForRemain.replace('{remain}', fmtI(r.remain));
+        be.innerHTML = `<p class="portfolio-bll">${beLabel}</p><p class="portfolio-bv">฿${fmt(r.bePrice)} / หุ้น</p>`;
+    } else {
+        be.className = 'portfolio-be-box gray';
+        const statusText = r.remain === 0 && r.totalShares > 0 ? t.beSoldOut : t.beNoData;
+        be.innerHTML = `<p class="portfolio-bll">Break-even</p><p class="portfolio-bv">${statusText}</p>`;
+    }
+    body.appendChild(be);
+}
+
+function renderPortfolio() {
+    if (!elements.stockList) return;
+    elements.stockList.innerHTML = '';
+    
+    const t = translations[appState.lang];
+    
+    appState.portfolioStocks.forEach((s, si) => {
+        const r = calculateStockMetrics(s);
+        const card = document.createElement('div');
+        card.className = 'portfolio-stock-card';
+        
+        // Header
+        const hdr = document.createElement('div');
+        hdr.className = 'portfolio-stock-header' + (s.open ? '' : ' is-collapsed');
+        hdr.addEventListener('click', () => {
+            s.open = !s.open;
+            savePortfolio();
+            renderPortfolio();
+        });
+        
+        const hl = document.createElement('div');
+        hl.className = 'portfolio-stock-header-left';
+        
+        const nw = document.createElement('div');
+        nw.className = 'portfolio-name-wrap';
+        
+        const ni = document.createElement('input');
+        ni.className = 'portfolio-name-inp';
+        ni.value = s.name;
+        ni.placeholder = t.placeholderStockName;
+        ni.addEventListener('click', e => e.stopPropagation());
+        ni.addEventListener('change', () => {
+            s.name = ni.value;
+            savePortfolio();
+        });
+        
+        const nc = document.createElement('button');
+        nc.className = 'portfolio-name-clr';
+        nc.textContent = '✕';
+        nc.addEventListener('click', e => {
+            e.stopPropagation();
+            s.name = '';
+            ni.value = '';
+            savePortfolio();
+        });
+        
+        nw.append(ni, nc);
+        
+        const badge = document.createElement('span');
+        badge.className = 'portfolio-badge ' + (r.realized > 0 ? 'portfolio-bp' : r.realized < 0 ? 'portfolio-bl2' : 'portfolio-bz');
+        badge.textContent = r.realized > 0 ? `+฿${fmt(r.realized)}` : r.realized < 0 ? `-฿${fmt(Math.abs(r.realized))}` : '฿0.00';
+        hl.append(nw, badge);
+        
+        const hr2 = document.createElement('div');
+        hr2.style.cssText = 'display:flex;align-items:center;gap:12px';
+        
+        const avgSp = document.createElement('span');
+        avgSp.style.cssText = 'font-size:14px;color:var(--text-secondary)';
+        const avgPriceText = r.totalShares > 0 ? '฿' + fmt(r.avg) : '-';
+        avgSp.textContent = t.avgLabel.replace('{price}', avgPriceText);
+        
+        const tb = document.createElement('button');
+        tb.className = 'portfolio-trash-btn';
+        tb.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+        tb.addEventListener('click', e => {
+            e.stopPropagation();
+            appState.portfolioStocks.splice(si, 1);
+            savePortfolio();
+            renderPortfolio();
+        });
+        
+        const chev = document.createElement('span');
+        chev.className = 'portfolio-chevron';
+        chev.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
+        
+        hr2.append(avgSp, tb, chev);
+        hdr.append(hl, hr2);
+        card.appendChild(hdr);
+        
+        if (s.open) {
+            const body = document.createElement('div');
+            body.className = 'portfolio-stock-body';
+            renderPortfolioBody(s, body, si);
+            card.appendChild(body);
+        }
+        
+        elements.stockList.appendChild(card);
+    });
+    
+    updatePortfolioSummary();
+}
+
+function updatePortfolioSummary() {
+    let c = 0, rv = 0, h = 0;
+    appState.portfolioStocks.forEach(s => {
+        const r = calculateStockMetrics(s);
+        c += r.totalCost;
+        rv += r.realized;
+        h += r.remainCost;
+    });
+    
+    document.getElementById('pt-cost').textContent = '฿' + fmt(c);
+    
+    const rEl = document.getElementById('pt-realized');
+    rEl.textContent = (rv >= 0 ? '+' : '') + '฿' + fmt(Math.abs(rv));
+    rEl.style.color = rv > 0 ? 'var(--accent-primary)' : rv < 0 ? 'var(--accent-red)' : 'var(--text-primary)';
+    
+    document.getElementById('pt-holding').textContent = '฿' + fmt(h);
+    
+    const countUnit = translations[appState.lang].stocksCountUnit.replace('{count}', appState.portfolioStocks.length);
+    document.getElementById('pt-count').textContent = countUnit;
 }
