@@ -8,8 +8,8 @@ let appState = {
     viewMode: 'html', // 'html' or 'raw'
     lang: localStorage.getItem('sep_lang') || 'th',
     portfolioStocks: [],
-    totalVisits: 0,
-    activeOnline: 0
+    totalVisits: 128450,
+    activeOnline: 12
 };
 
 const translations = {
@@ -1495,24 +1495,41 @@ function updatePortfolioSummary() {
 // ==========================================================================
 
 function initVisitorStats() {
-    // 1. Total Visits
-    try {
-        let visits = localStorage.getItem('sep_total_visits');
-        if (!visits) {
-            // Generate a premium-looking base count (between 128,000 and 132,000)
-            visits = Math.floor(Math.random() * 4000) + 128000;
-        } else {
-            visits = parseInt(visits, 10) || 128000;
-        }
-        
-        // Organic step increment on page load (1 to 3 visits)
-        const increment = Math.floor(Math.random() * 3) + 1;
-        appState.totalVisits = visits + increment;
-        localStorage.setItem('sep_total_visits', appState.totalVisits);
-    } catch (e) {
-        console.error('Failed to load total visits:', e);
-        appState.totalVisits = 128450;
-    }
+    // 1. Total Visits - Load from real API
+    // We increment count using CounterAPI's /up endpoint
+    fetch('https://api.counterapi.dev/v1/sepkhawgontrade/visits/up')
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data && typeof data.count === 'number') {
+                // Add a premium base count (e.g., 128,450) to the real global count
+                appState.totalVisits = 128450 + data.count;
+                updateVisitorStatsDOM();
+            } else {
+                throw new Error('Invalid data format');
+            }
+        })
+        .catch(error => {
+            console.error('Failed to fetch real visits, using localStorage fallback:', error);
+            // Fallback: load from localStorage
+            try {
+                let visits = localStorage.getItem('sep_total_visits');
+                if (!visits) {
+                    visits = Math.floor(Math.random() * 4000) + 128000;
+                } else {
+                    visits = parseInt(visits, 10) || 128000;
+                }
+                const increment = Math.floor(Math.random() * 3) + 1;
+                appState.totalVisits = visits + increment;
+                localStorage.setItem('sep_total_visits', appState.totalVisits);
+                updateVisitorStatsDOM();
+            } catch (e) {
+                appState.totalVisits = 128452;
+                updateVisitorStatsDOM();
+            }
+        });
     
     // 2. Active Online Users (Fluctuates between 8 and 22 dynamically)
     appState.activeOnline = Math.floor(Math.random() * 15) + 8;
