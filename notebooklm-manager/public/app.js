@@ -211,6 +211,7 @@ function setupEventListeners() {
     // Prompt textarea change - update state in memory immediately
     promptTextarea.addEventListener('input', (e) => {
         updatePromptState(e.target.value);
+        updateCharCounter(e.target.value);
     });
 
     // Save prompts to database button
@@ -799,6 +800,7 @@ function loadPromptsForActiveTemplate() {
     // Set textarea content for the active prompt tab type
     let promptKey = getPromptKey(state.activePromptType);
     promptTextarea.value = template[promptKey] || '';
+    updateCharCounter(promptTextarea.value);
 }
 
 // Map frontend data-prompt-type attributes to templates.json fields
@@ -839,6 +841,15 @@ function updatePromptState(text) {
         const promptKey = getPromptKey(state.activePromptType);
         template[promptKey] = text;
     }
+}
+
+// Update the character counter element based on text length and active prompt type
+function updateCharCounter(text) {
+    const charCounter = document.getElementById('char-counter');
+    if (!charCounter) return;
+    const len = text.length;
+    charCounter.style.color = 'var(--text-secondary)';
+    charCounter.innerHTML = `${len.toLocaleString()} ตัวอักษร`;
 }
 
 // Save prompt templates to server
@@ -921,6 +932,8 @@ async function handleRunWorkflow() {
             return;
         }
     }
+
+
 
     btnRunWorkflow.disabled = true;
     workflowIdleSection.style.display = 'none';

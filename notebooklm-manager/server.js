@@ -477,7 +477,7 @@ app.post('/api/workflow/run', async (req, res) => {
     activeWorkflowState.progress = 40;
     activeWorkflowState.currentStep = 'กำลังนำเข้าแหล่งข้อมูล...';
     addLog(`ขั้นตอนที่ 4/8: กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --type file --title "${actualSourceTitle}" "${actualFilePath}"`);
+    await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --type text --title "${actualSourceTitle}" "${actualFilePath}"`);
     addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
     
     // 5. Generate Audio Overview
