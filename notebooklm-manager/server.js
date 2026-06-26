@@ -556,7 +556,27 @@ app.post('/api/workflow/run', async (req, res) => {
     activeWorkflowState.progress = 40;
     activeWorkflowState.currentStep = 'กำลังนำเข้าแหล่งข้อมูล...';
     addLog(`ขั้นตอนที่ 4/8: กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --type text --title "${actualSourceTitle}" "${actualFilePath}"`);
+    
+    let tempTxtFilePath = '';
+    if (actualFilePath.toLowerCase().endsWith('.md')) {
+      tempTxtFilePath = actualFilePath.replace(/\.md$/i, '.txt');
+      fs.copyFileSync(actualFilePath, tempTxtFilePath);
+    }
+    
+    const fileToUpload = tempTxtFilePath || actualFilePath;
+    try {
+      await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --title "${actualSourceTitle}" "${fileToUpload}"`);
+    } finally {
+      if (tempTxtFilePath) {
+        try {
+          if (fs.existsSync(tempTxtFilePath)) {
+            fs.unlinkSync(tempTxtFilePath);
+          }
+        } catch (err) {
+          console.error('Failed to clean up temp text file:', err);
+        }
+      }
+    }
     addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
 
     // Extract ticker and date from report for prompt replacement
