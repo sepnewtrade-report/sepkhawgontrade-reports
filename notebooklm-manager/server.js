@@ -601,7 +601,7 @@ app.post('/api/workflow/run', async (req, res) => {
       try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
     }
     addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest "${outputAudioPath}"`);
+    await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
     addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
     
     // 6. Generate Report (Facebook post)
@@ -617,7 +617,7 @@ app.post('/api/workflow/run', async (req, res) => {
       try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
     }
     addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest "${outputReportPath}"`);
+    await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
     addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
     
     // Read generated report content for Facebook post copy paste
@@ -636,7 +636,7 @@ app.post('/api/workflow/run', async (req, res) => {
       try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
     }
     addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest "${outputInfoPath}"`);
+    await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
     addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
     
     // 8. Finished!
