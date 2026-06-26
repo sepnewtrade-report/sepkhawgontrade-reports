@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM Web Manager — เสพข่าวก่อนเทรด</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="app-container">
+        <!-- Sidebar / Header -->
+        <header class="header">
+            <div class="logo-area">
+                <img src="/Logo master.png" alt="SepKhawGonTrade Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/150x50/111/fff?text=SepKhawGonTrade'">
+                <div class="logo-text">
+                    <h1>NotebookLM</h1>
+                    <p>Auto-Delete & Manager Tool</p>
+                </div>
+            </div>
+            
+            <!-- Account / Profile Switcher -->
+            <div class="profile-container">
+                <i class="fa-solid fa-circle-user profile-icon"></i>
+                <select id="profile-select" class="profile-select">
+                    <!-- Dynamic Options -->
+                </select>
+                <button class="btn-icon btn-add-profile" id="btn-add-profile" title="เพิ่มบัญชีใหม่">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="btn-icon btn-delete-profile" id="btn-delete-profile" title="ลบบัญชีนี้" disabled>
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+
+            <!-- Connection Status Card -->
+            <div class="status-card" id="status-card">
+                <div class="status-indicator">
+                    <span class="pulse-dot" id="status-dot"></span>
+                    <span class="status-label" id="status-label">กำลังตรวจสอบการเชื่อมต่อ...</span>
+                </div>
+                <button class="btn btn-login" id="btn-login" style="display: none;">
+                    <i class="fa-brands fa-google"></i> ล็อกอิน Google Account
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="manager-tab">
+                    <i class="fa-solid fa-list-check"></i> จัดการรายการ Notebooks
+                </button>
+                <button class="tab-btn" data-tab="workflow-tab">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> ระบบผลิตคลิปอัตโนมัติ (Workflow)
+                </button>
+            </div>
+
+            <!-- Tab 1: Manager Tab Panel -->
+            <div class="tab-panel active" id="manager-tab">
+                <!-- Search & Actions Bar -->
+                <section class="toolbar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="ค้นหาตามชื่อ Notebook...">
+                    <button class="clear-search" id="clear-search" style="display: none;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                
+                <div class="actions-group">
+                    <button class="btn btn-secondary" id="btn-select-all">
+                        <i class="fa-regular fa-square-check"></i> เลือกทั้งหมด
+                    </button>
+                    <button class="btn btn-danger" id="btn-delete-selected" disabled>
+                        <i class="fa-regular fa-trash-can"></i> ลบรายการที่เลือก (<span id="selected-count">0</span>)
+                    </button>
+                    <button class="btn btn-outline-danger" id="btn-delete-all">
+                        <i class="fa-solid fa-dumpster-fire"></i> ลบทั้งหมดในบัญชี
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loading-state">
+                <div class="spinner"></div>
+                <p>กำลังดึงข้อมูล Notebooks จากบัญชีของคุณ...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <i class="fa-regular fa-folder-open empty-icon"></i>
+                <h3 id="empty-title">ไม่พบ Notebook</h3>
+                <p id="empty-subtitle">คุณยังไม่ได้ล็อกอิน หรือไม่มี Notebook อยู่ในระบบ</p>
+            </div>
+
+            <!-- Notebooks Grid -->
+            <section class="notebooks-grid" id="notebooks-grid" style="display: none;">
+                <!-- Cards will be dynamically injected here -->
+            </section>
+        </div> <!-- End Tab 1: Manager Tab Panel -->
+
+        <!-- Tab 2: Workflow Automation Panel -->
+        <div class="tab-panel" id="workflow-tab" style="display: none;">
+            <div class="workflow-layout">
+                <!-- Left: Show selection and configuration -->
+                <div class="workflow-left">
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-gears"></i> ประมวลผลคลิปอัตโนมัติ</h3>
+                        
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="workflow-template-select">รายการที่ต้องการสร้าง:</label>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <select id="workflow-template-select" class="form-control" style="flex: 1;">
+                                    <!-- Dynamic Options -->
+                                </select>
+                                <button class="btn btn-secondary btn-icon" id="btn-add-template" title="เพิ่มรายการใหม่" style="height: 38px; width: 38px; min-width: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-icon" id="btn-delete-template" title="ลบรายการนี้" style="height: 38px; width: 38px; min-width: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="workflow-file-select">ไฟล์บทวิเคราะห์ (.md) ในระบบ:</label>
+                            <select id="workflow-file-select" class="form-control">
+                                <!-- Dynamic Options from workspace -->
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="workflow-date-input">วันที่จัดทำรายการ:</label>
+                            <input type="date" id="workflow-date-input" class="form-control">
+                        </div>
+
+                        <button class="btn btn-primary btn-block" id="btn-run-workflow" style="margin-top: 20px; width: 100%; justify-content: center; height: 48px;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> เริ่มประมวลผลคลิปอัตโนมัติ (Start Automation)
+                        </button>
+                    </div>
+
+                    <!-- Prompt Editor Section -->
+                    <div class="glass-card prompt-editor-card" style="margin-top: 20px;">
+                        <h3><i class="fa-solid fa-pen-to-square"></i> ตั้งค่า Prompt สำหรับรายการนี้</h3>
+                        <div class="prompt-tabs" style="margin-top: 15px;">
+                            <button class="prompt-tab-btn active" data-prompt-type="search">ค้นหาข่าว</button>
+                            <button class="prompt-tab-btn" data-prompt-type="audio">ผู้พูด (Audio)</button>
+                            <button class="prompt-tab-btn" data-prompt-type="report">โพสต์ Facebook</button>
+                            <button class="prompt-tab-btn" data-prompt-type="info">อินโฟกราฟิก</button>
+                        </div>
+                        
+                        <div class="prompt-input-area" style="margin-top: 15px;">
+                            <textarea id="prompt-textarea" rows="8" class="form-control" placeholder="ใส่รายละเอียดคำสั่งที่ต้องการบีบอัดเนื้อหา..."></textarea>
+                        </div>
+                        
+                        <button class="btn btn-secondary btn-block" id="btn-save-prompts" style="margin-top: 15px; width: 100%; justify-content: center;">
+                            <i class="fa-regular fa-floppy-disk"></i> บันทึกการตั้งค่า Prompt
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Running status and result display -->
+                <div class="workflow-right">
+                    <div class="glass-card progress-card" id="workflow-progress-section" style="display: none;">
+                        <h3><i class="fa-solid fa-gears fa-spin"></i> กำลังประมวลผลกระบวนการทำงาน...</h3>
+                        <div class="progress-bar-container" style="margin-top: 20px; height: 10px;">
+                            <div class="progress-bar-fill" id="workflow-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <div class="progress-info" style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary);">
+                            <span id="workflow-progress-text">0%</span>
+                            <span id="workflow-step-text">เตรียมระบบ...</span>
+                        </div>
+                        
+                        <div class="logs-container" style="margin-top: 20px;">
+                            <h4 style="font-size: 14px; margin-bottom: 8px;">Log รายงานการทำงาน:</h4>
+                            <div class="logs-viewport" id="workflow-logs">
+                                <!-- Dynamic logs -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results section -->
+                    <div class="glass-card result-card" id="workflow-result-section" style="display: none;">
+                        <h3 class="text-success"><i class="fa-regular fa-circle-check"></i> สร้างสื่อเสร็จสิ้น!</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; margin-top: 5px;">
+                            ไฟล์เสียง (.mp3) และอินโฟกราฟิก (.png) ได้รับการดาวน์โหลดไว้ในเครื่องเรียบร้อยแล้ว
+                        </p>
+                        
+                        <div class="file-path-row">
+                            <i class="fa-regular fa-file-audio"></i> <strong>Audio Path:</strong> <span id="res-audio-path">-</span>
+                        </div>
+                        <div class="file-path-row" style="margin-top: 8px;">
+                            <i class="fa-regular fa-image"></i> <strong>Infographic:</strong> <span id="res-info-path">-</span>
+                        </div>
+                        
+                        <div class="fb-post-area" style="margin-top: 20px;">
+                            <h4 style="font-size: 14px; margin-bottom: 8px;"><i class="fa-brands fa-facebook"></i> เนื้อหาสำหรับก๊อปปี้ไปโพสต์ Facebook:</h4>
+                            <textarea id="res-fb-post" rows="12" class="form-control text-area-copy" style="font-family: inherit; font-size: 14px; padding: 12px; line-height: 1.5;" readonly></textarea>
+                            <button class="btn btn-primary" id="btn-copy-fb-post" style="margin-top: 12px; width: 100%; justify-content: center; height: 40px;">
+                                <i class="fa-regular fa-copy"></i> คัดลอกเนื้อหาไปยังคลิปบอร์ด
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Instruction Box if idle -->
+                    <div class="glass-card idle-card" id="workflow-idle-section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; padding: 40px 20px;">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 48px; color: var(--border-color-focus); margin-bottom: 20px; display: block; text-align: center;"></i>
+                        <h3 style="text-align: center; margin-bottom: 10px;">พร้อมใช้งานระบบอัตโนมัติ</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); text-align: center;">
+                            กรุณาเลือกรายการและไฟล์บทวิเคราะห์เพื่อเชื่อมโยงกระบวนการทำงานและเริ่มผลิตคลิปอัตโนมัติ
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 SepKhawGonTrade. All Rights Reserved. Development for Automated Workflow.</p>
+        </footer>
+    </div>
+
+    <!-- Double Confirmation Dialog Modal -->
+    <div class="modal-backdrop" id="confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header header-warning">
+                <i class="fa-solid fa-triangle-exclamation modal-icon"></i>
+                <h2>ยืนยันการลบแบบถาวร</h2>
+            </div>
+            <div class="modal-body">
+                <p>คุณกำลังจะลบ Notebook จำนวน <strong id="modal-delete-count" class="text-danger">0</strong> รายการ</p>
+                <p class="warning-text">⚠️ การลบนี้เป็นการถาวรและไม่สามารถกู้คืนข้อมูลกลับมาได้อีก!</p>
+                <div class="confirm-input-group">
+                    <label for="confirm-input">พิมพ์คำว่า <strong class="text-danger">DELETE</strong> เพื่อยืนยัน:</label>
+                    <input type="text" id="confirm-input" placeholder="พิมพ์ตรงนี้..." autocomplete="off">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-confirm-cancel">ยกเลิก</button>
+                <button class="btn btn-danger" id="btn-confirm-execute" disabled>ยืนยันการลบ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing / Deletion Progress Modal -->
+    <div class="modal-backdrop" id="progress-modal">
+        <div class="modal-content modal-progress-content">
+            <div class="modal-header">
+                <h2>กำลังดำเนินการลบ...</h2>
+            </div>
+            <div class="modal-body text-center">
+                <div class="progress-ring-container">
+                    <div class="progress-ring-spinner"></div>
+                    <div class="progress-percentage" id="progress-pct">0%</div>
+                </div>
+                <p class="current-task" id="current-deleting-title">กำลังลบ: -</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <p class="progress-fraction" id="progress-fraction">0 / 0 รายการเสร็จสิ้น</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Profile Modal -->
+    <div class="modal-backdrop" id="add-profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-user-plus modal-icon" style="color: var(--primary);"></i>
+                <h2>เพิ่มบัญชี Google ใหม่</h2>
+            </div>
+            <div class="modal-body">
+                <p>ระบุชื่อเรียกสำหรับบัญชีนี้ (ภาษาอังกฤษเท่านั้น เช่น work, personal):</p>
+                <div class="confirm-input-group" style="margin-top: 15px;">
+                    <input type="text" id="new-profile-input" placeholder="ตัวอย่าง: work" autocomplete="off" style="letter-spacing: 0.5px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-profile-cancel">ยกเลิก</button>
+                <button class="btn btn-primary" id="btn-profile-confirm" disabled>สร้างบัญชีและล็อกอิน</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Template Modal -->
+    <div class="modal-backdrop" id="add-template-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-wand-magic-sparkles modal-icon" style="color: var(--primary);"></i>
+                <h2>เพิ่มรายการวิเคราะห์ใหม่</h2>
+            </div>
+            <div class="modal-body">
+                <p>ระบุชื่อรายการวิเคราะห์ใหม่ (เช่น Small Cap Research, Pre-Market):</p>
+                <div class="confirm-input-group" style="margin-top: 15px;">
+                    <input type="text" id="new-template-input" placeholder="ตัวอย่าง: Small Cap Research" autocomplete="off" style="letter-spacing: 0.5px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-template-cancel">ยกเลิก</button>
+                <button class="btn btn-primary" id="btn-template-confirm" disabled>สร้างรายการ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
