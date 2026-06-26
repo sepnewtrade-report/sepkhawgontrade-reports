@@ -67,6 +67,85 @@ function runCmd(cmd) {
   });
 }
 
+// Helper to format YYYY-MM-DD to Thai Date (e.g., 26 มิถุนายน 2569)
+function formatThaiDate(dateStr) {
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return dateStr;
+  const year = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10);
+  const day = parseInt(parts[2], 10);
+  
+  const thaiMonths = [
+    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+  ];
+  
+  const thaiMonth = thaiMonths[month - 1] || parts[1];
+  const thaiYear = year + 543; // Buddhist Era
+  
+  return `${day} ${thaiMonth} ${thaiYear}`;
+}
+
+// Helper to extract stock ticker from markdown content
+function extractTicker(mdContent) {
+  if (!mdContent) return 'หุ้นสหรัฐฯ';
+  
+  const lines = mdContent.split('\n').slice(0, 25);
+  const tickerRegex = /\(([A-Z]{1,5})\)/;
+  
+  // Exclude common macro abbreviations
+  const exclusions = ['USD', 'GDP', 'CPI', 'FED', 'NYSE', 'SEC', 'AI', 'US', 'USA', 'PCE', 'IPO', 'SPX', 'NDX', 'DJI'];
+  
+  for (const line of lines) {
+    const match = line.match(tickerRegex);
+    if (match) {
+      const ticker = match[1];
+      if (!exclusions.includes(ticker)) {
+        return ticker;
+      }
+    }
+  }
+  
+  // Try NYSE: TICKER or NASDAQ: TICKER
+  const exchangeRegex = /(NYSE|NASDAQ):\s*([A-Z]{1,5})/i;
+  for (const line of lines) {
+    const match = line.match(exchangeRegex);
+    if (match) {
+      return match[2].toUpperCase();
+    }
+  }
+  
+  // Try matching any capitalized letters inside parenthesis in first 25 lines
+  const globalParenthesisRegex = /\(([A-Z]{1,5})\)/g;
+  const headContent = lines.join('\n');
+  let match;
+  const candidates = [];
+  while ((match = globalParenthesisRegex.exec(headContent)) !== null) {
+    const ticker = match[1];
+    if (!exclusions.includes(ticker)) {
+      candidates.push(ticker);
+    }
+  }
+  if (candidates.length > 0) {
+    return candidates[0];
+  }
+  
+  // Scan entire document for NYSE/NASDAQ: TICKER
+  const allExchangeTickers = [];
+  const globalExchangeRegex = /(?:NYSE|NASDAQ|NYSEArca):\s*([A-Z]{1,5})\b/gi;
+  while ((match = globalExchangeRegex.exec(mdContent)) !== null) {
+    allExchangeTickers.push(match[1].toUpperCase());
+  }
+  
+  if (allExchangeTickers.length > 0) {
+    const unique = [...new Set(allExchangeTickers)];
+    return unique.join(', ');
+  }
+  
+  return 'หุ้นสหรัฐฯ';
+}
+
+
 // Log message to active workflow
 function addLog(msg) {
   const time = new Date().toLocaleTimeString('th-TH');
@@ -479,13 +558,48 @@ app.post('/api/workflow/run', async (req, res) => {
     addLog(`ขั้นตอนที่ 4/8: กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
     await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --type text --title "${actualSourceTitle}" "${actualFilePath}"`);
     addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
+
+    // Extract ticker and date from report for prompt replacement
+    let resolvedAudioPrompt = audioPrompt;
+    let resolvedReportPrompt = reportPrompt;
+    let resolvedInfoPrompt = infoPrompt;
+    
+    try {
+      if (fs.existsSync(actualFilePath)) {
+        const mdContent = fs.readFileSync(actualFilePath, 'utf8');
+        const ticker = extractTicker(mdContent);
+        const thaiDate = formatThaiDate(dateStr);
+        
+        addLog(`ระบบสแกนข้อมูลพบ Ticker: ${ticker} | วันที่: ${thaiDate}`);
+        
+        // Replace [TICKER] (case-insensitive)
+        resolvedAudioPrompt = resolvedAudioPrompt.replace(/\[TICKER\]/gi, ticker);
+        resolvedReportPrompt = resolvedReportPrompt.replace(/\[TICKER\]/gi, ticker);
+        resolvedInfoPrompt = resolvedInfoPrompt.replace(/\[TICKER\]/gi, ticker);
+        
+        // Replace [วัน เดือน ปี] (supports spaces, slashes or dashes)
+        const datePattern = /\[วัน\s*[\/\-\s]?\s*เดือน\s*[\/\-\s]?\s*ปี\]/g;
+        resolvedAudioPrompt = resolvedAudioPrompt.replace(datePattern, thaiDate);
+        resolvedReportPrompt = resolvedReportPrompt.replace(datePattern, thaiDate);
+        resolvedInfoPrompt = resolvedInfoPrompt.replace(datePattern, thaiDate);
+      }
+    } catch (parseErr) {
+      console.error('Error parsing placeholders:', parseErr);
+      addLog(`⚠️ คำเตือน: ระบบแทนที่ตัวแปร Ticker / วันที่ ขัดข้อง: ${parseErr.message}`);
+    }
     
     // 5. Generate Audio Overview
     activeWorkflowState.progress = 55;
     activeWorkflowState.currentStep = 'กำลังสร้าง Audio Overview (Deep Dive)...';
     addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
-    addLog(`Prompt บังคับสำหรับบทสนทนา: "${audioPrompt}"`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait "${audioPrompt}"`);
+    addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
+    const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
+    fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
+    try {
+      await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
+    } finally {
+      try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
+    }
     addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
     await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest "${outputAudioPath}"`);
     addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
@@ -494,8 +608,14 @@ app.post('/api/workflow/run', async (req, res) => {
     activeWorkflowState.progress = 70;
     activeWorkflowState.currentStep = 'กำลังสร้างเนื้อหาโพสต์ Facebook...';
     addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-    addLog(`Prompt: "${reportPrompt}"`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait "${reportPrompt}"`);
+    addLog(`Prompt: "${resolvedReportPrompt}"`);
+    const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
+    fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
+    try {
+      await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+    } finally {
+      try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
+    }
     addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
     await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest "${outputReportPath}"`);
     addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
@@ -507,8 +627,14 @@ app.post('/api/workflow/run', async (req, res) => {
     activeWorkflowState.progress = 85;
     activeWorkflowState.currentStep = 'กำลังสร้างรูปภาพ Infographic...';
     addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
-    addLog(`Prompt: "${infoPrompt}"`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait "${infoPrompt}"`);
+    addLog(`Prompt: "${resolvedInfoPrompt}"`);
+    const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
+    fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
+    try {
+      await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
+    } finally {
+      try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
+    }
     addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
     await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest "${outputInfoPath}"`);
     addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
