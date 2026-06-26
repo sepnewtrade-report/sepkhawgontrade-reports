@@ -1,5 +1,45 @@
 [
   {
+    "title": "รายงานวิเคราะห์ภาวะตลาดการเงินรายวัน (Daily Market Intelligence Report)",
+    "filename": "market_summary_2026_06_26.md",
+    "path": "market_summary_2026_06_26.md",
+    "category": "Market Summary",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-26",
+    "timestamp": 1782468571843.4744,
+    "size": 22407
+  },
+  {
+    "title": "custom_1782454904186_2026_06_26.md",
+    "filename": "custom_1782454904186_2026_06_26.md",
+    "path": "custom_1782454904186_2026_06_26.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-26",
+    "timestamp": 1782464989928.3596,
+    "size": 23806
+  },
+  {
+    "title": "test_api.md",
+    "filename": "test_api.md",
+    "path": "scratch/test_api.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-26",
+    "timestamp": 1782455542721.5627,
+    "size": 11000
+  },
+  {
+    "title": "คู่มือการใช้งานเครื่องมือลบ Notebook ใน NotebookLM อัตโนมัติ (Auto-Delete)",
+    "filename": "README_notebooklm.md",
+    "path": "README_notebooklm.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-26",
+    "timestamp": 1782440338480.058,
+    "size": 6453
+  },
+  {
     "title": "รายงานเจาะลึก: วิเคราะห์หุ้นพื้นฐานแกร่งที่มีโอกาสเกิด Short Squeeze จริง",
     "filename": "short_squeeze_fundamental_analysis_2026_06_25.md",
     "path": "short_squeeze_fundamental_analysis_2026_06_25.md",
