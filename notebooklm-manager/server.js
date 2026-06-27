@@ -10,7 +10,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Paths to venv executables and profiles
@@ -59,12 +60,55 @@ function runCmd(cmd) {
   return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
-        reject(new Error(stderr || error.message));
+        const errObj = new Error(stderr || error.message);
+        errObj.stdout = stdout;
+        errObj.stderr = stderr;
+        reject(errObj);
       } else {
         resolve({ stdout, stderr });
       }
     });
   });
+}
+
+// Helper to check if CLI error indicates quota/rate limit exhaustion
+function isQuotaError(err) {
+  if (!err) return false;
+  const msg = (err.message || '').toLowerCase();
+  const stderr = (err.stderr || '').toLowerCase();
+  const stdout = (err.stdout || '').toLowerCase();
+  
+  return msg.includes('quota') || 
+         msg.includes('rate limit') || 
+         msg.includes('removed from the list') || 
+         msg.includes('incomplete') ||
+         msg.includes('exceeded') ||
+         stderr.includes('quota') ||
+         stderr.includes('rate limit') ||
+         stderr.includes('removed from the list') ||
+         stderr.includes('incomplete') ||
+         stderr.includes('exceeded') ||
+         stdout.includes('quota') ||
+         stdout.includes('rate limit') ||
+         stdout.includes('removed from the list') ||
+         stdout.includes('incomplete') ||
+         stdout.includes('exceeded');
+}
+
+// Helper to get authenticated profiles from the CLI
+async function getAuthenticatedProfiles() {
+  try {
+    const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" profile list --json`);
+    const data = JSON.parse(listRes.stdout);
+    const active = data.active || 'default';
+    const authenticated = data.profiles
+      .filter(p => p.authenticated)
+      .map(p => p.name);
+    return { active, authenticated };
+  } catch (e) {
+    console.error('Error fetching authenticated profiles:', e);
+    return { active: 'default', authenticated: ['default'] };
+  }
 }
 
 // Helper to format YYYY-MM-DD to Thai Date (e.g., 26 มิถุนายน 2569)
@@ -538,143 +582,205 @@ app.post('/api/workflow/run', async (req, res) => {
       actualSourceTitle = `${actualFile.replace('.md', '')}_Source`;
     }
     
-    // 3. Create Notebook
-    activeWorkflowState.progress = 25;
-    activeWorkflowState.currentStep = 'กำลังสร้าง Notebook ใหม่...';
-    const notebookTitle = `${showNameClean.replace(/_/g, ' ')} — ${dateStr}`;
-    addLog(`ขั้นตอนที่ 3/8: กำลังสร้าง Notebook ใน NotebookLM: "${notebookTitle}"...`);
-    const createRes = await runCmd(`"${VENV_NOTEBOOKLM}" create "${notebookTitle}"`);
+    const { active: initialProfile, authenticated: authProfiles } = await getAuthenticatedProfiles();
+    let currentProfile = initialProfile;
+    const maxAttempts = authProfiles.length;
+    let success = false;
+    let lastError = null;
+    let fbPostContent = '';
     
-    const match = createRes.stdout.match(/Created notebook:\s+([a-f0-9-]+)\s+-/);
-    if (!match) {
-      throw new Error('ไม่สามารถค้นหา Notebook ID จากผลลัพธ์ของคำสั่งได้:\n' + createRes.stdout);
-    }
-    const notebookId = match[1];
-    addLog(`สร้าง Notebook สำเร็จ ID: ${notebookId}`);
-    
-    // 4. Ingest source
-    activeWorkflowState.progress = 40;
-    activeWorkflowState.currentStep = 'กำลังนำเข้าแหล่งข้อมูล...';
-    addLog(`ขั้นตอนที่ 4/8: กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
-    
-    let tempTxtFilePath = '';
-    if (actualFilePath.toLowerCase().endsWith('.md')) {
-      tempTxtFilePath = actualFilePath.replace(/\.md$/i, '.txt');
-      fs.copyFileSync(actualFilePath, tempTxtFilePath);
-    }
-    
-    const fileToUpload = tempTxtFilePath || actualFilePath;
-    try {
-      await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --title "${actualSourceTitle}" "${fileToUpload}"`);
-    } finally {
-      if (tempTxtFilePath) {
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      let notebookId = '';
+      try {
+        if (maxAttempts > 1) {
+          addLog(`[บัญชี: ${currentProfile}] เริ่มต้นการประมวลผลระบบ NotebookLM (พยายามครั้งที่ ${attempt}/${maxAttempts})...`);
+        }
+        
+        // 3. Create Notebook
+        activeWorkflowState.progress = 25;
+        activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้าง Notebook ใหม่...`;
+        const notebookTitle = `${showNameClean.replace(/_/g, ' ')} — ${dateStr}`;
+        addLog(`ขั้นตอนที่ 3/8: กำลังสร้าง Notebook ใน NotebookLM: "${notebookTitle}"...`);
+        const createRes = await runCmd(`"${VENV_NOTEBOOKLM}" create "${notebookTitle}"`);
+        
+        const match = createRes.stdout.match(/Created notebook:\s+([a-f0-9-]+)\s+-/);
+        if (!match) {
+          throw new Error('ไม่สามารถค้นหา Notebook ID จากผลลัพธ์ของคำสั่งได้:\n' + createRes.stdout);
+        }
+        notebookId = match[1];
+        addLog(`สร้าง Notebook สำเร็จ ID: ${notebookId}`);
+        
+        // 4. Ingest source
+        activeWorkflowState.progress = 40;
+        activeWorkflowState.currentStep = `[${currentProfile}] กำลังนำเข้าแหล่งข้อมูล...`;
+        addLog(`ขั้นตอนที่ 4/8: กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
+        
+        let tempTxtFilePath = '';
+        if (actualFilePath.toLowerCase().endsWith('.md')) {
+          tempTxtFilePath = actualFilePath.replace(/\.md$/i, '.txt');
+          fs.copyFileSync(actualFilePath, tempTxtFilePath);
+        }
+        
+        const fileToUpload = tempTxtFilePath || actualFilePath;
         try {
-          if (fs.existsSync(tempTxtFilePath)) {
-            fs.unlinkSync(tempTxtFilePath);
+          await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --title "${actualSourceTitle}" "${fileToUpload}"`);
+        } finally {
+          if (tempTxtFilePath) {
+            try {
+              if (fs.existsSync(tempTxtFilePath)) {
+                fs.unlinkSync(tempTxtFilePath);
+              }
+            } catch (err) {
+              console.error('Failed to clean up temp text file:', err);
+            }
           }
-        } catch (err) {
-          console.error('Failed to clean up temp text file:', err);
+        }
+        addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
+    
+        // Extract ticker and date from report for prompt replacement
+        let resolvedAudioPrompt = audioPrompt;
+        let resolvedReportPrompt = reportPrompt;
+        let resolvedInfoPrompt = infoPrompt;
+        
+        try {
+          if (fs.existsSync(actualFilePath)) {
+            const mdContent = fs.readFileSync(actualFilePath, 'utf8');
+            const ticker = extractTicker(mdContent);
+            const thaiDate = formatThaiDate(dateStr);
+            
+            addLog(`ระบบสแกนข้อมูลพบ Ticker: ${ticker} | วันที่: ${thaiDate}`);
+            
+            // Replace [TICKER] (case-insensitive)
+            resolvedAudioPrompt = resolvedAudioPrompt.replace(/\[TICKER\]/gi, ticker);
+            resolvedReportPrompt = resolvedReportPrompt.replace(/\[TICKER\]/gi, ticker);
+            resolvedInfoPrompt = resolvedInfoPrompt.replace(/\[TICKER\]/gi, ticker);
+            
+            // Replace [วัน เดือน ปี] (supports spaces, slashes or dashes)
+            const datePattern = /\[วัน\s*[\/\-\s]?\s*เดือน\s*[\/\-\s]?\s*ปี\]/g;
+            resolvedAudioPrompt = resolvedAudioPrompt.replace(datePattern, thaiDate);
+            resolvedReportPrompt = resolvedReportPrompt.replace(datePattern, thaiDate);
+            resolvedInfoPrompt = resolvedInfoPrompt.replace(datePattern, thaiDate);
+          }
+        } catch (parseErr) {
+          console.error('Error parsing placeholders:', parseErr);
+          addLog(`⚠️ คำเตือน: ระบบแทนที่ตัวแปร Ticker / วันที่ ขัดข้อง: ${parseErr.message}`);
+        }
+        
+        // 5. Generate Audio Overview
+        activeWorkflowState.progress = 55;
+        activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้าง Audio Overview (Deep Dive)...`;
+        addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
+        addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
+        const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
+        fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
+        try {
+          await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
+        } finally {
+          try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
+        }
+        addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
+        await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
+        addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
+        
+        // 6. Generate Report (Facebook post)
+        activeWorkflowState.progress = 70;
+        activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
+        addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
+        addLog(`Prompt: "${resolvedReportPrompt}"`);
+        const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
+        fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
+        try {
+          await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+        } finally {
+          try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
+        }
+        addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
+        await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
+        addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
+        
+        // Read generated report content for Facebook post copy paste
+        fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
+        
+        // 7. Generate Infographic
+        activeWorkflowState.progress = 85;
+        activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
+        addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
+        addLog(`Prompt: "${resolvedInfoPrompt}"`);
+        const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
+        fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
+        try {
+          await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
+        } finally {
+          try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
+        }
+        addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
+        await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
+        addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
+        
+        // 8. Finished!
+        activeWorkflowState.progress = 100;
+        activeWorkflowState.currentStep = 'เสร็จสมบูรณ์!';
+        addLog(`ขั้นตอนที่ 8/8: ทำงานเสร็จสมบูรณ์ ไฟล์ทั้งหมดถูกดาวน์โหลดลงในโฟลเดอร์ Draft เรียบร้อยแล้ว!`);
+        
+        activeWorkflowState.running = false;
+        activeWorkflowState.result = {
+          audioPath: outputAudioPath,
+          infoPath: outputInfoPath,
+          fbPost: fbPostContent
+        };
+        
+        success = true;
+        break; // Success! Break retry loop
+        
+      } catch (err) {
+        lastError = err;
+        console.error(`[บัญชี: ${currentProfile}] การทำงานขั้นตอนนี้ขัดข้อง:`, err);
+        
+        // Delete partial notebook of the failed attempt to keep it clean
+        if (notebookId) {
+          try {
+            addLog(`[บัญชี: ${currentProfile}] กำลังลบ Notebook ที่สร้างค้างไว้ ID: ${notebookId} เพื่อเคลียร์ระบบ...`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" delete "${notebookId}"`);
+          } catch (delErr) {
+            console.error('Failed to delete notebook on failure:', delErr);
+          }
+        }
+        
+        if (isQuotaError(err) && attempt < maxAttempts) {
+          const currentIdx = authProfiles.indexOf(currentProfile);
+          const nextIdx = (currentIdx + 1) % authProfiles.length;
+          const nextProfile = authProfiles[nextIdx];
+          
+          addLog(`⚠️ ตรวจพบโควตาเต็มสำหรับบัญชี '${currentProfile}'!`);
+          addLog(`🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '${nextProfile}'...`);
+          
+          try {
+            await runCmd(`"${VENV_NOTEBOOKLM}" profile switch "${nextProfile}"`);
+            currentProfile = nextProfile;
+            addLog(`✅ สลับบัญชีสำเร็จเป็น '${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
+          } catch (switchErr) {
+            addLog(`❌ สลับบัญชีล้มเหลว: ${switchErr.message}`);
+            throw err;
+          }
+        } else {
+          // Rethrow the error to be caught by the outer block
+          throw err;
         }
       }
     }
-    addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
-
-    // Extract ticker and date from report for prompt replacement
-    let resolvedAudioPrompt = audioPrompt;
-    let resolvedReportPrompt = reportPrompt;
-    let resolvedInfoPrompt = infoPrompt;
     
-    try {
-      if (fs.existsSync(actualFilePath)) {
-        const mdContent = fs.readFileSync(actualFilePath, 'utf8');
-        const ticker = extractTicker(mdContent);
-        const thaiDate = formatThaiDate(dateStr);
-        
-        addLog(`ระบบสแกนข้อมูลพบ Ticker: ${ticker} | วันที่: ${thaiDate}`);
-        
-        // Replace [TICKER] (case-insensitive)
-        resolvedAudioPrompt = resolvedAudioPrompt.replace(/\[TICKER\]/gi, ticker);
-        resolvedReportPrompt = resolvedReportPrompt.replace(/\[TICKER\]/gi, ticker);
-        resolvedInfoPrompt = resolvedInfoPrompt.replace(/\[TICKER\]/gi, ticker);
-        
-        // Replace [วัน เดือน ปี] (supports spaces, slashes or dashes)
-        const datePattern = /\[วัน\s*[\/\-\s]?\s*เดือน\s*[\/\-\s]?\s*ปี\]/g;
-        resolvedAudioPrompt = resolvedAudioPrompt.replace(datePattern, thaiDate);
-        resolvedReportPrompt = resolvedReportPrompt.replace(datePattern, thaiDate);
-        resolvedInfoPrompt = resolvedInfoPrompt.replace(datePattern, thaiDate);
-      }
-    } catch (parseErr) {
-      console.error('Error parsing placeholders:', parseErr);
-      addLog(`⚠️ คำเตือน: ระบบแทนที่ตัวแปร Ticker / วันที่ ขัดข้อง: ${parseErr.message}`);
+    if (!success && lastError) {
+      throw lastError;
     }
-    
-    // 5. Generate Audio Overview
-    activeWorkflowState.progress = 55;
-    activeWorkflowState.currentStep = 'กำลังสร้าง Audio Overview (Deep Dive)...';
-    addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
-    addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
-    const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
-    fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
-    try {
-      await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
-    } finally {
-      try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
-    }
-    addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
-    addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
-    
-    // 6. Generate Report (Facebook post)
-    activeWorkflowState.progress = 70;
-    activeWorkflowState.currentStep = 'กำลังสร้างเนื้อหาโพสต์ Facebook...';
-    addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-    addLog(`Prompt: "${resolvedReportPrompt}"`);
-    const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
-    fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
-    try {
-      await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
-    } finally {
-      try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
-    }
-    addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
-    addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
-    
-    // Read generated report content for Facebook post copy paste
-    const fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
-    
-    // 7. Generate Infographic
-    activeWorkflowState.progress = 85;
-    activeWorkflowState.currentStep = 'กำลังสร้างรูปภาพ Infographic...';
-    addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
-    addLog(`Prompt: "${resolvedInfoPrompt}"`);
-    const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
-    fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
-    try {
-      await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
-    } finally {
-      try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
-    }
-    addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-    await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
-    addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
-    
-    // 8. Finished!
-    activeWorkflowState.progress = 100;
-    activeWorkflowState.currentStep = 'เสร็จสมบูรณ์!';
-    addLog(`ขั้นตอนที่ 8/8: ทำงานเสร็จสมบูรณ์ ไฟล์ทั้งหมดถูกดาวน์โหลดลงในโฟลเดอร์ Draft เรียบร้อยแล้ว!`);
-    
-    activeWorkflowState.running = false;
-    activeWorkflowState.result = {
-      audioPath: outputAudioPath,
-      infoPath: outputInfoPath,
-      fbPost: fbPostContent
-    };
   } catch (err) {
     console.error('Workflow error:', err);
-    addLog(`❌ เกิดข้อผิดพลาดในกระบวนการทำงาน: ${err.message}`);
+    let displayError = err.message;
+    if (isQuotaError(err)) {
+      displayError = 'โควตาการใช้งานบัญชีนี้เต็มแล้วสำหรับวันนี้ (Daily Quota Exceeded) หรือเซิร์ฟเวอร์ Google ปฏิเสธคำขอชั่วคราว กรุณาสลับผู้ใช้ไปใช้โปรไฟล์บัญชีอื่นในแท็บเมนูจัดการบัญชี แล้วทดลองใหม่อีกครั้ง';
+    }
+    addLog(`❌ เกิดข้อผิดพลาดในกระบวนการทำงาน: ${displayError}`);
     activeWorkflowState.running = false;
-    activeWorkflowState.error = err.message;
+    activeWorkflowState.error = displayError;
   }
 });
 

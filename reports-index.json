@@ -1,5 +1,35 @@
 [
   {
+    "title": "\udc0b รายงานวิเคราะห์ความเคลื่อนไหวสถาบันและการสะสมของวาฬ (Whale Flow & Institutional Accumulation Report)",
+    "filename": "whale_flow_analysis_2026_06_27.md",
+    "path": "whale_flow_analysis_2026_06_27.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-06-27",
+    "timestamp": 1782528059539.331,
+    "size": 64482
+  },
+  {
+    "title": "custom_1782454912886_2026_06_26.md",
+    "filename": "custom_1782454912886_2026_06_26.md",
+    "path": "custom_1782454912886_2026_06_26.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-26",
+    "timestamp": 1782486575789.6548,
+    "size": 23093
+  },
+  {
+    "title": "custom_1782454904186_2026_06_26.md",
+    "filename": "custom_1782454904186_2026_06_26.md",
+    "path": "custom_1782454904186_2026_06_26.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-26",
+    "timestamp": 1782476550786.1477,
+    "size": 25812
+  },
+  {
     "title": "Small-Cap & Penny Stock Intelligence Report",
     "filename": "small_cap_research_2026_06_26.md",
     "path": "small_cap_research_2026_06_26.md",
@@ -38,16 +68,6 @@
     "date": "2026-06-26",
     "timestamp": 1782468571843.4744,
     "size": 22407
-  },
-  {
-    "title": "custom_1782454904186_2026_06_26.md",
-    "filename": "custom_1782454904186_2026_06_26.md",
-    "path": "custom_1782454904186_2026_06_26.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-06-26",
-    "timestamp": 1782464989928.3596,
-    "size": 23806
   },
   {
     "title": "test_api.md",
