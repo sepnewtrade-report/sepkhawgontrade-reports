@@ -316,19 +316,6 @@ app.get('/api/workspace-files', (req, res) => {
     console.error('Error loading templates in workspace-files:', e);
   }
 
-  // Get date filter from query param, default to today's local date
-  let targetDateStr = req.query.date;
-  if (!targetDateStr) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    targetDateStr = `${yyyy}-${mm}-${dd}`;
-  }
-  
-  const targetDateDash = targetDateStr.replace(/_/g, '-');
-  const targetDateUnderscore = targetDateStr.replace(/-/g, '_');
-
   // Read parent folder
   let parentFiles = [];
   try {
@@ -356,6 +343,44 @@ app.get('/api/workspace-files', (req, res) => {
   }
 
   const allFiles = [...parentFiles, ...membershipFiles];
+
+  // Find the latest file date in the workspace
+  let latestDateStr = '';
+  allFiles.forEach(file => {
+    const name = file.filename.toLowerCase();
+    if (name.endsWith('.md') && 
+        name !== 'readme_notebooklm.md' && 
+        name !== 'agents.md' && 
+        name !== 'task.md' &&
+        name !== 'implementation_plan.md' &&
+        name !== 'walkthrough.md') {
+      const dateMatch = file.filename.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
+      if (dateMatch) {
+        const dateStr = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
+        if (!latestDateStr || dateStr > latestDateStr) {
+          latestDateStr = dateStr;
+        }
+      }
+    }
+  });
+
+  // If no files with dates were found, default to today's local date
+  if (!latestDateStr) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    latestDateStr = `${yyyy}-${mm}-${dd}`;
+  }
+
+  // Get date filter from query param, default to latest report date
+  let targetDateStr = req.query.date;
+  if (!targetDateStr) {
+    targetDateStr = latestDateStr;
+  }
+  
+  const targetDateDash = targetDateStr.replace(/_/g, '-');
+  const targetDateUnderscore = targetDateStr.replace(/-/g, '_');
 
   // Filter for markdown files and exclude config/status files
   const mdFiles = allFiles
@@ -388,7 +413,7 @@ app.get('/api/workspace-files', (req, res) => {
         mtime: stats.mtime
       };
     })
-    // Filter for files whose names match today/targetDate string
+    // Filter for files whose names match targetDate string
     .filter(file => {
       return file.filename.includes(targetDateDash) || file.filename.includes(targetDateUnderscore);
     })
@@ -433,7 +458,7 @@ app.get('/api/workspace-files', (req, res) => {
     // Sort by parsed date (newest first)
     .sort((a, b) => b.created_at - a.created_at);
     
-  res.json({ success: true, files: mdFiles });
+  res.json({ success: true, files: mdFiles, suggestedDate: targetDateStr });
 });
 
 // Get Prompt Templates

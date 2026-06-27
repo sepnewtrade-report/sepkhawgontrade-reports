@@ -697,18 +697,10 @@ async function handleProfileDelete() {
 
 // Initialize/Load Workflow Tab data
 async function loadWorkflowData() {
-    // Set default date to today's local date
-    if (!workflowDateInput.value) {
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        workflowDateInput.value = `${yyyy}-${mm}-${dd}`;
-    }
-
     try {
         // Fetch workspace MD files list
-        const filesResponse = await fetch('/api/workspace-files?date=' + workflowDateInput.value);
+        const queryDate = workflowDateInput.value || '';
+        const filesResponse = await fetch('/api/workspace-files?date=' + queryDate);
         const filesData = await filesResponse.json();
         
         if (filesData.success) {
@@ -719,6 +711,11 @@ async function loadWorkflowData() {
             defaultOpt.value = '';
             defaultOpt.textContent = '-- ไม่ใช้ไฟล์ (ดึงข้อมูลผ่านระบบค้นหาข่าว) --';
             workflowFileSelect.appendChild(defaultOpt);
+            
+            // Set the date input value to the suggested date if it is different
+            if (filesData.suggestedDate && workflowDateInput.value !== filesData.suggestedDate) {
+                workflowDateInput.value = filesData.suggestedDate;
+            }
             
             filesData.files.forEach(f => {
                 const opt = document.createElement('option');
