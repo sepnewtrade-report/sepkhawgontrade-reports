@@ -1,5 +1,15 @@
 [
   {
+    "title": "U.S. Equity Research Report: High-Conviction Opportunities (1-4 Week Horizon)",
+    "filename": "equity_research_report_2026_06_27.md",
+    "path": "equity_research_report_2026_06_27.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-06-27",
+    "timestamp": 1782559387581.671,
+    "size": 34743
+  },
+  {
     "title": "\udc0b รายงานวิเคราะห์ความเคลื่อนไหวสถาบันและการสะสมของวาฬ (Whale Flow & Institutional Accumulation Report)",
     "filename": "whale_flow_analysis_2026_06_27.md",
     "path": "whale_flow_analysis_2026_06_27.md",
@@ -678,5 +688,15 @@
     "date": "2026-06-05",
     "timestamp": 1781854488380.7078,
     "size": 21707
+  },
+  {
+    "title": "US Equity Research & Market Intelligence Report",
+    "filename": "us_equity_research_report_2026_05_29.md",
+    "path": "us_equity_research_report_2026_05_29.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-05-29",
+    "timestamp": 1782559402744.665,
+    "size": 35638
   }
 ]
