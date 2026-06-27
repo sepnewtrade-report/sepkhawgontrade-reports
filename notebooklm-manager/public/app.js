@@ -69,11 +69,18 @@ const btnRunWorkflow = document.getElementById('btn-run-workflow');
 
 // Template Manager Selectors
 const btnAddTemplate = document.getElementById('btn-add-template');
+const btnEditTemplate = document.getElementById('btn-edit-template');
 const btnDeleteTemplate = document.getElementById('btn-delete-template');
+
 const addTemplateModal = document.getElementById('add-template-modal');
 const newTemplateInput = document.getElementById('new-template-input');
 const btnTemplateCancel = document.getElementById('btn-template-cancel');
 const btnTemplateConfirm = document.getElementById('btn-template-confirm');
+
+const editTemplateModal = document.getElementById('edit-template-modal');
+const editTemplateInput = document.getElementById('edit-template-input');
+const btnEditTemplateCancel = document.getElementById('btn-edit-template-cancel');
+const btnEditTemplateConfirm = document.getElementById('btn-edit-template-confirm');
 
 // Prompt Editor Selectors
 const promptTabBtns = document.querySelectorAll('.prompt-tab-btn');
@@ -241,6 +248,28 @@ function setupEventListeners() {
     });
 
     btnTemplateConfirm.addEventListener('click', handleTemplateCreate);
+
+    // Edit Template event listeners
+    btnEditTemplate.addEventListener('click', () => {
+        const template = state.templates.find(t => t.id === state.activeTemplateId);
+        if (!template) return;
+        editTemplateInput.value = template.name;
+        btnEditTemplateConfirm.disabled = false;
+        editTemplateModal.classList.add('show');
+        editTemplateInput.focus();
+        editTemplateInput.select();
+    });
+
+    btnEditTemplateCancel.addEventListener('click', () => {
+        editTemplateModal.classList.remove('show');
+    });
+
+    editTemplateInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        btnEditTemplateConfirm.disabled = val.length < 2;
+    });
+
+    btnEditTemplateConfirm.addEventListener('click', handleTemplateEditSave);
 
     btnDeleteTemplate.addEventListener('click', handleTemplateDelete);
 
@@ -1192,6 +1221,55 @@ async function handleTemplateDelete() {
     } catch (error) {
         console.error('Error saving templates after delete:', error);
         alert('เกิดข้อผิดพลาดในการลบรายการ');
+    }
+}
+
+// Edit template name and save
+async function handleTemplateEditSave() {
+    const newName = editTemplateInput.value.trim();
+    if (!newName) return;
+
+    editTemplateModal.classList.remove('show');
+
+    const template = state.templates.find(t => t.id === state.activeTemplateId);
+    if (!template) return;
+
+    const oldName = template.name;
+    if (oldName === newName) return; // No change
+
+    template.name = newName;
+
+    // Save templates to backend database
+    try {
+        const response = await fetch('/api/templates/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ templates: state.templates })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            // Reload select options
+            const currentSelectedId = state.activeTemplateId;
+            workflowTemplateSelect.innerHTML = '';
+            state.templates.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.name;
+                workflowTemplateSelect.appendChild(opt);
+            });
+            workflowTemplateSelect.value = currentSelectedId;
+            
+            alert(`แก้ไขชื่อรายการเป็น "${newName}" เรียบร้อยแล้ว!`);
+        } else {
+            // Revert on error
+            template.name = oldName;
+            alert('แก้ไขชื่อรายการไม่สำเร็จ: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Error saving templates:', error);
+        template.name = oldName;
+        alert('เกิดข้อผิดพลาดในการบันทึกชื่อรายการ');
     }
 }
 

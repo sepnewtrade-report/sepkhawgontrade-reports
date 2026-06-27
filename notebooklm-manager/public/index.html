@@ -122,6 +122,9 @@
                                 <button class="btn btn-secondary btn-icon" id="btn-add-template" title="เพิ่มรายการใหม่" style="height: 38px; width: 38px; min-width: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
+                                <button class="btn btn-secondary btn-icon" id="btn-edit-template" title="แก้ไขชื่อรายการนี้" style="height: 38px; width: 38px; min-width: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
                                 <button class="btn btn-outline-danger btn-icon" id="btn-delete-template" title="ลบรายการนี้" style="height: 38px; width: 38px; min-width: 38px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px;">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
@@ -316,6 +319,26 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="btn-template-cancel">ยกเลิก</button>
                 <button class="btn btn-primary" id="btn-template-confirm" disabled>สร้างรายการ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Template Modal -->
+    <div class="modal-backdrop" id="edit-template-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-pen-to-square modal-icon" style="color: var(--primary);"></i>
+                <h2>แก้ไขชื่อรายการวิเคราะห์</h2>
+            </div>
+            <div class="modal-body">
+                <p>ระบุชื่อรายการวิเคราะห์ใหม่:</p>
+                <div class="confirm-input-group" style="margin-top: 15px;">
+                    <input type="text" id="edit-template-input" placeholder="ตัวอย่าง: Small Cap Research" autocomplete="off" style="letter-spacing: 0.5px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-edit-template-cancel">ยกเลิก</button>
+                <button class="btn btn-primary" id="btn-edit-template-confirm">บันทึกชื่อรายการ</button>
             </div>
         </div>
     </div>
