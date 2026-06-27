@@ -496,7 +496,8 @@ app.post('/api/workflow/run', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Another workflow is already running' });
   }
   
-  const { templateId, selectedFile, dateStr, searchPrompt, audioPrompt, reportPrompt, infoPrompt } = req.body;
+  const { templateId, selectedFile, dateStr, searchPrompt, audioPrompt, reportPrompt, infoPrompt, genFacebook } = req.body;
+  const shouldGenFacebook = genFacebook === true || genFacebook === 'true' || genFacebook === undefined;
   
   if (!templateId || !dateStr) {
     return res.status(400).json({ success: false, error: 'Missing required parameters (templateId, dateStr)' });
@@ -730,23 +731,30 @@ app.post('/api/workflow/run', async (req, res) => {
         addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
         
         // 6. Generate Report (Facebook post)
-        activeWorkflowState.progress = 70;
-        activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
-        addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-        addLog(`Prompt: "${resolvedReportPrompt}"`);
-        const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
-        fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
-        try {
-          await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
-        } finally {
-          try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
+        if (shouldGenFacebook) {
+          activeWorkflowState.progress = 70;
+          activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
+          addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
+          addLog(`Prompt: "${resolvedReportPrompt}"`);
+          const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
+          fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
+          try {
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+          } finally {
+            try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
+          }
+          addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
+          await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
+          addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
+          
+          // Read generated report content for Facebook post copy paste
+          fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
+        } else {
+          activeWorkflowState.progress = 70;
+          activeWorkflowState.currentStep = `[${currentProfile}] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook...`;
+          addLog(`ขั้นตอนที่ 6/8: [ข้าม] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook ตามที่ตั้งค่าไว้`);
+          fbPostContent = 'ข้ามการสร้างเนื้อหาสำหรับโพสต์ Facebook (User disabled)';
         }
-        addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-        await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
-        addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
-        
-        // Read generated report content for Facebook post copy paste
-        fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
         
         // 7. Generate Infographic
         activeWorkflowState.progress = 85;

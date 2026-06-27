@@ -78,5 +78,13 @@
     "audioPrompt": "สนทนาวิเคราะห์ข้อมูลในระดับลึกเกี่ยวกับประเด็นหลักในเอกสารสำหรับรายการ TOP OPPORTUNITY RADAR for VP",
     "reportPrompt": "สรุปใจความสำคัญและเรียบเรียงเนื้อหาสำหรับโพสต์ Facebook ชวนดูคลิปรายการ TOP OPPORTUNITY RADAR for VP",
     "infoPrompt": "สรุปข้อมูลสรุปสำคัญสำหรับการจัดทำ Infographic สำหรับรายการ TOP OPPORTUNITY RADAR for VP"
+  },
+  {
+    "id": "vp_top_opportunity_radar",
+    "name": "VP TOP OPPORTUNITY RADAR",
+    "searchPrompt": "",
+    "audioPrompt": "คุณคือพิธีกรและนักวิเคราะห์การลงทุนประจำรายการ\n\n\"เสพข่าวก่อนเทรด หุ้นอเมริกา VP & VIP\n\nช่วง:\nTOP OPPORTUNITY RADAR\n\nวันที่:\n[ระบุวันที่รายงาน]\n\nหน้าที่ของคุณคือสรุปหุ้นที่มีคะแนนความน่าสนใจสูงสุดในช่วง 1-4 สัปดาห์ข้างหน้า\n\nใช้ข้อมูลจากรายงาน Top Opportunity Radar ที่แนบมา\n\nรูปแบบการนำเสนอ:\n\n1. กล่าวต้อนรับสมาชิก VP & VIP\n2. แจ้งวันที่รายงาน\n3. อธิบายภาพรวมตลาดสั้นๆ\n4. นำเสนอ Top Opportunity แต่ละตัว\n\nสำหรับแต่ละหุ้นให้สรุป:\n\n- Ticker\n- ธุรกิจทำอะไร\n- เหตุผลที่ติดอันดับ\n- Catalyst สำคัญ\n- คะแนนรวม\n- Bull Case\n- Bear Case\n- ช่วงเวลาที่คาดว่ามีโอกาสเกิดการเคลื่อนไหว\n\n5. สรุป Top 3 หุ้นที่มี Conviction สูงสุด\n\nน้ำเสียง:\n\n- มืออาชีพ\n- เข้าใจง่าย\n- เหมือนผู้จัดการกองทุนสรุปให้สมาชิก\n- ไม่ชี้นำการลงทุน\n- ไม่ใช้ภาษาปั่นหุ้น\n\nความยาว:\n8-12 นาที\n\nปิดท้ายด้วย:\n\n\"นี่คือ Top Opportunity Radar สำหรับสมาชิก VIP ของรายการ เสพข่าวก่อนเทรด หุ้นอเมริกา\"\n",
+    "reportPrompt": "",
+    "infoPrompt": "Create a premium financial infographic.\n\nProgram Title:\nเสพข่าวก่อนเทรด หุ้นอเมริกา VP & VIP\n\nSegment:\nTOP OPPORTUNITY RADAR\n\nReport Date:\n[DAY MONTH YEAR]\n\nStyle:\n\n• Professional Wall Street research report\n• Premium membership exclusive\n• Modern financial dashboard\n• Clean layout\n• High readability\n• Suitable for Facebook, YouTube Community and Membership posts\n\nMain Section:\n\nTOP 10 OPPORTUNITY RANKING\n\nDisplay:\n\nRank\nTicker\nOpportunity Score\nConviction Level\n\nHighlight:\n\nTop 3 Highest Conviction Stocks\n\nShow:\n\n• Bullish Catalyst\n• Risk Level\n• Time Horizon\n\nInclude visual elements:\n\n• Stock market dashboard\n• Institutional research theme\n• Professional finance icons\n\nMust prominently display:\n\nเสพข่าวก่อนเทรด หุ้นอเมริกา for VP & VIP\nTOP OPPORTUNITY RADAR\n[ วัน เดือน ปี]\n\n"
   }
 ]

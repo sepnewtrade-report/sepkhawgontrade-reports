@@ -909,6 +909,7 @@ async function handleRunWorkflow() {
     const templateId = workflowTemplateSelect.value;
     const selectedFile = workflowFileSelect.value;
     const dateStr = workflowDateInput.value;
+    const genFacebook = document.getElementById('workflow-gen-fb-checkbox').checked;
     
     if (!dateStr) {
         alert('กรุณาเลือกวันที่ก่อนจัดส่งข้อมูลเข้าระบบ');
@@ -951,7 +952,8 @@ async function handleRunWorkflow() {
                 searchPrompt: template.searchPrompt || '',
                 audioPrompt: template.audioPrompt || '',
                 reportPrompt: template.reportPrompt || '',
-                infoPrompt: template.infoPrompt || ''
+                infoPrompt: template.infoPrompt || '',
+                genFacebook: genFacebook
             })
         });
         const data = await response.json();
