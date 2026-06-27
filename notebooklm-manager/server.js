@@ -71,6 +71,21 @@ function runCmd(cmd) {
   });
 }
 
+// Helper to run shell commands with retry logic (especially useful for network requests)
+async function runCmdWithRetry(cmd, maxRetries = 3, delayMs = 5000) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await runCmd(cmd);
+    } catch (err) {
+      if (attempt === maxRetries) {
+        throw err;
+      }
+      console.warn(`Command failed (attempt ${attempt}/${maxRetries}): ${cmd}. Retrying in ${delayMs / 1000}s... Error: ${err.message}`);
+      await new Promise(resolve => setTimeout(resolve, delayMs));
+    }
+  }
+}
+
 // Helper to check if CLI error indicates quota/rate limit exhaustion
 function isQuotaError(err) {
   if (!err) return false;
@@ -727,7 +742,7 @@ app.post('/api/workflow/run', async (req, res) => {
           try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
         }
         addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-        await runCmd(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
+        await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
         addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
         
         // 6. Generate Report (Facebook post)
@@ -744,7 +759,7 @@ app.post('/api/workflow/run', async (req, res) => {
             try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
           }
           addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-          await runCmd(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
           addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
           
           // Read generated report content for Facebook post copy paste
@@ -769,7 +784,7 @@ app.post('/api/workflow/run', async (req, res) => {
           try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
         }
         addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-        await runCmd(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
+        await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
         addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
         
         // 8. Finished!
@@ -795,7 +810,7 @@ app.post('/api/workflow/run', async (req, res) => {
         if (notebookId) {
           try {
             addLog(`[บัญชี: ${currentProfile}] กำลังลบ Notebook ที่สร้างค้างไว้ ID: ${notebookId} เพื่อเคลียร์ระบบ...`);
-            await runCmd(`"${VENV_NOTEBOOKLM}" delete "${notebookId}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" delete -n "${notebookId}" -y`);
           } catch (delErr) {
             console.error('Failed to delete notebook on failure:', delErr);
           }
