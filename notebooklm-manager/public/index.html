@@ -17,12 +17,12 @@
         <header class="header">
             <div class="logo-area">
                 <img src="/Logo master.png" alt="SepKhawGonTrade Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/150x50/111/fff?text=SepKhawGonTrade'">
-                <div class="logo-text">
-                    <h1 style="display: flex; align-items: center; gap: 12px;">
-                        <img src="logo-mascot.png" alt="Mascot Logo" style="height: 128px; width: 128px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(224, 231, 255, 0.6)) drop-shadow(0 -5px 25px rgba(255, 255, 255, 0.55));">
-                        NotebookLM
-                    </h1>
-                    <p>Auto-Delete & Manager Tool</p>
+                <div class="logo-text" style="display: flex; align-items: center; gap: 12px;">
+                    <img src="logo-mascot.png" alt="Mascot Logo" style="height: 128px; width: 128px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(224, 231, 255, 0.6)) drop-shadow(0 -5px 25px rgba(255, 255, 255, 0.55));">
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <h1 style="margin: 0; line-height: 1.1;">NotebookLM</h1>
+                        <p style="margin: 4px 0 0 0;">Auto-Delete & Manager Tool</p>
+                    </div>
                 </div>
             </div>
             
@@ -56,16 +56,16 @@
         <main class="main-content">
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <button class="tab-btn active" data-tab="manager-tab">
-                    <i class="fa-solid fa-list-check"></i> จัดการรายการ Notebooks
-                </button>
-                <button class="tab-btn" data-tab="workflow-tab">
+                <button class="tab-btn active" data-tab="workflow-tab">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> ระบบผลิตคลิปอัตโนมัติ (Workflow)
+                </button>
+                <button class="tab-btn" data-tab="manager-tab">
+                    <i class="fa-solid fa-list-check"></i> จัดการรายการ Notebooks
                 </button>
             </div>
 
             <!-- Tab 1: Manager Tab Panel -->
-            <div class="tab-panel active" id="manager-tab">
+            <div class="tab-panel" id="manager-tab" style="display: none;">
                 <!-- Search & Actions Bar -->
                 <section class="toolbar">
                 <div class="search-box">
@@ -109,7 +109,7 @@
         </div> <!-- End Tab 1: Manager Tab Panel -->
 
         <!-- Tab 2: Workflow Automation Panel -->
-        <div class="tab-panel" id="workflow-tab" style="display: none;">
+        <div class="tab-panel active" id="workflow-tab">
             <div class="workflow-layout">
                 <!-- Left: Show selection and configuration -->
                 <div class="workflow-left">
