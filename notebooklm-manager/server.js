@@ -511,8 +511,9 @@ app.post('/api/workflow/run', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Another workflow is already running' });
   }
   
-  const { templateId, selectedFile, dateStr, searchPrompt, audioPrompt, reportPrompt, infoPrompt, genFacebook } = req.body;
+  const { templateId, selectedFile, dateStr, searchPrompt, audioPrompt, reportPrompt, infoPrompt, genFacebook, resumeWorkflow } = req.body;
   const shouldGenFacebook = genFacebook === true || genFacebook === 'true' || genFacebook === undefined;
+  const shouldResume = resumeWorkflow === true || resumeWorkflow === 'true' || resumeWorkflow === undefined;
   
   if (!templateId || !dateStr) {
     return res.status(400).json({ success: false, error: 'Missing required parameters (templateId, dateStr)' });
@@ -664,24 +665,26 @@ app.post('/api/workflow/run', async (req, res) => {
         activeWorkflowState.currentStep = `[${currentProfile}] กำลังเตรียม Notebook ใน NotebookLM...`;
         const notebookTitle = `${showNameClean.replace(/_/g, ' ')} — ${dateStr}`;
         
-        try {
-          addLog(`กำลังสแกนค้นหา Notebook เดิมสำหรับหัวข้อ: "${notebookTitle}"...`);
-          const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" list --json`);
-          const notebooksData = JSON.parse(listRes.stdout);
-          if (notebooksData && Array.isArray(notebooksData.notebooks)) {
-            const existingNotebook = notebooksData.notebooks.find(n => n.title === notebookTitle);
-            if (existingNotebook) {
-              notebookId = existingNotebook.id;
-              addLog(`พบ Notebook เดิมในระบบเรียบร้อยแล้ว (ID: ${notebookId}) ข้ามขั้นตอนการสร้างใหม่!`);
+        if (shouldResume) {
+          try {
+            addLog(`กำลังสแกนค้นหา Notebook เดิมสำหรับหัวข้อ: "${notebookTitle}"...`);
+            const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" list --json`);
+            const notebooksData = JSON.parse(listRes.stdout);
+            if (notebooksData && Array.isArray(notebooksData.notebooks)) {
+              const existingNotebook = notebooksData.notebooks.find(n => n.title === notebookTitle);
+              if (existingNotebook) {
+                notebookId = existingNotebook.id;
+                addLog(`พบ Notebook เดิมในระบบเรียบร้อยแล้ว (ID: ${notebookId}) ข้ามขั้นตอนการสร้างใหม่!`);
+              }
             }
+          } catch (scanErr) {
+            console.error('Failed to scan existing notebooks:', scanErr);
+            addLog(`⚠️ คำเตือน: สแกนค้นหา Notebook เดิมขัดข้อง จะใช้วิธีสร้างใหม่...`);
           }
-        } catch (scanErr) {
-          console.error('Failed to scan existing notebooks:', scanErr);
-          addLog(`⚠️ คำเตือน: สแกนค้นหา Notebook เดิมขัดข้อง จะใช้วิธีสร้างใหม่...`);
         }
 
         if (!notebookId) {
-          addLog(`ไม่พบ Notebook เดิม กำลังสร้าง Notebook ใหม่: "${notebookTitle}"...`);
+          addLog(`ไม่พบ Notebook เดิม หรือผู้เลือกตั้งค่าให้เริ่มใหม่ กำลังสร้าง Notebook ใหม่: "${notebookTitle}"...`);
           const createRes = await runCmd(`"${VENV_NOTEBOOKLM}" create "${notebookTitle}"`);
           const match = createRes.stdout.match(/Created notebook:\s+([a-f0-9-]+)\s+-/);
           if (!match) {
@@ -696,23 +699,25 @@ app.post('/api/workflow/run', async (req, res) => {
         activeWorkflowState.currentStep = `[${currentProfile}] กำลังนำเข้าแหล่งข้อมูล...`;
         
         let hasSources = false;
-        try {
-          addLog(`กำลังตรวจสอบแหล่งข้อมูลใน Notebook...`);
-          const sourcesRes = await runCmd(`"${VENV_NOTEBOOKLM}" source list -n ${notebookId} --json`);
-          const sourcesList = JSON.parse(sourcesRes.stdout);
-          if (sourcesList && Array.isArray(sourcesList.sources) && sourcesList.sources.length > 0) {
-            hasSources = true;
-          } else if (Array.isArray(sourcesList) && sourcesList.length > 0) {
-            hasSources = true;
+        if (shouldResume && notebookId) {
+          try {
+            addLog(`กำลังตรวจสอบแหล่งข้อมูลใน Notebook...`);
+            const sourcesRes = await runCmd(`"${VENV_NOTEBOOKLM}" source list -n ${notebookId} --json`);
+            const sourcesList = JSON.parse(sourcesRes.stdout);
+            if (sourcesList && Array.isArray(sourcesList.sources) && sourcesList.sources.length > 0) {
+              hasSources = true;
+            } else if (Array.isArray(sourcesList) && sourcesList.length > 0) {
+              hasSources = true;
+            }
+          } catch (sourcesErr) {
+            console.error('Failed to list sources:', sourcesErr);
           }
-        } catch (sourcesErr) {
-          console.error('Failed to list sources:', sourcesErr);
         }
 
         if (hasSources) {
           addLog(`พบข้อมูลแหล่งอ้างอิงเดิมใน Notebook เรียบร้อยแล้ว ข้ามการนำเข้าข้อมูลเพื่อประหยัดโควตา!`);
         } else {
-          addLog(`ไม่พบแหล่งอ้างอิงเดิม กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
+          addLog(`กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
           let tempTxtFilePath = '';
           if (actualFilePath.toLowerCase().endsWith('.md')) {
             tempTxtFilePath = actualFilePath.replace(/\.md$/i, '.txt');
@@ -767,10 +772,10 @@ app.post('/api/workflow/run', async (req, res) => {
         
         // 5. Generate Audio Overview
         let audioSuccess = false;
-        if (fs.existsSync(outputAudioPath)) {
+        if (shouldResume && fs.existsSync(outputAudioPath)) {
           addLog(`พบไฟล์เสียงเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputAudioPath} (ข้ามขั้นตอนการประมวลผลเสียง)`);
           audioSuccess = true;
-        } else {
+        } else if (shouldResume) {
           try {
             addLog(`พยายามดาวน์โหลดไฟล์เสียงที่มีอยู่ใน Notebook...`);
             // Run download command with 1 attempt only, since we just check if it already exists
@@ -780,33 +785,33 @@ app.post('/api/workflow/run', async (req, res) => {
           } catch (dlErr) {
             addLog(`ไม่พบไฟล์เสียงสำเร็จรูปในคลาวด์ หรือดาวน์โหลดไม่ได้ กำลังเริ่มขั้นตอนสร้างเสียงใหม่...`);
           }
-          
-          if (!audioSuccess) {
-            activeWorkflowState.progress = 55;
-            activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้าง Audio Overview (Deep Dive)...`;
-            addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
-            addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
-            const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
-            fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
-            try {
-              await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
-            } finally {
-              try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
-            }
-            addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
-            addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
+        }
+        
+        if (!audioSuccess) {
+          activeWorkflowState.progress = 55;
+          activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้าง Audio Overview (Deep Dive)...`;
+          addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
+          addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
+          const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
+          fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
+          try {
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
+          } finally {
+            try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
           }
+          addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
+          addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
         }
         
         // 6. Generate Report (Facebook post)
         if (shouldGenFacebook) {
           let reportSuccess = false;
-          if (fs.existsSync(outputReportPath)) {
+          if (shouldResume && fs.existsSync(outputReportPath)) {
             addLog(`พบไฟล์รายงานโพสต์ Facebook เดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputReportPath} (ข้ามขั้นตอนการประมวลผลรายงาน)`);
             fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
             reportSuccess = true;
-          } else {
+          } else if (shouldResume) {
             try {
               addLog(`พยายามดาวน์โหลดรายงานโพสต์ Facebook ที่มีอยู่ใน Notebook...`);
               await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`, 1, 1000);
@@ -816,25 +821,25 @@ app.post('/api/workflow/run', async (req, res) => {
             } catch (dlErr) {
               addLog(`ไม่พบรายงานโพสต์ Facebook สำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างรายงานใหม่...`);
             }
-            
-            if (!reportSuccess) {
-              activeWorkflowState.progress = 70;
-              activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
-              addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-              addLog(`Prompt: "${resolvedReportPrompt}"`);
-              const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
-              fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
-              try {
-                await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
-              } finally {
-                try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
-              }
-              addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
-              addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
-              
-              fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
+          }
+          
+          if (!reportSuccess) {
+            activeWorkflowState.progress = 70;
+            activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
+            addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
+            addLog(`Prompt: "${resolvedReportPrompt}"`);
+            const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
+            fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
+            try {
+              await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+            } finally {
+              try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
             }
+            addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
+            addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
+            
+            fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
           }
         } else {
           activeWorkflowState.progress = 70;
@@ -845,10 +850,10 @@ app.post('/api/workflow/run', async (req, res) => {
         
         // 7. Generate Infographic
         let infoSuccess = false;
-        if (fs.existsSync(outputInfoPath)) {
+        if (shouldResume && fs.existsSync(outputInfoPath)) {
           addLog(`พบไฟล์รูปภาพอินโฟกราฟิกเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputInfoPath} (ข้ามขั้นตอนการประมวลผลภาพ)`);
           infoSuccess = true;
-        } else {
+        } else if (shouldResume) {
           try {
             addLog(`พยายามดาวน์โหลดอินโฟกราฟิกที่มีอยู่ใน Notebook...`);
             await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`, 1, 1000);
@@ -857,23 +862,23 @@ app.post('/api/workflow/run', async (req, res) => {
           } catch (dlErr) {
             addLog(`ไม่พบรูปภาพอินโฟกราฟิกสำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างภาพใหม่...`);
           }
-          
-          if (!infoSuccess) {
-            activeWorkflowState.progress = 85;
-            activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
-            addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
-            addLog(`Prompt: "${resolvedInfoPrompt}"`);
-            const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
-            fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
-            try {
-              await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
-            } finally {
-              try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
-            }
-            addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
-            addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
+        }
+        
+        if (!infoSuccess) {
+          activeWorkflowState.progress = 85;
+          activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
+          addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
+          addLog(`Prompt: "${resolvedInfoPrompt}"`);
+          const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
+          fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
+          try {
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
+          } finally {
+            try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
           }
+          addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
+          addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
         }
         
         // 8. Finished!
