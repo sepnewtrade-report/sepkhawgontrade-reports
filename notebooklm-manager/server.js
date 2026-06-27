@@ -427,48 +427,6 @@ app.get('/api/workspace-files', (req, res) => {
     .filter(file => {
       return file.actualFileDateStr === targetDateStr;
     })
-    // Filter out files that already have clips generated in Draft folder
-    .filter(file => {
-      const baseName = path.basename(file.filename);
-      
-      // Convert targetDateStr (YYYY-MM-DD) to YYYY_MM_DD for the clip filename check
-      const dateStr = targetDateStr.replace(/-/g, '_');
-      
-      // Find template mapping
-      let matchedTemplate = null;
-      if (baseName.startsWith('market_summary_')) {
-        matchedTemplate = templates.find(t => t.id === 'daily');
-      } else if (baseName.startsWith('global_market_recap_') || baseName.startsWith('global_market_recap_thai_')) {
-        matchedTemplate = templates.find(t => t.id === 'weekly');
-      } else if (baseName.startsWith('whale_flow_analysis_')) {
-        matchedTemplate = templates.find(t => t.id === 'whale');
-      } else {
-        // Custom templates match prefix
-        matchedTemplate = templates.find(t => baseName.toLowerCase().startsWith(t.id + '_'));
-      }
-      
-      let showNameClean = '';
-      if (matchedTemplate) {
-        showNameClean = matchedTemplate.name
-          .replace(/\s*\(.*?\)/g, '')
-          .replace(/\s+/g, '_')
-          .replace(/[^a-zA-Z0-9_\u0e00-\u0e7f]/g, '');
-      } else {
-        // Fallback to filename prefix before date
-        const innerDateMatch = baseName.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-        if (innerDateMatch) {
-          showNameClean = baseName.substring(0, innerDateMatch.index).replace(/_$/, '');
-        } else {
-          showNameClean = baseName.replace('.md', '');
-        }
-      }
-      
-      const expectedAudioPath = path.join(draftDir, `${showNameClean}_${dateStr}.mp3`);
-      
-      // Exclude file if matching audio clip already exists
-      const hasClip = fs.existsSync(expectedAudioPath);
-      return !hasClip;
-    })
     // Sort by parsed date (newest first)
     .sort((a, b) => b.created_at - a.created_at);
     
