@@ -301,9 +301,10 @@ app.post('/api/profiles/delete', (req, res) => {
   });
 });
 
-// Get Workspace MD Files List (scans parent directory)
+// Get Workspace MD Files List (scans parent directory and MEMBERSHIP CONTENT SYSTEM)
 app.get('/api/workspace-files', (req, res) => {
   const parentDir = path.join(__dirname, '..');
+  const membershipDir = path.join(parentDir, 'MEMBERSHIP CONTENT SYSTEM');
   const draftDir = '/Users/soontorntachasakulnapaporn/Downloads/SepNewTrade_Project/Draft';
   
   let templates = [];
@@ -328,89 +329,111 @@ app.get('/api/workspace-files', (req, res) => {
   const targetDateDash = targetDateStr.replace(/_/g, '-');
   const targetDateUnderscore = targetDateStr.replace(/-/g, '_');
 
-  fs.readdir(parentDir, (err, files) => {
-    if (err) {
-      return res.status(500).json({ success: false, error: 'Failed to read workspace folder' });
+  // Read parent folder
+  let parentFiles = [];
+  try {
+    parentFiles = fs.readdirSync(parentDir).map(file => ({
+      filename: file,
+      relativePath: file,
+      absolutePath: path.join(parentDir, file)
+    }));
+  } catch (e) {
+    console.error('Failed to read parent dir:', e);
+  }
+
+  // Read membership folder
+  let membershipFiles = [];
+  try {
+    if (fs.existsSync(membershipDir)) {
+      membershipFiles = fs.readdirSync(membershipDir).map(file => ({
+        filename: file,
+        relativePath: `MEMBERSHIP CONTENT SYSTEM/${file}`,
+        absolutePath: path.join(membershipDir, file)
+      }));
     }
-    
-    // Filter for markdown files and exclude config/status files
-    const mdFiles = files
-      .filter(file => {
-        const name = file.toLowerCase();
-        return name.endsWith('.md') && 
-               name !== 'readme_notebooklm.md' && 
-               name !== 'agents.md' && 
-               name !== 'task.md' &&
-               name !== 'implementation_plan.md' &&
-               name !== 'walkthrough.md';
-      })
-      .map(file => {
-        const filePath = path.join(parentDir, file);
-        const stats = fs.statSync(filePath);
-        
-        // Parse date from filename (e.g. YYYY_MM_DD or YYYY-MM-DD)
-        const dateMatch = file.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-        let parsedDate = stats.mtime;
-        if (dateMatch) {
-          const dateObj = new Date(`${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`);
-          if (!isNaN(dateObj.getTime())) {
-            parsedDate = dateObj;
-          }
-        }
-        
-        return {
-          filename: file,
-          path: filePath,
-          created_at: parsedDate,
-          mtime: stats.mtime
-        };
-      })
-      // Filter for files whose names match today/targetDate string
-      .filter(file => {
-        return file.filename.includes(targetDateDash) || file.filename.includes(targetDateUnderscore);
-      })
-      // Filter out files that already have clips generated in Draft folder
-      .filter(file => {
-        const dateMatch = file.filename.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-        if (!dateMatch) return true; // Keep files without date for safety
-        
-        const dateStr = `${dateMatch[1]}_${dateMatch[2]}_${dateMatch[3]}`;
-        
-        // Find template mapping
-        let matchedTemplate = null;
-        if (file.filename.startsWith('market_summary_')) {
-          matchedTemplate = templates.find(t => t.id === 'daily');
-        } else if (file.filename.startsWith('global_market_recap_') || file.filename.startsWith('global_market_recap_thai_')) {
-          matchedTemplate = templates.find(t => t.id === 'weekly');
-        } else if (file.filename.startsWith('whale_flow_analysis_')) {
-          matchedTemplate = templates.find(t => t.id === 'whale');
-        } else {
-          // Custom templates match prefix
-          matchedTemplate = templates.find(t => file.filename.toLowerCase().startsWith(t.id + '_'));
-        }
-        
-        let showNameClean = '';
-        if (matchedTemplate) {
-          showNameClean = matchedTemplate.name
-            .replace(/\s*\(.*?\)/g, '')
-            .replace(/\s+/g, '_')
-            .replace(/[^a-zA-Z0-9_\u0e00-\u0e7f]/g, '');
-        } else {
-          // Fallback to filename prefix before date
-          showNameClean = file.filename.substring(0, dateMatch.index).replace(/_$/, '');
-        }
-        
-        const expectedAudioPath = path.join(draftDir, `${showNameClean}_${dateStr}.mp3`);
-        
-        // Exclude file if matching audio clip already exists
-        const hasClip = fs.existsSync(expectedAudioPath);
-        return !hasClip;
-      })
-      // Sort by parsed date (newest first)
-      .sort((a, b) => b.created_at - a.created_at);
+  } catch (e) {
+    console.error('Failed to read membership dir:', e);
+  }
+
+  const allFiles = [...parentFiles, ...membershipFiles];
+
+  // Filter for markdown files and exclude config/status files
+  const mdFiles = allFiles
+    .filter(file => {
+      const name = file.filename.toLowerCase();
+      return name.endsWith('.md') && 
+             name !== 'readme_notebooklm.md' && 
+             name !== 'agents.md' && 
+             name !== 'task.md' &&
+             name !== 'implementation_plan.md' &&
+             name !== 'walkthrough.md';
+    })
+    .map(file => {
+      const stats = fs.statSync(file.absolutePath);
       
-    res.json({ success: true, files: mdFiles });
-  });
+      // Parse date from filename (e.g. YYYY_MM_DD or YYYY-MM-DD)
+      const dateMatch = file.filename.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
+      let parsedDate = stats.mtime;
+      if (dateMatch) {
+        const dateObj = new Date(`${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`);
+        if (!isNaN(dateObj.getTime())) {
+          parsedDate = dateObj;
+        }
+      }
+      
+      return {
+        filename: file.relativePath,
+        path: file.absolutePath,
+        created_at: parsedDate,
+        mtime: stats.mtime
+      };
+    })
+    // Filter for files whose names match today/targetDate string
+    .filter(file => {
+      return file.filename.includes(targetDateDash) || file.filename.includes(targetDateUnderscore);
+    })
+    // Filter out files that already have clips generated in Draft folder
+    .filter(file => {
+      const baseName = path.basename(file.filename);
+      const dateMatch = baseName.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
+      if (!dateMatch) return true; // Keep files without date for safety
+      
+      const dateStr = `${dateMatch[1]}_${dateMatch[2]}_${dateMatch[3]}`;
+      
+      // Find template mapping
+      let matchedTemplate = null;
+      if (baseName.startsWith('market_summary_')) {
+        matchedTemplate = templates.find(t => t.id === 'daily');
+      } else if (baseName.startsWith('global_market_recap_') || baseName.startsWith('global_market_recap_thai_')) {
+        matchedTemplate = templates.find(t => t.id === 'weekly');
+      } else if (baseName.startsWith('whale_flow_analysis_')) {
+        matchedTemplate = templates.find(t => t.id === 'whale');
+      } else {
+        // Custom templates match prefix
+        matchedTemplate = templates.find(t => baseName.toLowerCase().startsWith(t.id + '_'));
+      }
+      
+      let showNameClean = '';
+      if (matchedTemplate) {
+        showNameClean = matchedTemplate.name
+          .replace(/\s*\(.*?\)/g, '')
+          .replace(/\s+/g, '_')
+          .replace(/[^a-zA-Z0-9_\u0e00-\u0e7f]/g, '');
+      } else {
+        // Fallback to filename prefix before date
+        showNameClean = baseName.substring(0, dateMatch.index).replace(/_$/, '');
+      }
+      
+      const expectedAudioPath = path.join(draftDir, `${showNameClean}_${dateStr}.mp3`);
+      
+      // Exclude file if matching audio clip already exists
+      const hasClip = fs.existsSync(expectedAudioPath);
+      return !hasClip;
+    })
+    // Sort by parsed date (newest first)
+    .sort((a, b) => b.created_at - a.created_at);
+    
+  res.json({ success: true, files: mdFiles });
 });
 
 // Get Prompt Templates
@@ -493,7 +516,7 @@ app.post('/api/workflow/run', async (req, res) => {
   let sourceTitle = '';
   if (selectedFile) {
     mdFilePath = path.join(__dirname, '..', selectedFile);
-    sourceTitle = `${selectedFile.replace('.md', '')}_Source`;
+    sourceTitle = `${path.basename(selectedFile).replace('.md', '')}_Source`;
   }
   
   // Start workflow asynchronously
@@ -579,7 +602,7 @@ app.post('/api/workflow/run', async (req, res) => {
       // Override parameters to ingest this generated file
       actualFile = generatedFilename;
       actualFilePath = generatedFilePath;
-      actualSourceTitle = `${actualFile.replace('.md', '')}_Source`;
+      actualSourceTitle = `${path.basename(actualFile).replace('.md', '')}_Source`;
     }
     
     const { active: initialProfile, authenticated: authProfiles } = await getAuthenticatedProfiles();
