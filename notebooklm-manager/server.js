@@ -344,7 +344,7 @@ app.get('/api/workspace-files', (req, res) => {
 
   const allFiles = [...parentFiles, ...membershipFiles];
 
-  // Find the latest file date in the workspace
+  // Find the latest file date in the workspace using the actual file creation/modification time
   let latestDateStr = '';
   allFiles.forEach(file => {
     const name = file.filename.toLowerCase();
@@ -354,12 +354,14 @@ app.get('/api/workspace-files', (req, res) => {
         name !== 'task.md' &&
         name !== 'implementation_plan.md' &&
         name !== 'walkthrough.md') {
-      const dateMatch = file.filename.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-      if (dateMatch) {
-        const dateStr = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
-        if (!latestDateStr || dateStr > latestDateStr) {
-          latestDateStr = dateStr;
-        }
+      const stats = fs.statSync(file.absolutePath);
+      const fileDateObj = stats.birthtime || stats.mtime;
+      const yyyy = fileDateObj.getFullYear();
+      const mm = String(fileDateObj.getMonth() + 1).padStart(2, '0');
+      const dd = String(fileDateObj.getDate()).padStart(2, '0');
+      const dateStr = `${yyyy}-${mm}-${dd}`;
+      if (!latestDateStr || dateStr > latestDateStr) {
+        latestDateStr = dateStr;
       }
     }
   });
@@ -378,9 +380,6 @@ app.get('/api/workspace-files', (req, res) => {
   if (!targetDateStr) {
     targetDateStr = latestDateStr;
   }
-  
-  const targetDateDash = targetDateStr.replace(/_/g, '-');
-  const targetDateUnderscore = targetDateStr.replace(/-/g, '_');
 
   // Filter for markdown files and exclude config/status files
   const mdFiles = allFiles
@@ -395,35 +394,30 @@ app.get('/api/workspace-files', (req, res) => {
     })
     .map(file => {
       const stats = fs.statSync(file.absolutePath);
-      
-      // Parse date from filename (e.g. YYYY_MM_DD or YYYY-MM-DD)
-      const dateMatch = file.filename.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-      let parsedDate = stats.mtime;
-      if (dateMatch) {
-        const dateObj = new Date(`${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`);
-        if (!isNaN(dateObj.getTime())) {
-          parsedDate = dateObj;
-        }
-      }
+      const fileDateObj = stats.birthtime || stats.mtime;
+      const yyyy = fileDateObj.getFullYear();
+      const mm = String(fileDateObj.getMonth() + 1).padStart(2, '0');
+      const dd = String(fileDateObj.getDate()).padStart(2, '0');
+      const actualFileDateStr = `${yyyy}-${mm}-${dd}`;
       
       return {
         filename: file.relativePath,
         path: file.absolutePath,
-        created_at: parsedDate,
-        mtime: stats.mtime
+        created_at: fileDateObj,
+        mtime: stats.mtime,
+        actualFileDateStr: actualFileDateStr
       };
     })
-    // Filter for files whose names match targetDate string
+    // Filter for files whose actual creation date matches targetDateStr
     .filter(file => {
-      return file.filename.includes(targetDateDash) || file.filename.includes(targetDateUnderscore);
+      return file.actualFileDateStr === targetDateStr;
     })
     // Filter out files that already have clips generated in Draft folder
     .filter(file => {
       const baseName = path.basename(file.filename);
-      const dateMatch = baseName.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
-      if (!dateMatch) return true; // Keep files without date for safety
       
-      const dateStr = `${dateMatch[1]}_${dateMatch[2]}_${dateMatch[3]}`;
+      // Convert targetDateStr (YYYY-MM-DD) to YYYY_MM_DD for the clip filename check
+      const dateStr = targetDateStr.replace(/-/g, '_');
       
       // Find template mapping
       let matchedTemplate = null;
@@ -446,7 +440,12 @@ app.get('/api/workspace-files', (req, res) => {
           .replace(/[^a-zA-Z0-9_\u0e00-\u0e7f]/g, '');
       } else {
         // Fallback to filename prefix before date
-        showNameClean = baseName.substring(0, dateMatch.index).replace(/_$/, '');
+        const innerDateMatch = baseName.match(/(\d{4})[-_](\d{2})[-_](\d{2})/);
+        if (innerDateMatch) {
+          showNameClean = baseName.substring(0, innerDateMatch.index).replace(/_$/, '');
+        } else {
+          showNameClean = baseName.replace('.md', '');
+        }
       }
       
       const expectedAudioPath = path.join(draftDir, `${showNameClean}_${dateStr}.mp3`);
