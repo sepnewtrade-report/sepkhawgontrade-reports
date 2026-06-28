@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchProfiles();
     checkAuthStatus();
     checkWorkflowStatusOnLoad();
+    loadWorkflowData();
 });
 
 // Event Listeners Setup
