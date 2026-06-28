@@ -71,7 +71,15 @@ function extractMetadata(filePath, relativePath) {
   }
 
   const categoryInfo = getCategory(filename);
-  const dateStr = parseDate(filename) || new Date(stats.mtime).toISOString().split('T')[0];
+  
+  // Format local date fallback (YYYY-MM-DD) in the local timezone
+  const mtime = new Date(stats.mtime);
+  const yyyy = mtime.getFullYear();
+  const mm = String(mtime.getMonth() + 1).padStart(2, '0');
+  const dd = String(mtime.getDate()).padStart(2, '0');
+  const localMtimeStr = `${yyyy}-${mm}-${dd}`;
+  
+  const dateStr = parseDate(filename) || localMtimeStr;
 
   return {
     title: title,
