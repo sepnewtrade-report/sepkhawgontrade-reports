@@ -101,6 +101,14 @@ const resInfoPath = document.getElementById('res-info-path');
 const resFbPost = document.getElementById('res-fb-post');
 const btnCopyFbPost = document.getElementById('btn-copy-fb-post');
 
+// Stock Price Verification Selectors
+const priceCheckModal = document.getElementById('price-check-modal');
+const priceCheckTableBody = document.getElementById('price-check-table-body');
+const checkAllPrices = document.getElementById('check-all-prices');
+const btnPriceCancel = document.getElementById('btn-price-cancel');
+const btnPriceSkipUpdate = document.getElementById('btn-price-skip-update');
+const btnPriceConfirm = document.getElementById('btn-price-confirm');
+
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
@@ -285,6 +293,74 @@ function setupEventListeners() {
     // Workflow Date change - refresh files select dropdown
     workflowDateInput.addEventListener('change', () => {
         loadWorkflowData();
+    });
+
+    // Price check modal listeners
+    btnPriceCancel.addEventListener('click', () => {
+        priceCheckModal.classList.remove('show');
+        btnRunWorkflow.disabled = false;
+        workflowIdleSection.style.display = 'flex';
+        workflowProgressSection.style.display = 'none';
+    });
+
+    btnPriceSkipUpdate.addEventListener('click', () => {
+        priceCheckModal.classList.remove('show');
+        executeWorkflowRunDirectly();
+    });
+
+    btnPriceConfirm.addEventListener('click', async () => {
+        const checkboxes = document.querySelectorAll('.price-update-checkbox');
+        const updatesToApply = [];
+        
+        checkboxes.forEach(chk => {
+            if (chk.checked && !chk.disabled) {
+                const index = parseInt(chk.dataset.index);
+                const tickerData = scannedTickers[index];
+                updatesToApply.push({
+                    lineIndex: tickerData.lineIndex,
+                    ticker: tickerData.ticker,
+                    oldPrice: tickerData.filePrice,
+                    newPrice: tickerData.currentPrice
+                });
+            }
+        });
+        
+        priceCheckModal.classList.remove('show');
+        
+        if (updatesToApply.length > 0) {
+            workflowLogs.innerHTML = '<div class="log-line">กำลังอัปเดตราคาในไฟล์บทวิเคราะห์ `.md` เป็นราคาตลาดปัจจุบัน...</div>';
+            try {
+                const selectedFile = workflowFileSelect.value;
+                const updateRes = await fetch('/api/workflow/update-prices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        file: selectedFile,
+                        updates: updatesToApply
+                    })
+                });
+                const updateData = await updateRes.json();
+                if (updateData.success) {
+                    workflowLogs.innerHTML += '<div class="log-line" style="color: #10B981;">อัปเดตราคาในไฟล์สำเร็จ! เริ่มกระบวนการส่งต่อข้อมูล...</div>';
+                } else {
+                    workflowLogs.innerHTML += '<div class="log-line" style="color: #EF4444;">อัปเดตราคาบางส่วนไม่สำเร็จ: ' + updateData.error + ' (จะรันกระบวนการต่อโดยไม่เปลี่ยนไฟล์)</div>';
+                }
+            } catch (err) {
+                console.error('Failed to update prices:', err);
+                workflowLogs.innerHTML += '<div class="log-line" style="color: #EF4444;">เกิดข้อผิดพลาดในการแก้ไฟล์ (จะรันกระบวนการต่อโดยไม่เปลี่ยนไฟล์)</div>';
+            }
+        }
+        
+        executeWorkflowRunDirectly();
+    });
+
+    checkAllPrices.addEventListener('change', (e) => {
+        const checkboxes = document.querySelectorAll('.price-update-checkbox');
+        checkboxes.forEach(chk => {
+            if (!chk.disabled) {
+                chk.checked = e.target.checked;
+            }
+        });
     });
 }
 
@@ -939,7 +1015,7 @@ function handleCopyFbPost() {
     }
 }
 
-// Run Video Production Workflow Pipeline
+// Run Video Production Workflow Pipeline (Pre-check prices first)
 async function handleRunWorkflow() {
     // Save current editor changes in prompt state
     updatePromptState(promptTextarea.value);
@@ -947,8 +1023,6 @@ async function handleRunWorkflow() {
     const templateId = workflowTemplateSelect.value;
     const selectedFile = workflowFileSelect.value;
     const dateStr = workflowDateInput.value;
-    const genFacebook = document.getElementById('workflow-gen-fb-checkbox').checked;
-    const resumeWorkflow = document.getElementById('workflow-resume-checkbox').checked;
     
     if (!dateStr) {
         alert('กรุณาเลือกวันที่ก่อนจัดส่งข้อมูลเข้าระบบ');
@@ -970,15 +1044,54 @@ async function handleRunWorkflow() {
         }
     }
 
-
-
     btnRunWorkflow.disabled = true;
     workflowIdleSection.style.display = 'none';
     workflowResultSection.style.display = 'none';
     workflowProgressSection.style.display = 'block';
     
     // Clear logs
-    workflowLogs.innerHTML = '<div class="log-line">กำลังส่งคำร้องเริ่มการรันระบบอัตโนมัติ...</div>';
+    workflowLogs.innerHTML = '<div class="log-line">กำลังวิเคราะห์ข้อมูลราคาหุ้นในไฟล์บทวิเคราะห์...</div>';
+    
+    // If a file is selected, perform the stock price check first!
+    if (selectedFile) {
+        try {
+            const checkRes = await fetch('/api/workflow/check-prices?file=' + encodeURIComponent(selectedFile));
+            const checkData = await checkRes.json();
+            
+            if (checkData.success && checkData.tickers && checkData.tickers.length > 0) {
+                // Save results in memory
+                scannedTickers = checkData.tickers;
+                
+                // Show modal to compare prices
+                populatePriceCheckTable(scannedTickers);
+                priceCheckModal.classList.add('show');
+                return; // Wait for modal action to continue!
+            }
+        } catch (err) {
+            console.error('Error doing pre-run price check:', err);
+            // In case of error, just proceed directly so we don't block the user
+        }
+    }
+    
+    // If no tickers found or check failed, proceed directly
+    executeWorkflowRunDirectly();
+}
+
+// Actual workflow post command
+async function executeWorkflowRunDirectly() {
+    const templateId = workflowTemplateSelect.value;
+    const selectedFile = workflowFileSelect.value;
+    const dateStr = workflowDateInput.value;
+    const genFacebook = document.getElementById('workflow-gen-fb-checkbox').checked;
+    const resumeWorkflow = document.getElementById('workflow-resume-checkbox').checked;
+    const template = state.templates.find(t => t.id === templateId);
+
+    btnRunWorkflow.disabled = true;
+    workflowIdleSection.style.display = 'none';
+    workflowResultSection.style.display = 'none';
+    workflowProgressSection.style.display = 'block';
+    
+    workflowLogs.innerHTML += '<div class="log-line">กำลังส่งคำร้องเริ่มการรันระบบอัตโนมัติ...</div>';
     
     try {
         const response = await fetch('/api/workflow/run', {
@@ -1280,5 +1393,78 @@ async function handleTemplateEditSave() {
         template.name = oldName;
         alert('เกิดข้อผิดพลาดในการบันทึกชื่อรายการ');
     }
+}
+
+// Variable to store scanned price check result in memory
+let scannedTickers = [];
+
+// Populate the price check comparison table
+function populatePriceCheckTable(tickers) {
+    priceCheckTableBody.innerHTML = '';
+    
+    tickers.forEach((t, index) => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border-color)';
+        
+        // Checkbox cell
+        const tdCheck = document.createElement('td');
+        tdCheck.style.padding = '10px';
+        tdCheck.style.textAlign = 'center';
+        
+        const chk = document.createElement('input');
+        chk.type = 'checkbox';
+        chk.className = 'price-update-checkbox';
+        chk.dataset.index = index;
+        chk.checked = (t.filePrice !== null && t.currentPrice !== null);
+        chk.disabled = (t.filePrice === null || t.currentPrice === null);
+        tdCheck.appendChild(chk);
+        tr.appendChild(tdCheck);
+        
+        // Ticker cell
+        const tdTicker = document.createElement('td');
+        tdTicker.style.padding = '10px';
+        tdTicker.style.fontWeight = 'bold';
+        tdTicker.textContent = `${t.ticker} (${t.exchange})`;
+        tr.appendChild(tdTicker);
+        
+        // File Price cell
+        const tdFilePrice = document.createElement('td');
+        tdFilePrice.style.padding = '10px';
+        tdFilePrice.textContent = t.filePrice !== null ? `$${t.filePrice.toLocaleString()}` : 'ไม่พบราคา';
+        tr.appendChild(tdFilePrice);
+        
+        // Current Price cell
+        const tdCurrentPrice = document.createElement('td');
+        tdCurrentPrice.style.padding = '10px';
+        tdCurrentPrice.style.fontWeight = '500';
+        tdCurrentPrice.textContent = t.currentPrice !== null ? `$${t.currentPrice.toLocaleString()}` : 'ดึงราคาไม่สำเร็จ';
+        tr.appendChild(tdCurrentPrice);
+        
+        // Deviation cell
+        const tdDeviation = document.createElement('td');
+        tdDeviation.style.padding = '10px';
+        tdDeviation.style.textAlign = 'right';
+        tdDeviation.style.fontWeight = 'bold';
+        
+        if (t.deviationPercent !== null) {
+            const dev = t.deviationPercent;
+            tdDeviation.textContent = dev > 0 ? `+${dev}%` : `${dev}%`;
+            if (dev > 0) {
+                tdDeviation.style.color = '#10B981'; // Green
+            } else if (dev < 0) {
+                tdDeviation.style.color = '#EF4444'; // Red
+            } else {
+                tdDeviation.style.color = 'var(--text-secondary)'; // Gray
+            }
+        } else {
+            tdDeviation.textContent = '-';
+            tdDeviation.style.color = 'var(--text-secondary)';
+        }
+        tr.appendChild(tdDeviation);
+        
+        priceCheckTableBody.appendChild(tr);
+    });
+    
+    checkAllPrices.checked = tickers.some(t => t.filePrice !== null && t.currentPrice !== null);
 }
 

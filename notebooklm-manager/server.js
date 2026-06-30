@@ -463,6 +463,165 @@ app.get('/api/workflow/status', (req, res) => {
   res.json(activeWorkflowState);
 });
 
+// Scan a markdown file for stock tickers, extract written prices, and fetch real-time prices
+app.get('/api/workflow/check-prices', async (req, res) => {
+  const selectedFile = req.query.file;
+  if (!selectedFile) {
+    return res.status(400).json({ success: false, error: 'Missing file parameter' });
+  }
+
+  const filePath = path.join(__dirname, '..', selectedFile);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ success: false, error: 'File not found' });
+  }
+
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.split('\n');
+    
+    // Ticker regex matches (EXCHANGE: TICKER)
+    const tickerRegex = /\((NASDAQ|NYSE|AMEX|BKK|SET|NYSE-ARCA):\s*([A-Z0-9.]+)\)/gi;
+    
+    // Matches patterns like ปิดที่ $123.45, ราคา $123.45, ปิดตลาดปกติ: xxx (ปิดที่ $yyy)
+    const priceRegex = /(?:ปิดที่|ราคา|ปิดตลาดที่|ระดับ|โซนราคา|ปิดที่ราคา|ปิดตลาดปกติ:.*?ปิดที่)\s*(?:\*\*)?\$([0-9,.]+)\b/i;
+    const genericPriceRegex = /(?:\*\*)?\$([0-9,.]+)\b/i;
+    
+    const foundTickers = [];
+    const seenTickers = new Set();
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      let match;
+      tickerRegex.lastIndex = 0;
+      
+      while ((match = tickerRegex.exec(line)) !== null) {
+        const exchange = match[1].toUpperCase();
+        const symbol = match[2].toUpperCase();
+        const uniqueKey = symbol;
+        
+        if (seenTickers.has(uniqueKey)) continue;
+        seenTickers.add(uniqueKey);
+        
+        let filePrice = null;
+        let originalText = '';
+        let targetLineIndex = -1;
+        
+        // Search current line + next 5 lines
+        for (let j = i; j < Math.min(i + 6, lines.length); j++) {
+          const currentLine = lines[j];
+          
+          let priceMatch = priceRegex.exec(currentLine);
+          if (!priceMatch) {
+            // Fallback to any generic dollar price (ignoring market caps with B/M/T suffixes)
+            const cleanedLine = currentLine.replace(/\$[0-9,.]+[BMTbmt]\b/g, '');
+            priceMatch = genericPriceRegex.exec(cleanedLine);
+          }
+          
+          if (priceMatch) {
+            const rawVal = priceMatch[1].replace(/,/g, '');
+            const parsedVal = parseFloat(rawVal);
+            if (!isNaN(parsedVal)) {
+              filePrice = parsedVal;
+              originalText = priceMatch[0];
+              targetLineIndex = j;
+              break;
+            }
+          }
+        }
+        
+        foundTickers.push({
+          ticker: symbol,
+          exchange: exchange,
+          filePrice: filePrice,
+          originalText: originalText,
+          lineIndex: targetLineIndex,
+          lineContent: targetLineIndex !== -1 ? lines[targetLineIndex] : ''
+        });
+      }
+    }
+    
+    // Fetch Yahoo Finance prices
+    const results = [];
+    for (const item of foundTickers) {
+      let currentPrice = null;
+      let deviationPercent = null;
+      
+      try {
+        const fetchUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${item.ticker}`;
+        const response = await fetch(fetchUrl, {
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        const data = await response.json();
+        
+        if (data.chart && data.chart.result && data.chart.result[0]) {
+          const meta = data.chart.result[0].meta;
+          currentPrice = meta.regularMarketPrice || meta.chartPreviousClose;
+          
+          if (item.filePrice && currentPrice) {
+            deviationPercent = parseFloat((((currentPrice - item.filePrice) / item.filePrice) * 100).toFixed(2));
+          }
+        }
+      } catch (err) {
+        console.error(`Failed to fetch Yahoo Finance price for ${item.ticker}:`, err.message);
+      }
+      
+      results.push({
+        ...item,
+        currentPrice: currentPrice,
+        deviationPercent: deviationPercent
+      });
+    }
+
+    res.json({ success: true, tickers: results });
+  } catch (err) {
+    console.error('Error scanning file for prices:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Update selected stock prices in the markdown file
+app.post('/api/workflow/update-prices', (req, res) => {
+  const { file, updates } = req.body;
+  if (!file || !updates || !Array.isArray(updates)) {
+    return res.status(400).json({ success: false, error: 'Missing required parameters (file, updates)' });
+  }
+
+  const filePath = path.join(__dirname, '..', file);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ success: false, error: 'File not found' });
+  }
+
+  try {
+    let content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.split('\n');
+
+    updates.forEach(u => {
+      const { lineIndex, oldPrice, newPrice } = u;
+      
+      if (lineIndex !== undefined && lineIndex >= 0 && lineIndex < lines.length) {
+        const line = lines[lineIndex];
+        const oldPriceStr = String(oldPrice);
+        const newPriceStr = parseFloat(newPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        // Escape regex characters for safety
+        const escPlain = oldPriceStr.replace('.', '\\.');
+        const formattedOldPrice = parseFloat(oldPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const escForm = formattedOldPrice.replace('.', '\\.').replace(',', ',?');
+        
+        const pattern = new RegExp(`\\$(${escPlain}|${escForm})\\b`, 'g');
+        lines[lineIndex] = line.replace(pattern, '$' + newPriceStr);
+      }
+    });
+
+    const updatedContent = lines.join('\n');
+    fs.writeFileSync(filePath, updatedContent, 'utf8');
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error updating file prices:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Run Video Production Workflow Pipeline
 app.post('/api/workflow/run', async (req, res) => {
   if (activeWorkflowState.running) {

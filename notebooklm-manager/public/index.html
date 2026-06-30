@@ -346,6 +346,40 @@
         </div>
     </div>
 
+    <!-- Stock Price Verification Modal -->
+    <div class="modal-backdrop" id="price-check-modal">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="modal-header">
+                <i class="fa-solid fa-chart-line modal-icon" style="color: var(--accent-primary);"></i>
+                <h2>ตรวจสอบและอัปเดตราคาหุ้นล่าสุด</h2>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                <p style="margin-bottom: 15px; color: var(--text-secondary); line-height: 1.5;">ระบบตรวจพบข้อมูลราคาหุ้นในไฟล์บทวิเคราะห์ของคุณ ดังนี้ กรุณาเปรียบเทียบกับราคาปัจจุบันบน Yahoo Finance:</p>
+                <div class="table-container" style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: var(--bg-card);">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+                        <thead>
+                            <tr style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                                <th style="padding: 12px 10px; width: 50px; text-align: center;"><input type="checkbox" id="check-all-prices" checked></th>
+                                <th style="padding: 12px 10px;">Ticker (หุ้น)</th>
+                                <th style="padding: 12px 10px;">ราคาในไฟล์</th>
+                                <th style="padding: 12px 10px;">ราคาตลาดปัจจุบัน</th>
+                                <th style="padding: 12px 10px; text-align: right;">ส่วนต่าง (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="price-check-table-body">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-price-cancel">ยกเลิก</button>
+                <button class="btn btn-outline" id="btn-price-skip-update">ดำเนินงานต่อโดยไม่อัปเดต</button>
+                <button class="btn btn-primary" id="btn-price-confirm">อัปเดตราคาในไฟล์และดำเนินงานต่อ</button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

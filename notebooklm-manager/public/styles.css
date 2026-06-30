@@ -310,6 +310,17 @@ body {
     border-color: var(--danger);
 }
 
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background-color: var(--bg-hover);
+    border-color: var(--accent-primary);
+}
+
 /* Notebook Cards Grid */
 .notebooks-grid {
     display: grid;
