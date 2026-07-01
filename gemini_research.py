@@ -148,11 +148,32 @@ def main():
             print("Warning: QC returned empty response, falling back to draft report.")
             final_content = draft_content
 
+        # Extract search grounding sources from Stage 2 (QC)
+        try:
+            if qc_response.candidates and len(qc_response.candidates) > 0:
+                qc_cand = qc_response.candidates[0]
+                if hasattr(qc_cand, 'grounding_metadata') and qc_cand.grounding_metadata:
+                    qc_meta = qc_cand.grounding_metadata
+                    if hasattr(qc_meta, 'grounding_chunks') and qc_meta.grounding_chunks:
+                        seen_urls = {url for _, url in sources}
+                        for chunk in qc_meta.grounding_chunks:
+                            if hasattr(chunk, 'web') and chunk.web:
+                                url = chunk.web.uri
+                                title = chunk.web.title
+                                if url and url not in seen_urls:
+                                    seen_urls.add(url)
+                                    sources.append((title, url))
+        except Exception as e:
+            print(f"Warning: Failed to extract QC sources: {e}")
+
+        print(f"[Stage 2] Found {len(sources)} combined grounding sources.")
+
         # Append source references to the end of the report
         if sources:
-            final_content += "\n\n---\n\n## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
-            for title, url in sources:
-                final_content += f"- [{title}]({url})\n"
+            if "## 🌐 แหล่งข้อมูลอ้างอิง" not in final_content and "## Sources" not in final_content:
+                final_content += "\n\n---\n\n## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
+                for title, url in sources:
+                    final_content += f"- [{title}]({url})\n"
 
         # Make sure directory exists
         os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
