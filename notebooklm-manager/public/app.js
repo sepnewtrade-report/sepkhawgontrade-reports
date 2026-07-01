@@ -826,8 +826,8 @@ async function loadWorkflowData() {
             defaultOpt.textContent = '-- ไม่ใช้ไฟล์ (ดึงข้อมูลผ่านระบบค้นหาข่าว) --';
             workflowFileSelect.appendChild(defaultOpt);
             
-            // Set the date input value to the suggested date if it is different
-            if (filesData.suggestedDate && workflowDateInput.value !== filesData.suggestedDate) {
+            // Set the date input value to the suggested date if it is different (only if queryDate was not empty)
+            if (queryDate && filesData.suggestedDate && workflowDateInput.value !== filesData.suggestedDate) {
                 workflowDateInput.value = filesData.suggestedDate;
             }
             

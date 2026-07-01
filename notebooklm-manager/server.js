@@ -359,6 +359,9 @@ app.get('/api/workspace-files', (req, res) => {
 
   const allFiles = [...parentFiles, ...membershipFiles];
 
+  // Get date filter from query param
+  const targetDateStr = req.query.date || '';
+  
   // Find the latest file date in the workspace using the actual file creation/modification time
   let latestDateStr = '';
   allFiles.forEach(file => {
@@ -390,14 +393,8 @@ app.get('/api/workspace-files', (req, res) => {
     latestDateStr = `${yyyy}-${mm}-${dd}`;
   }
 
-  // Get date filter from query param, default to latest report date
-  let targetDateStr = req.query.date;
-  if (!targetDateStr) {
-    targetDateStr = latestDateStr;
-  }
-
   // Filter for markdown files and exclude config/status files
-  const mdFiles = allFiles
+  let mdFiles = allFiles
     .filter(file => {
       const name = file.filename.toLowerCase();
       return name.endsWith('.md') && 
@@ -422,15 +419,17 @@ app.get('/api/workspace-files', (req, res) => {
         mtime: stats.mtime,
         actualFileDateStr: actualFileDateStr
       };
-    })
-    // Filter for files whose actual creation date matches targetDateStr
-    .filter(file => {
-      return file.actualFileDateStr === targetDateStr;
-    })
-    // Sort by parsed date (newest first)
-    .sort((a, b) => b.created_at - a.created_at);
+    });
+
+  // Filter for files whose actual creation date matches targetDateStr (only if date is specified)
+  if (targetDateStr) {
+    mdFiles = mdFiles.filter(file => file.actualFileDateStr === targetDateStr);
+  }
+
+  // Sort by parsed date (newest first)
+  mdFiles.sort((a, b) => b.created_at - a.created_at);
     
-  res.json({ success: true, files: mdFiles, suggestedDate: targetDateStr });
+  res.json({ success: true, files: mdFiles, suggestedDate: targetDateStr || latestDateStr });
 });
 
 // Get Prompt Templates
