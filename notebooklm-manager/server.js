@@ -551,9 +551,8 @@ app.get('/api/workflow/check-prices', async (req, res) => {
       }
     }
     
-    // Fetch Yahoo Finance prices
-    const results = [];
-    for (const item of foundTickers) {
+    // Fetch Yahoo Finance prices in parallel
+    const results = await Promise.all(foundTickers.map(async (item) => {
       let currentPrice = null;
       let deviationPercent = null;
       
@@ -576,12 +575,12 @@ app.get('/api/workflow/check-prices', async (req, res) => {
         console.error(`Failed to fetch Yahoo Finance price for ${item.ticker}:`, err.message);
       }
       
-      results.push({
+      return {
         ...item,
         currentPrice: currentPrice,
         deviationPercent: deviationPercent
-      });
-    }
+      };
+    }));
 
     res.json({ success: true, tickers: results });
   } catch (err) {
