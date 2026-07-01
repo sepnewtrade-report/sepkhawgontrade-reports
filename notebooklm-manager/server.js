@@ -481,8 +481,8 @@ app.get('/api/workflow/check-prices', async (req, res) => {
     // Ticker regex matches (EXCHANGE: TICKER)
     const tickerRegex = /\((NASDAQ|NYSE|AMEX|BKK|SET|NYSE-ARCA):\s*([A-Z0-9.]+)\)/gi;
     
-    // Matches patterns like ปิดที่ $123.45, ราคา $123.45, ปิดตลาดปกติ: xxx (ปิดที่ $yyy)
-    const priceRegex = /(?:ปิดที่|ราคา|ปิดตลาดที่|ระดับ|โซนราคา|ปิดที่ราคา|ปิดตลาดปกติ:.*?ปิดที่)\s*(?:\*\*)?\$([0-9,.]+)\b/i;
+    // Matches patterns like ปิดที่ $123.45, ราคา $123.45, ปิดตลาดปกติ: xxx (ปิดที่ $yyy), ราคาปัจจุบัน: $zzz
+    const priceRegex = /(?:ราคาปัจจุบัน|ราคา|ปิดที่|ปิดตลาดที่|ระดับ|โซนราคา|ปิดที่ราคา)[^\$]*?\$([0-9,.]+)\b/i;
     const genericPriceRegex = /(?:\*\*)?\$([0-9,.]+)\b/i;
     
     const foundTickers = [];
@@ -505,17 +505,10 @@ app.get('/api/workflow/check-prices', async (req, res) => {
         let originalText = '';
         let targetLineIndex = -1;
         
-        // Search current line + next 5 lines
+        // Phase 1: Search current line + next 5 lines for high-confidence priceRegex
         for (let j = i; j < Math.min(i + 6, lines.length); j++) {
           const currentLine = lines[j];
-          
-          let priceMatch = priceRegex.exec(currentLine);
-          if (!priceMatch) {
-            // Fallback to any generic dollar price (ignoring market caps with B/M/T suffixes)
-            const cleanedLine = currentLine.replace(/\$[0-9,.]+[BMTbmt]\b/g, '');
-            priceMatch = genericPriceRegex.exec(cleanedLine);
-          }
-          
+          const priceMatch = priceRegex.exec(currentLine);
           if (priceMatch) {
             const rawVal = priceMatch[1].replace(/,/g, '');
             const parsedVal = parseFloat(rawVal);
@@ -524,6 +517,25 @@ app.get('/api/workflow/check-prices', async (req, res) => {
               originalText = priceMatch[0];
               targetLineIndex = j;
               break;
+            }
+          }
+        }
+        
+        // Phase 2: If not found, fallback to genericPriceRegex in current line + next 5 lines
+        if (targetLineIndex === -1) {
+          for (let j = i; j < Math.min(i + 6, lines.length); j++) {
+            const currentLine = lines[j];
+            const cleanedLine = currentLine.replace(/\$[0-9,.]+[BMTbmt]\b/g, '');
+            const priceMatch = genericPriceRegex.exec(cleanedLine);
+            if (priceMatch) {
+              const rawVal = priceMatch[1].replace(/,/g, '');
+              const parsedVal = parseFloat(rawVal);
+              if (!isNaN(parsedVal)) {
+                filePrice = parsedVal;
+                originalText = priceMatch[0];
+                targetLineIndex = j;
+                break;
+              }
             }
           }
         }
@@ -608,7 +620,7 @@ app.post('/api/workflow/update-prices', (req, res) => {
         const escForm = formattedOldPrice.replace('.', '\\.').replace(',', ',?');
         
         const pattern = new RegExp(`\\$(${escPlain}|${escForm})\\b`, 'g');
-        lines[lineIndex] = line.replace(pattern, '$' + newPriceStr);
+        lines[lineIndex] = line.replace(pattern, '$$' + newPriceStr);
       }
     });
 
