@@ -22,3 +22,11 @@ venv/
 ENV/
 env/
 
+# Environment variables
+.env
+notebooklm-manager/.env
+
+# Temp & data files
+notebooklm-manager/workflows_history.json
+notebooklm-manager/temp_prompt_*
+

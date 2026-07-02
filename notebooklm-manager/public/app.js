@@ -18,7 +18,8 @@ let state = {
     lastLogsJson: '',
     countdownInterval: null,
     estRemainingSeconds: 0,
-    currentProgress: -1
+    currentProgress: -1,
+    createNewTaskMode: false
 };
 
 // DOM Elements
@@ -228,9 +229,19 @@ function setupEventListeners() {
 
     const btnApproveWorkflow = document.getElementById('btn-approve-workflow');
     const btnCancelWorkflow = document.getElementById('btn-cancel-workflow');
+    const btnCreateNewTask = document.getElementById('btn-create-new-task');
 
     btnApproveWorkflow.addEventListener('click', handleApproveWorkflow);
     btnCancelWorkflow.addEventListener('click', handleCancelWorkflow);
+    if (btnCreateNewTask) {
+        btnCreateNewTask.addEventListener('click', () => {
+            state.createNewTaskMode = true;
+            state.selectedWorkflowId = null;
+            document.querySelectorAll('.task-item').forEach(el => el.classList.remove('active'));
+            showActiveSection(workflowIdleSection);
+            btnRunWorkflow.disabled = false;
+        });
+    }
 
     // Workflow Template select change
     workflowTemplateSelect.addEventListener('change', (e) => {
@@ -1128,6 +1139,8 @@ async function executeWorkflowRunDirectly() {
         
         if (data.success) {
             state.selectedWorkflowId = data.workflowId;
+            state.createNewTaskMode = false;
+            btnRunWorkflow.disabled = false; // Re-enable so they can run another task in parallel!
             startWorkflowPolling();
         } else {
             alert('เริ่มกระบวนการล้มเหลว: ' + data.error);
@@ -1238,6 +1251,19 @@ async function pollWorkflowStatus() {
         
         // If we don't have a selected ID but the server returned a list and one is running, auto-select it
         if (!state.selectedWorkflowId) {
+            if (state.createNewTaskMode) {
+                // Keep showing idle configuration section, do not auto-select running task
+                const listResponse = await fetch('/api/workflow/status');
+                const listData = await listResponse.json();
+                renderActiveTasksList(listData.activeWorkflows);
+                if (!listData.activeWorkflows || listData.activeWorkflows.length === 0) {
+                    document.getElementById('workflow-tasks-section').style.display = 'none';
+                }
+                showActiveSection(workflowIdleSection);
+                btnRunWorkflow.disabled = false;
+                return;
+            }
+
             const listResponse = await fetch('/api/workflow/status');
             const listData = await listResponse.json();
             if (listData.activeWorkflows && listData.activeWorkflows.length > 0) {
@@ -1277,6 +1303,17 @@ async function pollWorkflowStatus() {
         if (!activeW || (activeW.error && activeW.error === 'Workflow not found')) {
             state.selectedWorkflowId = null;
             return;
+        }
+
+        // Auto-switch: If current selected workflow is completed/failed, and there is another task waiting for approval, switch to it immediately
+        if (activeW && (activeW.status === 'completed' || activeW.status === 'failed')) {
+            const waitingTask = listData.activeWorkflows.find(w => w.status === 'waiting_approval');
+            if (waitingTask && waitingTask.id !== state.selectedWorkflowId) {
+                state.selectedWorkflowId = waitingTask.id;
+                state.isReviewing = false;
+                // Re-poll immediately to show the correct review section
+                return pollWorkflowStatus();
+            }
         }
         
         // Update progress display
@@ -1386,7 +1423,7 @@ async function checkWorkflowStatusOnLoad() {
             const runningTask = data.activeWorkflows.find(w => w.status === 'running' || w.status === 'waiting_approval');
             if (runningTask) {
                 state.selectedWorkflowId = runningTask.id;
-                btnRunWorkflow.disabled = true;
+                btnRunWorkflow.disabled = false; // Keep enabled for other parallel tasks
                 
                 if (runningTask.status === 'waiting_approval') {
                     showActiveSection(document.getElementById('workflow-review-section'));
@@ -1444,16 +1481,17 @@ function renderActiveTasksList(activeWorkflows) {
         const isActive = w.id === state.selectedWorkflowId ? 'active' : '';
         
         return `
-            <div class="task-item ${isActive}" data-id="${w.id}">
-                <div class="task-info">
-                    <div class="task-title">${escapeHtml(w.title)}</div>
+            <div class="task-item ${isActive}" data-id="${w.id}" style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                <div class="task-info" style="flex: 1; min-width: 0;">
+                    <div class="task-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(w.title)}</div>
                     <div class="task-status-row">
                         <span class="status-badge ${badgeClass}">${statusText}</span>
                         <span style="color: var(--text-secondary);">${w.progress}%</span>
                     </div>
                 </div>
-                <div class="task-arrow">
-                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: var(--text-muted);"></i>
+                <div class="task-actions" style="display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-trash-can remove-task-btn" data-id="${w.id}" style="color: #ef4444; font-size: 13px; cursor: pointer; padding: 4px;" title="ลบรายการ"></i>
+                    <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: var(--text-muted);"></i>
                 </div>
             </div>
         `;
@@ -1461,7 +1499,11 @@ function renderActiveTasksList(activeWorkflows) {
     
     // Add click event listeners to task items
     document.querySelectorAll('.task-item').forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+            // Do not switch task if clicking the delete icon
+            if (e.target.classList.contains('remove-task-btn') || e.target.closest('.remove-task-btn')) {
+                return;
+            }
             const taskId = item.getAttribute('data-id');
             state.selectedWorkflowId = taskId;
             state.isReviewing = false; // Reset reviewing state
@@ -1471,9 +1513,20 @@ function renderActiveTasksList(activeWorkflows) {
             item.classList.add('active');
             
             // Start polling if it was stopped, or just poll immediately
-            btnRunWorkflow.disabled = true;
+            btnRunWorkflow.disabled = false; // Do not disable run button when task is clicked
             pollWorkflowStatus();
             startWorkflowPolling();
+        });
+    });
+
+    // Add click listeners to remove buttons
+    document.querySelectorAll('.remove-task-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const taskId = btn.getAttribute('data-id');
+            if (confirm('คุณต้องการลบรายการงานนี้จากแถบสถานะใช่หรือไม่?')) {
+                await deleteWorkflow(taskId);
+            }
         });
     });
 }
@@ -1798,5 +1851,52 @@ function populatePriceCheckTable(tickers) {
     });
     
     checkAllPrices.checked = tickers.some(t => t.filePrice !== null && t.currentPrice !== null);
+}
+
+// Delete a workflow task from history
+async function deleteWorkflow(workflowId) {
+    try {
+        const response = await fetch('/api/workflow/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ workflowId })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            if (state.selectedWorkflowId === workflowId) {
+                state.selectedWorkflowId = null;
+            }
+            
+            // Refresh list
+            const listResponse = await fetch('/api/workflow/status');
+            const listData = await listResponse.json();
+            renderActiveTasksList(listData.activeWorkflows);
+            
+            // Re-select another task if available, else go to idle
+            if (!state.selectedWorkflowId) {
+                const runningTask = listData.activeWorkflows.find(w => w.status === 'running' || w.status === 'waiting_approval');
+                if (runningTask) {
+                    state.selectedWorkflowId = runningTask.id;
+                    pollWorkflowStatus();
+                } else if (listData.activeWorkflows && listData.activeWorkflows.length > 0) {
+                    state.selectedWorkflowId = listData.activeWorkflows[0].id;
+                    pollWorkflowStatus();
+                } else {
+                    stopWorkflowPolling();
+                    btnRunWorkflow.disabled = false;
+                    showActiveSection(workflowIdleSection);
+                    document.getElementById('workflow-tasks-section').style.display = 'none';
+                    state.lastWorkflowsJson = '';
+                }
+            } else {
+                pollWorkflowStatus();
+            }
+        } else {
+            alert('ลบงานไม่สำเร็จ: ' + data.error);
+        }
+    } catch (err) {
+        console.error('Error deleting workflow:', err);
+    }
 }
 

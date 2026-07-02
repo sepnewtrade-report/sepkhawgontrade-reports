@@ -191,7 +191,12 @@
                 <div class="workflow-right">
                     <!-- Active Tasks Section -->
                     <div class="glass-card tasks-card" id="workflow-tasks-section" style="display: none; margin-bottom: 20px;">
-                        <h3><i class="fa-solid fa-list-check"></i> รายการงานที่กำลังประมวลผล (Active Tasks)</h3>
+                        <h3 style="display: flex; justify-content: space-between; align-items: center;">
+                            <span><i class="fa-solid fa-list-check"></i> รายการงานที่กำลังประมวลผล (Active Tasks)</span>
+                            <button class="btn btn-success" id="btn-create-new-task" style="font-size: 12px; padding: 4px 8px; height: 28px; background: #10b981; color: white; border: none; font-weight: bold; border-radius: 4px; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i> สั่งรันงานใหม่
+                            </button>
+                        </h3>
                         <div id="workflow-tasks-list" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
                             <!-- Dynamic Tasks List -->
                         </div>
