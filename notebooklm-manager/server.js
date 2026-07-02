@@ -441,12 +441,21 @@ app.get('/api/workspace-files', (req, res) => {
     })
     .map(file => {
       const stats = fs.statSync(file.absolutePath);
-      const fileDateObj = stats.birthtime || stats.mtime;
-      const yyyy = fileDateObj.getFullYear();
-      const mm = String(fileDateObj.getMonth() + 1).padStart(2, '0');
-      const dd = String(fileDateObj.getDate()).padStart(2, '0');
-      const actualFileDateStr = `${yyyy}-${mm}-${dd}`;
       
+      // Parse date from filename first, fallback to stats.mtime/birthtime
+      let actualFileDateStr = '';
+      const dateMatch = file.filename.match(/(\d{4})_(\d{2})_(\d{2})/);
+      if (dateMatch) {
+        actualFileDateStr = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`;
+      } else {
+        const fileDateObj = stats.birthtime || stats.mtime;
+        const yyyy = fileDateObj.getFullYear();
+        const mm = String(fileDateObj.getMonth() + 1).padStart(2, '0');
+        const dd = String(fileDateObj.getDate()).padStart(2, '0');
+        actualFileDateStr = `${yyyy}-${mm}-${dd}`;
+      }
+      
+      const fileDateObj = stats.birthtime || stats.mtime;
       return {
         filename: file.relativePath,
         path: file.absolutePath,
@@ -456,7 +465,7 @@ app.get('/api/workspace-files', (req, res) => {
       };
     });
 
-  // Filter for files whose actual creation date matches targetDateStr (only if date is specified)
+  // Filter for files whose actual date matches targetDateStr
   if (targetDateStr) {
     mdFiles = mdFiles.filter(file => file.actualFileDateStr === targetDateStr);
   }
