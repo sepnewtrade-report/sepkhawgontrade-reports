@@ -1096,16 +1096,16 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         if (!audioSuccess) {
           addWorkflowLog(workflowId, `ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
           addWorkflowLog(workflowId, `Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
-          const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_\${Date.now()}.txt`);
+          const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
           fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n \${notebookId} --format deep-dive --language th --wait --prompt-file "\${tempAudioPromptPath}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
           }
           addWorkflowLog(workflowId, `เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n \${notebookId} --latest --force "\${w.outputAudioPath}"`);
-          addWorkflowLog(workflowId, `ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: \${w.outputAudioPath}`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`);
+          addWorkflowLog(workflowId, `ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${w.outputAudioPath}`);
         }
         
         if (!w.running) return;
@@ -1114,15 +1114,15 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         if (w.genFacebook) {
           let reportSuccess = false;
           if (w.resumeWorkflow && fs.existsSync(w.outputReportPath)) {
-            addWorkflowLog(workflowId, `พบไฟล์รายงานโพสต์ Facebook เดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: \${w.outputReportPath} (ข้ามขั้นตอนการประมวลผลรายงาน)`);
+            addWorkflowLog(workflowId, `พบไฟล์รายงานโพสต์ Facebook เดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${w.outputReportPath} (ข้ามขั้นตอนการประมวลผลรายงาน)`);
             fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
             reportSuccess = true;
           } else if (w.resumeWorkflow) {
             try {
               addWorkflowLog(workflowId, `พยายามดาวน์โหลดรายงานโพสต์ Facebook ที่มีอยู่ใน Notebook...`);
-              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n \${notebookId} --latest --force "\${w.outputReportPath}"`, 1, 1000);
+              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`, 1, 1000);
               fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
-              addWorkflowLog(workflowId, `ดาวน์โหลดรายงานโพสต์ Facebook สำเร็จรูปสำเร็จและเซฟไว้ที่: \${w.outputReportPath}`);
+              addWorkflowLog(workflowId, `ดาวน์โหลดรายงานโพสต์ Facebook สำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputReportPath}`);
               reportSuccess = true;
             } catch (dlErr) {
               addWorkflowLog(workflowId, `ไม่พบรายงานโพสต์ Facebook สำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างรายงานใหม่...`);
@@ -1131,25 +1131,25 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           
           if (!reportSuccess) {
             w.progress = 70;
-            w.currentStep = `[\${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
+            w.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
             addWorkflowLog(workflowId, `ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-            addWorkflowLog(workflowId, `Prompt: "\${resolvedReportPrompt}"`);
-            const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_\${Date.now()}.txt`);
+            addWorkflowLog(workflowId, `Prompt: "${resolvedReportPrompt}"`);
+            const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
             fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
             try {
-              await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n \${notebookId} --format custom --language th --wait --prompt-file "\${tempReportPromptPath}"`);
+              await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
             } finally {
               try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
             }
             addWorkflowLog(workflowId, `รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n \${notebookId} --latest --force "\${w.outputReportPath}"`);
-            addWorkflowLog(workflowId, `บันทึกรายงานสำรองสำเร็จไว้ที่: \${w.outputReportPath}`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`);
+            addWorkflowLog(workflowId, `บันทึกรายงานสำรองสำเร็จไว้ที่: ${w.outputReportPath}`);
             
             fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
           }
         } else {
           w.progress = 70;
-          w.currentStep = `[\${currentProfile}] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook...`;
+          w.currentStep = `[${currentProfile}] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook...`;
           addWorkflowLog(workflowId, `ขั้นตอนที่ 6/8: [ข้าม] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook ตามที่ตั้งค่าไว้`);
           fbPostContent = 'ข้ามการสร้างเนื้อหาสำหรับโพสต์ Facebook (User disabled)';
         }
@@ -1159,13 +1159,13 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         // 7. Generate Infographic
         let infoSuccess = false;
         if (w.resumeWorkflow && fs.existsSync(w.outputInfoPath)) {
-          addWorkflowLog(workflowId, `พบไฟล์รูปภาพอินโฟกราฟิกเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: \${w.outputInfoPath} (ข้ามขั้นตอนการประมวลผลภาพ)`);
+          addWorkflowLog(workflowId, `พบไฟล์รูปภาพอินโฟกราฟิกเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${w.outputInfoPath} (ข้ามขั้นตอนการประมวลผลภาพ)`);
           infoSuccess = true;
         } else if (w.resumeWorkflow) {
           try {
             addWorkflowLog(workflowId, `พยายามดาวน์โหลดอินโฟกราฟิกที่มีอยู่ใน Notebook...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n \${notebookId} --latest --force "\${w.outputInfoPath}"`, 1, 1000);
-            addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จรูปสำเร็จและเซฟไว้ที่: \${w.outputInfoPath}`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`, 1, 1000);
+            addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputInfoPath}`);
             infoSuccess = true;
           } catch (dlErr) {
             addWorkflowLog(workflowId, `ไม่พบรูปภาพอินโฟกราฟิกสำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างภาพใหม่...`);
@@ -1174,19 +1174,19 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         
         if (!infoSuccess) {
           w.progress = 85;
-          w.currentStep = `[\${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
+          w.currentStep = `[${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
           addWorkflowLog(workflowId, `ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
-          addWorkflowLog(workflowId, `Prompt: "\${resolvedInfoPrompt}"`);
-          const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_\${Date.now()}.txt`);
+          addWorkflowLog(workflowId, `Prompt: "${resolvedInfoPrompt}"`);
+          const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
           fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n \${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "\${tempInfoPromptPath}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
           }
           addWorkflowLog(workflowId, `รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n \${notebookId} --latest --force "\${w.outputInfoPath}"`);
-          addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: \${w.outputInfoPath}`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`);
+          addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${w.outputInfoPath}`);
         }
         
         // 8. Finished!
@@ -1207,24 +1207,24 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         
       } catch (err) {
         lastError = err;
-        console.error(`[บัญชี: \${currentProfile}] ช่วงที่เกิดข้อติดขัด:`, err);
+        console.error(`[บัญชี: ${currentProfile}] ช่วงที่เกิดข้อติดขัด:`, err);
         
-        addWorkflowLog(workflowId, `[บัญชี: \${currentProfile}] ระบบค้างหรือขัดข้อง: จะคงรักษา Notebook ID: \${notebookId || 'N/A'} เพื่อให้คุณสามารถกดรันประมวลผลต่อ (Resume) ได้ทันทีโดยไม่ต้องเริ่มนับหนึ่งใหม่`);
+        addWorkflowLog(workflowId, `[บัญชี: ${currentProfile}] ระบบค้างหรือขัดข้อง: จะคงรักษา Notebook ID: ${notebookId || 'N/A'} เพื่อให้คุณสามารถกดรันประมวลผลต่อ (Resume) ได้ทันทีโดยไม่ต้องเริ่มนับหนึ่งใหม่`);
         
         if (isQuotaError(err) && attempt < maxAttempts) {
           const currentIdx = authProfiles.indexOf(currentProfile);
           const nextIdx = (currentIdx + 1) % authProfiles.length;
           const nextProfile = authProfiles[nextIdx];
           
-          addWorkflowLog(workflowId, `⚠️ ตรวจพบโควตาเต็มสำหรับบัญชี '\${currentProfile}'!`);
-          addWorkflowLog(workflowId, `🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '\${nextProfile}'...`);
+          addWorkflowLog(workflowId, `⚠️ ตรวจพบโควตาเต็มสำหรับบัญชี '${currentProfile}'!`);
+          addWorkflowLog(workflowId, `🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '${nextProfile}'...`);
           
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" profile switch "\${nextProfile}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" profile switch "${nextProfile}"`);
             currentProfile = nextProfile;
-            addWorkflowLog(workflowId, `✅ สลับบัญชีสำเร็จเป็น '\${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
+            addWorkflowLog(workflowId, `✅ สลับบัญชีสำเร็จเป็น '${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
           } catch (switchErr) {
-            addWorkflowLog(workflowId, `❌ สลับบัญชีล้มเหลว: \${switchErr.message}`);
+            addWorkflowLog(workflowId, `❌ สลับบัญชีล้มเหลว: ${switchErr.message}`);
             throw err;
           }
         } else {
