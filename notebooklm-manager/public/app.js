@@ -11,7 +11,14 @@ let state = {
     templates: [],
     activeTemplateId: '',
     activePromptType: 'search', // default prompt tab
-    workflowPollingInterval: null
+    workflowPollingInterval: null,
+    selectedWorkflowId: null,
+    isReviewing: false,
+    lastWorkflowsJson: '',
+    lastLogsJson: '',
+    countdownInterval: null,
+    estRemainingSeconds: 0,
+    currentProgress: -1
 };
 
 // DOM Elements
@@ -218,6 +225,12 @@ function setupEventListeners() {
             }
         });
     });
+
+    const btnApproveWorkflow = document.getElementById('btn-approve-workflow');
+    const btnCancelWorkflow = document.getElementById('btn-cancel-workflow');
+
+    btnApproveWorkflow.addEventListener('click', handleApproveWorkflow);
+    btnCancelWorkflow.addEventListener('click', handleCancelWorkflow);
 
     // Workflow Template select change
     workflowTemplateSelect.addEventListener('change', (e) => {
@@ -1084,6 +1097,7 @@ async function executeWorkflowRunDirectly() {
     const dateStr = workflowDateInput.value;
     const genFacebook = document.getElementById('workflow-gen-fb-checkbox').checked;
     const resumeWorkflow = document.getElementById('workflow-resume-checkbox').checked;
+    const pauseForReview = document.getElementById('workflow-pause-checkbox').checked;
     const template = state.templates.find(t => t.id === templateId);
 
     btnRunWorkflow.disabled = true;
@@ -1106,12 +1120,14 @@ async function executeWorkflowRunDirectly() {
                 reportPrompt: template.reportPrompt || '',
                 infoPrompt: template.infoPrompt || '',
                 genFacebook: genFacebook,
-                resumeWorkflow: resumeWorkflow
+                resumeWorkflow: resumeWorkflow,
+                pauseForReview: pauseForReview
             })
         });
         const data = await response.json();
         
         if (data.success) {
+            state.selectedWorkflowId = data.workflowId;
             startWorkflowPolling();
         } else {
             alert('เริ่มกระบวนการล้มเหลว: ' + data.error);
@@ -1128,14 +1144,56 @@ async function executeWorkflowRunDirectly() {
     }
 }
 
+// Update Time Remaining display on UI
+function updateTimeRemainingUI() {
+    const timeRemainingEl = document.getElementById('workflow-time-remaining');
+    if (!timeRemainingEl) return;
+    
+    if (state.selectedWorkflowId && state.estRemainingSeconds > 0) {
+        const mins = Math.floor(state.estRemainingSeconds / 60);
+        const secs = state.estRemainingSeconds % 60;
+        
+        let timeStr = '';
+        if (mins > 0) {
+            timeStr = `${mins} นาที ${secs} วินาที`;
+        } else {
+            timeStr = `${secs} วินาที`;
+        }
+        
+        timeRemainingEl.innerHTML = `<i class="fa-regular fa-clock"></i> เหลืออีกประมาณ: ${timeStr}`;
+    } else {
+        timeRemainingEl.innerHTML = `<i class="fa-regular fa-clock"></i> ประเมินเวลา: -`;
+    }
+}
+
 // Start polling for workflow status updates
 function startWorkflowPolling() {
-    if (state.workflowPollingInterval) {
-        clearInterval(state.workflowPollingInterval);
-    }
-    
-    // Poll every 2 seconds
+    stopWorkflowPolling();
+    // Immediate poll
+    pollWorkflowStatus();
+    // Poll status every 2 seconds
     state.workflowPollingInterval = setInterval(pollWorkflowStatus, 2000);
+    
+    // Countdown timer interval (ticks every 1 second)
+    if (!state.countdownInterval) {
+        state.countdownInterval = setInterval(() => {
+            if (state.selectedWorkflowId && state.estRemainingSeconds > 0) {
+                const wSection = document.getElementById('workflow-progress-section');
+                if (wSection && wSection.style.display === 'block') {
+                    state.estRemainingSeconds--;
+                    
+                    // Enforce minimum limit based on progress to avoid hitting 0 too early
+                    let minLimit = 5;
+                    if (state.currentProgress >= 90) minLimit = 2;
+                    if (state.estRemainingSeconds < minLimit) {
+                        state.estRemainingSeconds = minLimit;
+                    }
+                    
+                    updateTimeRemainingUI();
+                }
+            }
+        }, 1000);
+    }
 }
 
 // Stop polling for workflow status updates
@@ -1144,28 +1202,133 @@ function stopWorkflowPolling() {
         clearInterval(state.workflowPollingInterval);
         state.workflowPollingInterval = null;
     }
+    if (state.countdownInterval) {
+        clearInterval(state.countdownInterval);
+        state.countdownInterval = null;
+    }
+}
+
+// Show/hide main layout panels only when state changes (prevents flickering)
+function showActiveSection(sectionToShow) {
+    const sections = [
+        { el: document.getElementById('workflow-review-section'), display: 'block' },
+        { el: document.getElementById('workflow-progress-section'), display: 'block' },
+        { el: document.getElementById('workflow-result-section'), display: 'block' },
+        { el: document.getElementById('workflow-idle-section'), display: 'flex' }
+    ];
+    
+    sections.forEach(s => {
+        if (s.el) {
+            const targetDisplay = s.el === sectionToShow ? s.display : 'none';
+            if (s.el.style.display !== targetDisplay) {
+                s.el.style.display = targetDisplay;
+            }
+        }
+    });
 }
 
 // Poll workflow status from Express server
 async function pollWorkflowStatus() {
     try {
-        const response = await fetch('/api/workflow/status');
+        // 1. Fetch overall status (which returns activeWorkflows array)
+        const response = await fetch('/api/workflow/status' + (state.selectedWorkflowId ? `?workflowId=${state.selectedWorkflowId}` : ''));
         const data = await response.json();
         
-        // Update progress UI
-        workflowProgressFill.style.width = `${data.progress}%`;
-        workflowProgressText.textContent = `${data.progress}%`;
-        workflowStepText.textContent = data.currentStep || 'กำลังดำเนินขั้นตอน...';
+        const reviewSection = document.getElementById('workflow-review-section');
         
-        // Render log lines
-        if (data.logs && data.logs.length > 0) {
+        // If we don't have a selected ID but the server returned a list and one is running, auto-select it
+        if (!state.selectedWorkflowId) {
+            const listResponse = await fetch('/api/workflow/status');
+            const listData = await listResponse.json();
+            if (listData.activeWorkflows && listData.activeWorkflows.length > 0) {
+                // Render tasks list
+                renderActiveTasksList(listData.activeWorkflows);
+                
+                // Auto-select the first running or waiting workflow
+                const runningTask = listData.activeWorkflows.find(w => w.status === 'running' || w.status === 'waiting_approval');
+                if (runningTask) {
+                    state.selectedWorkflowId = runningTask.id;
+                } else {
+                    state.selectedWorkflowId = listData.activeWorkflows[0].id;
+                }
+                
+                // Fetch again for the selected one
+                return pollWorkflowStatus();
+            } else {
+                // No active workflows in system
+                stopWorkflowPolling();
+                btnRunWorkflow.disabled = false;
+                showActiveSection(workflowIdleSection);
+                document.getElementById('workflow-tasks-section').style.display = 'none';
+                state.lastWorkflowsJson = '';
+                return;
+            }
+        }
+        
+        // Also fetch the list of all workflows in parallel to keep sidebar updated
+        const listResponse = await fetch('/api/workflow/status');
+        const listData = await listResponse.json();
+        renderActiveTasksList(listData.activeWorkflows);
+        
+        // Update progress UI for the selected workflow
+        const activeW = data; // since we queried specifically for selectedWorkflowId
+        
+        // If selected workflow doesn't exist anymore, reset
+        if (!activeW || (activeW.error && activeW.error === 'Workflow not found')) {
+            state.selectedWorkflowId = null;
+            return;
+        }
+        
+        // Update progress display
+        workflowProgressFill.style.width = `${activeW.progress}%`;
+        workflowProgressText.textContent = `${activeW.progress}%`;
+        workflowStepText.textContent = activeW.currentStep || 'กำลังดำเนินขั้นตอน...';
+        
+        // Handle time remaining text inside poll status
+        const timeRemainingEl = document.getElementById('workflow-time-remaining');
+        if (timeRemainingEl) {
+            if (activeW.status === 'waiting_approval') {
+                timeRemainingEl.innerHTML = `<i class="fa-regular fa-clock"></i> รออนุมัติเนื้อหา`;
+                state.estRemainingSeconds = 0;
+            } else if (activeW.status === 'completed') {
+                timeRemainingEl.innerHTML = `<i class="fa-regular fa-clock"></i> เสร็จสมบูรณ์`;
+                state.estRemainingSeconds = 0;
+            } else if (activeW.status === 'failed') {
+                timeRemainingEl.innerHTML = `<i class="fa-regular fa-clock"></i> ล้มเหลว`;
+                state.estRemainingSeconds = 0;
+            } else {
+                // status === 'running'
+                if (state.currentProgress !== activeW.progress) {
+                    state.currentProgress = activeW.progress;
+                    
+                    let baseline = 10;
+                    if (activeW.progress <= 5) baseline = 280;
+                    else if (activeW.progress <= 15) baseline = 260;
+                    else if (activeW.progress <= 20) baseline = 240;
+                    else if (activeW.progress <= 25) baseline = 230;
+                    else if (activeW.progress <= 40) baseline = 220;
+                    else if (activeW.progress <= 55) baseline = 200;
+                    else if (activeW.progress <= 70) baseline = 40;
+                    else if (activeW.progress <= 85) baseline = 25;
+                    else if (activeW.progress <= 99) baseline = 10;
+                    
+                    state.estRemainingSeconds = baseline;
+                }
+                updateTimeRemainingUI();
+            }
+        }
+        
+        // Render log lines only if they changed (prevents logs flashing)
+        const logsJson = JSON.stringify(activeW.logs);
+        if (activeW.logs && activeW.logs.length > 0 && logsJson !== state.lastLogsJson) {
+            state.lastLogsJson = logsJson;
             const atBottom = isScrolledToBottom(workflowLogs);
             
-            workflowLogs.innerHTML = data.logs.map(log => {
+            workflowLogs.innerHTML = activeW.logs.map(log => {
                 let logClass = '';
-                if (log.includes('❌') || log.includes('error')) logClass = 'log-error';
-                else if (log.includes('สำเร็จ') || log.includes('เสร็จสิ้น')) logClass = 'log-success';
-                else if (log.includes('ขั้นตอนที่')) logClass = 'log-header';
+                if (log.includes('❌') || log.includes('error') || log.includes('ล้มเหลว')) logClass = 'log-error';
+                else if (log.includes('สำเร็จ') || log.includes('เสร็จสิ้น') || log.includes('[อนุมัติ]')) logClass = 'log-success';
+                else if (log.includes('ขั้นตอนที่') || log.includes('[รอการอนุมัติ]')) logClass = 'log-header';
                 return `<div class="log-line ${logClass}">${escapeHtml(log)}</div>`;
             }).join('');
             
@@ -1174,30 +1337,37 @@ async function pollWorkflowStatus() {
             }
         }
         
-        if (!data.running) {
+        // Handle different statuses with optimized transitions
+        if (activeW.status === 'waiting_approval') {
+            showActiveSection(reviewSection);
+            
+            const reviewEditor = document.getElementById('review-markdown-editor');
+            if (reviewEditor.value !== activeW.tempContent && !state.isReviewing) {
+                reviewEditor.value = activeW.tempContent || '';
+                state.isReviewing = true;
+            }
+        } else if (activeW.status === 'completed') {
+            showActiveSection(workflowResultSection);
+            
+            resAudioPath.textContent = activeW.result.audioPath || '-';
+            resInfoPath.textContent = activeW.result.infoPath || '-';
+            resFbPost.value = activeW.result.fbPost || '';
+            
+            // Stop polling since it's completed
             stopWorkflowPolling();
             btnRunWorkflow.disabled = false;
+        } else if (activeW.status === 'failed') {
+            showActiveSection(workflowProgressSection); // keep visible for log check
             
-            if (data.error) {
-                // Workflow failed
-                alert('เกิดข้อผิดพลาดในกระบวนการทำงาน: ' + data.error);
-                // Keep progress card visible for debugging logs
-            } else if (data.result) {
-                // Workflow succeeded!
-                setTimeout(() => {
-                    workflowProgressSection.style.display = 'none';
-                    workflowResultSection.style.display = 'block';
-                    
-                    resAudioPath.textContent = data.result.audioPath || '-';
-                    resInfoPath.textContent = data.result.infoPath || '-';
-                    resFbPost.value = data.result.fbPost || '';
-                }, 1000);
-            } else {
-                // Stopped without result/error
-                workflowProgressSection.style.display = 'none';
-                workflowIdleSection.style.display = 'flex';
-            }
+            alert('เกิดข้อผิดพลาดในกระบวนการทำงาน: ' + activeW.error);
+            stopWorkflowPolling();
+            btnRunWorkflow.disabled = false;
+        } else {
+            // status === 'running'
+            showActiveSection(workflowProgressSection);
+            state.isReviewing = false;
         }
+        
     } catch (error) {
         console.error('Error polling workflow status:', error);
     }
@@ -1209,24 +1379,186 @@ async function checkWorkflowStatusOnLoad() {
         const response = await fetch('/api/workflow/status');
         const data = await response.json();
         
-        if (data.running) {
-            // Reconnect to polling
-            btnRunWorkflow.disabled = true;
-            workflowIdleSection.style.display = 'none';
-            workflowProgressSection.style.display = 'block';
-            startWorkflowPolling();
-        } else if (data.result) {
-            // Show last result
-            workflowIdleSection.style.display = 'none';
-            workflowProgressSection.style.display = 'none';
-            workflowResultSection.style.display = 'block';
+        if (data.activeWorkflows && data.activeWorkflows.length > 0) {
+            renderActiveTasksList(data.activeWorkflows);
             
-            resAudioPath.textContent = data.result.audioPath || '-';
-            resInfoPath.textContent = data.result.infoPath || '-';
-            resFbPost.value = data.result.fbPost || '';
+            // Find any running or waiting workflow to auto-select
+            const runningTask = data.activeWorkflows.find(w => w.status === 'running' || w.status === 'waiting_approval');
+            if (runningTask) {
+                state.selectedWorkflowId = runningTask.id;
+                btnRunWorkflow.disabled = true;
+                
+                if (runningTask.status === 'waiting_approval') {
+                    showActiveSection(document.getElementById('workflow-review-section'));
+                } else {
+                    showActiveSection(workflowProgressSection);
+                }
+                
+                startWorkflowPolling();
+            } else {
+                // Select first completed/failed one
+                state.selectedWorkflowId = data.activeWorkflows[0].id;
+                pollWorkflowStatus(); // Trigger single fetch
+            }
         }
     } catch (error) {
         console.error('Error checking workflow status on load:', error);
+    }
+}
+
+// Render the active tasks sidebar list
+function renderActiveTasksList(activeWorkflows) {
+    const tasksSection = document.getElementById('workflow-tasks-section');
+    const tasksList = document.getElementById('workflow-tasks-list');
+    
+    if (!activeWorkflows || activeWorkflows.length === 0) {
+        tasksSection.style.display = 'none';
+        state.lastWorkflowsJson = '';
+        return;
+    }
+    
+    tasksSection.style.display = 'block';
+    
+    // Check if task states or selection changed before re-rendering DOM (prevents sidebar flashing)
+    const currentJson = JSON.stringify(activeWorkflows) + '_' + state.selectedWorkflowId;
+    if (currentJson === state.lastWorkflowsJson) {
+        return;
+    }
+    state.lastWorkflowsJson = currentJson;
+    
+    tasksList.innerHTML = activeWorkflows.map(w => {
+        let statusText = 'กำลังรัน';
+        let badgeClass = 'status-running';
+        
+        if (w.status === 'waiting_approval') {
+            statusText = 'รอตรวจทาน';
+            badgeClass = 'status-waiting_approval';
+        } else if (w.status === 'completed') {
+            statusText = 'เสร็จสมบูรณ์';
+            badgeClass = 'status-completed';
+        } else if (w.status === 'failed') {
+            statusText = 'ล้มเหลว';
+            badgeClass = 'status-failed';
+        }
+        
+        const isActive = w.id === state.selectedWorkflowId ? 'active' : '';
+        
+        return `
+            <div class="task-item ${isActive}" data-id="${w.id}">
+                <div class="task-info">
+                    <div class="task-title">${escapeHtml(w.title)}</div>
+                    <div class="task-status-row">
+                        <span class="status-badge ${badgeClass}">${statusText}</span>
+                        <span style="color: var(--text-secondary);">${w.progress}%</span>
+                    </div>
+                </div>
+                <div class="task-arrow">
+                    <i class="fa-solid fa-chevron-right" style="font-size: 12px; color: var(--text-muted);"></i>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Add click event listeners to task items
+    document.querySelectorAll('.task-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const taskId = item.getAttribute('data-id');
+            state.selectedWorkflowId = taskId;
+            state.isReviewing = false; // Reset reviewing state
+            
+            // Highlight active task item immediately
+            document.querySelectorAll('.task-item').forEach(el => el.classList.remove('active'));
+            item.classList.add('active');
+            
+            // Start polling if it was stopped, or just poll immediately
+            btnRunWorkflow.disabled = true;
+            pollWorkflowStatus();
+            startWorkflowPolling();
+        });
+    });
+}
+
+// Approve and resume workflow
+async function handleApproveWorkflow() {
+    if (!state.selectedWorkflowId) return;
+    
+    const approveBtn = document.getElementById('btn-approve-workflow');
+    const cancelBtn = document.getElementById('btn-cancel-workflow');
+    const editor = document.getElementById('review-markdown-editor');
+    
+    approveBtn.disabled = true;
+    cancelBtn.disabled = true;
+    
+    try {
+        const response = await fetch('/api/workflow/approve', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                workflowId: state.selectedWorkflowId,
+                content: editor.value
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            state.isReviewing = false;
+            document.getElementById('workflow-review-section').style.display = 'none';
+            workflowProgressSection.style.display = 'block';
+            startWorkflowPolling();
+        } else {
+            alert('อนุมัติไม่สำเร็จ: ' + data.error);
+            approveBtn.disabled = false;
+            cancelBtn.disabled = false;
+        }
+    } catch (err) {
+        console.error('Error approving workflow:', err);
+        approveBtn.disabled = false;
+        cancelBtn.disabled = false;
+    }
+}
+
+// Cancel workflow
+async function handleCancelWorkflow() {
+    if (!state.selectedWorkflowId) return;
+    
+    if (!confirm('คุณแน่ใจหรือไม่ว่าต้องการยกเลิกกระบวนการทำงานนี้?')) return;
+    
+    const approveBtn = document.getElementById('btn-approve-workflow');
+    const cancelBtn = document.getElementById('btn-cancel-workflow');
+    
+    approveBtn.disabled = true;
+    cancelBtn.disabled = true;
+    
+    try {
+        const response = await fetch('/api/workflow/cancel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                workflowId: state.selectedWorkflowId
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            state.isReviewing = false;
+            document.getElementById('workflow-review-section').style.display = 'none';
+            workflowIdleSection.style.display = 'flex';
+            btnRunWorkflow.disabled = false;
+            stopWorkflowPolling();
+            
+            // Re-fetch all workflows list to refresh sidebar
+            const listResponse = await fetch('/api/workflow/status');
+            const listData = await listResponse.json();
+            renderActiveTasksList(listData.activeWorkflows);
+        } else {
+            alert('ยกเลิกไม่สำเร็จ: ' + data.error);
+            approveBtn.disabled = false;
+            cancelBtn.disabled = false;
+        }
+    } catch (err) {
+        console.error('Error canceling workflow:', err);
+        approveBtn.disabled = false;
+        cancelBtn.disabled = false;
     }
 }
 

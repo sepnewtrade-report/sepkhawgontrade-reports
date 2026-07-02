@@ -156,6 +156,11 @@
                             <label for="workflow-resume-checkbox" style="cursor: pointer; margin-bottom: 0; font-weight: 500;">ประมวลผลต่อจากเดิม (Resume Workflow)</label>
                         </div>
 
+                        <div class="form-group" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="workflow-pause-checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <label for="workflow-pause-checkbox" style="cursor: pointer; margin-bottom: 0; font-weight: 500; color: #3b82f6;">ตรวจทานและอนุมัติแบบร่างก่อนส่ง (Pause to Review)</label>
+                        </div>
+
                         <button class="btn btn-primary btn-block" id="btn-run-workflow" style="margin-top: 20px; width: 100%; justify-content: center; height: 48px;">
                             <i class="fa-solid fa-wand-magic-sparkles"></i> เริ่มประมวลผลคลิปอัตโนมัติ (Start Automation)
                         </button>
@@ -184,6 +189,35 @@
 
                 <!-- Right: Running status and result display -->
                 <div class="workflow-right">
+                    <!-- Active Tasks Section -->
+                    <div class="glass-card tasks-card" id="workflow-tasks-section" style="display: none; margin-bottom: 20px;">
+                        <h3><i class="fa-solid fa-list-check"></i> รายการงานที่กำลังประมวลผล (Active Tasks)</h3>
+                        <div id="workflow-tasks-list" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Dynamic Tasks List -->
+                        </div>
+                    </div>
+
+                    <!-- Review & Approve Section -->
+                    <div class="glass-card review-card" id="workflow-review-section" style="display: none; margin-bottom: 20px; border: 1px solid var(--border-color-focus);">
+                        <h3 style="color: #3b82f6;"><i class="fa-solid fa-file-pen"></i> ตรวจทานและอนุมัติแบบร่างบทวิเคราะห์</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; margin-top: 5px;">
+                            Gemini ค้นหาข้อมูลเสร็จแล้ว คุณสามารถแก้ไขและจัดแต่งร่างรายงานด้านล่างนี้ได้ตามต้องการ เมื่อเสร็จแล้วให้กดปุ่มอนุมัติเพื่อดำเนินกระบวนการต่อ
+                        </p>
+                        
+                        <div class="form-group">
+                            <textarea id="review-markdown-editor" rows="18" class="form-control" style="font-family: monospace; font-size: 13px; line-height: 1.6; padding: 12px;"></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 12px; margin-top: 15px;">
+                            <button class="btn btn-primary" id="btn-approve-workflow" style="flex: 1; justify-content: center; height: 44px; background: #2563eb;">
+                                <i class="fa-regular fa-circle-check"></i> อนุมัติและส่งข้อมูล (Approve & Resume)
+                            </button>
+                            <button class="btn btn-danger" id="btn-cancel-workflow" style="height: 44px; justify-content: center; padding: 0 20px;">
+                                <i class="fa-solid fa-xmark"></i> ยกเลิกงาน (Cancel)
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="glass-card progress-card" id="workflow-progress-section" style="display: none;">
                         <h3><i class="fa-solid fa-gears fa-spin"></i> กำลังประมวลผลกระบวนการทำงาน...</h3>
                         <div class="progress-bar-container" style="margin-top: 20px; height: 10px;">
@@ -191,6 +225,7 @@
                         </div>
                         <div class="progress-info" style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary);">
                             <span id="workflow-progress-text">0%</span>
+                            <span id="workflow-time-remaining" style="color: #818cf8; font-weight: 600;"><i class="fa-regular fa-clock"></i> ประเมินเวลา: -</span>
                             <span id="workflow-step-text">เตรียมระบบ...</span>
                         </div>
                         

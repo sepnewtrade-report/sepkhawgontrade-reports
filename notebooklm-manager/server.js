@@ -1,8 +1,8 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const { exec, spawn } = require('child_process');
-const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
@@ -30,6 +30,9 @@ let activeWorkflowState = {
   result: null,
   error: null
 };
+
+// Map of active workflows
+let workflows = {};
 
 // Helper to sanitize input
 function sanitizeName(name) {
@@ -206,6 +209,38 @@ function extractTicker(mdContent) {
 
 
 // Log message to active workflow
+function addWorkflowLog(workflowId, msg) {
+  const time = new Date().toLocaleTimeString('th-TH');
+  const logStr = `[${time}] ${msg}`;
+  console.log(`[${workflowId}] ${logStr}`);
+  if (workflows[workflowId]) {
+    workflows[workflowId].logs.push(logStr);
+    
+    // Sync to activeWorkflowState for backwards compatibility
+    activeWorkflowState.logs = workflows[workflowId].logs;
+    activeWorkflowState.progress = workflows[workflowId].progress;
+    activeWorkflowState.currentStep = workflows[workflowId].currentStep;
+    activeWorkflowState.running = workflows[workflowId].running;
+    activeWorkflowState.result = workflows[workflowId].result;
+    activeWorkflowState.error = workflows[workflowId].error;
+  }
+}
+
+// Error handling helper for workflows
+function handleWorkflowError(workflowId, err) {
+  console.error(`[${workflowId}] Workflow error:`, err);
+  let displayError = err.message;
+  if (isQuotaError(err)) {
+    displayError = 'โควตาการใช้งานบัญชีนี้เต็มแล้วสำหรับวันนี้ (Daily Quota Exceeded) หรือเซิร์ฟเวอร์ Google ปฏิเสธคำขอชั่วคราว กรุณาสลับผู้ใช้ไปใช้โปรไฟล์บัญชีอื่นในแท็บเมนูจัดการบัญชี แล้วทดลองใหม่อีกครั้ง';
+  }
+  addWorkflowLog(workflowId, `❌ เกิดข้อผิดพลาดในกระบวนการทำงาน: ${displayError}`);
+  if (workflows[workflowId]) {
+    workflows[workflowId].running = false;
+    workflows[workflowId].status = 'failed';
+    workflows[workflowId].error = displayError;
+  }
+}
+
 function addLog(msg) {
   const time = new Date().toLocaleTimeString('th-TH');
   const logStr = `[${time}] ${msg}`;
@@ -459,7 +494,73 @@ app.post('/api/templates/save', (req, res) => {
 
 // Get Workflow Run Status
 app.get('/api/workflow/status', (req, res) => {
-  res.json(activeWorkflowState);
+  const workflowId = req.query.workflowId;
+  if (workflowId && workflows[workflowId]) {
+    return res.json(workflows[workflowId]);
+  }
+  
+  const activeList = Object.values(workflows).map(w => ({
+    id: w.id,
+    title: w.title,
+    status: w.status,
+    progress: w.progress,
+    currentStep: w.currentStep,
+    error: w.error
+  }));
+  
+  res.json({
+    activeWorkflows: activeList,
+    running: Object.values(workflows).some(w => w.running),
+    progress: Object.values(workflows)[0]?.progress || 0,
+    currentStep: Object.values(workflows)[0]?.currentStep || '',
+    logs: Object.values(workflows)[0]?.logs || [],
+    result: Object.values(workflows)[0]?.result || null,
+    error: Object.values(workflows)[0]?.error || null
+  });
+});
+
+// Approve and resume workflow
+app.post('/api/workflow/approve', async (req, res) => {
+  const { workflowId, content } = req.body;
+  if (!workflowId || !workflows[workflowId]) {
+    return res.status(400).json({ success: false, error: 'Workflow not found' });
+  }
+  
+  const w = workflows[workflowId];
+  if (w.status !== 'waiting_approval') {
+    return res.status(400).json({ success: false, error: 'Workflow is not waiting for approval' });
+  }
+  
+  try {
+    fs.writeFileSync(w.actualFilePath, content, 'utf8');
+    addWorkflowLog(workflowId, `[อนุมัติ] บันทึกเนื้อหาเรียบร้อยแล้ว ดำเนินการขั้นตอนที่ 3 ถัดไป...`);
+    
+    w.status = 'running';
+    w.running = true;
+    w.tempContent = '';
+    
+    // Resume from step 3
+    runWorkflowPipelineFromStep3(workflowId);
+    
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error approving workflow:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Cancel active workflow
+app.post('/api/workflow/cancel', (req, res) => {
+  const { workflowId } = req.body;
+  if (workflowId && workflows[workflowId]) {
+    workflows[workflowId].running = false;
+    workflows[workflowId].status = 'failed';
+    workflows[workflowId].error = 'กระบวนการถูกยกเลิกโดยผู้ใช้';
+    addWorkflowLog(workflowId, `❌ กระบวนการทำงานนี้ถูกยกเลิกโดยผู้ใช้`);
+    res.json({ success: true });
+  } else {
+    res.status(400).json({ success: false, error: 'Workflow not found' });
+  }
 });
 
 // Scan a markdown file for stock tickers, extract written prices, and fetch real-time prices
@@ -634,13 +735,22 @@ app.post('/api/workflow/update-prices', (req, res) => {
 
 // Run Video Production Workflow Pipeline
 app.post('/api/workflow/run', async (req, res) => {
-  if (activeWorkflowState.running) {
-    return res.status(400).json({ success: false, error: 'Another workflow is already running' });
-  }
+  const { 
+    templateId, 
+    selectedFile, 
+    dateStr, 
+    searchPrompt, 
+    audioPrompt, 
+    reportPrompt, 
+    infoPrompt, 
+    genFacebook, 
+    resumeWorkflow,
+    pauseForReview 
+  } = req.body;
   
-  const { templateId, selectedFile, dateStr, searchPrompt, audioPrompt, reportPrompt, infoPrompt, genFacebook, resumeWorkflow } = req.body;
   const shouldGenFacebook = genFacebook === true || genFacebook === 'true' || genFacebook === undefined;
   const shouldResume = resumeWorkflow === true || resumeWorkflow === 'true' || resumeWorkflow === undefined;
+  const shouldPause = pauseForReview === true || pauseForReview === 'true';
   
   if (!templateId || !dateStr) {
     return res.status(400).json({ success: false, error: 'Missing required parameters (templateId, dateStr)' });
@@ -687,21 +797,61 @@ app.post('/api/workflow/run', async (req, res) => {
     sourceTitle = `${path.basename(selectedFile).replace('.md', '')}_Source`;
   }
   
-  // Start workflow asynchronously
-  activeWorkflowState = {
+  // Generate unique workflow ID
+  const workflowId = `wf_${Date.now()}`;
+  
+  const w = {
+    id: workflowId,
+    templateId,
+    selectedFile,
+    dateStr,
+    searchPrompt,
+    audioPrompt,
+    reportPrompt,
+    infoPrompt,
+    genFacebook: shouldGenFacebook,
+    resumeWorkflow: shouldResume,
+    pauseForReview: shouldPause,
+    
+    title: `${showNameClean.replace(/_/g, ' ')} (${dateStr})`,
     running: true,
+    status: 'running', // 'running', 'waiting_approval', 'completed', 'failed'
     progress: 5,
     currentStep: 'ตรวจสอบความพร้อม...',
     logs: [],
     result: null,
-    error: null
+    error: null,
+    
+    // File paths and titles
+    actualFile: selectedFile,
+    actualFilePath: mdFilePath,
+    actualSourceTitle: sourceTitle,
+    showNameClean: showNameClean,
+    baseFilename: baseFilename,
+    outputAudioPath: outputAudioPath,
+    outputInfoPath: outputInfoPath,
+    outputReportPath: outputReportPath,
+    draftDir: draftDir,
+    
+    tempContent: ''
   };
   
-  res.json({ success: true, message: 'Workflow started' });
+  workflows[workflowId] = w;
+  
+  res.json({ success: true, workflowId: workflowId });
+  
+  // Start pipeline in background
+  runWorkflowPipeline(workflowId);
+});
+
+// Async pipeline execution helpers
+async function runWorkflowPipeline(workflowId) {
+  const w = workflows[workflowId];
+  if (!w) return;
   
   try {
     // 1. Check Auth Status
-    addLog(`ขั้นตอนที่ 1/8: ตรวจสอบความถูกต้องของการเชื่อมต่อบัญชี Google...`);
+    addWorkflowLog(workflowId, `ขั้นตอนที่ 1/8: ตรวจสอบความถูกต้องของการเชื่อมต่อบัญชี Google...`);
     const activeProfile = await getActiveProfile();
     const storagePath = path.join(PROFILES_DIR, activeProfile, 'storage_state.json');
     if (!fs.existsSync(storagePath)) {
@@ -709,70 +859,91 @@ app.post('/api/workflow/run', async (req, res) => {
     }
     
     // 2. Read input file or run Gemini Deep Research
-    activeWorkflowState.progress = 15;
-    let actualFile = selectedFile;
-    let actualFilePath = mdFilePath;
-    let actualSourceTitle = sourceTitle;
+    w.progress = 15;
     
-    if (actualFile) {
-      activeWorkflowState.currentStep = 'กำลังอ่านไฟล์บทวิเคราะห์...';
-      addLog(`ขั้นตอนที่ 2/8: กำลังตรวจสอบไฟล์บทวิเคราะห์ในเครื่อง: ${actualFile}...`);
-      if (!fs.existsSync(actualFilePath)) {
-        throw new Error(`ไม่พบไฟล์บทวิเคราะห์ ${actualFile} ในโฟลเดอร์หลักของโปรเจกต์`);
+    if (w.actualFile) {
+      w.currentStep = 'กำลังอ่านไฟล์บทวิเคราะห์...';
+      addWorkflowLog(workflowId, `ขั้นตอนที่ 2/8: กำลังตรวจสอบไฟล์บทวิเคราะห์ในเครื่อง: ${w.actualFile}...`);
+      if (!fs.existsSync(w.actualFilePath)) {
+        throw new Error(`ไม่พบไฟล์บทวิเคราะห์ ${w.selectedFile} ในโฟลเดอร์หลักของโปรเจกต์`);
       }
     } else {
-      activeWorkflowState.currentStep = 'กำลังทำ Gemini Deep Research...';
-      addLog(`ขั้นตอนที่ 2/8: เริ่มทำ Deep Research วิจัยรวบรวมข่าวผ่าน Gemini...`);
+      w.currentStep = 'กำลังทำ Gemini Deep Research...';
+      addWorkflowLog(workflowId, `ขั้นตอนที่ 2/8: เริ่มทำ Deep Research วิจัยรวบรวมข่าวผ่าน Gemini...`);
       
       if (!process.env.GEMINI_API_KEY) {
         throw new Error('กรุณาระบุ GEMINI_API_KEY ในไฟล์ .env ของโฟลเดอร์ notebooklm-manager ก่อนดำเนินการ');
       }
       
       // Calculate output filename
-      const fileDate = dateStr.replace(/-/g, '_');
+      const fileDate = w.dateStr.replace(/-/g, '_');
       let generatedFilename = '';
-      if (templateId === 'daily') {
+      if (w.templateId === 'daily') {
         generatedFilename = `market_summary_${fileDate}.md`;
-      } else if (templateId === 'weekly') {
+      } else if (w.templateId === 'weekly') {
         generatedFilename = `global_market_recap_${fileDate}.md`;
-      } else if (templateId === 'whale') {
+      } else if (w.templateId === 'whale') {
         generatedFilename = `whale_flow_analysis_${fileDate}.md`;
       } else {
-        generatedFilename = `${templateId}_${fileDate}.md`;
+        generatedFilename = `${w.templateId}_${fileDate}.md`;
       }
       
       const generatedFilePath = path.join(__dirname, '..', generatedFilename);
       const geminiScriptPath = path.join(__dirname, '..', 'gemini_research.py');
       
-      addLog(`รันโมเดล Gemini เพื่อค้นหาข่าวและวิเคราะห์ตลาดลงไฟล์: ${generatedFilename}...`);
+      addWorkflowLog(workflowId, `รันโมเดล Gemini เพื่อค้นหาข่าวและวิเคราะห์ตลาดลงไฟล์: ${generatedFilename}...`);
       
-      const escapedPrompt = searchPrompt.replace(/"/g, '\\"').replace(/\n/g, ' ');
-      const geminiCmd = `"${VENV_PYTHON}" "${geminiScriptPath}" --template-id "${templateId}" --prompt "${escapedPrompt}" --date "${dateStr}" --output "${generatedFilePath}"`;
+      const escapedPrompt = w.searchPrompt.replace(/"/g, '\\"').replace(/\n/g, ' ');
+      const geminiCmd = `"${VENV_PYTHON}" "${geminiScriptPath}" --template-id "${w.templateId}" --prompt "${escapedPrompt}" --date "${w.dateStr}" --output "${generatedFilePath}"`;
       
       await runCmd(geminiCmd);
-      addLog(`สร้างและเซฟรายงานการเงินสำเร็จ: ${generatedFilename}`);
+      addWorkflowLog(workflowId, `สร้างและเซฟรายงานการเงินสำเร็จ: ${generatedFilename}`);
       
       // Rebuild website index and push to GitHub
-      activeWorkflowState.progress = 20;
-      activeWorkflowState.currentStep = 'กำลังบันทึกลงเว็บและ Push ขึ้น GitHub...';
-      addLog(`ขั้นตอนที่ 2.5/8: กำลังอัปเดตสารบัญข่าวบนเว็บและดาวน์โหลดซิงค์ขึ้น GitHub...`);
+      w.progress = 20;
+      w.currentStep = 'กำลังบันทึกลงเว็บและ Push ขึ้น GitHub...';
+      addWorkflowLog(workflowId, `ขั้นตอนที่ 2.5/8: กำลังอัปเดตสารบัญข่าวบนเว็บและดาวน์โหลดซิงค์ขึ้น GitHub...`);
       
       const parentDir = path.join(__dirname, '..');
       const syncCmd = `node "${path.join(parentDir, 'generate-index.js')}" && git add . && git commit -m "Auto-update reports" && git push`;
       
       try {
         await runCmd(syncCmd);
-        addLog(`อัปเดตสารบัญเว็บสำเร็จและ Push ขึ้น GitHub เรียบร้อยแล้ว!`);
+        addWorkflowLog(workflowId, `อัปเดตสารบัญเว็บสำเร็จและ Push ขึ้น GitHub เรียบร้อยแล้ว!`);
       } catch (syncErr) {
-        addLog(`⚠️ คำเตือน: ระบบพุช GitHub ล้มเหลว (ข้ามไปรันขั้นตอนถัดไป): ${syncErr.message}`);
+        addWorkflowLog(workflowId, `⚠️ คำเตือน: ระบบพุช GitHub ล้มเหลว (ข้ามไปรันขั้นตอนถัดไป): ${syncErr.message}`);
       }
       
       // Override parameters to ingest this generated file
-      actualFile = generatedFilename;
-      actualFilePath = generatedFilePath;
-      actualSourceTitle = `${path.basename(actualFile).replace('.md', '')}_Source`;
+      w.actualFile = generatedFilename;
+      w.actualFilePath = generatedFilePath;
+      w.actualSourceTitle = `${path.basename(w.actualFile).replace('.md', '')}_Source`;
     }
     
+    // Pause for review if requested
+    if (w.pauseForReview) {
+      w.status = 'waiting_approval';
+      w.running = false;
+      w.currentStep = 'รอตรวจทานและอนุมัติเนื้อหา...';
+      w.progress = 20;
+      w.tempContent = fs.readFileSync(w.actualFilePath, 'utf8');
+      addWorkflowLog(workflowId, `[รอการอนุมัติ] ค้นหาข้อมูลและเรียบเรียงร่างรายงานสำเร็จแล้ว กรุณาตรวจทานหน้าเว็บและอนุมัติเพื่อรันต่อ`);
+      return; // Exit here
+    }
+    
+    // Proceed directly if no pause requested
+    runWorkflowPipelineFromStep3(workflowId);
+    
+  } catch (err) {
+    handleWorkflowError(workflowId, err);
+  }
+}
+
+async function runWorkflowPipelineFromStep3(workflowId) {
+  const w = workflows[workflowId];
+  if (!w) return;
+  
+  try {
     const { active: initialProfile, authenticated: authProfiles } = await getAuthenticatedProfiles();
     let currentProfile = initialProfile;
     const maxAttempts = authProfiles.length;
@@ -781,54 +952,58 @@ app.post('/api/workflow/run', async (req, res) => {
     let fbPostContent = '';
     
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      if (!w.running) {
+        // Canceled early by user
+        return;
+      }
       let notebookId = null;
       try {
         if (maxAttempts > 1) {
-          addLog(`[บัญชี: ${currentProfile}] เริ่มต้นการประมวลผลระบบ NotebookLM (พยายามครั้งที่ ${attempt}/${maxAttempts})...`);
+          addWorkflowLog(workflowId, `[บัญชี: ${currentProfile}] เริ่มต้นการประมวลผลระบบ NotebookLM (พยายามครั้งที่ ${attempt}/${maxAttempts})...`);
         }
         
         // 3. Create Notebook or Reuse Existing
-        activeWorkflowState.progress = 25;
-        activeWorkflowState.currentStep = `[${currentProfile}] กำลังเตรียม Notebook ใน NotebookLM...`;
-        const notebookTitle = `${showNameClean.replace(/_/g, ' ')} — ${dateStr}`;
+        w.progress = 25;
+        w.currentStep = `[${currentProfile}] กำลังเตรียม Notebook ใน NotebookLM...`;
+        const notebookTitle = `${w.showNameClean.replace(/_/g, ' ')} — ${w.dateStr}`;
         
-        if (shouldResume) {
+        if (w.resumeWorkflow) {
           try {
-            addLog(`กำลังสแกนค้นหา Notebook เดิมสำหรับหัวข้อ: "${notebookTitle}"...`);
+            addWorkflowLog(workflowId, `กำลังสแกนค้นหา Notebook เดิมสำหรับหัวข้อ: "${notebookTitle}"...`);
             const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" list --json`);
             const notebooksData = JSON.parse(listRes.stdout);
             if (notebooksData && Array.isArray(notebooksData.notebooks)) {
               const existingNotebook = notebooksData.notebooks.find(n => n.title === notebookTitle);
               if (existingNotebook) {
                 notebookId = existingNotebook.id;
-                addLog(`พบ Notebook เดิมในระบบเรียบร้อยแล้ว (ID: ${notebookId}) ข้ามขั้นตอนการสร้างใหม่!`);
+                addWorkflowLog(workflowId, `พบ Notebook เดิมในระบบเรียบร้อยแล้ว (ID: ${notebookId}) ข้ามขั้นตอนการสร้างใหม่!`);
               }
             }
           } catch (scanErr) {
             console.error('Failed to scan existing notebooks:', scanErr);
-            addLog(`⚠️ คำเตือน: สแกนค้นหา Notebook เดิมขัดข้อง จะใช้วิธีสร้างใหม่...`);
+            addWorkflowLog(workflowId, `⚠️ คำเตือน: สแกนค้นหา Notebook เดิมขัดข้อง จะใช้วิธีสร้างใหม่...`);
           }
         }
-
+        
         if (!notebookId) {
-          addLog(`ไม่พบ Notebook เดิม หรือผู้เลือกตั้งค่าให้เริ่มใหม่ กำลังสร้าง Notebook ใหม่: "${notebookTitle}"...`);
+          addWorkflowLog(workflowId, `ไม่พบ Notebook เดิม หรือผู้เลือกตั้งค่าให้เริ่มใหม่ กำลังสร้าง Notebook ใหม่: "${notebookTitle}"...`);
           const createRes = await runCmd(`"${VENV_NOTEBOOKLM}" create "${notebookTitle}"`);
           const match = createRes.stdout.match(/Created notebook:\s+([a-f0-9-]+)\s+-/);
           if (!match) {
             throw new Error('ไม่สามารถค้นหา Notebook ID จากผลลัพธ์ของคำสั่งได้:\n' + createRes.stdout);
           }
           notebookId = match[1];
-          addLog(`สร้าง Notebook ใหม่สำเร็จ ID: ${notebookId}`);
+          addWorkflowLog(workflowId, `สร้าง Notebook ใหม่สำเร็จ ID: ${notebookId}`);
         }
         
         // 4. Ingest source
-        activeWorkflowState.progress = 40;
-        activeWorkflowState.currentStep = `[${currentProfile}] กำลังนำเข้าแหล่งข้อมูล...`;
+        w.progress = 40;
+        w.currentStep = `[${currentProfile}] กำลังนำเข้าแหล่งข้อมูล...`;
         
         let hasSources = false;
-        if (shouldResume && notebookId) {
+        if (w.resumeWorkflow && notebookId) {
           try {
-            addLog(`กำลังตรวจสอบแหล่งข้อมูลใน Notebook...`);
+            addWorkflowLog(workflowId, `กำลังตรวจสอบแหล่งข้อมูลใน Notebook...`);
             const sourcesRes = await runCmd(`"${VENV_NOTEBOOKLM}" source list -n ${notebookId} --json`);
             const sourcesList = JSON.parse(sourcesRes.stdout);
             if (sourcesList && Array.isArray(sourcesList.sources) && sourcesList.sources.length > 0) {
@@ -840,20 +1015,20 @@ app.post('/api/workflow/run', async (req, res) => {
             console.error('Failed to list sources:', sourcesErr);
           }
         }
-
+        
         if (hasSources) {
-          addLog(`พบข้อมูลแหล่งอ้างอิงเดิมใน Notebook เรียบร้อยแล้ว ข้ามการนำเข้าข้อมูลเพื่อประหยัดโควตา!`);
+          addWorkflowLog(workflowId, `พบข้อมูลแหล่งอ้างอิงเดิมใน Notebook เรียบร้อยแล้ว ข้ามการนำเข้าข้อมูลเพื่อประหยัดโควตา!`);
         } else {
-          addLog(`กำลังนำเข้าเนื้อหาจากไฟล์ ${actualFile} สู่ NotebookLM...`);
+          addWorkflowLog(workflowId, `กำลังนำเข้าเนื้อหาจากไฟล์ ${w.actualFile} สู่ NotebookLM...`);
           let tempTxtFilePath = '';
-          if (actualFilePath.toLowerCase().endsWith('.md')) {
-            tempTxtFilePath = actualFilePath.replace(/\.md$/i, '.txt');
-            fs.copyFileSync(actualFilePath, tempTxtFilePath);
+          if (w.actualFilePath.toLowerCase().endsWith('.md')) {
+            tempTxtFilePath = w.actualFilePath.replace(/\.md$/i, '.txt');
+            fs.copyFileSync(w.actualFilePath, tempTxtFilePath);
           }
           
-          const fileToUpload = tempTxtFilePath || actualFilePath;
+          const fileToUpload = tempTxtFilePath || w.actualFilePath;
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --title "${actualSourceTitle}" "${fileToUpload}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" source add -n ${notebookId} --title "${w.actualSourceTitle}" "${fileToUpload}"`);
           } finally {
             if (tempTxtFilePath) {
               try {
@@ -865,21 +1040,21 @@ app.post('/api/workflow/run', async (req, res) => {
               }
             }
           }
-          addLog(`นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
+          addWorkflowLog(workflowId, `นำเข้าข้อมูลเนื้อหาบทวิเคราะห์ลงสู่ NotebookLM เรียบร้อยแล้ว`);
         }
-    
+        
         // Extract ticker and date from report for prompt replacement
-        let resolvedAudioPrompt = audioPrompt;
-        let resolvedReportPrompt = reportPrompt;
-        let resolvedInfoPrompt = infoPrompt;
+        let resolvedAudioPrompt = w.audioPrompt;
+        let resolvedReportPrompt = w.reportPrompt;
+        let resolvedInfoPrompt = w.infoPrompt;
         
         try {
-          if (fs.existsSync(actualFilePath)) {
-            const mdContent = fs.readFileSync(actualFilePath, 'utf8');
+          if (fs.existsSync(w.actualFilePath)) {
+            const mdContent = fs.readFileSync(w.actualFilePath, 'utf8');
             const ticker = extractTicker(mdContent);
-            const thaiDate = formatThaiDate(dateStr);
+            const thaiDate = formatThaiDate(w.dateStr);
             
-            addLog(`ระบบสแกนข้อมูลพบ Ticker: ${ticker} | วันที่: ${thaiDate}`);
+            addWorkflowLog(workflowId, `ระบบสแกนข้อมูลพบ Ticker: ${ticker} | วันที่: ${thaiDate}`);
             
             // Replace [TICKER] (case-insensitive)
             resolvedAudioPrompt = resolvedAudioPrompt.replace(/\[TICKER\]/gi, ticker);
@@ -894,129 +1069,136 @@ app.post('/api/workflow/run', async (req, res) => {
           }
         } catch (parseErr) {
           console.error('Error parsing placeholders:', parseErr);
-          addLog(`⚠️ คำเตือน: ระบบแทนที่ตัวแปร Ticker / วันที่ ขัดข้อง: ${parseErr.message}`);
+          addWorkflowLog(workflowId, `⚠️ คำเตือน: ระบบแทนที่ตัวแปร Ticker / วันที่ ขัดข้อง: ${parseErr.message}`);
         }
         
+        if (!w.running) return;
+        
         // 5. Generate Audio Overview
+        w.progress = 55;
+        w.currentStep = `[${currentProfile}] กำลังประมวลผล Audio Overview...`;
+        
         let audioSuccess = false;
-        if (shouldResume && fs.existsSync(outputAudioPath)) {
-          addLog(`พบไฟล์เสียงเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputAudioPath} (ข้ามขั้นตอนการประมวลผลเสียง)`);
+        if (w.resumeWorkflow && fs.existsSync(w.outputAudioPath)) {
+          addWorkflowLog(workflowId, `พบไฟล์เสียงเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${w.outputAudioPath} (ข้ามขั้นตอนการประมวลผลเสียง)`);
           audioSuccess = true;
-        } else if (shouldResume) {
+        } else if (w.resumeWorkflow) {
           try {
-            addLog(`พยายามดาวน์โหลดไฟล์เสียงที่มีอยู่ใน Notebook...`);
-            // Run download command with 1 attempt only, since we just check if it already exists
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`, 1, 1000);
-            addLog(`ดาวน์โหลดเสียงที่มีอยู่เดิมสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
+            addWorkflowLog(workflowId, `พยายามดาวน์โหลดไฟล์เสียงที่มีอยู่ใน Notebook...`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`, 1, 1000);
+            addWorkflowLog(workflowId, `ดาวน์โหลดไฟล์เสียงสำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputAudioPath}`);
             audioSuccess = true;
           } catch (dlErr) {
-            addLog(`ไม่พบไฟล์เสียงสำเร็จรูปในคลาวด์ หรือดาวน์โหลดไม่ได้ กำลังเริ่มขั้นตอนสร้างเสียงใหม่...`);
+            addWorkflowLog(workflowId, `ไม่พบไฟล์เสียงสำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างเสียงใหม่...`);
           }
         }
         
         if (!audioSuccess) {
-          activeWorkflowState.progress = 55;
-          activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้าง Audio Overview (Deep Dive)...`;
-          addLog(`ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
-          addLog(`Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
-          const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
+          addWorkflowLog(workflowId, `ขั้นตอนที่ 5/8: กำลังประมวลผลสร้างเสียง Audio Overview (Deep Dive, ภาษาไทย)...`);
+          addWorkflowLog(workflowId, `Prompt บังคับสำหรับบทสนทนา: "${resolvedAudioPrompt}"`);
+          const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_\${Date.now()}.txt`);
           fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate audio -n \${notebookId} --format deep-dive --language th --wait --prompt-file "\${tempAudioPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
           }
-          addLog(`เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n ${notebookId} --latest --force "${outputAudioPath}"`);
-          addLog(`ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${outputAudioPath}`);
+          addWorkflowLog(workflowId, `เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download audio -n \${notebookId} --latest --force "\${w.outputAudioPath}"`);
+          addWorkflowLog(workflowId, `ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: \${w.outputAudioPath}`);
         }
         
+        if (!w.running) return;
+        
         // 6. Generate Report (Facebook post)
-        if (shouldGenFacebook) {
+        if (w.genFacebook) {
           let reportSuccess = false;
-          if (shouldResume && fs.existsSync(outputReportPath)) {
-            addLog(`พบไฟล์รายงานโพสต์ Facebook เดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputReportPath} (ข้ามขั้นตอนการประมวลผลรายงาน)`);
-            fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
+          if (w.resumeWorkflow && fs.existsSync(w.outputReportPath)) {
+            addWorkflowLog(workflowId, `พบไฟล์รายงานโพสต์ Facebook เดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: \${w.outputReportPath} (ข้ามขั้นตอนการประมวลผลรายงาน)`);
+            fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
             reportSuccess = true;
-          } else if (shouldResume) {
+          } else if (w.resumeWorkflow) {
             try {
-              addLog(`พยายามดาวน์โหลดรายงานโพสต์ Facebook ที่มีอยู่ใน Notebook...`);
-              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`, 1, 1000);
-              fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
-              addLog(`ดาวน์โหลดรายงานโพสต์ Facebook สำเร็จรูปสำเร็จและเซฟไว้ที่: ${outputReportPath}`);
+              addWorkflowLog(workflowId, `พยายามดาวน์โหลดรายงานโพสต์ Facebook ที่มีอยู่ใน Notebook...`);
+              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n \${notebookId} --latest --force "\${w.outputReportPath}"`, 1, 1000);
+              fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
+              addWorkflowLog(workflowId, `ดาวน์โหลดรายงานโพสต์ Facebook สำเร็จรูปสำเร็จและเซฟไว้ที่: \${w.outputReportPath}`);
               reportSuccess = true;
             } catch (dlErr) {
-              addLog(`ไม่พบรายงานโพสต์ Facebook สำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างรายงานใหม่...`);
+              addWorkflowLog(workflowId, `ไม่พบรายงานโพสต์ Facebook สำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างรายงานใหม่...`);
             }
           }
           
           if (!reportSuccess) {
-            activeWorkflowState.progress = 70;
-            activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
-            addLog(`ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
-            addLog(`Prompt: "${resolvedReportPrompt}"`);
-            const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
+            w.progress = 70;
+            w.currentStep = `[\${currentProfile}] กำลังสร้างเนื้อหาโพสต์ Facebook...`;
+            addWorkflowLog(workflowId, `ขั้นตอนที่ 6/8: กำลังสร้างรายงาน Custom Report สำหรับทำโพสต์ Facebook...`);
+            addWorkflowLog(workflowId, `Prompt: "\${resolvedReportPrompt}"`);
+            const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_\${Date.now()}.txt`);
             fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
             try {
-              await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+              await runCmd(`"${VENV_NOTEBOOKLM}" generate report -n \${notebookId} --format custom --language th --wait --prompt-file "\${tempReportPromptPath}"`);
             } finally {
               try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
             }
-            addLog(`รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n ${notebookId} --latest --force "${outputReportPath}"`);
-            addLog(`บันทึกรายงานสำรองสำเร็จไว้ที่: ${outputReportPath}`);
+            addWorkflowLog(workflowId, `รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download report -n \${notebookId} --latest --force "\${w.outputReportPath}"`);
+            addWorkflowLog(workflowId, `บันทึกรายงานสำรองสำเร็จไว้ที่: \${w.outputReportPath}`);
             
-            fbPostContent = fs.readFileSync(outputReportPath, 'utf8');
+            fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
           }
         } else {
-          activeWorkflowState.progress = 70;
-          activeWorkflowState.currentStep = `[${currentProfile}] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook...`;
-          addLog(`ขั้นตอนที่ 6/8: [ข้าม] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook ตามที่ตั้งค่าไว้`);
+          w.progress = 70;
+          w.currentStep = `[\${currentProfile}] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook...`;
+          addWorkflowLog(workflowId, `ขั้นตอนที่ 6/8: [ข้าม] ข้ามขั้นตอนการสร้างเนื้อหาโพสต์ Facebook ตามที่ตั้งค่าไว้`);
           fbPostContent = 'ข้ามการสร้างเนื้อหาสำหรับโพสต์ Facebook (User disabled)';
         }
         
+        if (!w.running) return;
+        
         // 7. Generate Infographic
         let infoSuccess = false;
-        if (shouldResume && fs.existsSync(outputInfoPath)) {
-          addLog(`พบไฟล์รูปภาพอินโฟกราฟิกเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: ${outputInfoPath} (ข้ามขั้นตอนการประมวลผลภาพ)`);
+        if (w.resumeWorkflow && fs.existsSync(w.outputInfoPath)) {
+          addWorkflowLog(workflowId, `พบไฟล์รูปภาพอินโฟกราฟิกเดิมที่ดาวน์โหลดไว้ในเครื่องแล้วที่: \${w.outputInfoPath} (ข้ามขั้นตอนการประมวลผลภาพ)`);
           infoSuccess = true;
-        } else if (shouldResume) {
+        } else if (w.resumeWorkflow) {
           try {
-            addLog(`พยายามดาวน์โหลดอินโฟกราฟิกที่มีอยู่ใน Notebook...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`, 1, 1000);
-            addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จรูปสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
+            addWorkflowLog(workflowId, `พยายามดาวน์โหลดอินโฟกราฟิกที่มีอยู่ใน Notebook...`);
+            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n \${notebookId} --latest --force "\${w.outputInfoPath}"`, 1, 1000);
+            addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จรูปสำเร็จและเซฟไว้ที่: \${w.outputInfoPath}`);
             infoSuccess = true;
           } catch (dlErr) {
-            addLog(`ไม่พบรูปภาพอินโฟกราฟิกสำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างภาพใหม่...`);
+            addWorkflowLog(workflowId, `ไม่พบรูปภาพอินโฟกราฟิกสำเร็จรูปในคลาวด์ กำลังเริ่มขั้นตอนสร้างภาพใหม่...`);
           }
         }
         
         if (!infoSuccess) {
-          activeWorkflowState.progress = 85;
-          activeWorkflowState.currentStep = `[${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
-          addLog(`ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
-          addLog(`Prompt: "${resolvedInfoPrompt}"`);
-          const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
+          w.progress = 85;
+          w.currentStep = `[\${currentProfile}] กำลังสร้างรูปภาพ Infographic...`;
+          addWorkflowLog(workflowId, `ขั้นตอนที่ 7/8: กำลังประมวลผลสร้าง Infographic (Landscape, สไตล์ Auto)...`);
+          addWorkflowLog(workflowId, `Prompt: "\${resolvedInfoPrompt}"`);
+          const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_\${Date.now()}.txt`);
           fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" generate infographic -n \${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "\${tempInfoPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
           }
-          addLog(`รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n ${notebookId} --latest --force "${outputInfoPath}"`);
-          addLog(`ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${outputInfoPath}`);
+          addWorkflowLog(workflowId, `รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
+          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" download infographic -n \${notebookId} --latest --force "\${w.outputInfoPath}"`);
+          addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: \${w.outputInfoPath}`);
         }
         
         // 8. Finished!
-        activeWorkflowState.progress = 100;
-        activeWorkflowState.currentStep = 'เสร็จสมบูรณ์!';
-        addLog(`ขั้นตอนที่ 8/8: ทำงานเสร็จสมบูรณ์ ไฟล์ทั้งหมดถูกดาวน์โหลดลงในโฟลเดอร์ Draft เรียบร้อยแล้ว!`);
+        w.progress = 100;
+        w.currentStep = 'เสร็จสมบูรณ์!';
+        w.status = 'completed';
+        addWorkflowLog(workflowId, `ขั้นตอนที่ 8/8: ทำงานเสร็จสมบูรณ์ ไฟล์ทั้งหมดถูกดาวน์โหลดลงในโฟลเดอร์ Draft เรียบร้อยแล้ว!`);
         
-        activeWorkflowState.running = false;
-        activeWorkflowState.result = {
-          audioPath: outputAudioPath,
-          infoPath: outputInfoPath,
+        w.running = false;
+        w.result = {
+          audioPath: w.outputAudioPath,
+          infoPath: w.outputInfoPath,
           fbPost: fbPostContent
         };
         
@@ -1025,30 +1207,27 @@ app.post('/api/workflow/run', async (req, res) => {
         
       } catch (err) {
         lastError = err;
-        console.error(`[บัญชี: ${currentProfile}] การทำงานขั้นตอนนี้ขัดข้อง:`, err);
+        console.error(`[บัญชี: \${currentProfile}] ช่วงที่เกิดข้อติดขัด:`, err);
         
-        // Do NOT delete the notebook on failure so the user can resume and rerun the process
-        // from the existing notebook without starting over from scratch!
-        addLog(`[บัญชี: ${currentProfile}] ระบบค้างหรือขัดข้อง: จะคงรักษา Notebook ID: ${notebookId || 'N/A'} เพื่อให้คุณสามารถกดรันประมวลผลต่อ (Resume) ได้ทันทีโดยไม่ต้องเริ่มนับหนึ่งใหม่`);
+        addWorkflowLog(workflowId, `[บัญชี: \${currentProfile}] ระบบค้างหรือขัดข้อง: จะคงรักษา Notebook ID: \${notebookId || 'N/A'} เพื่อให้คุณสามารถกดรันประมวลผลต่อ (Resume) ได้ทันทีโดยไม่ต้องเริ่มนับหนึ่งใหม่`);
         
         if (isQuotaError(err) && attempt < maxAttempts) {
           const currentIdx = authProfiles.indexOf(currentProfile);
           const nextIdx = (currentIdx + 1) % authProfiles.length;
           const nextProfile = authProfiles[nextIdx];
           
-          addLog(`⚠️ ตรวจพบโควตาเต็มสำหรับบัญชี '${currentProfile}'!`);
-          addLog(`🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '${nextProfile}'...`);
+          addWorkflowLog(workflowId, `⚠️ ตรวจพบโควตาเต็มสำหรับบัญชี '\${currentProfile}'!`);
+          addWorkflowLog(workflowId, `🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '\${nextProfile}'...`);
           
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" profile switch "${nextProfile}"`);
+            await runCmd(`"${VENV_NOTEBOOKLM}" profile switch "\${nextProfile}"`);
             currentProfile = nextProfile;
-            addLog(`✅ สลับบัญชีสำเร็จเป็น '${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
+            addWorkflowLog(workflowId, `✅ สลับบัญชีสำเร็จเป็น '\${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
           } catch (switchErr) {
-            addLog(`❌ สลับบัญชีล้มเหลว: ${switchErr.message}`);
+            addWorkflowLog(workflowId, `❌ สลับบัญชีล้มเหลว: \${switchErr.message}`);
             throw err;
           }
         } else {
-          // Rethrow the error to be caught by the outer block
           throw err;
         }
       }
@@ -1058,18 +1237,9 @@ app.post('/api/workflow/run', async (req, res) => {
       throw lastError;
     }
   } catch (err) {
-    console.error('Workflow error:', err);
-    let displayError = err.message;
-    if (isQuotaError(err)) {
-      displayError = 'โควตาการใช้งานบัญชีนี้เต็มแล้วสำหรับวันนี้ (Daily Quota Exceeded) หรือเซิร์ฟเวอร์ Google ปฏิเสธคำขอชั่วคราว กรุณาสลับผู้ใช้ไปใช้โปรไฟล์บัญชีอื่นในแท็บเมนูจัดการบัญชี แล้วทดลองใหม่อีกครั้ง';
-    }
-    addLog(`❌ เกิดข้อผิดพลาดในกระบวนการทำงาน: ${displayError}`);
-    activeWorkflowState.running = false;
-    activeWorkflowState.error = displayError;
+    handleWorkflowError(workflowId, err);
   }
-});
-
-// Fetch all notebooks
+}
 app.get('/api/notebooks', (req, res) => {
   exec(`"${VENV_PYTHON}" "${SCRIPT_PATH}" --list-json`, (error, stdout, stderr) => {
     if (error) {
