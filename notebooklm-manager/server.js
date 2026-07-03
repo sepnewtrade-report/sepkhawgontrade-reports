@@ -837,7 +837,30 @@ app.post('/api/workflow/run', async (req, res) => {
   } catch (e) {
     console.error('Error looking up template name in workflow:', e);
   }
-  const baseFilename = `${showNameClean}_${fileDate}`;
+
+  // Pre-extract ticker if a file is selected (useful for custom filename formats)
+  let tickerPrefix = '';
+  if (selectedFile) {
+    const mdFilePath = path.join(__dirname, '..', selectedFile);
+    if (fs.existsSync(mdFilePath)) {
+      try {
+        const mdContent = fs.readFileSync(mdFilePath, 'utf8');
+        const extracted = extractTicker(mdContent);
+        if (extracted && extracted !== 'หุ้นสหรัฐฯ') {
+          tickerPrefix = `${extracted}_`;
+        }
+      } catch (err) {
+        console.error('Error extracting ticker for custom filename:', err);
+      }
+    }
+  }
+
+  let baseFilename = `${showNameClean}_${fileDate}`;
+  if (showNameClean === 'หุ้นในดวงใจ' || showNameClean === 'ขอมา_จัดให้') {
+    if (tickerPrefix) {
+      baseFilename = `${tickerPrefix}${showNameClean}_${fileDate}`;
+    }
+  }
   
   const outputAudioPath = path.join(draftDir, `${baseFilename}.mp3`);
   const outputInfoPath = path.join(draftDir, `${baseFilename}.png`);
