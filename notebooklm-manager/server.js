@@ -981,9 +981,9 @@ async function runWorkflowPipeline(workflowId) {
       try {
         const mdContent = fs.readFileSync(generatedFilePath, 'utf8');
         const ticker = extractTicker(mdContent);
-        if (ticker && ticker !== 'หุ้นสหรัฐฯ' && (showNameClean === 'หุ้นในดวงใจ' || showNameClean === 'ขอมา_จัดให้')) {
-          const fileDate = dateStr.replace(/-/g, '_');
-          const newName = `${ticker}_${showNameClean}_${fileDate}.md`;
+        if (ticker && ticker !== 'หุ้นสหรัฐฯ' && (w.showNameClean === 'หุ้นในดวงใจ' || w.showNameClean === 'ขอมา_จัดให้')) {
+          const fileDate = w.dateStr.replace(/-/g, '_');
+          const newName = `${ticker}_${w.showNameClean}_${fileDate}.md`;
           const newPath = path.join(__dirname, '..', newName);
           fs.renameSync(generatedFilePath, newPath);
           finalFilename = newName;
@@ -993,9 +993,9 @@ async function runWorkflowPipeline(workflowId) {
           // Dynamically update workflow configuration paths with the new filename prefix
           const newBase = newName.replace('.md', '');
           w.baseFilename = newBase;
-          w.outputAudioPath = path.join(draftDir, `${newBase}.mp3`);
-          w.outputInfoPath = path.join(draftDir, `${newBase}.png`);
-          w.outputReportPath = path.join(draftDir, `${newBase}.md`);
+          w.outputAudioPath = path.join(w.draftDir, `${newBase}.mp3`);
+          w.outputInfoPath = path.join(w.draftDir, `${newBase}.png`);
+          w.outputReportPath = path.join(w.draftDir, `${newBase}.md`);
           addWorkflowLog(workflowId, `ปรับปรุงเส้นทางเซฟไฟล์ผลลัพธ์: ${newBase}.*`);
         }
       } catch (renameErr) {
@@ -1317,6 +1317,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           infoPath: w.outputInfoPath,
           fbPost: fbPostContent
         };
+        saveWorkflowsToDisk();
         
         success = true;
         break; // Success! Break retry loop
