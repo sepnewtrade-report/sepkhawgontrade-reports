@@ -1557,6 +1557,8 @@ async function handleApproveWorkflow() {
             state.isReviewing = false;
             document.getElementById('workflow-review-section').style.display = 'none';
             workflowProgressSection.style.display = 'block';
+            approveBtn.disabled = false;
+            cancelBtn.disabled = false;
             startWorkflowPolling();
         } else {
             alert('อนุมัติไม่สำเร็จ: ' + data.error);
@@ -1596,6 +1598,8 @@ async function handleCancelWorkflow() {
             state.isReviewing = false;
             document.getElementById('workflow-review-section').style.display = 'none';
             workflowIdleSection.style.display = 'flex';
+            approveBtn.disabled = false;
+            cancelBtn.disabled = false;
             btnRunWorkflow.disabled = false;
             stopWorkflowPolling();
             
