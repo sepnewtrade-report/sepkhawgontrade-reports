@@ -55,9 +55,10 @@ def get_whale_schema():
                         "change": types.Schema(type=types.Type.STRING),
                         "contracts": types.Schema(type=types.Type.STRING),
                         "value": types.Schema(type=types.Type.STRING),
-                        "strikeExpiry": types.Schema(type=types.Type.STRING)
+                        "strikePrice": types.Schema(type=types.Type.STRING),
+                        "expiryDate": types.Schema(type=types.Type.STRING)
                     },
-                    required=["ticker", "type", "underlyingPrice", "price", "change", "contracts", "value", "strikeExpiry"]
+                    required=["ticker", "type", "underlyingPrice", "price", "change", "contracts", "value", "strikePrice", "expiryDate"]
                 )
             ),
             "shortPositions": types.Schema(
@@ -101,7 +102,7 @@ def fetch_individual_whale(client, model_name, investor, firm):
         f"Search Google to extract the current portfolio, options positions, short positions, and recent transactions for: {investor} ({firm}).\n"
         "Extract:\n"
         "- Long Stock portfolio (exactly top 3 holdings: ticker, name, price, change %, shares, value, weight)\n"
-        "- Options positions (exactly top 2 call/put option positions: ticker, type, underlyingPrice (price of the underlying stock), price (option premium price), change %, contracts, value, strike/expiry. If none, return empty list or mock hedge positions for SPY/QQQ)\n"
+        "- Options positions (exactly top 2 call/put option positions: ticker, type, underlyingPrice (price of the underlying stock), price (option premium price), change %, contracts, value, strikePrice (strike price in contract), expiryDate (contract expiration date). If none, return empty list or mock hedge positions for SPY/QQQ)\n"
         "- Short positions (exactly top 2 short campaigns or positions, price, change %, size, reason. If none, return empty list)\n"
         "- Recent 1-Month Transactions: Transactions executed in the past 30 days (exactly top 2 transactions: date, ticker, buy/sell action, price, size. If none, return empty list)\n"
         "Keep descriptions and summaries highly concise (under 8 words per field). Limit search results to Form 13F and official filings to keep output short and prevent truncation. CRITICAL: Do not use unescaped double quotes inside any string properties. Use single quotes instead."
