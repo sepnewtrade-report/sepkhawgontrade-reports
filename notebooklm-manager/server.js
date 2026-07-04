@@ -507,6 +507,62 @@ app.get('/api/workspace-files', (req, res) => {
   res.json({ success: true, files: mdFiles, suggestedDate: targetDateStr || latestDateStr });
 });
 
+const TRENDS_FILE = path.join(__dirname, 'market_trends_cache.json');
+
+// Get cached market trends and social sentiment
+app.get('/api/market-trends', (req, res) => {
+  if (fs.existsSync(TRENDS_FILE)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(TRENDS_FILE, 'utf8'));
+      return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+    } catch (err) {
+      console.error('Failed to read trends cache:', err);
+    }
+  }
+  res.json({ success: true, data: null, lastUpdated: null });
+});
+
+// Trigger a live refresh of US market trends and social sentiment via Gemini
+app.post('/api/market-trends/refresh', async (req, res) => {
+  const tempJsonPath = path.join(__dirname, `temp_trends_${Date.now()}.json`);
+  const scannerScriptPath = path.join(__dirname, '..', 'market_scanner.py');
+  
+  if (!process.env.GEMINI_API_KEY) {
+    return res.status(400).json({ success: false, error: 'กรุณาระบุ GEMINI_API_KEY ในไฟล์ .env ก่อนรันระบบ' });
+  }
+
+  const cmd = `"${VENV_PYTHON}" "${scannerScriptPath}" "${tempJsonPath}"`;
+
+  try {
+    await runCmd(cmd);
+    if (!fs.existsSync(tempJsonPath)) {
+      throw new Error('สคริปต์สแกนเสร็จสิ้นแต่ไม่พบไฟล์ข้อมูลผลลัพธ์');
+    }
+    
+    const rawData = fs.readFileSync(tempJsonPath, 'utf8');
+    const parsedData = JSON.parse(rawData);
+    
+    // Save to cache with timestamp
+    const nowStr = new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' });
+    const cachePayload = {
+      data: parsedData,
+      lastUpdated: nowStr
+    };
+    
+    fs.writeFileSync(TRENDS_FILE, JSON.stringify(cachePayload, null, 2), 'utf8');
+    
+    // Clean up temp file
+    try { fs.unlinkSync(tempJsonPath); } catch (_) {}
+    
+    res.json({ success: true, data: parsedData, lastUpdated: nowStr });
+  } catch (err) {
+    console.error('Error scanning market trends:', err);
+    // Clean up temp file in case of failure
+    try { if (fs.existsSync(tempJsonPath)) fs.unlinkSync(tempJsonPath); } catch (_) {}
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Get Prompt Templates
 app.get('/api/templates', (req, res) => {
   fs.readFile(TEMPLATES_FILE, 'utf8', (err, data) => {

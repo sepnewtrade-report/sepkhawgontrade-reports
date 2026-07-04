@@ -24,6 +24,14 @@ let state = {
 
 // DOM Elements
 const statusCard = document.getElementById('status-card');
+const trendsLastUpdated = document.getElementById('trends-last-updated');
+const btnRefreshTrends = document.getElementById('btn-refresh-trends');
+const btnRefreshTrendsEmpty = document.getElementById('btn-refresh-trends-empty');
+const trendsLoadingOverlay = document.getElementById('trends-loading-overlay');
+const trendsEmptyPlaceholder = document.getElementById('trends-empty-placeholder');
+const trendsDashboardGrid = document.getElementById('trends-dashboard-grid');
+const sectorsGridContainer = document.getElementById('sectors-grid-container');
+const socialCardsContainer = document.getElementById('social-cards-container');
 const statusDot = document.getElementById('status-dot');
 const statusLabel = document.getElementById('status-label');
 const btnLogin = document.getElementById('btn-login');
@@ -232,6 +240,8 @@ function setupEventListeners() {
             // Load workflow data if switching to workflow tab
             if (targetTab === 'workflow-tab') {
                 loadWorkflowData();
+            } else if (targetTab === 'market-trends-tab') {
+                loadMarketTrends();
             }
         });
     });
@@ -279,6 +289,10 @@ function setupEventListeners() {
 
     // Copy Facebook post content button
     btnCopyFbPost.addEventListener('click', handleCopyFbPost);
+
+    // US Market Scan event listeners
+    if (btnRefreshTrends) btnRefreshTrends.addEventListener('click', handleRefreshMarketTrends);
+    if (btnRefreshTrendsEmpty) btnRefreshTrendsEmpty.addEventListener('click', handleRefreshMarketTrends);
 
     // Add/Delete Template event listeners
     btnAddTemplate.addEventListener('click', () => {
@@ -1923,6 +1937,173 @@ async function deleteWorkflow(workflowId) {
         }
     } catch (err) {
         console.error('Error deleting workflow:', err);
+    }
+}
+
+// Load and render US Market trends
+async function loadMarketTrends() {
+    try {
+        const response = await fetch('/api/market-trends');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            trendsLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            trendsEmptyPlaceholder.style.display = 'none';
+            trendsLoadingOverlay.style.display = 'none';
+            trendsDashboardGrid.style.display = 'flex';
+            renderMarketTrends(data.data);
+        } else {
+            trendsEmptyPlaceholder.style.display = 'flex';
+            trendsLoadingOverlay.style.display = 'none';
+            trendsDashboardGrid.style.display = 'none';
+        }
+    } catch (err) {
+        console.error('Error loading market trends:', err);
+    }
+}
+
+// Trigger live refresh scan
+async function handleRefreshMarketTrends() {
+    // Disable buttons and show loading overlay
+    btnRefreshTrends.disabled = true;
+    btnRefreshTrendsEmpty.disabled = true;
+    
+    const originalText = btnRefreshTrends.innerHTML;
+    btnRefreshTrends.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยตลาด...';
+    
+    trendsEmptyPlaceholder.style.display = 'none';
+    trendsDashboardGrid.style.display = 'none';
+    trendsLoadingOverlay.style.display = 'flex';
+    
+    try {
+        const response = await fetch('/api/market-trends/refresh', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            trendsLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            trendsLoadingOverlay.style.display = 'none';
+            trendsDashboardGrid.style.display = 'flex';
+            renderMarketTrends(data.data);
+            alert('ดึงข้อมูลตลาดหุ้นและโซเชียลเรียบร้อยแล้ว!');
+        } else {
+            alert('ดึงข้อมูลไม่สำเร็จ: ' + (data.error || 'ไม่ทราบสาเหตุ'));
+            loadMarketTrends(); // Fallback to cache if any
+        }
+    } catch (err) {
+        console.error('Error refreshing trends:', err);
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
+        loadMarketTrends(); // Fallback to cache if any
+    } finally {
+        btnRefreshTrends.disabled = false;
+        btnRefreshTrendsEmpty.disabled = false;
+        btnRefreshTrends.innerHTML = originalText;
+    }
+}
+
+// Render dynamic stock lists and social buzz feed
+function renderMarketTrends(trends) {
+    sectorsGridContainer.innerHTML = '';
+    socialCardsContainer.innerHTML = '';
+    
+    // Render sectors (Top 10 volume per sector)
+    if (trends.sectors && Array.isArray(trends.sectors)) {
+        trends.sectors.forEach(sec => {
+            const card = document.createElement('div');
+            card.className = 'glass-card sector-card';
+            
+            const titleRow = document.createElement('div');
+            titleRow.className = 'sector-title-row';
+            titleRow.innerHTML = `<h4 class="sector-title-text"><i class="fa-solid fa-folder-open" style="color: #60a5fa; margin-right: 8px;"></i>${sec.sectorName}</h4>`;
+            card.appendChild(titleRow);
+            
+            const table = document.createElement('table');
+            table.className = 'stock-table';
+            
+            // Header
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Ticker</th>
+                        <th style="width: 25%;">ราคา</th>
+                        <th style="width: 25%;">% +/-</th>
+                        <th style="width: 25%;">Volume</th>
+                    </tr>
+                </thead>
+            `;
+            
+            const tbody = document.createElement('tbody');
+            if (sec.stocks && Array.isArray(sec.stocks)) {
+                sec.stocks.forEach(stock => {
+                    const tr = document.createElement('tr');
+                    
+                    // Determine color class for change
+                    const changeStr = (stock.change || '').trim();
+                    let changeClass = 'stock-val-neutral';
+                    if (changeStr.startsWith('+')) {
+                        changeClass = 'stock-val-positive';
+                    } else if (changeStr.startsWith('-')) {
+                        changeClass = 'stock-val-negative';
+                    }
+                    
+                    tr.innerHTML = `
+                        <td>
+                            <span class="stock-ticker-badge" title="${stock.name || stock.ticker}">${stock.ticker}</span>
+                        </td>
+                        <td><strong>${stock.price || '-'}</strong></td>
+                        <td><span class="${changeClass}">${stock.change || '0%'}</span></td>
+                        <td style="color: var(--text-secondary); font-family: monospace;">${stock.volume || '-'}</td>
+                    `;
+                    
+                    // Attach hover tool-tip describing the catalyst/reason
+                    tr.title = `${stock.name || stock.ticker} - ${stock.reason || ''}`;
+                    tbody.appendChild(tr);
+                });
+            }
+            
+            table.appendChild(tbody);
+            card.appendChild(table);
+            sectorsGridContainer.appendChild(card);
+        });
+    }
+    
+    // Render Social media trends
+    if (trends.socialTrends && Array.isArray(trends.socialTrends)) {
+        trends.socialTrends.forEach(soc => {
+            const card = document.createElement('div');
+            card.className = 'glass-card social-card';
+            
+            const sentiment = (soc.sentiment || 'Neutral').trim();
+            const sentimentClass = `sentiment-${sentiment.toLowerCase()}`;
+            
+            // Format changes color
+            const changeStr = (soc.change || '').trim();
+            let changeStyle = 'color: var(--text-secondary);';
+            if (changeStr.startsWith('+')) {
+                changeStyle = 'color: #34d399; font-weight: 600;';
+            } else if (changeStr.startsWith('-')) {
+                changeStyle = 'color: #f87171; font-weight: 600;';
+            }
+            
+            card.innerHTML = `
+                <div class="social-header-row">
+                    <div class="social-ticker-area">
+                        <span class="social-ticker">${soc.ticker}</span>
+                        <span class="social-name">${soc.name || ''}</span>
+                    </div>
+                    <span class="sentiment-badge ${sentimentClass}">${sentiment}</span>
+                </div>
+                <div style="font-size: 13px; margin: 4px 0 8px 0; color: var(--text-primary);">
+                    ราคา: <span style="font-weight: 600; color: #fff;">${soc.price || '-'}</span> 
+                    (<span style="${changeStyle}">${soc.change || '0%'}</span>)
+                </div>
+                <p class="social-summary-text">${soc.summary || ''}</p>
+                <div class="social-meta-row">
+                    <span><i class="fa-regular fa-comment"></i> ${soc.mentions || '0 mentions'}</span>
+                    <span class="platform-pill"><i class="fa-solid fa-hashtag"></i> ${soc.platforms || 'Social Media'}</span>
+                </div>
+            `;
+            socialCardsContainer.appendChild(card);
+        });
     }
 }
 

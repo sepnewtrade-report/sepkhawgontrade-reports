@@ -63,6 +63,9 @@
                 <button class="tab-btn active" data-tab="workflow-tab">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> ระบบผลิตคลิปอัตโนมัติ (Workflow)
                 </button>
+                <button class="tab-btn" data-tab="market-trends-tab">
+                    <i class="fa-solid fa-chart-line"></i> เทรนด์และกลุ่มหุ้น (Market Scan)
+                </button>
                 <button class="tab-btn" data-tab="manager-tab">
                     <i class="fa-solid fa-list-check"></i> จัดการรายการ Notebooks
                 </button>
@@ -280,6 +283,71 @@
                         <p style="font-size: 13px; color: var(--text-secondary); text-align: center;">
                             กรุณาเลือกรายการและไฟล์บทวิเคราะห์เพื่อเชื่อมโยงกระบวนการทำงานและเริ่มผลิตคลิปอัตโนมัติ
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: US Market Scan & Social Trends Panel -->
+        <div class="tab-panel" id="market-trends-tab" style="display: none;">
+            <div class="trends-container">
+                <!-- Header Card with Refresh button & Last Updated timestamp -->
+                <div class="glass-card trends-header-card" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fa-solid fa-chart-line" style="font-size: 32px; color: #3b82f6;"></i>
+                        <div>
+                            <h2 style="margin: 0; font-size: 20px;">สแกนเนอร์ตลาดหุ้นสหรัฐฯ & สัญญาณโซเชียล</h2>
+                            <p style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary);">
+                                ข้อมูลแยกกลุ่ม 10 อันดับซื้อขายสูงสุด และกระแสเทรนด์ใน Reddit, X (Twitter) ทั่วโลก
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span id="trends-last-updated" style="font-size: 13px; color: var(--text-secondary);">อัปเดตล่าสุด: ยังไม่มีข้อมูล</span>
+                        <button class="btn btn-primary" id="btn-refresh-trends" style="height: 42px; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);">
+                            <i class="fa-solid fa-rotate"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading overlay spinner -->
+                <div id="trends-loading-overlay" class="glass-card" style="display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding: 40px; margin-bottom: 20px; border: 1px dashed var(--border-color-focus);">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 48px; color: #3b82f6; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px;">กำลังวิจัยและดึงข้อมูลสดผ่าน Gemini 3.5 Flash...</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 400px;">
+                        ระบบกำลังใช้ Google Search Grounding ค้นหาข้อมูลมูลค่าการซื้อขายหุ้นตามกลุ่ม และสแกนกระแสโซเชียล Reddit/X ในต่างประเทศ การวิเคราะห์นี้อาจใช้เวลาประมาณ 1-2 นาที...
+                    </p>
+                </div>
+
+                <!-- Empty cache placeholder -->
+                <div id="trends-empty-placeholder" class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; padding: 40px;">
+                    <i class="fa-solid fa-cloud-arrow-down" style="font-size: 48px; color: var(--text-muted); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px;">ยังไม่มีข้อมูลสแกนตลาดในระบบ</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 450px; margin-bottom: 20px;">
+                        คุณสามารถดึงข้อมูลปัจจุบันโดยกดปุ่มด้านบนเพื่อสั่งรันบอทสแกนเนอร์วิเคราะห์แนวโน้มตลาดได้ทันที
+                    </p>
+                    <button class="btn btn-primary" id="btn-refresh-trends-empty" style="height: 42px;">
+                        <i class="fa-solid fa-rotate"></i> เริ่มต้นสแกนตลาดเดี๋ยวนี้
+                    </button>
+                </div>
+
+                <!-- Dashboard Layout Grid -->
+                <div id="trends-dashboard-grid" style="display: none;" class="trends-dashboard-layout">
+                    <!-- Left Column: Sectors Volume Top 10 -->
+                    <div class="trends-left-col">
+                        <h3 style="margin-bottom: 15px; color: #60a5fa;"><i class="fa-solid fa-layer-group"></i> หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)</h3>
+                        <div class="sectors-grid-container" id="sectors-grid-container">
+                            <!-- Sector cards will be dynamically injected here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Social Sentiment Hub -->
+                    <div class="trends-right-col">
+                        <h3 style="margin-bottom: 15px; color: #f472b6;"><i class="fa-solid fa-fire-flame-curved"></i> สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)</h3>
+                        <div class="social-cards-container" id="social-cards-container">
+                            <!-- Social trend cards will be injected here -->
+                        </div>
                     </div>
                 </div>
             </div>

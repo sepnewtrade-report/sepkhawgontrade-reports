@@ -1,0 +1,589 @@
+{
+  "data": {
+    "sectors": [
+      {
+        "sectorName": "Technology",
+        "stocks": [
+          {
+            "ticker": "NVDA",
+            "name": "NVIDIA Corp.",
+            "price": "194.83",
+            "volume": "111.11M",
+            "change": "-1.39%",
+            "reason": "Dragged down by a massive rotation out of momentum tech and AI hardware."
+          },
+          {
+            "ticker": "INTC",
+            "name": "Intel Corp.",
+            "price": "120.35",
+            "volume": "107.77M",
+            "change": "-5.25%",
+            "reason": "Plunged alongside other chipmakers following a sharp selloff in South Korean semiconductor stocks."
+          },
+          {
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
+            "price": "308.63",
+            "volume": "65.98M",
+            "change": "+4.84%",
+            "reason": "Surged on bullish reports about upcoming iPhone models and expanded foldable iPhone production plans."
+          },
+          {
+            "ticker": "PLTR",
+            "name": "Palantir Technologies Inc.",
+            "price": "129.30",
+            "volume": "51.52M",
+            "change": "+2.80%",
+            "reason": "Upgraded to Buy by D.A. Davidson with a $175 target following its sovereign AI deal with Nvidia."
+          },
+          {
+            "ticker": "MSFT",
+            "name": "Microsoft Corp.",
+            "price": "390.49",
+            "volume": "42.19M",
+            "change": "+1.62%",
+            "reason": "Announced a $2.5 billion investment in its new AI deployment division, Microsoft Frontier."
+          },
+          {
+            "ticker": "MU",
+            "name": "Micron Technology, Inc.",
+            "price": "975.56",
+            "volume": "54.62M",
+            "change": "-5.49%",
+            "reason": "Suffered a major 2-day correction due to a potential China memory threat and cooling sector sentiment."
+          },
+          {
+            "ticker": "AMD",
+            "name": "Advanced Micro Devices, Inc.",
+            "price": "517.82",
+            "volume": "28.23M",
+            "change": "-4.26%",
+            "reason": "Fell on news that major customer Meta is looking to monetize its surplus AI compute capacity."
+          },
+          {
+            "ticker": "AVGO",
+            "name": "Broadcom Inc.",
+            "price": "360.45",
+            "volume": "23.10M",
+            "change": "-2.40%",
+            "reason": "Pressured by insider selling disclosure and broad semiconductor profit-taking."
+          },
+          {
+            "ticker": "AMAT",
+            "name": "Applied Materials, Inc.",
+            "price": "603.04",
+            "volume": "23.71M",
+            "change": "-7.35%",
+            "reason": "Hard hit by the widespread tech correction and concerns over stretched AI valuations."
+          },
+          {
+            "ticker": "OPEN",
+            "name": "Opendoor Technologies Inc.",
+            "price": "4.90",
+            "volume": "87.69M",
+            "change": "-0.81%",
+            "reason": "Saw heavy volume following its inclusion in the Russell 3000, despite minor margin pressures."
+          }
+        ]
+      },
+      {
+        "sectorName": "Financials",
+        "stocks": [
+          {
+            "ticker": "SOFI",
+            "name": "SoFi Technologies, Inc.",
+            "price": "18.24",
+            "volume": "76.88M",
+            "change": "-1.10%",
+            "reason": "Slipped on margin worries despite introducing its new digital-first small business loan platform."
+          },
+          {
+            "ticker": "HOOD",
+            "name": "Robinhood Markets, Inc.",
+            "price": "112.73",
+            "volume": "41.07M",
+            "change": "+3.80%",
+            "reason": "Gained after launching Robinhood Chain for real-world assets and receiving a Mizuho price target boost to $130."
+          },
+          {
+            "ticker": "BAC",
+            "name": "Bank of America Corp.",
+            "price": "58.73",
+            "volume": "26.79M",
+            "change": "+0.52%",
+            "reason": "Rose on supportive interest-rate environments and steady institutional accumulation."
+          },
+          {
+            "ticker": "PYPL",
+            "name": "PayPal Holdings, Inc.",
+            "price": "45.47",
+            "volume": "10.60M",
+            "change": "+3.18%",
+            "reason": "Sought after following reports of potential strategic interest and acquisition talks with Stripe."
+          },
+          {
+            "ticker": "JPM",
+            "name": "JPMorgan Chase & Co.",
+            "price": "334.47",
+            "volume": "7.58M",
+            "change": "+2.00%",
+            "reason": "Extending its gains after reporting a massive blowout Q2 earnings report."
+          },
+          {
+            "ticker": "WFC",
+            "name": "Wells Fargo & Co.",
+            "price": "85.51",
+            "volume": "7.92M",
+            "change": "-0.69%",
+            "reason": "Consolidated near key support but remains supported by expected post-stress test dividend hikes."
+          },
+          {
+            "ticker": "C",
+            "name": "Citigroup Inc.",
+            "price": "139.97",
+            "volume": "9.50M",
+            "change": "-0.11%",
+            "reason": "Bounced off lows, supported by solid Stress Test progress and ongoing corporate restructuring."
+          },
+          {
+            "ticker": "V",
+            "name": "Visa Inc.",
+            "price": "362.13",
+            "volume": "8.12M",
+            "change": "+3.10%",
+            "reason": "Hit a 52-week high amid strong credit spend trends and value sector rotation."
+          },
+          {
+            "ticker": "MS",
+            "name": "Morgan Stanley",
+            "price": "213.93",
+            "volume": "6.34M",
+            "change": "+0.98%",
+            "reason": "Drew buying interest as investors rotated from technology into yielding financial giants."
+          },
+          {
+            "ticker": "AXP",
+            "name": "American Express Co.",
+            "price": "351.96",
+            "volume": "4.89M",
+            "change": "+1.42%",
+            "reason": "Pushed higher by positive post-stress test analyst reviews and dividend increase plans."
+          }
+        ]
+      },
+      {
+        "sectorName": "Healthcare",
+        "stocks": [
+          {
+            "ticker": "PFE",
+            "name": "Pfizer Inc.",
+            "price": "24.32",
+            "volume": "53.20M",
+            "change": "+1.84%",
+            "reason": "Led volume charts as investors rotated into cheap, defensive dividend-paying pharma giants."
+          },
+          {
+            "ticker": "NVO",
+            "name": "Novo Nordisk A/S",
+            "price": "221.61",
+            "volume": "12.08M",
+            "change": "+3.40%",
+            "reason": "Gained on continued optimism over global sales of its blockbuster weight-loss therapies."
+          },
+          {
+            "ticker": "ABT",
+            "name": "Abbott Laboratories",
+            "price": "95.40",
+            "volume": "10.68M",
+            "change": "+3.49%",
+            "reason": "Surged on improving medical device volume expectations and strong dividend stability."
+          },
+          {
+            "ticker": "BMY",
+            "name": "Bristol-Myers Squibb Co.",
+            "price": "118.71",
+            "volume": "10.00M",
+            "change": "+4.16%",
+            "reason": "Caught strong tailwinds as part of a sector-wide defensive value rotation."
+          },
+          {
+            "ticker": "MDT",
+            "name": "Medtronic plc",
+            "price": "106.49",
+            "volume": "9.72M",
+            "change": "+5.04%",
+            "reason": "Rallied as medical equipment demand showed resilient post-holiday trends."
+          },
+          {
+            "ticker": "JNJ",
+            "name": "Johnson & Johnson",
+            "price": "263.04",
+            "volume": "8.00M",
+            "change": "+3.57%",
+            "reason": "Reached a 52-week high, benefiting from defensive rotation and resolution of legal overhangs."
+          },
+          {
+            "ticker": "MRK",
+            "name": "Merck & Co., Inc.",
+            "price": "129.56",
+            "volume": "7.83M",
+            "change": "+3.34%",
+            "reason": "Gained on a steady product pipeline and positive outlook for its key oncology drugs."
+          },
+          {
+            "ticker": "ABBV",
+            "name": "AbbVie Inc.",
+            "price": "261.07",
+            "volume": "7.11M",
+            "change": "+3.99%",
+            "reason": "Hit a 52-week high, driven by strong growth in next-generation immunology treatments."
+          },
+          {
+            "ticker": "VRTX",
+            "name": "Vertex Pharmaceuticals Inc.",
+            "price": "528.04",
+            "volume": "1.86M",
+            "change": "+6.03%",
+            "reason": "Led S&P 500 gainers with a sharp climb on breakthrough cystic fibrosis pipeline updates."
+          },
+          {
+            "ticker": "ISRG",
+            "name": "Intuitive Surgical, Inc.",
+            "price": "425.41",
+            "volume": "3.14M",
+            "change": "+5.87%",
+            "reason": "Advanced strongly as robotic surgical procedure volumes outpaced analyst expectations."
+          }
+        ]
+      },
+      {
+        "sectorName": "Consumer Discretionary",
+        "stocks": [
+          {
+            "ticker": "RIVN",
+            "name": "Rivian Automotive, Inc.",
+            "price": "18.63",
+            "volume": "77.10M",
+            "change": "+8.41%",
+            "reason": "Surged on beating Q2 delivery targets and raising its full-year 2026 delivery guidance."
+          },
+          {
+            "ticker": "TSLA",
+            "name": "Tesla, Inc.",
+            "price": "393.45",
+            "volume": "39.82M",
+            "change": "-7.49%",
+            "reason": "Suffered profit-taking after Q2 deliveries beat, as investors focused on a 19.7% domestic sales drop."
+          },
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com, Inc.",
+            "price": "242.67",
+            "volume": "28.50M",
+            "change": "+0.40%",
+            "reason": "Held steady as a defensive megacap during tech and semiconductor volatility."
+          },
+          {
+            "ticker": "LCID",
+            "name": "Lucid Group, Inc.",
+            "price": "6.08",
+            "volume": "15.30M",
+            "change": "-8.30%",
+            "reason": "Slipped alongside Tesla on fears of persistent price wars across the EV sector."
+          },
+          {
+            "ticker": "CHWY",
+            "name": "Chewy, Inc.",
+            "price": "20.85",
+            "volume": "11.82M",
+            "change": "+1.21%",
+            "reason": "Saw active volume due to alternative data signals showing rising web traffic and retail interest."
+          },
+          {
+            "ticker": "NKE",
+            "name": "Nike, Inc.",
+            "price": "44.09",
+            "volume": "26.95M",
+            "change": "+3.60%",
+            "reason": "Up on a post-earnings oversold bounce, despite analysts cutting price targets to the low $40s."
+          },
+          {
+            "ticker": "TGT",
+            "name": "Target Corp.",
+            "price": "130.21",
+            "volume": "5.21M",
+            "change": "-0.06%",
+            "reason": "Felled slightly by a soft jobs report signaling potentially tighter consumer holiday spending."
+          },
+          {
+            "ticker": "WMT",
+            "name": "Walmart Inc.",
+            "price": "111.84",
+            "volume": "11.85M",
+            "change": "+2.78%",
+            "reason": "Gained as a premier defensive retail giant, benefiting from the rotation out of tech."
+          },
+          {
+            "ticker": "COST",
+            "name": "Costco Wholesale Corp.",
+            "price": "951.67",
+            "volume": "3.12M",
+            "change": "+2.92%",
+            "reason": "Pushed higher by strong membership retention rates and rotation to high-quality retail."
+          },
+          {
+            "ticker": "HD",
+            "name": "The Home Depot, Inc.",
+            "price": "357.90",
+            "volume": "3.12M",
+            "change": "+2.01%",
+            "reason": "Bounced as easing Treasury yields raised hopes for a future housing market recovery."
+          }
+        ]
+      },
+      {
+        "sectorName": "Communication Services",
+        "stocks": [
+          {
+            "ticker": "T",
+            "name": "AT&T Inc.",
+            "price": "20.58",
+            "volume": "111.46M",
+            "change": "+0.49%",
+            "reason": "Sought after by income-oriented investors due to its defensive yield and low volatility."
+          },
+          {
+            "ticker": "VZ",
+            "name": "Verizon Communications Inc.",
+            "price": "42.56",
+            "volume": "56.03M",
+            "change": "+1.84%",
+            "reason": "Rallied after closing its acquisition of Frontier Communications, boosting its fiber network reach."
+          },
+          {
+            "ticker": "META",
+            "name": "Meta Platforms, Inc.",
+            "price": "582.90",
+            "volume": "28.50M",
+            "change": "-4.90%",
+            "reason": "Pressured by reports that its plan to enter the cloud business could depress sector compute pricing."
+          },
+          {
+            "ticker": "GOOGL",
+            "name": "Alphabet Inc. Class A",
+            "price": "359.91",
+            "volume": "25.10M",
+            "change": "-0.36%",
+            "reason": "Slightly down but showed resilience compared to other highly valued tech-oriented peers."
+          },
+          {
+            "ticker": "GOOG",
+            "name": "Alphabet Inc. Class C",
+            "price": "356.18",
+            "volume": "20.15M",
+            "change": "-0.50%",
+            "reason": "Moved in tandem with Class A shares amidst the wider growth-stock consolidation."
+          },
+          {
+            "ticker": "NFLX",
+            "name": "Netflix, Inc.",
+            "price": "77.65",
+            "volume": "14.80M",
+            "change": "+4.66%",
+            "reason": "Outperformed as strong subscriber engagement metrics offset broad communication sector softness."
+          },
+          {
+            "ticker": "TMUS",
+            "name": "T-Mobile US, Inc.",
+            "price": "182.40",
+            "volume": "8.20M",
+            "change": "+1.50%",
+            "reason": "Rose on steady retail subscriber gains and defensive telecommunication positioning."
+          },
+          {
+            "ticker": "DIS",
+            "name": "The Walt Disney Co.",
+            "price": "99.50",
+            "volume": "11.50M",
+            "change": "+3.96%",
+            "reason": "Drew strong speculative interest as value buyers rotated into underperforming media giants."
+          },
+          {
+            "ticker": "EA",
+            "name": "Electronic Arts Inc.",
+            "price": "140.20",
+            "volume": "3.80M",
+            "change": "+1.20%",
+            "reason": "Firm trading supported by expectations for upcoming video game releases ahead of Q3."
+          },
+          {
+            "ticker": "TTWO",
+            "name": "Take-Two Interactive Software",
+            "price": "160.10",
+            "volume": "4.20M",
+            "change": "+2.10%",
+            "reason": "Gained on positive sentiment surrounding long-term franchise monetization pipeline."
+          }
+        ]
+      },
+      {
+        "sectorName": "Energy",
+        "stocks": [
+          {
+            "ticker": "WMB",
+            "name": "The Williams Companies, Inc.",
+            "price": "73.00",
+            "volume": "8.50M",
+            "change": "+2.40%",
+            "reason": "Benefited from its position as a critical provider of power infrastructure to support AI data centers."
+          },
+          {
+            "ticker": "DEC",
+            "name": "Diversified Energy Co. plc",
+            "price": "14.16",
+            "volume": "12.30M",
+            "change": "-0.50%",
+            "reason": "Active after repurchasing over 328,000 common shares as part of its asset consolidation program."
+          },
+          {
+            "ticker": "CLNE",
+            "name": "Clean Energy Fuels Corp.",
+            "price": "2.05",
+            "volume": "4.80M",
+            "change": "-1.50%",
+            "reason": "Trading actively as dairy RNG investments expand, though short-term profit-taking occurred."
+          },
+          {
+            "ticker": "SLB",
+            "name": "Schlumberger Ltd.",
+            "price": "50.15",
+            "volume": "9.80M",
+            "change": "+1.80%",
+            "reason": "Reiterated as Buy by Citigroup, driving interest despite falling crude oil prices."
+          },
+          {
+            "ticker": "CVX",
+            "name": "Chevron Corp.",
+            "price": "169.20",
+            "volume": "11.20M",
+            "change": "+2.12%",
+            "reason": "Rallied as value investors sought solid energy giants with robust balance sheets."
+          },
+          {
+            "ticker": "XOM",
+            "name": "Exxon Mobil Corp.",
+            "price": "115.40",
+            "volume": "22.50M",
+            "change": "+1.20%",
+            "reason": "Maintained steady upward momentum on strong production outlooks."
+          },
+          {
+            "ticker": "COP",
+            "name": "ConocoPhillips",
+            "price": "110.10",
+            "volume": "10.40M",
+            "change": "+1.40%",
+            "reason": "Followed major oil giants higher as de-risking trades favored cash-flow leaders."
+          },
+          {
+            "ticker": "EOG",
+            "name": "EOG Resources, Inc.",
+            "price": "120.30",
+            "volume": "7.80M",
+            "change": "+1.10%",
+            "reason": "Saw moderate buying on solid reserve updates and disciplined capital expenditure plans."
+          },
+          {
+            "ticker": "HAL",
+            "name": "Halliburton Co.",
+            "price": "35.20",
+            "volume": "9.10M",
+            "change": "+1.70%",
+            "reason": "Advanced on expectations of steady international drilling activity in late 2026."
+          },
+          {
+            "ticker": "OXY",
+            "name": "Occidental Petroleum Corp.",
+            "price": "60.05",
+            "volume": "13.40M",
+            "change": "+1.00%",
+            "reason": "Supported by Berkshire Hathaway's passive stake and steady domestic output."
+          }
+        ]
+      }
+    ],
+    "socialTrends": [
+      {
+        "ticker": "TSLA",
+        "name": "Tesla, Inc.",
+        "price": "393.45",
+        "change": "-7.49%",
+        "mentions": "85.2K",
+        "platforms": "X, Reddit WallStreetBets, Stocktwits",
+        "sentiment": "Bearish",
+        "summary": "Heavy retail debate after Tesla's Q2 deliveries beat estimates at 480,126, but domestic US sales plummeted 19.7%, prompting fears of a margins crunch."
+      },
+      {
+        "ticker": "RIVN",
+        "name": "Rivian Automotive, Inc.",
+        "price": "18.63",
+        "change": "+8.41%",
+        "mentions": "42.5K",
+        "platforms": "X, Reddit WallStreetBets",
+        "sentiment": "Bullish",
+        "summary": "Sensation among retail traders after Rivian raised its 2026 delivery guidance, signaling strong EV demand momentum."
+      },
+      {
+        "ticker": "PLTR",
+        "name": "Palantir Technologies Inc.",
+        "price": "129.30",
+        "change": "+2.80%",
+        "mentions": "38.9K",
+        "platforms": "Reddit WallStreetBets, Stocktwits, X",
+        "sentiment": "Bullish",
+        "summary": "Heavily discussed after D.A. Davidson upgraded the stock to Buy with a $175 target, fueled by its sovereign AI deal with Nvidia."
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp.",
+        "price": "194.83",
+        "change": "-1.39%",
+        "mentions": "92.4K",
+        "platforms": "X, Stocktwits, Reddit WallStreetBets",
+        "sentiment": "Neutral",
+        "summary": "Highly active discussion on buying the pullback as tech momentum rotates out, with many viewing sub-$200 as a major buying zone."
+      },
+      {
+        "ticker": "HOOD",
+        "name": "Robinhood Markets, Inc.",
+        "price": "112.73",
+        "change": "+3.80%",
+        "mentions": "31.2K",
+        "platforms": "X, Stocktwits",
+        "sentiment": "Bullish",
+        "summary": "Surged on its launch of Robinhood Chain and Mizuho lifting its price target to $130, calling it the first online broker hyperscaler."
+      },
+      {
+        "ticker": "INTC",
+        "name": "Intel Corp.",
+        "price": "120.35",
+        "change": "-5.25%",
+        "mentions": "28.5K",
+        "platforms": "Reddit WallStreetBets",
+        "sentiment": "Bearish",
+        "summary": "Traders are buying options and discussing bottom-fishing strategies as the stock breaks support down to the $120 level."
+      },
+      {
+        "ticker": "MU",
+        "name": "Micron Technology, Inc.",
+        "price": "975.56",
+        "change": "-5.49%",
+        "mentions": "24.1K",
+        "platforms": "Stocktwits, Reddit WallStreetBets",
+        "sentiment": "Bearish",
+        "summary": "Heavy retail discussions on a sharp correction caused by a potential China memory ban risk, though long-term AI-supply arguments remain popular."
+      }
+    ]
+  },
+  "lastUpdated": "4/7/2569 17:25:05"
+}
