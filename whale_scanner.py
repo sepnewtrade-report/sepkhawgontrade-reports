@@ -172,8 +172,8 @@ def synthesize_overview(client, model_name, whales_data):
     system_instruction = (
         "You are an expert US financial analyst.\n"
         "Synthesize the general institutional market sentiment and top 3 sector rotations based on the provided summary of whale activities.\n"
-        "Also synthesize exactly top 3 critical period highlights on key dates in the past 30 days (such as CPI releases, Fed Chair meetings, or index sell-offs) detailing what these whales did on those dates.\n"
-        "CRITICAL: All events, timestamps, and highlights MUST only reference key dates and occurrences within the latest year (2026). Do not mention dates or crises from previous years (such as 2024, 2023, or earlier). All dates in critical period logs must belong to the latest 30 days of the year 2026.\n"
+        "Also synthesize exactly top 3 critical period highlights on key dates between April 2026 and July 2026 (such as CPI releases, Fed Chair meetings, or index sell-offs) detailing what these whales did on those dates.\n"
+        "CRITICAL: All events, timestamps, and highlights MUST only reference key dates and occurrences between April 2026 and July 2026. Do not mention dates before April 2026 (such as February or March 2026) or previous years (such as 2024, 2023). All dates in critical period logs must belong to the period from April 1, 2026 to July 4, 2026.\n"
         "Keep summaries highly concise (under 12 words per sentence). CRITICAL: Do not use unescaped double quotes inside any string properties. Use single quotes instead."
     )
     
