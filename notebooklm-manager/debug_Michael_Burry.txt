@@ -1,0 +1,76 @@
+{
+  "investorName": "Michael Burry",
+  "firmName": "Scion Asset Management",
+  "aum": "$154.9 Million",
+  "style": "Contrarian Value & Short Selling",
+  "longPortfolio": [
+    {
+      "ticker": "MOH",
+      "name": "Molina Healthcare Inc",
+      "price": "$191.36",
+      "change": "+20.12%",
+      "shares": "125,000",
+      "value": "$23,920,000",
+      "weight": "35.11%"
+    },
+    {
+      "ticker": "LULU",
+      "name": "Lululemon Athletica Inc",
+      "price": "$177.93",
+      "change": "+33.44%",
+      "shares": "100,000",
+      "value": "$17,793,000",
+      "weight": "26.11%"
+    },
+    {
+      "ticker": "SLM",
+      "name": "SLM Corp",
+      "price": "$27.68",
+      "change": "+7.51%",
+      "shares": "480,054",
+      "value": "$13,287,895",
+      "weight": "19.50%"
+    }
+  ],
+  "optionsPositions": [
+    {
+      "ticker": "PLTR",
+      "type": "Put",
+      "price": "$182.42",
+      "change": "-15.0%",
+      "contracts": "50,000",
+      "value": "$912,100,000",
+      "strikeExpiry": "Underlying: PLTR"
+    },
+    {
+      "ticker": "NVDA",
+      "type": "Put",
+      "price": "$186.58",
+      "change": "+5.0%",
+      "contracts": "10,000",
+      "value": "$186,580,000",
+      "strikeExpiry": "Underlying: NVDA"
+    }
+  ],
+  "shortPositions": [
+    {
+      "ticker": "MU",
+      "name": "Micron Technology Inc.",
+      "price": "$1,051.87",
+      "change": "-5.50%",
+      "size": "Not Disclosed",
+      "reason": "AI bubble, cyclical capital destroyer."
+    },
+    {
+      "ticker": "CAT",
+      "name": "Caterpillar Inc.",
+      "price": "$1,060.98",
+      "change": "-3.07%",
+      "size": "Not Disclosed",
+      "reason": "Proxy play on AI infrastructure."
+    }
+  ],
+  "recentTransactions": [
+    {
+      "date": "2026-07-01",
+      "ticker": "MU",
