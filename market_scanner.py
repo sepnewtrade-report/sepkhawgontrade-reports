@@ -71,16 +71,18 @@ def main():
 
     system_instruction = (
         "You are an expert US financial market scanner and social media sentiment analyst.\n"
-        "Your task is to use Google Search to find current, live information at this exact moment (or the latest trading session if the market is closed):\n"
-        "1. Identify the Top 10 US stocks by trading volume (มูลค่าการซื้อขายสูงสุด) for the following sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics.\n"
-        "2. Identify the most active/discussed US stocks in global retail investor forums and social channels (such as Reddit WallStreetBets, X/Twitter, Stocktwits, and other major investor hubs) right now.\n\n"
-        "Format the output strictly as a JSON object matching the requested schema. Ensure all fields (ticker, name, price, volume, change, reason/summary, mentions, platforms, sentiment) are populated with current actual values. "
-        "Do not include any markdown format blocks like ```json ... ```, output raw JSON only."
+        "Your task is to use Google Search to find current, live information at this exact moment:\n"
+        "1. Identify the Top 10 US stocks by trading volume for these sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics.\n"
+        "2. Identify the most active/discussed US stocks in global retail investor forums and social channels (Reddit, X, Stocktwits) right now.\n\n"
+        "CRITICAL: All stock prices must be the latest live price (including Pre-market, After-Hours, or Overnight prices if active).\n\n"
+        "Format the output strictly as a JSON object matching the requested schema. Ensure all fields are populated with current actual values. "
+        "Do not include any markdown format blocks, output raw JSON only."
     )
 
     user_prompt = (
         "Scan the US market right now. Fetch the top 10 stocks by volume for Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics. "
-        "Also scan global social platforms (X, Reddit WallStreetBets, Stocktwits) to identify the top trending stocks with mention volume, sentiment (Bullish/Bearish/Neutral), current price, change percentage, and discussion summaries. "
+        "Use the latest live prices (including Pre-market/After-hours/Overnight if active). "
+        "Also scan global social platforms (X, Reddit, Stocktwits) to identify top trending stocks with mention volume, sentiment, price, change, and discussion summaries. "
         "Return the resulting structured data."
     )
 

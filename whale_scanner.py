@@ -101,6 +101,7 @@ def fetch_individual_whale(client, model_name, investor, firm, current_date):
         "You are an expert US financial researcher.\n"
         f"Search Google to extract the current portfolio, options positions, short positions, and recent transactions for: {investor} ({firm}).\n"
         f"CRITICAL: The current date is {current_date}. All price, volume, holdings, and transaction data MUST represent the actual current values as of the year 2026. Do NOT return old data or historical prices from previous years (such as 2024 or 2023). For example, TSM stock price in mid-2026 is around $400+, not $145. Ensure all numbers represent 2026 filings.\n"
+        f"CRITICAL FOR STOCK PRICES: For all stock prices (long holdings, shorts, underlying stock price for options), you MUST fetch the most current, real-time live price at this exact moment, including Extended Hours trading (Pre-Market, After-Hours, or Overnight prices if the regular market is closed). If the stock is currently trading in after-hours or pre-market, return that live extended hours trading price instead of the previous regular close price.\n"
         "Extract:\n"
         "- Long Stock portfolio (exactly top 3 holdings: ticker, name, price, change %, shares, value, weight)\n"
         "- Options positions (exactly top 2 call/put option positions: ticker, type, underlyingPrice (price of the underlying stock), price (option premium price), change %, contracts, value, strikePrice (strike price in contract), expiryDate (contract expiration date). If none, return empty list or mock hedge positions for SPY/QQQ)\n"
@@ -117,7 +118,7 @@ def fetch_individual_whale(client, model_name, investor, firm, current_date):
         max_output_tokens=4096
     )
     
-    prompt = f"Search and analyze current filings, options, shorts and 30-day transactions for {investor} of {firm} as of {current_date}. Return raw JSON."
+    prompt = f"Search and analyze current filings, options, shorts and 30-day transactions for {investor} of {firm} as of {current_date}. Ensure all prices represent the latest live price (including Pre-market/After-hours/Overnight) at this exact moment. Return raw JSON."
     response = client.models.generate_content(model=model_name, contents=prompt, config=config)
     
     cleaned = clean_json_text(response.text)

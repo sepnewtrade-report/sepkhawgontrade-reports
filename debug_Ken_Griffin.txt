@@ -1,1 +1,38 @@
-{"investorName":"Ken Griffin","firmName":"Citadel Advisors","aum":"$618.47 Billion","style":"Multi-Strategy Quantitative","longPortfolio":[{"ticker":"NVDA","name":"NVIDIA Corp.","price":"$194.84","change":"-13.43% share count","shares":"18.66 Million","value":"$3.25 Billion","weight":"2.31%"},{"ticker":"IVV","name":"iShares Core S&P 500 ETF","price":"$748.43","change":"+5363.87% share count","shares":"4.06 Million","value":"$2.65 Billion","weight":"1.88%"},{"ticker":"AMZN","name":"Amazon.com Inc.","price":"$242.67","change":"-42.69% share count","shares":"8.10 Million","value":"$1.69 Billion","weight":"1.20%"}],"optionsPositions":[{"ticker":"SPY","type":"Put","underlyingPrice":"$
+{
+  "investorName": "Ken Griffin",
+  "firmName": "Citadel Advisors LLC",
+  "aum": "$570.62 Billion",
+  "style": "Multi-Strategy / Quantitative & Discretionary",
+  "longPortfolio": [
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia Corporation",
+      "price": "$194.83",
+      "change": "-1.39%",
+      "shares": "18,664,861",
+      "value": "$3,636,474,868",
+      "weight": "0.59%"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "price": "$242.67",
+      "change": "+0.40%",
+      "shares": "8,102,537",
+      "value": "$1,966,242,654",
+      "weight": "0.32%"
+    },
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "price": "$308.63",
+      "change": "+4.85%",
+      "shares": "5,213,870",
+      "value": "$1,609,156,698",
+      "weight": "0.26%"
+    }
+  ],
+  "optionsPositions": [
+    {
+      "ticker": "SPY",
+      "type": "PUT",
