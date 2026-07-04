@@ -38,26 +38,26 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 | Rank | Ticker | Company Name | Sector | Current Price (July 2, 2026) | Fundamental (20) | Catalyst (20) | Technical (20) | Institutional (20) | Momentum (20) | Total Score (100) | Conviction Level |
 | :---: | :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **1** | **LLY** | Eli Lilly and Company | Healthcare | $1,200.98 | 20 | 18 | 19 | 19 | 18 | **94** | Very High |
-| **2** | **AVAV** | AeroVironment, Inc. | Industrials | $190.98 | 18 | 20 | 19 | 18 | 19 | **94** | Very High |
+| **1** | **LLY** | Eli Lilly and Company | Healthcare | $1,213.91 | 20 | 18 | 19 | 19 | 18 | **94** | Very High |
+| **2** | **AVAV** | AeroVironment, Inc. | Industrials | $190.89 | 18 | 20 | 19 | 18 | 19 | **94** | Very High |
 | **3** | **CCXI** | Churchill Capital Corp XI | Financials / Technology | $19.10 | 15 | 20 | 20 | 19 | 20 | **94** | Very High |
-| **4** | **VST** | Vistra Corp. | Utilities | $163.49 | 19 | 18 | 19 | 19 | 18 | **93** | High |
+| **4** | **VST** | Vistra Corp. | Utilities | $151.05 | 19 | 18 | 19 | 19 | 18 | **93** | High |
 | **5** | **RIVN** | Rivian Automotive, Inc. | Consumer Cyclical | $18.63 | 15 | 20 | 19 | 18 | 20 | **92** | High |
 | **6** | **AAPL** | Apple Inc. | Technology | $308.63 | 19 | 18 | 19 | 18 | 18 | **92** | High |
-| **7** | **NTRA** | Natera, Inc. | Healthcare | $260.74 | 18 | 18 | 19 | 18 | 18 | **91** | High |
-| **8** | **CEG** | Constellation Energy Corp. | Utilities | $264.60 | 18 | 17 | 19 | 18 | 18 | **90** | High |
-| **9** | **MSFT** | Microsoft Corporation | Technology | $389.62 | 19 | 17 | 18 | 18 | 17 | **89** | High |
+| **7** | **NTRA** | Natera, Inc. | Healthcare | $279.32 | 18 | 18 | 19 | 18 | 18 | **91** | High |
+| **8** | **CEG** | Constellation Energy Corp. | Utilities | $239.25 | 18 | 17 | 19 | 18 | 18 | **90** | High |
+| **9** | **MSFT** | Microsoft Corporation | Technology | $390.49 | 19 | 17 | 18 | 18 | 17 | **89** | High |
 | **10** | **PLTR** | Palantir Technologies Inc. | Technology | $129.30 | 17 | 18 | 19 | 17 | 18 | **89** | High |
-| **11** | **GILD** | Gilead Sciences, Inc. | Healthcare | $126.34 | 17 | 19 | 18 | 17 | 17 | **88** | Medium-High |
-| **12** | **META** | Meta Platforms, Inc. | Comm. Services | $550.25 | 18 | 16 | 18 | 18 | 17 | **87** | Medium-High |
-| **13** | **VRT** | Vertiv Holdings Co. | Industrials | $334.82 | 17 | 17 | 18 | 18 | 17 | **87** | Medium-High |
+| **11** | **GILD** | Gilead Sciences, Inc. | Healthcare | $131.27 | 17 | 19 | 18 | 17 | 17 | **88** | Medium-High |
+| **12** | **META** | Meta Platforms, Inc. | Comm. Services | $582.90 | 18 | 16 | 18 | 18 | 17 | **87** | Medium-High |
+| **13** | **VRT** | Vertiv Holdings Co. | Industrials | $300.53 | 17 | 17 | 18 | 18 | 17 | **87** | Medium-High |
 | **14** | **NVDA** | NVIDIA Corporation | Technology | $194.83 | 20 | 16 | 16 | 18 | 15 | **85** | High (Buy-the-Dip) |
 | **15** | **HOOD** | Robinhood Markets, Inc. | Financials | $112.73 | 16 | 17 | 18 | 16 | 17 | **84** | Medium-High |
 | **16** | **MU** | Micron Technology, Inc. | Technology | $975.56 | 18 | 15 | 16 | 17 | 15 | **81** | Medium |
 | **17** | **CRWV** | CoreWeave, Inc. | Technology | $81.75 | 16 | 15 | 15 | 17 | 15 | **78** | Medium |
 | **18** | **TSLA** | Tesla, Inc. | Consumer Cyclical | $393.45 | 16 | 16 | 15 | 16 | 14 | **77** | Medium |
 | **19** | **AMAT** | Applied Materials, Inc. | Technology | $603.04 | 17 | 14 | 15 | 16 | 14 | **76** | Medium |
-| **20** | **CELH** | Celsius Holdings, Inc. | Consumer Defensive | $29.28 | 15 | 15 | 15 | 15 | 14 | **74** | Medium |
+| **20** | **CELH** | Celsius Holdings, Inc. | Consumer Defensive | $33.16 | 15 | 15 | 15 | 15 | 14 | **74** | Medium |
 
 ---
 
@@ -65,7 +65,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 1. Eli Lilly and Company (Ticker: LLY)
 *   **Sector:** Healthcare (Drug Manufacturers)
-*   **Current Price:** $1,200.98
+*   **Current Price:** $1,213.91
 *   **Why It Made The List:** Outperforming during the tech rotation, LLY continues to display exceptional strength, driven by secular demand for its GLP-1 weight loss treatments (Zepbound/Mounjaro) and robust clinical pipeline updates.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Elite. Dominant position in obesity and diabetes, high pricing power, and massive patent moats.
@@ -86,7 +86,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 2. AeroVironment, Inc. (Ticker: AVAV)
 *   **Sector:** Industrials (Aerospace & Defense)
-*   **Current Price:** $190.98
+*   **Current Price:** $190.89
 *   **Why It Made The List:** AVAV surged after reporting an earnings blowout ($1.84 EPS vs. $1.47 expected) and securing a massive $500 million U.S. Army contract for its C-UAS (counter-unmanned aircraft systems) over the next 3 years.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Excellent. Pure-play defense contractor leading the military drone and counter-drone space.
@@ -128,7 +128,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 4. Vistra Corp. (Ticker: VST)
 *   **Sector:** Utilities (Independent Power Producers)
-*   **Current Price:** $163.49
+*   **Current Price:** $151.05
 *   **Why It Made The List:** Vistra is a core beneficiary of the data center power demand trade. With deregulated capacity in ERCOT (Texas) and nuclear assets, VST is a high-growth utility stock with strong momentum.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Strong. Reliable power generation mix with high barrier nuclear assets.
@@ -191,7 +191,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 7. Natera, Inc. (Ticker: NTRA)
 *   **Sector:** Healthcare (Diagnostics & Research)
-*   **Current Price:** $260.74
+*   **Current Price:** $279.32
 *   **Why It Made The List:** Natera leads the cell-free DNA space, primarily with its Signatera oncology assay for minimal residual disease (MRD). Strong clinical data and Medicare reimbursement expansion are driving growth.
 *   **9-Point Evaluation:**
     1. *Business Quality:* High. Dominant market share in clinical genetic testing and oncology monitoring.
@@ -212,7 +212,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 8. Constellation Energy Corp. (Ticker: CEG)
 *   **Sector:** Utilities (Independent Power Producers)
-*   **Current Price:** $264.60
+*   **Current Price:** $239.25
 *   **Why It Made The List:** As the largest operator of nuclear power in the U.S., CEG is the primary target for hyperscalers seeking 24/7 carbon-free energy. Sector rotation into utilities supports its near-term run.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Excellent. Nuclear fleet is highly reliable and enjoys strong regulatory support.
@@ -233,7 +233,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 9. Microsoft Corporation (Ticker: MSFT)
 *   **Sector:** Technology (Software - Infrastructure)
-*   **Current Price:** $389.62
+*   **Current Price:** $390.49
 *   **Why It Made The List:** Microsoft rose 3.00% following an "Efficiency Play" move, announcing 5,000 job cuts (approx. 4% of workforce) to optimize margins. Simultaneously, MSFT announced its "Microsoft Frontier Company" strategy targeting federal and national security AI cloud contracts.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Elite. Enterprise software monopoly, Azure cloud dominance, and leading OpenAI partnership.
@@ -275,7 +275,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 11. Gilead Sciences, Inc. (Ticker: GILD)
 *   **Sector:** Healthcare (Biotechnology)
-*   **Current Price:** $126.34
+*   **Current Price:** $131.27
 *   **Why It Made The List:** Gilead received double FDA approvals for its drug Trodelvy (ADC) as a first-line treatment for Triple-Negative Breast Cancer (TNBC), both as a monotherapy and in combination with Merck's Keytruda, creating a multi-billion dollar revenue stream.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Excellent. Domination in HIV treatments and growing oncology presence.
@@ -296,7 +296,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 12. Meta Platforms, Inc. (Ticker: META)
 *   **Sector:** Communication Services (Interactive Media & Services)
-*   **Current Price:** $550.25
+*   **Current Price:** $582.90
 *   **Why It Made The List:** Meta's core ad business remains robust. However, the stock faces a minor headwind and sector rotation pressure due to its new "Meta Compute" initiative, which directly competes with GPU cloud providers, adding volatility.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Elite. Global social network dominance.
@@ -317,7 +317,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 13. Vertiv Holdings Co. (Ticker: VRT)
 *   **Sector:** Industrials (Electrical Equipment)
-*   **Current Price:** $334.82
+*   **Current Price:** $300.53
 *   **Why It Made The List:** Vertiv remains the key provider of liquid cooling and electrical infrastructure for AI data centers. The stock is finding strong support as NVIDIA's Blackwell GPU platform ramps up production.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Very Good. High barriers to entry in data center cooling technology.
@@ -464,7 +464,7 @@ Below is the ranked list of the Top 20 stock opportunities based on their Total 
 
 ### 20. Celsius Holdings, Inc. (Ticker: CELH)
 *   **Sector:** Consumer Defensive (Beverages - Non-Alcoholic)
-*   **Current Price:** $29.28
+*   **Current Price:** $33.16
 *   **Why It Made The List:** Celsius is in an oversold consolidation phase. The stock fell 38% YTD due to inventory adjustments by PepsiCo, its distributor, but its zero-debt balance sheet and international expansions (UK, Canada, Europe) remain intact.
 *   **9-Point Evaluation:**
     1. *Business Quality:* Good. Expanding brand footprint in functional energy drinks.

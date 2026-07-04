@@ -30,3 +30,8 @@ notebooklm-manager/.env
 notebooklm-manager/workflows_history.json
 notebooklm-manager/temp_prompt_*
 
+# Python compiled files
+__pycache__/
+*.pyc
+
+

@@ -1,0 +1,123 @@
+import os
+import sys
+import json
+from google import genai
+from google.genai import types
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python market_scanner.py <output_json_path>", file=sys.stderr)
+        sys.exit(1)
+        
+    output_file = sys.argv[1]
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("Error: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
+        sys.exit(1)
+        
+    model_name = "gemini-3.5-flash"
+
+    client = genai.Client(api_key=api_key)
+
+    schema = types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "sectors": types.Schema(
+                type=types.Type.ARRAY,
+                items=types.Schema(
+                    type=types.Type.OBJECT,
+                    properties={
+                        "sectorName": types.Schema(type=types.Type.STRING),
+                        "stocks": types.Schema(
+                            type=types.Type.ARRAY,
+                            items=types.Schema(
+                                type=types.Type.OBJECT,
+                                properties={
+                                    "ticker": types.Schema(type=types.Type.STRING),
+                                    "name": types.Schema(type=types.Type.STRING),
+                                    "price": types.Schema(type=types.Type.STRING),
+                                    "volume": types.Schema(type=types.Type.STRING),
+                                    "change": types.Schema(type=types.Type.STRING),
+                                    "reason": types.Schema(type=types.Type.STRING)
+                                },
+                                required=["ticker", "name", "price", "volume", "change", "reason"]
+                            )
+                        )
+                    },
+                    required=["sectorName", "stocks"]
+                )
+            ),
+            "socialTrends": types.Schema(
+                type=types.Type.ARRAY,
+                items=types.Schema(
+                    type=types.Type.OBJECT,
+                    properties={
+                        "ticker": types.Schema(type=types.Type.STRING),
+                        "name": types.Schema(type=types.Type.STRING),
+                        "price": types.Schema(type=types.Type.STRING),
+                        "change": types.Schema(type=types.Type.STRING),
+                        "mentions": types.Schema(type=types.Type.STRING),
+                        "platforms": types.Schema(type=types.Type.STRING),
+                        "sentiment": types.Schema(type=types.Type.STRING),
+                        "summary": types.Schema(type=types.Type.STRING)
+                    },
+                    required=["ticker", "name", "price", "change", "mentions", "platforms", "sentiment", "summary"]
+                )
+            )
+        },
+        required=["sectors", "socialTrends"]
+    )
+
+    system_instruction = (
+        "You are an expert US financial market scanner and social media sentiment analyst.\n"
+        "Your task is to use Google Search to find current, live information at this exact moment (or the latest trading session if the market is closed):\n"
+        "1. Identify the Top 10 US stocks by trading volume (มูลค่าการซื้อขายสูงสุด) for the following sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, and Energy.\n"
+        "2. Identify the most active/discussed US stocks in global retail investor forums and social channels (such as Reddit WallStreetBets, X/Twitter, Stocktwits, and other major investor hubs) right now.\n\n"
+        "Format the output strictly as a JSON object matching the requested schema. Ensure all fields (ticker, name, price, volume, change, reason/summary, mentions, platforms, sentiment) are populated with current actual values. "
+        "Do not include any markdown format blocks like ```json ... ```, output raw JSON only."
+    )
+
+    user_prompt = (
+        "Scan the US market right now. Fetch the top 10 stocks by volume for Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, and Energy. "
+        "Also scan global social platforms (X, Reddit WallStreetBets, Stocktwits) to identify the top trending stocks with mention volume, sentiment (Bullish/Bearish/Neutral), current price, change percentage, and discussion summaries. "
+        "Return the resulting structured data."
+    )
+
+    try:
+        config = types.GenerateContentConfig(
+            system_instruction=system_instruction,
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            response_mime_type="application/json",
+            response_schema=schema
+        )
+        
+        response = client.models.generate_content(
+            model=model_name,
+            contents=user_prompt,
+            config=config
+        )
+        
+        json_data = response.text
+        if not json_data:
+            raise Exception("Gemini returned empty response")
+            
+        # Parse to validate JSON format
+        parsed = json.loads(json_data)
+        
+        # Save to output file
+        output_dir = os.path.dirname(os.path.abspath(output_file))
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+            
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(parsed, f, ensure_ascii=False, indent=2)
+            
+        print(f"Success: Market scan saved to {output_file}")
+        sys.exit(0)
+    except Exception as e:
+        print(f"Error during generation: {e}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
