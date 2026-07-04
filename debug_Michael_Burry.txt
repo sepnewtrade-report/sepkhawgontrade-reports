@@ -1,1 +1,18 @@
-{"investorName":"Michael Burry","firmName":"Scion Asset Management","aum":"$1.38 Billion","style":"Contrarian Value","longPortfolio":[{"ticker":"MOH","name":"Molina Healthcare Inc","price":"$225.52","change":"-1.15%","shares":"125,000","value":"$28.19 Million","weight":"35.1%"},{"ticker":"LULU","name":"Lululemon Athletica Inc","price":"$238.01","change":"-2.30%","shares":"100,000","value":"$23.80 Million","weight":"26.1%"},{"ticker":"
+{
+  "investorName": "Michael Burry",
+  "firmName": "Scion Asset Management",
+  "aum": "$155M",
+  "style": "Value/Short",
+  "longPortfolio": [
+    {
+      "ticker": "PYPL",
+      "name": "PayPal Holdings Inc.",
+      "price": "$45.47",
+      "change": "+3.18%",
+      "shares": "500,000",
+      "value": "$22.7M",
+      "weight": "35.0%"
+    },
+    {
+      "ticker": "ADBE",
+      "

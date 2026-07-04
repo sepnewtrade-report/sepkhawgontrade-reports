@@ -173,6 +173,7 @@ def synthesize_overview(client, model_name, whales_data):
         "You are an expert US financial analyst.\n"
         "Synthesize the general institutional market sentiment and top 3 sector rotations based on the provided summary of whale activities.\n"
         "Also synthesize exactly top 3 critical period highlights on key dates in the past 30 days (such as CPI releases, Fed Chair meetings, or index sell-offs) detailing what these whales did on those dates.\n"
+        "CRITICAL: All events, timestamps, and highlights MUST only reference key dates and occurrences within the latest year (2026). Do not mention dates or crises from previous years (such as 2024, 2023, or earlier). All dates in critical period logs must belong to the latest 30 days of the year 2026.\n"
         "Keep summaries highly concise (under 12 words per sentence). CRITICAL: Do not use unescaped double quotes inside any string properties. Use single quotes instead."
     )
     
@@ -183,7 +184,7 @@ def synthesize_overview(client, model_name, whales_data):
         max_output_tokens=4096
     )
     
-    prompt = f"Here is the summary of the 10 whales activities:\n{summary_text}\n\nSynthesize the market sentiment, sector rotation, and critical period logs. Return raw JSON."
+    prompt = f"Here is the summary of the {len(whales_data)} whales activities:\n{summary_text}\n\nSynthesize the market sentiment, sector rotation, and critical period logs. Return raw JSON."
     
     response = client.models.generate_content(model=model_name, contents=prompt, config=config)
     cleaned = clean_json_text(response.text)
