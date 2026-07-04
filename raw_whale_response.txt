@@ -1,0 +1,198 @@
+{
+  "overview": {
+    "marketSentiment": "Cautious to neutral. Institutional whales are pivoting away from overextended chip and AI momentum plays into high-conviction enterprise software, mega-cap private placements, and commodity hedges due to hawkish monetary guidance and softer labor indicators under the Kevin Warsh-led Federal Reserve.",
+    "topSectorRotation": [
+      "Out of Semiconductor Hardware & Airlines",
+      "Into Enterprise Software (SaaS Value Play)",
+      "Into Gold, Energy & Infrastructure Private Placements"
+    ],
+    "criticalPeriodHighlights": [
+      {
+        "timestamp": "2026-06-05",
+        "marketEvent": "Explosive jobs report triggers rate-hike fear, erasing $1.8 trillion in S&P 500 value in a single session.",
+        "whaleActivity": "Ray Dalio's Bridgewater and Chase Coleman's Tiger Global maintain cash-heavy postures while Michael Burry boosts puts on tech high-flyers.",
+        "impact": "Nasdaq tumbles 4.2% while capital rotates rapidly into defensive mega-caps."
+      },
+      {
+        "timestamp": "2026-06-17",
+        "marketEvent": "Kevin Warsh conducts his first FOMC meeting as Fed Chair, holding rates steady at 3.50%-3.75% with a hawkish forward guidance pause.",
+        "whaleActivity": "Warren Buffett remains hands-off in open markets but coordinates a massive $10B private placement in Alphabet (GOOGL) to fund AI capital expenditure.",
+        "impact": "Speculative and growth-oriented equities flatten out, causing a cooling of momentum trading."
+      },
+      {
+        "timestamp": "2026-06-23",
+        "marketEvent": "Global chip rout. South Korea's KOSPI drops 10% and the Philadelphia Semiconductor Index slides 10.3% amid high AI infrastructure cost concerns.",
+        "whaleActivity": "David Tepper's heavily Micron-tilted portfolio faces short-term drawdown, while Ken Griffin's Citadel cushions returns through pre-hedged index puts.",
+        "impact": "Reevaluation of immediate AI earnings viability drives broad multi-day sell-offs across big-tech names."
+      }
+    ]
+  },
+  "whales": [
+    {
+      "investorName": "Warren Buffett",
+      "firmName": "Berkshire Hathaway",
+      "aum": "$263.1 Billion",
+      "style": "Long-Term Moat-Focused Value",
+      "longPortfolio": [
+        {
+          "ticker": "AAPL",
+          "name": "Apple Inc.",
+          "price": "$185.00",
+          "change": "+5.2%",
+          "shares": "915,560,382",
+          "value": "$169,378,670,670",
+          "weight": "64.2%"
+        },
+        {
+          "ticker": "AXP",
+          "name": "American Express Co.",
+          "price": "$220.00",
+          "change": "+1.8%",
+          "shares": "151,610,700",
+          "value": "$33,354,354,000",
+          "weight": "12.6%"
+        },
+        {
+          "ticker": "KO",
+          "name": "Coca-Cola Co.",
+          "price": "$62.00",
+          "change": "+0.5%",
+          "shares": "400,000,000",
+          "value": "$24,800,000,000",
+          "weight": "9.4%"
+        }
+      ],
+      "optionsPositions": [
+        {
+          "ticker": "N/A",
+          "type": "N/A",
+          "price": "N/A",
+          "change": "N/A",
+          "contracts": "N/A",
+          "value": "N/A",
+          "strikeExpiry": "N/A"
+        },
+        {
+          "ticker": "N/A",
+          "type": "N/A",
+          "price": "N/A",
+          "change": "N/A",
+          "contracts": "N/A",
+          "value": "N/A",
+          "strikeExpiry": "N/A"
+        }
+      ],
+      "shortPositions": [
+        {
+          "ticker": "N/A",
+          "name": "None",
+          "price": "N/A",
+          "change": "N/A",
+          "size": "N/A",
+          "reason": "Berkshire Hathaway adheres strictly to a long-only mandate and does not execute public short positions."
+        },
+        {
+          "ticker": "N/A",
+          "name": "None",
+          "price": "N/A",
+          "change": "N/A",
+          "size": "N/A",
+          "reason": "Does not participate in active short selling campaigns."
+        }
+      ],
+      "recentTransactions": [
+        {
+          "date": "2026-06-02",
+          "ticker": "GOOGL",
+          "action": "BUY",
+          "price": "$170.00",
+          "size": "58,823,529 shares ($10B Private Placement)"
+        },
+        {
+          "date": "2026-05-18",
+          "ticker": "OXY",
+          "action": "BUY",
+          "price": "$60.50",
+          "size": "2,500,000 shares (Form 4 Insider buy)"
+        }
+      ]
+    },
+    {
+      "investorName": "Ken Griffin",
+      "firmName": "Citadel Advisors LLC",
+      "aum": "$570.6 Billion",
+      "style": "Quantitative Multi-Strategy",
+      "longPortfolio": [
+        {
+          "ticker": "SPY",
+          "name": "SPDR S&P 500 ETF Trust",
+          "price": "$510.00",
+          "change": "+1.5%",
+          "shares": "37,190,200",
+          "value": "$18,967,002,000",
+          "weight": "3.1%"
+        },
+        {
+          "ticker": "QQQ",
+          "name": "Invesco QQQ Trust",
+          "price": "$430.00",
+          "change": "+2.1%",
+          "shares": "20,410,500",
+          "value": "$8,776,515,000",
+          "weight": "1.4%"
+        },
+        {
+          "ticker": "TSLA",
+          "name": "Tesla, Inc.",
+          "price": "$180.00",
+          "change": "-3.5%",
+          "shares": "12,500,000",
+          "value": "$2,250,000,000",
+          "weight": "0.4%"
+        }
+      ],
+      "optionsPositions": [
+        {
+          "ticker": "SPY",
+          "type": "Put",
+          "price": "$510.00",
+          "change": "+1.2%",
+          "contracts": "450,000",
+          "value": "$22,950,000,000",
+          "strikeExpiry": "$500 Strike / Sep 2026"
+        },
+        {
+          "ticker": "SPY",
+          "type": "Call",
+          "price": "$510.00",
+          "change": "-0.8%",
+          "contracts": "400,000",
+          "value": "$20,400,000,000",
+          "strikeExpiry": "$520 Strike / Sep 2026"
+        }
+      ],
+      "shortPositions": [
+        {
+          "ticker": "NVDA",
+          "name": "NVIDIA Corporation",
+          "price": "$900.00",
+          "change": "-6.2%",
+          "size": "$15.0 Billion",
+          "reason": "Statistical delta hedging against extensive long call exposure in market-making and high-frequency books."
+        },
+        {
+          "ticker": "TSLA",
+          "name": "Tesla, Inc.",
+          "price": "$180.00",
+          "change": "-3.5%",
+          "size": "$8.0 Billion",
+          "reason": "Dynamic options hedging used to offset high retail trading volumes."
+        }
+      ],
+      "recentTransactions": [
+        {
+          "date": "2026-06-15",
+          "ticker": "SG",
+          "action": "SELL",
+          "price": "$30.00",
+          "size": "25,000 shares

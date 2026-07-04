@@ -1,0 +1,18 @@
+{
+  "investorName": "Michael Burry",
+  "firmName": "Scion Asset Management",
+  "aum": "$68 Million",
+  "style": "Contrarian value and macro shorting",
+  "longPortfolio": [
+    {
+      "ticker": "PYPL",
+      "name": "PayPal Holdings Inc.",
+      "price": "$59.20",
+      "change": "+3.1%",
+      "shares": "150,000",
+      "value": "$8,880,000",
+      "weight": "13.0%"
+    },
+    {
+      "ticker": "ADBE",
+      "

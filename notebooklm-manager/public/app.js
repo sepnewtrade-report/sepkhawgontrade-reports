@@ -19,7 +19,11 @@ let state = {
     countdownInterval: null,
     estRemainingSeconds: 0,
     currentProgress: -1,
-    createNewTaskMode: false
+    createNewTaskMode: false,
+    
+    // Whale Tracker additions
+    whaleData: null,
+    selectedWhaleIndex: 0
 };
 
 // DOM Elements
@@ -32,6 +36,35 @@ const trendsEmptyPlaceholder = document.getElementById('trends-empty-placeholder
 const trendsDashboardGrid = document.getElementById('trends-dashboard-grid');
 const sectorsGridContainer = document.getElementById('sectors-grid-container');
 const socialCardsContainer = document.getElementById('social-cards-container');
+
+// Whale Tracker elements
+const whalesLastUpdated = document.getElementById('whales-last-updated');
+const btnRefreshWhales = document.getElementById('btn-refresh-whales');
+const btnRefreshWhalesEmpty = document.getElementById('btn-refresh-whales-empty');
+const whalesLoadingOverlay = document.getElementById('whales-loading-overlay');
+const whalesEmptyPlaceholder = document.getElementById('whales-empty-placeholder');
+const whalesDashboardGrid = document.getElementById('whales-dashboard-grid');
+const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+const sectorSocialView = document.getElementById('sector-social-view');
+const whaleTrackerView = document.getElementById('whale-tracker-view');
+
+const btnWhaleShowOverview = document.getElementById('btn-whale-show-overview');
+const btnWhaleShowIndividual = document.getElementById('btn-whale-show-individual');
+const whaleSelectContainer = document.getElementById('whale-select-container');
+const whaleDropdown = document.getElementById('whale-dropdown');
+
+const whalesOverviewView = document.getElementById('whales-overview-view');
+const whalesIndividualView = document.getElementById('whales-individual-view');
+
+const whaleOverviewSentiment = document.getElementById('whale-overview-sentiment');
+const whaleOverviewSectors = document.getElementById('whale-overview-sectors');
+const whalesOverviewTimeline = document.getElementById('whales-overview-timeline');
+
+const individualWhaleMeta = document.getElementById('individual-whale-meta');
+const whaleLongTable = document.getElementById('whale-long-table');
+const whaleOptionsTable = document.getElementById('whale-options-table');
+const whaleShortsContainer = document.getElementById('whale-shorts-container');
+const whaleTransactionsTimeline = document.getElementById('whale-transactions-timeline');
 const statusDot = document.getElementById('status-dot');
 const statusLabel = document.getElementById('status-label');
 const btnLogin = document.getElementById('btn-login');
@@ -293,6 +326,69 @@ function setupEventListeners() {
     // US Market Scan event listeners
     if (btnRefreshTrends) btnRefreshTrends.addEventListener('click', handleRefreshMarketTrends);
     if (btnRefreshTrendsEmpty) btnRefreshTrendsEmpty.addEventListener('click', handleRefreshMarketTrends);
+
+    // Sub-tab switching logic inside Market Scan
+    subTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetSub = btn.getAttribute('data-sub-tab');
+            
+            // Toggle active styling
+            subTabBtns.forEach(b => {
+                b.classList.remove('active');
+                b.style.background = 'rgba(255, 255, 255, 0.05)';
+                b.style.color = 'var(--text-secondary)';
+                b.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+            });
+            btn.classList.add('active');
+            btn.style.background = targetSub === 'sector-social-view' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(16, 185, 129, 0.15)';
+            btn.style.color = targetSub === 'sector-social-view' ? '#60a5fa' : '#34d399';
+            btn.style.borderColor = targetSub === 'sector-social-view' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(16, 185, 129, 0.3)';
+            
+            // Toggle view visibility
+            if (targetSub === 'sector-social-view') {
+                sectorSocialView.style.display = 'block';
+                whaleTrackerView.style.display = 'none';
+                loadMarketTrends();
+            } else {
+                sectorSocialView.style.display = 'none';
+                whaleTrackerView.style.display = 'block';
+                loadWhalePortfolios();
+            }
+        });
+    });
+
+    // Whale view switches (Overview vs. Individual)
+    if (btnWhaleShowOverview) {
+        btnWhaleShowOverview.addEventListener('click', () => {
+            btnWhaleShowOverview.classList.add('active');
+            btnWhaleShowIndividual.classList.remove('active');
+            whaleSelectContainer.style.display = 'none';
+            whalesOverviewView.style.display = 'flex';
+            whalesIndividualView.style.display = 'none';
+        });
+    }
+
+    if (btnWhaleShowIndividual) {
+        btnWhaleShowIndividual.addEventListener('click', () => {
+            btnWhaleShowIndividual.classList.add('active');
+            btnWhaleShowOverview.classList.remove('active');
+            whaleSelectContainer.style.display = 'flex';
+            whalesOverviewView.style.display = 'none';
+            whalesIndividualView.style.display = 'grid';
+            // Render selected whale
+            triggerWhaleRender();
+        });
+    }
+
+    if (whaleDropdown) {
+        whaleDropdown.addEventListener('change', () => {
+            triggerWhaleRender();
+        });
+    }
+
+    // Whale refresh button listeners
+    if (btnRefreshWhales) btnRefreshWhales.addEventListener('click', handleRefreshWhales);
+    if (btnRefreshWhalesEmpty) btnRefreshWhalesEmpty.addEventListener('click', handleRefreshWhales);
 
     // Add/Delete Template event listeners
     btnAddTemplate.addEventListener('click', () => {
@@ -2104,6 +2200,293 @@ function renderMarketTrends(trends) {
             `;
             socialCardsContainer.appendChild(card);
         });
+    }
+}
+
+// Load whale portfolios from backend cache
+async function loadWhalePortfolios() {
+    try {
+        const response = await fetch('/api/whale-portfolios');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            whalesLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            whalesEmptyPlaceholder.style.display = 'none';
+            whalesLoadingOverlay.style.display = 'none';
+            whalesDashboardGrid.style.display = 'flex';
+            
+            state.whaleData = data.data;
+            populateWhaleDropdown(data.data.whales);
+            renderWhalesOverview(data.data.overview);
+            triggerWhaleRender();
+        } else {
+            whalesEmptyPlaceholder.style.display = 'flex';
+            whalesLoadingOverlay.style.display = 'none';
+            whalesDashboardGrid.style.display = 'none';
+        }
+    } catch (err) {
+        console.error('Error loading whale portfolios:', err);
+    }
+}
+
+// Trigger live refresh of Whale Tracker
+async function handleRefreshWhales() {
+    btnRefreshWhales.disabled = true;
+    btnRefreshWhalesEmpty.disabled = true;
+    
+    const originalText = btnRefreshWhales.innerHTML;
+    btnRefreshWhales.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยบอร์ดวาฬ...';
+    
+    whalesEmptyPlaceholder.style.display = 'none';
+    whalesDashboardGrid.style.display = 'none';
+    whalesLoadingOverlay.style.display = 'flex';
+    
+    try {
+        const response = await fetch('/api/whale-portfolios/refresh', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            whalesLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            whalesLoadingOverlay.style.display = 'none';
+            whalesDashboardGrid.style.display = 'flex';
+            
+            state.whaleData = data.data;
+            populateWhaleDropdown(data.data.whales);
+            renderWhalesOverview(data.data.overview);
+            triggerWhaleRender();
+            alert('ดึงพอร์ตและการชอร์ตของวาฬยักษ์สำเร็จแล้ว!');
+        } else {
+            alert('ดึงข้อมูลวาฬไม่สำเร็จ: ' + (data.error || 'ไม่ทราบสาเหตุ'));
+            loadWhalePortfolios();
+        }
+    } catch (err) {
+        console.error('Error refreshing whales:', err);
+        alert('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
+        loadWhalePortfolios();
+    } finally {
+        btnRefreshWhales.disabled = false;
+        btnRefreshWhalesEmpty.disabled = false;
+        btnRefreshWhales.innerHTML = originalText;
+    }
+}
+
+// Populate dropdown select with whale names
+function populateWhaleDropdown(whales) {
+    if (!whaleDropdown) return;
+    
+    const currentSelectVal = whaleDropdown.value;
+    whaleDropdown.innerHTML = '';
+    
+    if (whales && Array.isArray(whales)) {
+        whales.forEach((whale, index) => {
+            const opt = document.createElement('option');
+            opt.value = index;
+            opt.textContent = `${whale.investorName} (${whale.firmName})`;
+            whaleDropdown.appendChild(opt);
+        });
+        
+        if (currentSelectVal !== null && currentSelectVal !== "" && currentSelectVal < whales.length) {
+            whaleDropdown.value = currentSelectVal;
+        }
+    }
+}
+
+// Render the high-level overview highlights
+function renderWhalesOverview(overview) {
+    if (!overview) return;
+    
+    // Sentiment
+    if (whaleOverviewSentiment) {
+        whaleOverviewSentiment.textContent = overview.marketSentiment || 'Mixed';
+        
+        // Color depending on sentiment value
+        const sent = (overview.marketSentiment || '').toLowerCase();
+        if (sent.includes('bullish') || sent.includes('buy') || sent.includes('long')) {
+            whaleOverviewSentiment.style.color = '#34d399';
+        } else if (sent.includes('bearish') || sent.includes('sell') || sent.includes('short')) {
+            whaleOverviewSentiment.style.color = '#f87171';
+        } else {
+            whaleOverviewSentiment.style.color = '#fbbf24';
+        }
+    }
+    
+    // Sectors
+    if (whaleOverviewSectors && overview.topSectorRotation) {
+        whaleOverviewSectors.innerHTML = '';
+        overview.topSectorRotation.forEach(sec => {
+            const span = document.createElement('span');
+            span.style.padding = '4px 12px';
+            span.style.backgroundColor = 'rgba(96, 165, 250, 0.15)';
+            span.style.color = '#93c5fd';
+            span.style.borderRadius = '12px';
+            span.style.fontSize = '12px';
+            span.style.fontWeight = '500';
+            span.textContent = sec;
+            whaleOverviewSectors.appendChild(span);
+        });
+    }
+    
+    // Timeline
+    if (whalesOverviewTimeline && overview.criticalPeriodHighlights) {
+        whalesOverviewTimeline.innerHTML = '';
+        overview.criticalPeriodHighlights.forEach(hl => {
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            item.innerHTML = `
+                <div class="timeline-timestamp">${hl.timestamp || ''}</div>
+                <h4 class="timeline-title">${hl.marketEvent || ''}</h4>
+                <p class="timeline-desc" style="margin-bottom: 5px;"><strong>ความเคลื่อนไหววาฬ:</strong> ${hl.whaleActivity || ''}</p>
+                <p class="timeline-desc" style="color: var(--text-muted);"><strong>ผลกระทบต่อตลาด:</strong> ${hl.impact || ''}</p>
+            `;
+            whalesOverviewTimeline.appendChild(item);
+        });
+    }
+}
+
+// Render selected individual whale detailed lists
+function triggerWhaleRender() {
+    if (!state.whaleData || !state.whaleData.whales || !whaleDropdown) return;
+    
+    const index = parseInt(whaleDropdown.value || 0, 10);
+    const whale = state.whaleData.whales[index];
+    if (!whale) return;
+    
+    // Render metadata
+    if (individualWhaleMeta) {
+        individualWhaleMeta.textContent = `AUM: ${whale.aum || 'N/A'} | สไตล์: ${whale.style || 'N/A'}`;
+    }
+    
+    // Render Long Portfolio Table
+    const longTbody = whaleLongTable.querySelector('tbody');
+    longTbody.innerHTML = '';
+    if (whale.longPortfolio && Array.isArray(whale.longPortfolio)) {
+        whale.longPortfolio.forEach(item => {
+            const tr = document.createElement('tr');
+            
+            const changeStr = (item.change || '').trim();
+            let changeClass = 'stock-val-neutral';
+            if (changeStr.startsWith('+')) {
+                changeClass = 'stock-val-positive';
+            } else if (changeStr.startsWith('-')) {
+                changeClass = 'stock-val-negative';
+            }
+            
+            tr.innerHTML = `
+                <td><span class="stock-ticker-badge" style="background-color: rgba(96, 165, 250, 0.12); color: #93c5fd;">${item.ticker}</span></td>
+                <td><strong>${item.name || ''}</strong></td>
+                <td><strong>${item.price || '-'}</strong></td>
+                <td><span class="${changeClass}">${item.change || '0%'}</span></td>
+                <td>${item.shares || '-'}</td>
+                <td><strong style="color: #60a5fa;">${item.value || '-'}</strong></td>
+                <td style="font-family: monospace;">${item.weight || '-'}</td>
+            `;
+            longTbody.appendChild(tr);
+        });
+    }
+    
+    // Render Options Portfolio Table
+    const optTbody = whaleOptionsTable.querySelector('tbody');
+    optTbody.innerHTML = '';
+    if (whale.optionsPositions && Array.isArray(whale.optionsPositions) && whale.optionsPositions.length > 0) {
+        whale.optionsPositions.forEach(item => {
+            const tr = document.createElement('tr');
+            
+            const typeStr = (item.type || '').trim().toUpperCase();
+            let typeStyle = 'background-color: rgba(245, 158, 11, 0.15); color: #fbbf24;';
+            if (typeStr.includes('PUT')) {
+                typeStyle = 'background-color: rgba(239, 68, 68, 0.15); color: #f87171;';
+            } else if (typeStr.includes('CALL')) {
+                typeStyle = 'background-color: rgba(16, 185, 129, 0.15); color: #34d399;';
+            }
+            
+            const changeStr = (item.change || '').trim();
+            let changeClass = 'stock-val-neutral';
+            if (changeStr.startsWith('+')) {
+                changeClass = 'stock-val-positive';
+            } else if (changeStr.startsWith('-')) {
+                changeClass = 'stock-val-negative';
+            }
+            
+            tr.innerHTML = `
+                <td><span class="stock-ticker-badge" style="background-color: rgba(251, 191, 36, 0.12); color: #fbbf24;">${item.ticker}</span></td>
+                <td><span class="tx-badge" style="${typeStyle}">${item.type || 'Option'}</span></td>
+                <td><strong>${item.price || '-'}</strong></td>
+                <td><span class="${changeClass}">${item.change || '0%'}</span></td>
+                <td>${item.contracts || '-'}</td>
+                <td><span style="font-family: monospace; color: var(--text-secondary);">${item.strikeExpiry || '-'}</span></td>
+                <td><strong style="color: #fbbf24;">${item.value || '-'}</strong></td>
+            `;
+            optTbody.appendChild(tr);
+        });
+    } else {
+        optTbody.innerHTML = '<tr><td colspan="7" class="text-center" style="color: var(--text-muted); padding: 15px;">ไม่มีรายการอนุพันธ์แจ้งตรวจสิทธิในระบบ</td></tr>';
+    }
+    
+    // Render Short Sell cards
+    if (whaleShortsContainer) {
+        whaleShortsContainer.innerHTML = '';
+        if (whale.shortPositions && Array.isArray(whale.shortPositions) && whale.shortPositions.length > 0) {
+            whale.shortPositions.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'short-position-card';
+                
+                const changeStr = (item.change || '').trim();
+                let changeStyle = 'color: var(--text-secondary);';
+                if (changeStr.startsWith('+')) {
+                    changeStyle = 'color: #34d399;';
+                } else if (changeStr.startsWith('-')) {
+                    changeStyle = 'color: #f87171;';
+                }
+                
+                card.innerHTML = `
+                    <div class="short-header">
+                        <span class="short-ticker">${item.ticker}</span>
+                        <span class="short-size">${item.size || ''}</span>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-primary);">
+                        ราคาหุ้น: <strong>${item.price || ''}</strong> 
+                        (<span style="${changeStyle}">${item.change || '0%'}</span>)
+                    </div>
+                    <p class="short-reason">${item.reason || ''}</p>
+                `;
+                whaleShortsContainer.appendChild(card);
+            });
+        } else {
+            whaleShortsContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">ไม่มีการรายงานชอร์ตเซลล่าสุดทางสาธารณะ</div>';
+        }
+    }
+    
+    // Render Recent Transactions (1 Month) Timeline
+    if (whaleTransactionsTimeline) {
+        whaleTransactionsTimeline.innerHTML = '';
+        if (whale.recentTransactions && Array.isArray(whale.recentTransactions) && whale.recentTransactions.length > 0) {
+            whale.recentTransactions.forEach(tx => {
+                const action = (tx.action || 'Buy').toLowerCase();
+                let actionClass = 'tx-buy';
+                let badgeClass = 'tx-badge-buy';
+                
+                if (action.includes('sell') || action.includes('close')) {
+                    actionClass = action.includes('close') ? 'tx-close' : 'tx-sell';
+                    badgeClass = action.includes('close') ? 'tx-badge-close' : 'tx-badge-sell';
+                }
+                
+                const item = document.createElement('div');
+                item.className = `tx-timeline-item ${actionClass}`;
+                item.innerHTML = `
+                    <div class="timeline-timestamp">${tx.date || ''}</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="tx-badge ${badgeClass}">${tx.action || 'TRADE'}</span>
+                        <strong style="color: #fff; font-size: 13.5px;">${tx.ticker}</strong>
+                    </div>
+                    <p class="timeline-desc" style="margin-top: 4px; font-size: 12px;">
+                        ทำรายการที่ราคา: <strong>${tx.price || '-'}</strong> | ขนาดรายการ: <strong>${tx.size || '-'}</strong>
+                    </p>
+                `;
+                whaleTransactionsTimeline.appendChild(item);
+            });
+        } else {
+            whaleTransactionsTimeline.innerHTML = '<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">ไม่มีรายการซื้อขายในรอบ 30 วันที่รายงานล่าสุด</div>';
+        }
     }
 }
 

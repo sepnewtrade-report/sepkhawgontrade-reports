@@ -563,6 +563,62 @@ app.post('/api/market-trends/refresh', async (req, res) => {
   }
 });
 
+const WHALE_FILE = path.join(__dirname, 'whale_portfolios_cache.json');
+
+// Get cached whale portfolios
+app.get('/api/whale-portfolios', (req, res) => {
+  if (fs.existsSync(WHALE_FILE)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(WHALE_FILE, 'utf8'));
+      return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+    } catch (err) {
+      console.error('Failed to read whale portfolios cache:', err);
+    }
+  }
+  res.json({ success: true, data: null, lastUpdated: null });
+});
+
+// Trigger a live refresh of US whale portfolios via Gemini 3.5 Flash
+app.post('/api/whale-portfolios/refresh', async (req, res) => {
+  const tempJsonPath = path.join(__dirname, `temp_whales_${Date.now()}.json`);
+  const scannerScriptPath = path.join(__dirname, '..', 'whale_scanner.py');
+  
+  if (!process.env.GEMINI_API_KEY) {
+    return res.status(400).json({ success: false, error: 'กรุณาระบุ GEMINI_API_KEY ในไฟล์ .env ก่อนรันระบบ' });
+  }
+
+  const cmd = `"${VENV_PYTHON}" "${scannerScriptPath}" "${tempJsonPath}"`;
+
+  try {
+    await runCmd(cmd);
+    if (!fs.existsSync(tempJsonPath)) {
+      throw new Error('สคริปต์สแกนพอร์ตวาฬเสร็จสิ้นแต่ไม่พบไฟล์ข้อมูลผลลัพธ์');
+    }
+    
+    const rawData = fs.readFileSync(tempJsonPath, 'utf8');
+    const parsedData = JSON.parse(rawData);
+    
+    // Save to cache with timestamp
+    const nowStr = new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' });
+    const cachePayload = {
+      data: parsedData,
+      lastUpdated: nowStr
+    };
+    
+    fs.writeFileSync(WHALE_FILE, JSON.stringify(cachePayload, null, 2), 'utf8');
+    
+    // Clean up temp file
+    try { fs.unlinkSync(tempJsonPath); } catch (_) {}
+    
+    res.json({ success: true, data: parsedData, lastUpdated: nowStr });
+  } catch (err) {
+    console.error('Error scanning whale portfolios:', err);
+    // Clean up temp file in case of failure
+    try { if (fs.existsSync(tempJsonPath)) fs.unlinkSync(tempJsonPath); } catch (_) {}
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Get Prompt Templates
 app.get('/api/templates', (req, res) => {
   fs.readFile(TEMPLATES_FILE, 'utf8', (err, data) => {

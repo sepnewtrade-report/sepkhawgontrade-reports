@@ -1,0 +1,23 @@
+{
+  "marketSentiment": "Institutional sentiment reflects a highly hedged stance. While long-term value players like Berkshire Hathaway are selectively accumulating high-quality mega-cap tech such as Alphabet, multiple major macro and activist managers (Tepper, Coleman, Icahn) are holding substantial short positions on broad-market indices like SPY, QQQ, and IWM to protect against systemic downside.",
+  "topSectorRotation": [
+    "Concentration in Mega-Cap Technology and Communication Services (GOOGL, AMZN)",
+    "Selective rotation into defensive Consumer Staples and Specialty Finance (LWAY, HHH)",
+    "De-allocation from traditional Energy and Mining Materials (Shorting TTE, REP, and selling TFPM)"
+  ],
+  "criticalPeriodHighlights": [
+    {
+      "timestamp": "2024-10-15",
+      "marketEvent": "CPI Inflation release showing sticky core inflation, causing temporary broader index pullbacks.",
+      "whaleActivity": "Warren Buffett capitalized on the dip to accumulate GOOG and GOOGL, while Ken Griffin pivoted into defensive consumer plays like LWAY and GMRS.",
+      "impact": "Injected liquidity into premium tech and staples, demonstrating institutional preference for fortress balance sheets during inflation scares."
+    },
+    {
+      "timestamp": "2024-10-30",
+      "marketEvent": "Fed policy outlook shifts towards a cautious rate-cut trajectory, putting pressure on small-caps and high-beta growth.",
+      "whaleActivity": "Chase Coleman and David Tepper maintained or added to their short overlays on QQQ, SPY, and IWM to shield their high-growth portfolios.",
+      "impact": "Increased hedging activity capped broader index upside, forcing a divergence between resilient mega-caps and lagging small-cap equities."
+    },
+    {
+      "timestamp": "2024-11-06",
+      "marketEvent": "Increased geopolitical volatility triggering

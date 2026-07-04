@@ -291,65 +291,241 @@
         <!-- Tab 3: US Market Scan & Social Trends Panel -->
         <div class="tab-panel" id="market-trends-tab" style="display: none;">
             <div class="trends-container">
-                <!-- Header Card with Refresh button & Last Updated timestamp -->
-                <div class="glass-card trends-header-card" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <i class="fa-solid fa-chart-line" style="font-size: 32px; color: #3b82f6;"></i>
-                        <div>
-                            <h2 style="margin: 0; font-size: 20px;">สแกนเนอร์ตลาดหุ้นสหรัฐฯ & สัญญาณโซเชียล</h2>
-                            <p style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary);">
-                                ข้อมูลแยกกลุ่ม 10 อันดับซื้อขายสูงสุด และกระแสเทรนด์ใน Reddit, X (Twitter) ทั่วโลก
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <span id="trends-last-updated" style="font-size: 13px; color: var(--text-secondary);">อัปเดตล่าสุด: ยังไม่มีข้อมูล</span>
-                        <button class="btn btn-primary" id="btn-refresh-trends" style="height: 42px; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);">
-                            <i class="fa-solid fa-rotate"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Loading overlay spinner -->
-                <div id="trends-loading-overlay" class="glass-card" style="display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding: 40px; margin-bottom: 20px; border: 1px dashed var(--border-color-focus);">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 48px; color: #3b82f6; margin-bottom: 20px;"></i>
-                    <h3 style="margin-bottom: 10px;">กำลังวิจัยและดึงข้อมูลสดผ่าน Gemini 3.5 Flash...</h3>
-                    <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 400px;">
-                        ระบบกำลังใช้ Google Search Grounding ค้นหาข้อมูลมูลค่าการซื้อขายหุ้นตามกลุ่ม และสแกนกระแสโซเชียล Reddit/X ในต่างประเทศ การวิเคราะห์นี้อาจใช้เวลาประมาณ 1-2 นาที...
-                    </p>
-                </div>
-
-                <!-- Empty cache placeholder -->
-                <div id="trends-empty-placeholder" class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; padding: 40px;">
-                    <i class="fa-solid fa-cloud-arrow-down" style="font-size: 48px; color: var(--text-muted); margin-bottom: 20px;"></i>
-                    <h3 style="margin-bottom: 10px;">ยังไม่มีข้อมูลสแกนตลาดในระบบ</h3>
-                    <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 450px; margin-bottom: 20px;">
-                        คุณสามารถดึงข้อมูลปัจจุบันโดยกดปุ่มด้านบนเพื่อสั่งรันบอทสแกนเนอร์วิเคราะห์แนวโน้มตลาดได้ทันที
-                    </p>
-                    <button class="btn btn-primary" id="btn-refresh-trends-empty" style="height: 42px;">
-                        <i class="fa-solid fa-rotate"></i> เริ่มต้นสแกนตลาดเดี๋ยวนี้
+                <!-- Sub-Navigation Toggle Bar -->
+                <div class="sub-tab-navigation" style="margin-bottom: 20px; display: flex; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+                    <button class="sub-tab-btn active" data-sub-tab="sector-social-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-layer-group"></i> กลุ่มหุ้น & กระแสโซเชียล
+                    </button>
+                    <button class="sub-tab-btn" data-sub-tab="whale-tracker-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); color: var(--text-secondary); border: 1px solid rgba(255, 255, 255, 0.08); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i> พอร์ต & การชอร์ตของวาฬยักษ์
                     </button>
                 </div>
 
-                <!-- Dashboard Layout Grid -->
-                <div id="trends-dashboard-grid" style="display: none;" class="trends-dashboard-layout">
-                    <!-- Left Column: Sectors Volume Top 10 -->
-                    <div class="trends-left-col">
-                        <h3 style="margin-bottom: 15px; color: #60a5fa;"><i class="fa-solid fa-layer-group"></i> หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)</h3>
-                        <div class="sectors-grid-container" id="sectors-grid-container">
-                            <!-- Sector cards will be dynamically injected here -->
+                <!-- Sub-tab 1: Sector & Social Panel -->
+                <div id="sector-social-view">
+                    <!-- Header Card with Refresh button & Last Updated timestamp -->
+                    <div class="glass-card trends-header-card" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-chart-line" style="font-size: 32px; color: #3b82f6;"></i>
+                            <div>
+                                <h2 style="margin: 0; font-size: 20px;">สแกนเนอร์ตลาดหุ้นสหรัฐฯ & สัญญาณโซเชียล</h2>
+                                <p style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary);">
+                                    ข้อมูลแยกกลุ่ม 10 อันดับซื้อขายสูงสุด และกระแสเทรนด์ใน Reddit, X (Twitter) ทั่วโลก
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span id="trends-last-updated" style="font-size: 13px; color: var(--text-secondary);">อัปเดตล่าสุด: ยังไม่มีข้อมูล</span>
+                            <button class="btn btn-primary" id="btn-refresh-trends" style="height: 42px; background: linear-gradient(135deg, #3b82f6, #2563eb); border: none; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);">
+                                <i class="fa-solid fa-rotate"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh)
+                            </button>
                         </div>
                     </div>
-                    
-                    <!-- Right Column: Social Sentiment Hub -->
-                    <div class="trends-right-col">
-                        <h3 style="margin-bottom: 15px; color: #f472b6;"><i class="fa-solid fa-fire-flame-curved"></i> สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)</h3>
-                        <div class="social-cards-container" id="social-cards-container">
-                            <!-- Social trend cards will be injected here -->
+
+                    <!-- Loading overlay spinner -->
+                    <div id="trends-loading-overlay" class="glass-card" style="display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding: 40px; margin-bottom: 20px; border: 1px dashed var(--border-color-focus);">
+                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 48px; color: #3b82f6; margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 10px;">กำลังวิจัยและดึงข้อมูลสดผ่าน Gemini 3.5 Flash...</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 400px;">
+                            ระบบกำลังใช้ Google Search Grounding ค้นหาข้อมูลมูลค่าการซื้อขายหุ้นตามกลุ่ม และสแกนกระแสโซเชียล Reddit/X ในต่างประเทศ การวิเคราะห์นี้อาจใช้เวลาประมาณ 1-2 นาที...
+                        </p>
+                    </div>
+
+                    <!-- Empty cache placeholder -->
+                    <div id="trends-empty-placeholder" class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; padding: 40px;">
+                        <i class="fa-solid fa-cloud-arrow-down" style="font-size: 48px; color: var(--text-muted); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 10px;">ยังไม่มีข้อมูลสแกนตลาดในระบบ</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 450px; margin-bottom: 20px;">
+                            คุณสามารถดึงข้อมูลปัจจุบันโดยกดปุ่มด้านบนเพื่อสั่งรันบอทสแกนเนอร์วิเคราะห์แนวโน้มตลาดได้ทันที
+                        </p>
+                        <button class="btn btn-primary" id="btn-refresh-trends-empty" style="height: 42px;">
+                            <i class="fa-solid fa-rotate"></i> เริ่มต้นสแกนตลาดเดี๋ยวนี้
+                        </button>
+                    </div>
+
+                    <!-- Dashboard Layout Grid -->
+                    <div id="trends-dashboard-grid" style="display: none;" class="trends-dashboard-layout">
+                        <!-- Left Column: Sectors Volume Top 10 -->
+                        <div class="trends-left-col">
+                            <h3 style="margin-bottom: 15px; color: #60a5fa;"><i class="fa-solid fa-layer-group"></i> หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)</h3>
+                            <div class="sectors-grid-container" id="sectors-grid-container">
+                                <!-- Sector cards will be dynamically injected here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: Social Sentiment Hub -->
+                        <div class="trends-right-col">
+                            <h3 style="margin-bottom: 15px; color: #f472b6;"><i class="fa-solid fa-fire-flame-curved"></i> สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)</h3>
+                            <div class="social-cards-container" id="social-cards-container">
+                                <!-- Social trend cards will be injected here -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> <!-- End Sub-tab 1: Sector & Social Panel -->
+
+                <!-- Sub-tab 2: Whale Tracker Panel -->
+                <div id="whale-tracker-view" style="display: none;">
+                    <!-- Whale Header Card -->
+                    <div class="glass-card trends-header-card" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-magnifying-glass-chart" style="font-size: 32px; color: #10b981;"></i>
+                            <div>
+                                <h2 style="margin: 0; font-size: 20px;">พอร์ตการลงทุน & การชอร์ตเซลของวาฬสหรัฐฯ (10 ยักษ์ใหญ่)</h2>
+                                <p style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary);">
+                                    วิเคราะห์พอร์ต Long หุ้น, สัญญาณ Options/Puts, รายการชอร์ตเซล และธุรกรรมย้อนหลัง 1 เดือน
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span id="whales-last-updated" style="font-size: 13px; color: var(--text-secondary);">อัปเดตล่าสุด: ยังไม่มีข้อมูล</span>
+                            <button class="btn btn-primary" id="btn-refresh-whales" style="height: 42px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                                <i class="fa-solid fa-rotate"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh Whales)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Whales Loading overlay spinner -->
+                    <div id="whales-loading-overlay" class="glass-card" style="display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; padding: 40px; margin-bottom: 20px; border: 1px dashed #10b981;">
+                        <i class="fa-solid fa-spinner fa-spin" style="font-size: 48px; color: #10b981; margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 10px;">กำลังสแกนพอร์ตและประวัติการเทรดของวาฬผ่าน Gemini 3.5 Flash...</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 400px;">
+                            ระบบกำลังใช้ Google Search Grounding ดึงข้อมูลแบบยื่นแสดงสิทธิพอร์ตล่าสุด Form 13F และข่าวการเทรดในรอบ 30 วันที่ผ่านมา การสแกนข้อมูลเชิงลึกนี้อาจใช้เวลา 1-2 นาที...
+                        </p>
+                    </div>
+
+                    <!-- Whales Empty cache placeholder -->
+                    <div id="whales-empty-placeholder" class="glass-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; padding: 40px;">
+                        <i class="fa-solid fa-cloud-arrow-down" style="font-size: 48px; color: var(--text-muted); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 10px;">ยังไม่มีข้อมูลวิจัยพอร์ตวาฬในระบบ</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 450px; margin-bottom: 20px;">
+                            คุณสามารถเปิดใช้งานบอทวิเคราะห์เจาะลึกพอร์ตหุ้นและการเทรดย้อนหลังของ 10 มหาอำนาจได้โดยกดปุ่มด้านล่าง
+                        </p>
+                        <button class="btn btn-primary" id="btn-refresh-whales-empty" style="height: 42px; background-color: #10b981;">
+                            <i class="fa-solid fa-rotate"></i> เริ่มต้นวิเคราะห์พอร์ตวาฬเดี๋ยวนี้
+                        </button>
+                    </div>
+
+                    <!-- Whales Dashboard Content -->
+                    <div id="whales-dashboard-grid" style="display: none; flex-direction: column; gap: 20px;">
+                        <!-- Whale Sub-toggle bar (Overview vs. Individual) -->
+                        <div class="glass-card" style="padding: 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-secondary active" id="btn-whale-show-overview" style="height: 38px; display: inline-flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-compass"></i> ภาพรวม & ไฮไลท์วิกฤต (Overview)
+                                </button>
+                                <button class="btn btn-secondary" id="btn-whale-show-individual" style="height: 38px; display: inline-flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-user-tie"></i> พอร์ตและธุรกรรมรายบุคคล
+                                </button>
+                            </div>
+                            
+                            <!-- Individual Whale Selector (visible only when individual is active) -->
+                            <div id="whale-select-container" style="display: none; align-items: center; gap: 10px;">
+                                <label for="whale-dropdown" style="font-weight: 500; font-size: 13px; margin: 0; color: var(--text-secondary);">เลือกนักลงทุนยักษ์ใหญ่:</label>
+                                <select id="whale-dropdown" class="form-control" style="width: 280px; height: 38px; padding: 0 10px; border-radius: 8px;">
+                                    <!-- Dynamic Whale names -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Panel 1: Whales Overview View -->
+                        <div id="whales-overview-view" style="display: flex; flex-direction: column; gap: 20px;">
+                            <!-- Sentiment & Top Sectors cards -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                                <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center; min-height: 120px; padding: 20px;">
+                                    <h4 style="color: #34d399; margin-top: 0; margin-bottom: 10px;"><i class="fa-solid fa-gauge"></i> Institutional Market Sentiment</h4>
+                                    <div style="font-size: 24px; font-weight: 700; color: #fff;" id="whale-overview-sentiment">-</div>
+                                    <p style="font-size: 12px; color: var(--text-muted); margin: 5px 0 0 0;">น้ำหนักการลงทุนโดยรวมของกลุ่มวาฬสถาบัน</p>
+                                </div>
+                                <div class="glass-card" style="min-height: 120px; padding: 20px;">
+                                    <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 10px;"><i class="fa-solid fa-arrows-spin"></i> Top Sector Rotation</h4>
+                                    <div id="whale-overview-sectors" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                        <!-- sectors -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Critical Periods Highlights -->
+                            <div class="glass-card">
+                                <h3 style="margin-top: 0; margin-bottom: 20px; color: #fbbf24;"><i class="fa-solid fa-timeline"></i> Highlights สำคัญในช่วงเวลาวิกฤต (Critical Period Logs)</h3>
+                                <div class="whale-timeline" id="whales-overview-timeline">
+                                    <!-- Dynamic highlights timeline items -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel 2: Individual Whale detailed view -->
+                        <div id="whales-individual-view" style="display: none; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+                            <!-- Left: Long Port & Options -->
+                            <div style="display: flex; flex-direction: column; gap: 24px;">
+                                <!-- Long portfolio card -->
+                                <div class="glass-card" style="overflow-x: auto;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                                        <h3 style="margin: 0; color: #60a5fa;"><i class="fa-solid fa-briefcase"></i> รายการพอร์ตหลัก (Long Positions)</h3>
+                                        <span id="individual-whale-meta" style="font-size: 12px; color: var(--text-secondary);"></span>
+                                    </div>
+                                    <table class="stock-table" id="whale-long-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15%;">Ticker</th>
+                                                <th>ชื่อบริษัท</th>
+                                                <th style="width: 18%;">ราคาล่าสุด</th>
+                                                <th style="width: 15%;">% +/-</th>
+                                                <th style="width: 18%;">ถือครอง (Shares)</th>
+                                                <th style="width: 18%;">มูลค่าถือครอง</th>
+                                                <th style="width: 10%;">สัดส่วน %</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- stocks -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Options positions card -->
+                                <div class="glass-card" style="overflow-x: auto;">
+                                    <h3 style="margin-top: 0; margin-bottom: 15px; color: #fbbf24;"><i class="fa-solid fa-chart-pie"></i> รายการอนุพันธ์ป้องกันความเสี่ยง (Options Positions)</h3>
+                                    <table class="stock-table" id="whale-options-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15%;">Ticker</th>
+                                                <th style="width: 15%;">สัญญา (Type)</th>
+                                                <th style="width: 18%;">ราคาล่าสุด</th>
+                                                <th style="width: 15%;">% +/-</th>
+                                                <th style="width: 18%;">Contracts</th>
+                                                <th>Strike / Expiry</th>
+                                                <th style="width: 18%;">มูลค่าสัญญา</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- options -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Right: Shorts & 1-Month Transactions -->
+                            <div style="display: flex; flex-direction: column; gap: 24px;">
+                                <!-- Short Sell list card -->
+                                <div class="glass-card" style="border-left: 3px solid #f87171;">
+                                    <h3 style="margin-top: 0; margin-bottom: 15px; color: #f87171;"><i class="fa-solid fa-arrow-down-wide-narrow"></i> รายการชอร์ตเซล (Short Sell Positions)</h3>
+                                    <div id="whale-shorts-container" style="display: flex; flex-direction: column; gap: 12px;">
+                                        <!-- shorts -->
+                                    </div>
+                                </div>
+                                
+                                <!-- 1-Month Transaction timeline -->
+                                <div class="glass-card">
+                                    <h3 style="margin-top: 0; margin-bottom: 15px; color: #a78bfa;"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติทำรายการในรอบ 1 เดือน (Past 30 Days)</h3>
+                                    <div class="transaction-timeline" id="whale-transactions-timeline">
+                                        <!-- transactions -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Sub-tab 2: Whale Tracker Panel -->
             </div>
         </div>
         </main>
