@@ -231,10 +231,10 @@ def main():
         "whales": []
     }
 
-    print("Initiating concurrent queries for 10 Whales...")
+    print("Initiating concurrent queries for 12 Whales...")
     
-    # Process 10 whales in parallel (max 2 concurrent workers for rate limit safety)
-    with ThreadPoolExecutor(max_workers=2) as executor:
+    # Process 12 whales in parallel (max 6 concurrent workers to optimize speed while staying under rate limit)
+    with ThreadPoolExecutor(max_workers=6) as executor:
         whale_futures = {
             executor.submit(fetch_individual_whale, client, model_name, w["investor"], w["firm"]): w
             for w in whale_list
