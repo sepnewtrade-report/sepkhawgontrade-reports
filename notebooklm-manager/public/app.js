@@ -2410,6 +2410,7 @@ function triggerWhaleRender() {
             tr.innerHTML = `
                 <td><span class="stock-ticker-badge" style="background-color: rgba(251, 191, 36, 0.12); color: #fbbf24;">${item.ticker}</span></td>
                 <td><span class="tx-badge" style="${typeStyle}">${item.type || 'Option'}</span></td>
+                <td><strong style="color: #60a5fa;">${item.underlyingPrice || '-'}</strong></td>
                 <td><strong>${item.price || '-'}</strong></td>
                 <td><span class="${changeClass}">${item.change || '0%'}</span></td>
                 <td>${item.contracts || '-'}</td>
@@ -2419,7 +2420,7 @@ function triggerWhaleRender() {
             optTbody.appendChild(tr);
         });
     } else {
-        optTbody.innerHTML = '<tr><td colspan="7" class="text-center" style="color: var(--text-muted); padding: 15px;">ไม่มีรายการอนุพันธ์แจ้งตรวจสิทธิในระบบ</td></tr>';
+        optTbody.innerHTML = '<tr><td colspan="8" class="text-center" style="color: var(--text-muted); padding: 15px;">ไม่มีรายการอนุพันธ์แจ้งตรวจสิทธิในระบบ</td></tr>';
     }
     
     // Render Short Sell cards

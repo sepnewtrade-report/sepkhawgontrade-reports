@@ -50,13 +50,14 @@ def get_whale_schema():
                     properties={
                         "ticker": types.Schema(type=types.Type.STRING),
                         "type": types.Schema(type=types.Type.STRING),
+                        "underlyingPrice": types.Schema(type=types.Type.STRING),
                         "price": types.Schema(type=types.Type.STRING),
                         "change": types.Schema(type=types.Type.STRING),
                         "contracts": types.Schema(type=types.Type.STRING),
                         "value": types.Schema(type=types.Type.STRING),
                         "strikeExpiry": types.Schema(type=types.Type.STRING)
                     },
-                    required=["ticker", "type", "price", "change", "contracts", "value", "strikeExpiry"]
+                    required=["ticker", "type", "underlyingPrice", "price", "change", "contracts", "value", "strikeExpiry"]
                 )
             ),
             "shortPositions": types.Schema(
@@ -100,7 +101,7 @@ def fetch_individual_whale(client, model_name, investor, firm):
         f"Search Google to extract the current portfolio, options positions, short positions, and recent transactions for: {investor} ({firm}).\n"
         "Extract:\n"
         "- Long Stock portfolio (exactly top 3 holdings: ticker, name, price, change %, shares, value, weight)\n"
-        "- Options positions (exactly top 2 call/put option positions, price, change %, contracts, value, strike/expiry. If none, return empty list or mock hedge positions for SPY/QQQ)\n"
+        "- Options positions (exactly top 2 call/put option positions: ticker, type, underlyingPrice (price of the underlying stock), price (option premium price), change %, contracts, value, strike/expiry. If none, return empty list or mock hedge positions for SPY/QQQ)\n"
         "- Short positions (exactly top 2 short campaigns or positions, price, change %, size, reason. If none, return empty list)\n"
         "- Recent 1-Month Transactions: Transactions executed in the past 30 days (exactly top 2 transactions: date, ticker, buy/sell action, price, size. If none, return empty list)\n"
         "Keep descriptions and summaries highly concise (under 8 words per field). Limit search results to Form 13F and official filings to keep output short and prevent truncation. CRITICAL: Do not use unescaped double quotes inside any string properties. Use single quotes instead."
@@ -218,7 +219,9 @@ def main():
         {"investor": "David Tepper", "firm": "Appaloosa Management"},
         {"investor": "Bill Ackman", "firm": "Pershing Square"},
         {"investor": "Carl Icahn", "firm": "Icahn Enterprises"},
-        {"investor": "Paul Singer", "firm": "Elliott Investment Management"}
+        {"investor": "Paul Singer", "firm": "Elliott Investment Management"},
+        {"investor": "Cathie Wood", "firm": "ARK Investment Management"},
+        {"investor": "Larry Fink", "firm": "BlackRock"}
     ]
 
     final_payload = {
