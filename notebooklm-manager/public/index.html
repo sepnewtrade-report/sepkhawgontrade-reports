@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flatpickr Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -139,11 +143,15 @@
                             <select id="workflow-file-select" class="form-control">
                                 <!-- Dynamic Options from workspace -->
                             </select>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+                                <input type="checkbox" id="workflow-show-all-files" style="width: 16px; height: 16px; cursor: pointer;">
+                                <label for="workflow-show-all-files" style="cursor: pointer; margin-bottom: 0; font-size: 12px; color: var(--text-secondary); font-weight: normal;">แสดงไฟล์ทั้งหมดในเครื่อง (ไม่กรองตามวันที่)</label>
+                            </div>
                         </div>
 
                         <div class="form-group" style="margin-top: 15px;">
                             <label for="workflow-date-input">วันที่จัดทำรายการ:</label>
-                            <input type="date" id="workflow-date-input" class="form-control">
+                            <input type="text" id="workflow-date-input" class="form-control" placeholder="เลือกวันที่..." readonly>
                         </div>
 
                         <div class="form-group" style="margin-top: 15px; display: flex; align-items: center; gap: 8px;">

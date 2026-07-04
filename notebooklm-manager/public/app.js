@@ -129,7 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
-    workflowDateInput.value = `${yyyy}-${mm}-${dd}`;
+    
+    // Initialize Flatpickr calendar on the date input
+    flatpickr("#workflow-date-input", {
+        dateFormat: "Y-m-d",
+        defaultDate: `${yyyy}-${mm}-${dd}`,
+        theme: "dark",
+        onChange: function(selectedDates, dateStr, instance) {
+            workflowDateInput.dispatchEvent(new Event('change'));
+        }
+    });
 
     loadWorkflowData();
 });
@@ -318,6 +327,13 @@ function setupEventListeners() {
     workflowDateInput.addEventListener('change', () => {
         loadWorkflowData();
     });
+
+    const checkboxShowAllFiles = document.getElementById('workflow-show-all-files');
+    if (checkboxShowAllFiles) {
+        checkboxShowAllFiles.addEventListener('change', () => {
+            loadWorkflowData();
+        });
+    }
 
     // Price check modal listeners
     btnPriceCancel.addEventListener('click', () => {
@@ -837,7 +853,8 @@ async function handleProfileDelete() {
 async function loadWorkflowData() {
     try {
         // Fetch workspace MD files list
-        const queryDate = workflowDateInput.value || '';
+        const showAll = document.getElementById('workflow-show-all-files')?.checked || false;
+        const queryDate = showAll ? '' : (workflowDateInput.value || '');
         const filesResponse = await fetch('/api/workspace-files?date=' + queryDate);
         const filesData = await filesResponse.json();
         
@@ -850,15 +867,20 @@ async function loadWorkflowData() {
             defaultOpt.textContent = '-- ไม่ใช้ไฟล์ (ดึงข้อมูลผ่านระบบค้นหาข่าว) --';
             workflowFileSelect.appendChild(defaultOpt);
             
-            // Set the date input value to the suggested date if it is different (only if queryDate was not empty)
-            if (queryDate && filesData.suggestedDate && workflowDateInput.value !== filesData.suggestedDate) {
-                workflowDateInput.value = filesData.suggestedDate;
+            // Set the date input value to the suggested date if it is different (only if not showing all and queryDate was not empty)
+            if (!showAll && queryDate && filesData.suggestedDate && workflowDateInput.value !== filesData.suggestedDate) {
+                const fp = document.getElementById('workflow-date-input')._flatpickr;
+                if (fp) {
+                    fp.setDate(filesData.suggestedDate, false);
+                } else {
+                    workflowDateInput.value = filesData.suggestedDate;
+                }
             }
             
             filesData.files.forEach(f => {
                 const opt = document.createElement('option');
                 opt.value = f.filename;
-                opt.textContent = f.filename;
+                opt.textContent = `${f.filename} (${f.actualFileDateStr})`;
                 workflowFileSelect.appendChild(opt);
             });
             btnRunWorkflow.disabled = false; // Always enabled because web search is always a fallback option!
