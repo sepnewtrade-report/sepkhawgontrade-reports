@@ -2129,7 +2129,23 @@ function renderMarketTrends(trends) {
             
             const tbody = document.createElement('tbody');
             if (sec.stocks && Array.isArray(sec.stocks)) {
-                sec.stocks.forEach(stock => {
+                // Parse volume helper
+                const parseVolumeVal = (v) => {
+                    if (!v) return 0;
+                    const c = v.replace(/[$,\s]/g, '').toLowerCase();
+                    let m = 1;
+                    let n = c;
+                    if (c.endsWith('b')) { m = 1e9; n = c.slice(0, -1); }
+                    else if (c.endsWith('m')) { m = 1e6; n = c.slice(0, -1); }
+                    else if (c.endsWith('k')) { m = 1e3; n = c.slice(0, -1); }
+                    const p = parseFloat(n);
+                    return isNaN(p) ? 0 : p * m;
+                };
+                
+                // Sort stocks descending by parsed volume
+                const sortedStocks = [...sec.stocks].sort((a, b) => parseVolumeVal(b.volume) - parseVolumeVal(a.volume));
+                
+                sortedStocks.forEach(stock => {
                     const tr = document.createElement('tr');
                     
                     // Determine color class for change
@@ -2329,7 +2345,13 @@ function renderWhalesOverview(overview) {
     // Timeline
     if (whalesOverviewTimeline && overview.criticalPeriodHighlights) {
         whalesOverviewTimeline.innerHTML = '';
-        overview.criticalPeriodHighlights.forEach(hl => {
+        // Sort highlights by timestamp descending (newest first)
+        const sortedHighlights = [...overview.criticalPeriodHighlights].sort((a, b) => {
+            const dateA = new Date(a.timestamp);
+            const dateB = new Date(b.timestamp);
+            return dateB - dateA;
+        });
+        sortedHighlights.forEach(hl => {
             const item = document.createElement('div');
             item.className = 'timeline-item';
             item.innerHTML = `
@@ -2462,7 +2484,9 @@ function triggerWhaleRender() {
     if (whaleTransactionsTimeline) {
         whaleTransactionsTimeline.innerHTML = '';
         if (whale.recentTransactions && Array.isArray(whale.recentTransactions) && whale.recentTransactions.length > 0) {
-            whale.recentTransactions.forEach(tx => {
+            // Sort transactions by date descending (newest first)
+            const sortedTxs = [...whale.recentTransactions].sort((a, b) => new Date(b.date) - new Date(a.date));
+            sortedTxs.forEach(tx => {
                 const action = (tx.action || 'Buy').toLowerCase();
                 let actionClass = 'tx-buy';
                 let badgeClass = 'tx-badge-buy';
