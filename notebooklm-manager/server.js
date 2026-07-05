@@ -514,7 +514,11 @@ app.get('/api/market-trends', (req, res) => {
   if (fs.existsSync(TRENDS_FILE)) {
     try {
       const data = JSON.parse(fs.readFileSync(TRENDS_FILE, 'utf8'));
-      return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+      if (data && data.hasOwnProperty('data') && data.hasOwnProperty('lastUpdated')) {
+        return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+      } else {
+        return res.json({ success: true, data: data, lastUpdated: 'N/A' });
+      }
     } catch (err) {
       console.error('Failed to read trends cache:', err);
     }
@@ -570,7 +574,11 @@ app.get('/api/whale-portfolios', (req, res) => {
   if (fs.existsSync(WHALE_FILE)) {
     try {
       const data = JSON.parse(fs.readFileSync(WHALE_FILE, 'utf8'));
-      return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+      if (data && data.hasOwnProperty('data') && data.hasOwnProperty('lastUpdated')) {
+        return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
+      } else {
+        return res.json({ success: true, data: data, lastUpdated: 'N/A' });
+      }
     } catch (err) {
       console.error('Failed to read whale portfolios cache:', err);
     }
