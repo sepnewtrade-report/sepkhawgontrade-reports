@@ -1116,8 +1116,26 @@ select.form-control {
 }
 
 .status-waiting_approval {
-    background: rgba(245, 158, 11, 0.18);
+    background: rgba(245, 158, 11, 0.25);
     color: #fde047;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+    animation: status-pulse 2s infinite ease-in-out;
+}
+
+@keyframes status-pulse {
+    0% {
+        opacity: 0.8;
+        box-shadow: 0 0 4px rgba(245, 158, 11, 0.2);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+    }
+    100% {
+        opacity: 0.8;
+        box-shadow: 0 0 4px rgba(245, 158, 11, 0.2);
+    }
 }
 
 .status-completed {

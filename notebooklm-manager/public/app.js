@@ -1600,7 +1600,7 @@ function renderActiveTasksList(activeWorkflows) {
         let badgeClass = 'status-running';
         
         if (w.status === 'waiting_approval') {
-            statusText = 'รอตรวจทาน';
+            statusText = 'รออนุมัติ ⏳';
             badgeClass = 'status-waiting_approval';
         } else if (w.status === 'completed') {
             statusText = 'เสร็จสมบูรณ์';
