@@ -4,6 +4,18 @@ import json
 from google import genai
 from google.genai import types
 
+def clean_json_text(text):
+    if not text:
+        return ""
+    text = text.strip()
+    if text.startswith("```json"):
+        text = text[7:]
+    elif text.startswith("```"):
+        text = text[3:]
+    if text.endswith("```"):
+        text = text[:-3]
+    return text.strip()
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python market_scanner.py <output_json_path>", file=sys.stderr)
@@ -104,8 +116,9 @@ def main():
         if not json_data:
             raise Exception("Gemini returned empty response")
             
-        # Parse to validate JSON format
-        parsed = json.loads(json_data)
+        cleaned = clean_json_text(json_data)
+        # Parse to validate JSON format (strict=False handles raw newlines/tabs inside strings)
+        parsed = json.loads(cleaned, strict=False)
         
         # Save to output file
         output_dir = os.path.dirname(os.path.abspath(output_file))
@@ -118,6 +131,12 @@ def main():
         print(f"Success: Market scan saved to {output_file}")
         sys.exit(0)
     except Exception as e:
+        debug_filename = "debug_market.txt"
+        try:
+            with open(debug_filename, "w", encoding="utf-8") as df:
+                df.write(response.text if 'response' in locals() and response.text else "No response text")
+        except Exception:
+            pass
         print(f"Error during generation: {e}", file=sys.stderr)
         sys.exit(1)
 

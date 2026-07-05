@@ -123,7 +123,7 @@ def fetch_individual_whale(client, model_name, investor, firm, current_date):
     
     cleaned = clean_json_text(response.text)
     try:
-        return json.loads(cleaned)
+        return json.loads(cleaned, strict=False)
     except Exception as e:
         debug_filename = f"debug_{investor.replace(' ', '_')}.txt"
         with open(debug_filename, "w", encoding="utf-8") as df:
@@ -192,7 +192,7 @@ def synthesize_overview(client, model_name, whales_data):
     cleaned = clean_json_text(response.text)
     
     try:
-        return json.loads(cleaned)
+        return json.loads(cleaned, strict=False)
     except Exception as e:
         with open("debug_overview.txt", "w", encoding="utf-8") as df:
             df.write(response.text)
