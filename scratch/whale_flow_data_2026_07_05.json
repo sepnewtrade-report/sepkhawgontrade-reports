@@ -1,0 +1,1004 @@
+{
+  "lastUpdated": "5/7/2569 09:15:24",
+  "data": {
+    "overview": {
+      "marketSentiment": "Whales maintain a defensive stance focusing on select tech and value.",
+      "topSectorRotation": [
+        "Technology and Big Tech",
+        "Biotech and Genomic Innovation",
+        "Activist and Contrarian Value"
+      ],
+      "criticalPeriodHighlights": [
+        {
+          "timestamp": "April 15, 2026",
+          "marketEvent": "CPI inflation spiked unexpectedly.",
+          "whaleActivity": "Whales accumulated Google and liquidated Microsoft shares.",
+          "impact": "Portfolios shifted rapidly toward resilient tech giants."
+        },
+        {
+          "timestamp": "May 20, 2026",
+          "marketEvent": "Fed announced interest rate stability.",
+          "whaleActivity": "Contrarian whales shorted Tesla and bought PayPal.",
+          "impact": "This triggered a major short squeeze."
+        },
+        {
+          "timestamp": "June 18, 2026",
+          "marketEvent": "Indices faced sharp macro sell-offs.",
+          "whaleActivity": "Whales dumped high-flying tech and bought IEP.",
+          "impact": "Capital fled to high-dividend activist value."
+        }
+      ]
+    },
+    "whales": [
+      {
+        "investorName": "Warren Buffett",
+        "firmName": "Berkshire Hathaway",
+        "aum": "$263.1B",
+        "style": "Value Investing",
+        "longPortfolio": [
+          {
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
+            "price": "$308.63",
+            "change": "+4.84%",
+            "shares": "227,917,808",
+            "value": "$70.34B",
+            "weight": "22.0%"
+          },
+          {
+            "ticker": "AXP",
+            "name": "American Express Co.",
+            "price": "$351.96",
+            "change": "+1.14%",
+            "shares": "151,610,700",
+            "value": "$53.36B",
+            "weight": "17.4%"
+          },
+          {
+            "ticker": "KO",
+            "name": "The Coca-Cola Co.",
+            "price": "$84.14",
+            "change": "+3.51%",
+            "shares": "400,000,000",
+            "value": "$33.66B",
+            "weight": "11.6%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "PUT",
+            "underlyingPrice": "$745.71",
+            "price": "$18.50",
+            "change": "-2.4%",
+            "contracts": "20,000",
+            "value": "$37,000,000",
+            "strikePrice": "$710.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "PUT",
+            "underlyingPrice": "$724.25",
+            "price": "$22.10",
+            "change": "-1.8%",
+            "contracts": "15,000",
+            "value": "$33,150,000",
+            "strikePrice": "$680.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": [
+          {
+            "date": "2026-06-01",
+            "ticker": "GOOGL",
+            "action": "BUY",
+            "price": "$351.81",
+            "size": "14,212,216"
+          },
+          {
+            "date": "2026-06-01",
+            "ticker": "GOOG",
+            "action": "BUY",
+            "price": "$348.20",
+            "size": "14,359,563"
+          }
+        ]
+      },
+      {
+        "investorName": "Ken Griffin",
+        "firmName": "Citadel Advisors",
+        "aum": "$570.62 Billion",
+        "style": "Multi-Strategy / Quantitative",
+        "longPortfolio": [
+          {
+            "ticker": "NVDA",
+            "name": "NVIDIA Corporation",
+            "price": "$194.42",
+            "change": "-0.21%",
+            "shares": "18,700,000",
+            "value": "$3,635,654,000",
+            "weight": "2.31%"
+          },
+          {
+            "ticker": "IVV",
+            "name": "iShares Core S&P 500 ETF",
+            "price": "$749.21",
+            "change": "+0.10%",
+            "shares": "4,100,000",
+            "value": "$3,071,761,000",
+            "weight": "1.88%"
+          },
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com, Inc.",
+            "price": "$243.00",
+            "change": "-0.14%",
+            "shares": "8,100,000",
+            "value": "$1,968,300,000",
+            "weight": "1.20%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Call",
+            "underlyingPrice": "$745.71",
+            "price": "$102.50",
+            "change": "+0.12%",
+            "contracts": "650,000",
+            "value": "$42,000,000,000",
+            "strikePrice": "$650.00",
+            "expiryDate": "2026-12-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Call",
+            "underlyingPrice": "$716.30",
+            "price": "$145.20",
+            "change": "+0.51%",
+            "contracts": "550,000",
+            "value": "$32,000,000,000",
+            "strikePrice": "$580.00",
+            "expiryDate": "2026-12-18"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "SNN",
+            "name": "Smith & Nephew PLC",
+            "price": "$30.25",
+            "change": "+5.29%",
+            "size": "1.66% shares short",
+            "reason": "Underperforming knee implant sales growth"
+          },
+          {
+            "ticker": "WPP",
+            "name": "WPP PLC",
+            "price": "$16.53",
+            "change": "+1.60%",
+            "size": "1.07% shares short",
+            "reason": "Inadequate digital ad client data solution"
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-30",
+            "ticker": "IMNM",
+            "action": "Sell",
+            "price": "$21.19",
+            "size": "1,660,508"
+          },
+          {
+            "date": "2026-06-29",
+            "ticker": "WPP",
+            "action": "Sell",
+            "price": "$16.53",
+            "size": "12,600,000"
+          }
+        ]
+      },
+      {
+        "investorName": "Jim Simons",
+        "firmName": "Renaissance Technologies LLC",
+        "aum": "$96.38 Billion",
+        "style": "Quantitative Systematic Trading",
+        "longPortfolio": [
+          {
+            "ticker": "UTHR",
+            "name": "United Therapeutics Corporation",
+            "price": "$555.91",
+            "change": "+1.60%",
+            "shares": "1,787,019",
+            "value": "$993,421,732",
+            "weight": "1.66%"
+          },
+          {
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
+            "price": "$308.63",
+            "change": "+4.84%",
+            "shares": "3,075,600",
+            "value": "$949,222,428",
+            "weight": "1.22%"
+          },
+          {
+            "ticker": "PLTR",
+            "name": "Palantir Technologies Inc.",
+            "price": "$129.30",
+            "change": "+2.84%",
+            "shares": "6,985,900",
+            "value": "$903,276,870",
+            "weight": "1.60%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$744.78",
+            "price": "$15.50",
+            "change": "+21.13%",
+            "contracts": "10,000",
+            "value": "$15,500,000",
+            "strikePrice": "$740.00",
+            "expiryDate": "2026-07-17"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$12.40",
+            "change": "+18.50%",
+            "contracts": "15,000",
+            "value": "$18,600,000",
+            "strikePrice": "$710.00",
+            "expiryDate": "2026-07-17"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": []
+      },
+      {
+        "investorName": "Michael Burry",
+        "firmName": "Scion Asset Management",
+        "aum": "$155 Million",
+        "style": "Contrarian Value",
+        "longPortfolio": [
+          {
+            "ticker": "PYPL",
+            "name": "PayPal Holdings Inc.",
+            "price": "$45.47",
+            "change": "+3.18%",
+            "shares": "350,000",
+            "value": "$15,914,500",
+            "weight": "35.0%"
+          },
+          {
+            "ticker": "ADBE",
+            "name": "Adobe Inc.",
+            "price": "$219.72",
+            "change": "+4.14%",
+            "shares": "50,000",
+            "value": "$10,986,000",
+            "weight": "24.1%"
+          },
+          {
+            "ticker": "BABA",
+            "name": "Alibaba Group Holding Limited",
+            "price": "$96.14",
+            "change": "-1.89%",
+            "shares": "110,000",
+            "value": "$10,575,400",
+            "weight": "23.2%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "NVDA",
+            "type": "Put",
+            "underlyingPrice": "$194.83",
+            "price": "$12.50",
+            "change": "+1.50%",
+            "contracts": "10,000",
+            "value": "$12,500,000",
+            "strikePrice": "$110.00",
+            "expiryDate": "2027-06-18"
+          },
+          {
+            "ticker": "PLTR",
+            "type": "Put",
+            "underlyingPrice": "$129.30",
+            "price": "$15.50",
+            "change": "-2.30%",
+            "contracts": "20,000",
+            "value": "$31,000,000",
+            "strikePrice": "$100.00",
+            "expiryDate": "2026-12-18"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "TSLA",
+            "name": "Tesla, Inc.",
+            "price": "$394.04",
+            "change": "-7.30%",
+            "size": "Undisclosed",
+            "reason": "Overextended valuation, inflating AI bubble"
+          },
+          {
+            "ticker": "MU",
+            "name": "Micron Technology, Inc.",
+            "price": "$975.56",
+            "change": "-5.39%",
+            "size": "Undisclosed",
+            "reason": "Skepticism on AI memory demand durability"
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-30",
+            "ticker": "TSLA",
+            "action": "Short",
+            "price": "$416.22",
+            "size": "Undisclosed"
+          },
+          {
+            "date": "2026-06-12",
+            "ticker": "PYPL",
+            "action": "Buy",
+            "price": "$41.53",
+            "size": "Undisclosed"
+          }
+        ]
+      },
+      {
+        "investorName": "Ray Dalio",
+        "firmName": "Bridgewater Associates",
+        "aum": "$150.16 Billion",
+        "style": "Systematic Global Macro",
+        "longPortfolio": [
+          {
+            "ticker": "SPY",
+            "name": "SPDR S&P 500 ETF Trust",
+            "price": "$745.71",
+            "change": "-0.41%",
+            "shares": "4,364,862",
+            "value": "$3,254,923,142",
+            "weight": "12.67%"
+          },
+          {
+            "ticker": "IVV",
+            "name": "iShares Core S&P 500 ETF",
+            "price": "$748.43",
+            "change": "-0.30%",
+            "shares": "2,679,084",
+            "value": "$2,005,107,838",
+            "weight": "7.81%"
+          },
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com Inc.",
+            "price": "$242.40",
+            "change": "+0.40%",
+            "shares": "4,388,711",
+            "value": "$1,063,823,546",
+            "weight": "4.08%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$745.71",
+            "price": "$12.50",
+            "change": "-1.50%",
+            "contracts": "15,000",
+            "value": "$18,750,000",
+            "strikePrice": "$730.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$11.80",
+            "change": "-0.80%",
+            "contracts": "10,000",
+            "value": "$11,800,000",
+            "strikePrice": "$695.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": []
+      },
+      {
+        "investorName": "Chase Coleman",
+        "firmName": "Tiger Global Management",
+        "aum": "$55.96 Billion",
+        "style": "Long/Short Growth Tech Equity",
+        "longPortfolio": [
+          {
+            "ticker": "GOOGL",
+            "name": "Alphabet Inc.",
+            "price": "$359.07",
+            "change": "-0.36%",
+            "shares": "10,631,402",
+            "value": "$3.82 Billion",
+            "weight": "13.38%"
+          },
+          {
+            "ticker": "NVDA",
+            "name": "NVIDIA Corp.",
+            "price": "$194.44",
+            "change": "-1.39%",
+            "shares": "12,011,752",
+            "value": "$2.34 Billion",
+            "weight": "9.17%"
+          },
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com Inc.",
+            "price": "$242.67",
+            "change": "+0.40%",
+            "shares": "10,000,000",
+            "value": "$2.43 Billion",
+            "weight": "9.12%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$745.71",
+            "price": "$12.50",
+            "change": "+1.2%",
+            "contracts": "5,000",
+            "value": "$6,250,000",
+            "strikePrice": "$720.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$15.80",
+            "change": "-0.5%",
+            "contracts": "4,000",
+            "value": "$6,320,000",
+            "strikePrice": "$690.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "MSTR",
+            "name": "MicroStrategy Inc.",
+            "price": "$1,550.00",
+            "change": "-2.4%",
+            "size": "$120 Million",
+            "reason": "Hedge against Bitcoin premium."
+          },
+          {
+            "ticker": "CVNA",
+            "name": "Carvana Co.",
+            "price": "$118.50",
+            "change": "+1.8%",
+            "size": "$85 Million",
+            "reason": "Valuation disconnect from fundamentals."
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-11",
+            "ticker": "INTC",
+            "action": "BUY",
+            "price": "$116.96",
+            "size": "500,000"
+          },
+          {
+            "date": "2026-06-18",
+            "ticker": "MSFT",
+            "action": "SELL",
+            "price": "$390.49",
+            "size": "250,000"
+          }
+        ]
+      },
+      {
+        "investorName": "David Tepper",
+        "firmName": "Appaloosa Management",
+        "aum": "$15.30 Billion",
+        "style": "Contrarian Distressed Value Macro",
+        "longPortfolio": [
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com Inc.",
+            "price": "$242.67",
+            "change": "0.40%",
+            "shares": "4,320,000",
+            "value": "$1.05 Billion",
+            "weight": "15.16%"
+          },
+          {
+            "ticker": "MU",
+            "name": "Micron Technology Inc.",
+            "price": "$975.56",
+            "change": "-5.49%",
+            "shares": "1,665,000",
+            "value": "$1.62 Billion",
+            "weight": "9.48%"
+          },
+          {
+            "ticker": "GOOGL",
+            "name": "Alphabet Inc.",
+            "price": "$359.91",
+            "change": "-0.36%",
+            "shares": "1,732,700",
+            "value": "$623.62 Million",
+            "weight": "8.38%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$744.78",
+            "price": "$4.50",
+            "change": "-12.50%",
+            "contracts": "5,000",
+            "value": "$2.25 Million",
+            "strikePrice": "$700.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$6.20",
+            "change": "-8.40%",
+            "contracts": "3,000",
+            "value": "$1.86 Million",
+            "strikePrice": "$670.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": []
+      },
+      {
+        "investorName": "Bill Ackman",
+        "firmName": "Pershing Square Capital Management",
+        "aum": "$13.71B",
+        "style": "Concentrated, long-only activist",
+        "longPortfolio": [
+          {
+            "ticker": "BN",
+            "name": "Brookfield Corp",
+            "price": "$43.50",
+            "change": "+1.54%",
+            "shares": "59,697,208",
+            "value": "$2,596,828,548",
+            "weight": "17.62%"
+          },
+          {
+            "ticker": "AMZN",
+            "name": "Amazon.com Inc",
+            "price": "$242.40",
+            "change": "+0.40%",
+            "shares": "11,451,981",
+            "value": "$2,775,960,194",
+            "weight": "17.39%"
+          },
+          {
+            "ticker": "UBER",
+            "name": "Uber Technologies Inc",
+            "price": "$74.35",
+            "change": "+5.47%",
+            "shares": "29,958,771",
+            "value": "$2,227,434,624",
+            "weight": "15.71%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$745.71",
+            "price": "$12.50",
+            "change": "+2.10%",
+            "contracts": "10,000",
+            "value": "$12,500,000",
+            "strikePrice": "$720.00",
+            "expiryDate": "09/18/2026"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$18.20",
+            "change": "+1.80%",
+            "contracts": "8,500",
+            "value": "$15,470,000",
+            "strikePrice": "$690.00",
+            "expiryDate": "09/18/2026"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": [
+          {
+            "date": "06/04/2026",
+            "ticker": "HHH",
+            "action": "Buy",
+            "price": "$7,142.85",
+            "size": "140,000 Preferred Shares"
+          },
+          {
+            "date": "06/04/2026",
+            "ticker": "PSH",
+            "action": "Buy",
+            "price": "$53.55",
+            "size": "24,499 Shares"
+          }
+        ]
+      },
+      {
+        "investorName": "Carl Icahn",
+        "firmName": "Icahn Enterprises",
+        "aum": "$8.55 Billion",
+        "style": "Activist Value",
+        "longPortfolio": [
+          {
+            "ticker": "IEP",
+            "name": "Icahn Enterprises L.P.",
+            "price": "$7.24",
+            "change": "-0.55%",
+            "shares": "618,393,343",
+            "value": "$4,477,167,803",
+            "weight": "48.5%"
+          },
+          {
+            "ticker": "CVI",
+            "name": "CVR Energy, Inc.",
+            "price": "$28.48",
+            "change": "-0.59%",
+            "shares": "71,201,875",
+            "value": "$2,027,829,394",
+            "weight": "28.0%"
+          },
+          {
+            "ticker": "UAN",
+            "name": "CVR Partners, LP",
+            "price": "$114.00",
+            "change": "+2.10%",
+            "shares": "4,164,274",
+            "value": "$474,727,236",
+            "weight": "6.2%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "PUT",
+            "underlyingPrice": "$744.78",
+            "price": "$12.50",
+            "change": "+4.2%",
+            "contracts": "5,000",
+            "value": "$6,250,000",
+            "strikePrice": "$730.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "PUT",
+            "underlyingPrice": "$712.60",
+            "price": "$15.80",
+            "change": "+6.5%",
+            "contracts": "3,500",
+            "value": "$5,530,000",
+            "strikePrice": "$700.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "SPY",
+            "name": "S&P 500 Index Short",
+            "price": "$744.78",
+            "change": "-0.13%",
+            "size": "$147,000,000",
+            "reason": "Broad market macroeconomic protection"
+          },
+          {
+            "ticker": "CVI",
+            "name": "Refining Margin Hedges",
+            "price": "$28.48",
+            "change": "-0.59%",
+            "size": "$81,000,000",
+            "reason": "Hedging refinery crack spreads"
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-25",
+            "ticker": "IEP",
+            "action": "BUY",
+            "price": "$7.24",
+            "size": "36,456,030 shares"
+          },
+          {
+            "date": "2026-06-09",
+            "ticker": "JBLU",
+            "action": "BUY",
+            "price": "$5.10",
+            "size": "20,658,179 shares"
+          }
+        ]
+      },
+      {
+        "investorName": "Paul Singer",
+        "firmName": "Elliott Investment Management",
+        "aum": "$79.8 Billion",
+        "style": "Multi-Strategy Activist",
+        "longPortfolio": [
+          {
+            "ticker": "TFPM",
+            "name": "Triple Flag Precious Metals Corp.",
+            "price": "$31.49",
+            "change": "+4.34%",
+            "shares": "133,241,535",
+            "value": "$4,195,775,935",
+            "weight": "23.0%"
+          },
+          {
+            "ticker": "PSX",
+            "name": "Phillips 66",
+            "price": "$176.42",
+            "change": "+1.10%",
+            "shares": "19,251,000",
+            "value": "$3,396,261,420",
+            "weight": "17.4%"
+          },
+          {
+            "ticker": "SU",
+            "name": "Suncor Energy Inc.",
+            "price": "$55.05",
+            "change": "+2.76%",
+            "shares": "52,670,800",
+            "value": "$2,899,527,540",
+            "weight": "17.3%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "XLI",
+            "type": "PUT",
+            "underlyingPrice": "$183.91",
+            "price": "$3.50",
+            "change": "+0.30%",
+            "contracts": "75,000",
+            "value": "$1,212,975,000",
+            "strikePrice": "$180.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "XLP",
+            "type": "PUT",
+            "underlyingPrice": "$84.99",
+            "price": "$1.85",
+            "change": "+2.03%",
+            "contracts": "91,400",
+            "value": "$749,297,200",
+            "strikePrice": "$85.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "REP",
+            "name": "Repsol SA",
+            "price": "22.33 EUR",
+            "change": "-0.62%",
+            "size": "1.40% stake",
+            "reason": "Oil transition risk."
+          },
+          {
+            "ticker": "TTE",
+            "name": "TotalEnergies SE",
+            "price": "66.94 EUR",
+            "change": "+0.09%",
+            "size": "0.88% stake",
+            "reason": "Energy market cycle hedge."
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-30",
+            "ticker": "TFPM",
+            "action": "SELL",
+            "price": "$35.91",
+            "size": "6,680"
+          },
+          {
+            "date": "2026-06-22",
+            "ticker": "IDH",
+            "action": "SELL",
+            "price": "$0.50",
+            "size": "126,000,000"
+          }
+        ]
+      },
+      {
+        "investorName": "Cathie Wood",
+        "firmName": "ARK Investment Management",
+        "aum": "$12.86 Billion",
+        "style": "Thematic Disruptive Innovation",
+        "longPortfolio": [
+          {
+            "ticker": "TSLA",
+            "name": "Tesla, Inc.",
+            "price": "$393.45",
+            "change": "-7.49%",
+            "shares": "2,831,329",
+            "value": "$1,113,996,424",
+            "weight": "8.19%"
+          },
+          {
+            "ticker": "AMD",
+            "name": "Advanced Micro Devices, Inc.",
+            "price": "$517.80",
+            "change": "-4.60%",
+            "shares": "2,713,434",
+            "value": "$1,405,016,125",
+            "weight": "4.29%"
+          },
+          {
+            "ticker": "CRSP",
+            "name": "CRISPR Therapeutics AG",
+            "price": "$60.08",
+            "change": "+8.02%",
+            "shares": "11,300,000",
+            "value": "$678,904,000",
+            "weight": "4.19%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "SPY",
+            "type": "Put",
+            "underlyingPrice": "$744.78",
+            "price": "$12.50",
+            "change": "-2.45%",
+            "contracts": "1,500",
+            "value": "$1,875,000",
+            "strikePrice": "$720.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "QQQ",
+            "type": "Put",
+            "underlyingPrice": "$712.60",
+            "price": "$14.20",
+            "change": "+1.85%",
+            "contracts": "1,200",
+            "value": "$1,704,000",
+            "strikePrice": "$690.00",
+            "expiryDate": "2026-09-18"
+          }
+        ],
+        "shortPositions": [],
+        "recentTransactions": [
+          {
+            "date": "2026-07-02",
+            "ticker": "ROKU",
+            "action": "SELL",
+            "price": "$140.38",
+            "size": "124,660 shares"
+          },
+          {
+            "date": "2026-07-01",
+            "ticker": "CRCL",
+            "action": "BUY",
+            "price": "$61.95",
+            "size": "288,000 shares"
+          }
+        ]
+      },
+      {
+        "investorName": "Larry Fink",
+        "firmName": "BlackRock",
+        "aum": "$14.0 Trillion",
+        "style": "Passive & Active Barbell",
+        "longPortfolio": [
+          {
+            "ticker": "NVDA",
+            "name": "Nvidia Corporation",
+            "price": "$194.83",
+            "change": "-1.39%",
+            "shares": "1,925,533,174",
+            "value": "$375.15 Billion",
+            "weight": "5.89%"
+          },
+          {
+            "ticker": "AAPL",
+            "name": "Apple Inc.",
+            "price": "$308.63",
+            "change": "+4.84%",
+            "shares": "1,144,695,425",
+            "value": "$353.29 Billion",
+            "weight": "5.10%"
+          },
+          {
+            "ticker": "MSFT",
+            "name": "Microsoft Corp.",
+            "price": "$390.49",
+            "change": "+1.62%",
+            "shares": "593,328,571",
+            "value": "$231.69 Billion",
+            "weight": "3.85%"
+          }
+        ],
+        "optionsPositions": [
+          {
+            "ticker": "NVDA",
+            "type": "Put",
+            "underlyingPrice": "$194.83",
+            "price": "$8.50",
+            "change": "+1.20%",
+            "contracts": "26,655",
+            "value": "$22.66 Million",
+            "strikePrice": "$190.00",
+            "expiryDate": "2026-09-18"
+          },
+          {
+            "ticker": "AMZN",
+            "type": "Call",
+            "underlyingPrice": "$242.67",
+            "price": "$12.50",
+            "change": "-0.40%",
+            "contracts": "11,278",
+            "value": "$14.10 Million",
+            "strikePrice": "$240.00",
+            "expiryDate": "2026-08-21"
+          }
+        ],
+        "shortPositions": [
+          {
+            "ticker": "SPY",
+            "name": "SPDR S&P 500 ETF Trust",
+            "price": "$744.78",
+            "change": "-0.13%",
+            "size": "$1.20 Billion",
+            "reason": "Systematic portfolio hedge"
+          },
+          {
+            "ticker": "QQQ",
+            "name": "Invesco QQQ Trust",
+            "price": "$712.60",
+            "change": "-1.73%",
+            "size": "$850.00 Million",
+            "reason": "Tech sector valuation protection"
+          }
+        ],
+        "recentTransactions": [
+          {
+            "date": "2026-06-01",
+            "ticker": "BLK",
+            "action": "Gift",
+            "price": "$0.00",
+            "size": "4,780 shares"
+          },
+          {
+            "date": "2026-04-28",
+            "ticker": "BLK",
+            "action": "Sell",
+            "price": "$1,050.55",
+            "size": "33,900 shares"
+          }
+        ]
+      }
+    ]
+  }
+}
