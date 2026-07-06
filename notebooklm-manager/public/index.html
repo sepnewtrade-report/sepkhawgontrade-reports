@@ -300,13 +300,20 @@
         <div class="tab-panel" id="market-trends-tab" style="display: none;">
             <div class="trends-container">
                 <!-- Sub-Navigation Toggle Bar -->
-                <div class="sub-tab-navigation" style="margin-bottom: 20px; display: flex; gap: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
-                    <button class="sub-tab-btn active" data-sub-tab="sector-social-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-layer-group"></i> กลุ่มหุ้น & กระแสโซเชียล
-                    </button>
-                    <button class="sub-tab-btn" data-sub-tab="whale-tracker-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); color: var(--text-secondary); border: 1px solid rgba(255, 255, 255, 0.08); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i> พอร์ต & การชอร์ตของวาฬยักษ์
-                    </button>
+                <div class="sub-tab-navigation" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; flex-wrap: wrap; gap: 15px;">
+                    <div style="display: flex; gap: 10px;">
+                        <button class="sub-tab-btn active" data-sub-tab="sector-social-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-layer-group"></i> <span class="nav-txt-sector-social">กลุ่มหุ้น & กระแสโซเชียล</span>
+                        </button>
+                        <button class="sub-tab-btn" data-sub-tab="whale-tracker-view" style="padding: 8px 16px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); color: var(--text-secondary); border: 1px solid rgba(255, 255, 255, 0.08); font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> <span class="nav-txt-whale-tracker">พอร์ต & การชอร์ตของวาฬยักษ์</span>
+                        </button>
+                    </div>
+                    
+                    <div class="lang-switcher" style="display: flex; gap: 4px; background: rgba(255, 255, 255, 0.05); padding: 3px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <button class="lang-btn active" data-lang="th" style="padding: 6px 12px; border-radius: 15px; border: none; background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">TH</button>
+                        <button class="lang-btn" data-lang="en" style="padding: 6px 12px; border-radius: 15px; border: none; background: transparent; color: var(--text-secondary); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">EN</button>
+                    </div>
                 </div>
 
                 <!-- Sub-tab 1: Sector & Social Panel -->
@@ -356,7 +363,7 @@
                     <div id="trends-dashboard-grid" style="display: none;" class="trends-dashboard-layout">
                         <!-- Left Column: Sectors Volume Top 10 -->
                         <div class="trends-left-col">
-                            <h3 style="margin-bottom: 15px; color: #60a5fa;"><i class="fa-solid fa-layer-group"></i> หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)</h3>
+                            <h3 id="trends-sectors-header" style="margin-bottom: 15px; color: #60a5fa;"><i class="fa-solid fa-layer-group"></i> หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)</h3>
                             <div class="sectors-grid-container" id="sectors-grid-container">
                                 <!-- Sector cards will be dynamically injected here -->
                             </div>
@@ -364,7 +371,7 @@
                         
                         <!-- Right Column: Social Sentiment Hub -->
                         <div class="trends-right-col">
-                            <h3 style="margin-bottom: 15px; color: #f472b6;"><i class="fa-solid fa-fire-flame-curved"></i> สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)</h3>
+                            <h3 id="trends-social-header" style="margin-bottom: 15px; color: #f472b6;"><i class="fa-solid fa-fire-flame-curved"></i> สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)</h3>
                             <div class="social-cards-container" id="social-cards-container">
                                 <!-- Social trend cards will be injected here -->
                             </div>

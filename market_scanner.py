@@ -16,6 +16,73 @@ def clean_json_text(text):
         text = text[:-3]
     return text.strip()
 
+def override_prices_with_yfinance(data):
+    import yfinance as yf
+    from concurrent.futures import ThreadPoolExecutor
+    
+    # Collect all tickers
+    tickers = set()
+    if "sectors" in data and isinstance(data["sectors"], list):
+        for sec in data["sectors"]:
+            if "stocks" in sec and isinstance(sec["stocks"], list):
+                for stock in sec["stocks"]:
+                    if "ticker" in stock:
+                        tickers.add(stock["ticker"])
+                        
+    if "socialTrends" in data and isinstance(data["socialTrends"], list):
+        for trend in data["socialTrends"]:
+            if "ticker" in trend:
+                tickers.add(trend["ticker"])
+                
+    # Fetch in parallel
+    results = {}
+    def fetch_quote(ticker):
+        try:
+            # clean ticker name just in case
+            t_name = ticker.strip().upper()
+            t = yf.Ticker(t_name)
+            info = t.info
+            price = info.get("currentPrice") or info.get("regularMarketPrice")
+            prev_close = info.get("previousClose") or info.get("regularMarketPreviousClose")
+            
+            # fallback to history if info doesn't have it
+            if price is None:
+                hist = t.history(period="1d")
+                if not hist.empty:
+                    price = hist['Close'].iloc[-1]
+                    prev_close = hist['Open'].iloc[-1]
+                    
+            if price is not None and prev_close is not None:
+                change = ((price - prev_close) / prev_close) * 100
+                return ticker, price, change
+        except Exception:
+            pass
+        return ticker, None, None
+
+    with ThreadPoolExecutor(max_workers=25) as executor:
+        for ticker, price, change in executor.map(fetch_quote, list(tickers)):
+            if price is not None:
+                results[ticker] = (price, change)
+                
+    # Overwrite in data
+    if "sectors" in data and isinstance(data["sectors"], list):
+        for sec in data["sectors"]:
+            if "stocks" in sec and isinstance(sec["stocks"], list):
+                for stock in sec["stocks"]:
+                    ticker = stock.get("ticker")
+                    if ticker in results:
+                        price, change = results[ticker]
+                        stock["price"] = f"${price:.2f}"
+                        stock["change"] = f"{change:+.2f}%"
+                        
+    if "socialTrends" in data and isinstance(data["socialTrends"], list):
+        for trend in data["socialTrends"]:
+            ticker = trend.get("ticker")
+            if ticker in results:
+                price, change = results[ticker]
+                trend["price"] = f"${price:.2f}"
+                trend["change"] = f"{change:+.2f}%"
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python market_scanner.py <output_json_path>", file=sys.stderr)
@@ -61,9 +128,11 @@ def main():
                                     "price": types.Schema(type=types.Type.STRING),
                                     "volume": types.Schema(type=types.Type.STRING),
                                     "change": types.Schema(type=types.Type.STRING),
+                                    "rsi": types.Schema(type=types.Type.STRING),
+                                    "macd": types.Schema(type=types.Type.STRING),
                                     "reason": types.Schema(type=types.Type.STRING)
                                 },
-                                required=["ticker", "name", "price", "volume", "change", "reason"]
+                                required=["ticker", "name", "price", "volume", "change", "rsi", "macd", "reason"]
                             )
                         )
                     },
@@ -95,14 +164,16 @@ def main():
         "You are an expert US financial market scanner and social media sentiment analyst.\n"
         "Your task is to use Google Search to find current, live information at this exact moment:\n"
         "1. Identify the Top 10 US stocks by trading volume for these sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics.\n"
-        "2. Identify the most active/discussed US stocks in global retail investor forums and social channels (Reddit, X, Stocktwits) right now.\n\n"
-        "CRITICAL: All stock prices must be the latest live price (including Pre-market, After-Hours, or Overnight prices if active).\n\n"
+        "2. For each stock, identify its current technical indicators: RSI (14-day relative strength index, e.g., '55'), trading Volume (e.g. '12.4M'), and MACD signal (e.g. 'Bullish Cross' or 'Bearish').\n"
+        "3. Identify the most active/discussed US stocks in global retail investor forums and social channels (Reddit, X, Stocktwits) right now.\n\n"
+        "CRITICAL: Do NOT include any inline search citations (such as [1], [2], [1.3.7]) or footnote links anywhere in the JSON keys or values. Strip all citations and footnotes, returning only pure raw data. All stock prices must be the latest live price (including Pre-market, After-Hours, or Overnight prices if active). To guarantee accuracy, prioritize querying Yahoo Finance or Google Finance quotes directly for each ticker (e.g., search 'SPCE stock price yahoo finance' or 'AAPL quote google finance'). Pay extra attention to stocks that had recent reverse stock splits (such as SPCE, which trades around $2.70+, NOT $1.50). Double check quotes to ensure post-split values are represented.\n\n"
         "Format the output strictly as a JSON object matching the requested schema. Ensure all fields are populated with current actual values. "
         "Do not include any markdown format blocks, output raw JSON only."
     )
 
     user_prompt = (
         "Scan the US market right now. Fetch the top 10 stocks by volume for Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics. "
+        "For each stock, retrieve the current RSI (14-day) and MACD indicators alongside the price and volume. "
         "Use the latest live prices (including Pre-market/After-hours/Overnight if active). "
         "Also scan global social platforms (X, Reddit, Stocktwits) to identify top trending stocks with mention volume, sentiment, price, change, and discussion summaries. "
         "Return the resulting structured data."
@@ -127,8 +198,14 @@ def main():
             raise Exception("Gemini returned empty response")
             
         cleaned = clean_json_text(json_data)
-        # Parse to validate JSON format (strict=False handles raw newlines/tabs inside strings)
         parsed = json.loads(cleaned, strict=False)
+        
+        # Override prices with yfinance data for 100% accuracy
+        try:
+            print("Verifying and correcting stock prices using yfinance...")
+            override_prices_with_yfinance(parsed)
+        except Exception as e:
+            print(f"Warning: Failed to override prices with yfinance: {e}", file=sys.stderr)
         
         # Save to output file
         output_dir = os.path.dirname(os.path.abspath(output_file))

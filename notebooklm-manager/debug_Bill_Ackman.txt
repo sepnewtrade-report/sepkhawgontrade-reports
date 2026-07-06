@@ -1,0 +1,17 @@
+{
+  "investorName": "Bill Ackman",
+  "firmName": "Pershing Square Capital Management",
+  "aum": "$32.62 Billion",
+  "style": "Concentrated activist value",
+  "longPortfolio": [
+    {
+      "ticker": "BN",
+      "name": "Brookfield Corporation",
+      "price": "$43.28",
+      "change": "-0.35%",
+      "shares": "59,697,208",
+      "value": "$2,583,695,162",
+      "weight": "17.62%"
+    },
+    {
+      

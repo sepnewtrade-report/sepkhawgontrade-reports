@@ -1539,3 +1539,18 @@ select.form-control {
     line-height: 1.4;
     margin: 0;
 }
+
+/* Highlight style for high-volume oversold stocks (RSI <= 30) */
+.stock-row-highlight {
+    background: rgba(245, 158, 11, 0.12) !important;
+    box-shadow: inset 3px 0 0 0 #f59e0b;
+}
+.stock-row-highlight td {
+    color: #fbbf24 !important;
+}
+.stock-row-highlight .stock-ticker-badge {
+    background-color: rgba(245, 158, 11, 0.25) !important;
+    color: #fde047 !important;
+    border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+

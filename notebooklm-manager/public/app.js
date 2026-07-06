@@ -7,6 +7,9 @@ let state = {
     isPollingStatus: false,
     pollInterval: null,
     
+    // Translation additions
+    language: 'th',
+    
     // Workflow additions
     templates: [],
     activeTemplateId: '',
@@ -510,6 +513,39 @@ function setupEventListeners() {
             if (!chk.disabled) {
                 chk.checked = e.target.checked;
             }
+        });
+    });
+
+    // Language Switcher Toggle
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (state.language === lang) return;
+            
+            // Switch active button
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Apply new state styles
+            langBtns.forEach(b => {
+                if (b.classList.contains('active')) {
+                    b.style.background = 'rgba(59, 130, 246, 0.2)';
+                    b.style.color = '#60a5fa';
+                } else {
+                    b.style.background = 'transparent';
+                    b.style.color = 'var(--text-secondary)';
+                }
+            });
+            
+            state.language = lang;
+            
+            // 1. Translate static UI elements
+            applyLanguage();
+            
+            // 2. Fetch and render translated dynamic data
+            loadMarketTrends();
+            loadWhalePortfolios();
         });
     });
 }
@@ -2110,11 +2146,11 @@ async function deleteWorkflow(workflowId) {
 // Load and render US Market trends
 async function loadMarketTrends() {
     try {
-        const response = await fetch('/api/market-trends');
+        const response = await fetch(`/api/market-trends?lang=${state.language}`);
         const data = await response.json();
         
         if (data.success && data.data) {
-            trendsLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            trendsLastUpdated.textContent = (state.language === 'th' ? 'อัปเดตล่าสุด: ' : 'Last Updated: ') + data.lastUpdated;
             trendsEmptyPlaceholder.style.display = 'none';
             trendsLoadingOverlay.style.display = 'none';
             trendsDashboardGrid.style.display = 'flex';
@@ -2136,29 +2172,29 @@ async function handleRefreshMarketTrends() {
     btnRefreshTrendsEmpty.disabled = true;
     
     const originalText = btnRefreshTrends.innerHTML;
-    btnRefreshTrends.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยตลาด...';
+    btnRefreshTrends.innerHTML = state.language === 'th' ? '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยตลาด...' : '<i class="fa-solid fa-spinner fa-spin"></i> Scanning Market...';
     
     trendsEmptyPlaceholder.style.display = 'none';
     trendsDashboardGrid.style.display = 'none';
     trendsLoadingOverlay.style.display = 'flex';
     
     try {
-        const response = await fetch('/api/market-trends/refresh', { method: 'POST' });
+        const response = await fetch(`/api/market-trends/refresh?lang=${state.language}`, { method: 'POST' });
         const data = await response.json();
         
         if (data.success && data.data) {
-            trendsLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            trendsLastUpdated.textContent = (state.language === 'th' ? 'อัปเดตล่าสุด: ' : 'Last Updated: ') + data.lastUpdated;
             trendsLoadingOverlay.style.display = 'none';
             trendsDashboardGrid.style.display = 'flex';
             renderMarketTrends(data.data);
-            alert('ดึงข้อมูลตลาดหุ้นและโซเชียลเรียบร้อยแล้ว!');
+            alert(state.language === 'th' ? 'ดึงข้อมูลตลาดหุ้นและโซเชียลเรียบร้อยแล้ว!' : 'Market and social trends refreshed successfully!');
         } else {
-            alert('ดึงข้อมูลไม่สำเร็จ: ' + (data.error || 'ไม่ทราบสาเหตุ'));
+            alert((state.language === 'th' ? 'ดึงข้อมูลไม่สำเร็จ: ' : 'Scan failed: ') + (data.error || 'ไม่ทราบสาเหตุ'));
             loadMarketTrends(); // Fallback to cache if any
         }
     } catch (err) {
         console.error('Error refreshing trends:', err);
-        alert('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
+        alert(state.language === 'th' ? 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์' : 'Server connection error');
         loadMarketTrends(); // Fallback to cache if any
     } finally {
         btnRefreshTrends.disabled = false;
@@ -2171,6 +2207,117 @@ async function handleRefreshMarketTrends() {
 function renderMarketTrends(trends) {
     sectorsGridContainer.innerHTML = '';
     socialCardsContainer.innerHTML = '';
+    
+    const l = trans[state.language];
+    
+    // Dynamic headers based on language
+    const trendsSectorsHeader = document.getElementById('trends-sectors-header');
+    if (trendsSectorsHeader) {
+        trendsSectorsHeader.innerHTML = `<i class="fa-solid fa-layer-group"></i> ${state.language === 'th' ? 'หุ้นปริมาณซื้อขายสูงสุด 10 อันดับแยกตามกลุ่ม (Sector Leaders)' : 'Top 10 Stocks by Volume (Sector Leaders)'}`;
+    }
+    const trendsSocialHeader = document.getElementById('trends-social-header');
+    if (trendsSocialHeader) {
+        trendsSocialHeader.innerHTML = `<i class="fa-solid fa-fire-flame-curved"></i> ${state.language === 'th' ? 'สัญญาณโซเชียลต่างประเทศ (Reddit, X & Community Trends)' : 'Global Social Sentiment & Community Trends'}`;
+    }
+    
+    // Volume parse helper for sorting
+    const parseVolumeVal = (v) => {
+        if (!v) return 0;
+        const c = v.replace(/[$,\s]/g, '').toLowerCase();
+        let m = 1;
+        let n = c;
+        if (c.endsWith('b')) { m = 1e9; n = c.slice(0, -1); }
+        else if (c.endsWith('m')) { m = 1e6; n = c.slice(0, -1); }
+        else if (c.endsWith('k')) { m = 1e3; n = c.slice(0, -1); }
+        const p = parseFloat(n);
+        return isNaN(p) ? 0 : p * m;
+    };
+    
+    // 1. Collect all oversold stocks (RSI <= 30) across all sectors
+    const oversoldStocks = [];
+    if (trends.sectors && Array.isArray(trends.sectors)) {
+        trends.sectors.forEach(sec => {
+            if (sec.stocks && Array.isArray(sec.stocks)) {
+                sec.stocks.forEach(stock => {
+                    const rsiVal = parseFloat(stock.rsi);
+                    if (!isNaN(rsiVal) && rsiVal <= 30) {
+                        oversoldStocks.push({
+                            ...stock,
+                            sectorName: sec.sectorName
+                        });
+                    }
+                });
+            }
+        });
+    }
+    
+    // 2. Render the "Golden Radar" card as the very first card
+    const radarCard = document.createElement('div');
+    radarCard.className = 'glass-card sector-card';
+    radarCard.style.border = '1px solid rgba(245, 158, 11, 0.4)';
+    radarCard.style.background = 'linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(0, 0, 0, 0.3) 100%)';
+    radarCard.style.marginBottom = '25px';
+    
+    const radarTitleRow = document.createElement('div');
+    radarTitleRow.className = 'sector-title-row';
+    radarTitleRow.innerHTML = `<h4 class="sector-title-text" style="color: #fbbf24;"><i class="fa-solid fa-circle-exclamation" style="color: #fbbf24; margin-right: 8px;"></i>${l.radar_title}</h4>`;
+    radarCard.appendChild(radarTitleRow);
+    
+    const radarTable = document.createElement('table');
+    radarTable.className = 'stock-table';
+    radarTable.innerHTML = `
+        <thead>
+            <tr>
+                <th style="width: 25%;">${l.col_ticker} (${state.language === 'th' ? 'กลุ่ม' : 'Sector'})</th>
+                <th style="width: 14%;">${l.col_price}</th>
+                <th style="width: 14%;">${l.col_change}</th>
+                <th style="width: 16%;">${l.col_volume}</th>
+                <th style="width: 14%;">${l.col_rsi}</th>
+                <th style="width: 17%;">${l.col_macd}</th>
+            </tr>
+        </thead>
+    `;
+    
+    const radarTbody = document.createElement('tbody');
+    if (oversoldStocks.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td colspan="6" style="text-align: center; color: var(--text-muted); padding: 25px; font-style: italic; font-size: 13px;">${l.radar_empty}</td>`;
+        radarTbody.appendChild(tr);
+    } else {
+        // Sort oversold stocks descending by volume
+        const sortedOversold = [...oversoldStocks].sort((a, b) => parseVolumeVal(b.volume) - parseVolumeVal(a.volume));
+        
+        sortedOversold.forEach(stock => {
+            const tr = document.createElement('tr');
+            tr.className = 'stock-row-highlight';
+            
+            const changeStr = (stock.change || '').trim();
+            let changeClass = 'stock-val-neutral';
+            if (changeStr.startsWith('+')) {
+                changeClass = 'stock-val-positive';
+            } else if (changeStr.startsWith('-')) {
+                changeClass = 'stock-val-negative';
+            }
+            
+            tr.innerHTML = `
+                <td>
+                    <span class="stock-ticker-badge" title="${stock.name || stock.ticker}">${stock.ticker}</span>
+                    <span style="font-size: 10px; color: #a1a1aa; margin-left: 4px;">(${stock.sectorName})</span>
+                </td>
+                <td><strong>${stock.price || '-'}</strong></td>
+                <td><span class="${changeClass}">${stock.change || '0%'}</span></td>
+                <td style="color: var(--text-secondary); font-family: monospace; font-size: 12px;">${stock.volume || '-'}</td>
+                <td style="color: #cbd5e1; font-family: monospace; font-size: 12px; font-weight: 500;">${stock.rsi || '-'}</td>
+                <td style="color: #94a3b8; font-size: 12px; font-weight: 500;">${stock.macd || '-'}</td>
+            `;
+            tr.title = `${stock.name || stock.ticker} - ${stock.reason || ''}`;
+            radarTbody.appendChild(tr);
+        });
+    }
+    
+    radarTable.appendChild(radarTbody);
+    radarCard.appendChild(radarTable);
+    sectorsGridContainer.appendChild(radarCard);
     
     // Render sectors (Top 10 volume per sector)
     if (trends.sectors && Array.isArray(trends.sectors)) {
@@ -2190,10 +2337,12 @@ function renderMarketTrends(trends) {
             table.innerHTML = `
                 <thead>
                     <tr>
-                        <th style="width: 25%;">Ticker</th>
-                        <th style="width: 25%;">ราคา</th>
-                        <th style="width: 25%;">% +/-</th>
-                        <th style="width: 25%;">Volume</th>
+                        <th style="width: 16%;">${l.col_ticker}</th>
+                        <th style="width: 16%;">${l.col_price}</th>
+                        <th style="width: 16%;">${l.col_change}</th>
+                        <th style="width: 18%;">${l.col_volume}</th>
+                        <th style="width: 16%;">${l.col_rsi}</th>
+                        <th style="width: 18%;">${l.col_macd}</th>
                     </tr>
                 </thead>
             `;
@@ -2219,6 +2368,12 @@ function renderMarketTrends(trends) {
                 sortedStocks.forEach(stock => {
                     const tr = document.createElement('tr');
                     
+                    // Highlight if RSI <= 30 (oversold high-volume stocks)
+                    const rsiVal = parseFloat(stock.rsi);
+                    if (!isNaN(rsiVal) && rsiVal <= 30) {
+                        tr.className = 'stock-row-highlight';
+                    }
+                    
                     // Determine color class for change
                     const changeStr = (stock.change || '').trim();
                     let changeClass = 'stock-val-neutral';
@@ -2234,7 +2389,9 @@ function renderMarketTrends(trends) {
                         </td>
                         <td><strong>${stock.price || '-'}</strong></td>
                         <td><span class="${changeClass}">${stock.change || '0%'}</span></td>
-                        <td style="color: var(--text-secondary); font-family: monospace;">${stock.volume || '-'}</td>
+                        <td style="color: var(--text-secondary); font-family: monospace; font-size: 12px;">${stock.volume || '-'}</td>
+                        <td style="color: #cbd5e1; font-family: monospace; font-size: 12px; font-weight: 500;">${stock.rsi || '-'}</td>
+                        <td style="color: #94a3b8; font-size: 12px; font-weight: 500;">${stock.macd || '-'}</td>
                     `;
                     
                     // Attach hover tool-tip describing the catalyst/reason
@@ -2276,7 +2433,7 @@ function renderMarketTrends(trends) {
                     <span class="sentiment-badge ${sentimentClass}">${sentiment}</span>
                 </div>
                 <div style="font-size: 13px; margin: 4px 0 8px 0; color: var(--text-primary);">
-                    ราคา: <span style="font-weight: 600; color: #fff;">${soc.price || '-'}</span> 
+                    ${state.language === 'th' ? 'ราคา' : 'Price'}: <span style="font-weight: 600; color: #fff;">${soc.price || '-'}</span> 
                     (<span style="${changeStyle}">${soc.change || '0%'}</span>)
                 </div>
                 <p class="social-summary-text">${soc.summary || ''}</p>
@@ -2293,11 +2450,11 @@ function renderMarketTrends(trends) {
 // Load whale portfolios from backend cache
 async function loadWhalePortfolios() {
     try {
-        const response = await fetch('/api/whale-portfolios');
+        const response = await fetch(`/api/whale-portfolios?lang=${state.language}`);
         const data = await response.json();
         
         if (data.success && data.data) {
-            whalesLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            whalesLastUpdated.textContent = (state.language === 'th' ? 'อัปเดตล่าสุด: ' : 'Last Updated: ') + data.lastUpdated;
             whalesEmptyPlaceholder.style.display = 'none';
             whalesLoadingOverlay.style.display = 'none';
             whalesDashboardGrid.style.display = 'flex';
@@ -2322,18 +2479,18 @@ async function handleRefreshWhales() {
     btnRefreshWhalesEmpty.disabled = true;
     
     const originalText = btnRefreshWhales.innerHTML;
-    btnRefreshWhales.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยบอร์ดวาฬ...';
+    btnRefreshWhales.innerHTML = state.language === 'th' ? '<i class="fa-solid fa-spinner fa-spin"></i> กำลังวิจัยบอร์ดวาฬ...' : '<i class="fa-solid fa-spinner fa-spin"></i> Researching Whales...';
     
     whalesEmptyPlaceholder.style.display = 'none';
     whalesDashboardGrid.style.display = 'none';
     whalesLoadingOverlay.style.display = 'flex';
     
     try {
-        const response = await fetch('/api/whale-portfolios/refresh', { method: 'POST' });
+        const response = await fetch(`/api/whale-portfolios/refresh?lang=${state.language}`, { method: 'POST' });
         const data = await response.json();
         
         if (data.success && data.data) {
-            whalesLastUpdated.textContent = 'อัปเดตล่าสุด: ' + data.lastUpdated;
+            whalesLastUpdated.textContent = (state.language === 'th' ? 'อัปเดตล่าสุด: ' : 'Last Updated: ') + data.lastUpdated;
             whalesLoadingOverlay.style.display = 'none';
             whalesDashboardGrid.style.display = 'flex';
             
@@ -2341,14 +2498,14 @@ async function handleRefreshWhales() {
             populateWhaleDropdown(data.data.whales);
             renderWhalesOverview(data.data.overview);
             triggerWhaleRender();
-            alert('ดึงพอร์ตและการชอร์ตของวาฬยักษ์สำเร็จแล้ว!');
+            alert(state.language === 'th' ? 'ดึงพอร์ตและการชอร์ตของวาฬยักษ์สำเร็จแล้ว!' : 'Whale portfolios and short sales refreshed successfully!');
         } else {
-            alert('ดึงข้อมูลวาฬไม่สำเร็จ: ' + (data.error || 'ไม่ทราบสาเหตุ'));
+            alert((state.language === 'th' ? 'ดึงข้อมูลวาฬไม่สำเร็จ: ' : 'Research failed: ') + (data.error || 'ไม่ทราบสาเหตุ'));
             loadWhalePortfolios();
         }
     } catch (err) {
         console.error('Error refreshing whales:', err);
-        alert('เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์');
+        alert(state.language === 'th' ? 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์' : 'Server connection error');
         loadWhalePortfolios();
     } finally {
         btnRefreshWhales.disabled = false;
@@ -2547,7 +2704,7 @@ function triggerWhaleRender() {
                 whaleShortsContainer.appendChild(card);
             });
         } else {
-            whaleShortsContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">ไม่มีการรายงานชอร์ตเซลล่าสุดทางสาธารณะ</div>';
+            whaleShortsContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">${state.language === 'th' ? 'ไม่มีการรายงานชอร์ตเซลล่าสุดทางสาธารณะ' : 'No public short sale positions reported recently'}</div>`;
         }
     }
     
@@ -2576,14 +2733,279 @@ function triggerWhaleRender() {
                         <strong style="color: #fff; font-size: 13.5px;">${tx.ticker}</strong>
                     </div>
                     <p class="timeline-desc" style="margin-top: 4px; font-size: 12px;">
-                        ทำรายการที่ราคา: <strong>${tx.price || '-'}</strong> | ขนาดรายการ: <strong>${tx.size || '-'}</strong>
+                        ${state.language === 'th' ? 'ทำรายการที่ราคา' : 'Executed Price'}: <strong>${tx.price || '-'}</strong> | ${state.language === 'th' ? 'ขนาดรายการ' : 'Size'}: <strong>${tx.size || '-'}</strong>
                     </p>
                 `;
                 whaleTransactionsTimeline.appendChild(item);
             });
         } else {
-            whaleTransactionsTimeline.innerHTML = '<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">ไม่มีรายการซื้อขายในรอบ 30 วันที่รายงานล่าสุด</div>';
+            whaleTransactionsTimeline.innerHTML = `<div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">${state.language === 'th' ? 'ไม่มีรายการซื้อขายในรอบ 30 วันที่รายงานล่าสุด' : 'No transactions reported in the past 30 days'}</div>`;
         }
     }
 }
+
+// Translation dictionary
+const trans = {
+    th: {
+        nav_sector_social: "กลุ่มหุ้น & กระแสโซเชียล",
+        nav_whale_tracker: "พอร์ต & การชอร์ตของวาฬยักษ์",
+        trends_header_title: "สแกนเนอร์ตลาดหุ้นสหรัฐฯ & สัญญาณโซเชียล",
+        trends_header_subtitle: "ข้อมูลแยกกลุ่ม 10 อันดับซื้อขายสูงสุด และกระแสเทรนด์ใน Reddit, X (Twitter) ทั่วโลก",
+        trends_last_updated_never: "อัปเดตล่าสุด: ยังไม่มีข้อมูล",
+        trends_last_updated_prefix: "อัปเดตล่าสุด: ",
+        trends_refresh_btn: "<i class=\"fa-solid fa-rotate\"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh)",
+        trends_loading_title: "กำลังวิจัยและดึงข้อมูลสดผ่าน Gemini 3.5 Flash...",
+        trends_loading_desc: "ระบบกำลังใช้ Google Search Grounding ค้นหาข้อมูลมูลค่าการซื้อขายหุ้นตามกลุ่ม และสแกนกระแสโซเชียล Reddit/X ในต่างประเทศ การวิเคราะห์นี้อาจใช้เวลาประมาณ 1-2 นาที...",
+        trends_empty_title: "ยังไม่มีข้อมูลสแกนตลาดในระบบ",
+        trends_empty_desc: "คุณสามารถดึงข้อมูลปัจจุบันโดยกดปุ่มด้านบนเพื่อสั่งรันบอทสแกนเนอร์วิเคราะห์แนวโน้มตลาดได้ทันที",
+        trends_empty_btn: "<i class=\"fa-solid fa-rotate\"></i> เริ่มต้นวิเคราะห์แนวโน้มตลาดเดี๋ยวนี้",
+        whales_header_title: "พอร์ตการลงทุน & การชอร์ตเซลของวาฬสหรัฐฯ (10 ยักษ์ใหญ่)",
+        whales_header_subtitle: "วิเคราะห์พอร์ต Long หุ้น, สัญญาณ Options/Puts, รายการชอร์ตเซล และธุรกรรมย้อนหลัง 1 เดือน",
+        whales_last_updated_never: "อัปเดตล่าสุด: ยังไม่มีข้อมูล",
+        whales_last_updated_prefix: "อัปเดตล่าสุด: ",
+        whales_refresh_btn: "<i class=\"fa-solid fa-rotate\"></i> ดึงข้อมูลสด ณ เวลานี้ (Refresh Whales)",
+        whales_loading_title: "กำลังสแกนพอร์ตและประวัติการเทรดของวาฬผ่าน Gemini 3.5 Flash...",
+        whales_loading_desc: "ระบบกำลังใช้ Google Search Grounding ดึงข้อมูลแบบยื่นแสดงสิทธิพอร์ตล่าสุด Form 13F และข่าวการเทรดในรอบ 30 วันที่ผ่านมา การสแกนข้อมูลเชิงลึกนี้อาจใช้เวลา 1-2 นาที...",
+        whales_empty_title: "ยังไม่มีข้อมูลวิจัยพอร์ตวาฬในระบบ",
+        whales_empty_desc: "คุณสามารถเปิดใช้งานบอทวิเคราะห์เจาะลึกพอร์ตหุ้นและการเทรดย้อนหลังของ 10 มหาอำนาจได้โดยกดปุ่มด้านล่าง",
+        whales_empty_btn: "<i class=\"fa-solid fa-rotate\"></i> เริ่มต้นวิเคราะห์พอร์ตวาฬเดี๋ยวนี้",
+        whales_toggle_overview: "<i class=\"fa-solid fa-compass\"></i> ภาพรวม & ไฮไลท์วิกฤต (Overview)",
+        whales_toggle_individual: "<i class=\"fa-solid fa-user-tie\"></i> พอร์ตและธุรกรรมรายบุคคล",
+        whales_select_label: "เลือกนักลงทุนยักษ์ใหญ่:",
+        sentiment_card_title: "<i class=\"fa-solid fa-gauge\"></i> Institutional Market Sentiment",
+        sentiment_card_desc: "น้ำหนักการลงทุนโดยรวมของกลุ่มวาฬสถาบัน",
+        sector_rotation_card_title: "<i class=\"fa-solid fa-arrows-spin\"></i> Top Sector Rotation",
+        sector_rotation_card_desc: "กลุ่มเซกเตอร์เป้าหมายหลักที่มีการสะสมน้ำหนักมากที่สุดในขณะนี้",
+        timeline_header: "Timeline การเคลื่อนไหวของสถาบัน",
+        portfolio_summary: "ข้อมูลสรุปผู้จัดการกองทุน / สไตล์การลงทุน",
+        long_portfolio: "รายการพอร์ตหลัก (Long Positions)",
+        options_derivatives: "รายการอนุพันธ์ป้องกันความเสี่ยง (Options Positions)",
+        shorts_activist: "รายการชอร์ตเซล (Short Sell Positions)",
+        past_transactions: "ประวัติทำรายการในรอบ 1 เดือน (Past 30 Days)",
+        col_ticker: "Ticker",
+        col_price: "ราคาล่าสุด",
+        col_change: "% +/-",
+        col_volume: "Volume",
+        col_rsi: "RSI",
+        col_macd: "MACD",
+        col_shares: "ถือครอง (Shares)",
+        col_value: "มูลค่าถือครอง",
+        col_weight: "สัดส่วน %",
+        col_strike: "ราคา Strike / วันหมดอายุ",
+        col_contracts: "Contracts",
+        col_short_ticker: "หุ้นที่ชอร์ต",
+        col_short_size: "ขนาด (Short Size)",
+        col_short_desc: "สมมติฐานและรายละเอียดการชอร์ต",
+        radar_title: "🔥 Golden Radar: หุ้นสัญญาณกลับตัว (Oversold RSI <= 30)",
+        radar_empty: "ไม่พบหุ้นที่อยู่ในเกณฑ์ Oversold (RSI <= 30) ในรอบสแกนนี้",
+        social_buzz_header: "Social Media Sentiment Buzz (Reddit / X / Stocktwits)"
+    },
+    en: {
+        nav_sector_social: "Sectors & Social Buzz",
+        nav_whale_tracker: "Whale Portfolios & Shorts",
+        trends_header_title: "US Market Scanner & Social Sentiment",
+        trends_header_subtitle: "Top 10 stocks by volume across sectors & global Reddit/X trends",
+        trends_last_updated_never: "Last Updated: No data yet",
+        trends_last_updated_prefix: "Last Updated: ",
+        trends_refresh_btn: "<i class=\"fa-solid fa-rotate\"></i> Fetch Live Data (Refresh)",
+        trends_loading_title: "Analyzing and fetching live data via Gemini 3.5 Flash...",
+        trends_loading_desc: "The system is using Google Search Grounding to find volume metrics and scan Reddit/X social sentiment. This analysis may take 1-2 minutes...",
+        trends_empty_title: "No Market Scan Data Available",
+        trends_empty_desc: "You can fetch live data by clicking the button above to run the market scanner bot immediately.",
+        trends_empty_btn: "<i class=\"fa-solid fa-rotate\"></i> Start Market Scan Now",
+        whales_header_title: "US Whale Portfolios & Short Sales (Top 10 Whales)",
+        whales_header_subtitle: "Analyze Long holdings, Hedging Options/Puts, Short sells, and recent 30D transactions",
+        whales_last_updated_never: "Last Updated: No data yet",
+        whales_last_updated_prefix: "Last Updated: ",
+        whales_refresh_btn: "<i class=\"fa-solid fa-rotate\"></i> Fetch Live Whales (Refresh)",
+        whales_loading_title: "Scanning whale portfolios and trade histories via Gemini 3.5 Flash...",
+        whales_loading_desc: "The system is using Google Search Grounding to parse the latest Form 13F filings and trade news over the last 30 days. This scan may take 1-2 minutes...",
+        whales_empty_title: "No Whale Data Available",
+        whales_empty_desc: "You can run the whale research bot to analyze holdings and transactions by clicking the button below.",
+        whales_empty_btn: "<i class=\"fa-solid fa-rotate\"></i> Start Whale Research Now",
+        whales_toggle_overview: "<i class=\"fa-solid fa-compass\"></i> Overview & Highlights",
+        whales_toggle_individual: "<i class=\"fa-solid fa-user-tie\"></i> Individual Portfolios",
+        whales_select_label: "Select Investor/Whale:",
+        sentiment_card_title: "<i class=\"fa-solid fa-gauge\"></i> Institutional Market Sentiment",
+        sentiment_card_desc: "Overall investment positioning weight of institutional whales",
+        sector_rotation_card_title: "<i class=\"fa-solid fa-arrows-spin\"></i> Top Sector Rotation",
+        sector_rotation_card_desc: "Core target sectors receiving the highest weight accumulation",
+        timeline_header: "Institutional Activity Timeline",
+        portfolio_summary: "Whale Portfolio Summary / Investment Style",
+        long_portfolio: "Core Portfolio (Long Holdings)",
+        options_derivatives: "Risk Hedging & Options Derivatives",
+        shorts_activist: "Short Selling & Activist Plays",
+        past_transactions: "Recent 30D Transactions",
+        col_ticker: "Ticker",
+        col_price: "Price",
+        col_change: "% +/-",
+        col_volume: "Volume",
+        col_rsi: "RSI",
+        col_macd: "MACD",
+        col_shares: "Shares Held",
+        col_value: "Value",
+        col_weight: "Portfolio Weight",
+        col_strike: "Strike Price / Expiry",
+        col_contracts: "Contracts",
+        col_short_ticker: "Short Ticker",
+        col_short_size: "Short Size",
+        col_short_desc: "Short Hypothesis & Details",
+        radar_title: "🔥 Golden Radar: Oversold Candidates (RSI <= 30)",
+        radar_empty: "No oversold stocks (RSI <= 30) found in this scan cycle",
+        social_buzz_header: "Social Media Sentiment Buzz (Reddit / X / Stocktwits)"
+    }
+};
+
+function applyLanguage() {
+    const l = trans[state.language];
+    
+    // Sub tabs
+    const navSectorBtn = document.querySelector('.sub-tab-btn[data-sub-tab="sector-social-view"] span');
+    if (navSectorBtn) navSectorBtn.textContent = l.nav_sector_social;
+    const navWhaleBtn = document.querySelector('.sub-tab-btn[data-sub-tab="whale-tracker-view"] span');
+    if (navWhaleBtn) navWhaleBtn.textContent = l.nav_whale_tracker;
+    
+    // Sector tab static UI
+    const trendsTitle = document.querySelector('#sector-social-view h2');
+    if (trendsTitle) trendsTitle.textContent = l.trends_header_title;
+    const trendsSub = document.querySelector('#sector-social-view p');
+    if (trendsSub) trendsSub.textContent = l.trends_header_subtitle;
+    
+    const trendsLastUpdatedEl = document.getElementById('trends-last-updated');
+    if (trendsLastUpdatedEl) {
+        const curText = trendsLastUpdatedEl.textContent;
+        if (curText.includes('ยังไม่มีข้อมูล') || curText.includes('No data yet')) {
+            trendsLastUpdatedEl.textContent = l.trends_last_updated_never;
+        } else {
+            const dateStr = curText.replace('อัปเดตล่าสุด: ', '').replace('Last Updated: ', '');
+            trendsLastUpdatedEl.textContent = l.trends_last_updated_prefix + dateStr;
+        }
+    }
+    
+    const btnTrendsRefresh = document.getElementById('btn-refresh-trends');
+    if (btnTrendsRefresh) btnTrendsRefresh.innerHTML = l.trends_refresh_btn;
+    
+    const trendsLoadingTitle = document.querySelector('#trends-loading-overlay h3');
+    if (trendsLoadingTitle) trendsLoadingTitle.textContent = l.trends_loading_title;
+    const trendsLoadingDesc = document.querySelector('#trends-loading-overlay p');
+    if (trendsLoadingDesc) trendsLoadingDesc.textContent = l.trends_loading_desc;
+    
+    const trendsEmptyTitle = document.querySelector('#trends-empty-placeholder h3');
+    if (trendsEmptyTitle) trendsEmptyTitle.textContent = l.trends_empty_title;
+    const trendsEmptyDesc = document.querySelector('#trends-empty-placeholder p');
+    if (trendsEmptyDesc) trendsEmptyDesc.textContent = l.trends_empty_desc;
+    const btnTrendsEmpty = document.getElementById('btn-refresh-trends-empty');
+    if (btnTrendsEmpty) btnTrendsEmpty.innerHTML = l.trends_empty_btn;
+    
+    // Whale tab static UI
+    const whalesTitle = document.querySelector('#whale-tracker-view h2');
+    if (whalesTitle) whalesTitle.textContent = l.whales_header_title;
+    const whalesSub = document.querySelector('#whale-tracker-view p');
+    if (whalesSub) whalesSub.textContent = l.whales_header_subtitle;
+    
+    const whalesLastUpdatedEl = document.getElementById('whales-last-updated');
+    if (whalesLastUpdatedEl) {
+        const curText = whalesLastUpdatedEl.textContent;
+        if (curText.includes('ยังไม่มีข้อมูล') || curText.includes('No data yet')) {
+            whalesLastUpdatedEl.textContent = l.whales_last_updated_never;
+        } else {
+            const dateStr = curText.replace('อัปเดตล่าสุด: ', '').replace('Last Updated: ', '');
+            whalesLastUpdatedEl.textContent = l.whales_last_updated_prefix + dateStr;
+        }
+    }
+    
+    const btnWhalesRefresh = document.getElementById('btn-refresh-whales');
+    if (btnWhalesRefresh) btnWhalesRefresh.innerHTML = l.whales_refresh_btn;
+    
+    const whalesLoadingTitle = document.querySelector('#whales-loading-overlay h3');
+    if (whalesLoadingTitle) whalesLoadingTitle.textContent = l.whales_loading_title;
+    const whalesLoadingDesc = document.querySelector('#whales-loading-overlay p');
+    if (whalesLoadingDesc) whalesLoadingDesc.textContent = l.whales_loading_desc;
+    
+    const whalesEmptyTitle = document.querySelector('#whales-empty-placeholder h3');
+    if (whalesEmptyTitle) whalesEmptyTitle.textContent = l.whales_empty_title;
+    const whalesEmptyDesc = document.querySelector('#whales-empty-placeholder p');
+    if (whalesEmptyDesc) whalesEmptyDesc.textContent = l.whales_empty_desc;
+    const btnWhalesEmpty = document.getElementById('btn-refresh-whales-empty');
+    if (btnWhalesEmpty) btnWhalesEmpty.innerHTML = l.whales_empty_btn;
+    
+    const btnWhaleShowOverviewEl = document.getElementById('btn-whale-show-overview');
+    if (btnWhaleShowOverviewEl) btnWhaleShowOverviewEl.innerHTML = l.whales_toggle_overview;
+    const btnWhaleShowIndividualEl = document.getElementById('btn-whale-show-individual');
+    if (btnWhaleShowIndividualEl) btnWhaleShowIndividualEl.innerHTML = l.whales_toggle_individual;
+    
+    const whaleSelectLabel = document.querySelector('#whale-select-container label');
+    if (whaleSelectLabel) whaleSelectLabel.textContent = l.whales_select_label;
+    
+    // Overview headings
+    const sentimentTitle = document.querySelector('#whales-overview-view h4');
+    if (sentimentTitle) sentimentTitle.innerHTML = l.sentiment_card_title;
+    const sentimentDesc = document.querySelector('#whales-overview-view p');
+    if (sentimentDesc) sentimentDesc.textContent = l.sentiment_card_desc;
+    
+    const rotationCard = document.querySelector('#whales-overview-view div[style*="min-height: 120px"]:nth-child(2)');
+    if (rotationCard) {
+        const title = rotationCard.querySelector('h4');
+        if (title) title.innerHTML = l.sector_rotation_card_title;
+        const desc = rotationCard.querySelector('p');
+        if (desc) desc.textContent = l.sector_rotation_card_desc;
+    }
+    
+    const timelineHeader = document.querySelector('#whales-overview-view h3');
+    if (timelineHeader) timelineHeader.textContent = l.timeline_header;
+    
+    // Whale individual tables headers
+    const whaleLongTableHead = document.querySelector('#whale-long-table thead tr');
+    if (whaleLongTableHead) {
+        whaleLongTableHead.innerHTML = `
+            <th style="width: 15%;">${l.col_ticker}</th>
+            <th>${state.language === 'th' ? 'ชื่อบริษัท' : 'Company Name'}</th>
+            <th style="width: 18%;">${state.language === 'th' ? 'ราคาล่าสุด' : 'Latest Price'}</th>
+            <th style="width: 15%;">${l.col_change}</th>
+            <th style="width: 18%;">${l.col_shares}</th>
+            <th style="width: 18%;">${state.language === 'th' ? 'มูลค่าถือครอง' : 'Market Value'}</th>
+            <th style="width: 10%;">${state.language === 'th' ? 'สัดส่วน %' : 'Weight %'}</th>
+        `;
+    }
+    
+    const whaleOptionsTableHead = document.querySelector('#whale-options-table thead tr');
+    if (whaleOptionsTableHead) {
+        whaleOptionsTableHead.innerHTML = `
+            <th style="width: 10%;">${l.col_ticker}</th>
+            <th style="width: 12%;">${state.language === 'th' ? 'สัญญา (Type)' : 'Option Type'}</th>
+            <th style="width: 14%;">${state.language === 'th' ? 'ราคาหุ้นแม่ (Underlying)' : 'Underlying Price'}</th>
+            <th style="width: 12%;">${state.language === 'th' ? 'ราคาในสัญญา (Strike)' : 'Strike Price'}</th>
+            <th style="width: 12%;">${state.language === 'th' ? 'วันหมดอายุ (Expiry)' : 'Expiry Date'}</th>
+            <th style="width: 12%;">${state.language === 'th' ? 'พรีเมียมล่าสุด' : 'Premium'}</th>
+            <th style="width: 8%;">${l.col_change}</th>
+            <th style="width: 10%;">${l.col_contracts}</th>
+            <th style="width: 10%;">${state.language === 'th' ? 'มูลค่าสัญญา' : 'Notional Value'}</th>
+        `;
+    }
+    
+    // Whales individual subheaders
+    const longTitle = document.querySelector('#whales-individual-view div[style*="flex-direction: column"] h3');
+    if (longTitle) longTitle.innerHTML = `<i class="fa-solid fa-briefcase"></i> ${l.long_portfolio}`;
+    
+    const optionsTitle = document.querySelector('#whale-options-table').previousElementSibling;
+    if (optionsTitle) optionsTitle.innerHTML = `<i class="fa-solid fa-chart-pie"></i> ${l.options_derivatives}`;
+    
+    const shortsTitle = document.querySelector('#whale-shorts-container').previousElementSibling;
+    if (shortsTitle) shortsTitle.innerHTML = `<i class="fa-solid fa-arrow-down-wide-narrow"></i> ${l.shorts_activist}`;
+    
+    const transTitle = document.querySelector('#whale-transactions-timeline').previousElementSibling;
+    if (transTitle) transTitle.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> ${l.past_transactions}`;
+
+    const disclosureTitle = document.querySelector('#whale-tracker-view div[style*="padding: 15px"] div[style*="font-weight: 600"]');
+    if (disclosureTitle) {
+        disclosureTitle.innerHTML = `<i class="fa-solid fa-circle-info" style="color: #60a5fa;"></i> ${state.language === 'th' ? '🌐 แหล่งข้อมูลอ้างอิงของระบบติดตาม (Data Sources & Disclosures):' : '🌐 Data Sources & Disclosures:'}`;
+    }
+    const disclosureDesc = document.querySelector('#whale-tracker-view div[style*="padding: 15px"] p');
+    if (disclosureDesc) {
+        disclosureDesc.textContent = state.language === 'th' 
+            ? 'ข้อมูลทั้งหมดถูกสืบค้นและประมวลผลเชิงวิจัยโดย Gemini 3.5 Flash (พร้อมฟีเจอร์ Google Search Grounding) อ้างอิงจากรายงานยื่นต่อสำนักงาน ก.ล.ต. สหรัฐฯ (U.S. SEC Form 13F & Form 4), สถิติสัญญาออปชัน (Options Contracts) และเอกสารงบการเงินอย่างเป็นทางการของสถาบัน เช่น Berkshire Hathaway, Citadel Advisors, BlackRock, ARK Invest และอื่นๆ ทั้งนี้ข้อมูลเผยแพร่อาจมีความล่าช้าตามกำหนดส่งรายงานของกฎหมาย'
+            : 'All data is researched and processed by Gemini 3.5 Flash with Google Search Grounding. Sources include official U.S. SEC filings (Form 13F & Form 4), options derivatives volume data, and corporate disclosure documents of institutional funds like Berkshire Hathaway, Citadel Advisors, BlackRock, ARK Invest, etc. Information may be delayed in accordance with regulatory filing schedules.';
+    }
+}
+
 

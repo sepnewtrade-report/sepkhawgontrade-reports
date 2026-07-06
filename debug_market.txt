@@ -1,0 +1,953 @@
+{
+  "sectors":."
+        },
+        {
+          "ticker": "AAPL",
+          "name": "Apple Inc.",
+          "price": "308.63",
+          "volume": "75.40M",
+          "change": "+4.84%",
+          "rsi": "68",
+          "macd": "Bullish Cross",
+          "reason": "Surging on capital rotation away from semiconductor hardware and rumors of alternative screen technologies."
+        },
+        {
+          "ticker": "MSFT",
+          "name": "Microsoft Corporation",
+          "price": "390.79",
+          "volume": "22.40M",
+          "change": "+1.70%",
+          "rsi": "52",
+          "macd": "Bullish",
+          "reason": "Tracking broader market gains despite retail discussion around a 2.1% workforce reduction."
+        },
+        {
+          "ticker": "AMD",
+          "name": "Advanced Micro Devices, Inc.",
+          "price": "165.20",
+          "volume": "48.20M",
+          "change": "+8.50%",
+          "rsi": "58",
+          "macd": "Bullish Cross",
+          "reason": "Strong early-session gains following target price adjustments in the specialty fabless chip space."
+        },
+        {
+          "ticker": "INTC",
+          "name": "Intel Corporation",
+          "price": "127.62",
+          "volume": "88.31M",
+          "change": "-8.40%",
+          "rsi": "35",
+          "macd": "Bearish",
+          "reason": "Facing selling pressure on concerns over advanced packaging margins and foundry scale-up costs."
+        },
+        {
+          "ticker": "AVGO",
+          "name": "Broadcom Inc.",
+          "price": "1420.50",
+          "volume": "2.80M",
+          "change": "+4.00%",
+          "rsi": "62",
+          "macd": "Bullish",
+          "reason": "Surged after extending its critical multiyear chip supply agreement with Apple through 2031."
+        },
+        {
+          "ticker": "TSM",
+          "name": "Taiwan Semiconductor Manufacturing Co.",
+          "price": "172.30",
+          "volume": "12.10M",
+          "change": "+1.50%",
+          "rsi": "56",
+          "macd": "Bullish",
+          "reason": "Supported by secular demands for high-density advanced packaging nodes."
+        },
+        {
+          "ticker": "MU",
+          "name": "Micron Technology, Inc.",
+          "price": "128.50",
+          "volume": "38.60M",
+          "change": "-5.20%",
+          "rsi": "38",
+          "macd": "Bearish",
+          "reason": "Heavily hit by data-center profit-taking and public disclosure of high-profile short seller positions."
+        },
+        {
+          "ticker": "PLTR",
+          "name": "Palantir Technologies Inc.",
+          "price": "34.22",
+          "volume": "18.50M",
+          "change": "+14.00%",
+          "rsi": "65",
+          "macd": "Bullish Cross",
+          "reason": "Strong buying momentum after inclusion in prominent growth lists for enterprise software."
+        },
+        {
+          "ticker": "CRM",
+          "name": "Salesforce, Inc.",
+          "price": "274.50",
+          "volume": "6.80M",
+          "change": "-0.50%",
+          "rsi": "48",
+          "macd": "Neutral",
+          "reason": "Consolidating as enterprise software spending shows mixed trends across the corporate landscape."
+        }
+      ]
+    },
+    {
+      "sectorName": "Financials",
+      "stocks": [
+        {
+          "ticker": "SOFI",
+          "name": "SoFi Technologies, Inc.",
+          "price": "18.62",
+          "volume": "72.63M",
+          "change": "+3.76%",
+          "rsi": "58",
+          "macd": "Bullish Cross",
+          "reason": "Seeing strong retail interest and accumulation on positive net-interest-margin expectations [1.3.7]."
+        },
+        {
+          "ticker": "BAC",
+          "name": "Bank of America Corporation",
+          "price": "41.80",
+          "volume": "35.20M",
+          "change": "+0.60%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Reflecting stable depository trends and commercial loan pipeline expansion."
+        },
+        {
+          "ticker": "JPM",
+          "name": "JPMorgan Chase & Co.",
+          "price": "198.50",
+          "volume": "12.40M",
+          "change": "+1.10%",
+          "rsi": "54",
+          "macd": "Neutral",
+          "reason": "Steady performance ahead of the unofficial kick-off of the Q2 corporate earnings season next week."
+        },
+        {
+          "ticker": "C",
+          "name": "Citigroup Inc.",
+          "price": "62.40",
+          "volume": "18.30M",
+          "change": "-0.30%",
+          "rsi": "47",
+          "macd": "Neutral",
+          "reason": "Mixed performance with institutional capital restructuring under progress."
+        },
+        {
+          "ticker": "WFC",
+          "name": "Wells Fargo & Company",
+          "price": "58.10",
+          "volume": "15.90M",
+          "change": "+0.20%",
+          "rsi": "49",
+          "macd": "Neutral",
+          "reason": "Stable action following Federal Reserve stress test updates."
+        },
+        {
+          "ticker": "PYPL",
+          "name": "PayPal Holdings, Inc.",
+          "price": "66.80",
+          "volume": "9.40M",
+          "change": "-1.20%",
+          "rsi": "42",
+          "macd": "Bearish",
+          "reason": "Trading flat as peer-to-peer transaction fee updates trigger mixed retail sentiment."
+        },
+        {
+          "ticker": "MS",
+          "name": "Morgan Stanley",
+          "price": "96.50",
+          "volume": "7.20M",
+          "change": "+0.80%",
+          "rsi": "53",
+          "macd": "Neutral",
+          "reason": "Quiet consolidation amid slightly lower near-term M&A deal execution volumes."
+        },
+        {
+          "ticker": "GS",
+          "name": "The Goldman Sachs Group, Inc.",
+          "price": "435.20",
+          "volume": "2.80M",
+          "change": "+1.30%",
+          "rsi": "57",
+          "macd": "Bullish",
+          "reason": "Gaining on asset management flows and global M&A advisory expansions."
+        },
+        {
+          "ticker": "COIN",
+          "name": "Coinbase Global, Inc.",
+          "price": "212.40",
+          "volume": "8.50M",
+          "change": "-2.30%",
+          "rsi": "44",
+          "macd": "Bearish",
+          "reason": "Consolidating in tandem with highly volatile cryptocurrency market levels."
+        },
+        {
+          "ticker": "NU",
+          "name": "Nu Holdings Ltd.",
+          "price": "13.15",
+          "volume": "14.80M",
+          "change": "+2.10%",
+          "rsi": "60",
+          "macd": "Bullish",
+          "reason": "Continued strong retail customer acquisition in Brazil and financial services rollout in Mexico."
+        }
+      ]
+    },
+    {
+      "sectorName": "Healthcare",
+      "stocks": [
+        {
+          "ticker": "LLY",
+          "name": "Eli Lilly and Company",
+          "price": "895.40",
+          "volume": "3.50M",
+          "change": "+1.20%",
+          "rsi": "63",
+          "macd": "Bullish",
+          "reason": "Strong upward momentum sustained on robust global demand for metabolic therapies."
+        },
+        {
+          "ticker": "UNH",
+          "name": "UnitedHealth Group Incorporated",
+          "price": "512.60",
+          "volume": "2.90M",
+          "change": "+0.40%",
+          "rsi": "52",
+          "macd": "Neutral",
+          "reason": "Defensive positioning ahead of federal premium rate adjustments in Medicare Advantage."
+        },
+        {
+          "ticker": "JNJ",
+          "name": "Johnson & Johnson",
+          "price": "154.20",
+          "volume": "7.10M",
+          "change": "-0.30%",
+          "rsi": "45",
+          "macd": "Neutral",
+          "reason": "Trading flat around ongoing litigation updates and core pharmaceutical pipeline transitions."
+        },
+        {
+          "ticker": "PFE",
+          "name": "Pfizer Inc.",
+          "price": "28.50",
+          "volume": "22.40M",
+          "change": "-0.80%",
+          "rsi": "39",
+          "macd": "Bearish",
+          "reason": "Underperforming on reduced commercial therapy margins and structural cost-cutting shifts."
+        },
+        {
+          "ticker": "MRK",
+          "name": "Merck & Co., Inc.",
+          "price": "122.10",
+          "volume": "6.50M",
+          "change": "+0.50%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Stable performance supported by clinical trial progress in early-stage immunology."
+        },
+        {
+          "ticker": "ABBV",
+          "name": "AbbVie Inc.",
+          "price": "172.80",
+          "volume": "4.80M",
+          "change": "+1.00%",
+          "rsi": "58",
+          "macd": "Bullish",
+          "reason": "Supported by strong market uptake of next-gen immunology therapies."
+        },
+        {
+          "ticker": "MDT",
+          "name": "Medtronic plc",
+          "price": "82.40",
+          "volume": "5.10M",
+          "change": "-0.20%",
+          "rsi": "46",
+          "macd": "Neutral",
+          "reason": "Consolidating as global surgical procedural volumes normalize to long-term trends."
+        },
+        {
+          "ticker": "AMGN",
+          "name": "Amgen Inc.",
+          "price": "310.20",
+          "volume": "2.30M",
+          "change": "+0.70%",
+          "rsi": "55",
+          "macd": "Neutral",
+          "reason": "Steady accumulation based on dual-acting obesity drug pipeline developments."
+        },
+        {
+          "ticker": "BMY",
+          "name": "Bristol-Myers Squibb Company",
+          "price": "41.50",
+          "volume": "8.90M",
+          "change": "-1.10%",
+          "rsi": "37",
+          "macd": "Bearish",
+          "reason": "Under pressure as generic competition challenges mature blockbuster oncology franchises."
+        },
+        {
+          "ticker": "CVS",
+          "name": "CVS Health Corporation",
+          "price": "56.40",
+          "volume": "9.20M",
+          "change": "-0.40%",
+          "rsi": "41",
+          "macd": "Bearish",
+          "reason": "Pressure on pharmacy benefits management margins limits near-term institutional upside."
+        }
+      ]
+    },
+    {
+      "sectorName": "Consumer Discretionary",
+      "stocks":."
+        },
+        {
+          "ticker": "AMZN",
+          "name": "Amazon.com, Inc.",
+          "price": "243.04",
+          "volume": "32.40M",
+          "change": "+0.60%",
+          "rsi": "55",
+          "macd": "Bullish",
+          "reason": "Bolstered by sustained AWS cloud margins and early retail demand for Prime Day promotions."
+        },
+        {
+          "ticker": "NKE",
+          "name": "NIKE, Inc.",
+          "price": "42.62",
+          "volume": "66.47M",
+          "change": "+3.84%",
+          "rsi": "39",
+          "macd": "Bearish",
+          "reason": "Technical bounce-back from multi-year lows despite structural inventory adjustments."
+        },
+        {
+          "ticker": "SBUX",
+          "name": "Starbucks Corporation",
+          "price": "76.50",
+          "volume": "9.10M",
+          "change": "-0.80%",
+          "rsi": "43",
+          "macd": "Bearish",
+          "reason": "Struggling with cautious consumer spending patterns in domestic retail markets."
+        },
+        {
+          "ticker": "F",
+          "name": "Ford Motor Company",
+          "price": "11.85",
+          "volume": "38.40M",
+          "change": "+1.20%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Moderate volume as hybrid passenger vehicle sales outpace pure-EV segment growth."
+        },
+        {
+          "ticker": "GM",
+          "name": "General Motors Company",
+          "price": "46.20",
+          "volume": "14.50M",
+          "change": "+0.50%",
+          "rsi": "53",
+          "macd": "Neutral",
+          "reason": "Performance supported by resilient pricing structures for internal combustion trucks."
+        },
+        {
+          "ticker": "BABA",
+          "name": "Alibaba Group Holding Limited",
+          "price": "74.60",
+          "volume": "16.20M",
+          "change": "+2.10%",
+          "rsi": "58",
+          "macd": "Bullish",
+          "reason": "Supported by broad macro consumer incentives and localized cloud deployments."
+        },
+        {
+          "ticker": "LULU",
+          "name": "Lululemon Athletica Inc.",
+          "price": "312.40",
+          "volume": "1.80M",
+          "change": "-1.50%",
+          "rsi": "36",
+          "macd": "Bearish",
+          "reason": "Facing pressure as global activewear demand shows signs of competitive saturation."
+        },
+        {
+          "ticker": "HD",
+          "name": "The Home Depot, Inc.",
+          "price": "342.10",
+          "volume": "4.20M",
+          "change": "+0.30%",
+          "rsi": "49",
+          "macd": "Neutral",
+          "reason": "Reflecting flat consumer remodeling demand amid high interest rate environments."
+        },
+        {
+          "ticker": "TGT",
+          "name": "Target Corporation",
+          "price": "138.50",
+          "volume": "5.60M",
+          "change": "-1.10%",
+          "rsi": "45",
+          "macd": "Neutral",
+          "reason": "Cautious outlook as mid-tier retail buyers trim discretionary home merchandise spend."
+        }
+      ]
+    },
+    {
+      "sectorName": "Communication Services",
+      "stocks":."
+        },
+        {
+          "ticker": "GOOGL",
+          "name": "Alphabet Inc.",
+          "price": "356.56",
+          "volume": "24.10M",
+          "change": "-0.40%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Tracking flat as antitrust watchdogs push for alternative app store billing systems."
+        },
+        {
+          "ticker": "NFLX",
+          "name": "Netflix, Inc.",
+          "price": "658.20",
+          "volume": "3.20M",
+          "change": "-1.50%",
+          "rsi": "49",
+          "macd": "Bearish",
+          "reason": "Slight pullback despite fresh content drops for the summer streaming season."
+        },
+        {
+          "ticker": "DIS",
+          "name": "The Walt Disney Company",
+          "price": "98.40",
+          "volume": "8.50M",
+          "change": "+0.20%",
+          "rsi": "47",
+          "macd": "Neutral",
+          "reason": "Supported by stable theme park bookings and digital streaming segment monetization updates."
+        },
+        {
+          "ticker": "T",
+          "name": "AT&T Inc.",
+          "price": "20.38",
+          "volume": "102.45M",
+          "change": "-1.55%",
+          "rsi": "54",
+          "macd": "Bearish",
+          "reason": "Heavy volume after agreeing to block purchases of regional cellular spectrum."
+        },
+        {
+          "ticker": "VZ",
+          "name": "Verizon Communications Inc.",
+          "price": "41.20",
+          "volume": "18.60M",
+          "change": "+0.10%",
+          "rsi": "48",
+          "macd": "Neutral",
+          "reason": "Consolidating near major support as high-yield dividend buyers step in."
+        },
+        {
+          "ticker": "CMCSA",
+          "name": "Comcast Corporation",
+          "price": "38.50",
+          "volume": "14.20M",
+          "change": "-0.50%",
+          "rsi": "43",
+          "macd": "Bearish",
+          "reason": "Facing pressure from cord-cutting and soft linear ad-revenues."
+        },
+        {
+          "ticker": "SNAP",
+          "name": "Snap Inc.",
+          "price": "10.15",
+          "volume": "19.50M",
+          "change": "-2.30%",
+          "rsi": "38",
+          "macd": "Bearish",
+          "reason": "Underperforming on soft advertiser demand for smaller-tier visual social media."
+        },
+        {
+          "ticker": "PINS",
+          "name": "Pinterest, Inc.",
+          "price": "38.40",
+          "volume": "8.60M",
+          "change": "+1.10%",
+          "rsi": "52",
+          "macd": "Neutral",
+          "reason": "Accumulating on visual commerce features and improved international monetization."
+        },
+        {
+          "ticker": "TMUS",
+          "name": "T-Mobile US, Inc.",
+          "price": "178.60",
+          "volume": "4.50M",
+          "change": "+0.80%",
+          "rsi": "59",
+          "macd": "Bullish",
+          "reason": "Defensive stock supported by consistent industry-leading wireless additions."
+        }
+      ]
+    },
+    {
+      "sectorName": "Energy",
+      "stocks": [
+        {
+          "ticker": "XOM",
+          "name": "Exxon Mobil Corporation",
+          "price": "118.40",
+          "volume": "14.50M",
+          "change": "+0.80%",
+          "rsi": "53",
+          "macd": "Neutral",
+          "reason": "Consolidating as global oil shipments face temporary shipping lane adjustments [4.4.6]."
+        },
+        {
+          "ticker": "CVX",
+          "name": "Chevron Corporation",
+          "price": "158.20",
+          "volume": "8.10M",
+          "change": "+1.10%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Supported by upstream execution and regional geopolitical risk premiums."
+        },
+        {
+          "ticker": "COP",
+          "name": "ConocoPhillips",
+          "price": "114.30",
+          "volume": "5.80M",
+          "change": "+1.40%",
+          "rsi": "54",
+          "macd": "Neutral",
+          "reason": "Steady volume following upgrades in deepwater production efficiency."
+        },
+        {
+          "ticker": "SLB",
+          "name": "Schlumberger Limited",
+          "price": "44.80",
+          "volume": "9.60M",
+          "change": "-0.50%",
+          "rsi": "42",
+          "macd": "Bearish",
+          "reason": "Slight pullback as domestic drillers maintain flat budget targets."
+        },
+        {
+          "ticker": "HAL",
+          "name": "Halliburton Company",
+          "price": "32.40",
+          "volume": "8.20M",
+          "change": "-0.80%",
+          "rsi": "40",
+          "macd": "Bearish",
+          "reason": "Under pressure due to slow onshore completions in the Permian basin."
+        },
+        {
+          "ticker": "OXY",
+          "name": "Occidental Petroleum Corporation",
+          "price": "59.20",
+          "volume": "11.40M",
+          "change": "+2.02%",
+          "rsi": "57",
+          "macd": "Bullish",
+          "reason": "Rallying on high upstream sensitivity and Berkshire Hathaway accumulation."
+        },
+        {
+          "ticker": "ET",
+          "name": "Energy Transfer LP",
+          "price": "19.33",
+          "volume": "13.10M",
+          "change": "+1.47%",
+          "rsi": "62",
+          "macd": "Bullish Cross",
+          "reason": "Surging on natural gas pipeline volumes and growing fuel demand from data center operators."
+        },
+        {
+          "ticker": "MPC",
+          "name": "Marathon Petroleum Corporation",
+          "price": "168.40",
+          "volume": "3.50M",
+          "change": "+1.00%",
+          "rsi": "56",
+          "macd": "Bullish",
+          "reason": "Bolstered by resilient refining spreads and aggressive stock buybacks."
+        },
+        {
+          "ticker": "PSX",
+          "name": "Phillips 66",
+          "price": "134.10",
+          "volume": "2.90M",
+          "change": "+0.70%",
+          "rsi": "52",
+          "macd": "Neutral",
+          "reason": "Supported by stable midstream cash flows and recovery in chemicals segment margins."
+        },
+        {
+          "ticker": "VLO",
+          "name": "Valero Energy Corporation",
+          "price": "148.50",
+          "volume": "3.10M",
+          "change": "+0.90%",
+          "rsi": "53",
+          "macd": "Neutral",
+          "reason": "High refining utilization rates recorded ahead of peak summer fuel consumption seasons."
+        }
+      ]
+    },
+    {
+      "sectorName": "Biotechnology",
+      "stocks": [
+        {
+          "ticker": "MRNA",
+          "name": "Moderna, Inc.",
+          "price": "128.40",
+          "volume": "12.10M",
+          "change": "+10.01%",
+          "rsi": "64",
+          "macd": "Bullish Cross",
+          "reason": "Strong sector leader following progress in personalized oncology vaccine candidates [1.3.4]."
+        },
+        {
+          "ticker": "GILD",
+          "name": "Gilead Sciences, Inc.",
+          "price": "68.50",
+          "volume": "6.40M",
+          "change": "+0.40%",
+          "rsi": "52",
+          "macd": "Neutral",
+          "reason": "Steady performance backed by stable HIV drug pipelines and oncology segment integrations."
+        },
+        {
+          "ticker": "REGN",
+          "name": "Regeneron Pharmaceuticals, Inc.",
+          "price": "985.40",
+          "volume": "1.20M",
+          "change": "+0.56%",
+          "rsi": "58",
+          "macd": "Bullish",
+          "reason": "Benefiting from stable commercial drug demand and ophthalmology product revisions."
+        },
+        {
+          "ticker": "VRTX",
+          "name": "Vertex Pharmaceuticals Incorporated",
+          "price": "472.30",
+          "volume": "1.50M",
+          "change": "+1.10%",
+          "rsi": "61",
+          "macd": "Bullish",
+          "reason": "Consistently supported by cystic fibrosis market dominance and pain management trial entries."
+        },
+        {
+          "ticker": "AMGN",
+          "name": "Amgen Inc.",
+          "price": "310.20",
+          "volume": "2.30M",
+          "change": "+0.70%",
+          "rsi": "55",
+          "macd": "Neutral",
+          "reason": "Steady accumulation based on dual-acting obesity drug pipeline developments."
+        },
+        {
+          "ticker": "AXSM",
+          "name": "Axsome Therapeutics, Inc.",
+          "price": "245.46",
+          "volume": "128.4K",
+          "change": "+0.47%",
+          "rsi": "57",
+          "macd": "Bullish",
+          "reason": "Earnings visibility enhanced on strong market demand for Auvelity and Sunosi."
+        },
+        {
+          "ticker": "BNTX",
+          "name": "BioNTech SE",
+          "price": "92.40",
+          "volume": "1.80M",
+          "change": "-1.20%",
+          "rsi": "45",
+          "macd": "Bearish",
+          "reason": "Consolidating as focus turns from COVID-era sales to clinical-stage oncology programs."
+        },
+        {
+          "ticker": "EXEL",
+          "name": "Exelixis, Inc.",
+          "price": "24.80",
+          "volume": "2.50M",
+          "change": "+0.60%",
+          "rsi": "52",
+          "macd": "Neutral",
+          "reason": "Supported by Cabometyx sales and positive combination therapy trials."
+        },
+        {
+          "ticker": "CRSP",
+          "name": "CRISPR Therapeutics AG",
+          "price": "54.20",
+          "volume": "3.10M",
+          "change": "-2.30%",
+          "rsi": "41",
+          "macd": "Bearish",
+          "reason": "Highly volatile as early commercial rollouts of first-gen gene therapies scale slowly."
+        },
+        {
+          "ticker": "BEAM",
+          "name": "Beam Therapeutics Inc.",
+          "price": "26.40",
+          "volume": "1.90M",
+          "change": "-1.80%",
+          "rsi": "39",
+          "macd": "Bearish",
+          "reason": "Early-stage gene editing pipeline cash burn remains a focus for retail investors."
+        }
+      ]
+    },
+    {
+      "sectorName": "Space",
+      "stocks":."
+        },
+        {
+          "ticker": "RKLB",
+          "name": "Rocket Lab USA, Inc.",
+          "price": "100.46",
+          "volume": "5.12M",
+          "change": "+0.32%",
+          "rsi": "55",
+          "macd": "Bearish Cross",
+          "reason": "Volatile movement on technical charts following its planned $8B acquisition of Iridium."
+        },
+        {
+          "ticker": "ASTS",
+          "name": "AST SpaceMobile, Inc.",
+          "price": "85.50",
+          "volume": "12.40M",
+          "change": "+31.20%",
+          "rsi": "65",
+          "macd": "Bullish Cross",
+          "reason": "Rocketed higher on industry valuation re-ratings from recent orbital acquisitions."
+        },
+        {
+          "ticker": "SPCE",
+          "name": "Virgin Galactic Holdings, Inc.",
+          "price": "2.70",
+          "volume": "14.70M",
+          "change": "-2.88%",
+          "rsi": "38",
+          "macd": "Bearish",
+          "reason": "Consolidating near lower post-split ranges with ongoing development capital burn."
+        },
+        {
+          "ticker": "LMT",
+          "name": "Lockheed Martin Corporation",
+          "price": "462.50",
+          "volume": "1.40M",
+          "change": "+0.50%",
+          "rsi": "53",
+          "macd": "Neutral",
+          "reason": "Defense backlog supported by expanding national security space-sensing budgets."
+        },
+        {
+          "ticker": "NOC",
+          "name": "Northrop Grumman Corporation",
+          "price": "442.10",
+          "volume": "1.10M",
+          "change": "+0.30%",
+          "rsi": "49",
+          "macd": "Neutral",
+          "reason": "Benefiting from structural military space-based intelligence contracts."
+        },
+        {
+          "ticker": "BA",
+          "name": "The Boeing Company",
+          "price": "174.50",
+          "volume": "6.80M",
+          "change": "-1.20%",
+          "rsi": "36",
+          "macd": "Bearish",
+          "reason": "Commercial aviation safety reviews weigh on stock, offsetting strong defense and orbital space backlogs."
+        },
+        {
+          "ticker": "LHX",
+          "name": "L3Harris Technologies, Inc.",
+          "price": "212.40",
+          "volume": "1.30M",
+          "change": "+0.20%",
+          "rsi": "51",
+          "macd": "Neutral",
+          "reason": "Securing key low-Earth-orbit communication payload development projects."
+        },
+        {
+          "ticker": "PL",
+          "name": "Planet Labs PBC",
+          "price": "1.95",
+          "volume": "3.20M",
+          "change": "-0.50%",
+          "rsi": "44",
+          "macd": "Bearish",
+          "reason": "Early contract delays in enterprise imagery subscription cycles limit upward movement."
+        },
+        {
+          "ticker": "VOYG",
+          "name": "Voyager Technologies, Inc.",
+          "price": "34.22",
+          "volume": "2.10M",
+          "change": "+1.21%",
+          "rsi": "54",
+          "macd": "Bullish",
+          "reason": "Retail interest in its joint-venture success on Starlab commercial space platform design."
+        }
+      ]
+    },
+    {
+      "sectorName": "Robotics",
+      "stocks":."
+        },
+        {
+          "ticker": "PATH",
+          "name": "UiPath Inc.",
+          "price": "12.15",
+          "volume": "11.20M",
+          "change": "-1.50%",
+          "rsi": "39",
+          "macd": "Bearish",
+          "reason": "Weak corporate spending trends on robotic process automation weigh on software growth."
+        },
+        {
+          "ticker": "ISRG",
+          "name": "Intuitive Surgical, Inc.",
+          "price": "425.91",
+          "volume": "3.14M",
+          "change": "+5.87%",
+          "rsi": "67",
+          "macd": "Bullish Cross",
+          "reason": "Aggressively accumulated ahead of its mid-July Q2 earnings call and da Vinci 5 adoption."
+        },
+        {
+          "ticker": "TSLA",
+          "name": "Tesla, Inc. (Optimus)",
+          "price": "394.04",
+          "volume": "57.18M",
+          "change": "-7.30%",
+          "rsi": "42",
+          "macd": "Bearish",
+          "reason": "Retooling production lines for its Optimus V3 humanoid robot, targeting late 2026 delivery."
+        },
+        {
+          "ticker": "NVDA",
+          "name": "NVIDIA Corporation (Isaac)",
+          "price": "194.84",
+          "volume": "142.39M",
+          "change": "-1.39%",
+          "rsi": "45",
+          "macd": "Bearish Cross",
+          "reason": "Focus on its Isaac GR00T framework and physical AI development with Asian partners."
+        },
+        {
+          "ticker": "TER",
+          "name": "Teradyne, Inc.",
+          "price": "118.50",
+          "volume": "4.80M",
+          "change": "-5.60%",
+          "rsi": "38",
+          "macd": "Bearish",
+          "reason": "Exhibits downward pressure tied to short-term data center equipment CapEx rotations."
+        },
+        {
+          "ticker": "ROK",
+          "name": "Rockwell Automation, Inc.",
+          "price": "264.20",
+          "volume": "1.20M",
+          "change": "-0.40%",
+          "rsi": "44",
+          "macd": "Bearish",
+          "reason": "Flat action due to cautious capital spending on industrial assembly automation."
+        },
+        {
+          "ticker": "CGNX",
+          "name": "Cognex Corporation",
+          "price": "38.40",
+          "volume": "1.90M",
+          "change": "-0.80%",
+          "rsi": "46",
+          "macd": "Neutral",
+          "reason": "Undergoing steady consolidation as machine-vision deployments in warehouses plateau."
+        },
+        {
+          "ticker": "IRBT",
+          "name": "iRobot Corporation",
+          "price": "7.80",
+          "volume": "2.10M",
+          "change": "-1.20%",
+          "rsi": "35",
+          "macd": "Bearish",
+          "reason": "Pressure from weak consumer discretionary spending on localized smart appliances."
+        },
+        {
+          "ticker": "AVAV",
+          "name": "AeroVironment, Inc.",
+          "price": "168.40",
+          "volume": "1.50M",
+          "change": "+10.70%",
+          "rsi": "62",
+          "macd": "Bullish Cross",
+          "reason": "Surging on high-volume national security orders for autonomous loitering platforms."
+        }
+      ]
+    }
+  ],
+  "socialTrends": [
+    {
+      "ticker": "SPCX",
+      "name": "Space Exploration Technologies Corp.",
+      "price": "161.78",
+      "change": "+2.70%",
+      "mentions": "15.4K",
+      "platforms": "Reddit, X, Stocktwits",
+      "sentiment": "Mixed",
+      "summary": "Massive retail engagement centered around SpaceX's upcoming Nasdaq-100 entry on July 7 [3.1.6]. Debates rage on whether passive index-fund buying will force the stock above $200, though early post-IPO valuation concerns keep sentiment cautious."
+    },
+    {
+      "ticker": "ASTS",
+      "name": "AST SpaceMobile, Inc.",
+      "price": "85.50",
+      "change": "+31.20%",
+      "mentions": "12.2K",
+      "platforms": "Reddit (WallStreetBets), X, Stocktwits",
+      "sentiment": "Bullish",
+      "summary": "ASTS is a primary focus of WallStreetBets after Rocket Lab's major acquisition of Iridium. Retail investors are interpreting the deal as a bullish secular signal for the direct-to-cell satellite sector."
+    },
+    {
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "price": "128.50",
+      "change": "-5.20%",
+      "mentions": "9.8K",
+      "platforms": "Reddit (WallStreetBets), X",
+      "sentiment": "Bearish",
+      "summary": "Chip investors are complaining about heavy selling across memory stocks. Discussions are highly focused on public disclosures of new short positions held by high-profile hedge fund managers."
+    },
+    {
+      "ticker": "RKLB",
+      "name": "Rocket Lab USA, Inc.",
+      "price": "100.46",
+      "change": "+0.32%",
+      "mentions": "8.6K",
+      "platforms": "Stocktwits, X",
+      "sentiment": "Bullish",
+      "summary": "Retail investors are highly focused on Rocket Lab's ambitious $8B deal to acquire Iridium Communications. Traders expect this moves Rocket Lab into direct competition with Starlink, though some warn of high price multiples."
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "price": "194.84",
+      "change": "-1.39%",
+      "mentions": "18.5K",
+      "platforms": "Reddit, Stocktwits, X",
+      "sentiment": "Mixed",
+      "summary": "Panicked discussions as NVDA fell back below the $200 support level. Retail boards are split between those predicting a peak in the data-center cycle and those advocating 'buying the dip'."
+    }
+  ]
+}

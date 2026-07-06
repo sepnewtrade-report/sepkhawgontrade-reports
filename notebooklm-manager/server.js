@@ -508,21 +508,88 @@ app.get('/api/workspace-files', (req, res) => {
 });
 
 const TRENDS_FILE = path.join(__dirname, 'market_trends_cache.json');
+const TRENDS_FILE_TH = path.join(__dirname, 'market_trends_cache_th.json');
+const WHALE_FILE = path.join(__dirname, 'whale_portfolios_cache.json');
+const WHALE_FILE_TH = path.join(__dirname, 'whale_portfolios_cache_th.json');
+
+// Helper to translate JSON using Gemini REST API
+async function translateJsonViaGemini(jsonObject, targetLanguage) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not set in env');
+  }
+  
+  const systemInstruction = `You are a professional financial translator. Translate all English text strings (e.g. descriptions, reasons, summaries, names if appropriate) in the provided JSON object to ${targetLanguage === 'th' ? 'Thai' : 'English'}. Keep keys, tickers, prices, percentages, dates, and numbers unchanged. Return ONLY the translated JSON structure matching the input format. Do not include markdown code block syntax.`;
+  
+  const prompt = JSON.stringify(jsonObject);
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{ text: prompt }]
+      }],
+      systemInstruction: {
+        parts: [{ text: systemInstruction }]
+      },
+      generationConfig: {
+        responseMimeType: 'application/json'
+      }
+    })
+  });
+  
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Gemini Translation API failed: ${response.statusText} - ${errorText}`);
+  }
+  
+  const resData = await response.json();
+  const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!rawText) {
+    throw new Error('Gemini returned empty translation response');
+  }
+  
+  let cleaned = rawText.trim();
+  if (cleaned.startsWith('```json')) cleaned = cleaned.substring(7);
+  else if (cleaned.startsWith('```')) cleaned = cleaned.substring(3);
+  if (cleaned.endsWith('```')) cleaned = cleaned.substring(0, cleaned.length - 3);
+  
+  return JSON.parse(cleaned.trim());
+}
 
 // Get cached market trends and social sentiment
-app.get('/api/market-trends', (req, res) => {
-  if (fs.existsSync(TRENDS_FILE)) {
+app.get('/api/market-trends', async (req, res) => {
+  const lang = req.query.lang || 'th';
+  const targetFile = lang === 'en' ? TRENDS_FILE : TRENDS_FILE_TH;
+  
+  if (fs.existsSync(targetFile)) {
     try {
-      const data = JSON.parse(fs.readFileSync(TRENDS_FILE, 'utf8'));
-      if (data && data.hasOwnProperty('data') && data.hasOwnProperty('lastUpdated')) {
-        return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
-      } else {
-        return res.json({ success: true, data: data, lastUpdated: 'N/A' });
-      }
+      const data = JSON.parse(fs.readFileSync(targetFile, 'utf8'));
+      return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
     } catch (err) {
       console.error('Failed to read trends cache:', err);
     }
   }
+  
+  // If TH is requested but only EN exists, translate on-the-fly
+  if (lang === 'th' && fs.existsSync(TRENDS_FILE)) {
+    try {
+      console.log('Translating market trends cache to Thai on-the-fly...');
+      const enData = JSON.parse(fs.readFileSync(TRENDS_FILE, 'utf8'));
+      const translatedData = await translateJsonViaGemini(enData.data, 'th');
+      const cachePayload = {
+        data: translatedData,
+        lastUpdated: enData.lastUpdated
+      };
+      fs.writeFileSync(TRENDS_FILE_TH, JSON.stringify(cachePayload, null, 2), 'utf8');
+      return res.json({ success: true, data: translatedData, lastUpdated: enData.lastUpdated });
+    } catch (translateErr) {
+      console.error('On-the-fly translation of trends failed:', translateErr);
+    }
+  }
+  
   res.json({ success: true, data: null, lastUpdated: null });
 });
 
@@ -555,25 +622,42 @@ app.post('/api/market-trends/refresh', async (req, res) => {
     
     fs.writeFileSync(TRENDS_FILE, JSON.stringify(cachePayload, null, 2), 'utf8');
     
+    // Generate Thai cache
+    let dataToReturn = parsedData;
+    try {
+      console.log('Pre-translating new trends data to Thai...');
+      const translatedData = await translateJsonViaGemini(parsedData, 'th');
+      const cachePayloadTh = {
+        data: translatedData,
+        lastUpdated: nowStr
+      };
+      fs.writeFileSync(TRENDS_FILE_TH, JSON.stringify(cachePayloadTh, null, 2), 'utf8');
+      if (req.query.lang === 'th') {
+        dataToReturn = translatedData;
+      }
+    } catch (transErr) {
+      console.error('Failed to pre-translate trends to Thai:', transErr);
+    }
+    
     // Clean up temp file
     try { fs.unlinkSync(tempJsonPath); } catch (_) {}
     
-    res.json({ success: true, data: parsedData, lastUpdated: nowStr });
+    res.json({ success: true, data: dataToReturn, lastUpdated: nowStr });
   } catch (err) {
     console.error('Error scanning market trends:', err);
-    // Clean up temp file in case of failure
     try { if (fs.existsSync(tempJsonPath)) fs.unlinkSync(tempJsonPath); } catch (_) {}
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-const WHALE_FILE = path.join(__dirname, 'whale_portfolios_cache.json');
-
 // Get cached whale portfolios
-app.get('/api/whale-portfolios', (req, res) => {
-  if (fs.existsSync(WHALE_FILE)) {
+app.get('/api/whale-portfolios', async (req, res) => {
+  const lang = req.query.lang || 'th';
+  const targetFile = lang === 'en' ? WHALE_FILE : WHALE_FILE_TH;
+  
+  if (fs.existsSync(targetFile)) {
     try {
-      const data = JSON.parse(fs.readFileSync(WHALE_FILE, 'utf8'));
+      const data = JSON.parse(fs.readFileSync(targetFile, 'utf8'));
       if (data && data.hasOwnProperty('data') && data.hasOwnProperty('lastUpdated')) {
         return res.json({ success: true, data: data.data, lastUpdated: data.lastUpdated });
       } else {
@@ -583,6 +667,27 @@ app.get('/api/whale-portfolios', (req, res) => {
       console.error('Failed to read whale portfolios cache:', err);
     }
   }
+  
+  // Translate to Thai on-the-fly if needed
+  if (lang === 'th' && fs.existsSync(WHALE_FILE)) {
+    try {
+      console.log('Translating whale portfolios cache to Thai on-the-fly...');
+      const enData = JSON.parse(fs.readFileSync(WHALE_FILE, 'utf8'));
+      const rawPayload = enData.hasOwnProperty('data') ? enData.data : enData;
+      const lastUpdated = enData.hasOwnProperty('lastUpdated') ? enData.lastUpdated : 'N/A';
+      
+      const translatedData = await translateJsonViaGemini(rawPayload, 'th');
+      const cachePayloadTh = {
+        data: translatedData,
+        lastUpdated: lastUpdated
+      };
+      fs.writeFileSync(WHALE_FILE_TH, JSON.stringify(cachePayloadTh, null, 2), 'utf8');
+      return res.json({ success: true, data: translatedData, lastUpdated: lastUpdated });
+    } catch (translateErr) {
+      console.error('On-the-fly translation of whale portfolios failed:', translateErr);
+    }
+  }
+  
   res.json({ success: true, data: null, lastUpdated: null });
 });
 
@@ -615,13 +720,29 @@ app.post('/api/whale-portfolios/refresh', async (req, res) => {
     
     fs.writeFileSync(WHALE_FILE, JSON.stringify(cachePayload, null, 2), 'utf8');
     
+    // Generate Thai cache
+    let dataToReturn = parsedData;
+    try {
+      console.log('Pre-translating new whale portfolios data to Thai...');
+      const translatedData = await translateJsonViaGemini(parsedData, 'th');
+      const cachePayloadTh = {
+        data: translatedData,
+        lastUpdated: nowStr
+      };
+      fs.writeFileSync(WHALE_FILE_TH, JSON.stringify(cachePayloadTh, null, 2), 'utf8');
+      if (req.query.lang === 'th') {
+        dataToReturn = translatedData;
+      }
+    } catch (transErr) {
+      console.error('Failed to pre-translate whale portfolios to Thai:', transErr);
+    }
+    
     // Clean up temp file
     try { fs.unlinkSync(tempJsonPath); } catch (_) {}
     
-    res.json({ success: true, data: parsedData, lastUpdated: nowStr });
+    res.json({ success: true, data: dataToReturn, lastUpdated: nowStr });
   } catch (err) {
     console.error('Error scanning whale portfolios:', err);
-    // Clean up temp file in case of failure
     try { if (fs.existsSync(tempJsonPath)) fs.unlinkSync(tempJsonPath); } catch (_) {}
     res.status(500).json({ success: false, error: err.message });
   }
