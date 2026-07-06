@@ -1063,6 +1063,16 @@ async function runWorkflowPipeline(workflowId) {
       if (!fs.existsSync(w.actualFilePath)) {
         throw new Error(`ไม่พบไฟล์บทวิเคราะห์ ${w.selectedFile} ในโฟลเดอร์หลักของโปรเจกต์`);
       }
+      // Check if existing QC report file exists
+      const qcReportPath = w.actualFilePath.replace('.md', '_qc_report.json');
+      if (fs.existsSync(qcReportPath)) {
+        try {
+          const qcRaw = fs.readFileSync(qcReportPath, 'utf8');
+          w.qcReport = JSON.parse(qcRaw);
+        } catch (qcErr) {
+          console.error('Error reading existing QC report:', qcErr);
+        }
+      }
     } else {
       w.currentStep = 'กำลังทำ Gemini Deep Research...';
       addWorkflowLog(workflowId, `ขั้นตอนที่ 2/8: เริ่มทำ Deep Research วิจัยรวบรวมข่าวผ่าน Gemini...`);
@@ -1095,6 +1105,18 @@ async function runWorkflowPipeline(workflowId) {
       await runCmd(geminiCmd);
       addWorkflowLog(workflowId, `สร้างและเซฟรายงานการเงินสำเร็จ: ${generatedFilename}`);
       
+      // Check if QC report exists and load it
+      const qcReportPath = generatedFilePath.replace('.md', '_qc_report.json');
+      if (fs.existsSync(qcReportPath)) {
+        try {
+          const qcRaw = fs.readFileSync(qcReportPath, 'utf8');
+          w.qcReport = JSON.parse(qcRaw);
+          addWorkflowLog(workflowId, `โหลดผลการตรวจสอบคุณภาพข้อมูล (QC Content Report) สำเร็จ`);
+        } catch (qcErr) {
+          console.error('Error reading QC report:', qcErr);
+        }
+      }
+      
       // Rename file if it contains ticker and is "หุ้นในดวงใจ" or "ขอมา_จัดให้"
       let finalFilename = generatedFilename;
       let finalFilePath = generatedFilePath;
@@ -1109,6 +1131,17 @@ async function runWorkflowPipeline(workflowId) {
           finalFilename = newName;
           finalFilePath = newPath;
           addWorkflowLog(workflowId, `เปลี่ยนชื่อไฟล์รายงานเชิงลึกเป็น: ${newName}`);
+          
+          // Rename the QC report JSON as well if it exists
+          const oldQcPath = generatedFilePath.replace('.md', '_qc_report.json');
+          const newQcPath = newPath.replace('.md', '_qc_report.json');
+          if (fs.existsSync(oldQcPath)) {
+            try {
+              fs.renameSync(oldQcPath, newQcPath);
+            } catch (qcRenameErr) {
+              console.error('Error renaming QC report:', qcRenameErr);
+            }
+          }
           
           // Dynamically update workflow configuration paths with the new filename prefix
           const newBase = newName.replace('.md', '');

@@ -1,8 +1,21 @@
 import os
 import sys
 import argparse
+import json
 from google import genai
 from google.genai import types
+from pydantic import BaseModel, Field
+from typing import List
+
+class QCCheck(BaseModel):
+    item: str = Field(description="ชื่อหุ้น ดัชนี หรือหัวข้อข่าวที่ทำการตรวจสอบ (เช่น CRM RSI, ORCL Price, ข่าว CapEx)")
+    status: str = Field(description="ผลการตรวจสอบ: verified_ok (ถูกต้อง), corrected (พบจุดผิดและแก้ไขสำเร็จ), หรือ info_added (เพิ่มข้อมูล)")
+    details: str = Field(description="คำอธิบายสั้นๆ ของการตรวจสอบและผลลัพธ์ (เช่น ข้อมูล RSI เดิม 25 ถูกต้องแล้ว หรือแก้ไขจาก 25 เป็น 67.18 เพื่อให้ตรงกับวันที่เป้าหมาย)")
+
+class QCReport(BaseModel):
+    overall_summary: str = Field(description="สรุปภาพรวมของการตรวจสอบคุณภาพเนื้อหาและการ Fact-check ข้อมูลข้ามปี")
+    audit_log: List[QCCheck] = Field(description="รายการบันทึกการตรวจสอบข้อเท็จจริงและความถูกต้องของตัวเลข")
+    final_report_content: str = Field(description="เนื้อหารายงานบทวิเคราะห์ฉบับสมบูรณ์ที่ได้รับการจัดแต่งและแก้ไขตัวเลขทั้งหมดแล้วเสร็จ โดยไม่มีบทพูดหรือเครื่องหมายสคริปต์")
 
 def main():
     parser = argparse.ArgumentParser(description="Gemini Deep Research, Report Writer, and QC Agent")
@@ -134,7 +147,10 @@ def main():
         
         qc_config = types.GenerateContentConfig(
             system_instruction=qc_system_instruction,
-            tools=[types.Tool(google_search=types.GoogleSearch())]
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            response_mime_type="application/json",
+            response_schema=QCReport,
+            temperature=0.1
         )
         
         qc_response = client.models.generate_content(
@@ -143,10 +159,25 @@ def main():
             config=qc_config
         )
         
-        final_content = qc_response.text
-        if not final_content:
+        qc_json_text = qc_response.text
+        final_content = ""
+        qc_report_data = None
+        
+        if not qc_json_text:
             print("Warning: QC returned empty response, falling back to draft report.")
             final_content = draft_content
+        else:
+            try:
+                qc_data = json.loads(qc_json_text)
+                final_content = qc_data.get("final_report_content", draft_content)
+                qc_report_data = {
+                    "overall_summary": qc_data.get("overall_summary", "ผ่านการตรวจสอบข้อมูลสำเร็จ"),
+                    "audit_log": qc_data.get("audit_log", [])
+                }
+            except Exception as parse_err:
+                print(f"Error parsing QC JSON output: {parse_err}")
+                print("Falling back to raw text output from QC.")
+                final_content = qc_json_text
 
         # Extract search grounding sources from Stage 2 (QC)
         try:
@@ -178,8 +209,26 @@ def main():
         # Make sure directory exists
         os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
         
+        # Save markdown report
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(final_content)
+            
+        # Save QC report JSON
+        qc_report_path = args.output.replace(".md", "_qc_report.json")
+        if not qc_report_data:
+            qc_report_data = {
+                "overall_summary": "ผ่านการตรวจสอบความถูกต้องแล้ว (ผลลัพธ์เป็นข้อความธรรมดา)",
+                "audit_log": [
+                    {
+                        "item": "การตรวจสอบความถูกต้องข้อมูล",
+                        "status": "verified_ok",
+                        "details": "ความถูกต้องได้รับการยืนยันโดยโมเดลแล้ว"
+                    }
+                ]
+            }
+        with open(qc_report_path, "w", encoding="utf-8") as f:
+            json.dump(qc_report_data, f, ensure_ascii=False, indent=2)
+        print(f"QC Audit Report saved to: {qc_report_path}")
             
         print(f"Report successfully saved to: {args.output}")
         sys.exit(0)

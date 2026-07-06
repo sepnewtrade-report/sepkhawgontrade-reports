@@ -845,6 +845,57 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+// Format and render QC Content Report
+function formatQcReport(qcReport) {
+    if (!qcReport) return '';
+    
+    let html = `<div style="font-weight: 600; color: #818cf8; margin-bottom: 12px; font-size: 13.5px; border-left: 3px solid #6366f1; padding-left: 8px;">`;
+    html += escapeHtml(qcReport.overall_summary);
+    html += `</div>`;
+    
+    if (qcReport.audit_log && qcReport.audit_log.length > 0) {
+        html += `<div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px;">`;
+        qcReport.audit_log.forEach(check => {
+            let icon = '';
+            let badgeStyle = '';
+            let statusText = '';
+            
+            if (check.status === 'verified_ok') {
+                icon = '<i class="fa-solid fa-circle-check" style="color: #10b981;"></i>';
+                badgeStyle = 'background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2);';
+                statusText = 'ถูกต้อง';
+            } else if (check.status === 'corrected') {
+                icon = '<i class="fa-solid fa-circle-exclamation" style="color: #f59e0b;"></i>';
+                badgeStyle = 'background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2);';
+                statusText = 'แก้ไขแล้ว';
+            } else if (check.status === 'info_added') {
+                icon = '<i class="fa-solid fa-circle-info" style="color: #3b82f6;"></i>';
+                badgeStyle = 'background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2);';
+                statusText = 'เพิ่มข้อมูล';
+            } else {
+                icon = '<i class="fa-solid fa-question-circle" style="color: #9ca3af;"></i>';
+                badgeStyle = 'background: rgba(156, 163, 175, 0.1); color: #d1d5db; border: 1px solid rgba(156, 163, 175, 0.2);';
+                statusText = check.status;
+            }
+            
+            html += `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 6px; padding: 10px 12px; display: flex; align-items: start; gap: 10px;">
+                <div style="font-size: 16px; margin-top: 2px; display: flex; align-items: center; justify-content: center;">${icon}</div>
+                <div style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; gap: 8px;">
+                        <span style="font-weight: 600; color: var(--text-primary); font-size: 13px;">${escapeHtml(check.item)}</span>
+                        <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 500; ${badgeStyle}">${statusText}</span>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 12px; line-height: 1.5;">${escapeHtml(check.details)}</div>
+                </div>
+            </div>`;
+        });
+        html += `</div>`;
+    }
+    
+    return html;
+}
+
 // Fetch all profiles from backend
 async function fetchProfiles() {
     try {
@@ -1515,26 +1566,46 @@ async function pollWorkflowStatus() {
                 reviewEditor.value = activeW.tempContent || '';
                 state.isReviewing = true;
             }
-        } else if (activeW.status === 'completed') {
-            showActiveSection(workflowResultSection);
             
-            resAudioPath.textContent = activeW.result.audioPath || '-';
-            resInfoPath.textContent = activeW.result.infoPath || '-';
-            resFbPost.value = activeW.result.fbPost || '';
-            
-            // Stop polling since it's completed
-            stopWorkflowPolling();
-            btnRunWorkflow.disabled = false;
-        } else if (activeW.status === 'failed') {
-            showActiveSection(workflowProgressSection); // keep visible for log check
-            
-            alert('เกิดข้อผิดพลาดในกระบวนการทำงาน: ' + activeW.error);
-            stopWorkflowPolling();
-            btnRunWorkflow.disabled = false;
+            // Render and show QC Report if available
+            const qcContainer = document.getElementById('workflow-qc-container');
+            const qcContentEl = document.getElementById('workflow-qc-content');
+            if (qcContainer && qcContentEl) {
+                if (activeW.qcReport) {
+                    qcContainer.style.display = 'block';
+                    qcContentEl.innerHTML = formatQcReport(activeW.qcReport);
+                } else {
+                    qcContainer.style.display = 'none';
+                }
+            }
         } else {
-            // status === 'running'
-            showActiveSection(workflowProgressSection);
-            state.isReviewing = false;
+            // Hide QC Container when not in waiting approval
+            const qcContainer = document.getElementById('workflow-qc-container');
+            if (qcContainer) {
+                qcContainer.style.display = 'none';
+            }
+            
+            if (activeW.status === 'completed') {
+                showActiveSection(workflowResultSection);
+                
+                resAudioPath.textContent = activeW.result.audioPath || '-';
+                resInfoPath.textContent = activeW.result.infoPath || '-';
+                resFbPost.value = activeW.result.fbPost || '';
+                
+                // Stop polling since it's completed
+                stopWorkflowPolling();
+                btnRunWorkflow.disabled = false;
+            } else if (activeW.status === 'failed') {
+                showActiveSection(workflowProgressSection); // keep visible for log check
+                
+                alert('เกิดข้อผิดพลาดในกระบวนการทำงาน: ' + activeW.error);
+                stopWorkflowPolling();
+                btnRunWorkflow.disabled = false;
+            } else {
+                // status === 'running'
+                showActiveSection(workflowProgressSection);
+                state.isReviewing = false;
+            }
         }
         
     } catch (error) {
