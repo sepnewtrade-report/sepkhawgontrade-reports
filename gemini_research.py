@@ -25,9 +25,19 @@ def main():
     parser.add_argument("--output", required=True, help="Output markdown file path")
     args = parser.parse_args()
 
+    # Manually load .env from project root if it exists
+    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip() and not line.startswith("#"):
+                    parts = line.strip().split("=", 1)
+                    if len(parts) == 2:
+                        os.environ[parts[0].strip()] = parts[1].strip().strip('"').strip("'")
+                        
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        print("Error: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
+        print("Error: GEMINI_API_KEY environment variable not set. Please set it in .env file in the project root.", file=sys.stderr)
         sys.exit(1)
 
     model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")

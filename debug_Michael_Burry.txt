@@ -1,18 +1,20 @@
 {
   "investorName": "Michael Burry",
   "firmName": "Scion Asset Management",
-  "aum": "$155M",
-  "style": "Value/Short",
+  "aum": "$1.1B",
+  "style": "Contrarian Value Investing",
   "longPortfolio": [
     {
       "ticker": "PYPL",
-      "name": "PayPal Holdings Inc.",
+      "name": "PayPal Holdings, Inc.",
       "price": "$45.47",
       "change": "+3.18%",
-      "shares": "500,000",
-      "value": "$22.7M",
-      "weight": "35.0%"
+      "shares": "800,000",
+      "value": "$36,376,000",
+      "weight": "3.5%"
     },
     {
-      "ticker": "ADBE",
-      "
+      "ticker": "SFM",
+      "name": "Sprouts Farmers Market",
+      "price": "$90.28",
+      "change": "+4.1

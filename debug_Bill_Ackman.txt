@@ -1,0 +1,65 @@
+{
+  "investorName": "Bill Ackman",
+  "firmName": "Pershing Square",
+  "aum": "$33.8 Billion",
+  "style": "Concentrated Activist",
+  "longPortfolio": [
+    {
+      "ticker": "BN",
+      "name": "Brookfield Corporation",
+      "price": "$43.43",
+      "change": "+1.54%",
+      "shares": "59,697,208",
+      "value": "$2,592,650,000",
+      "weight": "17.62%"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com Inc.",
+      "price": "$243.04",
+      "change": "+0.55%",
+      "shares": "11,451,981",
+      "value": "$2,783,280,000",
+      "weight": "17.39%"
+    },
+    {
+      "ticker": "UBER",
+      "name": "Uber Technologies Inc.",
+      "price": "$74.63",
+      "change": "+0.27%",
+      "shares": "29,958,771",
+      "value": "$2,235,820,000",
+      "weight": "15.71%"
+    }
+  ],
+  "optionsPositions": [
+    {
+      "ticker": "SPY",
+      "type": "PUT",
+      "underlyingPrice": "$744.78",
+      "price": "$19.87",
+      "change": "+10.50%",
+      "contracts": "50,000",
+      "value": "$99,350,000",
+      "strikePrice": "$740.00",
+      "expiryDate": "2026-09-18"
+    },
+    {
+      "ticker": "QQQ",
+      "type": "PUT",
+      "underlyingPrice": "$712.60",
+      "price": "$25.50",
+      "change": "+22.10%",
+      "contracts": "30,000",
+      "value": "$76,500,000",
+      "strikePrice": "$710.00",
+      "expiryDate": "2026-09-18"
+    }
+  ],
+  "shortPositions": [],
+  "recentTransactions": [
+    {
+      "date": "2026-07-03",
+      "ticker": "PSH",
+      "action": "BUY",
+      "price": "$53
