@@ -1,13 +1,13 @@
 [
   {
-    "title": "รายงานวิเคราะห์กระแสเงินทุนสถาบันและกองทุนขนาดใหญ่ (Whale Flow Analysis)",
-    "filename": "whale_flow_analysis_2026_07_06.md",
-    "path": "whale_flow_analysis_2026_07_06.md",
-    "category": "Whale Flow",
-    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "title": "us_pre_market_analysis_2026_07_06.md",
+    "filename": "us_pre_market_analysis_2026_07_06.md",
+    "path": "us_pre_market_analysis_2026_07_06.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
     "date": "2026-07-06",
-    "timestamp": 1783339211945.995,
-    "size": 33139
+    "timestamp": 1783340072185.7458,
+    "size": 7714
   },
   {
     "title": "Small-Cap & Penny Stock Intelligence Report",
@@ -16,8 +16,28 @@
     "category": "Small Cap Radar",
     "categoryThai": "Small Cap Radar",
     "date": "2026-07-06",
-    "timestamp": 1783338944922.6328,
+    "timestamp": 1783339596127.012,
     "size": 46890
+  },
+  {
+    "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
+    "filename": "us_viral_stock_analysis_2026_07_06.md",
+    "path": "us_viral_stock_analysis_2026_07_06.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-07-06",
+    "timestamp": 1783339524124.859,
+    "size": 36483
+  },
+  {
+    "title": "รายงานวิเคราะห์กระแสเงินทุนสถาบันและกองทุนขนาดใหญ่ (Whale Flow Analysis)",
+    "filename": "whale_flow_analysis_2026_07_06.md",
+    "path": "whale_flow_analysis_2026_07_06.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-06",
+    "timestamp": 1783339464818.1287,
+    "size": 33139
   },
   {
     "title": "รายงานวิเคราะห์ภาวะตลาดการเงินรายวัน (Daily Market Intelligence Report)",
@@ -28,16 +48,6 @@
     "date": "2026-07-06",
     "timestamp": 1783338932989.0103,
     "size": 20294
-  },
-  {
-    "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
-    "filename": "us_viral_stock_analysis_2026_07_06.md",
-    "path": "us_viral_stock_analysis_2026_07_06.md",
-    "category": "Hot Stock วันนี้",
-    "categoryThai": "Hot Stock วันนี้",
-    "date": "2026-07-06",
-    "timestamp": 1783338496968.4443,
-    "size": 36483
   },
   {
     "title": "Astro Economy Weekly Analysis: Neptune's Awakening & The Pragmatic Shift",

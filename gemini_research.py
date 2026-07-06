@@ -158,7 +158,6 @@ def main():
         
         qc_config = types.GenerateContentConfig(
             system_instruction=qc_system_instruction,
-            tools=[types.Tool(google_search=types.GoogleSearch())],
             response_mime_type="application/json",
             response_schema=QCReport,
             temperature=0.1

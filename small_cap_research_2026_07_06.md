@@ -77,7 +77,7 @@ graph TD
 ---
 
 ### 2️⃣ Seer, Inc. (NASDAQ: SEER)
-*Management Unsolicited Buyout Proposal @ $2.45 & Activist Proxy Battle vs. Long-term Unprofitability*
+*Management Unsolicited Buyout Proposal @ $1.62 & Activist Proxy Battle vs. Long-term Unprofitability*
 
 ```mermaid
 graph TD
