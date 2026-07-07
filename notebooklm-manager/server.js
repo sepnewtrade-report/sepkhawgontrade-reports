@@ -512,51 +512,71 @@ const TRENDS_FILE_TH = path.join(__dirname, 'market_trends_cache_th.json');
 const WHALE_FILE = path.join(__dirname, 'whale_portfolios_cache.json');
 const WHALE_FILE_TH = path.join(__dirname, 'whale_portfolios_cache_th.json');
 
-// Helper to translate JSON using Gemini REST API
+// Helper to translate JSON using Gemini REST API with key rotation
 async function translateJsonViaGemini(jsonObject, targetLanguage) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
+  const rawApiKey = process.env.GEMINI_API_KEY;
+  if (!rawApiKey) {
     throw new Error('GEMINI_API_KEY is not set in env');
+  }
+  
+  // Extract all keys (split by comma if comma-separated)
+  const apiKeys = rawApiKey.split(',').map(k => k.trim()).filter(Boolean);
+  if (apiKeys.length === 0) {
+    throw new Error('No valid API keys found in GEMINI_API_KEY');
   }
   
   const systemInstruction = `You are a professional financial translator. Translate all English text strings (e.g. descriptions, reasons, summaries, names if appropriate) in the provided JSON object to ${targetLanguage === 'th' ? 'Thai' : 'English'}. Keep keys, tickers, prices, percentages, dates, and numbers unchanged. Return ONLY the translated JSON structure matching the input format. Do not include markdown code block syntax.`;
   
   const prompt = JSON.stringify(jsonObject);
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  let lastError = null;
   
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{
-        parts: [{ text: prompt }]
-      }],
-      systemInstruction: {
-        parts: [{ text: systemInstruction }]
-      },
-      generationConfig: {
-        responseMimeType: 'application/json'
+  for (let i = 0; i < apiKeys.length; i++) {
+    const key = apiKeys[i];
+    try {
+      console.log(`[Translation] Attempting translation with API Key ${i + 1}/${apiKeys.length}...`);
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: prompt }]
+          }],
+          systemInstruction: {
+            parts: [{ text: systemInstruction }]
+          },
+          generationConfig: {
+            responseMimeType: 'application/json'
+          }
+        })
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Gemini Translation API failed: ${response.status} - ${errorText}`);
       }
-    })
-  });
-  
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Gemini Translation API failed: ${response.statusText} - ${errorText}`);
+      
+      const resData = await response.json();
+      const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawText) {
+        throw new Error('Gemini returned empty translation response');
+      }
+      
+      let cleaned = rawText.trim();
+      if (cleaned.startsWith('```json')) cleaned = cleaned.substring(7);
+      else if (cleaned.startsWith('```')) cleaned = cleaned.substring(3);
+      if (cleaned.endsWith('```')) cleaned = cleaned.substring(0, cleaned.length - 3);
+      
+      return JSON.parse(cleaned.trim());
+    } catch (err) {
+      console.error(`[Translation] API Key ${i + 1} failed:`, err.message);
+      lastError = err;
+      // Continue to next key
+    }
   }
   
-  const resData = await response.json();
-  const rawText = resData.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!rawText) {
-    throw new Error('Gemini returned empty translation response');
-  }
-  
-  let cleaned = rawText.trim();
-  if (cleaned.startsWith('```json')) cleaned = cleaned.substring(7);
-  else if (cleaned.startsWith('```')) cleaned = cleaned.substring(3);
-  if (cleaned.endsWith('```')) cleaned = cleaned.substring(0, cleaned.length - 3);
-  
-  return JSON.parse(cleaned.trim());
+  throw new Error(`All translation API keys failed. Last error: ${lastError.message}`);
 }
 
 async function translateWhaleDataToThai(whaleData) {
