@@ -14,17 +14,17 @@
         {
           "ticker": "AAPL",
           "name": "Apple Inc.",
-          "price": "$304.52",
+          "price": "$312.66",
           "volume": "9.8M",
-          "change": "-0.96%",
+          "change": "+1.31%",
           "reason": "Slight profit-taking after hitting all-time highs following news of massive foldable iPhone production targets."
         },
         {
           "ticker": "MSFT",
           "name": "Microsoft Corp.",
-          "price": "$392.50",
+          "price": "$386.74",
           "volume": "7.1M",
-          "change": "+0.60%",
+          "change": "-0.96%",
           "reason": "Broad technology recovery and expansion of cloud AI services."
         },
         {
@@ -46,9 +46,9 @@
         {
           "ticker": "AMD",
           "name": "Advanced Micro Devices, Inc.",
-          "price": "$535.00",
+          "price": "$552.05",
           "volume": "6.2M",
-          "change": "+3.32%",
+          "change": "+6.61%",
           "reason": "Memory chip rally lifts broader semiconductor peers."
         },
         {
@@ -99,9 +99,9 @@
         {
           "ticker": "BAC",
           "name": "Bank of America Corporation",
-          "price": "$58.66",
+          "price": "$59.90",
           "volume": "29.33M",
-          "change": "+0.57%",
+          "change": "+1.99%",
           "reason": "Pre-market bank sector rotation on lower expectations for immediate Fed hikes."
         },
         {
@@ -163,9 +163,9 @@
         {
           "ticker": "SOFI",
           "name": "SoFi Technologies, Inc.",
-          "price": "$7.45",
+          "price": "$18.61",
           "volume": "15.4M",
-          "change": "+0.80%",
+          "change": "+2.03%",
           "reason": "Strong performance from diversified rural lending and personal finance products."
         }
       ]
@@ -176,9 +176,9 @@
         {
           "ticker": "ISRG",
           "name": "Intuitive Surgical, Inc.",
-          "price": "$425.91",
+          "price": "$432.83",
           "volume": "3.14M",
-          "change": "+5.87%",
+          "change": "+1.60%",
           "reason": "Bullish surgical robotics adoption and da Vinci 5 commercial progress."
         },
         {
@@ -192,17 +192,17 @@
         {
           "ticker": "LLY",
           "name": "Eli Lilly and Company",
-          "price": "$965.50",
+          "price": "$1200.06",
           "volume": "2.8M",
-          "change": "+0.85%",
+          "change": "-1.14%",
           "reason": "Continued global expansion of Jaypirca and Medicare coverage for obesity therapeutics."
         },
         {
           "ticker": "JNJ",
           "name": "Johnson & Johnson",
-          "price": "$155.80",
+          "price": "$259.33",
           "volume": "4.5M",
-          "change": "+0.30%",
+          "change": "-1.41%",
           "reason": "Stability in diversified MedTech portfolio and oncology therapeutics pipeline."
         },
         {
@@ -216,17 +216,17 @@
         {
           "ticker": "UNH",
           "name": "UnitedHealth Group Incorporated",
-          "price": "$510.50",
+          "price": "$417.99",
           "volume": "2.2M",
-          "change": "+0.15%",
+          "change": "-1.73%",
           "reason": "Stable defensive flows as the largest healthcare insurance provider in the US."
         },
         {
           "ticker": "MRK",
           "name": "Merck & Co., Inc.",
-          "price": "$128.20",
+          "price": "$126.78",
           "volume": "3.4M",
-          "change": "+0.25%",
+          "change": "-2.15%",
           "reason": "Consistent growth from oncology treatments and global drug pipelines."
         },
         {
@@ -248,9 +248,9 @@
         {
           "ticker": "BIIB",
           "name": "Biogen Inc.",
-          "price": "$225.30",
+          "price": "$208.46",
           "volume": "1.5M",
-          "change": "+1.20%",
+          "change": "-3.54%",
           "reason": "Fresh regulatory approvals and strategic drug partnerships fuel bullish outlook."
         }
       ]
@@ -261,9 +261,9 @@
         {
           "ticker": "TSLA",
           "name": "Tesla, Inc.",
-          "price": "$392.76",
+          "price": "$419.77",
           "volume": "18.5M",
-          "change": "+1.50%",
+          "change": "+6.69%",
           "reason": "Delivery volume stability and optimistic expectations for Optimus robotics project."
         },
         {
@@ -301,9 +301,9 @@
         {
           "ticker": "BABA",
           "name": "Alibaba Group Holding Limited",
-          "price": "$76.80",
+          "price": "$97.91",
           "volume": "12.1M",
-          "change": "+0.80%",
+          "change": "+1.84%",
           "reason": "Global e-commerce growth and cloud computing advancements in Asia."
         },
         {
@@ -333,9 +333,9 @@
         {
           "ticker": "ODFL",
           "name": "Old Dominion Freight Line, Inc.",
-          "price": "$325.40",
+          "price": "$216.44",
           "volume": "1.1M",
-          "change": "+0.25%",
+          "change": "-0.56%",
           "reason": "Leading industrial logistics volumes support optimistic transport sector outlook."
         }
       ]
@@ -346,33 +346,33 @@
         {
           "ticker": "META",
           "name": "Meta Platforms, Inc.",
-          "price": "$593.65",
+          "price": "$600.29",
           "volume": "6.2M",
-          "change": "+1.50%",
+          "change": "+2.98%",
           "reason": "Report of plans to launch a new revenue-generating AI cloud business."
         },
         {
           "ticker": "GOOGL",
           "name": "Alphabet Inc.",
-          "price": "$362.00",
+          "price": "$366.46",
           "volume": "7.8M",
-          "change": "+1.00%",
+          "change": "+1.82%",
           "reason": "Broad recovery in digital ad spend and strong Google Cloud performance."
         },
         {
           "ticker": "NFLX",
           "name": "Netflix, Inc.",
-          "price": "$678.50",
+          "price": "$76.02",
           "volume": "2.1M",
-          "change": "+0.70%",
+          "change": "-2.10%",
           "reason": "Leading subscriber growth and expansion into live streaming sports programming."
         },
         {
           "ticker": "DIS",
           "name": "The Walt Disney Company",
-          "price": "$102.40",
+          "price": "$97.41",
           "volume": "5.4M",
-          "change": "+0.40%",
+          "change": "-2.10%",
           "reason": "Success of summer theatrical releases and streaming bundle price hikes."
         },
         {
@@ -394,25 +394,25 @@
         {
           "ticker": "T",
           "name": "AT&T Inc.",
-          "price": "$18.90",
+          "price": "$20.58",
           "volume": "18.4M",
-          "change": "+0.50%",
+          "change": "+0.00%",
           "reason": "Value-seeking dividend inflows and cellular fiber infrastructure expansion."
         },
         {
           "ticker": "SNAP",
           "name": "Snap Inc.",
-          "price": "$14.20",
+          "price": "$4.75",
           "volume": "14.5M",
-          "change": "+1.20%",
+          "change": "-1.86%",
           "reason": "Rising advertiser counts on redesigned social commerce features."
         },
         {
           "ticker": "PINS",
           "name": "Pinterest, Inc.",
-          "price": "$38.50",
+          "price": "$22.25",
           "volume": "4.8M",
-          "change": "+0.90%",
+          "change": "+0.82%",
           "reason": "Partnership with global e-commerce providers boosts shoppable pins monetization."
         },
         {
@@ -431,9 +431,9 @@
         {
           "ticker": "IREN",
           "name": "IREN Limited",
-          "price": "$41.05",
+          "price": "$43.91",
           "volume": "60.37M",
-          "change": "+5.74%",
+          "change": "+13.11%",
           "reason": "Shortlisted in a bid for Anthropic's massive $15 billion Australian data center development."
         },
         {
@@ -455,9 +455,9 @@
         {
           "ticker": "COP",
           "name": "ConocoPhillips",
-          "price": "$112.30",
+          "price": "$103.58",
           "volume": "5.8M",
-          "change": "-0.50%",
+          "change": "-1.10%",
           "reason": "Easing oil prices put pressure on upstream exploration companies."
         },
         {
@@ -479,25 +479,25 @@
         {
           "ticker": "MPC",
           "name": "Marathon Petroleum Corporation",
-          "price": "$168.40",
+          "price": "$268.99",
           "volume": "2.5M",
-          "change": "-0.30%",
+          "change": "+0.99%",
           "reason": "Steady refining margins buffer product companies from oil price declines."
         },
         {
           "ticker": "PSX",
           "name": "Phillips 66",
-          "price": "$134.50",
+          "price": "$177.33",
           "volume": "3.1M",
-          "change": "-0.40%",
+          "change": "+0.52%",
           "reason": "Refining operators see sideways trading as crude input costs soften."
         },
         {
           "ticker": "VLO",
           "name": "Valero Energy Corporation",
-          "price": "$152.30",
+          "price": "$270.32",
           "volume": "4.2M",
-          "change": "-0.40%",
+          "change": "+0.96%",
           "reason": "Valuation support from retail gasoline demand during peak summer travel."
         },
         {
@@ -532,9 +532,9 @@
         {
           "ticker": "REGN",
           "name": "Regeneron Pharmaceuticals, Inc.",
-          "price": "$654.27",
+          "price": "$649.81",
           "volume": "3.1M",
-          "change": "+4.73%",
+          "change": "-0.68%",
           "reason": "Presentation of muscle biology and diabetes data at ADA conference."
         },
         {
@@ -548,25 +548,25 @@
         {
           "ticker": "BNTX",
           "name": "BioNTech SE",
-          "price": "$88.40",
+          "price": "$93.93",
           "volume": "1.8M",
-          "change": "+0.30%",
+          "change": "-3.71%",
           "reason": "Ongoing transition to oncology pipelines and cancer vaccine research."
         },
         {
           "ticker": "AMGN",
           "name": "Amgen Inc.",
-          "price": "$310.20",
+          "price": "$366.44",
           "volume": "2.9M",
-          "change": "+0.80%",
+          "change": "-2.06%",
           "reason": "Optimistic outlook for upcoming clinical data on obesity therapeutic assets."
         },
         {
           "ticker": "BIIB",
           "name": "Biogen Inc.",
-          "price": "$225.30",
+          "price": "$208.46",
           "volume": "1.4M",
-          "change": "+1.20%",
+          "change": "-3.54%",
           "reason": "Broad drug sector rally and pipeline expansion successes."
         },
         {
@@ -601,17 +601,17 @@
         {
           "ticker": "SPCX",
           "name": "Space Exploration Technologies Corp.",
-          "price": "$160.95",
+          "price": "$160.42",
           "volume": "1.21M",
-          "change": "-1.70%",
+          "change": "-0.98%",
           "reason": "Voluntary post-IPO cooling ahead of Nasdaq-100 inclusion tomorrow."
         },
         {
           "ticker": "RKLB",
           "name": "Rocket Lab USA, Inc.",
-          "price": "$100.21",
+          "price": "$93.09",
           "volume": "1.4M",
-          "change": "-1.31%",
+          "change": "-7.34%",
           "reason": "Attention focused on the $8 billion proposed acquisition of Iridium Communications."
         },
         {
@@ -649,17 +649,17 @@
         {
           "ticker": "SATL",
           "name": "Satellogic Inc.",
-          "price": "$5.43",
+          "price": "$5.18",
           "volume": "510K",
-          "change": "-1.99%",
+          "change": "-4.60%",
           "reason": "Sideways consolidation following commercial satellite contract awards."
         },
         {
           "ticker": "BKSY",
           "name": "BlackSky Technology Inc.",
-          "price": "$27.88",
+          "price": "$27.16",
           "volume": "340K",
-          "change": "-2.99%",
+          "change": "-2.58%",
           "reason": "Minor profit taking on defense satellite intelligence growth assets."
         },
         {
@@ -673,9 +673,9 @@
         {
           "ticker": "SPCE",
           "name": "Virgin Galactic Holdings, Inc.",
-          "price": "$5.78",
+          "price": "$2.69",
           "volume": "1.5M",
-          "change": "+0.50%",
+          "change": "-0.37%",
           "reason": "High-beta retail speculation on future commercial spaceflight program scheduling."
         }
       ]
@@ -686,17 +686,17 @@
         {
           "ticker": "ISRG",
           "name": "Intuitive Surgical, Inc.",
-          "price": "$425.91",
+          "price": "$432.83",
           "volume": "3.14M",
-          "change": "+5.87%",
+          "change": "+1.60%",
           "reason": "Medical robotics leader benefits from high da Vinci 5 adoption rates."
         },
         {
           "ticker": "SYM",
           "name": "Symbotic Inc.",
-          "price": "$38.50",
+          "price": "$44.46",
           "volume": "2.2M",
-          "change": "+1.20%",
+          "change": "+4.02%",
           "reason": "Reaching GAAP profitability milestones and massive $22B distribution backlog."
         },
         {
@@ -710,17 +710,17 @@
         {
           "ticker": "BBAI",
           "name": "BigBear.ai Holdings, Inc.",
-          "price": "$1.45",
+          "price": "$3.58",
           "volume": "3.1M",
-          "change": "+1.10%",
+          "change": "+1.42%",
           "reason": "Commercial contract growth in military logistics robotics."
         },
         {
           "ticker": "TER",
           "name": "Teradyne, Inc.",
-          "price": "$382.00",
+          "price": "$379.52",
           "volume": "2.1M",
-          "change": "+3.50%",
+          "change": "+2.83%",
           "reason": "Semiconductor test and robotics industrial solutions benefit from chip recovery."
         },
         {
@@ -780,8 +780,8 @@
     {
       "ticker": "IREN",
       "name": "IREN Limited",
-      "price": "$41.05",
-      "change": "+5.74%",
+      "price": "$43.91",
+      "change": "+13.11%",
       "mentions": "15,500",
       "platforms": "Stocktwits, X, Reddit",
       "sentiment": "Bullish",
@@ -790,8 +790,8 @@
     {
       "ticker": "SPCX",
       "name": "Space Exploration Technologies Corp.",
-      "price": "$160.95",
-      "change": "-1.70%",
+      "price": "$160.42",
+      "change": "-0.98%",
       "mentions": "25,000",
       "platforms": "X, Reddit, Stocktwits",
       "sentiment": "Mixed",
