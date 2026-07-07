@@ -282,21 +282,13 @@ def main():
             "criticalPeriodHighlights": []
         }
 
-    now = time.localtime()
-    thai_timestamp = f"{now.tm_mday}/{now.tm_mon}/{now.tm_year + 543} {now.tm_hour:02d}:{now.tm_min:02d}:{now.tm_sec:02d}"
-
-    result_payload = {
-        "lastUpdated": thai_timestamp,
-        "data": final_payload
-    }
-
     try:
         output_dir = os.path.dirname(os.path.abspath(output_file))
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
             
         with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(result_payload, f, ensure_ascii=False, indent=2)
+            json.dump(final_payload, f, ensure_ascii=False, indent=2)
             
         print(f"Success: Full database compiled and saved to {output_file}")
         sys.exit(0)

@@ -1,0 +1,975 @@
+{
+  "data": {
+    "lastUpdated": "6/7/2569 19:28:53",
+    "data": {
+      "overview": {
+        "marketSentiment": "ความเชื่อมั่นของสถาบันยังคงระมัดระวังในเชิงป้องกัน โดยมีการเลือกซื้อหุ้นเติบโต กลุ่มวาฬกำลังป้องกันความเสี่ยงจากการลงทุนในดัชนีพร้อมกับเลือกซื้อหุ้นคุณค่าเฉพาะราย",
+        "topSectorRotation": [
+          "การหมุนเวียนจากหุ้นเซมิคอนดักเตอร์ขนาดใหญ่เข้าสู่หุ้นคุณค่า",
+          "กระแสเงินทุนที่เพิ่มขึ้นเข้าสู่ภาคเทคโนโลยีทางการแพทย์และสุขภาพ",
+          "การขายชอร์ตดัชนีตลาดในวงกว้างเพื่อป้องกันความเสี่ยงของหุ้นเติบโต"
+        ],
+        "criticalPeriodHighlights": [
+          {
+            "timestamp": "2026-04-15",
+            "marketEvent": "การเปิดเผยข้อมูล CPI เดือนเมษายนแสดงให้เห็นว่าเงินเฟ้อยังคงเหนียวแน่น",
+            "whaleActivity": "กลุ่มวาฬขายชอร์ตดัชนีหลักอย่าง QQQ และ SPY อย่างหนัก",
+            "impact": "ดัชนีตลาดในวงกว้างเผชิญกับแรงกดดันขาลงและการป้องกันความเสี่ยงที่เพิ่มขึ้น"
+          },
+          {
+            "timestamp": "2026-05-20",
+            "marketEvent": "ธนาคารกลางสหรัฐฯ คงอัตราดอกเบี้ยหลักไว้ที่ระดับเดิม",
+            "whaleActivity": "บัฟเฟตต์ซื้อหุ้น Alphabet ในขณะที่กริฟฟินลดสัดส่วนหุ้น Nvidia",
+            "impact": "ภาคเทคโนโลยีมีการเคลื่อนไหวที่หลากหลายและมีการจัดสรรเงินทุนใหม่ไปยังหุ้นคุณค่า"
+          },
+          {
+            "timestamp": "2026-06-18",
+            "marketEvent": "ดัชนีภาคเทคโนโลยีประสบกับการเทขายอย่างรุนแรงในช่วงกลางฤดูร้อน",
+            "whaleActivity": "เบอร์รีขายชอร์ต Tesla และ Micron ในขณะที่วูดซื้อ Tesla",
+            "impact": "หุ้นเติบโตที่มีค่าเบต้าสูงประสบกับความผันผวนและความแตกต่างที่เพิ่มขึ้น"
+          }
+        ]
+      },
+      "whales": [
+        {
+          "investorName": "Warren Buffett",
+          "firmName": "Berkshire Hathaway",
+          "aum": "$263.1 Billion",
+          "style": "หุ้นคุณค่า / ถือครองระยะยาวแบบเข้มข้น",
+          "longPortfolio": [
+            {
+              "ticker": "AAPL",
+              "name": "Apple Inc.",
+              "price": "$308.45",
+              "change": "+4.84%",
+              "shares": "227,917,808",
+              "value": "$70.30 Billion",
+              "weight": "22.0%"
+            },
+            {
+              "ticker": "AXP",
+              "name": "American Express Co.",
+              "price": "$351.96",
+              "change": "+1.42%",
+              "shares": "151,610,700",
+              "value": "$53.36 Billion",
+              "weight": "17.43%"
+            },
+            {
+              "ticker": "GOOGL",
+              "name": "Alphabet Inc.",
+              "price": "$359.91",
+              "change": "-0.36%",
+              "shares": "114,978,572",
+              "value": "$41.25 Billion",
+              "weight": "13.0%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$550.00",
+              "price": "$4.50",
+              "change": "-1.20%",
+              "contracts": "50,000",
+              "value": "$22.50 Million",
+              "strikePrice": "$500.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$480.00",
+              "price": "$3.80",
+              "change": "-0.80%",
+              "contracts": "30,000",
+              "value": "$11.40 Million",
+              "strikePrice": "$440.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [],
+          "recentTransactions": [
+            {
+              "date": "2026-06-04",
+              "ticker": "GOOGL",
+              "action": "ซื้อ",
+              "price": "$351.81",
+              "size": "14,212,216"
+            },
+            {
+              "date": "2026-06-04",
+              "ticker": "GOOG",
+              "action": "ซื้อ",
+              "price": "$348.20",
+              "size": "14,359,563"
+            }
+          ]
+        },
+        {
+          "investorName": "Ken Griffin",
+          "firmName": "Citadel Advisors",
+          "aum": "$618.47 Billion",
+          "style": "กลยุทธ์หลากหลาย",
+          "longPortfolio": [
+            {
+              "ticker": "NVDA",
+              "name": "NVIDIA Corporation",
+              "price": "$194.39",
+              "change": "-0.06%",
+              "shares": "18,664,861",
+              "value": "$3,628,262,330",
+              "weight": "2.31%"
+            },
+            {
+              "ticker": "IVV",
+              "name": "iShares Core S&P 500 ETF",
+              "price": "$748.43",
+              "change": "-0.09%",
+              "shares": "4,060,750",
+              "value": "$3,039,185,127",
+              "weight": "1.88%"
+            },
+            {
+              "ticker": "AMZN",
+              "name": "Amazon.com, Inc.",
+              "price": "$243.05",
+              "change": "+0.54%",
+              "shares": "8,102,537",
+              "value": "$1,969,321,617",
+              "weight": "1.20%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิซื้อ",
+              "underlyingPrice": "$744.78",
+              "price": "$15.50",
+              "change": "-0.13%",
+              "contracts": "650,000",
+              "value": "$42,000,000,000",
+              "strikePrice": "$750.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิซื้อ",
+              "underlyingPrice": "$714.22",
+              "price": "$12.80",
+              "change": "-0.80%",
+              "contracts": "552,000",
+              "value": "$31,800,000,000",
+              "strikePrice": "$720.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "TEP.PA",
+              "name": "Teleperformance SE",
+              "price": "€51.90",
+              "change": "+2.45%",
+              "size": "2.51%",
+              "reason": "ภัยคุกคามจากการหยุดชะงักของ AI ต่อศูนย์บริการลูกค้า"
+            },
+            {
+              "ticker": "WPP",
+              "name": "WPP PLC",
+              "price": "£2.50",
+              "change": "+2.54%",
+              "size": "1.07%",
+              "reason": "การลดลงเชิงโครงสร้างของการโฆษณาแบบดั้งเดิม"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-06-16",
+              "ticker": "ISRG",
+              "action": "ซื้อ",
+              "price": "$417.07",
+              "size": "1,250,000"
+            },
+            {
+              "date": "2026-06-16",
+              "ticker": "NVDA",
+              "action": "ขาย",
+              "price": "$194.84",
+              "size": "2,900,000"
+            }
+          ]
+        },
+        {
+          "investorName": "Jim Simons",
+          "firmName": "Renaissance Technologies LLC",
+          "aum": "$63.97 Billion",
+          "style": "การซื้อขายเชิงปริมาณที่เป็นระบบ",
+          "longPortfolio": [
+            {
+              "ticker": "UTHR",
+              "name": "United Therapeutics Corporation",
+              "price": "$544.10",
+              "change": "-0.56%",
+              "shares": "1,800,000",
+              "value": "$1,100,000,000",
+              "weight": "1.7%"
+            },
+            {
+              "ticker": "PLTR",
+              "name": "Palantir Technologies Inc.",
+              "price": "$129.30",
+              "change": "+2.84%",
+              "shares": "7,000,000",
+              "value": "$1,000,000,000",
+              "weight": "1.6%"
+            },
+            {
+              "ticker": "AAPL",
+              "name": "Apple Inc.",
+              "price": "$308.63",
+              "change": "+4.93%",
+              "shares": "3,100,000",
+              "value": "$781,000,000",
+              "weight": "1.2%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$746.94",
+              "price": "$12.50",
+              "change": "-1.2%",
+              "contracts": "5,000",
+              "value": "$6,250,000",
+              "strikePrice": "$740.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$714.20",
+              "price": "$14.20",
+              "change": "+0.8%",
+              "contracts": "4,000",
+              "value": "$5,680,000",
+              "strikePrice": "$710.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "NORSE.OL",
+              "name": "Norse Atlantic ASA",
+              "price": "NOK 0.50",
+              "change": "+1.22%",
+              "size": "0.56% of shares",
+              "reason": "ภาวะกำลังการผลิตส่วนเกินในเส้นทางสายการบินราคาประหยัดข้ามมหาสมุทรแอตแลนติก"
+            },
+            {
+              "ticker": "SWON.SW",
+              "name": "SoftwareONE Holding AG",
+              "price": "CHF 8.38",
+              "change": "+3.08%",
+              "size": "0.51% of shares",
+              "reason": "อัตรากำไรที่ถูกบีบในส่วนงานที่ปรึกษาด้านไอที"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-06-18",
+              "ticker": "FBGL",
+              "action": "ซื้อ",
+              "price": "$0.55",
+              "size": "150,000 shares"
+            },
+            {
+              "date": "2026-06-30",
+              "ticker": "LFVN",
+              "action": "ขาย",
+              "price": "$6.24",
+              "size": "55,000 shares"
+            }
+          ]
+        },
+        {
+          "investorName": "Michael Burry",
+          "firmName": "Scion Asset Management, LLC",
+          "aum": "$155 Million",
+          "style": "เน้นคุณค่า, สวนกระแส",
+          "longPortfolio": [
+            {
+              "ticker": "PYPL",
+              "name": "PayPal Holdings Inc.",
+              "price": "$45.53",
+              "change": "+0.13%",
+              "shares": "500,000",
+              "value": "$22.77M",
+              "weight": "25.0%"
+            },
+            {
+              "ticker": "ADBE",
+              "name": "Adobe Inc.",
+              "price": "$219.76",
+              "change": "+4.16%",
+              "shares": "100,000",
+              "value": "$21.98M",
+              "weight": "24.0%"
+            },
+            {
+              "ticker": "JD",
+              "name": "JD.com Inc.",
+              "price": "$26.62",
+              "change": "+1.18%",
+              "shares": "800,000",
+              "value": "$21.30M",
+              "weight": "23.0%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "MSFT",
+              "type": "สิทธิซื้อ",
+              "underlyingPrice": "$390.83",
+              "price": "$12.50",
+              "change": "+2.10%",
+              "contracts": "5,000",
+              "value": "$6.25M",
+              "strikePrice": "$700.00",
+              "expiryDate": "2028-12-15"
+            },
+            {
+              "ticker": "PLTR",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$129.07",
+              "price": "$4.50",
+              "change": "-3.50%",
+              "contracts": "10,000",
+              "value": "$4.50M",
+              "strikePrice": "$100.00",
+              "expiryDate": "2026-12-19"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "MU",
+              "name": "Micron Technology Inc.",
+              "price": "$1,004.83",
+              "change": "+3.00%",
+              "size": "Disclosed entry $1,051.87",
+              "reason": "วงจรหน่วยความจำ AI ใกล้ถึงจุดสูงสุด"
+            },
+            {
+              "ticker": "TSLA",
+              "name": "Tesla Inc.",
+              "price": "$394.04",
+              "change": "-7.35%",
+              "size": "Disclosed entry $416.22",
+              "reason": "การประเมินมูลค่าที่สูงเกินไปเมื่อเทียบกับอัตรากำไร"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-07-01",
+              "ticker": "MU",
+              "action": "ขาย (ชอร์ต)",
+              "price": "$1,051.87",
+              "size": "การเปิดเผยในจดหมายข่าวส่วนตัว"
+            },
+            {
+              "date": "2026-06-30",
+              "ticker": "TSLA",
+              "action": "ขาย (ชอร์ต)",
+              "price": "$416.22",
+              "size": "การเปิดเผยในจดหมายข่าวส่วนตัว"
+            }
+          ]
+        },
+        {
+          "investorName": "Ray Dalio",
+          "firmName": "Bridgewater Associates",
+          "aum": "$150.2 Billion",
+          "style": "มหภาคเชิงระบบทั่วโลก",
+          "longPortfolio": [
+            {
+              "ticker": "SPY",
+              "name": "SPDR S&P 500 ETF Trust",
+              "price": "$746.94",
+              "change": "+0.29%",
+              "shares": "4,364,862",
+              "value": "$3,260,289,322",
+              "weight": "12.67%"
+            },
+            {
+              "ticker": "IVV",
+              "name": "iShares Core S&P 500 ETF",
+              "price": "$748.43",
+              "change": "+0.10%",
+              "shares": "2,679,084",
+              "value": "$2,005,107,338",
+              "weight": "7.81%"
+            },
+            {
+              "ticker": "AMZN",
+              "name": "Amazon.com, Inc.",
+              "price": "$243.05",
+              "change": "+0.16%",
+              "shares": "4,388,711",
+              "value": "$1,066,676,208",
+              "weight": "4.08%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$746.94",
+              "price": "$8.50",
+              "change": "-2.40%",
+              "contracts": "10,000",
+              "value": "$8,500,000",
+              "strikePrice": "$730.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "SPY",
+              "type": "สิทธิซื้อ",
+              "underlyingPrice": "$746.94",
+              "price": "$12.40",
+              "change": "+1.80%",
+              "contracts": "5,000",
+              "value": "$6,200,000",
+              "strikePrice": "$760.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "TLT",
+              "name": "iShares 20+ Year Treasury ETF",
+              "price": "$85.51",
+              "change": "-0.01%",
+              "size": "$1.5B",
+              "reason": "ภาวะหนี้สินล้นตลาดของสหรัฐฯ และความเสี่ยงจากเงินเฟ้อ"
+            },
+            {
+              "ticker": "FEZ",
+              "name": "SPDR EURO STOXX 50 ETF",
+              "price": "$68.76",
+              "change": "-0.33%",
+              "size": "$1.2B",
+              "reason": "การแบ่งแยกทางภูมิรัฐศาสตร์และการชะลอตัวของการเติบโต"
+            }
+          ],
+          "recentTransactions": []
+        },
+        {
+          "investorName": "Chase Coleman",
+          "firmName": "Tiger Global Management",
+          "aum": "$22.85 Billion",
+          "style": "การเติบโตแบบครอสโอเวอร์และเทคโนโลยี",
+          "longPortfolio": [
+            {
+              "ticker": "GOOGL",
+              "name": "Alphabet Inc.",
+              "price": "$359.91",
+              "change": "-0.36%",
+              "shares": "10,600,000",
+              "value": "$3,815,046,000",
+              "weight": "13.38%"
+            },
+            {
+              "ticker": "AMZN",
+              "name": "Amazon.com Inc.",
+              "price": "$242.67",
+              "change": "+0.40%",
+              "shares": "10,000,000",
+              "value": "$2,426,700,000",
+              "weight": "9.12%"
+            },
+            {
+              "ticker": "NVDA",
+              "name": "NVIDIA Corporation",
+              "price": "$194.83",
+              "change": "-1.39%",
+              "shares": "12,000,000",
+              "value": "$2,337,960,000",
+              "weight": "9.17%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$714.22",
+              "price": "$12.50",
+              "change": "-1.73%",
+              "contracts": "15,000",
+              "value": "$18,750,000",
+              "strikePrice": "$700.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$745.71",
+              "price": "$14.20",
+              "change": "-0.58%",
+              "contracts": "12,000",
+              "value": "$17,040,000",
+              "strikePrice": "$730.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "VWS",
+              "name": "Vestas Wind Systems",
+              "price": "187.15 DKK",
+              "change": "-0.58%",
+              "size": "0.59% of shares",
+              "reason": "ข้อกังวลด้านมูลค่าและการบีบอัดอัตรากำไรจากพลังงานลม"
+            },
+            {
+              "ticker": "QQQ",
+              "name": "Invesco QQQ Trust",
+              "price": "$714.22",
+              "change": "-1.73%",
+              "size": "Broad index hedge",
+              "reason": "กลยุทธ์ป้องกันฟองสบู่เทคโนโลยีมหภาค"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-06-09",
+              "ticker": "SIERRA",
+              "action": "นำการระดมทุน 950 ล้านดอลลาร์",
+              "price": "$15.8B Valuation",
+              "size": "Lead in $950M round"
+            },
+            {
+              "date": "2026-07-06",
+              "ticker": "MONEYVIEW",
+              "action": "ส่วนประกอบการออกจากตลาดโดยการเสนอขาย",
+              "price": "IPO Filing Approval",
+              "size": "Offer-for-sale exit component"
+            }
+          ]
+        },
+        {
+          "investorName": "David Tepper",
+          "firmName": "Appaloosa Management",
+          "aum": "$17.00B",
+          "style": "หุ้นคุณค่าเชิงฉวยโอกาส",
+          "longPortfolio": [
+            {
+              "ticker": "AMZN",
+              "name": "Amazon.com Inc.",
+              "price": "$242.67",
+              "change": "+0.40%",
+              "shares": "4,320,000",
+              "value": "$1,048,334,400",
+              "weight": "15.16%"
+            },
+            {
+              "ticker": "MU",
+              "name": "Micron Technology Inc.",
+              "price": "$975.56",
+              "change": "-5.49%",
+              "shares": "1,700,000",
+              "value": "$1,658,452,000",
+              "weight": "9.48%"
+            },
+            {
+              "ticker": "GOOG",
+              "name": "Alphabet Inc. Class C",
+              "price": "$356.18",
+              "change": "-0.48%",
+              "shares": "1,700,000",
+              "value": "$605,506,000",
+              "weight": "8.38%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$745.71",
+              "price": "$8.50",
+              "change": "-0.33%",
+              "contracts": "10,000",
+              "value": "$8,500,000",
+              "strikePrice": "$740.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$714.22",
+              "price": "$12.20",
+              "change": "-1.73%",
+              "contracts": "5,000",
+              "value": "$6,100,000",
+              "strikePrice": "$710.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [],
+          "recentTransactions": []
+        },
+        {
+          "investorName": "Bill Ackman",
+          "firmName": "Pershing Square",
+          "aum": "N/A",
+          "style": "พอร์ตการลงทุนเชิงรุก",
+          "longPortfolio": [],
+          "optionsPositions": [],
+          "shortPositions": [],
+          "recentTransactions": []
+        },
+        {
+          "investorName": "Carl Icahn",
+          "firmName": "Icahn Enterprises",
+          "aum": "$8.55 Billion",
+          "style": "นักลงทุนเชิงรุก / หุ้นคุณค่าลึก",
+          "longPortfolio": [
+            {
+              "ticker": "IEP",
+              "name": "Icahn Enterprises L.P.",
+              "price": "$7.24",
+              "change": "+0.84%",
+              "shares": "618,393,343",
+              "value": "$4,477,167,803",
+              "weight": "51.35%"
+            },
+            {
+              "ticker": "CVI",
+              "name": "CVR Energy, Inc.",
+              "price": "$28.47",
+              "change": "-0.04%",
+              "shares": "71,201,875",
+              "value": "$2,027,117,381",
+              "weight": "28.01%"
+            },
+            {
+              "ticker": "UAN",
+              "name": "CVR Partners, LP",
+              "price": "$114.00",
+              "change": "+1.69%",
+              "shares": "4,164,274",
+              "value": "$474,727,236",
+              "weight": "6.17%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$745.71",
+              "price": "$12.50",
+              "change": "+1.20%",
+              "contracts": "15,000",
+              "value": "$18,750,000",
+              "strikePrice": "$730.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$714.22",
+              "price": "$14.80",
+              "change": "+1.50%",
+              "contracts": "12,000",
+              "value": "$17,760,000",
+              "strikePrice": "$700.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "SPY",
+              "name": "SPDR S&P 500 ETF Trust",
+              "price": "$745.71",
+              "change": "+0.80%",
+              "size": "$1.5B",
+              "reason": "การป้องกันความเสี่ยงด้วยการขายชอร์ตตลาดในวงกว้างเทียบกับพอร์ตการลงทุนระยะยาว"
+            },
+            {
+              "ticker": "QQQ",
+              "name": "Invesco QQQ Trust",
+              "price": "$714.22",
+              "change": "+1.73%",
+              "size": "$1.2B",
+              "reason": "การป้องกันความเสี่ยงด้วยการขายชอร์ตในภาคเทคโนโลยีที่มี P/E สูง"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-06-25",
+              "ticker": "IEP",
+              "action": "ซื้อ",
+              "price": "$7.24",
+              "size": "36,456,030"
+            },
+            {
+              "date": "2026-06-25",
+              "ticker": "CVI",
+              "action": "ซื้อ",
+              "price": "$27.31",
+              "size": "1,200,000"
+            }
+          ]
+        },
+        {
+          "investorName": "Paul Singer",
+          "firmName": "Elliott Investment Management",
+          "aum": "$128.6 Billion",
+          "style": "นักลงทุนเชิงรุก, กลยุทธ์หลากหลาย",
+          "longPortfolio": [
+            {
+              "ticker": "TFPM",
+              "name": "Triple Flag Precious Metals Corp.",
+              "price": "$31.49",
+              "change": "+4.34%",
+              "shares": "133,241,535",
+              "value": "$4,195,775,937",
+              "weight": "20.9%"
+            },
+            {
+              "ticker": "PSX",
+              "name": "Phillips 66",
+              "price": "$176.42",
+              "change": "+1.10%",
+              "shares": "19,300,000",
+              "value": "$3,404,906,000",
+              "weight": "16.9%"
+            },
+            {
+              "ticker": "SU",
+              "name": "Suncor Energy Inc.",
+              "price": "$55.05",
+              "change": "+2.07%",
+              "shares": "52,700,000",
+              "value": "$2,901,135,000",
+              "weight": "14.4%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "XLI",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$183.91",
+              "price": "$1.62",
+              "change": "-3.15%",
+              "contracts": "75,000",
+              "value": "$1,212,975,000",
+              "strikePrice": "$165.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "FTV",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$62.65",
+              "price": "$1.20",
+              "change": "-4.33%",
+              "contracts": "7,500",
+              "value": "$41,460,000",
+              "strikePrice": "$60.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "SHEL",
+              "name": "Shell plc",
+              "price": "$78.02",
+              "change": "+1.10%",
+              "size": "0.70% of shares",
+              "reason": "ผลักดันวินัยทางการเงินและประสิทธิภาพ"
+            },
+            {
+              "ticker": "TTE",
+              "name": "TotalEnergies SE",
+              "price": "$74.80",
+              "change": "+0.09%",
+              "size": "0.52% of shares",
+              "reason": "ผลักดันผลตอบแทนจากเงินทุนที่แข็งแกร่งขึ้น"
+            }
+          ],
+          "recentTransactions": [
+            {
+              "date": "2026-06-30",
+              "ticker": "TFPM",
+              "action": "ขาย",
+              "price": "$35.91",
+              "size": "6,680 shares"
+            },
+            {
+              "date": "2026-06-22",
+              "ticker": "IDH",
+              "action": "ขาย",
+              "price": "$0.50",
+              "size": "126,000,000 shares"
+            }
+          ]
+        },
+        {
+          "investorName": "Cathie Wood",
+          "firmName": "ARK Investment Management",
+          "aum": "$12.86 Billion",
+          "style": "การเติบโตตามธีม",
+          "longPortfolio": [
+            {
+              "ticker": "TSLA",
+              "name": "Tesla Inc.",
+              "price": "$399.11",
+              "change": "+1.44%",
+              "shares": "2,831,329",
+              "value": "$1,130,011,717",
+              "weight": "8.2%"
+            },
+            {
+              "ticker": "AMD",
+              "name": "Advanced Micro Devices Inc.",
+              "price": "$536.55",
+              "change": "+3.62%",
+              "shares": "2,712,854",
+              "value": "$1,455,581,814",
+              "weight": "4.3%"
+            },
+            {
+              "ticker": "CRSP",
+              "name": "CRISPR Therapeutics AG",
+              "price": "$60.11",
+              "change": "+0.05%",
+              "shares": "11,313,623",
+              "value": "$680,061,878",
+              "weight": "4.2%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "QQQ",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$721.55",
+              "price": "$4.50",
+              "change": "+12.50%",
+              "contracts": "5,000",
+              "value": "$2,250,000",
+              "strikePrice": "$700.00",
+              "expiryDate": "2026-09-18"
+            },
+            {
+              "ticker": "SPY",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$747.96",
+              "price": "$6.20",
+              "change": "+8.30%",
+              "contracts": "3,000",
+              "value": "$1,860,000",
+              "strikePrice": "$730.00",
+              "expiryDate": "2026-09-18"
+            }
+          ],
+          "shortPositions": [],
+          "recentTransactions": [
+            {
+              "date": "2026-07-06",
+              "ticker": "TSLA",
+              "action": "ซื้อ",
+              "price": "$394.35",
+              "size": "97,000"
+            },
+            {
+              "date": "2026-07-06",
+              "ticker": "RXRX",
+              "action": "ซื้อ",
+              "price": "$3.63",
+              "size": "935,000"
+            }
+          ]
+        },
+        {
+          "investorName": "Larry Fink",
+          "firmName": "BlackRock",
+          "aum": "$14.0 Trillion",
+          "style": "การทำดัชนีเชิงรับและเชิงรุกสำหรับสถาบัน",
+          "longPortfolio": [
+            {
+              "ticker": "NVDA",
+              "name": "NVIDIA Corporation",
+              "price": "$194.44",
+              "change": "-0.06%",
+              "shares": "1.93 Billion",
+              "value": "$336.0 Billion",
+              "weight": "5.87%"
+            },
+            {
+              "ticker": "AAPL",
+              "name": "Apple Inc.",
+              "price": "$308.45",
+              "change": "-0.48%",
+              "shares": "1.14 Billion",
+              "value": "$291.0 Billion",
+              "weight": "5.08%"
+            },
+            {
+              "ticker": "MSFT",
+              "name": "Microsoft Corp.",
+              "price": "$390.83",
+              "change": "-0.13%",
+              "shares": "593 Million",
+              "value": "$220.0 Billion",
+              "weight": "3.84%"
+            }
+          ],
+          "optionsPositions": [
+            {
+              "ticker": "NVDA",
+              "type": "สิทธิขาย",
+              "underlyingPrice": "$194.44",
+              "price": "$4.50",
+              "change": "-2.50%",
+              "contracts": "26,655",
+              "value": "$11,994,750",
+              "strikePrice": "$190.00",
+              "expiryDate": "2026-07-17"
+            },
+            {
+              "ticker": "AAPL",
+              "type": "สิทธิซื้อ",
+              "underlyingPrice": "$308.45",
+              "price": "$4.35",
+              "change": "+5.72%",
+              "contracts": "2,285",
+              "value": "$993,975",
+              "strikePrice": "$305.00",
+              "expiryDate": "2026-07-17"
+            }
+          ],
+          "shortPositions": [
+            {
+              "ticker": "SPY",
+              "name": "SPDR S&P 500 ETF Trust",
+              "price": "$745.71",
+              "change": "-0.13%",
+              "size": "$5.2B",
+              "reason": "การป้องกันความเสี่ยงด้านขาลงของเบต้าพอร์ตโฟลิโอ"
+            },
+            {
+              "ticker": "QQQ",
+              "name": "Invesco QQQ Trust",
+              "price": "$714.22",
+              "change": "-0.80%",
+              "size": "$4.1B",
+              "reason": "การป้องกันความเสี่ยงจากการลงทุนในภาคเทคโนโลยีมากเกินไป"
+            }
+          ],
+          "recentTransactions": []
+        }
+      ]
+    }
+  },
+  "lastUpdated": "6/7/2569 19:28:53"
+}

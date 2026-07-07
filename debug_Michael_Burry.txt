@@ -1,20 +1,51 @@
 {
   "investorName": "Michael Burry",
   "firmName": "Scion Asset Management",
-  "aum": "$1.1B",
-  "style": "Contrarian Value Investing",
+  "aum": "N/A (Deregistered in Nov 2025)",
+  "style": "Contrarian value and active short-selling",
   "longPortfolio": [
     {
       "ticker": "PYPL",
-      "name": "PayPal Holdings, Inc.",
-      "price": "$45.47",
-      "change": "+3.18%",
-      "shares": "800,000",
-      "value": "$36,376,000",
-      "weight": "3.5%"
+      "name": "PayPal Holdings Inc.",
+      "price": "$44.42",
+      "change": "-2.31%",
+      "shares": "1,200,000",
+      "value": "$53.30M",
+      "weight": "15.0%"
+    },
+    {
+      "ticker": "ZTS",
+      "name": "Zoetis Inc.",
+      "price": "$75.54",
+      "change": "+3.22%",
+      "shares": "500,000",
+      "value": "$37.77M",
+      "weight": "11.0%"
     },
     {
       "ticker": "SFM",
       "name": "Sprouts Farmers Market",
-      "price": "$90.28",
-      "change": "+4.1
+      "price": "$82.14",
+      "change": "-3.79%",
+      "shares": "400,000",
+      "value": "$32.86M",
+      "weight": "9.0%"
+    }
+  ],
+  "optionsPositions": [
+    {
+      "ticker": "NVDA",
+      "type": "Put",
+      "underlyingPrice": "$194.83",
+      "price": "$8.50",
+      "change": "-1.39%",
+      "contracts": "10,000",
+      "value": "$8.50M",
+      "strikePrice": "$110.00",
+      "expiryDate": "2027-01-15"
+    },
+    {
+      "ticker": "PLTR",
+      "type": "Put",
+      "underlyingPrice": "$128.05",
+      "price": "$14.20",

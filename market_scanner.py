@@ -163,7 +163,7 @@ def main():
     system_instruction = (
         "You are an expert US financial market scanner and social media sentiment analyst.\n"
         "Your task is to use Google Search to find current, live information at this exact moment:\n"
-        "1. Identify the Top 10 US stocks by trading volume for these sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics.\n"
+        "1. Identify 10 fundamentally strong US stocks (market leaders with solid financial health, healthy balance sheets, or sustainable business models; strictly avoiding bankrupt companies, speculative penny stocks, or highly volatile low-quality meme stocks) for these sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics.\n"
         "2. For each stock, identify its current technical indicators: RSI (14-day relative strength index, e.g., '55'), trading Volume (e.g. '12.4M'), and MACD signal (e.g. 'Bullish Cross' or 'Bearish').\n"
         "3. Identify the most active/discussed US stocks in global retail investor forums and social channels (Reddit, X, Stocktwits) right now.\n\n"
         "CRITICAL: Do NOT include any inline search citations (such as [1], [2], [1.3.7]) or footnote links anywhere in the JSON keys or values. Strip all citations and footnotes, returning only pure raw data. All stock prices must be the latest live price (including Pre-market, After-Hours, or Overnight prices if active). To guarantee accuracy, prioritize querying Yahoo Finance or Google Finance quotes directly for each ticker (e.g., search 'SPCE stock price yahoo finance' or 'AAPL quote google finance'). Pay extra attention to stocks that had recent reverse stock splits (such as SPCE, which trades around $2.70+, NOT $1.50). Double check quotes to ensure post-split values are represented.\n\n"
@@ -172,7 +172,7 @@ def main():
     )
 
     user_prompt = (
-        "Scan the US market right now. Fetch the top 10 stocks by volume for Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics. "
+        "Scan the US market right now. Identify 10 fundamentally strong US stocks (market leaders with healthy financials, solid balance sheets, and sustainable business models, while avoiding highly speculative penny stocks, bankrupt companies, or low-quality meme plays) for each of these sectors: Technology, Financials, Healthcare, Consumer Discretionary, Communication Services, Energy, Biotechnology, Space, and Robotics. "
         "For each stock, retrieve the current RSI (14-day) and MACD indicators alongside the price and volume. "
         "Use the latest live prices (including Pre-market/After-hours/Overnight if active). "
         "Also scan global social platforms (X, Reddit, Stocktwits) to identify top trending stocks with mention volume, sentiment, price, change, and discussion summaries. "
