@@ -6,6 +6,7 @@ from google import genai
 from google.genai import types
 from pydantic import BaseModel, Field
 from typing import List
+import gemini_utils
 
 class QCCheck(BaseModel):
     item: str = Field(description="ชื่อหุ้น ดัชนี หรือหัวข้อข่าวที่ทำการตรวจสอบ (เช่น CRM RSI, ORCL Price, ข่าว CapEx)")
@@ -25,25 +26,12 @@ def main():
     parser.add_argument("--output", required=True, help="Output markdown file path")
     args = parser.parse_args()
 
-    # Manually load .env from project root if it exists
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
-    if os.path.exists(env_path):
-        with open(env_path, "r", encoding="utf-8") as f:
-            for line in f:
-                if line.strip() and not line.startswith("#"):
-                    parts = line.strip().split("=", 1)
-                    if len(parts) == 2:
-                        os.environ[parts[0].strip()] = parts[1].strip().strip('"').strip("'")
-                        
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: GEMINI_API_KEY environment variable not set. Please set it in .env file in the project root.", file=sys.stderr)
+    api_keys = gemini_utils.get_api_keys()
+    if not api_keys:
+        print("Error: No Gemini API keys found. Please set GEMINI_API_KEY in .env file.", file=sys.stderr)
         sys.exit(1)
 
     model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
-    
-    # Initialize modern Gemini client
-    client = genai.Client(api_key=api_key)
 
     # Base System Instruction for financial report style compliance
     system_instruction = (
@@ -95,7 +83,8 @@ def main():
             tools=[types.Tool(google_search=types.GoogleSearch())]
         )
         
-        response = client.models.generate_content(
+        response = gemini_utils.generate_content_with_rotation(
+            api_keys=api_keys,
             model=model_name,
             contents=user_prompt,
             config=config
@@ -158,12 +147,14 @@ def main():
         
         qc_config = types.GenerateContentConfig(
             system_instruction=qc_system_instruction,
+            tools=[types.Tool(google_search=types.GoogleSearch())],
             response_mime_type="application/json",
             response_schema=QCReport,
             temperature=0.1
         )
         
-        qc_response = client.models.generate_content(
+        qc_response = gemini_utils.generate_content_with_rotation(
+            api_keys=api_keys,
             model=model_name,
             contents=qc_user_prompt,
             config=qc_config

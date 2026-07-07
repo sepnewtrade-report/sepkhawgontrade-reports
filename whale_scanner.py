@@ -5,6 +5,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from google import genai
 from google.genai import types
+import gemini_utils
 
 def clean_json_text(text):
     if not text:
@@ -94,7 +95,7 @@ def get_whale_schema():
         required=["investorName", "firmName", "aum", "style", "longPortfolio", "optionsPositions", "shortPositions", "recentTransactions"]
     )
 
-def fetch_individual_whale(client, model_name, investor, firm, current_date):
+def fetch_individual_whale(api_keys, model_name, investor, firm, current_date):
     schema = get_whale_schema()
     
     system_instruction = (
@@ -119,7 +120,12 @@ def fetch_individual_whale(client, model_name, investor, firm, current_date):
     )
     
     prompt = f"Search and analyze current filings, options, shorts and 30-day transactions for {investor} of {firm} as of {current_date}. Ensure all prices represent the latest live price (including Pre-market/After-hours/Overnight) at this exact moment. Return raw JSON."
-    response = client.models.generate_content(model=model_name, contents=prompt, config=config)
+    response = gemini_utils.generate_content_with_rotation(
+        api_keys=api_keys,
+        model=model_name,
+        contents=prompt,
+        config=config
+    )
     
     cleaned = clean_json_text(response.text)
     try:
@@ -130,7 +136,7 @@ def fetch_individual_whale(client, model_name, investor, firm, current_date):
             df.write(response.text)
         raise Exception(f"Whale {investor} parse error: {e}. Raw response saved to {debug_filename}")
 
-def synthesize_overview(client, model_name, whales_data):
+def synthesize_overview(api_keys, model_name, whales_data):
     schema = types.Schema(
         type=types.Type.OBJECT,
         properties={
@@ -188,7 +194,12 @@ def synthesize_overview(client, model_name, whales_data):
     
     prompt = f"Here is the summary of the {len(whales_data)} whales activities:\n{summary_text}\n\nSynthesize the market sentiment, sector rotation, and critical period logs. Return raw JSON."
     
-    response = client.models.generate_content(model=model_name, contents=prompt, config=config)
+    response = gemini_utils.generate_content_with_rotation(
+        api_keys=api_keys,
+        model=model_name,
+        contents=prompt,
+        config=config
+    )
     cleaned = clean_json_text(response.text)
     
     try:
@@ -205,13 +216,12 @@ def main():
         
     output_file = sys.argv[1]
 
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
+    api_keys = gemini_utils.get_api_keys()
+    if not api_keys:
+        print("Error: No Gemini API keys found. Please set GEMINI_API_KEY in .env file.", file=sys.stderr)
         sys.exit(1)
         
     model_name = "gemini-3.5-flash"
-    client = genai.Client(api_key=api_key)
 
     whale_list = [
         {"investor": "Warren Buffett", "firm": "Berkshire Hathaway"},
@@ -241,7 +251,7 @@ def main():
     # Process 12 whales in parallel (max 6 concurrent workers to optimize speed while staying under rate limit)
     with ThreadPoolExecutor(max_workers=6) as executor:
         whale_futures = {
-            executor.submit(fetch_individual_whale, client, model_name, w["investor"], w["firm"], current_date): w
+            executor.submit(fetch_individual_whale, api_keys, model_name, w["investor"], w["firm"], current_date): w
             for w in whale_list
         }
         
@@ -272,7 +282,7 @@ def main():
     # 2. Synthesize overview using the successfully retrieved whale data as context
     print("Synthesizing market overview based on compiled whale profiles...")
     try:
-        final_payload["overview"] = synthesize_overview(client, model_name, final_payload["whales"])
+        final_payload["overview"] = synthesize_overview(api_keys, model_name, final_payload["whales"])
         print("Market overview successfully compiled.")
     except Exception as e:
         print(f"Error synthesizing overview: {e}", file=sys.stderr)

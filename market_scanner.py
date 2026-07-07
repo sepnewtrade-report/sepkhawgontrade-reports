@@ -3,6 +3,7 @@ import sys
 import json
 from google import genai
 from google.genai import types
+import gemini_utils
 
 def clean_json_text(text):
     if not text:
@@ -90,24 +91,12 @@ def main():
         
     output_file = sys.argv[1]
 
-    # Manually load .env from project root if it exists
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
-    if os.path.exists(env_path):
-        with open(env_path, "r", encoding="utf-8") as f:
-            for line in f:
-                if line.strip() and not line.startswith("#"):
-                    parts = line.strip().split("=", 1)
-                    if len(parts) == 2:
-                        os.environ[parts[0].strip()] = parts[1].strip().strip('"').strip("'")
-                        
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: GEMINI_API_KEY environment variable not set. Please set it in .env file in the project root.", file=sys.stderr)
+    api_keys = gemini_utils.get_api_keys()
+    if not api_keys:
+        print("Error: No Gemini API keys found. Please set GEMINI_API_KEY in .env file.", file=sys.stderr)
         sys.exit(1)
         
     model_name = "gemini-3.5-flash"
-
-    client = genai.Client(api_key=api_key)
 
     schema = types.Schema(
         type=types.Type.OBJECT,
@@ -187,7 +176,8 @@ def main():
             response_schema=schema
         )
         
-        response = client.models.generate_content(
+        response = gemini_utils.generate_content_with_rotation(
+            api_keys=api_keys,
             model=model_name,
             contents=user_prompt,
             config=config
