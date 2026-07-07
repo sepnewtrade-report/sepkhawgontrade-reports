@@ -559,6 +559,43 @@ async function translateJsonViaGemini(jsonObject, targetLanguage) {
   return JSON.parse(cleaned.trim());
 }
 
+async function translateWhaleDataToThai(whaleData) {
+  if (!whaleData) return null;
+  
+  console.log('Starting chunked translation of whale data...');
+  
+  // 1. Translate overview
+  let translatedOverview = whaleData.overview;
+  if (whaleData.overview) {
+    try {
+      translatedOverview = await translateJsonViaGemini(whaleData.overview, 'th');
+    } catch (err) {
+      console.error('Failed to translate whale overview:', err);
+    }
+  }
+  
+  // 2. Translate each whale in parallel
+  let translatedWhales = [];
+  if (whaleData.whales && Array.isArray(whaleData.whales)) {
+    const promises = whaleData.whales.map(async (whale) => {
+      try {
+        return await translateJsonViaGemini(whale, 'th');
+      } catch (err) {
+        console.error(`Failed to translate individual whale: ${whale.investorName}`, err);
+        return whale; // fallback to English
+      }
+    });
+    translatedWhales = await Promise.all(promises);
+  } else {
+    translatedWhales = whaleData.whales || [];
+  }
+  
+  return {
+    overview: translatedOverview,
+    whales: translatedWhales
+  };
+}
+
 // Get cached market trends and social sentiment
 app.get('/api/market-trends', async (req, res) => {
   const lang = req.query.lang || 'th';
@@ -676,7 +713,7 @@ app.get('/api/whale-portfolios', async (req, res) => {
       const rawPayload = enData.hasOwnProperty('data') ? enData.data : enData;
       const lastUpdated = enData.hasOwnProperty('lastUpdated') ? enData.lastUpdated : 'N/A';
       
-      const translatedData = await translateJsonViaGemini(rawPayload, 'th');
+      const translatedData = await translateWhaleDataToThai(rawPayload);
       const cachePayloadTh = {
         data: translatedData,
         lastUpdated: lastUpdated
@@ -724,7 +761,7 @@ app.post('/api/whale-portfolios/refresh', async (req, res) => {
     let dataToReturn = parsedData;
     try {
       console.log('Pre-translating new whale portfolios data to Thai...');
-      const translatedData = await translateJsonViaGemini(parsedData, 'th');
+      const translatedData = await translateWhaleDataToThai(parsedData);
       const cachePayloadTh = {
         data: translatedData,
         lastUpdated: nowStr
