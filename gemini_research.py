@@ -2,11 +2,13 @@ import os
 import sys
 import argparse
 import json
+import re
 from google import genai
 from google.genai import types
 from pydantic import BaseModel, Field
 from typing import List
 import gemini_utils
+from tradingview_ta import TA_Handler, Interval
 
 class QCCheck(BaseModel):
     item: str = Field(description="ชื่อหุ้น ดัชนี หรือหัวข้อข่าวที่ทำการตรวจสอบ (เช่น CRM RSI, ORCL Price, ข่าว CapEx)")
@@ -17,6 +19,50 @@ class QCReport(BaseModel):
     overall_summary: str = Field(description="สรุปภาพรวมของการตรวจสอบคุณภาพเนื้อหาและการ Fact-check ข้อมูลข้ามปี")
     audit_log: List[QCCheck] = Field(description="รายการบันทึกการตรวจสอบข้อเท็จจริงและความถูกต้องของตัวเลข")
     final_report_content: str = Field(description="เนื้อหารายงานบทวิเคราะห์ฉบับสมบูรณ์ที่ได้รับการจัดแต่งและแก้ไขตัวเลขทั้งหมดแล้วเสร็จ โดยไม่มีบทพูดหรือเครื่องหมายสคริปต์")
+
+def extract_tickers_from_markdown(text):
+    candidates = set()
+    # 1. Parentheses: (NVDA)
+    candidates.update(re.findall(r'\(([A-Z]{1,5})\)', text))
+    # 2. Table columns: | NVDA |
+    candidates.update(re.findall(r'\|\s*([A-Z]{1,5})\s*\|', text))
+    # 3. Bold tickers: **NVDA**
+    candidates.update(re.findall(r'\*\*([A-Z]{1,5})\*\*', text))
+    
+    EXCLUDED = {
+        'RSI', 'EMA', 'MACD', 'FED', 'CPI', 'USD', 'GDP', 'FOMC', 'SEC', 
+        'ETF', 'USA', 'PE', 'EPS', 'CEO', 'IPO', 'AI', 'NYSE', 'AMEX', 
+        'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY',
+        'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM'
+    }
+    return [t for t in candidates if t not in EXCLUDED]
+
+def get_tradingview_quote(ticker):
+    exchanges = ["NASDAQ", "NYSE", "AMEX", "BATS"]
+    for exchange in exchanges:
+        try:
+            handler = TA_Handler(
+                symbol=ticker,
+                screener="america",
+                exchange=exchange,
+                interval=Interval.INTERVAL_1_DAY
+            )
+            analysis = handler.get_analysis()
+            indicators = analysis.indicators
+            price = indicators.get("close")
+            change = indicators.get("change")
+            rsi = indicators.get("RSI")
+            macd = indicators.get("MACD.macd")
+            if price is not None:
+                return {
+                    "price": price,
+                    "change": change,
+                    "rsi": rsi,
+                    "macd": macd
+                }
+        except Exception:
+            continue
+    return None
 
 def main():
     parser = argparse.ArgumentParser(description="Gemini Deep Research, Report Writer, and QC Agent")
@@ -118,11 +164,37 @@ def main():
         # Stage 2: Quality Control (QC) Step
         print(f"[Stage 2] Starting Quality Control (QC) Step...")
         
+        # Extract tickers and fetch TradingView quotes
+        tickers = extract_tickers_from_markdown(draft_content)
+        tv_quotes = {}
+        if tickers:
+            print(f"[QC Prep] Extracted tickers from draft: {tickers}")
+            for t in tickers:
+                quote = get_tradingview_quote(t)
+                if quote:
+                    tv_quotes[t] = quote
+                    print(f"  - {t}: Price={quote['price']:.2f}, Change={quote['change']:.2f}%, RSI={quote['rsi']:.2f}")
+
+        # Compile the real-time quotes context
+        if tv_quotes:
+            tv_context_lines = [
+                "\nCRITICAL: ข้อมูลราคาและตัวชี้วัดทางเทคนิคจริง ณ ปัจจุบัน จาก TradingView สำหรับหักล้างแก้ตัวเลขในรายงาน:",
+                "คุณต้องตรวจสอบและทำการแทนที่ราคาหุ้น เปอร์เซ็นต์การเปลี่ยนแปลง ค่า RSI และดัชนีทางเทคนิคทั้งหมดในรายงานดราฟต์ให้ตรงกับข้อมูลจริง 100% ด้านล่างนี้อย่างเคร่งครัด ห้ามใช้ราคาหรือค่าตัวชี้วัดอื่นนอกเหนือจากนี้เด็ดขาด:"
+            ]
+            for t, q in tv_quotes.items():
+                change_str = f"+{q['change']:.2f}%" if q['change'] >= 0 else f"{q['change']:.2f}%"
+                tv_context_lines.append(
+                    f"- {t}: ราคาล่าสุด = ${q['price']:.2f} (การเปลี่ยนแปลง = {change_str}), Daily RSI (14) = {q['rsi']:.2f}, MACD = {q['macd']:.4f}"
+                )
+            tv_context = "\n".join(tv_context_lines)
+        else:
+            tv_context = ""
+        
         qc_system_instruction = (
             "คุณคือหัวหน้าฝ่ายตรวจสอบคุณภาพข้อมูล (QC Inspector) และบรรณาธิการข่าวการเงินระดับสูงของช่อง 'เสพข่าวก่อนเทรด หุ้นอเมริกา'\n"
             "หน้าที่ของคุณคือตรวจสอบความถูกต้องของข้อมูล (Fact-check) และกรอบเวลา (Timeline) ของรายงานที่ได้รับ\n\n"
             "เกณฑ์การตรวจสอบคุณภาพอย่างเข้มงวด:\n"
-            "1. ตรวจสอบราคาหุ้น ดัชนีชี้วัดทางเทคนิคัลรายวัน (เช่น Daily RSI, EMA) และตัวเลขสถิติทั้งหมดในรายงานให้ตรงกับความเป็นจริง ณ วันที่และเดือนเป้าหมาย (Target Date) หากไม่มีในแหล่งข้อมูลดั้งเดิม ให้ใช้ Google Search ค้นหาข้อมูลปัจจุบันเพื่อตรวจสอบยืนยันเสมอ\n"
+            "1. ตรวจสอบราคาหุ้น ดัชนีชี้วัดทางเทคนิคัลรายวัน (เช่น Daily RSI, EMA) และตัวเลขสถิติทั้งหมดในรายงานให้ตรงกับความเป็นจริง ณ วันที่และเดือนเป้าหมาย (Target Date) โดยเฉพาะข้อมูลราคาหุ้นและค่า RSI ของ Tickers ที่จัดเตรียมให้เพิ่มเติมในหัวข้อ 'ข้อมูลราคาและตัวชี้วัดทางเทคนิคจริง ณ ปัจจุบัน จาก TradingView' ให้ทำการแก้ไขเนื้อหาให้ตรงกับข้อมูลดังกล่าวอย่างเคร่งครัด ห้ามใช้ตัวเลขราคาหรือตัวชี้วัดที่ผิดจากนี้เด็ดขาด\n"
             "2. ตรวจสอบเรื่องกรอบเวลา (Time Period): ข้อมูลข่าวสารและดัชนีต้องสอดคล้องตรงตามปีและเดือนเป้าหมาย (Target Year and Month) ณ วันที่ระบุของรายงานเท่านั้น ห้ามหยิบยกข้อมูลหรือเหตุการณ์ข้ามปีหรือข้ามเดือนในอดีต (เช่น ดัชนี RSI ของ CRM ในปี 2024 หรือข่าวจากเดือนก่อนหน้าที่ไม่มีผลแล้ว) มากล่าวอ้างว่าเป็นข้อมูลปัจจุบันอย่างเด็ดขาด\n"
             "3. หากตรวจพบข้อมูลที่ไม่ถูกต้อง ข่าวเก่าล้าสมัย หรือข้อมูลคลาดเคลื่อน ให้แก้ไขข้อมูลดังกล่าวให้ถูกต้องและเป็นปัจจุบันตามความเป็นจริงทันที (ค้นหาผ่าน Google Search เพิ่มเติมเพื่อยืนยันข้อมูลปัจจุบัน)\n"
             "4. รักษารูปแบบและโครงสร้างภาษาเขียนแบบมืออาชีพทางการเงิน ห้ามมีสัญลักษณ์เกี่ยวกับบทสคริปต์วิดีโอหรือ YouTube เช่น วงเล็บเหลี่ยมบอกกล้อง/ป้ายบทพูดเด็ดขาด\n"
@@ -140,7 +212,8 @@ def main():
             f"วันที่กำหนดสำหรับรายงานนี้ (Target Date): {args.date}\n"
             f"คำสั่งค้นหาเดิม: {args.prompt}\n\n"
             f"แหล่งอ้างอิงข้อมูลเว็บของฉบับร่าง:\n"
-            f"{sources_text}\n\n"
+            f"{sources_text}\n"
+            f"{tv_context}\n\n"
             f"โปรดดำเนินการตรวจสอบและแก้ไขจุดที่คลาดเคลื่อน ข้อมูลล้าสมัย ดัชนี RSI ที่ไม่ถูกต้อง หรือกรอบเวลาของปีและเดือนที่ไม่ตรงกับ Target Date ({args.date}) ทั้งหมด "
             f"โดยเฉพาะการใช้ Google Search ค้นหาราคาหุ้นและ Daily RSI ณ ปัจจุบันของ Tickers ในรายงาน จากนั้นเขียนและแสดงผลลัพธ์เป็นรายงานฉบับสมบูรณ์ที่ผ่านการ QC และแก้ไขตัวเลขทั้งหมดแล้ว"
         )
