@@ -868,6 +868,37 @@ body {
     display: block;
 }
 
+/* Album Button */
+.btn-album {
+    margin-left: auto;
+    padding: 8px 18px;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: #c084fc;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+.btn-album:hover {
+    background: rgba(168, 85, 247, 0.18);
+    border-color: rgba(168, 85, 247, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.15);
+}
+.btn-album.active {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+.btn-album.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 /* Workflow Layout Grid */
 .workflow-layout {
     display: grid;

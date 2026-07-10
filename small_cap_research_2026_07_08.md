@@ -139,7 +139,7 @@ graph TD
 
 ```mermaid
 graph TD
-    A["Edible Garden (EDBL)"] -->|After-Hours Spike| B["Stock Up +23-45% to ~$0.108"]
+    A["Edible Garden (EDBL)"] -->|After-Hours Spike| B["Stock Up +23-45% to ~$0.09"]
     A -->|Insider Activity| C["HRT Financial LP Buys 416K Shares"]
     A -->|Commercial Catalyst| D["LOI signed for Long-term Strategic Alliance"]
     A -->|Structural Deficit| E["Delisting Risk & Heavy Dilution from Secured Notes"]

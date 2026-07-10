@@ -1751,6 +1751,56 @@ app.post('/api/delete', async (req, res) => {
   });
 });
 
+// ============================================================
+// Album Server Management (launch/stop generate-album.js)
+// ============================================================
+let albumProcess = null;
+const ALBUM_PORT = 3457;
+const ALBUM_SCRIPT = path.join(__dirname, 'generate-album.js');
+
+app.get('/api/album/status', (req, res) => {
+  const alive = albumProcess && !albumProcess.killed;
+  res.json({ running: alive, port: ALBUM_PORT, url: `http://localhost:${ALBUM_PORT}` });
+});
+
+app.post('/api/album/start', (req, res) => {
+  if (albumProcess && !albumProcess.killed) {
+    return res.json({ success: true, message: 'Album กำลังทำงานอยู่แล้ว', url: `http://localhost:${ALBUM_PORT}` });
+  }
+
+  try {
+    const { spawn } = require('child_process');
+    albumProcess = spawn('node', [ALBUM_SCRIPT], {
+      detached: false,
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+
+    albumProcess.stdout.on('data', d => console.log(`[Album] ${d.toString().trim()}`));
+    albumProcess.stderr.on('data', d => console.error(`[Album] ${d.toString().trim()}`));
+    albumProcess.on('close', (code) => {
+      console.log(`[Album] ปิดระบบแล้ว (code: ${code})`);
+      albumProcess = null;
+    });
+
+    // Give it a moment to start
+    setTimeout(() => {
+      res.json({ success: true, message: 'เปิด Album สำเร็จ', url: `http://localhost:${ALBUM_PORT}` });
+    }, 800);
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post('/api/album/stop', (req, res) => {
+  if (!albumProcess || albumProcess.killed) {
+    albumProcess = null;
+    return res.json({ success: true, message: 'Album ไม่ได้ทำงานอยู่' });
+  }
+  albumProcess.kill('SIGTERM');
+  albumProcess = null;
+  res.json({ success: true, message: 'ปิด Album แล้ว' });
+});
+
 app.listen(PORT, () => {
   console.log(`=================================================`);
   console.log(` NotebookLM Manager Web App with Profile Switcher`);

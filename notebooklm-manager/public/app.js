@@ -3008,4 +3008,64 @@ function applyLanguage() {
     }
 }
 
+// ============================================================
+// Album Server Control
+// ============================================================
+let albumRunning = false;
 
+async function checkAlbumStatus() {
+    try {
+        const resp = await fetch('/api/album/status');
+        const data = await resp.json();
+        albumRunning = data.running;
+        updateAlbumButton();
+    } catch (e) { /* ignore */ }
+}
+
+function updateAlbumButton() {
+    const btn = document.getElementById('btn-album');
+    if (!btn) return;
+    if (albumRunning) {
+        btn.textContent = '📚 Album ✅';
+        btn.classList.add('active');
+        btn.title = 'Album กำลังทำงาน — คลิกเพื่อเปิดหน้า Album หรือกดค้างเพื่อปิด';
+    } else {
+        btn.textContent = '📚 Album';
+        btn.classList.remove('active');
+        btn.title = 'คลิกเพื่อเปิด Album รายการผลิตคลิป';
+    }
+    btn.classList.remove('loading');
+}
+
+async function toggleAlbum() {
+    const btn = document.getElementById('btn-album');
+    btn.classList.add('loading');
+
+    if (albumRunning) {
+        // Already running → just open in new tab
+        window.open('http://localhost:3457', '_blank');
+        btn.classList.remove('loading');
+        return;
+    }
+
+    // Not running → start it, then open
+    try {
+        const resp = await fetch('/api/album/start', { method: 'POST' });
+        const data = await resp.json();
+        if (data.success) {
+            albumRunning = true;
+            updateAlbumButton();
+            window.open(data.url, '_blank');
+        }
+    } catch (e) {
+        alert('ไม่สามารถเปิด Album ได้: ' + e.message);
+        btn.classList.remove('loading');
+    }
+}
+
+// Check album status on page load
+document.addEventListener('DOMContentLoaded', () => {
+    checkAlbumStatus();
+    // Periodically check album status every 30s
+    setInterval(checkAlbumStatus, 30000);
+});
