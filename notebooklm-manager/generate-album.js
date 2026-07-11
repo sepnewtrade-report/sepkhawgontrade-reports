@@ -14,6 +14,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const url = require('url');
+const { execSync } = require('child_process');
 
 const PORT = 3457;
 const TEMPLATES_FILE = path.join(__dirname, 'templates.json');
@@ -54,6 +55,25 @@ function loadWorkflows() {
 
 function saveTemplates(templates) {
   fs.writeFileSync(TEMPLATES_FILE, JSON.stringify(templates, null, 2), 'utf8');
+}
+
+// --- Export static album.html ---
+const ROOT_ALBUM_FILE = path.join(__dirname, '..', 'album.html');
+const LOCAL_ALBUM_FILE = path.join(__dirname, 'album.html');
+
+function exportAlbumHtml() {
+  try {
+    const html = generateHtml(false);
+    // Remove server-bar and server-specific JS from static version
+    const staticHtml = html
+      .replace(/<!-- Server Control Bar -->.*?<\/div>\s*<\/div>/s, '<!-- Static version -->')
+      .replace(/\/\/ --- Pause\/Resume.*$/s, '// Static version - no server needed\n    render();\n  ');
+    fs.writeFileSync(LOCAL_ALBUM_FILE, staticHtml, 'utf8');
+    fs.writeFileSync(ROOT_ALBUM_FILE, staticHtml, 'utf8');
+    console.log('📦 อัปเดต album.html สำเร็จ');
+  } catch (e) {
+    console.error('❌ Export album.html ล้มเหลว:', e.message);
+  }
 }
 
 // --- Server ---
@@ -127,6 +147,7 @@ const server = http.createServer((req, res) => {
         }
         tmpl[key] = value;
         saveTemplates(templates);
+        exportAlbumHtml();
         console.log(`💾 บันทึก ${promptType} prompt ของ "${tmpl.name}" สำเร็จ`);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true }));
@@ -142,6 +163,33 @@ const server = http.createServer((req, res) => {
   if (parsed.pathname === '/' || parsed.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(generateHtml(isPaused));
+    return;
+  }
+
+  // API: Deploy to GitHub
+  if (parsed.pathname === '/api/deploy' && req.method === 'POST') {
+    try {
+      const projectRoot = path.join(__dirname, '..');
+      exportAlbumHtml();
+      const output = execSync(
+        'node generate-index.js && git add . && git commit -m "Update album prompts" && git push',
+        { cwd: projectRoot, encoding: 'utf8', timeout: 30000 }
+      );
+      console.log('🚀 Deploy สำเร็จ!');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, message: 'Deploy สำเร็จ!' }));
+    } catch (e) {
+      const errMsg = (e.stderr || e.message || '').toString().substring(0, 500);
+      // Check if it's just "nothing to commit"
+      if (errMsg.includes('nothing to commit') || (e.stdout && e.stdout.includes('nothing to commit'))) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'ไม่มีอะไรเปลี่ยนแปลง — เว็บเป็นปัจจุบันแล้ว' }));
+      } else {
+        console.error('❌ Deploy ล้มเหลว:', errMsg);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: errMsg }));
+      }
+    }
     return;
   }
 
@@ -210,6 +258,7 @@ ${getCSS()}
         <span class="countdown" id="countdown">⏱️ ปิดอัตโนมัติใน 5:00</span>
       </div>
       <div class="toggle-group">
+        <button class="btn-deploy" id="btn-deploy" onclick="deployToGithub()">🚀 Deploy</button>
         <span class="toggle-label" id="toggle-label">ON</span>
         <label class="toggle-switch" id="toggle-switch">
           <input type="checkbox" id="server-toggle" checked onchange="handleToggle(this)">
@@ -383,6 +432,11 @@ function getCSS() {
     .toggle-group { display:flex; align-items:center; gap:12px; }
     .toggle-label { font-family:var(--font-heading); font-size:.82rem; font-weight:600; letter-spacing:.5px; color:#34d399; transition:color .3s; min-width:28px; text-align:right; }
     .toggle-label.off { color:#f87171; }
+    .btn-deploy { background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.15)); border:1px solid rgba(99,102,241,.3); color:#a5b4fc; padding:6px 16px; border-radius:8px; font-size:.82rem; font-weight:600; cursor:pointer; font-family:var(--font-heading); transition:all .25s; letter-spacing:.3px; }
+    .btn-deploy:hover { background:linear-gradient(135deg,rgba(99,102,241,.35),rgba(168,85,247,.25)); border-color:rgba(99,102,241,.5); box-shadow:0 0 16px rgba(99,102,241,.15); transform:translateY(-1px); color:#c7d2fe; }
+    .btn-deploy:active { transform:translateY(0); }
+    .btn-deploy.deploying { opacity:.7; pointer-events:none; }
+    .btn-deploy.success { background:rgba(16,185,129,.2); border-color:rgba(16,185,129,.35); color:#34d399; }
     .toggle-switch { position:relative; display:inline-block; width:52px; height:28px; cursor:pointer; }
     .toggle-switch input { opacity:0; width:0; height:0; }
     .toggle-slider { position:absolute; inset:0; background:rgba(239,68,68,.25); border:1px solid rgba(239,68,68,.35); border-radius:999px; transition:all .35s cubic-bezier(.4,.0,.2,1); }
@@ -787,16 +841,39 @@ function getJS() {
 
     async function handleToggle(checkbox) {
       if (!checkbox.checked) {
-        // Turning OFF — pause server
         await pauseServer(false);
       } else {
-        // Turning ON — resume server
         const ok = await resumeServer();
         if (!ok) {
           checkbox.checked = false;
           showToast('❌ ไม่สามารถเปิดได้', true);
         }
       }
+    }
+
+    async function deployToGithub() {
+      const btn = document.getElementById('btn-deploy');
+      btn.textContent = '⏳ กำลัง Deploy...';
+      btn.classList.add('deploying');
+      try {
+        const resp = await fetch('/api/deploy', { method: 'POST' });
+        const data = await resp.json();
+        if (data.success) {
+          btn.textContent = '✅ สำเร็จ!';
+          btn.classList.remove('deploying');
+          btn.classList.add('success');
+          showToast('🚀 ' + (data.message || 'Deploy สำเร็จ! เว็บจะอัปเดตใน 1-2 นาที'));
+        } else {
+          throw new Error(data.error || 'Deploy failed');
+        }
+      } catch (e) {
+        btn.textContent = '❌ ผิดพลาด';
+        showToast('❌ Deploy ล้มเหลว: ' + e.message, true);
+      }
+      setTimeout(() => {
+        btn.textContent = '🚀 Deploy';
+        btn.classList.remove('deploying','success');
+      }, 3000);
     }
 
     function showToast(msg, isError) {
