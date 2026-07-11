@@ -862,16 +862,6 @@ async function renderReportContent(reportMeta) {
     // Toggle views
     elements.catalogView.classList.remove('active');
     elements.readerView.classList.add('active');
-
-    // Show/hide whale legend card in reader
-    const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
-    if (whaleLegendCardReader) {
-        if (reportMeta.category === 'Bot Trade Todays' || reportMeta.category === 'Bot Trade Stats') {
-            whaleLegendCardReader.style.display = 'block';
-        } else {
-            whaleLegendCardReader.style.display = 'none';
-        }
-    }
     
     // Scroll content area back to top
     elements.readerView.parentElement.scrollTop = 0;
@@ -885,6 +875,13 @@ async function renderReportContent(reportMeta) {
         
         // Store raw markdown in memory
         appState.rawMarkdown = markdown;
+
+        // Show/hide whale legend card in reader dynamically
+        const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
+        if (whaleLegendCardReader) {
+            const hasWhaleIndicators = markdown.includes('CMF') || markdown.includes('Whale Flow') || markdown.includes('🐳');
+            whaleLegendCardReader.style.display = hasWhaleIndicators ? 'block' : 'none';
+        }
         
         // Render
         await displayParsedHTML(markdown);
