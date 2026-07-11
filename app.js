@@ -53,8 +53,7 @@ const translations = {
         latestReportBadge: "รายงานล่าสุด",
         lblMemberTools: "เครื่องมือสมาชิก",
         lblNavPortfolio: "Portfolio หุ้น",
-        lblNavBotTrade: "Bot Trade Todays",
-        lblNavBotPerf: "ผลงานบอทเทรด",
+        lblNavBotTrade: "บอทเทรด & ผลงาน",
         portfolioTitle: "📊 Portfolio หุ้น",
         portfolioSubtitle: "ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน",
         portfolioOverview: "ภาพรวม Portfolio",
@@ -126,8 +125,7 @@ const translations = {
         latestReportBadge: "Latest Report",
         lblMemberTools: "Member Tools",
         lblNavPortfolio: "Stock Portfolio",
-        lblNavBotTrade: "Bot Trade Todays",
-        lblNavBotPerf: "Bot Trade Stats",
+        lblNavBotTrade: "Bot Trade & Stats",
         portfolioTitle: "📊 Stock Portfolio",
         portfolioSubtitle: "Calculate average cost, break-even price, and track realized P&L",
         portfolioOverview: "Portfolio Overview",
@@ -248,9 +246,6 @@ function updateUILanguage() {
 
     const navBotTradeEl = document.getElementById('lbl-nav-bot-trade');
     if (navBotTradeEl) navBotTradeEl.textContent = t.lblNavBotTrade;
-
-    const navBotPerfEl = document.getElementById('lbl-nav-bot-perf');
-    if (navBotPerfEl) navBotPerfEl.textContent = t.lblNavBotPerf;
     
     if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
     if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
@@ -325,8 +320,7 @@ const elements = {
     addStockBtn: document.getElementById('add-stock-btn'),
     refreshBtn: document.getElementById('refresh-btn'),
     stockList: document.getElementById('stock-list'),
-    navBotTrade: document.getElementById('nav-bot-trade'),
-    navBotPerf: document.getElementById('nav-bot-perf')
+    navBotTrade: document.getElementById('nav-bot-trade')
 };
 
 // Initialize Application
@@ -454,19 +448,7 @@ function setupEventListeners() {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
             elements.navBotTrade.classList.add('active');
             
-            appState.activeCategory = 'Bot Trade Todays';
-            window.location.hash = ''; // Back to catalog list
-            renderCatalog();
-            closeMobileSidebar();
-        });
-    }
-
-    if (elements.navBotPerf) {
-        elements.navBotPerf.addEventListener('click', () => {
-            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-            elements.navBotPerf.classList.add('active');
-            
-            appState.activeCategory = 'Bot Trade Stats';
+            appState.activeCategory = 'Bot Trade Combined';
             window.location.hash = ''; // Back to catalog list
             renderCatalog();
             closeMobileSidebar();
@@ -636,22 +618,15 @@ function renderCategoriesMenu() {
     // Update count-all badge
     const countAllEl = document.getElementById('count-all');
     if (countAllEl) {
-        const generalReportsCount = appState.reports.filter(r => r.category !== 'Bot Trade Todays' && r.category !== 'Bot Trade Stats').length;
+        const generalReportsCount = appState.reports.filter(r => r.category !== 'Bot Trade Todays').length;
         countAllEl.textContent = generalReportsCount;
     }
 
-    // Update count-bot-trade badge
+    // Update count-bot-trade badge (combined count of Bot Trade Todays and Bot Trade Stats)
     const countBotTradeEl = document.getElementById('count-bot-trade');
     if (countBotTradeEl) {
-        const count = appState.reports.filter(r => r.category === 'Bot Trade Todays').length;
+        const count = appState.reports.filter(r => r.category === 'Bot Trade Todays' || r.category === 'Bot Trade Stats').length;
         countBotTradeEl.textContent = count;
-    }
-
-    // Update count-bot-perf badge
-    const countBotPerfEl = document.getElementById('count-bot-perf');
-    if (countBotPerfEl) {
-        const count = appState.reports.filter(r => r.category === 'Bot Trade Stats').length;
-        countBotPerfEl.textContent = count;
     }
 }
 
@@ -663,6 +638,8 @@ function renderCatalog() {
     // Update main section title
     if (appState.activeCategory === 'all') {
         elements.sectionTitle.textContent = t.vaultTitle;
+    } else if (appState.activeCategory === 'Bot Trade Combined') {
+        elements.sectionTitle.textContent = appState.lang === 'th' ? 'บอทเทรด & ผลงาน' : 'Bot Trade & Stats';
     } else {
         const currentCat = appState.reports.find(r => r.category === appState.activeCategory);
         const catNameDisplay = appState.lang === 'th' ? currentCat?.categoryThai : currentCat?.category;
@@ -679,9 +656,11 @@ function renderCatalog() {
         }
     }
     
-    // 1. Filter by category (On home page 'all', show ONLY the latest report of each category, excluding Bot Trade Todays and Bot Trade Stats)
+    // 1. Filter by category (On home page 'all', show ONLY the latest report of each category, excluding Bot Trade Todays)
     if (appState.activeCategory === 'all') {
-        filtered = filtered.filter(r => r.isLatest && r.category !== 'Bot Trade Todays' && r.category !== 'Bot Trade Stats');
+        filtered = filtered.filter(r => r.isLatest && r.category !== 'Bot Trade Todays');
+    } else if (appState.activeCategory === 'Bot Trade Combined') {
+        filtered = filtered.filter(r => r.category === 'Bot Trade Todays' || r.category === 'Bot Trade Stats');
     } else {
         filtered = filtered.filter(r => r.category === appState.activeCategory);
     }
