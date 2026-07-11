@@ -276,6 +276,24 @@ function updateUILanguage() {
 
     const legendSellEl = document.getElementById('lbl-legend-sell');
     if (legendSellEl) legendSellEl.textContent = t.legendSellText;
+
+    const legendTitleReaderEl = document.getElementById('lbl-legend-title-reader');
+    if (legendTitleReaderEl) legendTitleReaderEl.textContent = t.legendTitle;
+
+    const legendDescReaderEl = document.getElementById('lbl-legend-desc-reader');
+    if (legendDescReaderEl) legendDescReaderEl.textContent = t.legendDesc;
+
+    const legendAccumReaderEl = document.getElementById('lbl-legend-accum-reader');
+    if (legendAccumReaderEl) legendAccumReaderEl.textContent = t.legendAccumText;
+
+    const legendBuyReaderEl = document.getElementById('lbl-legend-buy-reader');
+    if (legendBuyReaderEl) legendBuyReaderEl.textContent = t.legendBuyText;
+
+    const legendDistribReaderEl = document.getElementById('lbl-legend-distrib-reader');
+    if (legendDistribReaderEl) legendDistribReaderEl.textContent = t.legendDistribText;
+
+    const legendSellReaderEl = document.getElementById('lbl-legend-sell-reader');
+    if (legendSellReaderEl) legendSellReaderEl.textContent = t.legendSellText;
     
     if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
     if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
@@ -844,6 +862,16 @@ async function renderReportContent(reportMeta) {
     // Toggle views
     elements.catalogView.classList.remove('active');
     elements.readerView.classList.add('active');
+
+    // Show/hide whale legend card in reader
+    const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
+    if (whaleLegendCardReader) {
+        if (reportMeta.category === 'Bot Trade Todays' || reportMeta.category === 'Bot Trade Stats') {
+            whaleLegendCardReader.style.display = 'block';
+        } else {
+            whaleLegendCardReader.style.display = 'none';
+        }
+    }
     
     // Scroll content area back to top
     elements.readerView.parentElement.scrollTop = 0;
@@ -995,6 +1023,9 @@ function closeReport() {
     
     elements.readerView.classList.remove('active');
     elements.catalogView.classList.add('active');
+    
+    const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
+    if (whaleLegendCardReader) whaleLegendCardReader.style.display = 'none';
 }
 
 function openPortfolio() {
