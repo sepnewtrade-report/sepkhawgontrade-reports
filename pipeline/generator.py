@@ -35,8 +35,8 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
         content += "บอทสแกนแล้วแต่ไม่มีหุ้นใดผ่านเกณฑ์ความปลอดภัยและเงื่อนไขเทคนิคัล แนะนำให้รอประเมินความเสี่ยงตลาดอีกครั้ง\n\n"
     else:
         content += "## 🏆 สัญญาณซื้อเด่นประจำวันนี้ (Top Buy Signals)\n\n"
-        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | สัดส่วนจัดสรร | Stop Loss | Take Profit | ความมั่นใจ |\n"
-        content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | ATR (14) | Stop Loss | Take Profit | สัดส่วนจัดสรร | ความมั่นใจ |\n"
+        content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
         for sig in signals:
             ticker = sig["ticker"]
             strat = sig["strategy_name"]
@@ -45,7 +45,15 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
             sl = sig["stop_loss"]
             tp = sig["take_profit"]
             conf = sig["confidence"]
-            content += f"| **{ticker}** | {strat} | ${price:.2f} | ${pos:,.2f} | ${sl:.2f} | ${tp:.2f} | {conf*100:.0f}% |\n"
+            
+            # Fetch technical indicators
+            stock_data = scanned_data.get(ticker, {})
+            tech = stock_data.get("technicals", {})
+            rsi_val = f"{tech.get('rsi', 50.0):.1f}"
+            macd_val = f"{tech.get('macd_hist', 0.0):.4f}"
+            atr_val = f"${tech.get('atr', 0.0):.2f}"
+            
+            content += f"| **{ticker}** | {strat} | ${price:.2f} | {rsi_val} | {macd_val} | {atr_val} | ${sl:.2f} | ${tp:.2f} | ${pos:,.2f} | {conf*100:.0f}% |\n"
         
         content += "\n\n"
         content += "## 🔍 เจาะลึกรายบริษัทที่มีสัญญาณทางเทคนิคอล\n\n"

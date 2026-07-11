@@ -21,7 +21,7 @@ const CATEGORY_MAP = {
   'market_summary': { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' },
   'bear_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
   'short_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
-  'global_market_recap': { name: 'Global Market Recap', thai: 'Global Market Recap' },
+  'global_market_recap': { name: 'Bot Trade Stats', thai: 'ผลงานบอทเทรด' },
   'whats_next': { name: "What's Next for Market", thai: "What's Next for Market" },
   'thai_stock': { name: 'Thai Stock Analysis', thai: 'เหลียวหลังมามองหุ้นไทย' },
   'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' }
