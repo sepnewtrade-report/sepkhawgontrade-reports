@@ -64,13 +64,13 @@ const LOCAL_ALBUM_FILE = path.join(__dirname, 'album.html');
 function exportAlbumHtml() {
   try {
     const html = generateHtml(false);
-    // Remove server-bar and server-specific JS from static version
+    // Remove server-bar and server-specific JS from static version, and ensure we close the script and html tags
     const staticHtml = html
       .replace(/<!-- Server Control Bar -->.*?<\/div>\s*<\/div>/s, '<!-- Static version -->')
-      .replace(/\/\/ --- Pause\/Resume.*$/s, '// Static version - no server needed\n    render();\n  ');
+      .replace(/\/\/ --- Pause\/Resume.*$/s, '// Static version - no server needed\n    render();\n  </script>\n</body>\n</html>');
     fs.writeFileSync(LOCAL_ALBUM_FILE, staticHtml, 'utf8');
-    fs.writeFileSync(ROOT_ALBUM_FILE, staticHtml, 'utf8');
-    console.log('📦 อัปเดต album.html สำเร็จ');
+    // We NO LONGER overwrite ROOT_ALBUM_FILE (.. / album.html) here because that is managed by the client-side API version.
+    console.log('📦 อัปเดต notebooklm-manager/album.html สำเร็จ');
   } catch (e) {
     console.error('❌ Export album.html ล้มเหลว:', e.message);
   }
