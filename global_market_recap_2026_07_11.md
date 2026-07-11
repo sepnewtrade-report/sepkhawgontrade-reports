@@ -28,4 +28,5 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Yahoo Finance Market Data](https://finance.yahoo.com/)
+- [Google Finance](https://www.google.com/finance/)
 - [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)
