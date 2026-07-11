@@ -58,5 +58,6 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Yahoo Finance API](https://finance.yahoo.com/)
+- [Google Finance](https://www.google.com/finance/)
 - [TradingView Technical Indicators](https://www.tradingview.com/)
 - [SepKhawGonTrade Quantitative Scanner](https://github.com/)

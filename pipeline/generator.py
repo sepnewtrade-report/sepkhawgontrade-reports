@@ -66,6 +66,7 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
     content += "---\n\n"
     content += "## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
     content += "- [Yahoo Finance API](https://finance.yahoo.com/)\n"
+    content += "- [Google Finance](https://www.google.com/finance/)\n"
     content += "- [TradingView Technical Indicators](https://www.tradingview.com/)\n"
     content += "- [SepKhawGonTrade Quantitative Scanner](https://github.com/)\n"
     
@@ -109,6 +110,7 @@ def generate_0530_report(closed_signals, stats, date_str, output_path):
     content += "---\n\n"
     content += "## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
     content += "- [Yahoo Finance Market Data](https://finance.yahoo.com/)\n"
+    content += "- [Google Finance](https://www.google.com/finance/)\n"
     content += "- [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)\n"
     
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
