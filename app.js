@@ -480,7 +480,7 @@ function setupEventListeners() {
 // Fetch Reports Database
 async function fetchReportsIndex() {
     try {
-        const response = await fetch('reports-index.json');
+        const response = await fetch(`reports-index.json?v=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load reports database');
         
         appState.reports = await response.json();
@@ -831,7 +831,7 @@ async function renderReportContent(reportMeta) {
 
     // Load and Compile Markdown file content
     try {
-        const response = await fetch(reportMeta.path);
+        const response = await fetch(`${reportMeta.path}?v=${reportMeta.timestamp || Date.now()}`);
         if (!response.ok) throw new Error('File not found');
         
         const markdown = await response.text();
@@ -1120,7 +1120,7 @@ async function loadFeaturedReport(report) {
     };
     
     try {
-        const response = await fetch(report.path);
+        const response = await fetch(`${report.path}?v=${report.timestamp || Date.now()}`);
         if (!response.ok) throw new Error('File not found');
         const markdown = await response.text();
         
