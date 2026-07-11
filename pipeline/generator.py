@@ -35,8 +35,8 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
         content += "บอทสแกนแล้วแต่ไม่มีหุ้นใดผ่านเกณฑ์ความปลอดภัยและเงื่อนไขเทคนิคัล แนะนำให้รอประเมินความเสี่ยงตลาดอีกครั้ง\n\n"
     else:
         content += "## 🏆 สัญญาณซื้อเด่นประจำวันนี้ (Top Buy Signals)\n\n"
-        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | ATR (14) | Stop Loss | Take Profit | สัดส่วนจัดสรร | ความมั่นใจ |\n"
-        content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | CMF (Whale Flow) | ATR (14) | Stop Loss | Take Profit | สัดส่วนจัดสรร | ความมั่นใจ |\n"
+        content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
         for sig in signals:
             ticker = sig["ticker"]
             strat = sig["strategy_name"]
@@ -53,7 +53,18 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
             macd_val = f"{tech.get('macd_hist', 0.0):.4f}"
             atr_val = f"${tech.get('atr', 0.0):.2f}"
             
-            content += f"| **{ticker}** | {strat} | ${price:.2f} | {rsi_val} | {macd_val} | {atr_val} | ${sl:.2f} | ${tp:.2f} | ${pos:,.2f} | {conf*100:.0f}% |\n"
+            # Chaikin Money Flow (Whale indicator)
+            cmf_raw = tech.get("cmf", 0.0)
+            if cmf_raw >= 0.1:
+                cmf_val = f"{cmf_raw:+.2f} (🐳 Accum)"
+            elif cmf_raw > 0:
+                cmf_val = f"{cmf_raw:+.2f} (Buy Flow)"
+            elif cmf_raw <= -0.1:
+                cmf_val = f"{cmf_raw:.2f} (🐳 Distrib)"
+            else:
+                cmf_val = f"{cmf_raw:.2f} (Sell Flow)"
+            
+            content += f"| **{ticker}** | {strat} | ${price:.2f} | {rsi_val} | {macd_val} | {cmf_val} | {atr_val} | ${sl:.2f} | ${tp:.2f} | ${pos:,.2f} | {conf*100:.0f}% |\n"
         
         content += "\n\n"
         content += "## 🔍 เจาะลึกรายบริษัทที่มีสัญญาณทางเทคนิคอล\n\n"

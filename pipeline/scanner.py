@@ -35,6 +35,22 @@ def calculate_atr(df, period=14):
     atr = tr.ewm(alpha=1/period, min_periods=period).mean()
     return atr
 
+def calculate_cmf(df, period=20):
+    high = df['high']
+    low = df['low']
+    close = df['close']
+    volume = df['volume']
+    
+    # Avoid division by zero
+    hl_range = high - low
+    hl_range = hl_range.replace(0, 1e-9)
+    
+    mf_multiplier = ((close - low) - (high - close)) / hl_range
+    mf_volume = mf_multiplier * volume
+    
+    cmf = mf_volume.rolling(window=period).sum() / volume.rolling(window=period).sum()
+    return cmf
+
 def scan_stocks(cleaned_data):
     """
     Computes technical indicators for each verified stock.
@@ -57,6 +73,7 @@ def scan_stocks(cleaned_data):
             df['sma_50'] = df['close'].rolling(window=50).mean()
             df['sma_200'] = df['close'].rolling(window=200).mean()
             df['ema_20'] = df['close'].ewm(span=20, adjust=False).mean()
+            df['cmf_20'] = calculate_cmf(df, period=20)
             
             # Extract the last row (current day technical indicators)
             last_row = df.iloc[-1]
@@ -68,6 +85,7 @@ def scan_stocks(cleaned_data):
             sma_50 = last_row['sma_50'] if not pd.isna(last_row['sma_50']) else last_row['close']
             sma_200 = last_row['sma_200'] if not pd.isna(last_row['sma_200']) else last_row['close']
             ema_20 = last_row['ema_20'] if not pd.isna(last_row['ema_20']) else last_row['close']
+            cmf_val = last_row['cmf_20'] if not pd.isna(last_row['cmf_20']) else 0.0
             
             # Update data
             data["technicals"] = {
@@ -78,7 +96,8 @@ def scan_stocks(cleaned_data):
                 "atr": float(atr),
                 "sma_50": float(sma_50),
                 "sma_200": float(sma_200),
-                "ema_20": float(ema_20)
+                "ema_20": float(ema_20),
+                "cmf": float(cmf_val)
             }
             
             scanned_data[ticker] = data
