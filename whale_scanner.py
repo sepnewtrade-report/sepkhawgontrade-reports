@@ -221,7 +221,7 @@ def main():
         print("Error: No Gemini API keys found. Please set GEMINI_API_KEY in .env file.", file=sys.stderr)
         sys.exit(1)
         
-    model_name = "gemini-3.5-flash"
+    model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 
     whale_list = [
         {"investor": "Warren Buffett", "firm": "Berkshire Hathaway"},
