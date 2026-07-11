@@ -117,6 +117,37 @@
                     </div>
                 </div>
 
+                <!-- Whale Indicator Legend Card -->
+                <div id="whale-legend-card" class="whale-legend-card" style="display: none; margin-bottom: 20px;">
+                    <div class="legend-content">
+                        <div class="legend-header">
+                            <i class="fa-solid fa-circle-info legend-icon"></i>
+                            <h4 id="lbl-legend-title">คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน</h4>
+                        </div>
+                        <p class="legend-desc" id="lbl-legend-desc">
+                            ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:
+                        </p>
+                        <div class="legend-grid">
+                            <div class="legend-item accum">
+                                <span class="legend-badge">🐳 Accum (&gt;= +0.10)</span>
+                                <span class="legend-text" id="lbl-legend-accum">วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ</span>
+                            </div>
+                            <div class="legend-item buy">
+                                <span class="legend-badge">Buy Flow (&gt; 0)</span>
+                                <span class="legend-text" id="lbl-legend-buy">มีเงินไหลเข้าสะสมทั่วไป</span>
+                            </div>
+                            <div class="legend-item distrib">
+                                <span class="legend-badge">🐳 Distrib (&lt;= -0.10)</span>
+                                <span class="legend-text" id="lbl-legend-distrib">วาฬกำลังทยอยเทขายอย่างมีนัยสำคัญ</span>
+                            </div>
+                            <div class="legend-item sell">
+                                <span class="legend-badge">Sell Flow (&lt; 0)</span>
+                                <span class="legend-text" id="lbl-legend-sell">มีเงินไหลออกสะสมทั่วไป</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Featured Latest Report Panel -->
                 <div id="featured-report-container" class="featured-report-container" style="display: none;">
                     <div class="featured-header">

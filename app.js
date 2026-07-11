@@ -54,6 +54,12 @@ const translations = {
         lblMemberTools: "เครื่องมือสมาชิก",
         lblNavPortfolio: "Portfolio หุ้น",
         lblNavBotTrade: "บอทเทรด & ผลงาน",
+        legendTitle: "คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน",
+        legendDesc: "ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:",
+        legendAccumText: "วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ",
+        legendBuyText: "มีเงินไหลเข้าสะสมทั่วไป",
+        legendDistribText: "วาฬกำลังทยอยเทขายอย่างมีนัยสำคัญ",
+        legendSellText: "มีเงินไหลออกสะสมทั่วไป",
         portfolioTitle: "📊 Portfolio หุ้น",
         portfolioSubtitle: "ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน",
         portfolioOverview: "ภาพรวม Portfolio",
@@ -126,6 +132,12 @@ const translations = {
         lblMemberTools: "Member Tools",
         lblNavPortfolio: "Stock Portfolio",
         lblNavBotTrade: "Bot Trade & Stats",
+        legendTitle: "CMF (Whale Flow) Signal Reading Guide",
+        legendDesc: "CMF (Chaikin Money Flow) measures the accumulated capital flow of large institutional investors (whales) over a 20-day period:",
+        legendAccumText: "Whales actively accumulating shares",
+        legendBuyText: "General capital inflow",
+        legendDistribText: "Whales actively distributing shares",
+        legendSellText: "General capital outflow",
         portfolioTitle: "📊 Stock Portfolio",
         portfolioSubtitle: "Calculate average cost, break-even price, and track realized P&L",
         portfolioOverview: "Portfolio Overview",
@@ -246,6 +258,24 @@ function updateUILanguage() {
 
     const navBotTradeEl = document.getElementById('lbl-nav-bot-trade');
     if (navBotTradeEl) navBotTradeEl.textContent = t.lblNavBotTrade;
+
+    const legendTitleEl = document.getElementById('lbl-legend-title');
+    if (legendTitleEl) legendTitleEl.textContent = t.legendTitle;
+
+    const legendDescEl = document.getElementById('lbl-legend-desc');
+    if (legendDescEl) legendDescEl.textContent = t.legendDesc;
+
+    const legendAccumEl = document.getElementById('lbl-legend-accum');
+    if (legendAccumEl) legendAccumEl.textContent = t.legendAccumText;
+
+    const legendBuyEl = document.getElementById('lbl-legend-buy');
+    if (legendBuyEl) legendBuyEl.textContent = t.legendBuyText;
+
+    const legendDistribEl = document.getElementById('lbl-legend-distrib');
+    if (legendDistribEl) legendDistribEl.textContent = t.legendDistribText;
+
+    const legendSellEl = document.getElementById('lbl-legend-sell');
+    if (legendSellEl) legendSellEl.textContent = t.legendSellText;
     
     if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
     if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
@@ -653,6 +683,16 @@ function renderCatalog() {
             loadFeaturedReport(appState.reports[0]);
         } else {
             elements.featuredContainer.style.display = 'none';
+        }
+    }
+
+    // Show/hide whale legend card
+    const whaleLegendCard = document.getElementById('whale-legend-card');
+    if (whaleLegendCard) {
+        if (appState.activeCategory === 'Bot Trade Combined') {
+            whaleLegendCard.style.display = 'block';
+        } else {
+            whaleLegendCard.style.display = 'none';
         }
     }
     
