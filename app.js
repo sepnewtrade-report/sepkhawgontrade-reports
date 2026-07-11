@@ -53,6 +53,7 @@ const translations = {
         latestReportBadge: "รายงานล่าสุด",
         lblMemberTools: "เครื่องมือสมาชิก",
         lblNavPortfolio: "Portfolio หุ้น",
+        lblNavBotTrade: "Bot Trade Todays",
         portfolioTitle: "📊 Portfolio หุ้น",
         portfolioSubtitle: "ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน",
         portfolioOverview: "ภาพรวม Portfolio",
@@ -124,6 +125,7 @@ const translations = {
         latestReportBadge: "Latest Report",
         lblMemberTools: "Member Tools",
         lblNavPortfolio: "Stock Portfolio",
+        lblNavBotTrade: "Bot Trade Todays",
         portfolioTitle: "📊 Stock Portfolio",
         portfolioSubtitle: "Calculate average cost, break-even price, and track realized P&L",
         portfolioOverview: "Portfolio Overview",
@@ -241,6 +243,9 @@ function updateUILanguage() {
     
     const navPortfolioEl = document.getElementById('lbl-nav-portfolio');
     if (navPortfolioEl) navPortfolioEl.textContent = t.lblNavPortfolio;
+
+    const navBotTradeEl = document.getElementById('lbl-nav-bot-trade');
+    if (navBotTradeEl) navBotTradeEl.textContent = t.lblNavBotTrade;
     
     if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
     if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
@@ -314,7 +319,8 @@ const elements = {
     lblPtCount: document.getElementById('lbl-pt-count'),
     addStockBtn: document.getElementById('add-stock-btn'),
     refreshBtn: document.getElementById('refresh-btn'),
-    stockList: document.getElementById('stock-list')
+    stockList: document.getElementById('stock-list'),
+    navBotTrade: document.getElementById('nav-bot-trade')
 };
 
 // Initialize Application
@@ -436,6 +442,18 @@ function setupEventListeners() {
             closeMobileSidebar();
         });
     }
+
+    if (elements.navBotTrade) {
+        elements.navBotTrade.addEventListener('click', () => {
+            document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+            elements.navBotTrade.classList.add('active');
+            
+            appState.activeCategory = 'Bot Trade Todays';
+            window.location.hash = ''; // Back to catalog list
+            renderCatalog();
+            closeMobileSidebar();
+        });
+    }
     
     // Listen for hash change for routing
     window.addEventListener('hashchange', handleRouting);
@@ -519,8 +537,8 @@ function renderCategoriesMenu() {
         categoriesCount[cat] = (categoriesCount[cat] || 0) + 1;
     });
     
-    // Get unique categories list
-    const uniqueCategories = [...new Set(appState.reports.map(r => r.category))];
+    // Get unique categories list, excluding Bot Trade Todays
+    const uniqueCategories = [...new Set(appState.reports.map(r => r.category))].filter(cat => cat !== 'Bot Trade Todays');
     
     // Clear dynamic items (keep first "all" item)
     const allItem = elements.categoryList.querySelector('[data-category="all"]');
@@ -600,7 +618,15 @@ function renderCategoriesMenu() {
     // Update count-all badge
     const countAllEl = document.getElementById('count-all');
     if (countAllEl) {
-        countAllEl.textContent = appState.reports.length;
+        const generalReportsCount = appState.reports.filter(r => r.category !== 'Bot Trade Todays').length;
+        countAllEl.textContent = generalReportsCount;
+    }
+
+    // Update count-bot-trade badge
+    const countBotTradeEl = document.getElementById('count-bot-trade');
+    if (countBotTradeEl) {
+        const count = appState.reports.filter(r => r.category === 'Bot Trade Todays').length;
+        countBotTradeEl.textContent = count;
     }
 }
 
@@ -628,9 +654,9 @@ function renderCatalog() {
         }
     }
     
-    // 1. Filter by category (On home page 'all', show ONLY the latest report of each category)
+    // 1. Filter by category (On home page 'all', show ONLY the latest report of each category, excluding Bot Trade Todays)
     if (appState.activeCategory === 'all') {
-        filtered = filtered.filter(r => r.isLatest);
+        filtered = filtered.filter(r => r.isLatest && r.category !== 'Bot Trade Todays');
     } else {
         filtered = filtered.filter(r => r.category === appState.activeCategory);
     }
