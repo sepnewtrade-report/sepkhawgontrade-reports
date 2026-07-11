@@ -16,19 +16,29 @@ const CATEGORY_MAP = {
   'weekly_script': { name: 'Weekly Script', thai: 'บทวิเคราะห์รายสัปดาห์' },
   'whale_flow': { name: 'Whale Flow', thai: 'วาฬขยับ ตลาดสะเทือน' },
   'oversold_opportunity_report': { name: 'Oversold Opportunity', thai: 'Oversold Opportunity' },
-  
-  // New Categories
-  'market_summary': { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' },
   'bear_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
   'short_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
-  'global_market_recap': { name: 'Bot Trade Stats', thai: 'ผลงานบอทเทรด' },
   'whats_next': { name: "What's Next for Market", thai: "What's Next for Market" },
   'thai_stock': { name: 'Thai Stock Analysis', thai: 'เหลียวหลังมามองหุ้นไทย' },
   'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' }
 };
 
-function getCategory(filename) {
+function getCategory(filename, title) {
   const lowercase = filename.toLowerCase();
+  const titleLower = (title || "").toLowerCase();
+
+  if (lowercase.startsWith('market_summary')) {
+    if (titleLower.includes('top buy') || titleLower.includes('bot trade') || titleLower.includes('สัญญาณซื้อ') || titleLower.includes('บอทเทรด')) {
+      return { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' };
+    } else {
+      return { name: 'Daily Script', thai: 'สรุปจบ ทันโลกหุ้น' };
+    }
+  }
+
+  if (lowercase.startsWith('global_market_recap')) {
+    return { name: 'Global Market Recap', thai: 'Global Market Recap' };
+  }
+
   for (const prefix in CATEGORY_MAP) {
     if (lowercase.startsWith(prefix)) {
       return CATEGORY_MAP[prefix];
@@ -70,7 +80,7 @@ function extractMetadata(filePath, relativePath) {
     return null;
   }
 
-  const categoryInfo = getCategory(filename);
+  const categoryInfo = getCategory(filename, title);
   
   // Format local date fallback (YYYY-MM-DD) in the local timezone
   const mtime = new Date(stats.mtime);
