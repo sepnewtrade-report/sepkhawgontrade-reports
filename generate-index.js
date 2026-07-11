@@ -18,10 +18,10 @@ const CATEGORY_MAP = {
   'oversold_opportunity_report': { name: 'Oversold Opportunity', thai: 'Oversold Opportunity' },
   
   // New Categories
-  'market_summary': { name: 'Market Summary', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'market_summary': { name: 'Daily Bot Trade', thai: 'บอทเทรดประจำวัน' },
   'bear_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
   'short_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
-  'global_market_recap': { name: 'Global Market Recap', thai: 'Global Market Recap' },
+  'global_market_recap': { name: 'Daily Bot Trade', thai: 'บอทเทรดประจำวัน' },
   'whats_next': { name: "What's Next for Market", thai: "What's Next for Market" },
   'thai_stock': { name: 'Thai Stock Analysis', thai: 'เหลียวหลังมามองหุ้นไทย' },
   'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' }
