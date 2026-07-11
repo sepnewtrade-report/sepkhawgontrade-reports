@@ -555,7 +555,7 @@ function renderCategoriesMenu() {
         else if (nameLower.includes('hot stock') || nameLower.includes('hot')) iconClass = 'fa-fire';
         
         // New categories icons
-        else if (nameLower.includes('daily bot trade') || nameLower.includes('บอทเทรด')) iconClass = 'fa-robot';
+        else if (nameLower.includes('bot trade') || nameLower.includes('บอทเทรด')) iconClass = 'fa-robot';
         else if (nameLower.includes('market summary') || nameLower.includes('recap') || nameLower.includes('สรุปจบ')) iconClass = 'fa-newspaper';
         else if (nameLower.includes('bear squeeze') || nameLower.includes('หมี')) iconClass = 'fa-arrow-trend-up';
         else if (nameLower.includes('whats next') || nameLower.includes('next')) iconClass = 'fa-forward';
