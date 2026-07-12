@@ -35,13 +35,14 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
         content += "บอทสแกนแล้วแต่ไม่มีหุ้นใดผ่านเกณฑ์ความปลอดภัยและเงื่อนไขเทคนิคัล แนะนำให้รอประเมินความเสี่ยงตลาดอีกครั้ง\n\n"
     else:
         content += "## 🏆 สัญญาณซื้อเด่นประจำวันนี้ (Top Buy Signals)\n\n"
-        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | CMF (Whale Flow) | ATR (14) | Stop Loss | Take Profit | สัดส่วนจัดสรร | ความมั่นใจ |\n"
+        content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | CMF (Whale Flow) | ATR (14) | Stop Loss | Take Profit | จัดสรร (% Port) | ความมั่นใจ |\n"
         content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
         for sig in signals:
             ticker = sig["ticker"]
             strat = sig["strategy_name"]
             price = sig["price"]
             pos = sig["position_size"]
+            pos_pct = sig.get("position_pct", 0.0)
             sl = sig["stop_loss"]
             tp = sig["take_profit"]
             conf = sig["confidence"]
@@ -64,7 +65,7 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
             else:
                 cmf_val = f"{cmf_raw:.2f} (Sell Flow)"
             
-            content += f"| **{ticker}** | {strat} | ${price:.2f} | {rsi_val} | {macd_val} | {cmf_val} | {atr_val} | ${sl:.2f} | ${tp:.2f} | ${pos:,.2f} | {conf*100:.0f}% |\n"
+            content += f"| **{ticker}** | {strat} | ${price:.2f} | {rsi_val} | {macd_val} | {cmf_val} | {atr_val} | ${sl:.2f} | ${tp:.2f} | {pos_pct:.1f}% | {conf*100:.0f}% |\n"
         
         content += "\n\n"
         content += "## 🔍 เจาะลึกรายบริษัทที่มีสัญญาณทางเทคนิคอล\n\n"

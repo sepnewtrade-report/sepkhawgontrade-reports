@@ -57,6 +57,7 @@ class RiskEngine:
                 sig_updated["stop_loss"] = float(round(stop_loss, 2))
                 sig_updated["take_profit"] = float(round(take_profit, 2))
                 sig_updated["position_size"] = float(round(total_capital_allocation, 2))
+                sig_updated["position_pct"] = float(round((total_capital_allocation / self.account_size) * 100, 1))
                 sig_updated["shares"] = float(shares_to_buy)
                 
                 processed_signals.append(sig_updated)
