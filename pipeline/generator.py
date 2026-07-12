@@ -30,11 +30,15 @@ def generate_1900_report(signals, scanned_data, date_str, output_path):
     content += f"# 🌌 Top Buy Signals & Pre-Market Scan: {date_str}\n\n"
     content += "รายงานคัดกรองหุ้นคุณภาพและสัญญาณทางเทคนิคอลสำหรับคืนนี้ เพื่อค้นหาโอกาสลงทุนที่มีสัดส่วน Risk/Reward คุ้มค่าที่สุดก่อนตลาดสหรัฐฯ เปิด\n\n"
     
+    # Sort signals by confidence in descending order
+    if signals:
+        signals = sorted(signals, key=lambda s: s.get("confidence", 0.0), reverse=True)
+    
     if not signals:
         content += "### 📭 ไม่พบสัญญาณซื้อที่ตรงเงื่อนไขกลยุทธ์ในรอบวันนี้\n"
         content += "บอทสแกนแล้วแต่ไม่มีหุ้นใดผ่านเกณฑ์ความปลอดภัยและเงื่อนไขเทคนิคัล แนะนำให้รอประเมินความเสี่ยงตลาดอีกครั้ง\n\n"
     else:
-        content += "## 🏆 สัญญาณซื้อเด่นประจำวันนี้ (Top Buy Signals)\n\n"
+        content += "## 🏆 วันนี้มีหุ้นตัวไหนน่าสนใจ\n\n"
         content += "| Ticker | กลยุทธ์ | ราคาเข้าซื้อ | RSI (14) | MACD Hist | CMF (Whale Flow) | ATR (14) | Stop Loss | Take Profit | จัดสรร (% Port) | ความมั่นใจ |\n"
         content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
         for sig in signals:
