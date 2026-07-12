@@ -1,0 +1,498 @@
+[
+  {
+    "ticker": "SUNE",
+    "name": "SUNation Energy Inc.",
+    "price": 3.8299999237060547,
+    "changes": {
+      "change_3d": 85.92233155784787,
+      "change_5d": 70.98213872321104,
+      "change_7d": 62.288139574283406,
+      "change_10d": 50.78740083570407
+    },
+    "max_surge_10d": 140.6417106163267,
+    "short_percent": 6.859999999999999,
+    "days_to_cover": 0.02,
+    "volume_latest": 75649800,
+    "volume_avg_10d": 9195233
+  },
+  {
+    "ticker": "BATL",
+    "name": "Battalion Oil Corporation",
+    "price": 1.5800000429153442,
+    "changes": {
+      "change_3d": -11.235951218486386,
+      "change_5d": 19.696968191801957,
+      "change_7d": 20.610695567125028,
+      "change_10d": 25.39682975191411
+    },
+    "max_surge_10d": 103.36134117055904,
+    "short_percent": 92.67999999999999,
+    "days_to_cover": 0.18,
+    "volume_latest": 10399400,
+    "volume_avg_10d": 20492633
+  },
+  {
+    "ticker": "AMC",
+    "name": "AMC Entertainment Holdings, Inc.",
+    "price": 1.8899999856948853,
+    "changes": {
+      "change_3d": 9.883718270750075,
+      "change_5d": 0.0,
+      "change_7d": -0.5263152941442201,
+      "change_10d": 0.0
+    },
+    "max_surge_10d": 43.124995483085584,
+    "short_percent": 5.96,
+    "days_to_cover": 1.0,
+    "volume_latest": 24199900,
+    "volume_avg_10d": 49923025
+  },
+  {
+    "ticker": "LUNR",
+    "name": "Intuitive Machines, Inc.",
+    "price": 16.139999389648438,
+    "changes": {
+      "change_3d": -9.579837284465603,
+      "change_5d": -17.568950702051396,
+      "change_7d": -24.544180223495967,
+      "change_10d": -13.689846357464047
+    },
+    "max_surge_10d": 41.33165761414889,
+    "short_percent": 25.95,
+    "days_to_cover": 2.46,
+    "volume_latest": 9335700,
+    "volume_avg_10d": 11116050
+  },
+  {
+    "ticker": "WULF",
+    "name": "TeraWulf Inc.",
+    "price": 21.969999313354492,
+    "changes": {
+      "change_3d": 8.547428665018971,
+      "change_5d": 3.7299291633421645,
+      "change_7d": -11.052637106315919,
+      "change_10d": -15.694551943230394
+    },
+    "max_surge_10d": 40.64955561474875,
+    "short_percent": 24.870001,
+    "days_to_cover": 3.72,
+    "volume_latest": 30866600,
+    "volume_avg_10d": 40275166
+  },
+  {
+    "ticker": "RIVN",
+    "name": "Rivian Automotive, Inc.",
+    "price": 17.479999542236328,
+    "changes": {
+      "change_3d": 6.003637264156454,
+      "change_5d": -6.17283773663333,
+      "change_7d": 0.7492746853506944,
+      "change_10d": 17.631224401689686
+    },
+    "max_surge_10d": 38.92710327328705,
+    "short_percent": 14.35,
+    "days_to_cover": 4.65,
+    "volume_latest": 40094700,
+    "volume_avg_10d": 53037758
+  },
+  {
+    "ticker": "APLD",
+    "name": "Applied Digital Corporation",
+    "price": 31.149999618530273,
+    "changes": {
+      "change_3d": 1.4327598410124562,
+      "change_5d": -5.777379538477036,
+      "change_7d": -16.487934971375964,
+      "change_10d": -23.931626280403812
+    },
+    "max_surge_10d": 34.98162751068383,
+    "short_percent": 26.97,
+    "days_to_cover": 3.41,
+    "volume_latest": 12337600,
+    "volume_avg_10d": 19524783
+  },
+  {
+    "ticker": "GRPN",
+    "name": "Groupon, Inc.",
+    "price": 26.049999237060547,
+    "changes": {
+      "change_3d": -2.979520048578073,
+      "change_5d": 1.8373702687892668,
+      "change_7d": 8.270988425976757,
+      "change_10d": 13.854895946542218
+    },
+    "max_surge_10d": 32.77988554279496,
+    "short_percent": 53.559999999999995,
+    "days_to_cover": 6.87,
+    "volume_latest": 960200,
+    "volume_avg_10d": 1989291
+  },
+  {
+    "ticker": "SPWR",
+    "name": "SunPower Inc.",
+    "price": 0.640999972820282,
+    "changes": {
+      "change_3d": 8.09443144857682,
+      "change_5d": 1.584784586824086,
+      "change_7d": -6.695779531174314,
+      "change_10d": 2.559995651245117
+    },
+    "max_surge_10d": 31.478260527035683,
+    "short_percent": 8.34,
+    "days_to_cover": 1.8,
+    "volume_latest": 2068100,
+    "volume_avg_10d": 4296975
+  },
+  {
+    "ticker": "DJT",
+    "name": "Trump Media & Technology Group Corp.",
+    "price": 8.539999961853027,
+    "changes": {
+      "change_3d": 5.043048482666647,
+      "change_5d": 0.0,
+      "change_7d": 10.335920082582776,
+      "change_10d": 20.963173244599297
+    },
+    "max_surge_10d": 28.66379130207922,
+    "short_percent": 9.43,
+    "days_to_cover": 2.92,
+    "volume_latest": 2121800,
+    "volume_avg_10d": 5861516
+  },
+  {
+    "ticker": "PLUG",
+    "name": "Plug Power Inc.",
+    "price": 2.2300000190734863,
+    "changes": {
+      "change_3d": -10.080645083760869,
+      "change_5d": -15.530305664346573,
+      "change_7d": -17.712177576266672,
+      "change_10d": -13.229568988365822
+    },
+    "max_surge_10d": 28.18181236913394,
+    "short_percent": 27.52,
+    "days_to_cover": 5.87,
+    "volume_latest": 53631700,
+    "volume_avg_10d": 54560266
+  },
+  {
+    "ticker": "MSTR",
+    "name": "Strategy Inc",
+    "price": 94.63999938964844,
+    "changes": {
+      "change_3d": -2.7937563718687235,
+      "change_5d": -6.083157147589079,
+      "change_7d": 8.86920402324398,
+      "change_10d": 10.910579349367252
+    },
+    "max_surge_10d": 28.0772544996736,
+    "short_percent": 12.67,
+    "days_to_cover": 1.54,
+    "volume_latest": 16204000,
+    "volume_avg_10d": 31197558
+  },
+  {
+    "ticker": "RUN",
+    "name": "Sunrun Inc.",
+    "price": 12.470000267028809,
+    "changes": {
+      "change_3d": 2.2131185408595124,
+      "change_5d": -2.1193054076927833,
+      "change_7d": -6.80119461605949,
+      "change_10d": -8.308824137832863
+    },
+    "max_surge_10d": 27.4988914754227,
+    "short_percent": 32.75,
+    "days_to_cover": 5.72,
+    "volume_latest": 7232000,
+    "volume_avg_10d": 15507450
+  },
+  {
+    "ticker": "SPCE",
+    "name": "Virgin Galactic Holdings, Inc.",
+    "price": 2.569999933242798,
+    "changes": {
+      "change_3d": 0.0,
+      "change_5d": -4.81481896833457,
+      "change_7d": -11.072669897774531,
+      "change_10d": 2.799997329711914
+    },
+    "max_surge_10d": 27.125508847501013,
+    "short_percent": 32.799998,
+    "days_to_cover": 0.71,
+    "volume_latest": 8369500,
+    "volume_avg_10d": 16193675
+  },
+  {
+    "ticker": "BYND",
+    "name": "Beyond Meat, Inc.",
+    "price": 0.656000018119812,
+    "changes": {
+      "change_3d": -7.605628458381224,
+      "change_5d": -7.605628458381224,
+      "change_7d": -12.533330917358398,
+      "change_10d": -4.093566741863792
+    },
+    "max_surge_10d": 24.612998868249935,
+    "short_percent": 24.490000000000002,
+    "days_to_cover": 3.47,
+    "volume_latest": 36347900,
+    "volume_avg_10d": 35916250
+  },
+  {
+    "ticker": "HIMS",
+    "name": "Hims & Hers Health, Inc.",
+    "price": 34.380001068115234,
+    "changes": {
+      "change_3d": -4.94884487543858,
+      "change_5d": -6.576082117165319,
+      "change_7d": -0.8364497148714446,
+      "change_10d": 5.105478539849068
+    },
+    "max_surge_10d": 23.59550588929747,
+    "short_percent": 31.819999999999997,
+    "days_to_cover": 3.27,
+    "volume_latest": 11829200,
+    "volume_avg_10d": 15067475
+  },
+  {
+    "ticker": "BLNK",
+    "name": "Blink Charging Co.",
+    "price": 0.5699999928474426,
+    "changes": {
+      "change_3d": -3.389827426361236,
+      "change_5d": -9.235672961094114,
+      "change_7d": -10.937499126885067,
+      "change_10d": -5.31561550607908
+    },
+    "max_surge_10d": 21.886126488061304,
+    "short_percent": 11.68,
+    "days_to_cover": 6.56,
+    "volume_latest": 729900,
+    "volume_avg_10d": 1132633
+  },
+  {
+    "ticker": "CHWY",
+    "name": "Chewy, Inc.",
+    "price": 20.8799991607666,
+    "changes": {
+      "change_3d": 0.7235871772435729,
+      "change_5d": 0.14387903476268604,
+      "change_7d": 6.259539776664516,
+      "change_10d": 15.104740150552267
+    },
+    "max_surge_10d": 19.702806321816215,
+    "short_percent": 10.780000000000001,
+    "days_to_cover": 2.22,
+    "volume_latest": 5944100,
+    "volume_avg_10d": 10096633
+  },
+  {
+    "ticker": "UPST",
+    "name": "Upstart Holdings, Inc.",
+    "price": 32.7400016784668,
+    "changes": {
+      "change_3d": -0.9679361207853568,
+      "change_5d": -5.865431778118422,
+      "change_7d": -7.592431847413833,
+      "change_10d": -0.6976024680639157
+    },
+    "max_surge_10d": 19.070673760600357,
+    "short_percent": 30.959999999999997,
+    "days_to_cover": 5.47,
+    "volume_latest": 2688800,
+    "volume_avg_10d": 4379008
+  },
+  {
+    "ticker": "NVAX",
+    "name": "Novavax, Inc.",
+    "price": 9.329999923706055,
+    "changes": {
+      "change_3d": -1.3742083923541129,
+      "change_5d": -4.209444117523228,
+      "change_7d": -0.9554156248297915,
+      "change_10d": 8.99532086849868
+    },
+    "max_surge_10d": 18.640096158995515,
+    "short_percent": 28.04,
+    "days_to_cover": 9.99,
+    "volume_latest": 5095800,
+    "volume_avg_10d": 4399700
+  },
+  {
+    "ticker": "TEM",
+    "name": "Tempus AI, Inc.",
+    "price": 58.22999954223633,
+    "changes": {
+      "change_3d": -3.0953579724220686,
+      "change_5d": -3.3847700348981187,
+      "change_7d": 0.5178650707408046,
+      "change_10d": 6.123566021064888
+    },
+    "max_surge_10d": 18.24995666741121,
+    "short_percent": 33.94,
+    "days_to_cover": 4.52,
+    "volume_latest": 4377700,
+    "volume_avg_10d": 6371433
+  },
+  {
+    "ticker": "SOUN",
+    "name": "SoundHound AI, Inc.",
+    "price": 6.639999866485596,
+    "changes": {
+      "change_3d": 0.0,
+      "change_5d": 1.3740408111443903,
+      "change_7d": 2.627512856363009,
+      "change_10d": 6.924312813159538
+    },
+    "max_surge_10d": 16.996703292639296,
+    "short_percent": 41.07,
+    "days_to_cover": 6.15,
+    "volume_latest": 23730900,
+    "volume_avg_10d": 27122716
+  },
+  {
+    "ticker": "LFVN",
+    "name": "LifeVantage Corporation",
+    "price": 6.239999771118164,
+    "changes": {
+      "change_3d": 0.0,
+      "change_5d": 0.3215431125584883,
+      "change_7d": 0.0,
+      "change_10d": -6.16541832134536
+    },
+    "max_surge_10d": 16.861440191562767,
+    "short_percent": 18.81,
+    "days_to_cover": 2.08,
+    "volume_latest": 117500,
+    "volume_avg_10d": 303508
+  },
+  {
+    "ticker": "EVGO",
+    "name": "EVgo, Inc.",
+    "price": 1.809999942779541,
+    "changes": {
+      "change_3d": -0.549456559579393,
+      "change_5d": -3.2085594564617397,
+      "change_7d": -5.235603434001524,
+      "change_10d": 2.2598848748059988
+    },
+    "max_surge_10d": 15.78947221656772,
+    "short_percent": 34.12,
+    "days_to_cover": 10.13,
+    "volume_latest": 2248600,
+    "volume_avg_10d": 3641516
+  },
+  {
+    "ticker": "LYFT",
+    "name": "Lyft, Inc.",
+    "price": 15.609999656677246,
+    "changes": {
+      "change_3d": 1.1010367934849714,
+      "change_5d": 1.5614819317185316,
+      "change_7d": 6.8446271286732525,
+      "change_10d": 10.866475435096975
+    },
+    "max_surge_10d": 15.57143075125558,
+    "short_percent": 24.32,
+    "days_to_cover": 6.35,
+    "volume_latest": 8818600,
+    "volume_avg_10d": 12364850
+  },
+  {
+    "ticker": "CVNA",
+    "name": "Carvana Co.",
+    "price": 65.83000183105469,
+    "changes": {
+      "change_3d": -2.459617847470662,
+      "change_5d": -4.037896070961823,
+      "change_7d": 0.015196196105809573,
+      "change_10d": -0.5589050366222479
+    },
+    "max_surge_10d": 15.262736740981616,
+    "short_percent": 13.8,
+    "days_to_cover": 6.26,
+    "volume_latest": 4761500,
+    "volume_avg_10d": 12229041
+  },
+  {
+    "ticker": "FLWS",
+    "name": "1-800-FLOWERS.COM, Inc.",
+    "price": 3.7799999713897705,
+    "changes": {
+      "change_3d": 0.2652517377678936,
+      "change_5d": -1.8181801292662219,
+      "change_7d": 8.620688237701678,
+      "change_10d": 6.478873863742369
+    },
+    "max_surge_10d": 14.619882714792826,
+    "short_percent": 38.11,
+    "days_to_cover": 15.63,
+    "volume_latest": 112200,
+    "volume_avg_10d": 519116
+  },
+  {
+    "ticker": "SIRI",
+    "name": "Sirius XM Holdings Inc.",
+    "price": 30.420000076293945,
+    "changes": {
+      "change_3d": -0.9443146103033847,
+      "change_5d": -0.29498574864871135,
+      "change_7d": 2.9790085764826117,
+      "change_10d": 9.582131936168407
+    },
+    "max_surge_10d": 13.388672372422395,
+    "short_percent": 18.110001,
+    "days_to_cover": 5.62,
+    "volume_latest": 3216700,
+    "volume_avg_10d": 4534958
+  },
+  {
+    "ticker": "RH",
+    "name": "RH",
+    "price": 165.35000610351562,
+    "changes": {
+      "change_3d": 1.0079469676441892,
+      "change_5d": -2.206053753930099,
+      "change_7d": 0.376379768140133,
+      "change_10d": 3.395452724326481
+    },
+    "max_surge_10d": 11.9354392169737,
+    "short_percent": 61.8,
+    "days_to_cover": 5.36,
+    "volume_latest": 513400,
+    "volume_avg_10d": 980083
+  },
+  {
+    "ticker": "GME",
+    "name": "GameStop Corp.",
+    "price": 21.68000030517578,
+    "changes": {
+      "change_3d": -2.3423443238423554,
+      "change_5d": -4.995615271226316,
+      "change_7d": -1.8115924814873587,
+      "change_10d": 3.1889579676106603
+    },
+    "max_surge_10d": 10.362941838347016,
+    "short_percent": 13.639999999999999,
+    "days_to_cover": 9.22,
+    "volume_latest": 1826900,
+    "volume_avg_10d": 3943283
+  },
+  {
+    "ticker": "LAZR",
+    "name": "",
+    "price": 42.634700775146484,
+    "changes": {
+      "change_3d": 0.0,
+      "change_5d": 0.0,
+      "change_7d": 0.0,
+      "change_10d": 0.0
+    },
+    "max_surge_10d": 3.2796181037776004,
+    "short_percent": 0,
+    "days_to_cover": 0,
+    "volume_latest": 44563,
+    "volume_avg_10d": 44563
+  }
+]
