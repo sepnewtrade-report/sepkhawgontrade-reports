@@ -127,7 +127,7 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 1. Reuters: US-Iran strait of hormuz geopolitical military tension reports (13 July 2026) https://www.reuters.com
-2. U.S. Bureau of Labor Statistics: Employment Situation Summary for June 2026 (10 July 2026) https://www.bls.gov
+2. U.S. Bureau of Labor Statistics: Employment Situation Summary for June 2026 (2 July 2026) https://www.bls.gov
 3. Bloomberg: Crude Oil prices Brent and WTI futures spikes and Phillips 66 transaction flows (10 July 2026) https://www.bloomberg.com
 4. Nasdaq: SK Hynix ADR IPO listing debut and closing prices (10 July 2026) https://www.nasdaq.com
 5. Moomoo Options: Institutional call/put sweeps volume for IREN, META, RKLB, SMCI, WOLF, ASTS (10 July 2026) https://www.moomoo.com
