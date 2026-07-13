@@ -27,8 +27,10 @@ function cleanScriptContent(content, dateStr, type) {
   // 5. Replace section headers like "## 1️⃣ 🔥 OPENING (Hook)" with cleaner versions
   cleaned = cleaned.replace(/##\s+\d+️⃣\s*(🔥|🌍|📊|🔍|💡|🏁)\s*(.*)/g, '## $2');
 
-  // Prepend Logo Branding
-  cleaned = `<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>\n\n` + cleaned;
+  // Prepend Logo Branding (only if not already present)
+  if (!cleaned.trim().startsWith('<p align="center"><img src="Logo master.png"')) {
+    cleaned = `<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>\n\n` + cleaned;
+  }
 
   return cleaned;
 }
