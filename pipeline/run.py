@@ -73,7 +73,7 @@ def run_1900(date_str):
             )
             
         # Stage 6: Report Generator
-        output_report_name = f"market_summary_{date_str.replace('-', '_')}.md"
+        output_report_name = f"bot_trade_{date_str.replace('-', '_')}.md"
         output_report_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), output_report_name)
         generator.generate_1900_report(processed_signals, scanned_data, date_str, output_report_path)
         
@@ -121,7 +121,7 @@ def run_0530(date_str):
             }
             db.save_daily_stats(date_str, 0, 0.0, 0.0, 0.0)
             
-            output_report_name = f"global_market_recap_{date_str.replace('-', '_')}.md"
+            output_report_name = f"bot_stats_{date_str.replace('-', '_')}.md"
             output_report_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), output_report_name)
             generator.generate_0530_report([], stats, date_str, output_report_path)
             
@@ -179,7 +179,7 @@ def run_0530(date_str):
         db.save_daily_stats(date_str, total, win_rate, avg_return, accuracy)
         
         # Generate report
-        output_report_name = f"global_market_recap_{date_str.replace('-', '_')}.md"
+        output_report_name = f"bot_stats_{date_str.replace('-', '_')}.md"
         output_report_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), output_report_name)
         generator.generate_0530_report(closed_signals, stats, date_str, output_report_path)
         

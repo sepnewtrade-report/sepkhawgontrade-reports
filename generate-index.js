@@ -27,6 +27,14 @@ function getCategory(filename, title) {
   const lowercase = filename.toLowerCase();
   const titleLower = (title || "").toLowerCase();
 
+  if (lowercase.startsWith('bot_trade_')) {
+    return { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' };
+  }
+
+  if (lowercase.startsWith('bot_stats_')) {
+    return { name: 'Bot Trade Stats', thai: 'Bot Trade Stats' };
+  }
+
   if (lowercase.startsWith('market_summary')) {
     if (titleLower.includes('top buy') || titleLower.includes('bot trade') || titleLower.includes('สัญญาณซื้อ') || titleLower.includes('บอทเทรด')) {
       return { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' };
