@@ -38,6 +38,8 @@ const translations = {
         metaSize: "ขนาด {size} KB",
         errorLoading: "ไม่สามารถโหลดคลังรายงานได้",
         errorLoadingSub: "กรุณาตรวจสอบว่าคุณได้รันสคริปต์ {code} เพื่อสร้างฐานข้อมูลแล้ว",
+        localCorsError: "เบราว์เซอร์บล็อกการทำงานแบบ Offline (CORS Block)",
+        localCorsErrorSub: "เนื่องจากข้อจำกัดความปลอดภัยของเบราว์เซอร์ คุณไม่สามารถเปิดไฟล์ index.html ตรงๆ ได้ (โปรโตคอล file:// บล็อกการโหลดข้อมูล)<br><br><b>วิธีแก้ไข:</b><br>1. ใช้งานผ่านเว็บเซิร์ฟเวอร์จริง (แนะนำ): <a href='https://sepnewtrade-report.github.io/sepkhawgontrade-reports/' target='_blank' style='color:var(--accent-primary);text-decoration:underline;'>คลิกเปิดหน้าเว็บที่นี่</a><br>2. หรือรันเซิร์ฟเวอร์จำลองในคอมพิวเตอร์ของคุณ โดยพิมพ์คำสั่ง <code>python3 -m http.server 8000</code> ใน Terminal จากนั้นเปิดเบราว์เซอร์ไปที่ <code>http://localhost:8000</code>",
         noResults: "ไม่พบผลการค้นหา",
         noResultsSub: "กรุณาลองป้อนคำค้นหาอื่นหรือเลือกหมวดหมู่ที่ต่างออกไป",
         loadingSpinner: "กำลังดึงข้อมูลบทวิเคราะห์...",
@@ -116,6 +118,8 @@ const translations = {
         metaSize: "Size {size} KB",
         errorLoading: "Failed to Load Reports Hub",
         errorLoadingSub: "Please check if you have run {code} to generate the database.",
+        localCorsError: "Browser Blocked Offline Mode (CORS Block)",
+        localCorsErrorSub: "Due to browser security restrictions, you cannot open index.html directly via file:// protocol.<br><br><b>How to fix:</b><br>1. Access the deployed web version (Recommended): <a href='https://sepnewtrade-report.github.io/sepkhawgontrade-reports/' target='_blank' style='color:var(--accent-primary);text-decoration:underline;'>Open Live Web Version</a><br>2. Run a local development server by executing <code>python3 -m http.server 8000</code> and opening <code>http://localhost:8000</code> in your browser.",
         noResults: "No Results Found",
         noResultsSub: "Please try a different search query or select another category.",
         loadingSpinner: "Fetching analysis reports...",
@@ -509,6 +513,19 @@ function setupEventListeners() {
 
 // Fetch Reports Database
 async function fetchReportsIndex() {
+    if (window.location.protocol === 'file:') {
+        console.error('CORS blocked local file loading');
+        const t = translations[appState.lang];
+        elements.reportsGrid.innerHTML = `
+            <div class="error-state">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>${t.localCorsError}</h3>
+                <p>${t.localCorsErrorSub}</p>
+            </div>
+        `;
+        return;
+    }
+    
     try {
         const response = await fetch(`reports-index.json?v=${Date.now()}`);
         if (!response.ok) throw new Error('Failed to load reports database');
@@ -868,7 +885,7 @@ async function renderReportContent(reportMeta) {
 
     // Load and Compile Markdown file content
     try {
-        const response = await fetch(`${reportMeta.path}?v=${reportMeta.timestamp || Date.now()}`);
+        const response = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`);
         if (!response.ok) throw new Error('File not found');
         
         const markdown = await response.text();
@@ -919,6 +936,12 @@ async function loadMermaid() {
 
 // Convert Markdown to HTML & Format Custom Elements (Alerts)
 async function displayParsedHTML(markdown) {
+    if (typeof marked === 'undefined') {
+        throw new Error('Markdown parser (marked.js) failed to load. Please check your internet connection.');
+    }
+    if (typeof DOMPurify === 'undefined') {
+        throw new Error('HTML sanitizer (DOMPurify) failed to load. Please check your internet connection.');
+    }
     // 1. Compile Markdown using marked
     let rawHtml = marked.parse(markdown);
     
@@ -1167,7 +1190,7 @@ async function loadFeaturedReport(report) {
     };
     
     try {
-        const response = await fetch(`${report.path}?v=${report.timestamp || Date.now()}`);
+        const response = await fetch(`${encodeURI(report.path)}?v=${report.timestamp || Date.now()}`);
         if (!response.ok) throw new Error('File not found');
         const markdown = await response.text();
         
