@@ -1,15 +1,15 @@
 {
-  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-07-15. มีการแก้ไขเพื่อขจัดความซ้ำซ้อนของหุ้น: Removed ticker PLTR due to overlap with active Whale Flow., Removed ticker META due to overlap with active Whale Flow.",
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-07-15. พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation - วาฬขยับ ตลาดสะเทือน & Options Edge): Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for META (active in Whale Flow).",
   "audit_log": [
     {
       "item": "Duplication Check (Whale Flow vs Options Screen)",
-      "status": "warning",
-      "details": "Duplication check passed with corrections: Removed ticker PLTR due to overlap with active Whale Flow., Removed ticker META due to overlap with active Whale Flow."
+      "status": "verified_ok",
+      "details": "Confluence check passed: Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for META (active in Whale Flow). Tickers tagged for Double Confirmation."
     },
     {
       "item": "Ticker Data & Price Verification",
-      "status": "verified_ok",
-      "details": "AAPL Verified. Live Price: $328.20; MSFT Verified. Live Price: $397.24; GOOGL Verified. Live Price: $372.93; AMZN Verified. Live Price: $255.48; NVDA Verified. Live Price: $206.88; AMD Verified. Live Price: $513.97; TSM Verified. Live Price: $411.66; AVGO Verified. Live Price: $387.66; SMCI Verified. Live Price: $26.34; MRVL Verified. Live Price: $201.95; LLY Verified. Live Price: $1139.42; TSLA Verified. Live Price: $392.21; NFLX Verified. Live Price: $74.21; QCOM Verified. Live Price: $175.19"
+      "status": "warning",
+      "details": "AAPL Verified. Live Price: $327.94; MSFT Verified. Live Price: $396.46; GOOGL Verified. Live Price: $373.04; AMZN Error during price validation: list index out of range; NVDA Verified. Live Price: $206.31; AMD Verified. Live Price: $511.55; PLTR Verified. Live Price: $133.44; TSM Verified. Live Price: $411.12; META Verified. Live Price: $680.64; AVGO Verified. Live Price: $387.27; SMCI Verified. Live Price: $26.23; MRVL Verified. Live Price: $201.74; LLY Verified. Live Price: $1142.03; TSLA Verified. Live Price: $391.19; NFLX Verified. Live Price: $74.32; QCOM Verified. Live Price: $175.44"
     },
     {
       "item": "Fact-checking & Information Sourcing",

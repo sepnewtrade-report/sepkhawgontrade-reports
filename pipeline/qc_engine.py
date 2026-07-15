@@ -17,24 +17,28 @@ def run_qc_audit(date_str, options_signals, output_md_path):
     clean_signals = []
     
     # 1. Duplication Check (Options Screen vs Whale Flow & Other Strategies)
-    # Target 0% overlap with Whale Flow signals triggered today
+    # Check for tickers appearing in both lists to mark as Confluence (Double Confirmation)
     whale_tickers = set(db.get_signals_by_date(date_str))
-    print(f"Checking for duplication against active Whale Flow tickers today: {whale_tickers}")
+    print(f"Checking for confluence match against active Whale Flow tickers today: {whale_tickers}")
     
     dup_details = []
     for sig in options_signals:
         ticker = sig["ticker"]
         if ticker in whale_tickers:
-            dup_details.append(f"Removed ticker {ticker} due to overlap with active Whale Flow.")
+            sig["confluence_match"] = True
+            sig["overlap_strategy"] = "Whale Flow"
+            dup_details.append(f"Found Confluence Match for {ticker} (active in Whale Flow).")
         else:
-            clean_signals.append(sig)
+            sig["confluence_match"] = False
+            
+        clean_signals.append(sig)
             
     if dup_details:
-        status_dup = "warning"
-        details_dup = f"Duplication check passed with corrections: {', '.join(dup_details)}"
+        status_dup = "verified_ok"
+        details_dup = f"Confluence check passed: {', '.join(dup_details)} Tickers tagged for Double Confirmation."
     else:
         status_dup = "verified_ok"
-        details_dup = "Duplication check passed. 0% overlap with active Whale Flow."
+        details_dup = "Confluence check passed. No overlap with active Whale Flow."
         
     audit_log.append({
         "item": "Duplication Check (Whale Flow vs Options Screen)",
@@ -90,7 +94,7 @@ def run_qc_audit(date_str, options_signals, output_md_path):
     # Calculate overall summary
     overall_summary = f"ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ {date_str}."
     if dup_details:
-        overall_summary += f" มีการแก้ไขเพื่อขจัดความซ้ำซ้อนของหุ้น: {', '.join(dup_details)}"
+        overall_summary += f" พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation - วาฬขยับ ตลาดสะเทือน & Options Edge): {', '.join(dup_details)}"
         
     qc_report = {
         "overall_summary": overall_summary,

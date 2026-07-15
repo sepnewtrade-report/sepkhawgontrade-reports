@@ -170,11 +170,14 @@ def generate_options_report(signals, qc_report, date_str, output_path):
         
         candidates_to_display = []
         for sig in signals:
-            # Combine short and medium term candidates
+            is_confluence = sig.get("confluence_match", False)
+            ticker_display = f"**{sig['ticker']}**"
+            if is_confluence:
+                ticker_display += " (🔥 Confluence)"
+                
             all_cands = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
             for cand in all_cands:
                 candidates_to_display.append(cand)
-                ticker = cand["ticker"]
                 o_type = cand["type"]
                 strike = cand["strike"]
                 exp = cand["expiration"]
@@ -186,7 +189,7 @@ def generate_options_report(signals, qc_report, date_str, output_path):
                 theta = cand["theta"]
                 prob_itm = cand["prob_itm"]
                 
-                content += f"| **{ticker}** | {o_type} | ${strike:.2f} | {exp} | {dte} วัน | ${premium:.2f} | {iv:.1%} | {delta:+.2f} | {gamma:.4f} | ${theta:.4f}/วัน | {prob_itm:.1%} |\n"
+                content += f"| {ticker_display} | {o_type} | ${strike:.2f} | {exp} | {dte} วัน | ${premium:.2f} | {iv:.1%} | {delta:+.2f} | {gamma:.4f} | ${theta:.4f}/วัน | {prob_itm:.1%} |\n"
         
         content += "\n\n"
         content += "## 2️⃣ ตรวจสอบพื้นฐานและปัจจัยเสี่ยงหุ้นแม่ (Stock Validation)\n"
@@ -196,6 +199,7 @@ def generate_options_report(signals, qc_report, date_str, output_path):
         for sig in signals:
             ticker = sig["ticker"]
             hv_30 = sig["hv_30"]
+            is_confluence = sig.get("confluence_match", False)
             
             # Find representative IV from candidates
             cands = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
@@ -204,7 +208,11 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             # Simple assessment of IV vs HV
             iv_assessment = "พรีเมียมค่อนข้างแพง (IV > HV 30 วัน)" if avg_iv > hv_30 else "พรีเมียมสมเหตุสมผล (IV <= HV 30 วัน)"
             
-            content += f"### 📌 {ticker} (HV 30 วัน: {hv_30:.1%})\n"
+            title_suffix = " - 🔥 Double Confirmation (วาฬขยับ ตลาดสะเทือน & Options Edge)" if is_confluence else ""
+            
+            content += f"### 📌 {ticker} (HV 30 วัน: {hv_30:.1%}){title_suffix}\n"
+            if is_confluence:
+                content += f"> **💡 สัญญาณความสอดคล้อง (Confluence Event):** หุ้น {ticker} ติดสัญญาณซื้อเด่นในรายการ **\"วาฬขยับ ตลาดสะเทือน\"** ประจำวันนี้ด้วย ซึ่งชี้ว่าหุ้นแม่มีแรงซื้อสะสมจากสถาบันการเงินหนุนหลังร่วมกับการได้เปรียบทางคณิตศาสตร์ออปชัน\n\n"
             content += f"- **การประเมินมูลค่าพรีเมียม (Volatility Valuation):** {iv_assessment} (ค่าเฉลี่ย IV สัญญา: {avg_iv:.1%})\n"
             content += f"- **กรอบแนวรับ-แนวต้านเชิงสถิติ:** คำนวณจาก 1-Standard Deviation Standard Move\n"
             content += f"- **สถิติและแนวโน้ม:** สัญญาณคัดกรองไม่พบเหตุการณ์ประกาศผลประกอบการ (Earnings) หรือปัจจัยเสี่ยงใหญ่ในปฏิทินข่าวสัปดาห์นี้ ทำให้หลีกเลี่ยงปัจจัย IV Crush ได้\n\n"
