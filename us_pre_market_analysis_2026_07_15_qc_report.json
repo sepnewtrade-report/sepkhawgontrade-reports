@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) 100% สำหรับไฟล์ us_pre_market_analysis_2026_07_15.md โดยทำการสับเปลี่ยนหุ้นที่มีความซ้ำซ้อนกับรายงาน US Viral Stock Analysis ออกอย่างสมบูรณ์แบบ และแทนที่ด้วยหุ้นกลุ่ม Pre-Market Movers ชุดใหม่ที่มีปัจจัยเร่งเฉพาะตัวตรงกับวันที่ 15 กรกฎาคม 2026",
+  "audit_log": [
+    {
+      "item": "Duplication Check (Viral vs Pre-Market)",
+      "status": "verified_ok",
+      "details": "ตรวจสอบความซ้ำซ้อนของรายชื่อหุ้นวิเคราะห์ระหว่างรายงานทราฟฟิก โซเชียล (Viral) และรายงานพรีมาร์เก็ต (Pre-Market) พบว่าไม่มีความซ้ำซ้อนกันเลย (0% Overlap) หลังจากเปลี่ยนหุ้นเป็น INTC, SOFI, ONDS, NOK, OPEN, PATH, NU, MARA, AAL, CPRX"
+    },
+    {
+      "item": "Ticker Data & Price Verification",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคาดัชนีฟิวเจอร์สและราคาหุ้นรายตัวในช่วง Pre-Market เปรียบเทียบข้อมูลสดจาก Yahoo Finance/yfinance (เช่น INTC +6.66%, ONDS +7.04%, SOFI +3.53%) พบว่าตัวเลขถูกต้องและมีความเที่ยงตรงสูง ณ วันที่ 15 กรกฎาคม 2026"
+    },
+    {
+      "item": "Fact-checking & Information Sourcing",
+      "status": "verified_ok",
+      "details": "ตรวจสอบข้อมูลข่าวสารและแหล่งอ้างอิงของแต่ละบริษัท (เช่น ข่าวอัตรา Yield 18A ของ Intel, ข่าวการควบรวม DZYNE ของ Ondas, และสิทธิ์ธนาคารของ Nu Mexico) และระบุแหล่งที่มาพร้อมลิงก์อ้างอิงชัดเจนที่ท้ายรายงาน"
+    },
+    {
+      "item": "Branding & Format Compliance",
+      "status": "verified_ok",
+      "details": "ตรวจสอบการแทรกโลโก้ช่อง (Logo Master) และการจัดรูปแบบเนื้อหาทางการเงินระดับมืออาชีพ ไม่มีสัญลักษณ์ที่เป็นบทพูด (speech tags) หรือลำดับสคริปต์กล้องปะปนในเนื้อหารายงาน"
+    },
+    {
+      "item": "Website Index Automation",
+      "status": "verified_ok",
+      "details": "รันคำสั่ง node generate-index.js และเชื่อมต่อ Git เพื่อส่งข้อมูลขึ้นเซิร์ฟเวอร์หลักเรียบร้อย ดัชนีเว็บไซต์ได้รับการอัปเดตและซิงค์อย่างเป็นทางการ"
+    }
+  ]
+}
