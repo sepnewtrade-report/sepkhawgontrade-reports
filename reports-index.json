@@ -1,5 +1,45 @@
 [
   {
+    "title": "Small Cap Equity Research & Market Intelligence Report",
+    "filename": "small_cap_research_2026_07_15.md",
+    "path": "small_cap_research_2026_07_15.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-07-15",
+    "timestamp": 1784116915183.405,
+    "size": 72100
+  },
+  {
+    "title": "US Pre-Market Stock Catalyst & Intelligence Report",
+    "filename": "us_pre_market_analysis_2026_07_15.md",
+    "path": "us_pre_market_analysis_2026_07_15.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-07-15",
+    "timestamp": 1784116879743.0125,
+    "size": 66758
+  },
+  {
+    "title": "Top Buy Signals & Pre-Market Scan: 2026-07-15",
+    "filename": "bot_trade_2026_07_15.md",
+    "path": "bot_trade_2026_07_15.md",
+    "category": "Bot Trade Todays",
+    "categoryThai": "Bot Trade Todays",
+    "date": "2026-07-15",
+    "timestamp": 1784116860668.663,
+    "size": 2497
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-07-15",
+    "filename": "bot_stats_2026_07_15.md",
+    "path": "bot_stats_2026_07_15.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-07-15",
+    "timestamp": 1784116859113.7378,
+    "size": 1539
+  },
+  {
     "title": "\udc0b วาฬขยับ ตลาดสะเทือน — 2026-07-15",
     "filename": "whale_flow_analysis_2026_07_15.md",
     "path": "whale_flow_analysis_2026_07_15.md",
