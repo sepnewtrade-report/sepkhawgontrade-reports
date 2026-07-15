@@ -1,0 +1,122 @@
+{
+  "ASML": {
+    "name": "ASML Holding N.V.",
+    "business": "ASML Holding N.V. provides lithography solutions for the development, production, marketing, sales, upgrading, and servicing of advanced semiconductor equipment systems. The company offers lithography, metrology, and inspection systems. It also provides extreme ultraviolet lithography systems; and deep ultraviolet lithography systems comprising immersion and dry lithography systems solutions to manufacture various range of semiconductor nodes and technologies. In addition, the company offers metrology and inspection systems, including YieldStar optical metrology systems, a diffraction-based wafer metrology platform to assess the quality of patterns on the wafers; and HMI electron beam solutions to locate and analyze individual chip defects. Further, it provides computational lithography solutions, and lithography systems and control software solutions; and refurbishes and upgrades lithography systems, as well as offers customer support and related services. Additionally, the company offers hardware, software, and services to chipmakers to produce the patterns of integrated circuits. It operates in Japan, South Korea, Singapore, Taiwan, China, rest of Asia, the Netherlands, rest of Europe, the Middle East, Africa, and the United States. The company was formerly known as ASM Lithography Holding N.V. and changed its name to ASML Holding N.V. in 2001. ASML Holding N.V. was founded in 1984 and is headquartered in Veldhoven, the Netherlands.",
+    "sector": "Technology",
+    "industry": "Semiconductor Equipment & Materials",
+    "prevClose": 1726.04,
+    "preMarketPrice": 1833.63,
+    "preMarketChangePct": 6.23334337558806,
+    "volume": 2528275,
+    "avgVolume": 1896667,
+    "marketCap": 684363022336
+  },
+  "IBM": {
+    "name": "International Business Machines Corporation",
+    "business": "International Business Machines Corporation, together with its subsidiaries, provides integrated solutions and services in the Americas, Europe, the Middle East, Africa, and the Asia Pacific. It operates through Software, Consulting, Infrastructure, and Financing segments. The Software segment offers hybrid cloud and AI platforms that allow clients to realize their digital and AI transformations across the applications, data, and environments in which they operate. The Consulting segment delivers strategy and technology services and intelligent operations, providing business transformation, technology implementation, managed services, application modernization, and AI-powered solutions. The Infrastructure segment provides on-premises and cloud-based server, and storage solutions, as well as life-cycle services for hybrid cloud infrastructure deployment. The Financing segment offers client and commercial financing, and facilitates IBM clients' acquisition of hardware, software, and services. It operates a data streaming platform. The company has strategic partnerships with various companies, including hyperscalers, service providers, global system integrators, and software and hardware vendors that include Adobe, Amazon Web Services, Microsoft, Oracle, Salesforce, Samsung Electronics and SAP, and others. It also has a strategic collaboration with Arm Holdings plc for the development of new dual-architecture hardware that helps enterprises run future AI and data intensive workloads; strategic partnership with three.ws to advance ai-powered 3d agent technology; and collaboration with Lightwell to help strengthen open source software supply chain. The company was formerly known as Computing-Tabulating-Recording Co. and changed its name to International Business Machines Corporation in 1924. International Business Machines Corporation was incorporated in 1911 and is headquartered in Armonk, New York.",
+    "sector": "Technology",
+    "industry": "Information Technology Services",
+    "prevClose": 290.23,
+    "preMarketPrice": 219.7864,
+    "preMarketChangePct": -24.271646625090455,
+    "volume": 67422893,
+    "avgVolume": 10152796,
+    "marketCap": 204020908032
+  },
+  "BLK": {
+    "name": "BlackRock, Inc.",
+    "business": "BlackRock, Inc. is a publicly owned investment manager. The firm primarily provides its services to institutional, intermediary, and individual investors including corporate, public, union, and industry pension plans, insurance companies, third-party mutual funds, endowments, public institutions, governments, foundations, charities, sovereign wealth funds, corporations, official institutions, and banks. It also provides global risk management and advisory services. The firm manages separate client-focused equity, fixed income, and balanced portfolios. It also launches and manages open-end and closed-end mutual funds, offshore funds, unit trusts, and alternative investment vehicles including structured funds. The firm launches equity, fixed income, balanced, and real estate mutual funds. It also launches equity, fixed income, balanced, currency, commodity, and multi-asset exchange traded funds. The firm also launches and manages hedge funds. It invests in the public equity, fixed income, real estate, currency, commodity, and alternative markets across the globe. The firm primarily invests in growth and value stocks of small-cap, mid-cap, SMID-cap, large-cap, and multi-cap companies. It also invests in dividend-paying equity securities. The firm invests in investment grade municipal securities, government securities including securities issued or guaranteed by a government or a government agency or instrumentality, corporate bonds, and asset-backed and mortgage-backed securities. It employs fundamental and quantitative analysis with a focus on bottom-up and top-down approach to make its investments. The firm employs liquidity, asset allocation, balanced, real estate, and alternative strategies to make its investments. In real estate sector, it seeks to invest in Poland and Germany. The firm benchmarks the performance of its portfolios against various S&P, Russell, Barclays, MSCI, Citigroup, and Merrill Lynch indices. BlackRock, Inc. was founded in 1988 and is based in New York, New York with additional offices in Atlanta, Georgia; Boston, Massachusetts; Chicago, Illinois; Dallas, Texas; Denver, Colorado; Greenwich, Connecticut; Houston, Texas; Miami, Florida; Newport Beach, California; Palo Alto, California; Philadelphia, Pennsylvania; Princeton, New Jersey; San Francisco, California; Santa Monica, California; Seattle, Washington; Washington, DC; West Palm Beach, Florida; Wilmington, Delaware; Mexico; Canada; South Africa; Netherlands; Greece; Serbia; Belgium; Hungary; Denmark; Ireland; Scotland; Germany; Switzerland; England; Luxembourg; Spain; Italy; France; Sweden; Austria; India; China; Australia; Hong Kong; South Korea; Singapore; Taiwan; Japan; Colombia; Argentina; Peru; Chile; Brazil; UAE; Saudi Arabia; Israel.",
+    "sector": "Financial Services",
+    "industry": "Asset Management",
+    "prevClose": 1031.56,
+    "preMarketPrice": 1070.0,
+    "preMarketChangePct": 3.7263949746015794,
+    "volume": 719048,
+    "avgVolume": 719777,
+    "marketCap": 166738919424
+  },
+  "JNJ": {
+    "name": "Johnson & Johnson",
+    "business": "Johnson & Johnson, together with its subsidiaries, engages in the research and development, manufacture, and sale of a range of products in the healthcare field worldwide. It operates in two segments, Innovative Medicine and MedTech. The Innovative Medicine segment offers products for various therapeutic areas, such as oncology, immunology, neuroscience, pulmonary hypertension, infectious diseases, and cardiovascular and metabolism distributed through retailers, wholesalers, distributors, hospitals, and healthcare professionals for prescription use. The MedTech segment provides a portfolio of products used in the surgery, orthopedic, cardiovascular, and vision fields distributed through wholesalers, hospitals and retailers, and used in the professional fields by physicians, nurses, hospitals, eye care professionals and clinics. This segment also offers products and enabling technologies that support joint reconstruction, trauma, spine, sports related injuries, and others, as well as open, laparoscopic, and robotic surgical procedures; instrumentation, energy devices, stapling systems, wound closure, biosurgery products, and digital and robotic technologies; breast aesthetics and reconstruction; contact lenses under the ACUVUE brand; intraocular lenses for cataract surgery, and other products used in cataract and refractive procedures under the TECNIS brand. The company was founded in 1886 and is based in New Brunswick, New Jersey.",
+    "sector": "Healthcare",
+    "industry": "Drug Manufacturers - General",
+    "prevClose": 257.77,
+    "preMarketPrice": 249.16,
+    "preMarketChangePct": -3.3401869884005064,
+    "volume": 8770522,
+    "avgVolume": 8142677,
+    "marketCap": 611072016384
+  },
+  "CELC": {
+    "name": "Celcuity Inc.",
+    "business": "Celcuity Inc., a clinical-stage biotechnology company, focuses on the development of targeted therapies for the treatment of various solid tumors in the United States. The company's lead drug candidate includes Gedatolisib, which selectively targets various Class I isoforms of phosphatidylinositol-3-kinase (PI3K) and the two mechanistic targets of rapamycin (mTOR) sub-complexes, mTORC1 and mTORC2 to treat patients with hormone receptor positive (HR+), human epidermal growth factor receptor 2 negative (HER2-) or HR+/HER2-, advanced or metastatic breast cancer (ABC), and patients with metastatic castration resistant prostate cancer (mCRPC). The company had a license agreement with Pfizer Inc. for the development and commercialization rights to Gedatolisib. Celcuity Inc. was incorporated in 2011 and is based in Minneapolis, Minnesota.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "prevClose": 103.79,
+    "preMarketPrice": 102.01,
+    "preMarketChangePct": -1.7150014452259381,
+    "volume": 2149848,
+    "avgVolume": 1408721,
+    "marketCap": 5415496192
+  },
+  "SEI": {
+    "name": "Solaris Energy Infrastructure, Inc.",
+    "business": "Solaris Energy Infrastructure, Inc. provides modular and scalable equipment-based solutions for power generation, control and distribution, and management of raw materials used in the completion of oil and natural gas wells in the United States. It operates in Solaris Power Solutions and Solaris Logistics Solutions segments. The Solaris Power Solutions segment delivers power generation, control, and distribution solutions; and offers support to data center, energy, and other commercial and industrial sector. The Solaris Logistics Solutions segment designs and manufactures specialized equipment; and offers field technician support, last mile, and mobilization logistics services, as well as provides software solutions. The company was formerly known as Solaris Oilfield Infrastructure, Inc. and changed its name to Solaris Energy Infrastructure, Inc. in September 2024. Solaris Energy Infrastructure, Inc. was founded in 2014 and is headquartered in Houston, Texas.",
+    "sector": "Energy",
+    "industry": "Oil & Gas Equipment & Services",
+    "prevClose": 67.15,
+    "preMarketPrice": 70.5,
+    "preMarketChangePct": 4.9888309754281375,
+    "volume": 10444494,
+    "avgVolume": 2526922,
+    "marketCap": 6677409792
+  },
+  "CPRX": {
+    "name": "Catalyst Pharmaceuticals, Inc.",
+    "business": "Catalyst Pharmaceuticals, Inc., a commercial-stage biopharmaceutical company, focuses on developing and commercializing medicines for patients living with rare diseases in the United States. It offers Firdapse for the treatment of patients with lambert-eaton myasthenic syndrome (LEMS); Fycompa, a novel non-competitive selective antagonist at the postsynaptic ionotropic alpha-amino-3-hydroxy-5-methyl-4-isoxazolepropionic acid glutamate receptor that is used to treat focal onset seizures, as well as tonic-clonic seizure; and AGAMREE, a corticosteroid for the treatment of duchenne muscular dystrophy. The company has license agreements with BioMarin Pharmaceutical Inc.; and a collaboration and license agreement with Endo Ventures Limited for the development and commercialization of generic Sabril tablets. Catalyst Pharmaceuticals, Inc. was founded in 2002 and is based in Coral Gables, Florida.",
+    "sector": "Healthcare",
+    "industry": "Biotechnology",
+    "prevClose": 31.48,
+    "preMarketPrice": null,
+    "preMarketChangePct": null,
+    "volume": 15513864,
+    "avgVolume": 2668465,
+    "marketCap": 3854925568
+  },
+  "CLSK": {
+    "name": "CleanSpark, Inc.",
+    "business": "CleanSpark, Inc. operates as a bitcoin mining company in the Americas. The company owns, leases, and operates data centers and power assets. Its infrastructure supports Bitcoin, a digital commodity. The company was formerly known as Stratean Inc. and changed its name to CleanSpark, Inc. in November 2016. CleanSpark, Inc. was incorporated in 1987 and is headquartered in Henderson, Nevada.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets",
+    "prevClose": 12.36,
+    "preMarketPrice": 13.67,
+    "preMarketChangePct": 10.598705501618127,
+    "volume": 76365717,
+    "avgVolume": 22244754,
+    "marketCap": 3451385856
+  },
+  "WULF": {
+    "name": "TeraWulf Inc.",
+    "business": "TeraWulf Inc., together with its subsidiaries, owns, develops, operates digital infrastructure in the United States. It also develops and operates bitcoin mining facilities for bitcoin mining and high-performance computing workloads, leveraging clean, cost-effective, and reliable energy. The company was founded in 2021 and is headquartered in Easton, Maryland.",
+    "sector": "Financial Services",
+    "industry": "Capital Markets",
+    "prevClose": 20.89,
+    "preMarketPrice": 19.55,
+    "preMarketChangePct": -6.414552417424605,
+    "volume": 57994500,
+    "avgVolume": 31481068,
+    "marketCap": 9618288640
+  },
+  "AAL": {
+    "name": "American Airlines Group Inc.",
+    "business": "American Airlines Group Inc., through its subsidiaries, operates as a network air carrier in the United States, Latin America, Atlantic, and Pacific. The company provides scheduled air transportation services for passengers and cargo through its hubs in Charlotte, Chicago, Dallas/Fort Worth, Los Angeles, Miami, New York, Philadelphia, Phoenix, and Washington, D.C., as well as through partner gateways in London, Doha, Madrid, Seattle/Tacoma, Sydney, and Tokyo. It also operates a mainline fleet of 1,013 aircraft. The company was formerly known as AMR Corporation and changed its name to American Airlines Group Inc. in December 2013. American Airlines Group Inc. was founded in 1926 and is headquartered in Fort Worth, Texas.",
+    "sector": "Industrials",
+    "industry": "Airlines",
+    "prevClose": 16.31,
+    "preMarketPrice": 15.73,
+    "preMarketChangePct": -3.5561005518086963,
+    "volume": 138419696,
+    "avgVolume": 98583860,
+    "marketCap": 10363905024
+  }
+}

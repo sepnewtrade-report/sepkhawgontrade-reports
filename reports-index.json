@@ -1,5 +1,15 @@
 [
   {
+    "title": "รายงานวิเคราะห์ภาวะตลาดการเงินรายวัน (Daily Market Intelligence Report)",
+    "filename": "market_summary_2026_07_15.md",
+    "path": "market_summary_2026_07_15.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-15",
+    "timestamp": 1784116785591.5562,
+    "size": 24816
+  },
+  {
     "title": "Performance Review & Post-Market Recap: 2026-07-14",
     "filename": "bot_stats_2026_07_14.md",
     "path": "bot_stats_2026_07_14.md",
