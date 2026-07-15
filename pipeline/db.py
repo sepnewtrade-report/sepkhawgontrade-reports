@@ -140,6 +140,14 @@ def save_daily_stats(date_str, total_signals, win_rate, avg_return, accuracy):
     conn.commit()
     conn.close()
 
+def get_signals_by_date(date_str):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ticker FROM signals WHERE date = ?", (date_str,))
+    rows = [row["ticker"] for row in cursor.fetchall()]
+    conn.close()
+    return rows
+
 if __name__ == "__main__":
     init_db()
     print("Database initialized successfully at:", DB_PATH)

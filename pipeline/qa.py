@@ -95,6 +95,101 @@ def verify_data(collected_data):
     print(f"QA Verification complete: {len(cleaned_data)} passed, {len(collected_data) - len(cleaned_data)} rejected.")
     return cleaned_data, logs
 
+
+def verify_options_data(collected_data):
+    """
+    Specifically validates options data structures (Implied Volatilities, Greeks, DTE)
+    to filter out incomplete or anomaly contracts.
+    """
+    cleaned_options_data = {}
+    logs = []
+    
+    for ticker, data in collected_data.items():
+        opts = data.get("options")
+        if not opts:
+            logs.append({
+                "item": ticker,
+                "status": "warning",
+                "details": "No options data found"
+            })
+            continue
+            
+        hv_30 = opts.get("hv_30")
+        if hv_30 is None or hv_30 <= 0:
+            logs.append({
+                "item": ticker,
+                "status": "warning",
+                "details": f"Invalid historical volatility: {hv_30}"
+            })
+            continue
+            
+        short = opts.get("short_term")
+        medium = opts.get("medium_term")
+        
+        if not short and not medium:
+            logs.append({
+                "item": ticker,
+                "status": "warning",
+                "details": "Both short-term and medium-term option chains are empty"
+            })
+            continue
+            
+        # Verify contracts in short_term and medium_term
+        def check_term(term_data, name):
+            if not term_data:
+                return False
+            exp = term_data.get("expiration")
+            dte = term_data.get("dte")
+            if not exp or dte is None or dte <= 0:
+                return False
+                
+            calls = term_data.get("calls", [])
+            puts = term_data.get("puts", [])
+            if not calls and not puts:
+                return False
+                
+            # Filter clean contracts
+            clean_calls = []
+            for c in calls:
+                strike = c.get("strike")
+                iv = c.get("impliedVolatility", 0)
+                premium = c.get("lastPrice") or (c.get("bid", 0) + c.get("ask", 0)) / 2.0
+                if strike and strike > 0 and iv > 0 and premium > 0:
+                    clean_calls.append(c)
+                    
+            clean_puts = []
+            for p in puts:
+                strike = p.get("strike")
+                iv = p.get("impliedVolatility", 0)
+                premium = p.get("lastPrice") or (p.get("bid", 0) + p.get("ask", 0)) / 2.0
+                if strike and strike > 0 and iv > 0 and premium > 0:
+                    clean_puts.append(p)
+                    
+            term_data["calls"] = clean_calls
+            term_data["puts"] = clean_puts
+            return len(clean_calls) > 0 or len(clean_puts) > 0
+
+        short_ok = check_term(short, "short-term")
+        med_ok = check_term(medium, "medium-term")
+        
+        if short_ok or med_ok:
+            cleaned_options_data[ticker] = data
+            logs.append({
+                "item": ticker,
+                "status": "verified_ok",
+                "details": f"Options QA Passed. Short term active: {short_ok}, Medium term active: {med_ok}"
+            })
+        else:
+            logs.append({
+                "item": ticker,
+                "status": "rejected",
+                "details": "No valid option contracts (strikes, non-zero IV/premium) found after cleaning"
+            })
+            
+    print(f"Options QA Verification complete: {len(cleaned_options_data)} passed, {len(collected_data) - len(cleaned_options_data)} warning/rejected.")
+    return cleaned_options_data, logs
+
+
 if __name__ == "__main__":
     # Test stub
     test_stub = {

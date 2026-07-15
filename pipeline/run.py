@@ -15,6 +15,7 @@ import strategy
 import risk
 import generator
 import notifier
+import qc_engine
 
 def run_1900(date_str):
     print(f"\n==================== STARTING 19:00 PRE-MARKET PIPELINE [{date_str}] ====================")
@@ -224,14 +225,84 @@ def run_dryrun():
         risk_mgr = risk.RiskEngine()
         processed_signals = risk_mgr.process_signals(raw_signals, scanned_data)
         
+        # Test options pipeline path too
+        opt_cleaned, opt_qa_logs = qa.verify_options_data(raw_data)
+        opt_scanned = scanner.scan_stocks(opt_cleaned)
+        opt_strategy = strategy.OptionsScreenStrategy()
+        opt_signals = []
+        for ticker, sdata in opt_scanned.items():
+            sig = opt_strategy.evaluate(ticker, sdata)
+            if sig:
+                opt_signals.append(sig)
+                
+        print(f"Dryrun Options strategy test: {len(opt_signals)} signals found.")
         print("\nDryrun successfully completed! Ready for production deployment.")
     except Exception as e:
         print(f"Dryrun failed: {e}", file=sys.stderr)
         sys.exit(1)
 
+def run_options(date_str):
+    print(f"\n==================== STARTING OPTIONS SCANNING PIPELINE [{date_str}] ====================")
+    db.init_db()
+    
+    try:
+        # Stage 1: Data Collection (includes option chains and HV calculation)
+        raw_data = collector.collect_data()
+        if not raw_data:
+            raise Exception("No data collected in Stage 1")
+            
+        # Stage 2: Options QA Checker
+        cleaned_data, qa_logs = qa.verify_options_data(raw_data)
+        if not cleaned_data:
+            raise Exception("No options data passed QA verification in Stage 2")
+            
+        # Stage 3: Stock Technical Indicators (RSI, MACD) for Stock Validation
+        scanned_data = scanner.scan_stocks(cleaned_data)
+        
+        # Stage 4: Options Strategy Selection
+        opt_strategy = strategy.OptionsScreenStrategy()
+        raw_signals = []
+        for ticker, sdata in scanned_data.items():
+            sig = opt_strategy.evaluate(ticker, sdata)
+            if sig:
+                raw_signals.append(sig)
+                print(f"  [SIGNAL] {ticker} passed Options Selection Screen!")
+                
+        # Stage 5: Mandatory QC Audit (Duplication, Pricing, Formatting)
+        output_report_name = f"options_screen_analysis_{date_str.replace('-', '_')}.md"
+        output_report_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), output_report_name)
+        
+        clean_signals, qc_report = qc_engine.run_qc_audit(date_str, raw_signals, output_report_path)
+        
+        # Stage 6: Options Selection Report Generator
+        generator.generate_options_report(clean_signals, qc_report, date_str, output_report_path)
+        
+        # Stage 7: Notification
+        notification_title = f"Options Selection Screen Completed - {date_str}"
+        msg = f"<b>📊 สรุปผลคัดกรองสัญญา Option ({date_str})</b>\n\n"
+        if not clean_signals:
+            msg += "ไม่พบสัญญาออปชันที่ได้เปรียบทางสถิติในวันนี้"
+        else:
+            for sig in clean_signals:
+                cands_cnt = len(sig.get("short_term_candidates", [])) + len(sig.get("medium_term_candidates", []))
+                msg += f"• <b>{sig['ticker']}</b>: พบสัญญาที่เข้าเกณฑ์ทั้งหมด {cands_cnt} สัญญา (HV: {sig['hv_30']:.1%})\n"
+        msg += f"\n👉 อ่านบทวิเคราะห์ Options ฉบับเต็มและผลการตรวจสอบ QC บนเว็บได้แล้ววันนี้"
+        
+        plain_msg = msg.replace("<b>", "").replace("</b>", "")
+        notifier.send_notifications(notification_title, msg, plain_msg)
+        
+        db.log_scan("options", "success")
+        print("Options scanning pipeline execution completed successfully.")
+        
+    except Exception as e:
+        error_msg = f"Error in Options pipeline: {e}"
+        print(error_msg, file=sys.stderr)
+        db.log_scan("options", "failure", error_msg)
+        raise
+
 def main():
     parser = argparse.ArgumentParser(description="SepKhawGonTrade Automated Trading Pipeline")
-    parser.add_argument("--mode", required=True, choices=["1900", "0530", "dryrun"], help="Pipeline run mode")
+    parser.add_argument("--mode", required=True, choices=["1900", "0530", "dryrun", "options"], help="Pipeline run mode")
     parser.add_argument("--date", default=datetime.today().strftime("%Y-%m-%d"), help="Target run date (YYYY-MM-DD)")
     args = parser.parse_args()
     
@@ -241,6 +312,8 @@ def main():
         run_0530(args.date)
     elif args.mode == "dryrun":
         run_dryrun()
+    elif args.mode == "options":
+        run_options(args.date)
 
 if __name__ == "__main__":
     main()

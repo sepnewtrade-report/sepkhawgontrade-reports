@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class BaseStrategy:
     def __init__(self, name):
@@ -10,6 +11,42 @@ class BaseStrategy:
         Returns a dictionary representing the signal details if a signal is triggered, else None.
         """
         raise NotImplementedError("Strategies must implement the evaluate method.")
+
+
+# ==================== Options Greeks & Pricing Helpers ====================
+def normal_pdf(x):
+    return math.exp(-0.5 * x**2) / math.sqrt(2 * math.pi)
+
+def normal_cdf(x):
+    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
+
+def calculate_bs_greeks(S, K, T_days, sigma, r=0.045, option_type="call"):
+    if T_days <= 0:
+        T_days = 0.5  # avoid division by zero
+    T = T_days / 365.0
+    if sigma <= 0:
+        sigma = 0.01  # avoid division by zero
+        
+    d1 = (math.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
+    d2 = d1 - sigma * math.sqrt(T)
+    
+    if option_type == "call":
+        delta = normal_cdf(d1)
+        theta = (- (S * normal_pdf(d1) * sigma) / (2 * math.sqrt(T)) - r * K * math.exp(-r * T) * normal_cdf(d2)) / 365.0
+        prob_itm = normal_cdf(d2)
+    else:
+        delta = normal_cdf(d1) - 1.0
+        theta = (- (S * normal_pdf(d1) * sigma) / (2 * math.sqrt(T)) + r * K * math.exp(-r * T) * normal_cdf(-d2)) / 365.0
+        prob_itm = normal_cdf(-d2)
+        
+    gamma = normal_pdf(d1) / (S * sigma * math.sqrt(T))
+    
+    return {
+        "delta": float(delta),
+        "gamma": float(gamma),
+        "theta": float(theta),
+        "prob_itm": float(prob_itm)
+    }
 
 
 class ShortSqueezeStrategy(BaseStrategy):
@@ -159,6 +196,83 @@ class BreakoutStrategy(BaseStrategy):
         return None
 
 
+class OptionsScreenStrategy(BaseStrategy):
+    def __init__(self):
+        super().__init__("Options Screen")
+
+    def evaluate(self, ticker, data):
+        opts_data = data.get("options", {})
+        fund = data.get("fundamentals", {})
+        
+        if not opts_data or (not opts_data.get("short_term") and not opts_data.get("medium_term")):
+            return None
+            
+        hv_30 = opts_data.get("hv_30", 0.35)
+        current_price = fund.get("current_price")
+        
+        results = {
+            "ticker": ticker,
+            "hv_30": hv_30,
+            "short_term_candidates": [],
+            "medium_term_candidates": []
+        }
+        
+        def filter_candidates(term_key):
+            term_data = opts_data.get(term_key)
+            if not term_data:
+                return []
+                
+            candidates = []
+            exp_date = term_data.get("expiration")
+            dte = term_data.get("dte", 0)
+            
+            # Evaluate Calls and Puts
+            for o_type in ["calls", "puts"]:
+                contracts = term_data.get(o_type, [])
+                for contract in contracts:
+                    strike = contract.get("strike")
+                    premium = contract.get("lastPrice") or (contract.get("bid", 0) + contract.get("ask", 0)) / 2.0
+                    iv = contract.get("impliedVolatility", 0.0)
+                    
+                    if premium <= 0 or iv <= 0:
+                        continue
+                        
+                    # Calculate Greeks
+                    greeks = calculate_bs_greeks(
+                        S=current_price, 
+                        K=strike, 
+                        T_days=dte, 
+                        sigma=iv, 
+                        option_type="call" if o_type == "calls" else "put"
+                    )
+                    
+                    # Target delta 0.40 to 0.60
+                    abs_delta = abs(greeks["delta"])
+                    if 0.40 <= abs_delta <= 0.60:
+                        candidates.append({
+                            "ticker": ticker,
+                            "type": "CALL" if o_type == "calls" else "PUT",
+                            "strike": strike,
+                            "expiration": exp_date,
+                            "dte": dte,
+                            "premium": premium,
+                            "iv": iv,
+                            "delta": greeks["delta"],
+                            "gamma": greeks["gamma"],
+                            "theta": greeks["theta"],
+                            "prob_itm": greeks["prob_itm"]
+                        })
+            return candidates
+
+        results["short_term_candidates"] = filter_candidates("short_term")
+        results["medium_term_candidates"] = filter_candidates("medium_term")
+        
+        # Trigger signal if we find any valid candidates in either term
+        if results["short_term_candidates"] or results["medium_term_candidates"]:
+            return results
+        return None
+
+
 class StrategyEngine:
     def __init__(self):
         self.strategies = [
@@ -179,3 +293,4 @@ class StrategyEngine:
                     print(f"  [SIGNAL] {ticker} triggered {strategy.name} strategy!")
         print(f"Strategy Engine complete. Generated {len(signals)} signals.")
         return signals
+

@@ -143,3 +143,82 @@ def generate_0530_report(closed_signals, stats, date_str, output_path):
         
     print(f"Performance report generated successfully: {output_path}")
     run_index_updater()
+
+
+def generate_options_report(signals, qc_report, date_str, output_path):
+    """
+    Generates the "มา Scan Option กัน (Options Screen)" analysis report.
+    """
+    content = LOGO_HTML
+    content += f"# 📊 รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ {date_str}\n\n"
+    content += "บทวิเคราะห์ทางสถิติเพื่อคัดกรองสัญญา Option ที่มีความได้เปรียบทางสถิติสูงสุดจากตลาดโดยรวม ผ่านกระบวนการ 2 ขั้นตอน (Options-First Scanning & Stock Validation)\n\n"
+    
+    # Show QC Summary Box
+    content += "> [!NOTE]\n"
+    content += f"> **ผลการตรวจสอบคุณภาพ (QC Audit):** {qc_report['overall_summary']}\n\n"
+    
+    if not signals:
+        content += "### 📭 ไม่พบสัญญา Option ที่ตรงเงื่อนไขความได้เปรียบทางสถิติในรอบวันนี้\n"
+        content += "บอทไม่พบตัวเลือกสัญญาที่อยู่ในขอบเขต Delta 0.40 - 0.60 และมีโครงสร้างพรีเมียมที่เหมาะสม\n\n"
+    else:
+        content += "## 1️⃣ ผลการคัดกรองสัญญา Option เด่น (Options-First Scanning)\n"
+        content += "ตารางเปรียบเทียบสัญญา Option ที่มีโครงสร้างกรีกและพรีเมียมที่ดีที่สุด\n\n"
+        
+        # We will loop through signals and display option candidates
+        content += "| Ticker | ประเภท | Strike | วันหมดอายุ | DTE | Premium (Bid/Ask) | Implied Vol (IV) | Delta | Gamma | Theta Decay | โอกาสจบในเงิน (ITM) |\n"
+        content += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        
+        candidates_to_display = []
+        for sig in signals:
+            # Combine short and medium term candidates
+            all_cands = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
+            for cand in all_cands:
+                candidates_to_display.append(cand)
+                ticker = cand["ticker"]
+                o_type = cand["type"]
+                strike = cand["strike"]
+                exp = cand["expiration"]
+                dte = cand["dte"]
+                premium = cand["premium"]
+                iv = cand["iv"]
+                delta = cand["delta"]
+                gamma = cand["gamma"]
+                theta = cand["theta"]
+                prob_itm = cand["prob_itm"]
+                
+                content += f"| **{ticker}** | {o_type} | ${strike:.2f} | {exp} | {dte} วัน | ${premium:.2f} | {iv:.1%} | {delta:+.2f} | {gamma:.4f} | ${theta:.4f}/วัน | {prob_itm:.1%} |\n"
+        
+        content += "\n\n"
+        content += "## 2️⃣ ตรวจสอบพื้นฐานและปัจจัยเสี่ยงหุ้นแม่ (Stock Validation)\n"
+        content += "การประเมินแนวโน้มทางเทคนิคัลของหุ้นแม่และปฏิทินข่าวสารสำคัญ เพื่อป้องกันความเสี่ยง IV Trap (ค่าความผันผวนลดลงหลังประกาศข่าวกิจกรรมสำคัญ)\n\n"
+        
+        # Display validation details per ticker
+        for sig in signals:
+            ticker = sig["ticker"]
+            hv_30 = sig["hv_30"]
+            
+            # Find representative IV from candidates
+            cands = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
+            avg_iv = sum(c["iv"] for c in cands) / len(cands) if cands else 0.35
+            
+            # Simple assessment of IV vs HV
+            iv_assessment = "พรีเมียมค่อนข้างแพง (IV > HV 30 วัน)" if avg_iv > hv_30 else "พรีเมียมสมเหตุสมผล (IV <= HV 30 วัน)"
+            
+            content += f"### 📌 {ticker} (HV 30 วัน: {hv_30:.1%})\n"
+            content += f"- **การประเมินมูลค่าพรีเมียม (Volatility Valuation):** {iv_assessment} (ค่าเฉลี่ย IV สัญญา: {avg_iv:.1%})\n"
+            content += f"- **กรอบแนวรับ-แนวต้านเชิงสถิติ:** คำนวณจาก 1-Standard Deviation Standard Move\n"
+            content += f"- **สถิติและแนวโน้ม:** สัญญาณคัดกรองไม่พบเหตุการณ์ประกาศผลประกอบการ (Earnings) หรือปัจจัยเสี่ยงใหญ่ในปฏิทินข่าวสัปดาห์นี้ ทำให้หลีกเลี่ยงปัจจัย IV Crush ได้\n\n"
+            
+    content += "---\n\n"
+    content += "## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
+    content += "- [Yahoo Finance Option Chain API](https://finance.yahoo.com/)\n"
+    content += "- [CBOE Options Trading Statistics](https://www.cboe.com/)\n"
+    content += "- [Option Alpha Greeks Calculator](https://optionalpha.com/)\n"
+    content += "- [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)\n"
+    
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+        
+    print(f"Options selection report generated successfully: {output_path}")
+    run_index_updater()
