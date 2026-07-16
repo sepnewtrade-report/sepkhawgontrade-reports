@@ -12,19 +12,19 @@
 *   **S&P 500** เคลื่อนไหวในกรอบจำกัดโดยมีกลุ่มการเงินและพลังงานช่วยประคองดัชนี [ที่มา: S&P Dow Jones Indices, Morningstar, 15 ก.ค. 2026]
 *   **Dow Jones Industrial Average** ปิดปรับตัวเพิ่มขึ้นเล็กน้อยจากแรงหนุนของหุ้นกลุ่มดั้งเดิมและผลประกอบการที่แข็งแกร่งของภาคธนาคาร [ที่มา: S&P Dow Jones Indices, CNBC Close, 15 ก.ค. 2026]
 
-จิตวิทยาตลาดได้รับแรงหนุนเชิงบวกต่อเนื่องจากการรายงานข้อมูลอัตราเงินเฟ้อสหรัฐฯ (CPI) ประจำเดือนมิถุนายนที่ชะลอตัวลงมาอยู่ที่ระดับ **3.5%** เมื่อเทียบรายปี (YoY) [ที่มา: U.S. Bureau of Labor Statistics (BLS), 14 ก.ค. 2026] ทำให้นักลงทุนมีความหวังมากขึ้นเกี่ยวกับนโยบายดอกเบี้ยขาลงของเฟด (Fed Pivot) อย่างไรก็ตาม ในฝั่งหุ้นรายตัวเกิดความคึกคักอย่างโดดเด่นจากข่าวการเข้าซื้อกิจการระดับบิ๊กดีล ข้อมูลผลประกอบการไตรมาสที่ 2 และการปฏิเสธข่าวลือเชิงลบในกลุ่มรถยนต์ไฟฟ้า ส่งผลให้เกิดกระแสการเก็งกำไรที่ร้อนแรงทั้งในฝั่งของเงินทุนสถาบันและกลุ่มรายย่อยในโซเชียลมีเดียหลักอย่าง Reddit และ X [ที่มา: WallStreetBets Mentions, 16 ก.ค. 2026]
+จิตวิทยาตลาดได้รับแรงหนุนเชิงบวกต่อเนื่องจากการรายงานข้อมูลอัตราเงินเฟ้อสหรัฐฯ (CPI) ประจำเดือนมิถุนายนที่ชะลอตัวลงมาอยู่ที่ระดับ **3.5%** เมื่อเทียบรายปี (YoY) [ที่มา: U.S. Bureau of Labor Statistics (BLS), 14 ก.ค. 2026] ทำให้นักลงทุนมีความหวังมากขึ้นเกี่ยวกับนโยบายดอกเบี้ยขาลงของเฟด (Fed Pivot) อย่างไรก็ตาม ในฝั่งหุ้นรายตัวเกิดความคึกคักอย่างโดดเด่นจากรายงานผลประกอบการไตรมาสที่ 2 ของกลุ่มสถาบันการเงินยักษ์ใหญ่ที่เติบโตแบบก้าวกระโดด ช่วยพยุงความต้องการความเสี่ยงของตลาด (Risk-on Sentiment) และนำไปสู่การไล่ราคาของรายย่อยในกระแสโซเชียลมีเดียหลักอย่าง Reddit และ X [ที่มา: WallStreetBets Mentions, 16 ก.ค. 2026]
 
 ---
 
 ## 🔥 1. TOP HOT STOCKS (หุ้นกระแสแรงที่น่าจับตามองในรอบ 24 ชั่วโมง)
 
-### 1. PayPal Holdings, Inc. (Ticker: PYPL)
-*   **% การเปลี่ยนแปลงราคา:** **+17.2%** [ที่มา: Yahoo Finance/Nasdaq Real-Time, 16 ก.ค. 2026]
-*   **Volume (เทียบค่าเฉลี่ย):** สูงสะสมหนาแน่นที่สุดในรอบหลายเดือน โดยมีปริมาณซื้อขายพุ่งสูงกว่าค่าเฉลี่ยปกติถึง 5 เท่า [ที่มา: Yahoo Finance, 16 ก.ค. 2026]
-*   **สาเหตุหลัก (Stripe & Advent $53B Take-Private Rumor):** มีรายงานข่าวหนาหูว่า Stripe และบริษัทพีอี Advent International ได้ยื่นข้อเสนอร่วมทุนมูลค่ากว่า 5.3 หมื่นล้านดอลลาร์สหรัฐ เพื่อขอซื้อกิจการทั้งหมดของ PayPal และนำออกนอกตลาดหลักทรัพย์ (Take-Private) โดยเสนอส่วนต่างมูลค่าพรีเมียมประมาณ 28% ของราคาซื้อขายปกติ [ที่มา: Financial Times, Investing.com, 16 ก.ค. 2026]
+### 1. JPMorgan Chase & Co. (Ticker: JPM)
+*   **% การเปลี่ยนแปลงราคา:** **บวกตอบรับงบการเงินดีเด่น** [ที่มา: Yahoo Finance/NYSE Real-Time, 16 ก.ค. 2026]
+*   **Volume (เทียบค่าเฉลี่ย):** สูงขึ้นสะสมอย่างหนาแน่นและมีปริมาณการทำธุรกรรมเพิ่มขึ้นกว่าปกติ 2.5 เท่า [ที่มา: Yahoo Finance, 16 ก.ค. 2026]
+*   **สาเหตุหลัก (Blowout Q2 Earnings & Investment Banking Surge):** รายงานผลประกอบการไตรมาส 2 ที่แข็งแกร่งเป็นประวัติการณ์ โดยทำรายได้รวมกว่า 5.8 หมื่นล้านดอลลาร์สหรัฐ และมีกำไรสุทธิโตทะลุคาดการณ์อย่างชัดเจน รับอานิสงส์จากการพุ่งขึ้นถึง 86% ของรายได้กลุ่มการซื้อขายตราสารทุน (Equities Trading) และ 30% ของรายได้ค่าธรรมเนียมวาณิชธนกิจ [ที่มา: JPMorgan Chase, FinancialContent, 16 ก.ค. 2026]
 *   **👉 วิเคราะห์เชิงลึก:**
-    *   *Hype หรือ Reasoned?:* **Reasoned (สมเหตุสมผลบนพื้นฐานข่าวดีล):** ข่าวนี้ได้รับการสนับสนุนจากรายงานว่า suitors ได้เตรียมวงเงินสนับสนุนจากธนาคารกว่า 5 หมื่นล้านดอลลาร์สหรัฐเรียบร้อยแล้ว จึงไม่ใช่ข่าวลือเลื่อนลอย [ที่มา: Financial Times, 16 ก.ค. 2026]
-    *   *โอกาสไปต่อ หรือใกล้จบ:* ราคาหุ้นพุ่งขึ้นรับข่าวเกือบเต็มระดับพรีเมียมแล้ว แต่ยังมีช่องว่างความไม่แน่นอน (Spread) เนื่องจาก PayPal ยังไม่ได้ออกมาตอบรับอย่างเป็นทางการ และอาจต้องเผชิญด่านการตรวจสอบจากหน่วยงานกำกับดูแลการผูกขาดในตลาดฟินเทค [ที่มา: TheStreet, 16 ก.ค. 2026]
+    *   *Hype หรือ Reasoned?:* **Reasoned (สมเหตุสมผลด้วยผลประกอบการจริง):** การขยายตัวของรายได้แสดงให้เห็นถึงกิจกรรมทางเศรษฐกิจและการควบรวมกิจการในอุตสาหกรรมเทคโนโลยีและ AI ที่กลับมาคึกคัก ทำให้มูลค่าหลักทรัพย์ตามราคาตลาดของบริษัทใกล้ระดับ 1 ล้านล้านดอลลาร์สหรัฐ [ที่มา: MarketBeat, 16 ก.ค. 2026]
+    *   *โอกาสไปต่อ หรือใกล้จบ:* มีโอกาสขยับขึ้นต่อตามกรอบความมั่นคงเนื่องจากความจุทางธุรกิจและอัตราเงินปันผลที่ปรับเพิ่มขึ้น ช่วยรองรับแรงกระแทกในสภาวะตลาดไอทีผันผวน [ที่มา: Business Wire, 16 ก.ค. 2026]
 
 ### 2. AST SpaceMobile, Inc. (Ticker: ASTS)
 *   **% การเปลี่ยนแปลงราคา:** **-12.0%** [ที่มา: Seeking Alpha, 16 ก.ค. 2026]
@@ -34,13 +34,13 @@
     *   *Hype หรือ Reasoned?:* **Reasoned Downward (การปรับตัวลงสมเหตุสมผลระยะสั้น):** นักลงทุนกังวลเรื่องการเพิ่มทุนและไดลูชั่นของราคาหุ้นในอนาคต ประกอบกับการเลื่อนกำหนดการส่งมอบดาวเทียมสร้างความไม่แน่นอนให้กับกรอบเวลาทำเงิน [ที่มา: Seeking Alpha, 16 ก.ค. 2026]
     *   *โอกาสไปต่อ หรือใกล้จบ:* การปรับฐานลงน่าจะเป็นโอกาสซื้อสำหรับผู้ลงทุนระยะกลาง เนื่องจาก Piper Sandler เพิ่งเริ่มต้นวิเคราะห์ด้วยคำแนะนำ "Overweight" พร้อมคาดการณ์ราคาเป้าหมายในอนาคตที่สูงกว่าระดับราคาปัจจุบันอย่างมาก [ที่มา: Piper Sandler, GuruFocus, 16 ก.ค. 2026]
 
-### 3. Lucid Group, Inc. (Ticker: LCID)
-*   **% การเปลี่ยนแปลงราคา:** **+28.0%** [ที่มา: Yahoo Finance, 16 ก.ค. 2026]
-*   **Volume (เทียบค่าเฉลี่ย):** สูงขึ้นอย่างผิดปกติ โดยมีระดับปริมาณการเทรดคึกคักอย่างยิ่ง และระดับการพูดถึงบนอินเทอร์เน็ตพุ่งขึ้นเกิน 7,400% [ที่มา: Reddit, 16 ก.ค. 2026]
-*   **สาเหตุหลัก (Bankruptcy Rumor Rejection & Liquidity Update):** ราคาหุ้นผันผวนดีดตัวกลับอย่างรุนแรงหลังผู้บริหารระดับสูงปฏิเสธข่าวลือเรื่องการล้มละลายหรือการยื่นขอฟื้นฟูกิจการ โดยยืนยันว่าบริษัทมีสภาพคล่องเพียงพอสำหรับดำเนินงานไปจนถึงปี 2027 [ที่มา: TheStreet, 16 ก.ค. 2026]
+### 3. Morgan Stanley (Ticker: MS)
+*   **% การเปลี่ยนแปลงราคา:** **บวกโดดเด่นเข้าใกล้จุดสูงสุดประวัติการณ์** [ที่มา: Yahoo Finance/NYSE Real-Time, 16 ก.ค. 2026]
+*   **Volume (เทียบค่าเฉลี่ย):** คึกคักเพิ่มขึ้นกว่าปกติ 3 เท่าตัว จากแรงเข้าซื้อพอร์ตกลุ่มธนาคารของนักลงทุนสถาบัน [ที่มา: Yahoo Finance, 16 ก.ค. 2026]
+*   **สาเหตุหลัก (Blockbuster Q2 Earnings & 15% Dividend Hike):** รายงานผลกำไรไตรมาส 2 โดดเด่นอย่างมาก โดยมีรายได้กว่า 2.13 หมื่นล้านดอลลาร์สหรัฐ เอาชนะคาดการณ์เฉลี่ยของตลาดอย่างง่ายดาย พร้อมทั้งประกาศปรับเพิ่มเงินปันผลรายไตรมาสอีก 15% และอนุมัติวงเงินซื้อหุ้นคืนมูลค่ากว่า 2 หมื่นล้านดอลลาร์สหรัฐ [ที่มา: FXLeaders, MarketBeat, 16 ก.ค. 2026]
 *   **👉 วิเคราะห์เชิงลึก:**
-    *   *Hype หรือ Reasoned?:* **Hype & Short Cover (เกิดจากแรงบีบสถานะชอร์ต):** การเคลื่อนไหวของราคาเป็นการฟื้นตัวเฉียบพลันหลังข่าวร้ายไม่เป็นความจริง แต่ปัจจัยพื้นฐานด้านยอดขายและการทำกำไรของรถยนต์ไฟฟ้าค่ายนี้ยังคงประสบปัญหาขาดทุนสะสม [ที่มา: The Motley Fool, 16 ก.ค. 2026]
-    *   *โอกาสไปต่อ หรือใกล้จบ:* ใกล้จบโมเมนตัมขาขึ้นระยะสั้น เนื่องจากแรงซื้อหลักมาจาก Short Squeeze เมื่อนักลงทุนชอร์ตเริ่มปิดสถานะเพื่อลดความเสี่ยง คาดว่าราคาจะกลับมาพักฐานตามแนวโน้มเดิม [ที่มา: TradingView, 16 ก.ค. 2026]
+    *   *Hype หรือ Reasoned?:* **Reasoned (ขึ้นด้วยปัจจัยพื้นฐานและแผนจัดสรรเงินทุน):** อานิสงส์ความร้อนแรงของดีล IPO และการเสนอขายตราสารหนี้ในอุตสาหกรรม AI สนับสนุนกลุ่มธุรกิจวาณิชธนกิจให้ขยายตัวสูง อีกทั้งแผนซื้อหุ้นคืนช่วยจำกัดอัปไซด์ความเสี่ยงด้านขาลง [ที่มา: FXLeaders, Barchart, 16 ก.ค. 2026]
+    *   *โอกาสไปต่อ หรือใกล้จบ:* อาจเริ่มมีแรงขายล็อกกำไรระยะสั้นเนื่องจากราคากระชากขึ้นเข้าทดสอบขอบเขตสูงสุดเดิม แต่ในเชิงโครงสร้างยังจัดว่าเป็นกลุ่มมูลค่าที่มีความปลอดภัยสูง [ที่มา: Simply Wall St, 16 ก.ค. 2026]
 
 ### 4. Taiwan Semiconductor Manufacturing Co. (Ticker: TSM)
 *   **% การเปลี่ยนแปลงราคา:** **ทรงตัวในแดนลบเล็กน้อย** [ที่มา: Yahoo Finance, 16 ก.ค. 2026]
@@ -90,25 +90,25 @@
 
 *   **Momentum Continuation (แนวโน้มมีโอกาสปรับตัวขึ้นต่ออย่างยั่งยืน):**
     *   **Taiwan Semiconductor (TSM):** ปัจจัยพื้นฐานแกร่งด้วยคาดการณ์กำไรโตเกิน 40% และการขยายโรงงานในสหรัฐฯ มั่นคงในระยะยาว [ที่มา: Bloomberg, 16 ก.ค. 2026]
+    *   **JPMorgan Chase (JPM) & Morgan Stanley (MS):** เติบโตอย่างโดดเด่นในภาคการเงินและบริการวาณิชธนกิจ ได้ประโยชน์จาก IPO/M&A ในกลุ่ม AI [ที่มา: FXLeaders, 16 ก.ค. 2026]
     *   **BNY Mellon (BNY):** ขยายตัวดีตามตลาดทุนรอบนี้ ปลอดภัยสำหรับเงินทุนขนาดใหญ่ [ที่มา: Morningstar, 16 ก.ค. 2026]
 *   **Short Squeeze Candidates (โอกาสเกิดการบีบให้ปิดสถานะขายชอร์ต):**
-    *   **Lucid Group (LCID):** ยอดสัญญาชอร์ตเดิมอยู่ในระดับสูง เมื่อผู้บริหารออกโรงสยบข่าวลือร้ายจึงกระตุ้นแรงซื้อกลับเฉียบพลัน [ที่มา: TheStreet, 16 ก.ค. 2026]
+    *   **GameStop (GME):** โมเมนตัมส่วนใหญ่ถูกประคองด้วยกระแสรายย่อยและการเก็งกำไรในสัญญาสิทธิซื้อระยะสั้น [ที่มา: OptionFlow, 16 ก.ค. 2026]
 *   **Pump & Dump / Speculative Risk (กลุ่มความเสี่ยงผันผวนสูงจากปัจจัยข่าวสารและโซเชียล):**
-    *   **GameStop (GME):** โมเมนตัมพึ่งพิงกระแสข่าวเดลิเวอรีและการออกสื่อของ CEO เป็นหลัก เสี่ยงต่อการกลับตัวของราคา [ที่มา: Simply Wall St, 16 ก.ค. 2026]
-    *   **PayPal (PYPL):** แข็งแกร่งแต่มีความเสี่ยงหากดีลซื้อกิจการไม่บรรลุข้อตกลงหรือโดนสกัดจากภาครัฐ [ที่มา: Financial Times, 16 ก.ค. 2026]
+    *   **AST SpaceMobile (ASTS):** ความผิดหวังในแผนจัดส่งดาวเทียมและความกังวลการไดลูชั่นสร้างแรงแกว่งตัวฝั่งลบต่อเนื่อง [ที่มา: Seeking Alpha, 16 ก.ค. 2026]
 
 ---
 
 ## 💬 3. SOCIAL SENTIMENT (NARRATIVE ANALYSIS)
 
 *การวิเคราะห์กระแสสังคมออนไลน์อ้างอิงประเด็นสนทนาเชิงคุณภาพในชุมชนออนไลน์ Reddit และ X การเงิน:*
-*   **Sentiment ภาพรวม:** **Mixed (ผสมผสานระหว่างการตื่นตระหนกกลุ่มชิปและการเก็งบิ๊กดีล)**
-    *   กลุ่มรายย่อยใน r/WallStreetBets มีทั้งความโกรธแค้นประเด็นหุ้นกู้ของ ASTS และความตื่นเต้นกับดีลควบรวมของ PayPal รวมถึงข่าวลือล้มละลายของ Lucid [ที่มา: Reddit, 16 ก.ค. 2026]
+*   **Sentiment ภาพรวม:** **Positive on Big Banks / Mixed on Tech & AI Space**
+    *   กลุ่มรายย่อยใน r/WallStreetBets ชื่นชมผลประกอบการกลุ่มธนาคารใหญ่ที่เอาชนะคาดการณ์ แต่แสดงความห่วงใยประเด็นความล่าช้าของ ASTS และการตั้งรับก่อนงบ Netflix ประกาศ [ที่มา: Reddit, 16 ก.ค. 2026]
 
 ### Narrative สำคัญในกระแสสังคมออนไลน์:
-1.  **"The M&A Season is Back" (การกลับมาของฤดูกาลซื้อกิจการ):** นักลงทุนสตรีทพูดคุยกันอย่างคึกคักว่า การเสนอตัวของ Stripe ซื้อ PayPal ในมูลค่าสูง บ่งบอกว่าบริษัทเทคขนาดใหญ่เริ่มมีกระแสเงินสดล้นและมองหาการขยายกิจการแบบควบรวมเพื่อความคุ้มค่าในสภาวะดอกเบี้ยเริ่มทรงตัว [ที่มา: X Finance, 16 ก.ค. 2026]
+1.  **"Capital Markets Boom" (การกลับมาของธุรกิจไอพีโอและบิ๊กดีล):** บรรดานักจัดพอร์ตรายย่อยระบุว่า งบวาณิชธนกิจของ JPM และ MS ที่โตระเบิด ยืนยันว่าฝั่งสถาบันการเงินได้ประโยชน์ทางตรงอย่างมหาศาลจากการออกหุ้นกู้และการควบรวมกิจการกลุ่ม AI ในช่วงที่ผ่านมา [ที่มา: X Finance, 16 ก.ค. 2026]
 2.  **"Dilution Disappointment" (ความผิดหวังจากการเพิ่มทุน):** ผู้ถือหุ้นรายย่อยของ ASTS แสดงความผิดหวังอย่างมากในบอร์ดสนทนา เนื่องจากเคยคาดหวังว่าโครงการดาวเทียมจะได้รับการสนับสนุนเงินทุนครบถ้วนแล้ว การออกหุ้นกู้แปลงสภาพ 1 พันล้านเหรียญจึงทำลายความหวังระยะสั้น [ที่มา: Reddit r/ASTS, 16 ก.ค. 2026]
-3.  **"FUD vs Fact on EV" (การต่อสู้ข่าวลือในตลาดรถยนต์ไฟฟ้า):** กระแสการประณามสื่อและโพสต์โซเชียลที่ปล่อยข่าวลือเรื่องล้มละลายของ Lucid ส่งผลให้กลุ่มกระทิงรวมพลังดันราคาหุ้นกลับขึ้นมาพร้อมคำเตือนเรื่องความเสี่ยงของการอ่านข้อมูลไม่กรอง [ที่มา: Stocktwits, 16 ก.ค. 2026]
+3.  **"Streaming Battlefield" (การจัดทัพจับตางบเน็ตฟลิกซ์):** มีการประเมินทิศทางงบ NFLX ว่าจะสามารถขยายสัดส่วนผู้ใช้บริการฝั่งสมาชิกแพ็กเกจมีโฆษณาได้ตามเป้าหมายเพื่อชดเชยการปราบปรามการหารหัสผ่านที่อิ่มตัวแล้วหรือไม่ [ที่มา: Stocktwits, 16 ก.ค. 2026]
 
 ---
 
@@ -117,9 +117,9 @@
 *การวิเคราะห์การเคลื่อนย้ายของเงินทุนตามลักษณะราคาและปริมาณการซื้อขาย:*
 
 *   **Smart Money Flows (เงินใหญ่สถาบัน):**
-    *   สถาบันเน้นเข้าสะสมหุ้นที่ผลประกอบการเอาชนะเป้าหมายได้ชัดเจน เช่น BNY Mellon รวมถึงการปรับสมดุลพอร์ตของกลุ่มเซมิคอนดักเตอร์ที่ลดสถานะถือครองชิปบางส่วนเพื่อรับรู้กำไรสะสมหลังงบ TSMC ประกาศเสร็จสิ้น [ที่มา: Bloomberg Financial, 16 ก.ค. 2026]
+    *   สถาบันเน้นเข้าสะสมหุ้นที่ผลประกอบการเอาชนะเป้าหมายได้ชัดเจนและมีนโยบายการจัดสรรทุนที่ดีเยี่ยม เช่น JPMorgan Chase และ Morgan Stanley ที่มาพร้อมแผนปันผลและซื้อหุ้นคืนปริมาณสูง [ที่มา: Bloomberg Financial, 16 ก.ค. 2026]
 *   **Retail Speculation (การเก็งกำไรรายย่อย):**
-    *   รายย่อยแห่เข้าเก็งกำไรหนาแน่นในสัญญาสิทธิซื้อ (Call Options) ของ PayPal (PYPL) เพื่อรับพรีเมียมบิ๊กดีล และร่วมวง Short Squeeze หุ้น Lucid (LCID) บนกระแสข่าวยืนยันความปลอดภัยด้านการเงิน [ที่มา: Barchart Options Flow, 16 ก.ค. 2026]
+    *   รายย่อยจำกัดความเสี่ยงกลุ่มเทคโนโลยีและเข้ามาเก็งกำไรใน Ticker ความผันผวนสูงเช่น GameStop (GME) รวมถึงการเปิดออปชั่นก่อนงบการเงิน NFLX ประกาศ [ที่มา: Barchart Options Flow, 16 ก.ค. 2026]
 
 ---
 
@@ -127,31 +127,33 @@
 
 | Ticker | Bias | กลยุทธ์การเทรด (Tactical Strategy) | แนวรับ/แนวต้านสำคัญ | ความเสี่ยงหลัก (Key Risks) |
 | :---: | :---: | :--- | :--- | :--- |
-| **PYPL** | **WAIT** | **Hold for Deal Clarity / Wait for Pullback:** เนื่องจากราคาพุ่งขึ้นมาใกล้ระดับราคาเสนอซื้อแล้ว การเข้าซื้อไล่ราคาตอนนี้นับว่ามีส่วนต่างอัปไซด์ที่จำกัด ควรรอประเมินแถลงการณ์อย่างเป็นทางการของบริษัทว่าจะยอมรับดีลหรือไม่ หรือรอจังหวะย่อตัวหาแนวรับเดิม | **แนวรับ:** ขอบล่างของแก๊ปราคาที่เปิดขึ้น<br>**แนวต้าน:** ใกล้ระดับราคาเสนอซื้อ Take-Private | ดีลถูกยกเลิกหรือไม่ได้รับการอนุมัติจากผู้ถือหุ้นและหน่วยงานผูกขาดทางการค้า |
+| **JPM** | **LONG** | **Buy on Pullback:** รอจังหวะย่อตัวเข้าซื้อเนื่องจากทิศทางการทำกำไรของธุรกิจหลักค่อนข้างแข็งแกร่ง มีแรงประคองจากการขยายตัวของกลุ่ม equities trading | **แนวรับ:** ขอบล่างของเส้นแนวโน้มเฉลี่ยระยะสั้น<br>**แนวต้าน:** กรอบต้านสูงสุดตามเส้นเทคนิคจิตวิทยา | การตั้งสำรองเผื่อหนี้สูญที่อาจเพิ่มขึ้นในครึ่งปีหลัง |
 | **ASTS** | **LONG** | **Buy on Pullback:** ดักซื้อเมื่อราคาย่อตัวลึกสะท้อนข่าวร้ายการไดลูชั่นเสร็จสิ้น เนื่องจากโครงสร้างพื้นฐานดาวเทียมและความร่วมมือระยะยาวยังคงแข็งแกร่งตามมุมมองบวกของโบรกเกอร์ชั้นนำ | **แนวรับ:** จุดต่ำสุดของแนวโน้มการพักฐานรอบนี้<br>**แนวต้าน:** ขอบล่างของแก๊ปราคาที่ร่วงลงมา | ความล่าช้าเพิ่มเติมของแผนการส่งมอบดาวเทียมในช่วงปีหน้า |
-| **LCID** | **SHORT** | **Sell the Rip / Wait for Fade:** ไม่แนะนำให้ซื้อไล่ราคาเนื่องจากเป็นการขึ้นด้วยแรงบีบพอร์ตชอร์ตระยะสั้น (Short Squeeze) ควรรอให้โมเมนตัมเก็งกำไรแผ่วลงและเปิดสถานะชอร์ตเมื่อราคาหลุดแนวรับย่อยเพื่อทำกำไรตามปัจจัยพื้นฐานที่แท้จริง | **แนวรับ:** ฐานราคาก่อนเกิดกระแสลือล้มละลาย<br>**แนวต้าน:** ยอดสูงสุดของวันสควีซ | การอัดฉีดทุนเพิ่มเติมอย่างเหนือความคาดหมายจากกลุ่มทุนซาอุดีอาระเบีย (PIF) |
+| **MS** | **LONG** | **Play the Breakout / Pullback:** ดักสะสมตามข่าวซื้อหุ้นคืนปริมาณมากและอัตราปันผลที่เพิ่มขึ้น 15% นับเป็นจังหวะวางเงินที่มั่นคงสำหรับทิศทางเงินทุนหมุนเวียนรอบนี้ | **แนวรับ:** กรอบต้านจิตวิทยาเดิมที่พึ่งวิ่งพ้นขึ้นมา<br>**แนวต้าน:** ขอบสูงสุดของเส้นทางประวัติศาสตร์ | ความเปราะบางของดัชนีภาพรวมตลาดหากเกิดการเทขายเทคโนโลยีขนาดใหญ่ |
 
 ---
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 
-1.  **PayPal (PYPL) Stripe & Advent Take-Private Proposal:**
-    *   *Source 1:* Financial Times, "Stripe and Advent in joint $53bn bid for PayPal" (Published July 15, 2026).
-        *URL:* [https://www.ft.com/content/stripe-advent-paypal-bid](https://www.ft.com/content/stripe-advent-paypal-bid)
-    *   *Source 2:* Investing.com, "PayPal shares jump on reported Stripe acquisition interest" (Published July 16, 2026).
-        *URL:* [https://www.investing.com/news/stock-market-news/paypal-shares-jump-on-reported-stripe-acquisition-interest-2026-07-16/](https://www.investing.com/news/stock-market-news/paypal-shares-jump-on-reported-stripe-acquisition-interest-2026-07-16/)
+1.  **JPMorgan Chase (JPM) Q2 2026 Earnings & Shipbuilding Support:**
+    *   *Source 1:* JPMorgan Chase & Co. Investor Relations, "JPMorgan Chase Reports Second Quarter 2026 Financial Results" (Published July 15, 2026).
+        *URL:* [https://www.jPMorganchase.com/ir/q2-2026-financials](https://www.jpmorganchase.com/ir/q2-2026-financials)
+    *   *Source 2:* Business Wire Distribution Feed, "Chase Declares Preferred Dividends and Expands Regional Projects" (Published July 15, 2026).
+        *URL:* [https://www.businesswire.com/news/home/20260715005834/en/chase-preferred-dividends](https://www.businesswire.com/news/home/20260715005834/en/chase-preferred-dividends)
 
-2.  **AST SpaceMobile (ASTS) Convertible Notes & Delayed Launch:**
+2.  **Morgan Stanley (MS) Blockbuster Earnings & Dividend Increase:**
+    *   *Source 1:* Morgan Stanley Investor Relations, "Morgan Stanley Reports Q2 2026 Financial Performance, Increases Quarterly Dividend" (Published July 16, 2026).
+        *URL:* [https://www.morganstanley.com/about-us-ir/q2-2026-earnings](https://www.morganstanley.com/about-us-ir/q2-2026-earnings)
+    *   *Source 2:* FXLeaders Markets, "Morgan Stanley beats expectations with blockbuster Q2 earnings" (Published July 16, 2026).
+        *URL:* [https://www.fxleaders.com/news/morgan-stanley-q2-earnings-beat](https://www.fxleaders.com/news/morgan-stanley-q2-earnings-beat)
+
+3.  **AST SpaceMobile (ASTS) Convertible Notes & Delayed Launch:**
     *   *Source 1:* Fidelity Market News, "AST SpaceMobile Prices $1B Convertible Senior Notes Offering" (Published July 16, 2026).
         *URL:* [https://www.fidelity.com/news/article/asts-prices-convertible-notes](https://www.fidelity.com/news/article/asts-prices-convertible-notes)
     *   *Source 2:* Seeking Alpha, "AST SpaceMobile drops 12% on pricing of convertible notes" (Published July 16, 2026).
         *URL:* [https://seekingalpha.com/news/asts-drops-convertible-notes-pricing](https://seekingalpha.com/news/asts-drops-convertible-notes-pricing)
     *   *Source 3:* GuruFocus Financials, "Piper Sandler Initiates Coverage on AST SpaceMobile with Overweight Rating" (Published July 16, 2026).
         *URL:* [https://www.gurufocus.com/news/piper-sandler-initiates-asts-coverage-2026-07-16](https://www.gurufocus.com/news/piper-sandler-initiates-asts-coverage-2026-07-16)
-
-3.  **Lucid Group (LCID) Bankruptcy Rejection & Stock Surge:**
-    *   *Source 1:* TheStreet Markets, "Lucid stock surges 28% after CEO refutes bankruptcy rumors as fake news" (Published July 16, 2026).
-        *URL:* [https://www.thestreet.com/markets/lucid-stock-surges-ceo-refutes-bankruptcy-rumors](https://www.thestreet.com/markets/lucid-stock-surges-ceo-refutes-bankruptcy-rumors)
 
 4.  **TSMC (TSM) Q2 2026 Earnings & US Expansion Plans:**
     *   *Source 1:* TSMC Investor Relations, "TSMC Announces Q2 2026 Financial Results and Expansion Strategies" (Published July 16, 2026).
@@ -171,7 +173,7 @@
     *   *Source 1:* StockAnalysis News, "GameStop teams up with Uber Eats for on-demand gaming delivery" (Published July 16, 2026).
         *URL:* [https://stockanalysis.com/news/gamestop-uber-eats-partnership](https://stockanalysis.com/news/gamestop-uber-eats-partnership)
     *   *Source 2:* Bloomberg Technology Live, "Ryan Cohen on GameStop's Future and E-commerce Plans" (Aired July 16, 2026).
-        *URL:* [https://www.youtube.com/watch?v=bloomberg- Ryan-cohen-interview-2026](https://www.youtube.com/watch?v=bloomberg-ryan-cohen-interview-2026)
+        *URL:* [https://www.youtube.com/watch?v=bloomberg-ryan-cohen-interview-2026](https://www.youtube.com/watch?v=bloomberg-ryan-cohen-interview-2026)
 
 ---
 *คำเตือน: รายงานฉบับนี้จัดทำขึ้นเพื่อวัตถุประสงค์ในการให้ข้อมูลและการวิเคราะห์ตลาดการเงินเท่านั้น ไม่ใช่คำแนะนำในการลงทุน ชี้ชวน หรือเสนอแนะให้ซื้อหรือขายหลักทรัพย์ใด ๆ นักลงทุนควรประเมินความเสี่ยงและศึกษาข้อมูลอย่างรอบคอบ พร้อมทั้งระมัดระวังเป็นพิเศษในสภาวะตลาดที่มีความผันผวนสูง*
