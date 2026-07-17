@@ -1791,9 +1791,14 @@ function updateVisitorStatsDOM() {
 // ==========================================================================
 
 const defaultSrLevels = {
-    AMD: {
+    custom: {
         supports: [50.108, 42.52, 36.59],
         resistances: [63.47, 74.12, 80.83, 90.06],
+        currentPrice: 55.00
+    },
+    AMD: {
+        supports: [515.00, 495.00, 450.00],
+        resistances: [565.00, 580.00, 615.00, 630.00],
         currentPrice: 535.00
     },
     TSMC: {
@@ -1947,17 +1952,10 @@ function handleTickerChange() {
         elements.srTableTickerBadge.textContent = ticker === 'custom' ? 'CUSTOM' : ticker;
     }
     
-    if (ticker === 'custom') {
-        if (elements.srUseCurrentAsS0 && elements.srUseCurrentAsS0.checked) {
-            if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'block';
-        }
-        return;
-    }
-    
     const levels = defaultSrLevels[ticker];
     if (!levels) return;
     
-    const currentPriceVal = marketPrices[ticker] || levels.currentPrice;
+    const currentPriceVal = (ticker !== 'custom' && marketPrices[ticker]) || levels.currentPrice;
     if (elements.srCurrentPrice) {
         elements.srCurrentPrice.value = currentPriceVal;
     }
