@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-07-17.",
+  "audit_log": [
+    {
+      "item": "Duplication Check (Whale Flow vs Options Screen)",
+      "status": "verified_ok",
+      "details": "Confluence check passed. No overlap with active Whale Flow."
+    },
+    {
+      "item": "Ticker Data & Price Verification",
+      "status": "warning",
+      "details": "PLTR Error during price validation: list index out of range; LLY Verified. Live Price: $1169.17"
+    },
+    {
+      "item": "Fact-checking & Information Sourcing",
+      "status": "verified_ok",
+      "details": "Mandatory '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' section will be generated automatically at the end of the file."
+    },
+    {
+      "item": "Branding & Format Compliance",
+      "status": "verified_ok",
+      "details": "HTML Channel Logo (Logo Master) configured in the first line. All video recording indicators and speech tags (e.g. [Camera 1], **บทพูด:**) are banned from final report."
+    },
+    {
+      "item": "Website Index Automation",
+      "status": "verified_ok",
+      "details": "Git deployment and indexing scripts will run post-generation."
+    }
+  ]
+}

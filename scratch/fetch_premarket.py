@@ -1,35 +1,45 @@
 import yfinance as yf
 import json
+import sys
 
-tickers = ["ASML", "IBM", "BLK", "JNJ", "CELC", "SEI", "CPRX", "CLSK", "WULF", "AAL"]
-results = {}
+tickers = ["NFLX", "TRV", "RF", "FITB", "WDC", "STX", "MU", "CJMB", "BIYA", "GCTK", "SDOT", "PMAX", "VIVS", "JSPR", "VMAR", "KAPA", "RGNX"]
 
+result = {}
 for ticker in tickers:
     try:
         t = yf.Ticker(ticker)
         info = t.info
         
-        # Calculate premarket change
-        prev_close = info.get("previousClose") or info.get("regularMarketPreviousClose")
-        premarket_price = info.get("preMarketPrice")
+        # Extract pre-market data
+        pre_price = info.get("preMarketPrice")
+        pre_change = info.get("preMarketChangePercent")
+        pre_vol = info.get("preMarketVolume")
         
-        premarket_change = None
-        if premarket_price and prev_close:
-            premarket_change = ((premarket_price - prev_close) / prev_close) * 100
-            
-        results[ticker] = {
-            "name": info.get("longName"),
-            "business": info.get("longBusinessSummary"),
-            "sector": info.get("sector"),
-            "industry": info.get("industry"),
-            "prevClose": prev_close,
-            "preMarketPrice": premarket_price,
-            "preMarketChangePct": premarket_change,
-            "volume": info.get("volume") or info.get("regularMarketVolume"),
-            "avgVolume": info.get("averageVolume") or info.get("averageVolume10days"),
-            "marketCap": info.get("marketCap")
+        # Regular market data as fallback or comparison
+        reg_price = info.get("currentPrice") or info.get("regularMarketPrice")
+        reg_change = info.get("regularMarketChangePercent")
+        reg_vol = info.get("regularMarketVolume") or info.get("volume")
+        
+        prev_close = info.get("previousClose") or info.get("regularMarketPreviousClose")
+        market_cap = info.get("marketCap")
+        long_name = info.get("longName") or info.get("shortName") or ticker
+        industry = info.get("industry")
+        sector = info.get("sector")
+        
+        result[ticker] = {
+            "longName": long_name,
+            "sector": sector,
+            "industry": industry,
+            "marketCap": market_cap,
+            "previousClose": prev_close,
+            "preMarketPrice": pre_price,
+            "preMarketChangePercent": pre_change,
+            "preMarketVolume": pre_vol,
+            "regularMarketPrice": reg_price,
+            "regularMarketChangePercent": reg_change,
+            "regularMarketVolume": reg_vol
         }
     except Exception as e:
-        results[ticker] = {"error": str(e)}
+        result[ticker] = {"error": str(e)}
 
-print(json.dumps(results, indent=2))
+print(json.dumps(result, indent=2))
