@@ -321,7 +321,10 @@
 
                             <div class="sr-calc-input-group" id="sr-current-price-group" style="display: none;">
                                 <label for="sr-current-price" id="lbl-sr-current-price">ราคาปัจจุบัน (USD)</label>
-                                <input type="number" id="sr-current-price" value="535.00" step="0.01">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <input type="number" id="sr-current-price" value="535.00" step="0.01" style="flex-grow: 1;">
+                                    <button id="sr-btn-refresh-price" class="sr-refresh-price-btn" style="flex-shrink: 0;" title="ดึงราคารอบล่าสุด"><i class="fa-solid fa-rotate"></i></button>
+                                </div>
                             </div>
                         </div>
 

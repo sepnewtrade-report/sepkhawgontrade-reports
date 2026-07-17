@@ -490,7 +490,8 @@ const elements = {
     srTableTickerBadge: document.getElementById('sr-table-ticker-badge'),
     srTickerSearch: document.getElementById('sr-ticker-search'),
     srSuggestionsDropdown: document.getElementById('sr-suggestions-dropdown'),
-    srCustomName: document.getElementById('sr-custom-name')
+    srCustomName: document.getElementById('sr-custom-name'),
+    srBtnRefreshPrice: document.getElementById('sr-btn-refresh-price')
 };
 
 // Initialize Application
@@ -1886,6 +1887,63 @@ async function loadMarketPrices() {
     }
 }
 
+async function fetchLivePrice(ticker) {
+    if (!ticker || ticker === 'custom') return null;
+    
+    const priceInput = elements.srCurrentPrice;
+    if (priceInput) {
+        priceInput.classList.add('loading-price');
+    }
+    
+    try {
+        const cleanTicker = encodeURIComponent(ticker.trim().toUpperCase());
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${cleanTicker}?interval=1d&range=1d`)}`;
+        
+        const response = await fetch(proxyUrl);
+        if (response.ok) {
+            const data = await response.json();
+            if (data && data.chart && data.chart.result && data.chart.result[0]) {
+                const meta = data.chart.result[0].meta;
+                const livePrice = meta.regularMarketPrice;
+                if (livePrice && !isNaN(livePrice)) {
+                    marketPrices[ticker] = livePrice;
+                    if (priceInput) {
+                        priceInput.value = livePrice.toFixed(2);
+                    }
+                    
+                    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
+                    if (tickerSelect === 'custom') {
+                        const supports = [
+                            parseFloat((livePrice * 0.95).toFixed(3)),
+                            parseFloat((livePrice * 0.90).toFixed(3)),
+                            parseFloat((livePrice * 0.85).toFixed(3))
+                        ];
+                        const resistances = [
+                            parseFloat((livePrice * 1.05).toFixed(3)),
+                            parseFloat((livePrice * 1.10).toFixed(3)),
+                            parseFloat((livePrice * 1.15).toFixed(3)),
+                            parseFloat((livePrice * 1.20).toFixed(3))
+                        ];
+                        populateLevelInputs('support', supports);
+                        populateLevelInputs('resistance', resistances);
+                    }
+                    
+                    renderSrCalc();
+                    if (priceInput) priceInput.classList.remove('loading-price');
+                    return livePrice;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn(`Failed to fetch live price for ${ticker}:`, e);
+    }
+    
+    if (priceInput) {
+        priceInput.classList.remove('loading-price');
+    }
+    return null;
+}
+
 function openSrCalc() {
     document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
     
@@ -1965,9 +2023,38 @@ function setupSrInputListeners() {
     if (elements.srCustomName) {
         elements.srCustomName.addEventListener('input', () => {
             if (elements.srTickerSelect && elements.srTickerSelect.value === 'custom') {
+                const name = elements.srCustomName.value.trim().toUpperCase();
                 if (elements.srTableTickerBadge) {
-                    elements.srTableTickerBadge.textContent = elements.srCustomName.value.trim().toUpperCase() || 'CUSTOM';
+                    elements.srTableTickerBadge.textContent = name || 'CUSTOM';
                 }
+            }
+        });
+        
+        elements.srCustomName.addEventListener('blur', () => {
+            const name = elements.srCustomName.value.trim();
+            if (name && name !== 'Custom' && name.toLowerCase() !== 'custom') {
+                fetchLivePrice(name);
+            }
+        });
+        
+        elements.srCustomName.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const name = elements.srCustomName.value.trim();
+                if (name && name !== 'Custom' && name.toLowerCase() !== 'custom') {
+                    fetchLivePrice(name);
+                }
+            }
+        });
+    }
+    
+    if (elements.srBtnRefreshPrice) {
+        elements.srBtnRefreshPrice.addEventListener('click', () => {
+            const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
+            const ticker = tickerSelect === 'custom' 
+                ? (elements.srCustomName ? elements.srCustomName.value.trim() : '') 
+                : tickerSelect;
+            if (ticker) {
+                fetchLivePrice(ticker);
             }
         });
     }
@@ -2071,6 +2158,9 @@ function selectStockFromSearch(ticker, price) {
     }
     
     renderSrCalc();
+    
+    // Fetch live price
+    fetchLivePrice(ticker);
 }
 
 function handleTickerChange() {
@@ -2105,6 +2195,11 @@ function handleTickerChange() {
     populateLevelInputs('resistance', levels.resistances);
     
     renderSrCalc();
+    
+    // Fetch live price
+    if (ticker !== 'custom') {
+        fetchLivePrice(ticker);
+    }
 }
 
 function populateLevelInputs(type, values) {

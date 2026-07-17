@@ -2554,3 +2554,49 @@ body {
     color: var(--text-primary);
     flex-shrink: 0;
 }
+
+/* Price refresh button */
+.sr-refresh-price-btn {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sr-refresh-price-btn:hover {
+    background-color: var(--border-hover);
+    color: var(--text-primary);
+    border-color: var(--accent-purple);
+}
+
+.sr-refresh-price-btn:active {
+    transform: scale(0.95);
+}
+
+/* Price input loading state animation */
+.loading-price {
+    animation: pulse-border 1.5s infinite ease-in-out;
+    background-color: rgba(147, 51, 234, 0.05) !important;
+}
+
+@keyframes pulse-border {
+    0% {
+        border-color: var(--border-color);
+        box-shadow: none;
+    }
+    50% {
+        border-color: var(--accent-purple);
+        box-shadow: 0 0 8px rgba(147, 51, 234, 0.3);
+    }
+    100% {
+        border-color: var(--border-color);
+        box-shadow: none;
+    }
+}
+
