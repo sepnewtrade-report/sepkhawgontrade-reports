@@ -106,7 +106,12 @@ const translations = {
         lblSrResistances: "ระดับแนวต้าน (Sell at Resistance)",
         srAddSupport: "+ เพิ่มแนวรับ",
         srAddResistance: "+ เพิ่มแนวต้าน",
-        lblSrTableTitle: "ตารางคำนวณ แนวรับ-แนวต้าน"
+        lblSrTableTitle: "ตารางคำนวณ แนวรับ-แนวต้าน",
+        lblSrTickerSearch: "ค้นหาหุ้นในตลาด (เช่น NVDA, AAPL)",
+        placeholderTickerSearch: "พิมพ์ Ticker หรือชื่อหุ้น...",
+        lblSrCustomName: "ชื่อหุ้น / Ticker (ระบุเอง)",
+        placeholderCustomName: "พิมพ์ชื่อหุ้น (เช่น TSLA)",
+        noStocksFound: "ไม่พบข้อมูลหุ้นนี้"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -201,7 +206,12 @@ const translations = {
         lblSrResistances: "Resistance Levels (Sell)",
         srAddSupport: "+ Add Support",
         srAddResistance: "+ Add Resistance",
-        lblSrTableTitle: "Support & Resistance Grid"
+        lblSrTableTitle: "Support & Resistance Grid",
+        lblSrTickerSearch: "Search Stock (e.g. NVDA, AAPL)",
+        placeholderTickerSearch: "Type ticker or stock name...",
+        lblSrCustomName: "Stock Ticker / Name (Custom)",
+        placeholderCustomName: "Enter stock name (e.g., TSLA)",
+        noStocksFound: "No stocks found"
     }
 };
 
@@ -378,6 +388,18 @@ function updateUILanguage() {
     
     const lblSrTableTitleEl = document.getElementById('lbl-sr-table-title');
     if (lblSrTableTitleEl) lblSrTableTitleEl.textContent = t.lblSrTableTitle;
+
+    const lblSrTickerSearchEl = document.getElementById('lbl-sr-ticker-search');
+    if (lblSrTickerSearchEl) lblSrTickerSearchEl.textContent = t.lblSrTickerSearch;
+    
+    const srTickerSearchEl = document.getElementById('sr-ticker-search');
+    if (srTickerSearchEl) srTickerSearchEl.placeholder = t.placeholderTickerSearch;
+    
+    const lblSrCustomNameEl = document.getElementById('lbl-sr-custom-name');
+    if (lblSrCustomNameEl) lblSrCustomNameEl.textContent = t.lblSrCustomName;
+    
+    const srCustomNameEl = document.getElementById('sr-custom-name');
+    if (srCustomNameEl) srCustomNameEl.placeholder = t.placeholderCustomName;
     
     // Re-render S/R Calculator if active
     if (elements.srCalcView && elements.srCalcView.classList.contains('active')) {
@@ -465,7 +487,10 @@ const elements = {
     srAddSupport: document.getElementById('sr-add-support'),
     srAddResistance: document.getElementById('sr-add-resistance'),
     srOutputTable: document.getElementById('sr-output-table'),
-    srTableTickerBadge: document.getElementById('sr-table-ticker-badge')
+    srTableTickerBadge: document.getElementById('sr-table-ticker-badge'),
+    srTickerSearch: document.getElementById('sr-ticker-search'),
+    srSuggestionsDropdown: document.getElementById('sr-suggestions-dropdown'),
+    srCustomName: document.getElementById('sr-custom-name')
 };
 
 // Initialize Application
@@ -1829,6 +1854,7 @@ const defaultSrLevels = {
 };
 
 let marketPrices = {};
+let marketStocks = [];
 
 async function loadMarketPrices() {
     try {
@@ -1843,6 +1869,11 @@ async function loadMarketPrices() {
                                 const priceVal = parseFloat(stock.price.replace(/[$,]/g, ''));
                                 if (!isNaN(priceVal)) {
                                     marketPrices[stock.ticker] = priceVal;
+                                    marketStocks.push({
+                                        ticker: stock.ticker,
+                                        name: stock.name,
+                                        price: priceVal
+                                    });
                                 }
                             }
                         });
@@ -1931,6 +1962,16 @@ function setupSrInputListeners() {
         elements.srCurrentPrice.addEventListener('input', renderSrCalc);
     }
     
+    if (elements.srCustomName) {
+        elements.srCustomName.addEventListener('input', () => {
+            if (elements.srTickerSelect && elements.srTickerSelect.value === 'custom') {
+                if (elements.srTableTickerBadge) {
+                    elements.srTableTickerBadge.textContent = elements.srCustomName.value.trim().toUpperCase() || 'CUSTOM';
+                }
+            }
+        });
+    }
+    
     if (elements.srAddSupport) {
         elements.srAddSupport.addEventListener('click', () => {
             addManualLevelInput('support');
@@ -1942,14 +1983,114 @@ function setupSrInputListeners() {
             addManualLevelInput('resistance');
         });
     }
+    
+    setupAutocomplete();
+}
+
+function setupAutocomplete() {
+    const searchInput = elements.srTickerSearch;
+    const dropdown = elements.srSuggestionsDropdown;
+    if (!searchInput || !dropdown) return;
+    
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) {
+            dropdown.style.display = 'none';
+            return;
+        }
+        
+        const matches = marketStocks.filter(stock => 
+            stock.ticker.toLowerCase().includes(query) || 
+            stock.name.toLowerCase().includes(query)
+        ).slice(0, 8);
+        
+        if (matches.length === 0) {
+            dropdown.innerHTML = `<div class="sr-suggestion-item no-matches">${translations[appState.lang].noStocksFound}</div>`;
+        } else {
+            dropdown.innerHTML = matches.map(stock => `
+                <div class="sr-suggestion-item" data-ticker="${stock.ticker}" data-price="${stock.price}">
+                    <span class="sugg-ticker">${stock.ticker}</span>
+                    <span class="sugg-name">${stock.name}</span>
+                    <span class="sugg-price">$${stock.price.toFixed(2)}</span>
+                </div>
+            `).join('');
+            
+            dropdown.querySelectorAll('.sr-suggestion-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const ticker = item.getAttribute('data-ticker');
+                    const price = parseFloat(item.getAttribute('data-price'));
+                    selectStockFromSearch(ticker, price);
+                    dropdown.style.display = 'none';
+                    searchInput.value = '';
+                });
+            });
+        }
+        
+        dropdown.style.display = 'block';
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (e.target !== searchInput && !dropdown.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+}
+
+function selectStockFromSearch(ticker, price) {
+    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+    
+    const customNameGroup = document.getElementById('sr-custom-name-group');
+    if (customNameGroup) customNameGroup.style.display = 'block';
+    
+    if (elements.srCustomName) {
+        elements.srCustomName.value = ticker;
+    }
+    
+    if (elements.srCurrentPrice) {
+        elements.srCurrentPrice.value = price;
+    }
+    
+    const supports = [
+        parseFloat((price * 0.95).toFixed(3)),
+        parseFloat((price * 0.90).toFixed(3)),
+        parseFloat((price * 0.85).toFixed(3))
+    ];
+    
+    const resistances = [
+        parseFloat((price * 1.05).toFixed(3)),
+        parseFloat((price * 1.10).toFixed(3)),
+        parseFloat((price * 1.15).toFixed(3)),
+        parseFloat((price * 1.20).toFixed(3))
+    ];
+    
+    populateLevelInputs('support', supports);
+    populateLevelInputs('resistance', resistances);
+    
+    if (elements.srTableTickerBadge) {
+        elements.srTableTickerBadge.textContent = ticker;
+    }
+    
+    renderSrCalc();
 }
 
 function handleTickerChange() {
     if (!elements.srTickerSelect) return;
     const ticker = elements.srTickerSelect.value;
     
+    const customNameGroup = document.getElementById('sr-custom-name-group');
+    if (ticker === 'custom') {
+        if (customNameGroup) customNameGroup.style.display = 'block';
+    } else {
+        if (customNameGroup) customNameGroup.style.display = 'none';
+    }
+    
     if (elements.srTableTickerBadge) {
-        elements.srTableTickerBadge.textContent = ticker === 'custom' ? 'CUSTOM' : ticker;
+        if (ticker === 'custom') {
+            const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : 'CUSTOM';
+            elements.srTableTickerBadge.textContent = customNameVal || 'CUSTOM';
+        } else {
+            elements.srTableTickerBadge.textContent = ticker;
+        }
     }
     
     const levels = defaultSrLevels[ticker];
@@ -1984,6 +2125,9 @@ function populateLevelInputs(type, values) {
         
         item.querySelector('input').addEventListener('input', () => {
             if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+            if (elements.srCustomName) {
+                elements.srCustomName.value = 'CUSTOM';
+            }
             if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
             renderSrCalc();
         });
@@ -2021,6 +2165,9 @@ function addManualLevelInput(type) {
     
     item.querySelector('input').addEventListener('input', () => {
         if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+        if (elements.srCustomName) {
+            elements.srCustomName.value = 'CUSTOM';
+        }
         if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
         renderSrCalc();
     });
@@ -2028,6 +2175,9 @@ function addManualLevelInput(type) {
     container.appendChild(item);
     
     if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+    if (elements.srCustomName) {
+        elements.srCustomName.value = 'CUSTOM';
+    }
     if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
     
     renderSrCalc();
@@ -2038,6 +2188,20 @@ function renderSrCalc() {
     
     const t = translations[appState.lang];
     const investment = parseFloat(elements.srInvestment.value) || 1000;
+    
+    // Read Ticker Name to display on badge
+    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
+    let tickerName = 'CUSTOM';
+    if (tickerSelect === 'custom') {
+        const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : '';
+        tickerName = customNameVal || 'CUSTOM';
+    } else {
+        tickerName = tickerSelect;
+    }
+    
+    if (elements.srTableTickerBadge) {
+        elements.srTableTickerBadge.textContent = tickerName;
+    }
     
     const supports = [];
     

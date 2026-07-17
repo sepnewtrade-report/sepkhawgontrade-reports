@@ -294,6 +294,14 @@
                             </div>
 
                             <div class="sr-calc-input-group">
+                                <label for="sr-ticker-search" id="lbl-sr-ticker-search">ค้นหาหุ้นในตลาด (เช่น NVDA, AAPL)</label>
+                                <div class="sr-search-wrapper" style="position: relative;">
+                                    <input type="text" id="sr-ticker-search" placeholder="พิมพ์ Ticker หรือชื่อหุ้น..." autocomplete="off">
+                                    <div class="sr-suggestions-dropdown" id="sr-suggestions-dropdown" style="display: none;"></div>
+                                </div>
+                            </div>
+
+                            <div class="sr-calc-input-group">
                                 <label for="sr-ticker-select" id="lbl-sr-ticker-select">เลือกหุ้นจากบทวิเคราะห์</label>
                                 <select id="sr-ticker-select">
                                     <option value="custom" id="opt-sr-custom" selected>-- ป้อนข้อมูลเอง (Custom) --</option>
@@ -304,6 +312,11 @@
                                     <option value="UNH">UNH (UnitedHealth)</option>
                                     <option value="GW">GW (GW Pharmaceuticals)</option>
                                 </select>
+                            </div>
+
+                            <div class="sr-calc-input-group" id="sr-custom-name-group">
+                                <label for="sr-custom-name" id="lbl-sr-custom-name">ชื่อหุ้น / Ticker (ระบุเอง)</label>
+                                <input type="text" id="sr-custom-name" value="Custom" placeholder="พิมพ์ชื่อหุ้น (เช่น TSLA)">
                             </div>
 
                             <div class="sr-calc-input-group" id="sr-current-price-group" style="display: none;">
