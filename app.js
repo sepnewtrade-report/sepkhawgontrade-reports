@@ -1897,7 +1897,8 @@ async function fetchLivePrice(ticker) {
     
     const cleanTicker = encodeURIComponent(ticker.trim().toUpperCase());
     const timestamp = Date.now();
-    const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${cleanTicker}&nocache=${timestamp}`;
+    // Revert to v8/finance/chart which is public and open (does not return 401 Unauthorized)
+    const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${cleanTicker}?interval=1d&range=1d&nocache=${timestamp}`;
     
     // Fallback array of CORS proxies to ensure 100% availability
     const proxies = [
@@ -1910,9 +1911,10 @@ async function fetchLivePrice(ticker) {
             const response = await fetch(proxyUrl);
             if (response.ok) {
                 const data = await response.json();
-                if (data && data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
-                    const result = data.quoteResponse.result[0];
-                    const livePrice = result.regularMarketPrice;
+                if (data && data.chart && data.chart.result && data.chart.result[0]) {
+                    const result = data.chart.result[0];
+                    const meta = result.meta;
+                    const livePrice = meta.regularMarketPrice || meta.chartPreviousClose;
                     if (livePrice && !isNaN(livePrice)) {
                         marketPrices[ticker] = livePrice;
                         if (priceInput) {
