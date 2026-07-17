@@ -91,7 +91,22 @@ const translations = {
         placeholderQty: "จำนวน",
         visitLabel: "ผู้เข้าชม:",
         onlineLabel: "ออนไลน์:",
-        statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว"
+        statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว",
+        lblNavSrCalc: "ตารางคำนวณ แนวรับ-แนวต้าน",
+        srCalcTitle: "📐 ตารางคำนวณ แนวรับ-แนวต้าน",
+        srCalcSubtitle: "เครื่องมือคำนวณสัดส่วนกำไรและเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน",
+        lblSrInvestment: "ใส่เงินลงทุนเพิ่ม (USD)",
+        lblSrRemember: "จดจำจำนวนเงินนี้ไว้",
+        lblSrUseS0: "ใช้ราคาปัจจุบันเป็น S0",
+        lblSrTickerSelect: "เลือกหุ้นจากบทวิเคราะห์",
+        optSrCustom: "-- ป้อนข้อมูลเอง (Custom) --",
+        lblSrCurrentPrice: "ราคาปัจจุบัน (USD)",
+        lblSrManualTitle: "กำหนดระดับราคาแนวรับ-แนวต้าน",
+        lblSrSupports: "ระดับแนวรับ (Buy at Support)",
+        lblSrResistances: "ระดับแนวต้าน (Sell at Resistance)",
+        srAddSupport: "+ เพิ่มแนวรับ",
+        srAddResistance: "+ เพิ่มแนวต้าน",
+        lblSrTableTitle: "ตารางคำนวณ แนวรับ-แนวต้าน"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -171,7 +186,22 @@ const translations = {
         placeholderQty: "Qty",
         visitLabel: "Visits:",
         onlineLabel: "Online:",
-        statusConnected: "Connected to News Database"
+        statusConnected: "Connected to News Database",
+        lblNavSrCalc: "S/R Calculator",
+        srCalcTitle: "📐 Support & Resistance Calculator",
+        srCalcSubtitle: "Calculate profit margins and return targets from support-resistance zones",
+        lblSrInvestment: "Investment Amount (USD)",
+        lblSrRemember: "Remember this investment",
+        lblSrUseS0: "Use current price as S0",
+        lblSrTickerSelect: "Select Ticker from Reports",
+        optSrCustom: "-- Manual Input (Custom) --",
+        lblSrCurrentPrice: "Current Price (USD)",
+        lblSrManualTitle: "Configure Support & Resistance Levels",
+        lblSrSupports: "Support Levels (Buy)",
+        lblSrResistances: "Resistance Levels (Sell)",
+        srAddSupport: "+ Add Support",
+        srAddResistance: "+ Add Resistance",
+        lblSrTableTitle: "Support & Resistance Grid"
     }
 };
 
@@ -306,6 +336,54 @@ function updateUILanguage() {
     if (elements.addStockBtn) elements.addStockBtn.textContent = t.addStockBtn;
     if (elements.refreshBtn) elements.refreshBtn.textContent = t.refreshBtn;
     
+    // Update S/R Calculator translations
+    const srCalcTitleEl = document.getElementById('sr-calc-title');
+    if (srCalcTitleEl) srCalcTitleEl.textContent = t.srCalcTitle;
+    
+    const srCalcSubtitleEl = document.getElementById('sr-calc-subtitle');
+    if (srCalcSubtitleEl) srCalcSubtitleEl.textContent = t.srCalcSubtitle;
+    
+    const navSrCalcEl = document.getElementById('lbl-nav-sr-calc');
+    if (navSrCalcEl) navSrCalcEl.textContent = t.lblNavSrCalc;
+    
+    const lblSrInvestmentEl = document.getElementById('lbl-sr-investment');
+    if (lblSrInvestmentEl) lblSrInvestmentEl.textContent = t.lblSrInvestment;
+    
+    const lblSrRememberEl = document.getElementById('lbl-sr-remember');
+    if (lblSrRememberEl) lblSrRememberEl.textContent = t.lblSrRemember;
+    
+    const lblSrUseS0El = document.getElementById('lbl-sr-use-s0');
+    if (lblSrUseS0El) lblSrUseS0El.textContent = t.lblSrUseS0;
+    
+    const lblSrTickerSelectEl = document.getElementById('lbl-sr-ticker-select');
+    if (lblSrTickerSelectEl) lblSrTickerSelectEl.textContent = t.lblSrTickerSelect;
+    
+    const optSrCustomEl = document.getElementById('opt-sr-custom');
+    if (optSrCustomEl) optSrCustomEl.textContent = t.optSrCustom;
+    
+    const lblSrCurrentPriceEl = document.getElementById('lbl-sr-current-price');
+    if (lblSrCurrentPriceEl) lblSrCurrentPriceEl.textContent = t.lblSrCurrentPrice;
+    
+    const lblSrManualTitleEl = document.getElementById('lbl-sr-manual-title');
+    if (lblSrManualTitleEl) lblSrManualTitleEl.textContent = t.lblSrManualTitle;
+    
+    const lblSrSupportsEl = document.getElementById('lbl-sr-supports');
+    if (lblSrSupportsEl) lblSrSupportsEl.textContent = t.lblSrSupports;
+    
+    const lblSrResistancesEl = document.getElementById('lbl-sr-resistances');
+    if (lblSrResistancesEl) lblSrResistancesEl.textContent = t.lblSrResistances;
+    
+    if (elements.srAddSupport) elements.srAddSupport.textContent = t.srAddSupport;
+    if (elements.srAddResistance) elements.srAddResistance.textContent = t.srAddResistance;
+    
+    const lblSrTableTitleEl = document.getElementById('lbl-sr-table-title');
+    if (lblSrTableTitleEl) lblSrTableTitleEl.textContent = t.lblSrTableTitle;
+    
+    // Re-render S/R Calculator if active
+    if (elements.srCalcView && elements.srCalcView.classList.contains('active')) {
+        renderSrCalc();
+    }
+    
     // Re-render portfolio content if it's currently active
     if (elements.portfolioView && elements.portfolioView.classList.contains('active')) {
         renderPortfolio();
@@ -372,7 +450,22 @@ const elements = {
     addStockBtn: document.getElementById('add-stock-btn'),
     refreshBtn: document.getElementById('refresh-btn'),
     stockList: document.getElementById('stock-list'),
-    navBotTrade: document.getElementById('nav-bot-trade')
+    navBotTrade: document.getElementById('nav-bot-trade'),
+    
+    // SR Calculator Elements
+    srCalcView: document.getElementById('sr-calc-view'),
+    srInvestment: document.getElementById('sr-investment'),
+    srRememberInvestment: document.getElementById('sr-remember-investment'),
+    srUseCurrentAsS0: document.getElementById('sr-use-current-as-s0'),
+    srTickerSelect: document.getElementById('sr-ticker-select'),
+    srCurrentPrice: document.getElementById('sr-current-price'),
+    srCurrentPriceGroup: document.getElementById('sr-current-price-group'),
+    supportInputsContainer: document.getElementById('support-inputs-container'),
+    resistanceInputsContainer: document.getElementById('resistance-inputs-container'),
+    srAddSupport: document.getElementById('sr-add-support'),
+    srAddResistance: document.getElementById('sr-add-resistance'),
+    srOutputTable: document.getElementById('sr-output-table'),
+    srTableTickerBadge: document.getElementById('sr-table-ticker-badge')
 };
 
 // Initialize Application
@@ -386,6 +479,9 @@ if (document.readyState === 'loading') {
 
 async function initApp() {
     setupEventListeners();
+    
+    // Load real-time market prices if available
+    await loadMarketPrices();
     
     // Initialize visitor statistics
     initVisitorStats();
@@ -495,6 +591,14 @@ function setupEventListeners() {
         });
     }
 
+    const navSr = document.getElementById('nav-sr-calc');
+    if (navSr) {
+        navSr.addEventListener('click', () => {
+            window.location.hash = 'sr-calc';
+            closeMobileSidebar();
+        });
+    }
+
     if (elements.navBotTrade) {
         elements.navBotTrade.addEventListener('click', () => {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
@@ -568,14 +672,21 @@ function handleRouting() {
     // Expected hash format: #report=category/file.md or #report=file.md
     if (hash && hash.startsWith('#report=')) {
         closePortfolio();
+        closeSrCalc();
         const filePath = decodeURIComponent(hash.substring(8));
         openReport(filePath);
     } else if (hash === '#portfolio') {
         closeReport();
+        closeSrCalc();
         openPortfolio();
+    } else if (hash === '#sr-calc') {
+        closeReport();
+        closePortfolio();
+        openSrCalc();
     } else {
         closePortfolio();
         closeReport();
+        closeSrCalc();
         renderCatalog();
     }
 }
@@ -1673,4 +1784,351 @@ function updateVisitorStatsDOM() {
     
     document.querySelectorAll('.visit-count-val').forEach(el => el.textContent = visits);
     document.querySelectorAll('.online-count-val').forEach(el => el.textContent = online);
+}
+
+// ==========================================================================
+// Support & Resistance Calculator Functionality
+// ==========================================================================
+
+const defaultSrLevels = {
+    AMD: {
+        supports: [50.108, 42.52, 36.59],
+        resistances: [63.47, 74.12, 80.83, 90.06],
+        currentPrice: 535.00
+    },
+    TSMC: {
+        supports: [430.00, 420.00, 410.00],
+        resistances: [460.00, 465.00, 480.00, 500.00],
+        currentPrice: 440.00
+    },
+    UNH: {
+        supports: [415.00, 410.00, 405.00],
+        resistances: [440.00, 460.00, 480.00],
+        currentPrice: 420.00
+    },
+    SNPS: {
+        supports: [580.00, 560.00, 540.00],
+        resistances: [620.00, 640.00, 660.00, 680.00],
+        currentPrice: 600.00
+    },
+    CCXI: {
+        supports: [38.00, 36.00, 34.00],
+        resistances: [42.00, 44.00, 46.00, 48.00],
+        currentPrice: 40.00
+    },
+    GW: {
+        supports: [140.00, 135.00, 130.00],
+        resistances: [155.00, 160.00, 165.00, 170.00],
+        currentPrice: 148.00
+    }
+};
+
+let marketPrices = {};
+
+async function loadMarketPrices() {
+    try {
+        const response = await fetch('raw_market_today.json');
+        if (response.ok) {
+            const data = await response.json();
+            if (data && data.sectors) {
+                data.sectors.forEach(sector => {
+                    if (sector.stocks) {
+                        sector.stocks.forEach(stock => {
+                            if (stock.ticker && stock.price) {
+                                const priceVal = parseFloat(stock.price.replace(/[$,]/g, ''));
+                                if (!isNaN(priceVal)) {
+                                    marketPrices[stock.ticker] = priceVal;
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    } catch (e) {
+        console.warn('Unable to load real-time prices, using local defaults.', e);
+    }
+}
+
+function openSrCalc() {
+    document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+    
+    const navSr = document.getElementById('nav-sr-calc');
+    if (navSr) navSr.classList.add('active');
+    
+    elements.catalogView.classList.remove('active');
+    elements.readerView.classList.remove('active');
+    if (elements.portfolioView) elements.portfolioView.classList.remove('active');
+    if (elements.srCalcView) elements.srCalcView.classList.add('active');
+    
+    // Load state
+    const savedInvestment = localStorage.getItem('sep_sr_investment');
+    if (savedInvestment && elements.srInvestment) {
+        elements.srInvestment.value = savedInvestment;
+    }
+    const savedRemember = localStorage.getItem('sep_sr_remember_investment');
+    if (savedRemember !== null && elements.srRememberInvestment) {
+        elements.srRememberInvestment.checked = savedRemember === 'true';
+    }
+    
+    // Setup inputs and render
+    setupSrInputListeners();
+    handleTickerChange();
+    renderSrCalc();
+}
+
+function closeSrCalc() {
+    if (elements.srCalcView) elements.srCalcView.classList.remove('active');
+    const navSr = document.getElementById('nav-sr-calc');
+    if (navSr) navSr.classList.remove('active');
+}
+
+function setupSrInputListeners() {
+    if (window.srListenersAttached) return;
+    window.srListenersAttached = true;
+    
+    if (elements.srInvestment) {
+        elements.srInvestment.addEventListener('input', () => {
+            if (elements.srRememberInvestment && elements.srRememberInvestment.checked) {
+                localStorage.setItem('sep_sr_investment', elements.srInvestment.value);
+            }
+            renderSrCalc();
+        });
+    }
+    
+    if (elements.srRememberInvestment) {
+        elements.srRememberInvestment.addEventListener('change', () => {
+            localStorage.setItem('sep_sr_remember_investment', elements.srRememberInvestment.checked);
+            if (elements.srRememberInvestment.checked && elements.srInvestment) {
+                localStorage.setItem('sep_sr_investment', elements.srInvestment.value);
+            } else {
+                localStorage.removeItem('sep_sr_investment');
+            }
+        });
+    }
+    
+    if (elements.srUseCurrentAsS0) {
+        elements.srUseCurrentAsS0.addEventListener('change', () => {
+            if (elements.srUseCurrentAsS0.checked) {
+                if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'block';
+            } else {
+                if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'none';
+            }
+            renderSrCalc();
+        });
+    }
+    
+    if (elements.srTickerSelect) {
+        elements.srTickerSelect.addEventListener('change', handleTickerChange);
+    }
+    
+    if (elements.srCurrentPrice) {
+        elements.srCurrentPrice.addEventListener('input', renderSrCalc);
+    }
+    
+    if (elements.srAddSupport) {
+        elements.srAddSupport.addEventListener('click', () => {
+            addManualLevelInput('support');
+        });
+    }
+    
+    if (elements.srAddResistance) {
+        elements.srAddResistance.addEventListener('click', () => {
+            addManualLevelInput('resistance');
+        });
+    }
+}
+
+function handleTickerChange() {
+    if (!elements.srTickerSelect) return;
+    const ticker = elements.srTickerSelect.value;
+    
+    if (elements.srTableTickerBadge) {
+        elements.srTableTickerBadge.textContent = ticker === 'custom' ? 'CUSTOM' : ticker;
+    }
+    
+    if (ticker === 'custom') {
+        if (elements.srUseCurrentAsS0 && elements.srUseCurrentAsS0.checked) {
+            if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'block';
+        }
+        return;
+    }
+    
+    const levels = defaultSrLevels[ticker];
+    if (!levels) return;
+    
+    const currentPriceVal = marketPrices[ticker] || levels.currentPrice;
+    if (elements.srCurrentPrice) {
+        elements.srCurrentPrice.value = currentPriceVal;
+    }
+    
+    populateLevelInputs('support', levels.supports);
+    populateLevelInputs('resistance', levels.resistances);
+    
+    renderSrCalc();
+}
+
+function populateLevelInputs(type, values) {
+    const container = type === 'support' ? elements.supportInputsContainer : elements.resistanceInputsContainer;
+    if (!container) return;
+    
+    container.innerHTML = '';
+    values.forEach((val, idx) => {
+        const item = document.createElement('div');
+        item.className = 'sr-level-input-item';
+        
+        const labelText = type === 'support' ? `S${idx + 1}` : `R${idx + 1}`;
+        item.innerHTML = `
+            <span>${labelText}</span>
+            <input type="number" class="${type}-input" data-index="${idx + 1}" value="${val}" step="0.001">
+            <button class="sr-delete-level-btn" onclick="this.parentElement.remove(); renderSrCalc();"><i class="fa-solid fa-trash-can"></i></button>
+        `;
+        
+        item.querySelector('input').addEventListener('input', () => {
+            if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+            if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
+            renderSrCalc();
+        });
+        
+        container.appendChild(item);
+    });
+}
+
+function addManualLevelInput(type) {
+    const container = type === 'support' ? elements.supportInputsContainer : elements.resistanceInputsContainer;
+    if (!container) return;
+    
+    const inputs = container.querySelectorAll(`.${type}-input`);
+    const nextIdx = inputs.length + 1;
+    
+    const item = document.createElement('div');
+    item.className = 'sr-level-input-item';
+    
+    const labelText = type === 'support' ? `S${nextIdx}` : `R${nextIdx}`;
+    
+    let suggestedVal = 0;
+    if (inputs.length > 0) {
+        const lastVal = parseFloat(inputs[inputs.length - 1].value) || 0;
+        suggestedVal = type === 'support' ? lastVal * 0.95 : lastVal * 1.05;
+    } else {
+        suggestedVal = type === 'support' ? 100 : 110;
+    }
+    suggestedVal = parseFloat(suggestedVal.toFixed(3));
+    
+    item.innerHTML = `
+        <span>${labelText}</span>
+        <input type="number" class="${type}-input" data-index="${nextIdx}" value="${suggestedVal}" step="0.001">
+        <button class="sr-delete-level-btn" onclick="this.parentElement.remove(); renderSrCalc();"><i class="fa-solid fa-trash-can"></i></button>
+    `;
+    
+    item.querySelector('input').addEventListener('input', () => {
+        if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+        if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
+        renderSrCalc();
+    });
+    
+    container.appendChild(item);
+    
+    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+    if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
+    
+    renderSrCalc();
+}
+
+function renderSrCalc() {
+    if (!elements.srOutputTable) return;
+    
+    const t = translations[appState.lang];
+    const investment = parseFloat(elements.srInvestment.value) || 1000;
+    
+    const supports = [];
+    
+    if (elements.srUseCurrentAsS0 && elements.srUseCurrentAsS0.checked) {
+        const currentPriceVal = parseFloat(elements.srCurrentPrice.value);
+        if (!isNaN(currentPriceVal) && currentPriceVal > 0) {
+            supports.push({ name: 'S0 (ราคาปัจจุบัน)', price: currentPriceVal });
+        }
+    }
+    
+    if (elements.supportInputsContainer) {
+        const sInputs = elements.supportInputsContainer.querySelectorAll('.support-input');
+        sInputs.forEach((input, index) => {
+            const val = parseFloat(input.value);
+            if (!isNaN(val) && val > 0) {
+                supports.push({ name: `S${index + 1}`, price: val });
+            }
+        });
+    }
+    
+    const resistances = [];
+    if (elements.resistanceInputsContainer) {
+        const rInputs = elements.resistanceInputsContainer.querySelectorAll('.resistance-input');
+        rInputs.forEach((input, index) => {
+            const val = parseFloat(input.value);
+            if (!isNaN(val) && val > 0) {
+                resistances.push({ name: `R${index + 1}`, price: val });
+            }
+        });
+    }
+    
+    let tableHtml = '';
+    
+    tableHtml += '<thead><tr>';
+    tableHtml += `<th><div class="sr-corner-label">${t.tagBuy} \\ ${t.tagSell}</div></th>`;
+    resistances.forEach(r => {
+        tableHtml += `
+            <th>
+                <div class="sr-r-header-col">${r.name}</div>
+                <div class="sr-r-price-val">$${r.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 3})}</div>
+            </th>
+        `;
+    });
+    tableHtml += '</tr></thead>';
+    
+    tableHtml += '<tbody>';
+    
+    if (supports.length === 0 || resistances.length === 0) {
+        const colsSpan = resistances.length + 1;
+        tableHtml += `
+            <tr>
+                <td colspan="${colsSpan}" style="text-align: center; color: var(--text-muted); padding: 40px 0;">
+                    <i class="fa-solid fa-calculator" style="font-size: 24px; margin-bottom: 8px; display: block;"></i>
+                    กรุณากรอกระดับแนวรับและแนวต้าน
+                </td>
+            </tr>
+        `;
+    } else {
+        supports.forEach(s => {
+            tableHtml += '<tr>';
+            tableHtml += `
+                <td>
+                    <div class="sr-s-header-row">${s.name}</div>
+                    <div class="sr-s-price-val">$${s.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 3})}</div>
+                </td>
+            `;
+            
+            resistances.forEach(r => {
+                const profitPct = ((r.price / s.price) - 1) * 100;
+                const profitVal = investment * ((r.price / s.price) - 1);
+                
+                const isPositive = profitVal >= 0;
+                const profitClass = isPositive ? 'sr-cell-positive' : 'sr-cell-negative';
+                const sign = isPositive ? '+' : '';
+                
+                const formattedProfit = `${sign}$${profitVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                const formattedPct = `${sign}${profitPct.toFixed(2)}%`;
+                
+                tableHtml += `
+                    <td class="${profitClass}">
+                        <div class="sr-cell-profit">${formattedProfit}</div>
+                        <div class="sr-cell-pct">(${formattedPct})</div>
+                    </td>
+                `;
+            });
+            tableHtml += '</tr>';
+        });
+    }
+    
+    tableHtml += '</tbody>';
+    elements.srOutputTable.innerHTML = tableHtml;
 }
