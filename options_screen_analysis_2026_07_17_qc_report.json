@@ -8,8 +8,8 @@
     },
     {
       "item": "Ticker Data & Price Verification",
-      "status": "warning",
-      "details": "PLTR Error during price validation: list index out of range; LLY Verified. Live Price: $1169.17"
+      "status": "verified_ok",
+      "details": "AAPL Verified. Live Price: $333.26; MSFT Verified. Live Price: $401.10; GOOGL Verified. Live Price: $354.46; AMZN Verified. Live Price: $249.89; NVDA Verified. Live Price: $207.40; AMD Verified. Live Price: $500.94; PLTR Verified. Live Price: $134.44; TSM Verified. Live Price: $409.74; META Verified. Live Price: $664.54; AVGO Verified. Live Price: $374.45; SMCI Verified. Live Price: $24.68; MRVL Verified. Live Price: $188.30; LLY Verified. Live Price: $1169.17; TSLA Verified. Live Price: $391.06; NFLX Verified. Live Price: $74.35; QCOM Verified. Live Price: $170.61"
     },
     {
       "item": "Fact-checking & Information Sourcing",

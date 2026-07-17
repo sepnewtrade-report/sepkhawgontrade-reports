@@ -20,6 +20,31 @@ def normal_pdf(x):
 def normal_cdf(x):
     return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
+def bs_price(S, K, T_days, sigma, r=0.045, option_type="call"):
+    T = T_days / 365.0
+    if T <= 0:
+        T = 0.5 / 365.0
+    if sigma <= 0:
+        sigma = 0.01
+    d1 = (math.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
+    d2 = d1 - sigma * math.sqrt(T)
+    if option_type == "call":
+        return S * normal_cdf(d1) - K * math.exp(-r * T) * normal_cdf(d2)
+    else:
+        return K * math.exp(-r * T) * normal_cdf(-d2) - S * normal_cdf(-d1)
+
+def find_implied_vol(price, S, K, T_days, r=0.045, option_type="call"):
+    low = 0.001
+    high = 5.0
+    for _ in range(100):
+        mid = (low + high) / 2.0
+        p = bs_price(S, K, T_days, mid, r, option_type)
+        if p < price:
+            low = mid
+        else:
+            high = mid
+    return (low + high) / 2.0
+
 def calculate_bs_greeks(S, K, T_days, sigma, r=0.045, option_type="call"):
     if T_days <= 0:
         T_days = 0.5  # avoid division by zero
@@ -47,6 +72,7 @@ def calculate_bs_greeks(S, K, T_days, sigma, r=0.045, option_type="call"):
         "theta": float(theta),
         "prob_itm": float(prob_itm)
     }
+
 
 
 class ShortSqueezeStrategy(BaseStrategy):
@@ -234,6 +260,11 @@ class OptionsScreenStrategy(BaseStrategy):
                     premium = contract.get("lastPrice") or (contract.get("bid", 0) + contract.get("ask", 0)) / 2.0
                     iv = contract.get("impliedVolatility", 0.0)
                     
+                    if premium > 0 and iv < 0.05:
+                        recalc_iv = find_implied_vol(premium, current_price, strike, dte, option_type="call" if o_type == "calls" else "put")
+                        if recalc_iv > 0:
+                            iv = recalc_iv
+                            
                     if premium <= 0 or iv <= 0:
                         continue
                         

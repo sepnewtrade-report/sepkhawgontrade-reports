@@ -55,8 +55,13 @@ def run_qc_audit(date_str, options_signals, output_md_path):
             t = yf.Ticker(ticker)
             live_price = t.info.get("currentPrice") or t.info.get("regularMarketPrice")
             if live_price:
-                diff_pct = abs(live_price - sig.get("short_term_candidates", [{}])[0].get("premium", live_price)) / live_price
-                price_details.append(f"{ticker} Verified. Live Price: ${live_price:.2f}")
+                candidates = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
+                if candidates:
+                    premium_val = candidates[0].get("premium", live_price)
+                    diff_pct = abs(live_price - premium_val) / live_price
+                    price_details.append(f"{ticker} Verified. Live Price: ${live_price:.2f}")
+                else:
+                    price_details.append(f"{ticker} Warning: No options candidates found.")
             else:
                 price_details.append(f"{ticker} Warning: Could not fetch fresh quote.")
                 price_ok = False
