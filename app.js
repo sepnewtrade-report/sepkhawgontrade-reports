@@ -2091,8 +2091,18 @@ function setupAutocomplete() {
             stock.name.toLowerCase().includes(query)
         ).slice(0, 8);
         
+        const isThai = appState.lang === 'th';
+        const fetchLabel = isThai 
+            ? `ดึงข้อมูลหุ้น <strong>${query.toUpperCase()}</strong> สดจากตลาด` 
+            : `Fetch live data for <strong>${query.toUpperCase()}</strong> from market`;
+        
         if (matches.length === 0) {
-            dropdown.innerHTML = `<div class="sr-suggestion-item no-matches">${translations[appState.lang].noStocksFound}</div>`;
+            dropdown.innerHTML = `
+                <div class="sr-suggestion-item no-matches">${translations[appState.lang].noStocksFound}</div>
+                <div class="sr-suggestion-item custom-ticker-option" data-ticker="${query.toUpperCase()}" style="border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: start;">
+                    <span style="flex-grow: 1; text-align: left; color: var(--accent-purple);"><i class="fa-solid fa-cloud-arrow-down" style="margin-right: 8px;"></i> ${fetchLabel}</span>
+                </div>
+            `;
         } else {
             dropdown.innerHTML = matches.map(stock => `
                 <div class="sr-suggestion-item" data-ticker="${stock.ticker}" data-price="${stock.price}">
@@ -2101,15 +2111,28 @@ function setupAutocomplete() {
                     <span class="sugg-price">$${stock.price.toFixed(2)}</span>
                 </div>
             `).join('');
-            
-            dropdown.querySelectorAll('.sr-suggestion-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const ticker = item.getAttribute('data-ticker');
-                    const price = parseFloat(item.getAttribute('data-price'));
-                    selectStockFromSearch(ticker, price);
-                    dropdown.style.display = 'none';
-                    searchInput.value = '';
-                });
+        }
+        
+        // Setup click listener for matching items
+        dropdown.querySelectorAll('.sr-suggestion-item:not(.no-matches):not(.custom-ticker-option)').forEach(item => {
+            item.addEventListener('click', () => {
+                const ticker = item.getAttribute('data-ticker');
+                const price = parseFloat(item.getAttribute('data-price'));
+                selectStockFromSearch(ticker, price);
+                dropdown.style.display = 'none';
+                searchInput.value = '';
+            });
+        });
+        
+        // Setup click listener for custom unrecognized stock item
+        const customOpt = dropdown.querySelector('.custom-ticker-option');
+        if (customOpt) {
+            customOpt.addEventListener('click', () => {
+                const ticker = customOpt.getAttribute('data-ticker');
+                // Set default/placeholder 10.00 first, selectStockFromSearch will immediately call fetchLivePrice to override it
+                selectStockFromSearch(ticker, 10.00);
+                dropdown.style.display = 'none';
+                searchInput.value = '';
             });
         }
         
