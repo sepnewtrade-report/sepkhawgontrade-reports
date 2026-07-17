@@ -1895,47 +1895,56 @@ async function fetchLivePrice(ticker) {
         priceInput.classList.add('loading-price');
     }
     
-    try {
-        const cleanTicker = encodeURIComponent(ticker.trim().toUpperCase());
-        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${cleanTicker}?interval=1d&range=1d`)}`;
-        
-        const response = await fetch(proxyUrl);
-        if (response.ok) {
-            const data = await response.json();
-            if (data && data.chart && data.chart.result && data.chart.result[0]) {
-                const meta = data.chart.result[0].meta;
-                const livePrice = meta.regularMarketPrice;
-                if (livePrice && !isNaN(livePrice)) {
-                    marketPrices[ticker] = livePrice;
-                    if (priceInput) {
-                        priceInput.value = livePrice.toFixed(2);
+    const cleanTicker = encodeURIComponent(ticker.trim().toUpperCase());
+    const timestamp = Date.now();
+    const yahooUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${cleanTicker}&nocache=${timestamp}`;
+    
+    // Fallback array of CORS proxies to ensure 100% availability
+    const proxies = [
+        `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`
+    ];
+    
+    for (let proxyUrl of proxies) {
+        try {
+            const response = await fetch(proxyUrl);
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) {
+                    const result = data.quoteResponse.result[0];
+                    const livePrice = result.regularMarketPrice;
+                    if (livePrice && !isNaN(livePrice)) {
+                        marketPrices[ticker] = livePrice;
+                        if (priceInput) {
+                            priceInput.value = livePrice.toFixed(2);
+                        }
+                        
+                        const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
+                        if (tickerSelect === 'custom') {
+                            const supports = [
+                                parseFloat((livePrice * 0.95).toFixed(3)),
+                                parseFloat((livePrice * 0.90).toFixed(3)),
+                                parseFloat((livePrice * 0.85).toFixed(3))
+                            ];
+                            const resistances = [
+                                parseFloat((livePrice * 1.05).toFixed(3)),
+                                parseFloat((livePrice * 1.10).toFixed(3)),
+                                parseFloat((livePrice * 1.15).toFixed(3)),
+                                parseFloat((livePrice * 1.20).toFixed(3))
+                            ];
+                            populateLevelInputs('support', supports);
+                            populateLevelInputs('resistance', resistances);
+                        }
+                        
+                        renderSrCalc();
+                        if (priceInput) priceInput.classList.remove('loading-price');
+                        return livePrice;
                     }
-                    
-                    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
-                    if (tickerSelect === 'custom') {
-                        const supports = [
-                            parseFloat((livePrice * 0.95).toFixed(3)),
-                            parseFloat((livePrice * 0.90).toFixed(3)),
-                            parseFloat((livePrice * 0.85).toFixed(3))
-                        ];
-                        const resistances = [
-                            parseFloat((livePrice * 1.05).toFixed(3)),
-                            parseFloat((livePrice * 1.10).toFixed(3)),
-                            parseFloat((livePrice * 1.15).toFixed(3)),
-                            parseFloat((livePrice * 1.20).toFixed(3))
-                        ];
-                        populateLevelInputs('support', supports);
-                        populateLevelInputs('resistance', resistances);
-                    }
-                    
-                    renderSrCalc();
-                    if (priceInput) priceInput.classList.remove('loading-price');
-                    return livePrice;
                 }
             }
+        } catch (e) {
+            console.warn(`Proxy fetch failed for ${proxyUrl}:`, e);
         }
-    } catch (e) {
-        console.warn(`Failed to fetch live price for ${ticker}:`, e);
     }
     
     if (priceInput) {
