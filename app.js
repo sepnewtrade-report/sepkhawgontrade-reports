@@ -111,7 +111,11 @@ const translations = {
         placeholderTickerSearch: "พิมพ์ Ticker หรือชื่อหุ้น...",
         lblSrCustomName: "ชื่อหุ้น / Ticker (ระบุเอง)",
         placeholderCustomName: "พิมพ์ชื่อหุ้น (เช่น TSLA)",
-        noStocksFound: "ไม่พบข้อมูลหุ้นนี้"
+        noStocksFound: "ไม่พบข้อมูลหุ้นนี้",
+        lblSrWatchlistTitle: "Watchlist ของฉัน",
+        srBtnSaveWatchlist: "บันทึกเข้า Watchlist",
+        srBtnClearCustom: "ล้างข้อมูลแนวรับ-ต้าน",
+        srWatchlistEmpty: "ไม่มีหุ้นใน Watchlist (พิมพ์ค้นหาหุ้นแล้วบันทึกเพื่อติดตาม)"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
@@ -211,7 +215,11 @@ const translations = {
         placeholderTickerSearch: "Type ticker or stock name...",
         lblSrCustomName: "Stock Ticker / Name (Custom)",
         placeholderCustomName: "Enter stock name (e.g., TSLA)",
-        noStocksFound: "No stocks found"
+        noStocksFound: "No stocks found",
+        lblSrWatchlistTitle: "My Watchlist",
+        srBtnSaveWatchlist: "Add to Watchlist",
+        srBtnClearCustom: "Clear Calculator",
+        srWatchlistEmpty: "No stocks in watchlist (search and save a stock to track)"
     }
 };
 
@@ -400,6 +408,15 @@ function updateUILanguage() {
     
     const srCustomNameEl = document.getElementById('sr-custom-name');
     if (srCustomNameEl) srCustomNameEl.placeholder = t.placeholderCustomName;
+
+    const lblSrWatchlistTitleEl = document.getElementById('lbl-sr-watchlist-title');
+    if (lblSrWatchlistTitleEl) lblSrWatchlistTitleEl.textContent = t.lblSrWatchlistTitle;
+
+    if (elements.srBtnSaveWatchlist) elements.srBtnSaveWatchlist.innerHTML = `<i class="fa-solid fa-star"></i> ${t.srBtnSaveWatchlist}`;
+    if (elements.srBtnClearCustom) elements.srBtnClearCustom.innerHTML = `<i class="fa-solid fa-eraser"></i> ${t.srBtnClearCustom}`;
+    
+    // Refresh Watchlist rendering
+    renderWatchlist();
     
     // Re-render S/R Calculator if active
     if (elements.srCalcView && elements.srCalcView.classList.contains('active')) {
@@ -491,7 +508,10 @@ const elements = {
     srTickerSearch: document.getElementById('sr-ticker-search'),
     srSuggestionsDropdown: document.getElementById('sr-suggestions-dropdown'),
     srCustomName: document.getElementById('sr-custom-name'),
-    srBtnRefreshPrice: document.getElementById('sr-btn-refresh-price')
+    srBtnRefreshPrice: document.getElementById('sr-btn-refresh-price'),
+    srBtnSaveWatchlist: document.getElementById('sr-btn-save-watchlist'),
+    srBtnClearCustom: document.getElementById('sr-btn-clear-custom'),
+    srWatchlistList: document.getElementById('sr-watchlist-list')
 };
 
 // Initialize Application
@@ -1887,6 +1907,169 @@ async function loadMarketPrices() {
     }
 }
 
+let watchlist = [];
+
+function loadWatchlist() {
+    try {
+        const stored = localStorage.getItem('sep_sr_watchlist');
+        if (stored) {
+            watchlist = JSON.parse(stored);
+        } else {
+            watchlist = [];
+        }
+    } catch (e) {
+        watchlist = [];
+    }
+}
+
+function saveWatchlist() {
+    try {
+        localStorage.setItem('sep_sr_watchlist', JSON.stringify(watchlist));
+    } catch (e) {
+        console.warn('Failed to save watchlist to localStorage', e);
+    }
+}
+
+function renderWatchlist() {
+    const container = elements.srWatchlistList;
+    if (!container) return;
+    
+    loadWatchlist();
+    container.innerHTML = '';
+    
+    if (watchlist.length === 0) {
+        container.innerHTML = `<div class="sr-watchlist-empty">${translations[appState.lang].srWatchlistEmpty}</div>`;
+        return;
+    }
+    
+    watchlist.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'sr-watchlist-item';
+        div.innerHTML = `
+            <span class="sr-wl-ticker">${item.ticker}</span>
+            <span class="sr-wl-price">$${parseFloat(item.currentPrice).toFixed(2)}</span>
+            <button class="sr-wl-delete-btn" title="ลบออก" data-index="${idx}"><i class="fa-solid fa-trash-can"></i></button>
+        `;
+        
+        div.addEventListener('click', (e) => {
+            if (e.target.closest('.sr-wl-delete-btn')) return;
+            loadWatchlistItem(item);
+        });
+        
+        div.querySelector('.sr-wl-delete-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const index = parseInt(e.currentTarget.getAttribute('data-index'));
+            watchlist.splice(index, 1);
+            saveWatchlist();
+            renderWatchlist();
+        });
+        
+        container.appendChild(div);
+    });
+}
+
+function loadWatchlistItem(item) {
+    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+    
+    const customNameGroup = document.getElementById('sr-custom-name-group');
+    if (customNameGroup) customNameGroup.style.display = 'block';
+    
+    if (elements.srCustomName) elements.srCustomName.value = item.ticker;
+    if (elements.srCurrentPrice) elements.srCurrentPrice.value = item.currentPrice;
+    
+    populateLevelInputs('support', item.supports);
+    populateLevelInputs('resistance', item.resistances);
+    
+    if (elements.srTableTickerBadge) {
+        elements.srTableTickerBadge.textContent = item.ticker;
+    }
+    
+    renderSrCalc();
+    fetchLivePrice(item.ticker);
+}
+
+function saveCurrentToWatchlist() {
+    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
+    let ticker = 'CUSTOM';
+    if (tickerSelect === 'custom') {
+        const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : '';
+        ticker = customNameVal || 'CUSTOM';
+    } else {
+        ticker = tickerSelect;
+    }
+    
+    if (ticker === 'CUSTOM') {
+        alert(appState.lang === 'th' ? 'กรุณาระบุชื่อหุ้นก่อนทำการบันทึก' : 'Please specify a stock ticker before saving.');
+        return;
+    }
+    
+    const currentPrice = parseFloat(elements.srCurrentPrice.value) || 0;
+    
+    const supports = [];
+    if (elements.supportInputsContainer) {
+        const sInputs = elements.supportInputsContainer.querySelectorAll('.support-input');
+        sInputs.forEach(input => {
+            const val = parseFloat(input.value);
+            if (!isNaN(val) && val > 0) {
+                supports.push(val);
+            }
+        });
+    }
+    
+    const resistances = [];
+    if (elements.resistanceInputsContainer) {
+        const rInputs = elements.resistanceInputsContainer.querySelectorAll('.resistance-input');
+        rInputs.forEach(input => {
+            const val = parseFloat(input.value);
+            if (!isNaN(val) && val > 0) {
+                resistances.push(val);
+            }
+        });
+    }
+    
+    loadWatchlist();
+    
+    const existingIndex = watchlist.findIndex(item => item.ticker === ticker);
+    const watchlistItem = {
+        ticker: ticker,
+        currentPrice: currentPrice,
+        supports: supports,
+        resistances: resistances
+    };
+    
+    if (existingIndex !== -1) {
+        watchlist[existingIndex] = watchlistItem;
+    } else {
+        watchlist.push(watchlistItem);
+    }
+    
+    saveWatchlist();
+    renderWatchlist();
+}
+
+function clearCalculator() {
+    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
+    
+    const customNameGroup = document.getElementById('sr-custom-name-group');
+    if (customNameGroup) customNameGroup.style.display = 'block';
+    
+    if (elements.srCustomName) elements.srCustomName.value = '';
+    if (elements.srCurrentPrice) elements.srCurrentPrice.value = '';
+    
+    if (elements.supportInputsContainer) {
+        elements.supportInputsContainer.innerHTML = '';
+    }
+    if (elements.resistanceInputsContainer) {
+        elements.resistanceInputsContainer.innerHTML = '';
+    }
+    
+    if (elements.srTableTickerBadge) {
+        elements.srTableTickerBadge.textContent = 'CUSTOM';
+    }
+    
+    renderSrCalc();
+}
+
 async function fetchLivePrice(ticker) {
     if (!ticker || ticker === 'custom') return null;
     
@@ -2069,6 +2252,16 @@ function setupSrInputListeners() {
             }
         });
     }
+
+    if (elements.srBtnSaveWatchlist) {
+        elements.srBtnSaveWatchlist.addEventListener('click', saveCurrentToWatchlist);
+    }
+    
+    if (elements.srBtnClearCustom) {
+        elements.srBtnClearCustom.addEventListener('click', clearCalculator);
+    }
+    
+    renderWatchlist();
     
     if (elements.srAddSupport) {
         elements.srAddSupport.addEventListener('click', () => {
