@@ -87,10 +87,26 @@ def log_scan(mode, status, error_message=None):
     conn.commit()
     conn.close()
 
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if hasattr(obj, "isoformat"):
+            return obj.isoformat()
+        try:
+            import numpy as np
+            if isinstance(obj, (np.integer, np.int64)):
+                return int(obj)
+            elif isinstance(obj, (np.floating, np.float64)):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+        except ImportError:
+            pass
+        return super().default(obj)
+
 def save_stock_metrics(date_str, ticker, price, change_pct, volume, rsi, macd, atr, raw_dict):
     conn = get_connection()
     cursor = conn.cursor()
-    raw_json = json.dumps(raw_dict, ensure_ascii=False)
+    raw_json = json.dumps(raw_dict, cls=CustomJSONEncoder, ensure_ascii=False)
     cursor.execute("""
         INSERT OR REPLACE INTO stock_metrics 
         (date, ticker, price, change_percent, volume, rsi, macd, atr, raw_data)
