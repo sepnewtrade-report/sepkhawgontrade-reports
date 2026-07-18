@@ -1,5 +1,55 @@
 [
   {
+    "title": "รายงานวิเคราะห์กระแสเงินทุนสถาบัน (Institutional Flow & Equity Research) - ประจำสัปดาห์ 18 กรกฎาคม 2026",
+    "filename": "whale_flow_analysis_2026_07_18.md",
+    "path": "whale_flow_analysis_2026_07_18.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-18",
+    "timestamp": 1784376561744.5034,
+    "size": 11482
+  },
+  {
+    "title": "รายงานวิเคราะห์กระแสเงินทุนสถาบัน (Institutional Flow & Equity Research) - ประจำสัปดาห์ 18 กรกฎาคม 2026",
+    "filename": "vp_whalezoomkephoonarai_2026_07_18.md",
+    "path": "vp_whalezoomkephoonarai_2026_07_18.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-18",
+    "timestamp": 1784376542145.8623,
+    "size": 11482
+  },
+  {
+    "title": "VIP Investor Briefing: Top 10 High Conviction Stock Opportunities",
+    "filename": "vip_investor_briefing_2026_07_18.md",
+    "path": "MEMBERSHIP CONTENT SYSTEM/vip_investor_briefing_2026_07_18.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-18",
+    "timestamp": 1784376500182.1895,
+    "size": 12156
+  },
+  {
+    "title": "รายงานวิเคราะห์การเคลื่อนย้ายเงินทุนสถาบัน (Whale Flow Analysis)",
+    "filename": "whale_flow_analysis_2026_07_18.md",
+    "path": "MEMBERSHIP CONTENT SYSTEM/whale_flow_analysis_2026_07_18.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-18",
+    "timestamp": 1784376479422.5105,
+    "size": 11294
+  },
+  {
+    "title": "สรุปภาพย้อนหลังตลาดโลกประจำสัปดาห์ (Global Market Recap)",
+    "filename": "global_market_recap_2026_07_18.md",
+    "path": "MEMBERSHIP CONTENT SYSTEM/global_market_recap_2026_07_18.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-07-18",
+    "timestamp": 1784376470225.5552,
+    "size": 7179
+  },
+  {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-07-18",
     "filename": "bot_trade_2026_07_18.md",
     "path": "bot_trade_2026_07_18.md",
