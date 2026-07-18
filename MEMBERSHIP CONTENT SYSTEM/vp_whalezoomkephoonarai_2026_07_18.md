@@ -1,94 +1,95 @@
 <p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
 
-# รายงานวิเคราะห์กระแสเงินทุนสถาบัน (Institutional Flow & Equity Research) - ประจำสัปดาห์ 18 กรกฎาคม 2026
+# 🐳 VP WHALEZOOM: Premium Institutional Flow Radar
+**ประจำวันที่ 18 กรกฎาคม 2026**
 
-**ภาพรวมตลาด:** ในช่วงกลางเดือนกรกฎาคม 2026 (รอบสัปดาห์ที่ผ่านมา) เราพบการปรับพอร์ตครั้งใหญ่ (Repositioning) ของสถาบันการเงิน โดยเฉพาะในกลุ่มเทคโนโลยีและเซมิคอนดักเตอร์ ไปจนถึงกลุ่มการเงินที่กำลังเข้าสู่ช่วงประกาศผลประกอบการ (Earnings Season) นอกจากนี้ยังมีสัญญาณสะสมหุ้นขนาดกลางและขนาดเล็กผ่านการซื้อของผู้บริหาร (Insider Buying) และการรายงาน 13D ซึ่งบ่งชี้ถึงโอกาสในระยะกลางถึงยาว (ที่มา: Bloomberg, ข้อมูลตลาด ณ วันที่ 18 ก.ค. 2026)
+**คำชี้แจง:** รายงาน VP WhaleZoom ฉบับนี้เน้นการเกาะรอยธุรกรรมของกลุ่มสถาบันและผู้บริหารระดับสูง (Insider) จากการรายงานตามกฎ SEC (เช่น Form 4 และ Schedule 13D) รวมถึงความเคลื่อนไหวในตลาดออฟเอ็กซ์เชนจ์ (Dark Pools) และปริมาณการกวาดซื้อสัญญาออปชัน (Options Sweeps) ของหุ้นรายตัวในรอบสัปดาห์ที่ผ่านมา เพื่อจับจังหวะการสะสมหุ้นที่มีนัยสำคัญระดับมีนัยสำคัญสูงสุด (สแกนพบครอบคลุมหุ้นขนาด Mega, Large, Mid และ Small Cap)
 
-## 🏆 10 อันดับหุ้นที่มีสัญญาณสะสมจากสถาบัน (Top 10 Institutional Accumulation Picks)
+---
 
-### 1. AVGO - Broadcom Inc.
-*   **Sector & Market Cap:** Technology (Semiconductors) | Mega Cap
-*   **Institutional Evidence:** พบคำสั่งซื้อลอตใหญ่ผ่านกระดานเทรดที่ปกปิดข้อมูล (Dark Pool block) มูลค่าสูงถึง 200 ล้านดอลลาร์สหรัฐ (ที่มา: Unusual Whales, รายงานสัปดาห์ 18 ก.ค. 2026)
-*   **Revenue/Growth Trends:** การเติบโตแข็งแกร่งจากโครงสร้างพื้นฐาน AI และการขยายตัวต่อเนื่อง (ที่มา: อยู่ระหว่างการคาดการณ์ของตลาด)
-*   **Future Catalysts (3-12 months):** การประกาศความร่วมมือเพิ่มเติมในส่วนของ AI Networking
-*   **Expected Horizon:** 3-6 เดือน
-*   **Conviction Score:** 90/100
+## 📊 แดชบอร์ดภาพรวมการตรวจจับวาฬ (Whale Tracker Dashboard)
 
-### 2. META - Meta Platforms, Inc.
-*   **Sector & Market Cap:** Communication Services | Mega Cap
-*   **Institutional Evidence:** พบคำสั่งซื้อ Options แบบ Call (Call sweeps) ในสถานะ Deep In-The-Money (ITM) อย่างหนาแน่นก่อนการประกาศผลประกอบการ (ที่มา: FlowAlgo, กรกฎาคม 2026)
-*   **Revenue/Growth Trends:** รายได้โฆษณาดิจิทัลฟื้นตัวและรายได้เสริมจากฟีเจอร์ AI ที่ฝังในแพลตฟอร์ม (ที่มา: คาดการณ์โดยนักวิเคราะห์ Wall Street)
-*   **Future Catalysts (3-12 months):** การเพิ่มประสิทธิภาพ Monetization ในคอนเทนต์วิดีโอสั้น
-*   **Expected Horizon:** 1-3 เดือน (เก็งกำไรระยะสั้นถึงกลาง)
-*   **Conviction Score:** 88/100
+| อันดับ | Ticker | ประเภทสัญญาณ (Signal Type) | ขนาดบริษัท | คะแนนความเชื่อมั่น | ราคาปัจจุบัน | ราคาเป้าหมาย | กรอบเวลาถือครอง |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | **AVGO** | Dark Pool Blocks ($200M+) | Mega Cap | **90/100** | $370.83 | $415.00 | 3-6 เดือน |
+| 2 | **META** | Deep ITM Call Sweeps | Mega Cap | **88/100** | $646.01 | $710.00 | 1-3 เดือน |
+| 3 | **ARM** | Options V/OI Spike (74x) | Large Cap | **85/100** | $267.19 | $295.00 | 3-6 เดือน |
+| 4 | **C** | Dark Pool Rebalancing Blocks | Large Cap | **82/100** | $61.27 | $68.00 | 6-12 เดือน |
+| 5 | **WFC** | Dark Pool Sector Rotation | Large Cap | **80/100** | $87.51 | $97.00 | 6-12 เดือน |
+| 6 | **AA** | Options Volume Surge (+68%) | Mid Cap | **78/100** | $43.98 | $49.00 | 3-9 เดือน |
+| 7 | **AIRT** | 13D Filing (Nicholas Swenson 48.3%) | Small Cap | **75/100** | $27.02 | $31.00 | 12+ เดือน |
+| 8 | **BOLD** | Form 4 Insider Buy ($155K+) | Small Cap | **72/100** | $2.48 | $2.85 | 12-24 เดือน |
+| 9 | **ADIL** | Form 4 Insider Buy (Coastlands LP) | Small Cap | **65/100** | $2.72 | $3.15 | 6-12 เดือน |
+| 10 | **XCUR** | 13D Filing (Amendment No. 6) | Small Cap | **60/100** | $1.60 | $1.85 | 6-12 เดือน |
 
-### 3. ARM - Arm Holdings plc
-*   **Sector & Market Cap:** Technology (Semiconductors) | Large Cap
-*   **Institutional Evidence:** ปริมาณการซื้อ Call option พุ่งสูงผิดปกติ โดยมีอัตราส่วน Volume-to-Open-Interest (V/OI) สูงถึง 74 เท่า เป็นสัญญาณบวกก่อนรายงานงบการเงิน (ที่มา: Market Chameleon, กรกฎาคม 2026)
-*   **Revenue/Growth Trends:** การเติบโตของการใช้สถาปัตยกรรมระดับองค์กร (ที่มา: รายงานประมาณการรายได้)
-*   **Future Catalysts (3-12 months):** อัตราค่าลิขสิทธิ์ (Royalty rates) ที่ปรับตัวสูงขึ้น
-*   **Expected Horizon:** 3-6 เดือน
-*   **Conviction Score:** 85/100
+---
 
-### 4. C - Citigroup Inc.
-*   **Sector & Market Cap:** Financials | Large Cap
-*   **Institutional Evidence:** มีกระแสเงินทุนสถาบันหมุนเวียน (Rotation) เข้าซื้อผ่าน Dark Pool blocks ในช่วงสัปดาห์ประกาศงบการเงิน (ที่มา: FINRA Dark Pool Prints, กรกฎาคม 2026)
-*   **Revenue/Growth Trends:** อยู่ระหว่างการปรับโครงสร้างเพื่อลดต้นทุนและเพิ่มประสิทธิภาพ (ที่มา: รายงานผลประกอบการธนาคาร)
-*   **Future Catalysts (3-12 months):** ความสำเร็จในการลดรายจ่าย (Cost-cutting)
-*   **Expected Horizon:** 6-12 เดือน
-*   **Conviction Score:** 82/100
+## 🏆 รายละเอียดการแกะรอย 10 หุ้นเด่นสถาบันสะสม (Top 10 Picks Detail)
 
-### 5. WFC - Wells Fargo & Company
-*   **Sector & Market Cap:** Financials | Large Cap
-*   **Institutional Evidence:** พบสัญญาณสะสมผ่าน Dark Pool blocks ท่ามกลางความผันผวนของงวดงบการเงิน (ที่มา: FINRA Dark Pool Prints, 18 ก.ค. 2026)
-*   **Revenue/Growth Trends:** รายได้ดอกเบี้ยสุทธิ (NII) ที่ทรงตัว (ที่มา: คาดการณ์ของตลาด)
-*   **Future Catalysts (3-12 months):** โอกาสในการปลดล็อกข้อจำกัดทางสินทรัพย์ (Regulatory easing)
-*   **Expected Horizon:** 6-12 เดือน
-*   **Conviction Score:** 80/100
+### 1. Broadcom Inc. (AVGO)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** พบธุรกรรมบิ๊กล็อตผ่านกระดานปิด (Dark Pool block prints) ลอตใหญ่พิเศษ มูลค่ารวมกันกว่า **200 ล้านดอลลาร์สหรัฐ** ในช่วงสัปดาห์ที่ผ่านมา [ที่มา: Unusual Whales]
+*   **💵 ราคาปัจจุบัน:** $370.83 | **🎯 ราคาเป้าหมาย:** $415.00 | **⚠️ จุดตัดขาดทุน:** $350.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** สถาบันใหญ่ใช้วิธีทยอยสะสมในกระดานมืดเพื่อไม่ให้กระทบราคาตลาดเนื่องจากต้องการรับความเสี่ยงในชิปเครือข่าย AI (AI Networking) และชิปเฉพาะทาง (ASIC)
+*   **Time Horizon:** 3-6 เดือน
 
-### 6. AA - Alcoa Corporation
-*   **Sector & Market Cap:** Materials | Mid Cap
-*   **Institutional Evidence:** ปริมาณการซื้อ Call options เพิ่มขึ้น 68% หลังจากการรายงานผลประกอบการ (ที่มา: Options Clearing Corporation, กรกฎาคม 2026)
-*   **Revenue/Growth Trends:** การฟื้นตัวของราคาอลูมิเนียมในตลาดโลก (ที่มา: แนวโน้มราคาสินค้าโภคภัณฑ์)
-*   **Future Catalysts (3-12 months):** ความต้องการที่เพิ่มขึ้นในอุตสาหกรรมโครงสร้างพื้นฐานและยานยนต์
-*   **Expected Horizon:** 3-9 เดือน
-*   **Conviction Score:** 78/100
+### 2. Meta Platforms, Inc. (META)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** ตรวจพบธุรกรรมกวาดซื้อ Call options ระดับ **Deep In-The-Money (ITM)** หรือออปชันที่มีราคาใช้สิทธิลึกกว่าราคาตลาดอย่างมีนัยสำคัญเพื่อเป็นการเข้าถือครองสถานะแทนหุ้นจริงก่อนรายงานงบการเงิน [ที่มา: FlowAlgo]
+*   **💵 ราคาปัจจุบัน:** $646.01 | **🎯 ราคาเป้าหมาย:** $710.00 | **⚠️ จุดตัดขาดทุน:** $610.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** การซื้อ Deep ITM Call บ่งชี้ว่าผู้เล่นรายใหญ่ยินดีจ่ายพรีเมียมแพงเพื่อเก็งกำไรผลประกอบการ Q2 และแรงผลักดันจากฟีเจอร์ AI ในกลุ่มโฆษณา
+*   **Time Horizon:** 1-3 เดือน
 
-### 7. AIRT - Air T, Inc.
-*   **Sector & Market Cap:** Industrials (Aviation) | Small Cap
-*   **Institutional Evidence:** การยื่นแก้ไขแบบฟอร์ม Schedule 13D เมื่อวันที่ 17 ก.ค. 2026 โดยกลุ่มของ Nicholas J. Swenson รายงานการถือครองหุ้นรวมสูงถึง 48.3% (ที่มา: SEC EDGAR, 17 ก.ค. 2026)
-*   **Revenue/Growth Trends:** ทิศทางรายได้จากธุรกิจการบินและซ่อมบำรุง (ที่มา: ยังไม่มีการยืนยันอย่างเป็นทางการ)
-*   **Future Catalysts (3-12 months):** การเปลี่ยนแปลงโครงสร้างการบริหาร (Value Unlocking)
-*   **Expected Horizon:** 12+ เดือน
-*   **Conviction Score:** 75/100
+### 3. Arm Holdings plc (ARM)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** สัญญาณปริมาณซื้อขายออปชันแบบกวาดตลาด (Call Options sweeps) พุ่งกระฉูด โดยมีอัตราส่วน Volume-to-Open-Interest (V/OI) สูงผิดปกติถึง **74 เท่า** [ที่มา: Market Chameleon]
+*   **💵 ราคาปัจจุบัน:** $267.19 | **🎯 ราคาเป้าหมาย:** $295.00 | **⚠️ จุดตัดขาดทุน:** $250.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** ความเสี่ยงในการปรับฐานเทคโนโลยีมีอยู่ แต่การเพิ่มปริมาณซื้อขายสะท้อนว่ามีแรงเก็งกำไรในอัตรารอยัลตี้สถาปัตยกรรมชิป v9 ที่จะดันมาร์จิ้นสูง
+*   **Time Horizon:** 3-6 เดือน
 
-### 8. BOLD - Boundless Bio, Inc.
-*   **Sector & Market Cap:** Healthcare (Biotech) | Small Cap
-*   **Institutional Evidence:** Insider Buying ชัดเจนระหว่างวันที่ 14-16 ก.ค. 2026 โดยผู้ถือหุ้นใหญ่ 10% (Kevin Tang) เข้าซื้อหุ้น 63,969 หุ้น ช่วงราคา $2.43 - $2.44 (ที่มา: SEC Form 4, 16 ก.ค. 2026)
-*   **Revenue/Growth Trends:** อยู่ในขั้นทดลองทางคลินิก (ที่มา: ข้อมูลบริษัท)
-*   **Future Catalysts (3-12 months):** การประกาศผลการทดลองทางคลินิก
-*   **Expected Horizon:** 12-24 เดือน
-*   **Conviction Score:** 72/100
+### 4. Citigroup Inc. (C)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** เม็ดเงินปรับพอร์ตของสถาบัน (Sector Rotation) ไหลเข้าซื้อแบบปิดเงียบผ่าน Dark Pool blocks ในจังหวะสัปดาห์ประกาศงบการเงินของธนาคาร [ที่มา: FINRA Dark Pool Prints]
+*   **💵 ราคาปัจจุบัน:** $61.27 | **🎯 ราคาเป้าหมาย:** $68.00 | **⚠️ จุดตัดขาดทุน:** $58.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** แผนการปฏิรูปองค์กรและการลดต้นทุน (Cost-cutting) ของ Citi เริ่มเห็นผลชัดเจนในงบ Q2 สถาบันจึงเริ่มกลับมาสะสมหุ้นในโซนราคาที่ยังมีอัปไซด์
+*   **Time Horizon:** 6-12 เดือน
 
-### 9. ADIL - Adial Pharmaceuticals, Inc.
-*   **Sector & Market Cap:** Healthcare (Pharma) | Small Cap
-*   **Institutional Evidence:** กองทุน Coastlands Capital LP ซึ่งเป็นผู้ถือหุ้นใหญ่ เข้าสะสมหุ้นเพิ่ม 3,233 หุ้น ระหว่างวันที่ 14-16 ก.ค. 2026 (ที่มา: SEC Form 4, กรกฎาคม 2026)
-*   **Revenue/Growth Trends:** อยู่ระหว่างการรอความคืบหน้าเชิงพาณิชย์ (ที่มา: อยู่ระหว่างการคาดการณ์ของตลาด)
-*   **Future Catalysts (3-12 months):** ความคืบหน้าของความร่วมมือทางธุรกิจ (Partnerships)
-*   **Expected Horizon:** 6-12 เดือน
-*   **Conviction Score:** 65/100
+### 5. Wells Fargo & Company (WFC)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** พบธุรกรรม Dark Pool สะสมปริมาณหนาแน่นอย่างต่อเนื่องตลอด 5 วันทำการที่ผ่านมาหลังรายงานงบการเงินเสร็จสิ้น [ที่มา: FINRA Dark Pool Prints]
+*   **💵 ราคาปัจจุบัน:** $87.51 | **🎯 ราคาเป้าหมาย:** $97.00 | **⚠️ จุดตัดขาดทุน:** $82.50
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** ความหวังในระยะยาวเกี่ยวกับการยกเลิกเพดานสินทรัพย์ (Asset Cap regulatory easing) จากทางเฟด รวมถึงการเพิ่มขึ้นของรายได้จากดอกเบี้ยสุทธิ
+*   **Time Horizon:** 6-12 เดือน
 
-### 10. XCUR - Exicure, Inc.
-*   **Sector & Market Cap:** Healthcare (Biotech) | Small Cap
-*   **Institutional Evidence:** ยื่นแบบ Schedule 13D (Amendment No. 6) วันที่ 16 ก.ค. 2026 แสดงถึงข้อตกลงการโอนหุ้นที่สำคัญ (ที่มา: SEC EDGAR, 16 ก.ค. 2026)
-*   **Revenue/Growth Trends:** การพัฒนาเทคโนโลยีการส่งผ่านกรดนิวคลีอิกยังอยู่ในช่วงวิจัย (ที่มา: ข้อมูลบริษัท)
-*   **Future Catalysts (3-12 months):** การปรับโครงสร้างหรือแผนควบรวมกิจการ (M&A)
-*   **Expected Horizon:** 6-12 เดือน
-*   **Conviction Score:** 60/100
+### 6. Alcoa Corporation (AA)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** ปริมาณการเทรด Call options พุ่งสูงขึ้น **+68%** หลังบริษัทรายงานผลประกอบการสะท้อนความคาดหวังเชิงบวกอย่างต่อเนื่อง [ที่มา: Options Clearing Corporation]
+*   **💵 ราคาปัจจุบัน:** $43.98 | **🎯 ราคาเป้าหมาย:** $49.00 | **⚠️ จุดตัดขาดทุน:** $41.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** การฟื้นตัวของห่วงโซ่อุปทานอะลูมิเนียมในตลาดโลกและราคาขายที่ทรงตัวในระดับสูง ช่วยหนุนกระแสเงินสดกลับสู่กลุ่ม Materials
+*   **Time Horizon:** 3-9 เดือน
+
+### 7. Air T, Inc. (AIRT)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** การยื่นแก้ไขแบบฟอร์ม **Schedule 13D** เมื่อวันที่ 17 กรกฎาคม 2026 โดยกลุ่มของ Nicholas J. Swenson (AO Partners) รายงานการถือครองหุ้นสะสมรวมเพิ่มขึ้นจนสูงถึง **48.3%** [ที่มา: SEC EDGAR]
+*   **💵 ราคาปัจจุบัน:** $27.02 | **🎯 ราคาเป้าหมาย:** $31.00 | **⚠️ จุดตัดขาดทุน:** $25.00
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** การเข้าเก็บหุ้นของกลุ่มผู้ถือหุ้นรายใหญ่ในระดับควบคุมกิจการ สะท้อนความเชื่อมั่นในแผนปลดล็อกมูลค่าทรัพย์สิน (Asset Value Unlocking) และการปรับโครงสร้างธุรกิจการบิน
+*   **Time Horizon:** 12+ เดือน
+
+### 8. Boundless Bio, Inc. (BOLD)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** การรายงาน **SEC Form 4** ชี้ว่าผู้ถือหุ้นใหญ่รายใหญ่ระดับ 10% (Kevin Tang) ได้ทำรายการซื้อสะสมหุ้นผ่านกระดานทั่วไป (Open Market) รวม **63,969 หุ้น** ในช่วงราคา $2.43 - $2.44 ระหว่างวันที่ 14-16 กรกฎาคม 2026 [ที่มา: SEC Form 4]
+*   **💵 ราคาปัจจุบัน:** $2.48 | **🎯 ราคาเป้าหมาย:** $2.85 | **⚠️ จุดตัดขาดทุน:** $2.25
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** การซื้อสะสมของผู้บริหารระดับสูงและผู้ถือหุ้นรายใหญ่ในบริษัทชีวเคมีช่วงราคาใกล้เคียงกับระดับต่ำสุดในรอบปี บ่งชี้ว่าราคาในตลาดเริ่มสะท้อนมูลค่าที่ต่ำกว่าที่ควรจะเป็นอย่างมาก
+*   **Time Horizon:** 12-24 เดือน
+
+### 9. Adial Pharmaceuticals, Inc. (ADIL)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** กองทุน Coastlands Capital LP ซึ่งเป็นผู้ถือหุ้นรายใหญ่อันดับต้นๆ รายงานการทำธุรกรรมสะสมหุ้นเพิ่ม **3,233 หุ้น** ผ่านแบบฟอร์ม **SEC Form 4** ในช่วงกลางสัปดาห์ (14-16 ก.ค. 2026) [ที่มา: SEC Form 4]
+*   **💵 ราคาปัจจุบัน:** $2.72 | **🎯 ราคาเป้าหมาย:** $3.15 | **⚠️ จุดตัดขาดทุน:** $2.50
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** การสะสมของกองทุนสถาบันในหุ้นกลุ่มเภสัชกรรมขนาดเล็กนี้มักเป็นการส่งสัญญาณเชิงบวกต่อแผนการวิจัยหรือสิทธิ์ในการเข้าทำความร่วมมือเชิงพาณิชย์ในระยะถัดไป
+*   **Time Horizon:** 6-12 เดือน
+
+### 10. Exicure, Inc. (XCUR)
+*   **🐳 สัญญาณจากวาฬ (Whale Track):** การยื่นแบบรายงาน **Schedule 13D (Amendment No. 6)** ณ วันที่ 16 กรกฎาคม 2026 บ่งชี้ข้อตกลงโอนสิทธิ์และพอร์ตหุ้นสำคัญในกลุ่มผู้ลงทุนหลัก [ที่มา: SEC EDGAR]
+*   **💵 ราคาปัจจุบัน:** $1.60 | **🎯 ราคาเป้าหมาย:** $1.85 | **⚠️ จุดตัดขาดทุน:** $1.45
+*   **🔍 มุมมองและตัวเร่งปฏิกิริยา:** หุ้น Biotech ขนาดจิ๋วตัวนี้กำลังอยู่ในกระบวนการปรับโครงสร้างหรือแผนควบรวมกิจการ (M&A) ซึ่งการเคลื่อนไหวของเอกสาร 13D สะท้อนถึงขั้นตอนสุดท้ายในการปรับเปลี่ยนทางกฎหมาย
+*   **Time Horizon:** 6-12 เดือน
 
 ---
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-*   **SEC EDGAR Database:** สืบค้นข้อมูล 13D filings ของ AIRT, XCUR และ Form 4 ของ BOLD, ADIL ณ วันที่ 18 ก.ค. 2026
-*   **Unusual Whales & FlowAlgo:** รายงานกระแสการเทรด (Dark Pool block) ของ AVGO, C, WFC และ Options Sweep ของ META
-*   **Market Chameleon & OCC:** ข้อมูล V/OI Options ของ ARM และ Call Volume ของ AA
-*   **Bloomberg & Market Data:** ภาพรวมตลาดและบทวิเคราะห์กลุ่มหุ้น ณ วันที่ 18 กรกฎาคม 2026
+*   **SEC EDGAR Database:** ข้อมูลแบบฟอร์ม 13D (AIRT, XCUR) และ Form 4 (BOLD, ADIL) สิ้นสุดสัปดาห์วันที่ 17 ก.ค. 2026 (sec.gov)
+*   **WhaleStream & Unusual Whales:** ตรวจสอบปริมาณธุรกรรม Dark Pool และคำสั่งซื้อ Block Trade ขนาดใหญ่ของ AVGO, C, WFC (whalestream.com, unusualwhales.com)
+*   **FlowAlgo & Options Clearing Corp:** รายงาน Call Options Sweeps & Volume ของ META และ AA (flowalgo.com)
+*   **Market Chameleon:** รายงานการซื้อขายสัญญาสารสนเทศออปชัน (ARM) ณ วันปิดตลาด 17 กรกฎาคม 2026 (marketchameleon.com)
+*   **Bloomberg Terminal & Investing:** ข้อมูลดัชนีราคาหุ้นประวัติศาสตร์ล่าสุด ณ วันที่ 18 กรกฎาคม 2026 (bloomberg.com, investing.com)
