@@ -53,7 +53,8 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 * [highshortinterest.com] ข้อมูล Short Interest ของตลาดหุ้นสหรัฐฯ 
-* [findmymoat.com, barchart.com, stockanalysis.com] สถิติ Days to Cover และ % of Float ล่าสุด
+* [findmymoat.com, barchart.com, stockanalysis.com, marketbeat.com] สถิติ Days to Cover และ % of Float ล่าสุด
 * [optionseducation.org, marketchameleon.com] ข้อมูลกลไก Gamma Squeeze และ Options Volume Screeners
 * [benzinga.com, stocktitan.net] ข่าวสารการเงินและบทวิเคราะห์ความเสี่ยง
-* *หมายเหตุ: ตัวเลข Short Interest % of Float มีการรายงานอย่างเป็นทางการเพียงเดือนละ 2 ครั้ง (กลางเดือนและสิ้นเดือน) โดย FINRA ตัวเลขในรายงานนี้อ้างอิงจากรอบรายงานล่าสุดในเดือน มิ.ย. - ก.ค. 2026 ซึ่งตัวเลข Options Volume ล่าสุด และกระแสเชิงลึกบางส่วนอยู่ระหว่างการคาดการณ์ของตลาดและมีการเปลี่ยนแปลงได้แบบ Real-time ตลอดวันทำการ*
+* *หมายเหตุ 1: ตัวเลข Short Interest % of Float มีการรายงานอย่างเป็นทางการเพียงเดือนละ 2 ครั้ง (กลางเดือนและสิ้นเดือน) โดย FINRA ตัวเลขในรายงานนี้อ้างอิงจากรอบรายงานล่าสุดในเดือน มิ.ย. - ก.ค. 2026 ซึ่งตัวเลข Options Volume ล่าสุด และกระแสเชิงลึกบางส่วนอยู่ระหว่างการคาดการณ์ของตลาดและมีการเปลี่ยนแปลงได้แบบ Real-time ตลอดวันทำการ*
+* *หมายเหตุ 2: ข้อมูล % of Float อาจมีความแตกต่างกันอย่างมีนัยสำคัญในแต่ละแพลตฟอร์ม (เช่น MarketBeat, Benzinga, StockAnalysis) เนื่องจากวิธีการคำนวณจำนวนหุ้นหมุนเวียน (Public Float) ที่แตกต่างกันในเรื่องของการนับรวม/ไม่นับรวมหุ้นของสถาบันและผู้บริหาร*
