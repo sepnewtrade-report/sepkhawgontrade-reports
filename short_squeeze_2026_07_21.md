@@ -1,0 +1,59 @@
+<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
+
+# 🚀 Short Squeeze & Gamma Squeeze Radar: วิเคราะห์หุ้นสหรัฐที่มีโอกาสบีบซื้อคืน (21 กรกฎาคม 2026)
+
+**รายงานวิเคราะห์โครงสร้าง Short Data, Options Volume และ Social Sentiment ในตลาดหุ้นสหรัฐฯ** 
+เป้าหมายหลักคือการค้นหาหุ้นที่มีความเสี่ยงเกิด **Short Squeeze** และ **Gamma Squeeze** ภายใน 24-48 ชั่วโมงข้างหน้า 
+
+---
+
+## 🎯 เกณฑ์การคัดกรอง (Squeeze Criteria)
+1. **Short Interest (% of Float):** สูงกว่า 15% 
+2. **Days to Cover:** สูงกว่า 2 วัน (ใช้เวลาในการซื้อคืนนาน)
+3. **Volume Action:** มีปริมาณการซื้อขายพุ่งสูงกว่าค่าเฉลี่ย และราคาเริ่มขยับตัวขึ้นแรง
+4. **Gamma Squeeze Signals:** มี Open Interest หรือ Volume ฝั่ง Out-of-the-money (OTM) Call Options สูงผิดปกติ บีบให้ Market Maker ต้องซื้อหุ้นอ้างอิงเพื่อป้องกันความเสี่ยง (Hedging)
+
+---
+
+## 🔥 Top 5 Short Squeeze Candidates (หุ้นที่เสี่ยงเกิด Squeeze สูงสุด)
+
+### 1. Groupon, Inc. (GRPN)
+* **Short % of Float:** ~55-60% (สูงที่สุดในตาราง)
+* **สถานะปัจจุบัน:** GRPN เป็นหนึ่งในหุ้นที่มี Short Interest สูงที่สุดในตลาดอย่างต่อเนื่อง การบีบซื้อคืนสามารถเกิดขึ้นได้รุนแรงหากมี Catalyst เชิงบวก 
+* **Sentiment & Options:** มีการพูดถึงใน Reddit และ X (Twitter) อย่างต่อเนื่องเกี่ยวกับโอกาส Squeeze เนื่องจากปริมาณหุ้นที่หมุนเวียน (Float) มีจำกัด
+
+### 2. Battalion Oil Corp. (BATL)
+* **Short % of Float:** ~43-44%
+* **สถานะปัจจุบัน:** หุ้นพลังงานขนาดเล็กที่ถูก Short อย่างหนัก โครงสร้างราคาและปริมาณการซื้อขาย (Volume) ที่เพิ่มขึ้นกะทันหันอาจทำให้เกิดการบีบซื้อคืนได้อย่างฉับพลัน
+* **Sentiment & Options:** การขยับของราคาน้ำมันหรือข่าวการควบรวมกิจการอาจจุดชนวน Gamma Squeeze ได้จากแรงเก็งกำไรใน Call Options
+
+### 3. C3.ai, Inc. (AI)
+* **Short % of Float:** ~39-43%
+* **สถานะปัจจุบัน:** หุ้นกลุ่ม AI ที่มีความผันผวนสูงมาก แม้ว่าจะมีแรงเทขายชอร์ตมาตลอด แต่ด้วย Theme AI ที่ยังมีกระแสอยู่ตลอด ทำให้ C3.ai มักจะถูกเก็งกำไรด้วย Call Options จำนวนมาก 
+* **Sentiment & Options:** เป็นตัวเต็งอันดับต้นๆ ที่อาจเกิด **Gamma Squeeze** เนื่องจากนักลงทุนรายย่อยมักจะเข้ามาเก็งกำไร Out-of-the-money Call Options อย่างหนาแน่นในช่วงที่หุ้นเริ่มมีสัญญาณฟื้นตัว
+
+### 4. 1-800-FLOWERS.COM, Inc. (FLWS)
+* **Short % of Float:** ~38-40%
+* **สถานะปัจจุบัน:** หุ้นค้าปลีกเฉพาะกลุ่มที่มีระดับ Short Interest สูง 
+* **Sentiment & Options:** แม้ว่าอาจไม่ใช่หุ้นที่มีกระแสโซเชียลร้อนแรงเท่ากลุ่ม Tech แต่ด้วย Short Interest ที่สูงเกือบ 40% และ Days to Cover ที่อยู่ในระดับสูง ทำให้ความเสี่ยงทางลงของนักชอร์ตเซลล์มีมากหากราคาขยับขึ้นกะทันหัน
+
+### 5. SoundHound AI, Inc. (SOUN)
+* **Short % of Float:** ~36-38%
+* **สถานะปัจจุบัน:** อีกหนึ่งหุ้น AI ขนาดเล็กที่ได้รับผลกระทบจากการชอร์ตอย่างหนักเช่นเดียวกับ C3.ai แต่มีฐานแฟนคลับใน Reddit (Meme Stock Community) คอยสนับสนุน
+* **Sentiment & Options:** ปริมาณ Call Option หมุนเวียนค่อนข้างสูง มีโอกาสสูงที่จะเกิด Gamma Squeeze ซ้อนกับ Short Squeeze หากมีข่าวดีเกี่ยวกับพาร์ทเนอร์ชิพหรือรายได้
+
+---
+
+## ⚠️ คำเตือนความเสี่ยงสำคัญ (Risk Management)
+* **High Volatility:** หุ้นที่มี Short Interest สูง มักมีความผันผวนของราคารุนแรง การเข้าซื้อเพื่อเก็งกำไรจากการ Squeeze มีความเสี่ยงสูงมากที่จะขาดทุนหนักหากไม่เกิดการบีบซื้อคืน (Squeeze Fails)
+* **Timing is Everything:** Squeeze มักจะเกิดขึ้นอย่างรวดเร็วและจบลงอย่างรวดเร็วภายในเวลาไม่กี่ชั่วโมงถึงไม่กี่วัน การตั้ง Stop Loss อย่างเคร่งครัดคือสิ่งจำเป็นที่สุด
+* **Options Decay:** การซื้อ OTM Call Options เพื่อเก็งกำไร Gamma Squeeze อาจสูญเสียมูลค่าอย่างรวดเร็ว (Theta Decay) หากราคาหุ้นไม่ขยับขึ้นแรงตามที่คาดหวัง
+
+---
+
+## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
+* [highshortinterest.com] ข้อมูล Short Interest ของตลาดหุ้นสหรัฐฯ (ข้อมูลตลาด ณ วันที่ 21 ก.ค. 2026)
+* [findmymoat.com, barchart.com] สถิติ Days to Cover และ % of Float
+* [optionseducation.org, marketchameleon.com] ข้อมูลกลไก Gamma Squeeze และ Options Volume Screeners
+* [benzinga.com, stocktitan.net] ข่าวสารการเงินและบทวิเคราะห์ความเสี่ยง
+* *หมายเหตุ: ตัวเลข Options Volume ล่าสุด และกระแสเชิงลึกบางส่วนอยู่ระหว่างการคาดการณ์ของตลาดและมีการเปลี่ยนแปลงได้แบบ Real-time ตลอดวันทำการ*
