@@ -1,5 +1,45 @@
 [
   {
+    "title": "Performance Review & Post-Market Recap: 2026-07-23",
+    "filename": "bot_stats_2026_07_23.md",
+    "path": "bot_stats_2026_07_23.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-07-23",
+    "timestamp": 1784807805170.1594,
+    "size": 2162
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "tmp_venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-23",
+    "timestamp": 1784807786576.166,
+    "size": 1541
+  },
+  {
+    "title": "NCSA Open Source License",
+    "filename": "LICENSE.md",
+    "path": "tmp_venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-23",
+    "timestamp": 1784807785520.2495,
+    "size": 3511
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "tmp_venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-23",
+    "timestamp": 1784807785229.5532,
+    "size": 1096
+  },
+  {
     "title": "\uddfa\uddf8 US Pre-Market Analysis (23 กรกฎาคม 2026)",
     "filename": "us_pre_market_analysis_2026_07_23.md",
     "path": "us_pre_market_analysis_2026_07_23.md",
