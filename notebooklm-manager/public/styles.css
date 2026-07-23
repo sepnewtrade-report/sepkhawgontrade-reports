@@ -871,7 +871,7 @@ body {
 /* Album Button */
 .btn-album {
     margin-left: auto;
-    padding: 8px 18px;
+    padding: 6px 14px;
     background: rgba(168, 85, 247, 0.1);
     border: 1px solid rgba(168, 85, 247, 0.25);
     color: #c084fc;
@@ -882,6 +882,14 @@ body {
     cursor: pointer;
     transition: all 0.25s ease;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-album-logo {
+    height: 18px;
+    width: auto;
+    border-radius: 3px;
 }
 .btn-album:hover {
     background: rgba(168, 85, 247, 0.18);

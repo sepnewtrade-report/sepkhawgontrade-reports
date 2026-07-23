@@ -3026,11 +3026,11 @@ function updateAlbumButton() {
     const btn = document.getElementById('btn-album');
     if (!btn) return;
     if (albumRunning) {
-        btn.textContent = '📚 Album ✅';
+        btn.innerHTML = '<img src="logo-mascot.png" class="btn-album-logo" alt="Logo"> Album ✅';
         btn.classList.add('active');
         btn.title = 'Album กำลังทำงาน — คลิกเพื่อเปิดหน้า Album หรือกดค้างเพื่อปิด';
     } else {
-        btn.textContent = '📚 Album';
+        btn.innerHTML = '<img src="logo-mascot.png" class="btn-album-logo" alt="Logo"> Album';
         btn.classList.remove('active');
         btn.title = 'คลิกเพื่อเปิด Album รายการผลิตคลิป';
     }
