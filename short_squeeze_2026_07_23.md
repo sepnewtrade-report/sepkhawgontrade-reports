@@ -16,15 +16,15 @@
 ## 🔥 Top 3 Short Squeeze Candidates (หุ้นที่มีโอกาส Squeeze สูงสุด)
 
 ### 1. Groupon Inc. (NYSE: GRPN)
-* **Short Interest:** ~55% of Float [ที่มา: HighShortInterest, Fintel]
+* **Short Interest:** ~41% of Float [ที่มา: Benzinga, Fintel]
 * **Days to Cover:** สูงกว่า 5 วัน [ที่มา: MarketBeat]
 * **Volume Surge:** ปริมาณการซื้อขายพุ่งสูงกว่าค่าเฉลี่ย 30 วันที่ผ่านมา [ที่มา: Barchart]
-* **Gamma Squeeze Signal:** มีแรงซื้อ Call Options อย่างหนาแน่นจากการเก็งกำไรใน "Project Foundry" (แผนปรับโครงสร้างและบูรณาการ AI) รวมถึงการถูกปรับน้ำหนักในดัชนี Russell [ที่มา: ข้อมูลตลาด Options ก.ค. 2026]
+* **Gamma Squeeze Signal:** มีแรงซื้อ Call Options อย่างหนาแน่นจากการเก็งกำไรในแผนพลิกฟื้นกำไรและปรับโครงสร้างบริษัท (Restructuring) รวมถึงการถูกปรับน้ำหนักในดัชนี Russell [ที่มา: ข้อมูลตลาด Options ก.ค. 2026]
 * **Social Sentiment:** กระแสบน Reddit และ X (Twitter) อยู่ในระดับ "สูงมาก" โดยนักลงทุนรายย่อยเล็งเห็นโครงสร้างหุ้นที่มี Free Float ต่ำ ซึ่งง่ายต่อการไล่ราคา [ที่มา: การประเมินกระแสโซเชียล ก.ค. 2026]
 * **ความเห็นนักวิเคราะห์:** GRPN ถือเป็นเต็งหนึ่งของการเกิด Squeeze ในสัปดาห์นี้ โครงสร้างราคาเริ่มยกตัวขึ้นและต้นทุนการยืมหุ้น (Cost to Borrow) พุ่งสูง หากมีข่าวบวกสนับสนุนเพียงเล็กน้อย อาจเกิด Feedback Loop ให้ Market Maker ต้องไล่ซื้อหุ้นเพื่อทำ Hedging (Gamma Squeeze)
 
 ### 2. SoundHound AI Inc. (NASDAQ: SOUN)
-* **Short Interest:** ~38% of Float [ที่มา: Fintel]
+* **Short Interest:** ~41% of Float [ที่มา: Fintel, Benzinga]
 * **Days to Cover:** > 2 วัน [ที่มา: Barchart]
 * **Volume Surge:** ราคาหุ้นตอบสนองเชิงบวกพร้อมวอลุ่มไล่ซื้อที่เริ่มก่อตัว [ที่มา: MarketBeat]
 * **Gamma Squeeze Signal:** Open Interest ของ Out-of-the-money (OTM) Call Options ยังคงอยู่ในระดับสูง โดยนักเก็งกำไรหวังรอบ Rebound ของกลุ่ม AI [ที่มา: ข้อมูล Options ก.ค. 2026]
@@ -32,7 +32,7 @@
 * **ความเห็นนักวิเคราะห์:** SOUN มีค่าธรรมเนียมการยืมหุ้น (Borrow Fee) ที่สูง การเคลื่อนไหวของราคาจะผันผวนรุนแรงตามข่าว AI หากมีปัจจัยเร่ง (Catalyst) หุ้นสามารถดีดตัวแรงเพื่อบีบให้ Short Seller ต้อง Cover
 
 ### 3. C3.ai Inc. (NYSE: AI)
-* **Short Interest:** > 20% of Float [ที่มา: HighShortInterest]
+* **Short Interest:** ~29-37% of Float [ที่มา: HighShortInterest, Benzinga]
 * **Days to Cover:** 2-3 วัน (อยู่ระหว่างการประเมินจากปริมาณซื้อขายรายวัน) [ที่มา: MarketBeat]
 * **Volume Surge:** มีแรงซื้อสลับเข้ามาในช่วงที่ราคาพักตัว [ที่มา: Barchart]
 * **Gamma Squeeze Signal:** ยอด Open Interest ทะลุ 300,000 สัญญา (Contracts) โดยส่วนใหญ่เป็นสถานะ Bullish ฝั่ง Call Options [ที่มา: ข้อมูลตลาด Options ก.ค. 2026]
