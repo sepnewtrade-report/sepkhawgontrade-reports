@@ -83,6 +83,23 @@ const server = http.createServer((req, res) => {
   // Reset auto-shutdown timer on every request
   resetShutdownTimer();
 
+  // Serve logo-mascot.png
+  if (parsed.pathname === '/logo-mascot.png') {
+    const fs = require('fs');
+    let imgPath = path.join(__dirname, '..', 'logo-mascot.png');
+    if (!fs.existsSync(imgPath)) {
+      imgPath = path.join(__dirname, 'public', 'logo-mascot.png');
+    }
+    if (fs.existsSync(imgPath)) {
+      res.writeHead(200, { 'Content-Type': 'image/png' });
+      res.end(fs.readFileSync(imgPath));
+    } else {
+      res.writeHead(404);
+      res.end('Not Found');
+    }
+    return;
+  }
+
   // API: Heartbeat (reset timer, return remaining time + paused state)
   if (parsed.pathname === '/api/heartbeat' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -242,7 +259,7 @@ function generateHtml(paused) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📚 Album รายการผลิตคลิป — เสพข่าวก่อนเทรด หุ้นอเมริกา</title>
+  <title>Album รายการผลิตคลิป — เสพข่าวก่อนเทรด หุ้นอเมริกา</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
 ${getCSS()}
@@ -268,7 +285,10 @@ ${getCSS()}
     </div>
 
     <header class="page-header">
-      <h1>📚 Album รายการผลิตคลิป</h1>
+      <h1>
+        <img src="logo-mascot.png" class="header-logo" alt="Logo">
+        <span class="header-text">Album รายการผลิตคลิป</span>
+      </h1>
       <p>รวบรวมทุกรายการที่ผลิตผ่าน NotebookLM พร้อม Prompt และประวัติ Workflow — แก้ไข Prompt ได้ทันที</p>
       <div class="stats-bar" id="stats-bar"></div>
       <div class="search-bar">
@@ -323,7 +343,9 @@ function getCSS() {
 
     /* Header */
     .page-header { text-align:center; padding:48px 20px 36px; }
-    .page-header h1 { font-family:var(--font-heading); font-size:2.6rem; font-weight:700; background:linear-gradient(135deg,#818cf8,#a855f7,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:10px; }
+    .page-header h1 { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px; }
+    .page-header h1 .header-logo { height: 52px; width: auto; border-radius: 10px; filter: drop-shadow(0 4px 12px rgba(99,102,241,0.35)); }
+    .page-header h1 .header-text { font-family:var(--font-heading); font-size:2.6rem; font-weight:700; background:linear-gradient(135deg,#818cf8,#a855f7,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
     .page-header p { color:var(--text-secondary); font-size:1.05rem; max-width:650px; margin:0 auto; }
     .stats-bar { display:flex; justify-content:center; gap:36px; margin-top:28px; flex-wrap:wrap; }
     .stat-item { text-align:center; }
@@ -471,7 +493,9 @@ function getCSS() {
     ::-webkit-scrollbar-thumb:hover { background:rgba(255,255,255,.2); }
 
     @media (max-width:768px) {
-      .page-header h1 { font-size:1.8rem; }
+      .page-header h1 { gap: 10px; }
+      .page-header h1 .header-text { font-size:1.8rem; }
+      .page-header h1 .header-logo { height: 38px; }
       .album-grid { grid-template-columns:1fr; }
       .modal-content { max-width:100%; }
       .modal-body { padding:20px 16px 28px; }
