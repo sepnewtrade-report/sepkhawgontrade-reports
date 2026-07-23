@@ -21,6 +21,7 @@ walkthrough.md
 venv/
 ENV/
 env/
+tmp_venv/
 
 # Environment variables
 .env
