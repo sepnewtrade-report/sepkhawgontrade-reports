@@ -1,5 +1,15 @@
 [
   {
+    "title": "Performance Review & Post-Market Recap: 2026-07-23",
+    "filename": "bot_stats_2026_07_23.md",
+    "path": "bot_stats_2026_07_23.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-07-23",
+    "timestamp": 1784821745332.3386,
+    "size": 1964
+  },
+  {
     "title": "Quantitative Options Screening & Statistical Edge Analysis",
     "filename": "options_screen_analysis_2026_07_23.md",
     "path": "options_screen_analysis_2026_07_23.md",
@@ -48,16 +58,6 @@
     "date": "2026-07-23",
     "timestamp": 1784807867903.6675,
     "size": 4112
-  },
-  {
-    "title": "Performance Review & Post-Market Recap: 2026-07-23",
-    "filename": "bot_stats_2026_07_23.md",
-    "path": "bot_stats_2026_07_23.md",
-    "category": "Bot Trade Stats",
-    "categoryThai": "Bot Trade Stats",
-    "date": "2026-07-23",
-    "timestamp": 1784807805170.1594,
-    "size": 2162
   },
   {
     "title": "LICENSE.md",
