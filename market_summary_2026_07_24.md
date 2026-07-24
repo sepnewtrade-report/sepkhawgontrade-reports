@@ -42,12 +42,12 @@
 
 ## 6. 🚀 STOCK-SPECIFIC NEWS (หุ้นรายตัว)
 **1. Alphabet Inc. (GOOGL)**
-- **ข่าว:** หุ้นปรับตัวลดลง 6.9% หลังการคาดการณ์รายจ่ายลงทุน (Capital spending) ด้าน AI ที่สูงขึ้น [ที่มา: WSLS, GoLocalProv]
+- **ข่าว:** หุ้นปรับตัวลดลงสู่ระดับ 319.88 ดอลลาร์ (ร่วงลงราว 7.1% ในช่วงสองวันที่ผ่านมา) หลังการคาดการณ์รายจ่ายลงทุน (Capital spending) ด้าน AI ที่พุ่งสูงถึง $195–$205 พันล้านดอลลาร์ ทำให้เกิด Negative Free Cash Flow เป็นครั้งแรก [ที่มา: GuruFocus, WSLS]
 - **Sentiment:** Bearish ระยะสั้น
 - **วิเคราะห์:** ตลาดกังวลว่าต้นทุนที่สูงขึ้นจะบีบอัตรากำไร (Margin) ในระยะสั้น แม้บริษัทจะยืนยันถึงความจำเป็นในการลงทุนเพื่อรักษาความได้เปรียบก็ตาม
 
 **2. Tesla Inc. (TSLA)**
-- **ข่าว:** หุ้นร่วงลงถึง 15% ท่ามกลางความกังวลเรื่องผลกำไรที่ลดลง แม้ยอดส่งมอบรถยนต์จะทำได้ดี [ที่มา: GoLocalProv]
+- **ข่าว:** หุ้นร่วงลงอย่างหนักมาปิดที่ระดับ 319.69 ดอลลาร์ (ลดลงราว 14.5%) ท่ามกลางความกังวลเรื่องผลกำไรที่ลดลง และรายจ่ายลงทุนด้าน AI/Robotics ที่เพิ่มขึ้น [ที่มา: Motley Fool, GuruFocus]
 - **Sentiment:** Bearish 
 - **วิเคราะห์:** สงครามราคา (Price war) ส่งผลกระทบอย่างหนักต่อ Profitability ของบริษัท ตลาดต้องการความชัดเจนเรื่องทิศทางอัตรากำไรขั้นต้น (Gross Margin) มากกว่ายอดขายเพียงอย่างเดียว
 
@@ -66,12 +66,16 @@
 ## 9. 🧠 FINAL SUMMARY
 1. **Perfect Storm ทุบตลาด:** ฟิวเจอร์สชี้ตลาดลงต่อ รับข่าวราคาน้ำมันทะลุ $100 และนโยบายกำแพงภาษีใหม่ของทรัมป์
 2. **ความหวังลดดอกเบี้ยริบหรี่:** เงินเฟ้อเสี่ยงพุ่งกลับ ดันบอนด์ยีลด์ 10 ปี ทรงตัวระดับสูงที่ 4.65% 
-3. **Tech Sector หมดรอบฮันนีมูน:** ตลาดเทขาย GOOGL และ TSLA หลังกังวลเรื่องรายจ่ายลงทุน AI ที่สูงขึ้นและผลกำไรที่ถูกบีบ
+3. **Tech Sector หมดรอบฮันนีมูน:** ตลาดเทขาย GOOGL ($319.88) และ TSLA ($319.69) หลังกังวลเรื่องรายจ่ายลงทุน AI ที่สูงขึ้นและผลกำไรที่ถูกบีบ
 
 ---
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- Simply Wall St: อัปเดตตลาดฟิวเจอร์สและบอนด์ยีลด์
-- Big News Network: ข้อมูลดัชนี Dow Jones
-- GoLocalProv & InvestingLive: สถานการณ์ราคาน้ำมันดิบและตะวันออกกลาง
-- The Guardian & Morningstar: รายงานข่าวแผนภาษีนำเข้าของโดนัลด์ ทรัมป์
-- WSLS: ข่าวผลประกอบการบริษัทเทคโนโลยี (Alphabet, Tesla)
+- Simply Wall St (Stock Futures, 10Y Yield): https://simplywall.st
+- Big News Network (Dow Jones Data): https://www.bignewsnetwork.com
+- GoLocalProv (Oil Prices, Middle East): https://www.golocalprov.com
+- InvestingLive (Geopolitics): https://investinglive.com
+- The Guardian (Tariff News): https://www.theguardian.com
+- Morningstar (Market Outlook, Alphabet): https://www.morningstar.com
+- WSLS (Tech Earnings): https://www.wsls.com
+- GuruFocus (GOOGL & TSLA Stock Price): https://www.gurufocus.com
+- The Motley Fool (TSLA Earnings & Price): https://www.fool.com
