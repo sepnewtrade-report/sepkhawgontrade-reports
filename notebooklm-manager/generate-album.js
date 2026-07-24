@@ -155,7 +155,16 @@ const server = http.createServer((req, res) => {
           res.end(JSON.stringify({ error: 'Template not found' }));
           return;
         }
-        const keyMap = { search: 'searchPrompt', audio: 'audioPrompt', report: 'reportPrompt', info: 'infoPrompt' };
+        const keyMap = { 
+          search: 'searchPrompt', 
+          audio: 'audioPrompt', 
+          report: 'reportPrompt', 
+          info: 'infoPrompt',
+          searchV2: 'searchPromptV2', 
+          audioV2: 'audioPromptV2', 
+          reportV2: 'reportPromptV2', 
+          infoV2: 'infoPromptV2'
+        };
         const key = keyMap[promptType];
         if (!key) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -441,6 +450,12 @@ function getCSS() {
     .no-data { color:var(--text-muted); font-style:italic; }
     .no-data-cell { text-align:center; color:var(--text-muted); padding:24px !important; }
 
+    /* Version Selector */
+    .version-selector { display:flex; gap:8px; margin-bottom:20px; padding:4px; background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:10px; width:fit-content; }
+    .btn-version { padding:8px 16px; border:none; background:transparent; color:var(--text-secondary); font-size:.88rem; font-weight:500; font-family:var(--font-body); cursor:pointer; border-radius:7px; transition:all .2s; }
+    .btn-version:hover { color:var(--text-primary); }
+    .btn-version.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(99,102,241,0.3); }
+
     /* Server Control Bar */
     .server-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.15); border-radius:var(--radius-sm); margin-bottom:8px; position:sticky; top:0; z-index:100; backdrop-filter:blur(16px); transition:background .4s ease, border-color .4s ease; }
     .server-status { display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--text-secondary); }
@@ -507,6 +522,9 @@ function getCSS() {
 // ============================================================
 function getJS() {
   return `
+    let activeVersion = 'v1';
+    let currentDetailIdx = null;
+
     // --- Helpers ---
     function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
     function getIcon(id,name) {
@@ -561,14 +579,18 @@ function getJS() {
         const badge = getBadge(t.id,t.name);
         const wfs = workflowsByTemplate[t.id] || [];
         const completed = wfs.filter(w=>w.status==='completed').length;
-        const has = [t.searchPrompt,t.audioPrompt,t.reportPrompt,t.infoPrompt].filter(p=>p&&p.trim()).length;
-        const hasS=!!(t.searchPrompt&&t.searchPrompt.trim()), hasA=!!(t.audioPrompt&&t.audioPrompt.trim()), hasR=!!(t.reportPrompt&&t.reportPrompt.trim()), hasI=!!(t.infoPrompt&&t.infoPrompt.trim());
+        const hasV1 = [t.searchPrompt,t.audioPrompt,t.reportPrompt,t.infoPrompt].filter(p=>p&&p.trim()).length;
+        const hasV2 = [t.searchPromptV2,t.audioPromptV2,t.reportPromptV2,t.infoPromptV2].filter(p=>p&&p.trim()).length;
+        const hasS = !!((t.searchPrompt && t.searchPrompt.trim()) || (t.searchPromptV2 && t.searchPromptV2.trim()));
+        const hasA = !!((t.audioPrompt && t.audioPrompt.trim()) || (t.audioPromptV2 && t.audioPromptV2.trim()));
+        const hasR = !!((t.reportPrompt && t.reportPrompt.trim()) || (t.reportPromptV2 && t.reportPromptV2.trim()));
+        const hasI = !!((t.infoPrompt && t.infoPrompt.trim()) || (t.infoPromptV2 && t.infoPromptV2.trim()));
 
         return '<div class="album-card" onclick="openDetail('+i+')" data-name="'+esc(t.name)+'" data-id="'+esc(t.id)+'">'+
           '<div class="card-header"><span class="card-icon">'+icon+'</span><span class="card-badge '+badge.cls+'">'+badge.text+'</span></div>'+
           '<h3 class="card-title">'+esc(t.name)+'</h3>'+
           '<div class="card-meta">'+
-            '<div class="meta-item"><span>📝</span><span>'+has+' Prompts ตั้งค่า</span></div>'+
+            '<div class="meta-item"><span>📝</span><span>V1: '+hasV1+' | V2: '+hasV2+' Prompts</span></div>'+
             '<div class="meta-item"><span>🎬</span><span>'+wfs.length+' ครั้งที่รัน'+(completed>0?' ('+completed+' สำเร็จ)':'')+'</span></div>'+
           '</div>'+
           '<div class="card-prompts-preview">'+
@@ -583,17 +605,25 @@ function getJS() {
     }
 
     // --- Detail Modal ---
+    window.switchVersion = function(ver) {
+      activeVersion = ver;
+      openDetail(currentDetailIdx);
+    }
+
     function openDetail(idx) {
+      currentDetailIdx = idx;
       const t = DATA.templates[idx];
       const wfs = DATA.workflowsByTemplate[t.id] || [];
       const icon = getIcon(t.id,t.name);
 
       const prompts = [
-        {key:'search',label:'🔍 Prompt ค้นหาข่าว (Search)',cls:'prompt-search',val:t.searchPrompt||''},
-        {key:'audio',label:'🎙️ Prompt Audio Overview',cls:'prompt-audio',val:t.audioPrompt||''},
-        {key:'report',label:'📱 Prompt Report Facebook',cls:'prompt-report',val:t.reportPrompt||''},
-        {key:'info',label:'🖼️ Prompt Infographic',cls:'prompt-info',val:t.infoPrompt||''},
+        {key:'search',label:'🔍 Prompt ค้นหาข่าว (Search)',cls:'prompt-search',val: (activeVersion === 'v1' ? t.searchPrompt : t.searchPromptV2) || ''},
+        {key:'audio',label:'🎙️ Prompt Audio Overview',cls:'prompt-audio',val: (activeVersion === 'v1' ? t.audioPrompt : t.audioPromptV2) || ''},
+        {key:'report',label:'📱 Prompt Report Facebook',cls:'prompt-report',val: (activeVersion === 'v1' ? t.reportPrompt : t.reportPromptV2) || ''},
+        {key:'info',label:'🖼️ Prompt Infographic',cls:'prompt-info',val: (activeVersion === 'v1' ? t.infoPrompt : t.infoPromptV2) || ''},
       ];
+
+      const keySuffix = activeVersion === 'v1' ? '' : 'V2';
 
       let wfRows = '';
       if (wfs.length > 0) {
@@ -617,18 +647,23 @@ function getJS() {
         '<div class="modal-content" onclick="event.stopPropagation()">'+
           '<div class="modal-header"><div class="modal-title-group"><span class="modal-icon">'+icon+'</span><div><h2>'+esc(t.name)+'</h2><span class="modal-id">ID: '+esc(t.id)+'</span></div></div><button class="modal-close" onclick="closeDetail()">&times;</button></div>'+
           '<div class="modal-body">'+
-            '<h3 class="section-title">🎛️ การตั้งค่า Prompt ทั้ง 4 ประเภท <span style="font-size:.78rem;color:var(--text-muted);font-weight:400">— แก้ไขได้ กด Save เพื่อบันทึก</span></h3>'+
+            '<h3 class="section-title" style="margin-bottom:12px">🎛️ การตั้งค่า Prompt ทั้ง 4 ประเภท <span style="font-size:.78rem;color:var(--text-muted);font-weight:400">— แก้ไขได้ กด Save เพื่อบันทึก</span></h3>'+
+            '<div class="version-selector">'+
+              '<button class="btn-version '+(activeVersion==='v1'?'active':'')+'" onclick="switchVersion(\\'v1\\')">Version 1 (ดั้งเดิม)</button>'+
+              '<button class="btn-version '+(activeVersion==='v2'?'active':'')+'" onclick="switchVersion(\\'v2\\')">Version 2 (ปรับปรุงใหม่)</button>'+
+            '</div>'+
             '<div class="prompt-accordion">'+
             prompts.map(p => {
               const hasVal = !!(p.val && p.val.trim());
+              const keyWithVer = p.key + keySuffix;
               return '<div class="prompt-section '+p.cls+'">'+
                 '<button class="prompt-header-btn" onclick="toggleAccordion(this)"><span>'+p.label+'</span><span class="prompt-status">'+(hasVal?'✅ ตั้งค่าแล้ว':'⬜ ยังไม่ได้ตั้ง')+'</span><span class="chevron">▼</span></button>'+
                 '<div class="prompt-body">'+
                   '<div class="prompt-actions">'+
-                    '<button class="btn-sm btn-copy" onclick="copyText(\\'ta_'+t.id+'_'+p.key+'\\',this)">📋 Copy</button>'+
-                    '<button class="btn-sm btn-save" id="save_'+t.id+'_'+p.key+'" onclick="savePrompt(\\''+t.id+'\\',\\''+p.key+'\\','+idx+')" disabled>💾 Save</button>'+
+                    '<button class="btn-sm btn-copy" onclick="copyText(\\'ta_'+t.id+'_'+keyWithVer+'\\',this)">📋 Copy</button>'+
+                    '<button class="btn-sm btn-save" id="save_'+t.id+'_'+keyWithVer+'" onclick="savePrompt(\\''+t.id+'\\',\\''+keyWithVer+'\\','+idx+')" disabled>💾 Save</button>'+
                   '</div>'+
-                  '<textarea class="prompt-textarea'+(hasVal?'':' no-data')+'" id="ta_'+t.id+'_'+p.key+'" oninput="onPromptEdit(\\''+t.id+'\\',\\''+p.key+'\\')" placeholder="ยังไม่ได้ตั้งค่า Prompt นี้ — พิมพ์เพื่อเพิ่ม...">'+(p.val||'')+'</textarea>'+
+                  '<textarea class="prompt-textarea'+(hasVal?'':' no-data')+'" id="ta_'+t.id+'_'+keyWithVer+'" oninput="onPromptEdit(\\''+t.id+'\\',\\''+keyWithVer+'\\')" placeholder="ยังไม่ได้ตั้งค่า Prompt นี้ — พิมพ์เพื่อเพิ่ม...">'+(p.val||'')+'</textarea>'+
                 '</div>'+
               '</div>';
             }).join('')+
@@ -691,7 +726,10 @@ function getJS() {
         const result = await resp.json();
         if (result.success) {
           // Update local data
-          const keyMap = {search:'searchPrompt',audio:'audioPrompt',report:'reportPrompt',info:'infoPrompt'};
+          const keyMap = {
+            search:'searchPrompt', audio:'audioPrompt', report:'reportPrompt', info:'infoPrompt',
+            searchV2:'searchPromptV2', audioV2:'audioPromptV2', reportV2:'reportPromptV2', infoV2:'infoPromptV2'
+          };
           DATA.templates[templateIdx][keyMap[promptType]] = value;
 
           saveBtn.textContent = '✅ บันทึกแล้ว!';
