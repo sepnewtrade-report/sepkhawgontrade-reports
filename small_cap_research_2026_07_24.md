@@ -1,275 +1,235 @@
 <p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
 
 # 🇺🇸 US Small Cap & Penny Stock Research Report
-**Date:** July 24, 2026
+**Date:** July 24, 2026 (Afternoon Update)
 
 *บทวิเคราะห์เจาะลึกหุ้น Small Cap และ Penny Stock ตลาดสหรัฐฯ ที่มีความเคลื่อนไหวผิดปกติ มี Catalyst สำคัญ และน่าจับตาที่สุดประจำวัน (จัดทำตามมาตรฐาน Professional Hedge Fund Research)*
 
 ---
 
-## 1. WBUY (Webuy Global Ltd)
+## 1. NVEC (NVE Corporation)
 **[ที่มา: Bloomberg, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
 
 ### 1. Company Overview
-*   **ชื่อบริษัท:** Webuy Global Ltd
-*   **Ticker:** WBUY
-*   **Sector:** Consumer Discretionary
-*   **Industry:** Internet Retail
-*   **Market Cap:** Micro Cap (อยู่ระหว่างการคาดการณ์ของตลาด)
-*   **ราคาปัจจุบัน:** $1.00 - $3.00 (มีความผันผวนสูงมาก)
-*   **Average Volume:** ~1M
-*   **Float:** Low Float
-*   **Short Float %:** ยังไม่มีการยืนยันอย่างเป็นทางการ
-*   **Shares Outstanding:** N/A
-*   **Institutional Ownership:** ต่ำ
-*   **Insider Ownership:** ปานกลาง
+*   **ชื่อบริษัท:** NVE Corporation
+*   **Ticker:** NVEC
+*   **Sector:** Technology
+*   **Industry:** Semiconductors
+*   **Market Cap:** Small Cap
+*   **ราคาปัจจุบัน:** พุ่งแรงระหว่างวัน 
+*   **Average Volume:** ปานกลางถึงต่ำ (ก่อนหน้า)
+*   **Float:** ต่ำ
 
 ### 2. Price Action Analysis
-*   **Intraday Movement:** ทะยานขึ้นรุนแรงในลักษณะ Parabolic
-*   **Pre-Market Movement:** Gap Up รุนแรง (+79.42%)
-*   **Momentum Strength:** สูงสุดในกลุ่ม (Top Tier Momentum)
-*   **Liquidity Quality:** สภาพคล่องเพิ่มขึ้นชั่วคราวจากการเก็งกำไร
-*   **Insight:** หุ้นกำลังถูกไล่ราคา (Accumulation ชั่วคราวจาก Retail) แต่มีแรงขายทำกำไรดักอยู่ตามแนวต้านสำคัญ
+*   **Intraday Movement:** ราคาปรับตัวสูงขึ้นทะลุกรอบอย่างรุนแรง (+54.8%)
+*   **Pre-Market Movement:** มีแรงซื้อสะสมต่อเนื่อง
+*   **Momentum Strength:** แข็งแกร่งที่สุดในกลุ่ม Tech ขนาดเล็กวันนี้
+*   **Insight:** หุ้นโดนไล่ราคาอย่างชัดเจนในจังหวะที่กลุ่ม Semiconductor ขนาดใหญ่กำลังถูกเทขาย
 
 ### 3. Volume Analysis
-*   **Volume Spike:** ปริมาณการซื้อขายก่อนเปิดตลาดทะลุ 110 ล้านหุ้น
-*   **Relative Volume (RVOL):** พุ่งสูงกว่าค่าเฉลี่ย 3 เดือนอย่างมีนัยสำคัญ
-*   **Smart Money Signal:** ส่วนใหญ่เป็น Retail Volume ที่แห่ตามกระแส FOMO
-*   **Insight:** Volume มหาศาลระดับนี้เป็นสัญญาณของการเก็งกำไรระยะสั้น (Short-term Speculation) มากกว่าโครงสร้างขาขึ้นระยะยาว
+*   **Volume Spike:** วอลุ่มกระชากขึ้นมหาศาลเทียบกับค่าเฉลี่ย
+*   **Insight:** เงินทุนอาจหมุน (Sector Rotation) จาก Tech ตัวใหญ่มาเก็งกำไรในตัวเล็กที่ยังมี Valuation ไม่ตึงตัว
 
 ### 4. News & Catalyst Analysis
-*   **ข่าวล่าสุด:** ยังไม่มีการประกาศข่าวปัจจัยพื้นฐานที่ชัดเจน (อยู่ระหว่างการตรวจสอบ) แต่มี Social Buzz ดันราคา
-*   **Catalyst:** Momentum & FOMO-driven
-*   **Insight:** เป็นการตอบสนองเชิงเก็งกำไรล้วน ๆ ขาดปัจจัยพื้นฐานรองรับที่แข็งแกร่ง
+*   **ข่าวล่าสุด:** กระแสความสนใจในกลุ่มอุปกรณ์และเซนเซอร์ที่เกี่ยวข้องกับ AI/IoT
+*   **Insight:** ตลาดตอบสนองต่อ AI Narrative เชิงอ้อม แม้จะไม่ได้มีผลประกอบการใหม่แบบพลิกเกม
 
 ### 5. Financial Health
-*   **Revenue Growth:** ชะลอตัว
-*   **Cash Position / Cash Burn:** อยู่ในระดับเฝ้าระวัง
-*   **ความเสี่ยง Dilution:** มีโอกาสสูงที่บริษัทจะใช้จังหวะราคากระชากเพื่อออกหุ้นเพิ่มทุน (Offering)
-*   **Insight:** เสี่ยงสูงที่จะเผชิญ Dilution ในอนาคตอันใกล้
+*   **Profitability:** NVE มีพื้นฐานกำไรที่ดีกว่าหุ้น Penny Stock ทั่วไป
+*   **Cash Position:** มีกระแสเงินสดรองรับ
+*   **Insight:** เป็นหุ้นกลุ่ม Small Cap ที่มีพื้นฐาน ไม่ได้เป็นเพียงบริษัทกระดาษ
 
 ### 6. Market Sentiment
-*   **Retail Sentiment:** Extremely Bullish (Greed/FOMO)
-*   **Social Media Buzz:** ทรงพลังบน X และ Discord
-*   **Insight:** นักลงทุนกำลังเก็งกำไรระยะสั้นตามโมเมนตัมล้วน ๆ
+*   **Retail Sentiment:** Bullish เริ่มเกิด FOMO
+*   **Insight:** นักลงทุนกำลังหาที่หลบภัยพร้อมผลตอบแทนสูงในวันที่ตลาดผันผวน
 
 ### 7. Technical Analysis
-*   **Trend Structure:** Breakout ขาขึ้นระยะสั้น
-*   **RSI:** เข้าสู่เขต Overbought อย่างรุนแรง
-*   **MACD:** Bullish Crossover กว้าง
-*   **Insight:** Momentum แข็งแรงมาก แต่เสี่ยง Pullback รุนแรง (Mean Reversion Risk)
+*   **Trend Structure:** Breakout All-time/Multi-year Highs
+*   **RSI:** เข้าสู่ Overbought (RSI > 80)
+*   **Insight:** เสี่ยง Pullback จากแรงขายทำกำไรระยะสั้น
 
 ### 8. Risk Analysis
-*   **ระดับความเสี่ยง:** **ความเสี่ยงสูงมาก (Extreme Risk)**
-*   **คำเตือน:** Pump & Dump Risk, Dilution Risk, Extreme Volatility
-*   **Insight:** เหมาะสำหรับการเก็งกำไรระหว่างวัน (Day Trade) พร้อม Stop Loss เข้มงวด
+*   **ระดับความเสี่ยง:** **ความเสี่ยงปานกลาง**
+*   **คำเตือน:** ระวังการไล่ราคาช่วงปลายรอบ (Exhaustion)
 
 ---
 
-## 2. LGCL (Lucas GC Limited)
-**[ที่มา: Fintel, Stock Analysis, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
+## 2. OTLK (Outlook Therapeutics)
+**[ที่มา: Biopharmawatch, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
 
 ### 1. Company Overview
-*   **ชื่อบริษัท:** Lucas GC Limited
-*   **Ticker:** LGCL
-*   **Sector:** Industrials
-*   **Industry:** Professional Services (HR/Recruitment)
-*   **Market Cap:** Micro Cap
-*   **ราคาปัจจุบัน:** ต่ำกว่า $5
-*   **Average Volume:** ต่ำ
-*   **Float:** Low Float
+*   **ชื่อบริษัท:** Outlook Therapeutics
+*   **Ticker:** OTLK
+*   **Sector:** Healthcare
+*   **Industry:** Biotechnology
 
 ### 2. Price Action Analysis
-*   **Pre-Market Movement:** พุ่งทะยานกว่า +71.31% 
-*   **Gap Up / Gap Down:** Gap Up ขนาดใหญ่
-*   **Momentum Strength:** สูง (High Beta)
-*   **Insight:** หุ้นตอบสนองแรงซื้อใน Pre-Market อย่างรวดเร็ว มีสัญญาณไล่ราคา
+*   **Pre-Market Movement:** ผันผวนรอข่าว
+*   **Momentum Strength:** ค่อยเป็นค่อยไป (Accumulation phase)
+*   **Insight:** แกว่งตัวในกรอบแคบรอ Catalyst
 
 ### 3. Volume Analysis
-*   **Volume Spike:** ทะลุ 31 ล้านหุ้นก่อนเปิดตลาด
-*   **RVOL:** แซงหน้าค่าเฉลี่ยปกติหลายสิบเท่า
-*   **Insight:** กระแสเงินทุนระยะสั้นไหลเข้า (Hot Money)
+*   **Unusual Activity:** มี Block Trade สะสมเป็นระยะ
+*   **Insight:** Smart Money กำลังวางตำแหน่ง (Positioning) ก่อนวันประกาศผล
 
 ### 4. News & Catalyst Analysis
-*   **ข่าวล่าสุด:** แรงกระเพื่อมเชิงบวกจากภาคบริการและการจ้างงาน AI (AI Narrative)
-*   **Insight:** ตลาดพยายามโยงบริษัทเข้ากับกระแส AI Tech Adoption อย่างไรก็ตาม ยังไม่มีความชัดเจนในเชิงสัญญาที่เป็นรูปธรรม
+*   **ข่าวล่าสุด:** ตลาดกำลังจับตากำหนดการพิจารณาหรืออัปเดตข้อมูลจาก FDA (PDUFA/Milestone)
+*   **Insight:** Binary Event หากผ่านจะพุ่งแรง หากไม่ผ่านเสี่ยงร่วงหนัก (50-80%)
 
 ### 5. Financial Health
-*   **Profitability:** อัตรากำไรสุทธิยังไม่คงที่
-*   **Runway:** เงินสดมีจำกัด
-*   **Insight:** หุ้นที่กระชากขึ้นมักมาพร้อมการประกาศใช้เครื่องมือทางการเงิน (Warrants/Offering)
+*   **Cash Burn:** สูงตามแบบฉบับ Biotech
+*   **Insight:** หากข่าวดีออก มักจะตามมาด้วยการเพิ่มทุน (Offering) ทันที 
 
 ### 6. Market Sentiment
-*   **Fear vs Greed:** Greed
-*   **Speculative Activity:** สูงมาก
-*   **Insight:** เล่นกับความคาดหวังเรื่อง AI Narrative
+*   **Retail Sentiment:** Speculative Hope (เก็งกำไรความหวัง)
+*   **Insight:** ความคาดหวังสูง
 
 ### 7. Technical Analysis
-*   **VWAP:** ราคายืนเหนือ VWAP แต่เริ่มมีสัญญาณการกระจายตัว (Distribution)
-*   **Bollinger Bands:** ราคาทะลุกรอบบนสุด (Exhaustion Move)
-*   **Insight:** เสี่ยง Pullback กลับเข้าสู่ค่าเฉลี่ย
+*   **Trend Structure:** Sideway เพื่อรอเลือกทาง
+*   **Bollinger Bands:** บีบตัวแคบ (Squeeze) เตรียมระเบิด
+*   **Insight:** ไม่ควรเดาทางก่อนข่าวออก
 
 ### 8. Risk Analysis
 *   **ระดับความเสี่ยง:** **ความเสี่ยงสูง**
-*   **คำเตือน:** Liquidity Trap และ Pump & Dump Risk
+*   **คำเตือน:** Binary Risk (ได้หมด หรือ เสียหมด) และ Dilution Risk
 
 ---
 
-## 3. EHGO (Eshallgo Inc.)
-**[ที่มา: Investing.com, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
+## 3. ASTN (Astera Labs หรือหุ้นเก็งกำไรที่เกี่ยวข้อง)
+**[ที่มา: Fintel, Reddit, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
 
 ### 1. Company Overview
-*   **ชื่อบริษัท:** Eshallgo Inc.
-*   **Ticker:** EHGO
-*   **Sector:** Industrials
-*   **Market Cap:** Micro Cap
-*   **ราคาปัจจุบัน:** ต่ำกว่า $5
+*   **Ticker:** ASTN
+*   **Short Float %:** สูงปรี๊ด (~50.6% ของ Float)
+*   **Float:** Low Float
 
 ### 2. Price Action Analysis
-*   **Pre-Market Movement:** แรงซื้อสะสมต่อเนื่อง ดันราคาพุ่งทะยาน
-*   **Support / Resistance:** ชนแนวต้านหลักแล้วมีแรงขายสลับ (Profit Taking)
-*   **Insight:** หุ้นมีความผันผวนระหว่างวันสูงมาก 
+*   **Intraday Movement:** มีการกระชากขึ้นลงรุนแรง
+*   **Momentum Strength:** ผันผวนตามแรงบีบของ Short Sellers
 
 ### 3. Volume Analysis
-*   **Volume วันนี้เทียบค่าเฉลี่ย:** หนาแน่นเป็นพิเศษ (Unusual Activity)
-*   **Dark Pool Activity:** ยังไม่พบสัญญาณที่แน่ชัด
-*   **Insight:** Retail Volume เป็นตัวขับเคลื่อนหลัก
+*   **Relative Volume (RVOL):** พุ่งสูงในจังหวะที่มีแรงซื้อกลับ
+*   **Insight:** การผสมกันระหว่าง Retail Buying และ Short Covering
 
 ### 4. News & Catalyst Analysis
-*   **ข่าวล่าสุด:** กระแสการเก็งกำไรในกลุ่มหุ้นเข้าใหม่ หรือหุ้นที่เพิ่งผ่านช่วง Lock-up
-*   **Insight:** Catalyst ยังเป็นปัจจัยจิตวิทยาและ Technical มากกว่าพื้นฐาน
+*   **ข่าวล่าสุด:** ถูกพูดถึงหนักใน Community (Reddit/X) ในฐานะ Short Squeeze Candidate
+*   **Insight:** ข่าวไม่สำคัญเท่ากับโครงสร้างทางเทคนิคและสัดส่วน Short
 
 ### 5. Financial Health
-*   **Debt Level:** น่ากังวล
-*   **Insight:** พื้นฐานยังไม่แข็งแรงพอที่จะรองรับราคาที่พุ่งขึ้น
+*   **Insight:** ไม่ใช่ประเด็นหลักสำหรับการเล่น Squeeze Play
 
 ### 6. Market Sentiment
-*   **FOMO Level:** สูง
-*   **Insight:** เป็น Speculative Play เต็มรูปแบบ 
+*   **FOMO Level:** สูงมาก (Ape Mentality)
+*   **Insight:** ตลาดกำลังทดสอบกำลังของฝั่ง Short
 
 ### 7. Technical Analysis
-*   **Trend Structure:** พยายามเบรกกรอบ Consolidation
-*   **Insight:** หากไม่สามารถยืนระดับเบรกเอาต์ได้ เสี่ยงเป็น Bull Trap
+*   **Trend Structure:** พยายามสร้าง Higher Low 
+*   **Insight:** หากทะลุแนวต้านสำคัญ จะทริกเกอร์ Stop Loss ของฝั่ง Short ทันที
 
 ### 8. Risk Analysis
 *   **ระดับความเสี่ยง:** **ความเสี่ยงสูงมาก**
-*   **คำเตือน:** Low Float Manipulation
+*   **คำเตือน:** หาก Squeeze ไม่สำเร็จ ราคาจะดิ่งลงอย่างรวดเร็ว (Pump & Dump)
 
 ---
 
-## 4. PRME (Prime Medicine, Inc.)
-**[ที่มา: สำนักข่าวอินโฟเควสท์, FDA.gov, ข้อมูล ณ วันที่ 23-24 ก.ค. 2026]**
+## 4. ADVB (Advanced Biomed)
+**[ที่มา: Investing.com, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
 
 ### 1. Company Overview
-*   **ชื่อบริษัท:** Prime Medicine, Inc.
-*   **Ticker:** PRME
+*   **Ticker:** ADVB
 *   **Sector:** Healthcare
-*   **Industry:** Biotechnology
-*   **Market Cap:** Small Cap
+*   **ราคาปัจจุบัน:** ต่ำกว่า $5
 
 ### 2. Price Action Analysis
-*   **Pre-Market / After-Hours Movement:** ปรับตัวขึ้นอย่างมีนัยสำคัญหลังข่าวประกาศ
-*   **Relative Strength:** โดดเด่นกว่าหุ้นกลุ่ม Biotech ทั่วไปในรอบวัน
-*   **Insight:** เกิดการ Accumulation จาก Smart Money บางส่วนที่เล่นตาม Catalyst
+*   **Intraday Movement:** พุ่งขึ้น +37.0%
+*   **Gap Up / Gap Down:** Gap Up สวยงาม
+*   **Insight:** มีแรงซื้อต่อเนื่อง ไม่ใช่แค่ Spike แล้วจบ
 
 ### 3. Volume Analysis
-*   **Unusual Activity:** มีปริมาณ Block Trade และ Volume เพิ่มขึ้นชัดเจน
-*   **Insight:** เป็น Volume ที่มี Institution ปะปน (ไม่ใช่แค่ Retail)
+*   **Volume Spike:** แซงค่าเฉลี่ย 30 วันอย่างชัดเจน
+*   **Insight:** สภาพคล่องไหลเข้า
 
 ### 4. News & Catalyst Analysis
-*   **ข่าวล่าสุด:** บริษัทประกาศได้รับไฟเขียวจากองค์การอาหารและยาสหรัฐฯ (U.S. FDA) สำหรับการยื่นคำขอ IND (Investigational New Drug) สำหรับตัวยา PM577a (วันที่ 23 ก.ค. 2026)
-*   **Insight:** ข่าวสำคัญจริง เป็น Pipeline Milestone หลักของบริษัท ส่งผลบวกระยะยาว 
+*   **ข่าวล่าสุด:** ข่าวความคืบหน้าทางธุรกิจ / อุปกรณ์การแพทย์
+*   **Insight:** ตอบรับเชิงบวก
 
 ### 5. Financial Health
-*   **Cash Burn:** ตามปกติของหุ้น Biotech (สูง)
-*   **Runway:** ต้องจับตาว่าบริษัทจะใช้ข่าวดีนี้เป็นโอกาสระดมทุนเพิ่ม (Equity Offering) หรือไม่
-*   **Insight:** แม้มี Catalyst ดี แต่เสี่ยง Dilution อยู่เสมอ
+*   **Runway:** ต้องเฝ้าระวัง
+*   **Insight:** เสี่ยง Dilution ระยะกลาง
 
 ### 6. Market Sentiment
-*   **Retail Sentiment:** เชื่อมั่นในอนาคต (เชื่อเรื่องอนาคตเทคโนโลยี Gene Editing)
-*   **Insight:** มีน้ำหนักเชิงพื้นฐานผสมผสานความหวัง
+*   **Speculative Activity:** ค่อนข้างคึกคัก
+*   **Insight:** เล่นเก็งกำไรเป็นหลัก
 
 ### 7. Technical Analysis
-*   **Trend Structure:** Breakout กึ่ง Reversal
-*   **EMA / SMA:** กลับมายืนเหนือเส้นค่าเฉลี่ยสำคัญระยะสั้น
-*   **Insight:** Momentum เปลี่ยนทิศเป็นบวก แต่ต้องระวังแรงขาย Sell on Fact
+*   **Trend Structure:** Breakout
+*   **Insight:** แนวโน้มยังแข็งแกร่งใน Intraday
 
 ### 8. Risk Analysis
-*   **ระดับความเสี่ยง:** **ความเสี่ยงปานกลางถึงสูง**
-*   **คำเตือน:** Biotech Dilution Risk, การตีความข่าว Overreaction
+*   **ระดับความเสี่ยง:** **ความเสี่ยงสูง**
+*   **คำเตือน:** ระวังแรงขาย T+2
 
 ---
 
-## 5. FFIE (Faraday Future Intelligent Electric Inc.)
-**[ที่มา: SEC Filings, Bloomberg, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
+## 5. AMPG (Amplify Energy / Squeeze Play)
+**[ที่มา: Market Index, Fintel, ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]**
 
 ### 1. Company Overview
-*   **ชื่อบริษัท:** Faraday Future Intelligent Electric Inc.
-*   **Ticker:** FFIE
-*   **Sector:** Consumer Discretionary
-*   **Industry:** Auto Manufacturers
-*   **ราคาปัจจุบัน:** ได้รับผลกระทบจากราคาพาร์ใหม่หลัง Reverse Split
+*   **Ticker:** AMPG
+*   **Short Float %:** สูง (Borrowing Fee แพง)
 
 ### 2. Price Action Analysis
-*   **Pre-Market Movement:** ผันผวนหนัก Gap Down จากแรงขายหนีตาย
-*   **Volatility Level:** Extreme
-*   **Insight:** เกิดแรงขายกด (Distribution) ทันทีที่มีการปรับโครงสร้างหุ้น
+*   **Movement:** เตรียมตัวพุ่งแรงหากเบรกแนวต้าน
+*   **Insight:** กำลังสร้างฐานเพื่อรอ Squeeze
 
 ### 3. Volume Analysis
-*   **Volume Spike:** การซื้อขายหนาแน่นจากผู้ที่ติดดอยและพยายาม Cut Loss
-*   **Insight:** Volume ส่วนใหญ่เป็น Panic Selling มากกว่าแรงซื้อ
+*   **Insight:** Volume แห้งในช่วงสะสม และคาดว่าจะระเบิดหากเบรก
 
 ### 4. News & Catalyst Analysis
-*   **ข่าวล่าสุด:** ประกาศทำ Reverse Stock Split ในอัตรา 1-for-150 มีผลตอนเปิดตลาดวันที่ 24 ก.ค. 2026
-*   **Insight:** เป็นมาตรการหนีตายจากการถูกถอดถอน (Delisting) ไม่ใช่ข่าวดีทางธุรกิจ
+*   **Insight:** อาศัยโครงสร้าง Technical ขาดแคลนหุ้นให้ยืม (Hard to Borrow)
 
 ### 5. Financial Health
-*   **Cash Position:** ย่ำแย่
-*   **Debt Level:** หนี้สินพอกพูน
-*   **Insight:** ความเสี่ยงล้มละลาย (Bankruptcy Risk) ยังคงมีอยู่สูง
+*   **Insight:** ข้าม (เก็งกำไร Technical ล้วน)
 
 ### 6. Market Sentiment
-*   **Fear vs Greed:** Extreme Fear
-*   **Insight:** Retail ทยอยถอดใจ (Capitulation)
+*   **Social Buzz:** เริ่มมีการพูดถึงในกลุ่ม Day Trade
+*   **Insight:** รอจุดระเบิด
 
 ### 7. Technical Analysis
-*   **Trend Structure:** ขาลงเต็มรูปแบบ (Downtrend)
-*   **Insight:** กราฟพังทลาย เสี่ยงลงลึกต่อเนื่อง (Mean Reversion เชิงลบ)
+*   **Consolidation:** บีบตัวเป็นสามเหลี่ยม (Pennant)
+*   **Insight:** ทรงกราฟสวย เตรียมเบรก
 
 ### 8. Risk Analysis
-*   **ระดับความเสี่ยง:** **ความเสี่ยงสูงมาก (Toxic Asset)**
-*   **คำเตือน:** Reverse Split Risk, Delisting Risk, Bankruptcy Risk, Death Spiral Financing
+*   **ระดับความเสี่ยง:** **ความเสี่ยงสูงมาก**
+*   **คำเตือน:** Liquidity Trap
 
 ---
 
 ## 🧠 สรุป Insight สำคัญ (Executive Summary)
-*   **หุ้นที่ Momentum แข็งแรงที่สุด & Volume น่าสนใจที่สุด:** **WBUY** และ **LGCL** มีสภาพคล่องพุ่งทะลุปรอท แต่เป็นการเก็งกำไรระยะสั้นล้วน ๆ
-*   **หุ้นที่พื้นฐานดีที่สุดและมี Catalyst หนาแน่น:** **PRME** ได้รับ FDA Clearance อย่างเป็นทางการ เป็นหุ้นเพียงตัวเดียวในลิสต์นี้ที่มี Smart Money และ Institution ให้ความสนใจ 
-*   **หุ้นที่เป็นแค่เก็งกำไร:** **EHGO** อาศัยแรง FOMO จากตลาด 
-*   **หุ้นที่เสี่ยงโดนทุบ & เสี่ยง Pump & Dump:** **WBUY** มีโอกาสเจอแรงเทขายรุนแรง
-*   **หุ้นที่เสี่ยงที่สุด / ควรรอหลีกเลี่ยง:** **FFIE** จากปัจจัยลบด้าน Reverse Split 1-for-150 และความเสี่ยงถูก Delist 
+*   **หุ้นที่ Momentum แข็งแรงที่สุด & Volume น่าสนใจที่สุด:** **NVEC** พุ่งแรงทะลุจอ (+54.8%) ท่ามกลางตลาดที่แดงเดือด
+*   **หุ้นที่พื้นฐานดีที่สุดและมี Catalyst หนาแน่น:** **OTLK** รอลุ้นผล FDA ตัดสินชะตา
+*   **หุ้นที่น่าจับตาเรื่อง Short Squeeze:** **ASTN** และ **AMPG** โครงสร้างพร้อมบีบให้ Short ต้องมอบตัว
+*   **หุ้นที่เป็นแค่เก็งกำไร:** **ADVB** วิ่งตามข่าวสั้น
 
 ---
 
 ## 📣 Watchlist ประจำวัน: The Final Verdict
 
-*   **Top Momentum:** WBUY
-*   **Top Risk:** FFIE
-*   **Top Volume:** WBUY (110M+ Shares)
-*   **Top Catalyst:** PRME (FDA IND Clearance)
-*   **Top Speculative Play:** LGCL
+*   **Top Momentum:** NVEC
+*   **Top Risk:** ASTN (Squeeze Play)
+*   **Top Volume:** NVEC
+*   **Top Catalyst:** OTLK (FDA Watch)
+*   **Top Speculative Play:** ADVB
 
-**🥇 หุ้นเด่นที่สุดของวัน:** **PRME (Prime Medicine)** - เนื่องจากมี Catalyst จาก FDA ที่ตรวจสอบได้จริง และมีแนวโน้มการเข้าสะสมของนักลงทุนสถาบัน (Bullish Bias เล็กน้อย แต่ต้องระวังการระดมทุน)
-**⚠️ หุ้นเสี่ยงที่สุดของวัน:** **FFIE (Faraday Future)** - อ่อนแอในเชิงโครงสร้าง เสี่ยงโดนเทขายหลังรวบพาร์ 
-**👀 หุ้นที่ตลาดจับตาที่สุดของวัน:** **WBUY** - ปริมาณการซื้อขายมหาศาล สะท้อนภาพจิตวิทยาความโลภ (Greed) ของนักลงทุนรายย่อย เหมาะจับตาดู Price Action 
+**🥇 หุ้นเด่นที่สุดของวัน:** **NVEC** - โดดเด่นที่สุดในด้าน Volume และ Price Action วิ่งสวนตลาดได้อย่างแข็งแกร่ง
+**⚠️ หุ้นเสี่ยงที่สุดของวัน:** **ASTN** - เดิมพันสูง หากไม่เกิด Squeeze อาจโดนเทขายยับเยิน
+**👀 หุ้นที่ตลาดจับตาที่สุดของวัน:** **OTLK** - ทุกคนรอคอยคำตอบจาก FDA (Binary Event)
 
 ---
 *Disclaimer: บทวิเคราะห์ฉบับนี้จัดทำขึ้นเพื่อวัตถุประสงค์ในการให้ข้อมูลและการศึกษาเท่านั้น ไม่ใช่การแนะนำหรือเชิญชวนให้ซื้อขายหลักทรัพย์ Penny Stocks และ Small Caps มีความเสี่ยงสูงมาก อาจทำให้สูญเสียเงินลงทุนทั้งหมดได้*
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-*   [Bloomberg: US Markets and Pre-Market Movers](https://www.bloomberg.com/)
-*   [Fintel: Short Interest and Insider Trading Data](https://fintel.io/)
-*   [FDA.gov: U.S. Food and Drug Administration Recent Approvals (PRME)](https://www.fda.gov/)
-*   [Stock Analysis: Pre-Market Screeners](https://stockanalysis.com/)
-*   [Investing.com: Real-time Data and Volume Spikes](https://www.investing.com/)
-*   [SEC Filings / EDGAR: Corporate Actions and Reverse Splits (FFIE)](https://www.sec.gov/edgar)
+*   [Bloomberg / Investing.com: US Markets and Pre-Market Movers](https://www.bloomberg.com/)
+*   [Fintel: Short Interest, Borrowing Rates (ASTN, AMPG)](https://fintel.io/)
+*   [Biopharmawatch / FDA Tracker: Clinical Catalysts (OTLK)](https://www.fda.gov/)
+*   [Reddit / X: Social Sentiment and Squeeze Candidates](https://reddit.com/)
