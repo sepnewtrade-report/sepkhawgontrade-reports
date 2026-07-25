@@ -10,7 +10,10 @@ tickers = {
     "GME": "GameStop Corp.",
     "AMC": "AMC Entertainment Holdings",
     "CLOV": "Clover Health Investments",
-    "SOUN": "SoundHound AI Inc."
+    "SOUN": "SoundHound AI Inc.",
+    "GOOGL": "Alphabet Inc.",
+    "INTC": "Intel Corporation",
+    "MU": "Micron Technology, Inc."
 }
 
 def calculate_rsi(series, period=14):
