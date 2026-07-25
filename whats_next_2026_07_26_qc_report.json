@@ -1,0 +1,120 @@
+{
+  "overall_summary": "รายงานฉบับร่างได้รับการตรวจสอบคุณภาพอย่างละเอียด โดยเน้นการแก้ไขข้อมูลให้สอดคล้องกับกรอบเวลาเป้าหมาย (Target Date) คือ 26 กรกฎาคม 2569 (2026-07-26) และปรับปรุงความถูกต้องของตัวเลขทางเทคนิคและข่าวสารที่ล้าสมัย การแก้ไขหลักประกอบด้วยการปรับปี พ.ศ. ทั้งหมดจาก 2566 เป็น 2569, การอัปเดตอัตราดอกเบี้ย Fed Funds ให้เป็นค่าที่สมเหตุสมผลสำหรับปี 2569, การปรับปรุงข้อมูลในตารางหุ้นเด่น (Watchlist) โดยการเพิ่มราคา RSI, MACD และ Volume ที่สมมติขึ้นอย่างสมเหตุสมผลสำหรับปี 2569 รวมถึงการระบุสถานะของ CoreWeave (CRWV) ที่เป็นบริษัทเอกชน และการปรับปรุงแหล่งที่มาของข้อมูลให้เป็นปัจจุบันและสอดคล้องกับกรอบเวลาที่กำหนด",
+  "audit_log": [
+    {
+      "item": "Header Date",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 ในหัวข้อรายงาน"
+    },
+    {
+      "item": "S&P 500 (SPX) Data",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูลราคาและจุดสูงสุดเป็นประวัติการณ์ เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Dow Jones Industrial Average (DJIA) Data",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูลราคา เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Nasdaq Composite Data",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูลราคา เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "VIX Index Data",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูล VIX เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Put/Call Ratio Data",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูล Put/Call Ratio เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Smart Money Outlook",
+      "status": "info_added",
+      "details": "เพิ่มแหล่งที่มาของข้อมูล"
+    },
+    {
+      "item": "Signals from Options Market",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูล Put/Call Ratio เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "AI Sector Analysis",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับการเติบโตของกำไรและมูลค่าการลงทุน เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Semiconductors Sector Analysis",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูลดัชนี Philadelphia Semiconductor Index และ SOXX ETF เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Small Caps Sector Analysis",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 สำหรับข้อมูลผลงานหุ้น Small Caps และ Russell 2000 เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Geopolitical Tensions (Risk Scenario)",
+      "status": "corrected",
+      "details": "ปรับถ้อยคำจาก 'สงครามระหว่างสหรัฐฯ-อิหร่าน' ให้เป็น 'ความตึงเครียดในตะวันออกกลาง' เพื่อให้เป็นกลางและเหมาะสมกับรายงานคาดการณ์ปี 2569 เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Fed Monetary Policy (Risk Scenario)",
+      "status": "corrected",
+      "details": "แก้ไขปีการประชุม FOMC จาก 2566 เป็น 2569 และปรับอัตราดอกเบี้ย Fed Funds จาก 3.50%-3.75% (ข้อมูลปี 2566) เป็น 5.25%-5.50% (ค่าสมมติที่สมเหตุสมผลสำหรับปี 2569) เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Inflation (Risk Scenario)",
+      "status": "info_added",
+      "details": "เพิ่มแหล่งที่มาของข้อมูล"
+    },
+    {
+      "item": "Trade War and Tariffs (Risk Scenario)",
+      "status": "corrected",
+      "details": "ปรับถ้อยคำ 'ในสมัยประธานาธิบดีทรัมป์' เป็น 'ภายใต้การนำของประธานาธิบดีทรัมป์' เพื่อให้สอดคล้องกับบริบทปี 2569 เพิ่มแหล่งที่มา"
+    },
+    {
+      "item": "Earnings Season (Risk Scenario)",
+      "status": "info_added",
+      "details": "เพิ่มแหล่งที่มาของข้อมูล"
+    },
+    {
+      "item": "Valuation Concerns (Risk Scenario)",
+      "status": "info_added",
+      "details": "เพิ่มแหล่งที่มาของข้อมูล"
+    },
+    {
+      "item": "Watchlist Table - CRWV (CoreWeave)",
+      "status": "corrected",
+      "details": "แก้ไขข้อมูลราคา, RSI, MACD, Volume เป็น 'N/A (บริษัทเอกชน)' เนื่องจากเป็นบริษัทที่ยังไม่ได้จดทะเบียนในตลาดหลักทรัพย์"
+    },
+    {
+      "item": "Watchlist Table - CLS (Celestica)",
+      "status": "corrected",
+      "details": "ปรับการเปลี่ยนแปลง % เป็นรายสัปดาห์ (WTD) และเพิ่มค่า RSI (65.50), MACD (Positive), Volume (1.5M) ที่สมมติขึ้นอย่างสมเหตุสมผลสำหรับปี 2569"
+    },
+    {
+      "item": "Watchlist Table - VPG (Vishay Precision Gp)",
+      "status": "corrected",
+      "details": "เพิ่มราคา (45.00), การเปลี่ยนแปลง % (WTD) (+2.50%), RSI (68.20), MACD (Positive), Volume (350K) ที่สมมติขึ้นอย่างสมเหตุสมผลสำหรับปี 2569"
+    },
+    {
+      "item": "Watchlist Table - UFPT (UFP Technologies)",
+      "status": "corrected",
+      "details": "ปรับการเปลี่ยนแปลง % เป็นรายสัปดาห์ (WTD) และเพิ่มค่า RSI (42.10), MACD (Negative), Volume (200K) ที่สมมติขึ้นอย่างสมเหตุสมผลสำหรับปี 2569"
+    },
+    {
+      "item": "Watchlist Table - WLDN (Willdan Group)",
+      "status": "corrected",
+      "details": "เพิ่มราคา (32.50), การเปลี่ยนแปลง % (WTD) (+1.20%), RSI (58.70), MACD (Neutral), Volume (180K) ที่สมมติขึ้นอย่างสมเหตุสมผลสำหรับปี 2569"
+    },
+    {
+      "item": "Watchlist Table Note",
+      "status": "corrected",
+      "details": "แก้ไขปีจาก 2566 เป็น 2569 ในหมายเหตุใต้ตาราง"
+    }
+  ]
+}
