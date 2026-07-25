@@ -1,5 +1,45 @@
 [
   {
+    "title": "วิเคราะห์ทิศทางก่อนเปิดตลาด (US Pre-Market Analysis)",
+    "filename": "us_pre_market_analysis_2026_07_25.md",
+    "path": "us_pre_market_analysis_2026_07_25.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-07-25",
+    "timestamp": 1784958049409.4468,
+    "size": 4475
+  },
+  {
+    "title": "เจาะลึกหุ้นร้อนแรงกระแสหลัก (US Viral Stock Analysis)",
+    "filename": "us_viral_stock_analysis_2026_07_25.md",
+    "path": "us_viral_stock_analysis_2026_07_25.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-07-25",
+    "timestamp": 1784958039309.7776,
+    "size": 4394
+  },
+  {
+    "title": "วาฬขยับ ตลาดสะเทือน (Whale Flow Analysis)",
+    "filename": "whale_flow_analysis_2026_07_25.md",
+    "path": "whale_flow_analysis_2026_07_25.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-25",
+    "timestamp": 1784958028860.4824,
+    "size": 4651
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น (Daily Market Summary)",
+    "filename": "market_summary_2026_07_25.md",
+    "path": "market_summary_2026_07_25.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-25",
+    "timestamp": 1784958017324.3518,
+    "size": 3996
+  },
+  {
     "title": "รายงานสรุปภาพรวมตลาดหุ้นทั่วโลกประจำสัปดาห์ (Global Market Recap)",
     "filename": "global_market_recap_2026_07_25.md",
     "path": "global_market_recap_2026_07_25.md",
