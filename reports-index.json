@@ -1,43 +1,13 @@
 [
   {
-    "title": "\uddfa\uddf8 Small Cap & Penny Stock Market Intelligence Report (July 27, 2026)",
-    "filename": "small_cap_research_2026_07_27.md",
-    "path": "small_cap_research_2026_07_27.md",
-    "category": "Small Cap Radar",
-    "categoryThai": "Small Cap Radar",
+    "title": "Quantitative Options Screening: Premium Sellers Strategy",
+    "filename": "options_screen_analysis_2026_07_27.md",
+    "path": "options_screen_analysis_2026_07_27.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
     "date": "2026-07-27",
-    "timestamp": 1785156096336.1277,
-    "size": 18296
-  },
-  {
-    "title": "\udc0b Whale Flow Analysis: เจาะลึกร่องรอยเงินสถาบัน (27 กรกฎาคม 2026)",
-    "filename": "whale_flow_analysis_2026_07_27.md",
-    "path": "whale_flow_analysis_2026_07_27.md",
-    "category": "Whale Flow",
-    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
-    "date": "2026-07-27",
-    "timestamp": 1785155287669.336,
-    "size": 10614
-  },
-  {
-    "title": "\uddfa\uddf8 US Viral Stock Analysis (Hot Stocks) - 27 กรกฎาคม 2026",
-    "filename": "us_viral_stock_analysis_2026_07_27.md",
-    "path": "us_viral_stock_analysis_2026_07_27.md",
-    "category": "Hot Stock วันนี้",
-    "categoryThai": "Hot Stock วันนี้",
-    "date": "2026-07-27",
-    "timestamp": 1785152524824.8835,
-    "size": 16838
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น: ตลาดฟื้นตัวรับราคาน้ำมันร่วง จับตาผลประกอบการ Tech ยักษ์ใหญ่ และการประชุมเฟด (27 ก.ค. 2026)",
-    "filename": "market_summary_2026_07_27.md",
-    "path": "market_summary_2026_07_27.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-27",
-    "timestamp": 1785151637401.274,
-    "size": 15983
+    "timestamp": 1785162270080.7725,
+    "size": 8709
   },
   {
     "title": "US Pre-Market Analysis: Tech Earnings & Geopolitical Shifts",
@@ -46,18 +16,48 @@
     "category": "Pre-Market Analysis",
     "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
     "date": "2026-07-27",
-    "timestamp": 1785150909662.9126,
-    "size": 11890
+    "timestamp": 1785162269887.7478,
+    "size": 11889
   },
   {
-    "title": "Quantitative Options Screening: Premium Sellers Strategy",
-    "filename": "options_screen_analysis_2026_07_27.md",
-    "path": "options_screen_analysis_2026_07_27.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
+    "title": "\uddfa\uddf8 US Viral Stock Analysis (Hot Stocks) - 27 กรกฎาคม 2026",
+    "filename": "us_viral_stock_analysis_2026_07_27.md",
+    "path": "us_viral_stock_analysis_2026_07_27.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
     "date": "2026-07-27",
-    "timestamp": 1785150895374.6482,
-    "size": 8701
+    "timestamp": 1785162255740.2476,
+    "size": 16771
+  },
+  {
+    "title": "\udc0b Whale Flow Analysis: เจาะลึกร่องรอยเงินสถาบัน (27 กรกฎาคม 2026)",
+    "filename": "whale_flow_analysis_2026_07_27.md",
+    "path": "whale_flow_analysis_2026_07_27.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-27",
+    "timestamp": 1785162253160.0977,
+    "size": 10613
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น: ตลาดฟื้นตัวรับราคาน้ำมันร่วง จับตาผลประกอบการ Tech ยักษ์ใหญ่ และการประชุมเฟด (27 ก.ค. 2026)",
+    "filename": "market_summary_2026_07_27.md",
+    "path": "market_summary_2026_07_27.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-27",
+    "timestamp": 1785162243714.6904,
+    "size": 15982
+  },
+  {
+    "title": "\uddfa\uddf8 Small Cap & Penny Stock Market Intelligence Report (July 27, 2026)",
+    "filename": "small_cap_research_2026_07_27.md",
+    "path": "small_cap_research_2026_07_27.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-07-27",
+    "timestamp": 1785156096336.1277,
+    "size": 18296
   },
   {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-07-27",
