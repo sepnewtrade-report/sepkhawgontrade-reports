@@ -13,7 +13,7 @@
 ### 1. INTC (Intel Corporation)
 📌 **Company Name:** Intel Corporation
 📌 **ธุรกิจหลัก:** ผู้ผลิตเซมิคอนดักเตอร์และชิปประมวลผลระดับโลก
-📈 **% การเปลี่ยนแปลงใน Pre-Market:** +4.00% [ที่มา: Newsquawk, MarketBeat]
+📈 **% การเปลี่ยนแปลงใน Pre-Market:** -2.98% [ที่มา: Newsquawk, MarketBeat]
 📊 **Pre-Market Volume:** สูงกว่าค่าเฉลี่ย (อยู่ระหว่างการคาดการณ์ของตลาด)
 📊 **Relative Volume:** (ยังไม่มีการยืนยันอย่างเป็นทางการ)
 📊 **Market Cap:** (ข้อมูลตลาด ณ วันที่ 27 ก.ค. 2026)
