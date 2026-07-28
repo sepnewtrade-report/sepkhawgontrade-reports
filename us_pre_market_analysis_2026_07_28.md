@@ -77,7 +77,7 @@
 ## 🏆 Top 10 Pre-Market Movers
 เรียงตามปริมาณการเปลี่ยนแปลงและผลกระทบ [ที่มา: ข้อมูลตลาด ณ วันที่ 28 ก.ค. 2026]
 
-| ลำดับ | Ticker | % Change | Catalyst หลัก |
+| ลำดับ | Ticker | % Change (Pre-Market) | Catalyst หลัก |
 | :---: | :--- | :--- | :--- |
  | 1 | **CISS** | -80.31% | Technical Rebound จาก Public Offering | 
  | 2 | **INLF** | +2.82% | *อยู่ระหว่างการคาดการณ์ของตลาด / Momentum Play* | 

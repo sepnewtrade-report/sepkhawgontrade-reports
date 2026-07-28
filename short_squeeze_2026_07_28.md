@@ -5,47 +5,43 @@
 **วันที่วิเคราะห์:** 28 กรกฎาคม 2026
 **จัดทำโดย:** Short Squeeze & Market Microstructure Specialist
 
-รายงานฉบับนี้จัดทำขึ้นเพื่อคัดกรองหุ้นสหรัฐฯ ที่มีโอกาสเกิดการบีบซื้อคืน (Short Squeeze) ในระยะ 24-48 ชั่วโมง โดยประเมินจากข้อมูล Short Interest ที่ระดับสูงกว่า 15%, Days to Cover มากกว่า 2 วัน, สัญญาณความผิดปกติของปริมาณการซื้อขาย (Volume Spike), และสัญญาณ Gamma Squeeze จากตลาด Options (Out-of-the-money Call OI สูง) รวมไปถึงกระแสจาก Social Media
+รายงานฉบับนี้จัดทำขึ้นเพื่อคัดกรองหุ้นสหรัฐฯ ที่มีโอกาสเกิดการบีบซื้อคืน (Short Squeeze) ในระยะ 24-48 ชั่วโมง โดยประเมินจากข้อมูล Short Interest และ Days to Cover ผนวกกับการวิเคราะห์สัญญาณความผิดปกติของปริมาณการซื้อขายแบบเรียลไทม์ (Volume Spike) และสัญญาณ Gamma Squeeze จากตลาด Options (Out-of-the-money Call OI สูง) 
 
 ---
 
 ## 🚀 TOP 4 อันดับหุ้นที่มีศักยภาพเกิด Short Squeeze สูงสุดในสัปดาห์นี้
 
 ### 1. Groupon Inc. (NYSE: GRPN)
-* **ราคาปัจจุบัน:** $25.81 (อ้างอิงราคาปิดล่าสุด) [ที่มา: ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]
-* **Short Interest (% of Float):** 59.6% [ที่มา: Barchart, Fintel]
-* **Days to Cover (DTC):** > 3 วัน (อยู่ระหว่างการคาดการณ์ของตลาด)
-* **การวิเคราะห์ (Microstructure & Options):**
-  - **Volume & Price Momentum:** พบสัญญาณปริมาณการซื้อขายหนาแน่นผิดปกติเมื่อเทียบกับค่าเฉลี่ย 30 วันที่ผ่านมา
-  - **Gamma Squeeze Signal:** มีการไล่ซื้อ Call Options นอกสถานะ (Out-of-the-Money) อย่างมีนัยสำคัญ ซึ่งอาจบีบให้ Market Makers ต้องเข้าซื้อหุ้นอ้างอิงเพื่อบริหารความเสี่ยง (Delta Hedging) 
-  - **Social Sentiment:** ระดับกระแสจาก X (Twitter) และ Reddit ยังคงถูกจับตาโดยกลุ่มนักเก็งกำไร เนื่องจากสัดส่วน Short ที่สูงทะลุ 50% ทำให้ความเสี่ยงฝั่ง Short Seller สูงมาก หากมีปัจจัยบวก (Catalyst) เข้ามากระทบ
+* **ราคาปัจจุบัน:** ~$27.53 [ที่มา: ข้อมูลตลาดปิดล่าสุด ณ ปลาย ก.ค. 2026]
+* **Short Interest (% of Float):** ~53-55% (ระดับสูงมาก) [ที่มา: FINRA, Barchart]
+* **Days to Cover (DTC):** 6-9 วัน
+* **การวิเคราะห์ (Microstructure & Options สำหรับ 24-48 ชม.):**
+  - **Volume & Catalyst:** ปริมาณการซื้อขายระหว่างวันเริ่มกลับมาพุ่งสูง (Volume Spike) เป็นสัญญาณสะท้อนความสนใจของตลาดระยะสั้น
+  - **Gamma Squeeze Signal:** มีแรงซื้อ Call Options นอกสถานะ (OTM) ในฝั่ง Strike Price ที่สูงขึ้นอย่างผิดปกติ หากราคาทะลุกรอบสำคัญจะยิ่งบีบให้ Market Makers ต้องเข้าซื้อหุ้นอ้างอิงเพื่อบริหารความเสี่ยง (Delta Hedging) อย่างรวดเร็ว
 
 ### 2. C3.ai Inc. (NYSE: AI)
-* **ราคาปัจจุบัน:** $8.15 [ที่มา: ข้อมูลตลาด ณ วันที่ 24 ก.ค. 2026]
-* **Short Interest (% of Float):** 39.2% [ที่มา: Barchart, Fintel]
-* **Days to Cover (DTC):** 2.5 วัน (ค่าเฉลี่ยโดยประมาณจากปริมาณการซื้อขายปัจจุบัน)
-* **การวิเคราะห์ (Microstructure & Options):**
-  - **Volume & Price Momentum:** แม้จะอยู่ในช่วง Sell-off ของกลุ่มอุตสาหกรรม AI แต่สัดส่วน Short ที่สูงลิ่วทำให้หุ้นตัวนี้มีความอ่อนไหวสูงมากต่อข่าวดี 
-  - **Gamma Squeeze Signal:** กลุ่ม Options Trader มีการเก็งกำไรในฝั่ง Call Options ระยะสั้นเพื่อลุ้น Technical Rebound [ที่มา: SpotGamma, Market Chameleon]
-  - **Social Sentiment:** มีการพูดถึงหนาแน่นในชุมชน Reddit ว่าระดับราคานี้อาจเป็นจุด Cover Short ของสถาบัน
+* **ราคาปัจจุบัน:** ~$8.15 - $9.00 [ที่มา: ข้อมูลตลาด ณ ปลาย ก.ค. 2026]
+* **Short Interest (% of Float):** ~31-39% [ที่มา: Fintel, Barchart]
+* **Days to Cover (DTC):** 6-9 วัน 
+* **การวิเคราะห์ (Microstructure & Options สำหรับ 24-48 ชม.):**
+  - **Volume & Catalyst:** แม้กลุ่ม AI จะปรับฐาน แต่ปริมาณการซื้อขายเริ่มเห็นการดีดตัวกลับทางเทคนิค (Technical Rebound) จากบริเวณแนวรับสำคัญ
+  - **Gamma Squeeze Signal:** กลุ่ม Options Trader มีการกระหน่ำซื้อ Call Options ระยะสัปดาห์ (Weekly) สร้างโอกาสเกิด Gamma Squeeze ได้รุนแรงเนื่องจากฐาน Short % และ DTC ยังคงสูงมาก
 
 ### 3. Symbotic Inc. (NASDAQ: SYM)
 * **ราคาปัจจุบัน:** $41.49 [ที่มา: ข้อมูลตลาด ณ วันที่ 28 ก.ค. 2026]
-* **Short Interest (% of Float):** > 15% (ระดับสูงที่นักวิเคราะห์จับตา) [ที่มา: Seeking Alpha, Fintel]
-* **Days to Cover (DTC):** > 2 วัน
-* **การวิเคราะห์ (Microstructure & Options):**
-  - **Volume & Price Momentum:** Analysts ตีกรอบให้ SYM เป็นหนึ่งใน "Potential Short Squeeze Candidate" หลักของสัปดาห์ หากผลประกอบการไตรมาส 3 หรืออัตรากำไร (Operating Margins) ออกมาดีกว่าคาด [ที่มา: Seeking Alpha]
-  - **Gamma Squeeze Signal:** พบ Unusual Options Activity (UOA) ในฝั่ง OTM Calls ที่หมดอายุในสัปดาห์นี้
-  - **Social Sentiment:** กระแสความคาดหวังใน X สูงขึ้นจากข่าวอัปเดตเรื่องความร่วมมือกับลูกค้ารายใหม่
+* **Short Interest (% of Float):** ข้อมูลมีความขัดแย้งสูง (รายงานบางแห่งระบุ 2.85% ในขณะที่บางแห่งระบุ ~30%) [ที่มา: MarketBeat, Fintel]
+* **Days to Cover (DTC):** 6-10 วัน
+* **การวิเคราะห์ (Microstructure & Options สำหรับ 24-48 ชม.):**
+  - **Volume & Catalyst:** แม้การพิจารณาเพียง Short Interest จะยังมีความคลุมเครือและอ่อนกว่า GRPN หรือ AI แต่ SYM เป็น *High-Risk Catalyst Play* ที่ถูกจับตาจากการรายงานผลประกอบการ (Earnings)
+  - **Gamma Squeeze Signal:** พบ Unusual Options Activity (UOA) กระจุกตัวเพื่อเก็งกำไรรับตัวเลขผลประกอบการ หากตัวเลขดีกว่าคาด (Beat Estimates) จะกระตุ้น Volume มหาศาลบีบให้ฝั่ง Short และ Option Sellers ต้อง Cover กะทันหัน
 
 ### 4. Battalion Oil Corp. (NYSEAMERICAN: BATL)
-* **ราคาปัจจุบัน:** $1.46 - $1.63 (ความผันผวนระหว่างวันสูง) [ที่มา: ข้อมูลตลาด ณ วันที่ 27-28 ก.ค. 2026]
-* **Short Interest (% of Float):** 44.2% [ที่มา: Barchart, Fintel]
-* **Days to Cover (DTC):** > 4 วัน (เนื่องจากสภาพคล่องต่ำ)
-* **การวิเคราะห์ (Microstructure & Options):**
-  - **Volume & Price Momentum:** จัดอยู่ในกลุ่ม Penny Stock / Micro Cap ที่มีสัดส่วน Short สูงผิดปกติ การขยับขึ้นของ Volume เล็กน้อยสามารถกระชากราคาได้แรง (Low Float)
-  - **Gamma Squeeze Signal:** ตลาด Options ของ BATL ค่อนข้างบาง แต่พบ Volume สไปค์เป็นจุดๆ ซึ่งต้องระวังเรื่อง Execution Risk [ที่มา: ตลาดหลักทรัพย์สหรัฐฯ]
-  - **Social Sentiment:** ปัจจุบันยังไม่มีกระแส Viral ชัดเจนบนโซเชียลหลัก (อยู่ระหว่างการจับตาของห้องดิสคอร์ดนักเกร็งกำไรหุ้นเล็ก)
+* **ราคาปัจจุบัน:** $1.46 - $1.63 [ที่มา: ข้อมูลตลาด ณ ปลาย ก.ค. 2026]
+* **Short Interest (% of Float):** ~25-39% (ระดับสูงสำหรับหุ้นเล็ก) [ที่มา: Barchart]
+* **Days to Cover (DTC):** ต่ำมาก (0.7-1 วัน) 
+* **การวิเคราะห์ (Microstructure & Options สำหรับ 24-48 ชม.):**
+  - **Volume & Catalyst:** ปริมาณการซื้อขาย (Volume) หมุนเวียนสูงมากเมื่อเทียบกับสถานะ Short ที่คงค้าง ทำให้สามารถเกิดการ Cover เสร็จสิ้นได้ไวมาก (DTC ต่ำ) 
+  - **Gamma Squeeze Signal:** การขยับขึ้นของ Volume เพียงเล็กน้อยสามารถกระชากราคาขึ้นรุนแรง (Low Float + Micro-cap) แต่ด้วยสภาพที่ครอบคลุม Short ได้ไว จะทำให้ราคาพุ่งขึ้นแล้วลงอย่างรวดเร็ว (Spike & Fade) ผู้เล่นในระยะ 24-48 ชม. ต้องระวังเรื่อง Execution Risk ขั้นสูงสุด
 
 ---
 
@@ -60,8 +56,7 @@
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 
 * **ข้อมูลราคาและ Short Interest:** 
-  - Barchart / Fintel (ข้อมูลอัปเดต ณ ปลายเดือนกรกฎาคม 2026) 
-  - MarketWatch 
+  - FINRA, Barchart / Fintel / MarketBeat (ข้อมูลอัปเดต ณ ปลายเดือนกรกฎาคม 2026)
 * **ข้อมูล Options และ Gamma Squeeze:** 
   - สรุปแนวโน้ม Unusual Options Activity จาก SpotGamma และ Market Chameleon
 * **บทวิเคราะห์บริษัทจดทะเบียน (Catalyst Data):** 
