@@ -224,6 +224,13 @@
 
 ## 📣 สรุป Watchlist ประจำวัน
 
+* **Top Momentum:** **ASRV** (วิ่งสวนทางหุ้นตัวเล็กอื่น ๆ อย่างแข็งแกร่งด้วยปัจจัยบวก)
+* **Top Risk:** **ZCMD** (อันตรายจากการเพิ่มทุนและ Low Float Manipulation)
+* **Top Volume:** **CDXS** (ปริมาณการซื้อขายหนาแน่นจากการปิดดีลเสนอขายหุ้น)
+* **Top Catalyst:** **ASRV** (พลิกมีกำไรและประกาศจ่ายปันผล)
+* **Top Speculative Play:** **RR** (เก็งกำไรด้วย Narrative ธีม AI และ Robotics)
+
+**การจัดอันดับประจำวัน:**
 🥇 **หุ้นเด่นที่สุดของวัน (Top Watchlist):** **ASRV** (Turnaround Story + Dividend Play)
 ⚠️ **หุ้นเสี่ยงที่สุดของวัน (Top Risk):** **ZCMD** (Dilution Trap / Pump & Dump)
 👀 **หุ้นที่ตลาดจับตาที่สุดของวัน (Top Speculative / Squeeze Play):** **SPCE** (40% Short Float)
