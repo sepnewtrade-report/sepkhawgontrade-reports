@@ -1,5 +1,25 @@
 [
   {
+    "title": "\uddfa\uddf8 สรุปจบ ทันโลกหุ้น: ตลาดหุ้นสหรัฐฯ (ประจำวันที่ 28 กรกฎาคม 2026)",
+    "filename": "market_summary_2026_07_28.md",
+    "path": "market_summary_2026_07_28.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-28",
+    "timestamp": 1785210852859.9568,
+    "size": 14247
+  },
+  {
+    "title": "\ude80 US Short Squeeze & Gamma Squeeze Watchlist (สัปดาห์ 28 ก.ค. 2026)",
+    "filename": "short_squeeze_2026_07_28.md",
+    "path": "short_squeeze_2026_07_28.md",
+    "category": "Bear Squeeze",
+    "categoryThai": "หมีโดนบีบ",
+    "date": "2026-07-28",
+    "timestamp": 1785209941156.2837,
+    "size": 10442
+  },
+  {
     "title": "Performance Review & Post-Market Recap: 2026-07-28",
     "filename": "bot_stats_2026_07_28.md",
     "path": "bot_stats_2026_07_28.md",
