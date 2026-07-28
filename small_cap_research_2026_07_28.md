@@ -20,29 +20,29 @@
 * **Company Name:** Gossamer Bio, Inc.
 * **Ticker:** GOSS
 * **Sector/Industry:** Healthcare / Biotechnology
-* **Market Cap:** ~$66M - $95M [ที่มา: Yahoo Finance, Bloomberg, ข้อมูล ณ 28 ก.ค. 2026]
+* **Market Cap:** ~$66M - $97M [ที่มา: Yahoo Finance, Bloomberg, ข้อมูล ณ 28 ก.ค. 2026]
 * **Price:** Sub-$1
-* **Average Volume:** 14M - 22M shares [ที่มา: MarketWatch]
+* **Average Volume:** 14M - 20M shares [ที่มา: MarketWatch]
 
 #### 2. Price Action Analysis
-* **Pre-Market / Intraday:** หุ้นปรับตัวขึ้น (Gap Up) รุนแรงกว่า 25-40% ทันทีที่ข่าวออก [ที่มา: Benzinga, ข้อมูล ณ 28 ก.ค. 2026]
+* **Pre-Market / Intraday:** ปิดตลาด 27 ก.ค. +46.62% ที่ ~$0.20 และใน Pre-market 28 ก.ค. ยังบวกต่ออีกราว ~25-35%
 * **Momentum & Action:** การตอบสนองเป็นเชิงบวกชัดเจน แสดงถึงแรงซื้อกลับหลังมีความชัดเจนเรื่องยาใหม่
 * **Analysis:** หุ้นกำลังถูกไล่ราคาจากข่าว FDA ไม่ใช่แค่แรงเก็งกำไรมั่วซั่ว
 
 #### 3. Volume Analysis
-* **Volume Activity:** พุ่งสูงผิดปกติ (Unusual Volume) ระดับ 350 ล้านหุ้น เทียบกับค่าเฉลี่ยปกติ 14-22 ล้านหุ้น
+* **Volume Activity:** พุ่งสูงผิดปกติ (Unusual Volume) ระดับ ~357 ล้านหุ้น ในวันที่ 27 ก.ค. เทียบกับค่าเฉลี่ยปกติ 14-20 ล้านหุ้น
 * **Analysis:** Volume มหาศาลระดับนี้มักประกอบด้วย Smart Money และ Institutional Flow ที่ต้องปรับพอร์ตรับข่าวดี
 
 #### 4. News & Catalyst Analysis
 * **Catalyst:**
-  1. เตรียมยื่น NDA (New Drug Application) สำหรับยา seralutinib รักษาโรค PAH ในเดือนกันยายน 2026
-  2. FDA ยืนยันว่าผลทดสอบเฟส 3 เป็นเพียง "Review issues" ไม่ใช่ "Filing issues"
-  3. ดึงสิทธิ์ยาคืนจาก Chiesi ทำให้รับผลประโยชน์เต็มที่ [ที่มา: ข่าวบริษัท, FDA Update 27-28 ก.ค. 2026]
+  1. เตรียมยื่น NDA (New Drug Application) สำหรับยา seralutinib รักษาโรค PAH ในเดือนกันยายน 2026 (ประกาศ 27 ก.ค. หลังประชุม Pre-NDA Type B กับ FDA)
+  2. FDA ยืนยันว่าผลทดสอบเฟส 3 (statistical significance และ magnitude) เป็นเพียง "Review issues" ไม่ใช่ "Filing barriers"
+  3. ดึงสิทธิ์ยาทั่วโลกคืนจาก Chiesi ทำให้รับผลประโยชน์เต็มที่ (ไม่มีค่า upfront, Chiesi จ่าย $5M + รับ royalty แบบ capped)
 * **Impact:** เป็นปัจจัยพื้นฐานเชิงบวกที่แข็งแกร่ง (Fundamental Catalyst)
 
 #### 5. Financial Health
-* **Dilution Risk:** ก่อนหน้านี้มีปัญหาหนี้ แต่เพิ่งมีการปรับโครงสร้างหนี้ลดหนี้ลงไปได้กว่า $115.9M [ที่มา: SEC Filing ก.ค. 2026]
-* **Warning:** ยังเป็นหุ้นเทคชีวภาพที่ไม่มีกำไรสุทธิ ต้องเผาเงิน (Cash Burn) อาจมีการเพิ่มทุนในอนาคต
+* **Dilution Risk:** เพิ่งมีการปรับโครงสร้างหนี้/convertible note exchange ลดภาระหนี้ลงไปได้กว่า $115.9M - $120M
+* **Warning:** ยังเป็นหุ้นเทคชีวภาพที่ไม่มีกำไรสุทธิ ต้องเผาเงิน (Cash Burn) ชัดเจน โดยมีเงินสดเหลือราว ~$57M ณ สิ้นเดือน มิ.ย. 2026 อาจต้องเผชิญการระดมทุนในอนาคต
 
 #### 6. Market Sentiment
 * **Retail & Social Buzz:** พุ่งสูงลิ่วจากความหวังยาใหม่ (FDA Hopium) + ข่าวปลดหนี้
@@ -50,7 +50,7 @@
 
 #### 7. Technical Analysis
 * **Trend Structure:** Breakout จากกรอบสะสมพลังระยะยาว
-* **Risk:** หากราคาเปิดพุ่งสูงเกินไป อาจเกิด Mean Reversion หรือ Sell the news จากคนที่ติดดอยมานาน
+* **Risk:** หากราคาเปิดพุ่งสูงเกินไป อาจเกิด Mean Reversion จากคนที่ติดดอยมานาน
 
 #### 8. Risk Analysis
 * **ระดับความเสี่ยง:** ปานกลาง-สูง (Medium-High)
@@ -67,34 +67,34 @@
 * **Market Cap:** ~$9M - $19M [ที่มา: Yahoo Finance, ณ ปลายเดือน ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** มีลักษณะ Low-float squeeze ทำให้ราคาดีดจากระดับต่ำกว่า $0.25 ไปสูงกว่า $1.00 อย่างรวดเร็ว [ที่มา: Market Data]
-* **Gap Action:** มี Gap Up ใน Pre-market วันที่ 28 ก.ค. 2026 ขึ้นไปกว่า 33%
+* **Movement:** ปิดตลาด 27 ก.ค. ร่วงหนัก ~-71% เหลือ ~$0.145 รับข่าว Dilution ก่อนจะดีดกลับ ~+25% ขึ้นไปแถว ~$0.18 ใน Pre-market วันที่ 28 ก.ค.
+* **Gap Action:** ราคาผันผวนสูงมากจาก Low-float squeeze ที่เคยกระชากแรงในช่วงก่อนหน้า
 
 #### 3. Volume Analysis
-* **Unusual Volume:** ปริมาณการซื้อขายบางวันสูงทะลุ 200 ล้านหุ้น ซึ่งผิดปกติมากสำหรับหุ้นระดับนี้ [ที่มา: MarketWatch]
+* **Unusual Volume:** ปริมาณการซื้อขายบางวันสูงทะลุ 200 ล้านหุ้น ซึ่งผิดปกติมากสำหรับหุ้นระดับนี้
 * **Analysis:** เป็น Momentum ชั่วคราวที่มาจาก Retail Speculation และ Day Traders มากกว่านักลงทุนสถาบัน
 
 #### 4. News & Catalyst Analysis
 * **Catalyst:**
-  1. ประกาศ Registered Direct Offering มูลค่า $4 ล้าน ที่ราคา $0.20 ต่อหุ้น (ปิดดีลประมาณ 28 ก.ค. 2026)
-  2. เพิ่งได้รับคำเตือนจาก Nasdaq เรื่อง Minimum bid price deficiency (เสี่ยงถูกถอด) [ที่มา: Nasdaq, ข่าวบริษัท ก.ค. 2026]
-* **Analysis:** ข่าวการขายหุ้นที่ $0.20 มักจะกดดันราคา แต่ตลาดกลับเกิดอาการ Short Squeeze หรือถูกลาก
+  1. ประกาศ Registered Direct Offering มูลค่า $4 ล้าน ที่ราคา $0.20 ต่อหุ้น (20 ล้านหุ้น ปิดดีลประมาณ 28 ก.ค. 2026)
+  2. เคยได้รับคำเตือนจาก Nasdaq เรื่อง Minimum bid price deficiency (เสี่ยงถูกถอด)
+* **Analysis:** ข่าวการขายหุ้นที่ $0.20 กดดันราคาให้ร่วงหนัก (Dilutive News) แต่ด้วยความที่เป็น Low-float จึงมีแรงซื้อเก็งกำไรสั้นๆ ดันราคากลับขึ้นมา
 
 #### 5. Financial Health
 * **Dilution Risk:** มีการออกหุ้นเพิ่มทุนอย่างต่อเนื่องเพื่อพยุงบริษัท
 * **Warning:** ⚠️ หุ้นมีความเสี่ยงในการ Dilute สูงมาก และสถานะเงินสดน่าเป็นห่วง
 
 #### 6. Market Sentiment
-* **Sentiment:** ระดับ FOMO สูงลิ่วจากการเห็นราคาเด้งหลายร้อยเปอร์เซ็นต์
-* **Analysis:** ตลาดกำลัง "เก็งกำไรระยะสั้น" (Speculative Activity) แบบเข้าเร็วออกเร็ว
+* **Sentiment:** ผันผวนรุนแรง (Volatile Sentiment)
+* **Analysis:** ตลาดกำลัง "เก็งกำไรระยะสั้น" (Speculative Activity) แบบเข้าเร็วออกเร็ว รับความเสี่ยงสูง
 
 #### 7. Technical Analysis
-* **Trend:** เป็น Parabolic Move หรือ Exhaustion Move
-* **Risk:** เสี่ยง Pullback หรือ Mean Reversion สูงมาก หากหมดแรงซื้อ
+* **Trend:** เป็น Exhaustion Move หลังร่วงแรง
+* **Risk:** เสี่ยง Pullback ต่อเนื่องหากหมดแรงซื้อเก็งกำไร
 
 #### 8. Risk Analysis
 * **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
-* **Risk Factors:** Pump & Dump Risk, Dilution Risk, Delisting Risk หากราคาหลุด $1 นาน
+* **Risk Factors:** Pump & Dump Risk, Dilution Risk, Delisting Risk
 
 ---
 
@@ -104,35 +104,35 @@
 * **Company Name:** C3is Inc.
 * **Ticker:** CISS
 * **Sector/Industry:** Shipping (Seaborne transportation)
-* **Market Cap:** ~$150K - $771K (Micro-cap) [ที่มา: Benzinga, ข้อมูล ก.ค. 2026]
+* **Market Cap:** ต่ำมาก ระดับ Micro-cap (หลักแสนดอลลาร์หลังราคาร่วงหนัก) [ที่มา: ข้อมูล ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** ราคาโดนทุบหนัก (Sell-off) ลงไปที่ $0.10 ก่อนจะ Rebound กลับขึ้นมาเกือบ 30% [ที่มา: Benzinga]
-* **Pre-Market:** พุ่งกลับ +114.84% ในช่วงเช้า 28 ก.ค. 2026
+* **Movement:** ปิดตลาด 27 ก.ค. โดนทุบหนัก (Sell-off) ~-80% ลงไปที่ ~$0.10
+* **Pre-Market:** วันที่ 28 ก.ค. ดีดกลับแรง (Rebound) ~+100%+ ทะลุขึ้นไปแถว ~$0.20+ 
 
 #### 3. Volume Analysis
 * **Volume:** ทะลุหลักล้านหุ้นในช่วงที่ข่าว Offering ออก
-* **Analysis:** มีร่องรอยการเก็บของ (Accumulation) หลังโดนทุบหนัก แต่เป็นแรงซื้อจากฝั่ง Retail เป็นหลัก
+* **Analysis:** มีการไล่ซื้อเก็งกำไรสั้นหลังราคาดิ่งลงแรง แต่เป็น Retail เป็นหลัก
 
 #### 4. News & Catalyst Analysis
-* **Catalyst:** ประกาศขายหุ้นเพิ่มทุนมูลค่า $6M (11.5 ล้าน Units) ที่ราคา $0.52 ต่อ Unit ซึ่งแต่ละ Unit แถม Warrant ด้วย [ที่มา: GlobeNewswire, ข่าวบริษัท ก.ค. 2026]
-* **Impact:** ข่าวนี้สร้าง Dilution มหาศาล แต่เมื่อราคาดิ่งไปแรงกว่าราคา Offering ($0.52) ทำให้สายเก็งกำไรมองเป็นจุด Oversold Reversal
+* **Catalyst:** ประกาศขายหุ้นเพิ่มทุนมูลค่า $6M (11.535 ล้าน Units) ที่ราคา $0.52 ต่อ Unit ปิดดีลประมาณ 28 ก.ค. 
+* **Impact:** ข่าวนี้สร้าง Dilution มหาศาลกดให้ราคาร่วงหนัก แต่การที่ราคาดิ่งลึกกระตุ้นให้นักเก็งกำไรมองเป็นจุด Oversold Reversal
 
 #### 5. Financial Health
-* **Health:** แม้กำไร Q1/2026 จะดี แต่บริษัทยังใช้โมเดลระดมเงินจากตลาด (Equity Offerings) อย่างต่อเนื่อง
-* **Warning:** ⚠️ Dilution Risk ระดับวิกฤต
+* **Health:** บริษัทยังใช้โมเดลระดมเงินจากตลาด (Equity Offerings) อย่างต่อเนื่อง 
+* **Warning:** ⚠️ Dilution Risk ระดับวิกฤต พร้อม Warrants ที่สามารถปรับราคาลงได้อีก
 
 #### 6. Market Sentiment
-* **Sentiment:** Fear vs Greed สลับกันรวดเร็วมาก คนติดดอยมีความกลัว ส่วนคนเล่นสั้นมีความโลภ
-* **Analysis:** เก็งกำไรระยะสั้นล้วนๆ ไม่มีปัจจัยถือลงทุนแบบ Value
+* **Sentiment:** Fear vs Greed สลับกันรวดเร็วมาก 
+* **Analysis:** เก็งกำไรระยะสั้นล้วนๆ
 
 #### 7. Technical Analysis
-* **Trend:** Oversold Reversal
-* **Risk:** มีแนวต้านหนักบริเวณ $0.50 (ราคาเพิ่มทุน) หากทะลุไม่ได้อาจจบเวฟการดีดตัว
+* **Trend:** Oversold Reversal (Dead Cat Bounce)
+* **Risk:** ผันผวนหนัก ไร้ปัจจัยถือยาว
 
 #### 8. Risk Analysis
 * **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
-* **Risk Factors:** Dilution Trap, Pump & Dump
+* **Risk Factors:** Dilution Trap, Pump & Dump รุนแรง
 
 ---
 
@@ -142,30 +142,30 @@
 * **Company Name:** INLIF Limited
 * **Ticker:** INLF
 * **Sector/Industry:** Technology / Internet Content
-* **Market Cap:** ~$150K - $4.2M [ที่มา: Market Data ก.ค. 2026]
+* **Market Cap:** ผันผวนหนักตามราคา (~$150K - $4.2M)
 
 #### 2. Price Action Analysis
-* **Movement:** เพิ่งทำ Reverse Split ไปเมื่อต้นเดือน ทำให้ Float ต่ำมาก เมื่อมีแรงซื้อนิดเดียวราคาจะกระชากแรง (Low-float momentum squeeze)
-* **Pre-Market:** บวกขึ้นแรง 49.09% [ที่มา: Market Data 28 ก.ค. 2026]
+* **Movement:** หุ้น Float ต่ำมากจาก Reverse Split ส่งผลให้ราคาแกว่งแรงแบบไร้ปัจจัยใหม่รองรับ
+* **Pre-Market:** 28 ก.ค. บวกแรงระดับ ~+35-40%+ 
 
 #### 3. Volume Analysis
 * **Volume:** Spike เป็นพักๆ
-* **Analysis:** ไร้ปัจจัยพื้นฐานหนุน, เกิดจากการปั่นวอลุ่มในหุ้น Low Float
+* **Analysis:** เกิดจากการปั่นวอลุ่มในหุ้น Low Float ขาดพื้นฐานที่แข็งแกร่งรองรับ
 
 #### 4. News & Catalyst Analysis
-* **Catalyst:** 1-for-200 Reverse Split มีผลไปเมื่อ 6 ก.ค. 2026 เพื่อพยายามหนีการถูกถอดถอนออกจาก Nasdaq
-* **Impact:** เป็นปัจจัยลบระยะยาว แต่ก่อให้เกิดความผันผวนระยะสั้นเปิดโอกาสให้เทรดเดอร์เข้ามาเล่นรอบ
+* **Catalyst:** 1-for-200 Reverse Split มีผลไปเมื่อ 6 ก.ค. 2026 เพื่อหนีการถูกถอดถอนออกจาก Nasdaq
+* **Impact:** เป็นปัจจัยลบระยะยาว แต่ความขาดแคลนหุ้นทำให้เก็งกำไรได้แรง
 
 #### 5. Financial Health
-* **Warning:** ขาดทุนต่อเนื่อง ⚠️ Reverse Split Risk (เพิ่งทำไป และมักตามมาด้วยการกดราคา)
+* **Warning:** ขาดทุนต่อเนื่อง ⚠️ Reverse Split Risk สะท้อนปัญหาการรักษาสถานะ
 
 #### 6. Market Sentiment
 * **Sentiment:** Speculative Casino
-* **Analysis:** เป็นเพียงการเก็งกำไรทางเทคนิคและการพนันของ Day Trader
+* **Analysis:** เป็นเพียงการเก็งกำไรทางเทคนิคของ Day Trader
 
 #### 7. Technical Analysis
 * **Trend:** ผันผวนไร้ทิศทาง (Choppy)
-* **Risk:** ระวังถูกขังบนยอดเขา (Liquidity Trap) เนื่องจากสภาพคล่องที่แท้จริงต่ำ
+* **Risk:** ระวังถูกขังบนยอดเขา (Liquidity Trap) 
 
 #### 8. Risk Analysis
 * **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
@@ -179,30 +179,30 @@
 * **Company Name:** Polar Power, Inc.
 * **Ticker:** POLA
 * **Sector/Industry:** Power Systems (EV, Data Center)
-* **Market Cap:** ~$5.28M - $5.53M [ที่มา: Market Data ณ 28 ก.ค. 2026]
+* **Market Cap:** ~$5.3M - $5.5M 
 
 #### 2. Price Action Analysis
-* **Pre-Market:** ปรับตัวขึ้นโดดเด่นถึง +38.44% [ที่มา: Market Data 28 ก.ค. 2026]
-* **Movement:** มีลักษณะการดีดตัวรุนแรงรับข่าว แต่ต้องระวังแรงขายทำกำไรที่อาจตามมา
+* **Movement:** ปิด 27 ก.ค. ที่ ~$1.47
+* **Pre-Market / After-Hours:** ปรับตัวขึ้น ~+25-40% วันที่ 28 ก.ค. 
 
 #### 3. Volume Analysis
-* **Volume:** ปกติเทรดแค่หลักหมื่นหุ้นต่อวัน แต่วันที่มีข่าวพุ่งสูงขึ้นระดับแสน-ล้านหุ้น
-* **Analysis:** มีเม็ดเงินเข้าซื้อเก็งกำไรในธีมโครงสร้างพื้นฐาน AI/EV
+* **Volume:** พุ่งสูงขึ้นผิดปกติรับข่าว
+* **Analysis:** มีเม็ดเงินเข้าซื้อเก็งกำไรในธีม Data Center & EV
 
 #### 4. News & Catalyst Analysis
-* **Catalyst:** ทำข้อตกลง Committed Equity Facility (CEF) วงเงิน $25 ล้าน กับ Roth Principal Investments สำหรับใช้พัฒนาธุรกิจ Data Center & EV [ที่มา: ข่าวบริษัท ก.ค. 2026]
-* **Impact:** ได้เงินทุนเพื่อต่อลมหายใจและขยายงาน แต่ก็หมายถึง Dilution ที่อาจตามมาเมื่อมีการใช้ Facility นี้
+* **Catalyst:** ทำข้อตกลง Committed Equity Facility (CEF) วงเงินสูงสุด $25 ล้าน กับ Roth Principal Investments สำหรับใช้พัฒนาธุรกิจ Data Center, EV, Drone charging
+* **Impact:** ได้เงินทุน แต่ก็หมายถึง Dilution ที่อาจตามมาเมื่อมีการใช้ Facility
 
 #### 5. Financial Health
-* **Health:** มี Story ดีอยู่ในเทรนด์อนาคต (Data Center, EV) แต่อยู่ในช่วงต้องการเงินทุน (Cash Burn) เพื่อขยายตลาด
-* **Warning:** ⚠️ สัญญา CEF อาจนำมาซึ่ง Share Offering ที่ค่อยๆ กดดันราคาหุ้นเรื่อยๆ
+* **Health:** มี Story ธุรกิจน่าสนใจ แต่อยู่ในช่วง Cash Burn 
+* **Warning:** ⚠️ สัญญา CEF สร้างแรงกดดัน Overhang ต่อราคาหุ้นจากการเทขายเพิ่มทุน
 
 #### 6. Market Sentiment
-* **Sentiment:** มีความคาดหวังสูง (Hopium) เกี่ยวกับคำว่า "Data Center & EV" ដែលเป็น Narrative หลักของตลาดปัจจุบัน
+* **Sentiment:** ตอบรับเชิงบวกชั่วคราวต่อแผนการเข้าตลาด Data Center
 
 #### 7. Technical Analysis
-* **Trend:** Breakout กรอบแคบเพื่อตอบรับข่าว
-* **Risk:** มีโอกาสเจอแรงเทขายทำกำไรจากผู้ที่ติดดอยอยู่เดิม
+* **Trend:** Breakout กรอบแคบรับข่าว
+* **Risk:** มีโอกาสเจอแรงเทขายทำกำไร 
 
 #### 8. Risk Analysis
 * **ระดับความเสี่ยง:** สูง (High Risk)
@@ -212,25 +212,24 @@
 
 ## 🧠 สรุป Insight สำคัญ (Market Intelligence)
 
-* **Momentum แข็งแรงที่สุด & พื้นฐานดีที่สุด:** **GOSS** เป็นตัวเดียวที่มี Catalyst เชิงบวกที่แท้จริงระดับอุตสาหกรรม (FDA & Reacquired Rights) มีโอกาสไปต่อสูงที่สุดในกลุ่มนี้
-* **Volume น่าสนใจที่สุด:** **GOSS** (ทะลุ 350M shares) และ **OMH** (ทะลุ 200M shares) สะท้อนถึงการเข้าลุยของ Smart Money ในตัวแรก และ Retail Speculative ในตัวหลัง
-* **หุ้นที่เป็นแค่เก็งกำไร (Pump & Dump Risk):** **INLF**, **CISS**, **OMH** ขับเคลื่อนด้วยโครงสร้าง Low-float และเทคนิควิศวกรรมทางการเงิน (Reverse Split/Offering) ไม่ใช่ผลประกอบการจริง
-* **เสี่ยงโดนทุบ/เพิ่มทุน (Dilution Risk):** **CISS** (มีประวัติพิมพ์หุ้นออกมาขายอย่างต่อเนื่อง), **POLA** (เพิ่งเซ็นสัญญาหาเงินทุน $25M ซึ่งหมายถึงการทะยอยขายหุ้น)
+* **Momentum แข็งแรงที่สุด & พื้นฐานดีที่สุด:** **GOSS** เป็นตัวเดียวที่มี Catalyst เชิงบวกที่แท้จริงระดับอุตสาหกรรม (FDA & Reacquired Rights)
+* **กลุ่มเก็งกำไร Low-Float / Offering Rebound:** **OMH**, **CISS**, **INLF** เคลื่อนไหวรุนแรงจากผลกระทบของการทำ Corporate Action (Direct Offering, Warrants, Reverse Split) เหมาะสำหรับการเทรดสั้นเท่านั้น
+* **กลุ่มเก็งกำไรประเด็นอนาคต (AI/EV):** **POLA** มีการเข้าทำ Equity Facility เพื่อขยายตลาด Data Center & EV ซึ่งดีต่อกิจการแต่เสี่ยงต่อ Dilution ของนักลงทุน 
 
 ---
 
 ## 📣 สรุป Watchlist ประจำวัน (Top Picks)
 
-* **Top Momentum:** OMH
-* **Top Risk:** CISS, INLF
+* **Top Momentum:** INLF, CISS (Speculative Bounce)
+* **Top Risk:** CISS, OMH (Dilution)
 * **Top Volume:** GOSS
 * **Top Catalyst:** GOSS (FDA Pipeline Update)
 * **Top Speculative Play:** POLA
 
 ### 🏆 อันดับหุ้นที่น่าจับตาที่สุด
-🥇 **หุ้นเด่นที่สุดของวัน:** **GOSS (Gossamer Bio)** - มี Fundamental Catalyst รองรับชัดเจนที่สุด ตอบโจทย์ทั้งข่าวดี (FDA) และปัญหาหนี้ที่ลดลง คาดว่า Smart Money จะให้ความสนใจสะสมเข้าพอร์ต
-⚠️ **หุ้นเสี่ยงที่สุดของวัน:** **CISS (C3is Inc.)** - ข่าว Offering $0.52 ค้ำราคาอยู่ หากนักลงทุนหลงเข้าไปไล่ราคาช่วง Rebound มีโอกาสเผชิญสภาวะ Liquidity Trap เมื่อสถาบันเริ่มปล่อยของ
-👀 **หุ้นที่ตลาดจับตาที่สุดของวัน:** **OMH (Ohmyhome)** - Volatility สูงปรี๊ด เหมาะสำหรับ Day Trader สายลุยที่ถนัดเรื่อง Risk-Reward เพราะการสะบัดตัวแรงทั้งขึ้นและลง
+🥇 **หุ้นเด่นที่สุดของวัน:** **GOSS (Gossamer Bio)** - มี Fundamental Catalyst ชัดเจนและสะสางภาระหนี้ได้มาก เป็นที่สนใจของ Smart Money
+⚠️ **หุ้นเสี่ยงที่สุดของวัน:** **CISS / OMH** - ทั้งสองบริษัทมี Dilution Risk หนักหน่วง การเด้งกลับแรงใน Pre-market เป็นเพียงเทคนิคัล Rebound และระวังถูกทุบทำกำไรอย่างรวดเร็ว
+👀 **หุ้นที่ตลาดจับตาที่สุดของวัน:** **POLA (Polar Power)** - Theme การลงทุนใน Data Center/EV กำลังเป็นที่นิยม หากตลาดยอมรับแรงกดดันจาก Dilution ได้ อาจมีลุ้นเล่นรอบ
 
 ---
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
