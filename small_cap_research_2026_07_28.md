@@ -1,242 +1,239 @@
 <p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
 
-# 🦅 US Small Cap & Penny Stock Research (July 28, 2026)
-**Category:** Momentum Trading & Smart Money Flow
+# US Small Cap & Penny Stock Daily Research
+**Date:** July 28, 2026
 **Analyst:** Senior Small Cap Equity Research Analyst
+**Focus:** Penny Stocks, Momentum, Catalysts, and Smart Money Flow
+
+## 📊 หุ้นที่ผ่านเกณฑ์คัดกรอง (Top 5 Watchlist)
+1. **Gossamer Bio, Inc. (GOSS)** - Biotech Catalyst Play
+2. **Ohmyhome Limited (OMH)** - Low-Float Momentum Squeeze
+3. **C3is Inc. (CISS)** - Offering Rebound Play
+4. **INLIF Limited (INLF)** - Reverse Split Squeeze
+5. **Polar Power, Inc. (POLA)** - Equity Facility Speculation
 
 ---
 
-## Executive Summary
-สภาวะตลาด (Market Context) สำหรับ Small Cap และ Penny Stocks วันนี้อยู่ในโหมด "Risk-On สลับกับ การเก็งกำไรระยะสั้นจาก Catalyst" นักลงทุนยังคงจับตาดูหุ้นที่มี Short Interest สูงและหุ้นที่อิงกระแส AI (Narrative Trade) ควบคู่ไปกับความเสี่ยงจากการเพิ่มทุน (Dilution) ในหุ้นขนาดจิ๋ว (Micro-cap) 
-
-รายงานฉบับนี้ทำการวิเคราะห์เชิงลึก (Deep Dive) หุ้นขนาดเล็ก 5 ตัวที่กำลังเป็นกระแสในตลาดสหรัฐอเมริกา ประจำวันที่ 28 กรกฎาคม 2026 (อ้างอิงข้อมูลล่าสุด ณ วันนี้)
-
----
-
-### 1. Virgin Galactic Holdings, Inc. (NYSE: SPCE)
-**"The High Short Interest Squeeze Candidate"**
+### 1. Gossamer Bio, Inc. (GOSS)
 
 #### 1. Company Overview
-* **Ticker:** SPCE
-* **Sector:** Aerospace & Defense
-* **Market Cap:** ~$280M - $330M
-* **ราคาปัจจุบัน:** $2.55 
-* **Short Float %:** ~40.16% (Extremely High)
-* **Institutional Ownership:** Moderate (มีสถาบันถือครองเพื่อ Hedging เป็นหลัก)
+* **Company Name:** Gossamer Bio, Inc.
+* **Ticker:** GOSS
+* **Sector/Industry:** Healthcare / Biotechnology
+* **Market Cap:** ~$66M - $95M [ที่มา: Yahoo Finance, Bloomberg, ข้อมูล ณ 28 ก.ค. 2026]
+* **Price:** Sub-$1
+* **Average Volume:** 14M - 22M shares [ที่มา: MarketWatch]
 
 #### 2. Price Action Analysis
-* **Intraday / Pre-Market:** ราคาแกว่งตัวอยู่ในกรอบ $2.50 - $2.60 มีลักษณะ Consolidating หลังจากร่วงหนักในช่วงก่อนหน้า 
-* **Momentum Strength:** อ่อนแอในภาพรวม (Downtrend) แต่มีความผันผวนสูงมากระหว่างวัน
-* **Liquidity Quality:** ดีเยี่ยมสำหรับ Penny Stock (Volume หนาแน่น ทำให้เข้าออกง่าย)
-* **Signal:** มีแรงกดดันจากฝั่ง Short หนาแน่น แต่พบเห็นร่องรอยการ Accumulation เล็กน้อยแนวรับ
+* **Pre-Market / Intraday:** หุ้นปรับตัวขึ้น (Gap Up) รุนแรงกว่า 25-40% ทันทีที่ข่าวออก [ที่มา: Benzinga, ข้อมูล ณ 28 ก.ค. 2026]
+* **Momentum & Action:** การตอบสนองเป็นเชิงบวกชัดเจน แสดงถึงแรงซื้อกลับหลังมีความชัดเจนเรื่องยาใหม่
+* **Analysis:** หุ้นกำลังถูกไล่ราคาจากข่าว FDA ไม่ใช่แค่แรงเก็งกำไรมั่วซั่ว
 
 #### 3. Volume Analysis
-* **Volume:** สูงกว่าค่าเฉลี่ยในบางวัน โดยมี Retail Volume เป็นตัวขับเคลื่อนหลัก
-* **Smart Money Signal:** Dark Pool มียอด Short Volume Ratio ที่สูงมาก แสดงให้เห็นว่าตลาดยังคงเดิมพันในทางลง
+* **Volume Activity:** พุ่งสูงผิดปกติ (Unusual Volume) ระดับ 350 ล้านหุ้น เทียบกับค่าเฉลี่ยปกติ 14-22 ล้านหุ้น
+* **Analysis:** Volume มหาศาลระดับนี้มักประกอบด้วย Smart Money และ Institutional Flow ที่ต้องปรับพอร์ตรับข่าวดี
 
 #### 4. News & Catalyst Analysis
-* **News:** บริษัทยังคงเผชิญความท้าทายเรื่อง Cash Burn และระยะเวลาการพัฒนา Delta Class spaceships
-* **Catalyst:** ยังไม่มีข่าวบวกที่ชัดเจน แต่ "Short Interest ที่สูงถึง 40%" คือ Catalyst ทางจิตวิทยาที่ดึงดูดนักเก็งกำไรที่หวัง Short Squeeze (เหมือน Meme Stock)
+* **Catalyst:**
+  1. เตรียมยื่น NDA (New Drug Application) สำหรับยา seralutinib รักษาโรค PAH ในเดือนกันยายน 2026
+  2. FDA ยืนยันว่าผลทดสอบเฟส 3 เป็นเพียง "Review issues" ไม่ใช่ "Filing issues"
+  3. ดึงสิทธิ์ยาคืนจาก Chiesi ทำให้รับผลประโยชน์เต็มที่ [ที่มา: ข่าวบริษัท, FDA Update 27-28 ก.ค. 2026]
+* **Impact:** เป็นปัจจัยพื้นฐานเชิงบวกที่แข็งแกร่ง (Fundamental Catalyst)
 
 #### 5. Financial Health
-* **Cash Burn / Runway:** สูงมาก บริษัทมีค่าใช้จ่ายในการลงทุนสูง
-* **Dilution Risk:** **สูงมาก (High Risk)** บริษัทมีความจำเป็นต้องใช้เงินทุนอย่างต่อเนื่อง 
+* **Dilution Risk:** ก่อนหน้านี้มีปัญหาหนี้ แต่เพิ่งมีการปรับโครงสร้างหนี้ลดหนี้ลงไปได้กว่า $115.9M [ที่มา: SEC Filing ก.ค. 2026]
+* **Warning:** ยังเป็นหุ้นเทคชีวภาพที่ไม่มีกำไรสุทธิ ต้องเผาเงิน (Cash Burn) อาจมีการเพิ่มทุนในอนาคต
 
 #### 6. Market Sentiment
-* **Retail Sentiment:** ขั้วแตก (Polarized) มีทั้งกลุ่ม FOMO หวัง Squeeze และกลุ่มที่มองว่าเป็น Value Trap 
-* **FOMO Level:** ปานกลางถึงสูง (บนโซเชียลมีเดีย)
+* **Retail & Social Buzz:** พุ่งสูงลิ่วจากความหวังยาใหม่ (FDA Hopium) + ข่าวปลดหนี้
+* **Analysis:** ตลาดกำลัง "เชื่อเรื่องอนาคต" ของยา Seralutinib มากกว่าแค่เก็งกำไรสั้นๆ
 
 #### 7. Technical Analysis
-* **Trend Structure:** Bearish Trend ชัดเจน
-* **Squeeze Potential:** สูงมาก หากมีข่าวบวกแม้เพียงเล็กน้อย (เช่น ความคืบหน้าการทดสอบ) อาจบีบให้ Short Sellers ต้อง Cover ทันที
-* **Support:** $2.50 
+* **Trend Structure:** Breakout จากกรอบสะสมพลังระยะยาว
+* **Risk:** หากราคาเปิดพุ่งสูงเกินไป อาจเกิด Mean Reversion หรือ Sell the news จากคนที่ติดดอยมานาน
 
 #### 8. Risk Analysis
-* **Level:** **ความเสี่ยงสูงมาก (Extreme Risk)**
-* **Warning:** เสี่ยงต่อการเกิด Dilution (เพิ่มทุน) และ Reverse Split ในอนาคต หากราคาหลุด $1
+* **ระดับความเสี่ยง:** ปานกลาง-สูง (Medium-High)
+* **Risk Factors:** แม้ข่าวจะดี แต่หากยาไม่ผ่าน FDA ในปี 2027 หรือเกิดสภาพคล่องขาดมือ (Liquidity Trap) อาจถูกเทขายอย่างหนัก
 
 ---
 
-### 2. Richtech Robotics Inc. (NASDAQ: RR)
-**"The AI/Robotics Narrative Play"**
+### 2. Ohmyhome Limited (OMH)
 
 #### 1. Company Overview
-* **Ticker:** RR
-* **Sector:** Technology / Robotics
-* **Market Cap:** ~$350M
-* **ราคาปัจจุบัน:** $1.55 - $1.58
-* **Short Float %:** ต่ำ 
+* **Company Name:** Ohmyhome Limited
+* **Ticker:** OMH
+* **Sector/Industry:** Real Estate Services / Tech
+* **Market Cap:** ~$9M - $19M [ที่มา: Yahoo Finance, ณ ปลายเดือน ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** ร่วงลงแรงในช่วงต้นปี 2026 แต่เริ่มตั้งฐานได้ มีความผันผวนสูงจากกระแสข่าว AI
-* **Relative Strength:** อ่อนแอกว่าตลาดรวม แต่แข็งแรงกว่าเพื่อนในกลุ่ม Micro-cap robotics บางตัว
+* **Movement:** มีลักษณะ Low-float squeeze ทำให้ราคาดีดจากระดับต่ำกว่า $0.25 ไปสูงกว่า $1.00 อย่างรวดเร็ว [ที่มา: Market Data]
+* **Gap Action:** มี Gap Up ใน Pre-market วันที่ 28 ก.ค. 2026 ขึ้นไปกว่า 33%
 
 #### 3. Volume Analysis
-* **Relative Volume (RVOL):** มักจะ Spike เมื่อมีการแถลงข่าวเกี่ยวกับ AI หรือการนำหุ่นยนต์ไปจัดแสดง
-* **Driver:** เป็น Retail-driven (นักลงทุนรายย่อย) ที่ไล่ราคาตามกระแส "Embodied AI"
+* **Unusual Volume:** ปริมาณการซื้อขายบางวันสูงทะลุ 200 ล้านหุ้น ซึ่งผิดปกติมากสำหรับหุ้นระดับนี้ [ที่มา: MarketWatch]
+* **Analysis:** เป็น Momentum ชั่วคราวที่มาจาก Retail Speculation และ Day Traders มากกว่านักลงทุนสถาบัน
 
 #### 4. News & Catalyst Analysis
-* **News (24-72 ชม.):** ล่าสุดเพิ่งเปิดตัวไลฟ์สตรีม AI 24/7 เพื่อแสดงศักยภาพของหุ่นยนต์ ADAM แบบ Real-time (AI-driven human-robot interaction)
-* **Catalyst Impact:** ข่าวเหล่านี้เป็นเพียง Narrative (สร้างสตอรี่) มากกว่าปัจจัยพื้นฐานที่สร้างกระแสเงินสดจริงในระยะสั้น ตลาดตอบรับในแง่บวกเล็กน้อย
+* **Catalyst:**
+  1. ประกาศ Registered Direct Offering มูลค่า $4 ล้าน ที่ราคา $0.20 ต่อหุ้น (ปิดดีลประมาณ 28 ก.ค. 2026)
+  2. เพิ่งได้รับคำเตือนจาก Nasdaq เรื่อง Minimum bid price deficiency (เสี่ยงถูกถอด) [ที่มา: Nasdaq, ข่าวบริษัท ก.ค. 2026]
+* **Analysis:** ข่าวการขายหุ้นที่ $0.20 มักจะกดดันราคา แต่ตลาดกลับเกิดอาการ Short Squeeze หรือถูกลาก
 
 #### 5. Financial Health
-* **Profitability:** ขาดทุนสุทธิ (Net Loss) เพิ่มขึ้นใน Q1 2026 
-* **Compliance Risk:** เคยได้รับจดหมายเตือนจาก Nasdaq เรื่องส่งงบการเงินล่าช้า
-* **Dilution Risk:** ปานกลางถึงสูง
+* **Dilution Risk:** มีการออกหุ้นเพิ่มทุนอย่างต่อเนื่องเพื่อพยุงบริษัท
+* **Warning:** ⚠️ หุ้นมีความเสี่ยงในการ Dilute สูงมาก และสถานะเงินสดน่าเป็นห่วง
 
 #### 6. Market Sentiment
-* **Social Media Buzz:** ได้รับอานิสงส์จากคำว่า "AI" และ "Robotics" ทำให้เกิด Speculative Activity จากนักลงทุนรายย่อย
+* **Sentiment:** ระดับ FOMO สูงลิ่วจากการเห็นราคาเด้งหลายร้อยเปอร์เซ็นต์
+* **Analysis:** ตลาดกำลัง "เก็งกำไรระยะสั้น" (Speculative Activity) แบบเข้าเร็วออกเร็ว
 
 #### 7. Technical Analysis
-* **Pattern:** กำลังทำ Consolidation ในกรอบแคบ เสี่ยง Breakdown หากรายงานงบออกมาน่าผิดหวัง
+* **Trend:** เป็น Parabolic Move หรือ Exhaustion Move
+* **Risk:** เสี่ยง Pullback หรือ Mean Reversion สูงมาก หากหมดแรงซื้อ
 
 #### 8. Risk Analysis
-* **Level:** **ความเสี่ยงสูง (High Risk)**
-* **Warning:** หุ้นกลุ่ม AI Narrative ที่ยังไม่มีกำไร มักเผชิญกับ Pump & Dump เมื่อกระแสหมด 
+* **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
+* **Risk Factors:** Pump & Dump Risk, Dilution Risk, Delisting Risk หากราคาหลุด $1 นาน
 
 ---
 
-### 3. Zhongchao Inc. (NASDAQ: ZCMD)
-**"The Low Float Squeeze & Dilution Trap"**
+### 3. C3is Inc. (CISS)
 
 #### 1. Company Overview
-* **Ticker:** ZCMD
-* **Sector:** Healthcare Technology
-* **Market Cap:** ~$1.2M - $1.6M (Micro-cap / Nano-cap)
-* **ราคาปัจจุบัน:** $1.18 - $1.40 (ร่วงจากจุดสูงสุดทะลุ $11.93 เมื่อไม่กี่วันก่อน)
-* **Float:** ต่ำมาก (Low Float) ~1.15M หุ้น
+* **Company Name:** C3is Inc.
+* **Ticker:** CISS
+* **Sector/Industry:** Shipping (Seaborne transportation)
+* **Market Cap:** ~$150K - $771K (Micro-cap) [ที่มา: Benzinga, ข้อมูล ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** เมื่อวันที่ 22 ก.ค. 2026 ราคาพุ่งจาก $2.27 ไปทำ High ที่ $11.93 (Short-lived spike) ก่อนจะถูกทุบลงมาเหลือระดับ $1.18 ในปัจจุบัน
-* **Signal:** ชัดเจนว่าเป็น **Pump & Dump / Liquidity Squeeze** แบบรุนแรง มีแรงขายกดทับ (Distribution) มหาศาลหลังจากผู้บริหารประกาศเพิ่มทุน
+* **Movement:** ราคาโดนทุบหนัก (Sell-off) ลงไปที่ $0.10 ก่อนจะ Rebound กลับขึ้นมาเกือบ 30% [ที่มา: Benzinga]
+* **Pre-Market:** พุ่งกลับ +114.84% ในช่วงเช้า 28 ก.ค. 2026
 
 #### 3. Volume Analysis
-* **Volume Spike:** ปริมาณการซื้อขายมหาศาล (Abnormal Volume) ในวันที่ 22 ก.ค. แต่ปัจจุบันวอลุ่มเริ่มเหือดแห้ง 
-* **Smart Money:** ไม่มี Smart Money เข้ามารับ มีแต่ Retail ที่ติดดอย
+* **Volume:** ทะลุหลักล้านหุ้นในช่วงที่ข่าว Offering ออก
+* **Analysis:** มีร่องรอยการเก็บของ (Accumulation) หลังโดนทุบหนัก แต่เป็นแรงซื้อจากฝั่ง Retail เป็นหลัก
 
 #### 4. News & Catalyst Analysis
-* **News:** วันที่ 23 ก.ค. 2026 บริษัทประกาศ "Registered Direct Offering" ขายหุ้น 4.54 ล้านหุ้น ที่ราคา $1.10 (ได้เงินราว $5.0M)
-* **Impact:** ข่าวเพิ่มทุนนี้ทำลายโครงสร้างราคาทันที (Dilution) 
+* **Catalyst:** ประกาศขายหุ้นเพิ่มทุนมูลค่า $6M (11.5 ล้าน Units) ที่ราคา $0.52 ต่อ Unit ซึ่งแต่ละ Unit แถม Warrant ด้วย [ที่มา: GlobeNewswire, ข่าวบริษัท ก.ค. 2026]
+* **Impact:** ข่าวนี้สร้าง Dilution มหาศาล แต่เมื่อราคาดิ่งไปแรงกว่าราคา Offering ($0.52) ทำให้สายเก็งกำไรมองเป็นจุด Oversold Reversal
 
 #### 5. Financial Health
-* **Cash Position:** เพิ่งได้เงินสดมา $5M จากการเพิ่มทุน แต่แลกมากับการที่จำนวนหุ้นเพิ่มขึ้นเกือบ 4 เท่า 
-* **Dilution Risk:** เกิดขึ้นแล้ว และอาจเกิดซ้ำ
+* **Health:** แม้กำไร Q1/2026 จะดี แต่บริษัทยังใช้โมเดลระดมเงินจากตลาด (Equity Offerings) อย่างต่อเนื่อง
+* **Warning:** ⚠️ Dilution Risk ระดับวิกฤต
 
 #### 6. Market Sentiment
-* **Sentiment:** Retail Fear ระดับสูงสุด (Panic) นักลงทุนรายย่อยที่เข้าซื้อตอนราคาวิ่งขึ้นไป $10+ ขาดทุนยับเยิน
+* **Sentiment:** Fear vs Greed สลับกันรวดเร็วมาก คนติดดอยมีความกลัว ส่วนคนเล่นสั้นมีความโลภ
+* **Analysis:** เก็งกำไรระยะสั้นล้วนๆ ไม่มีปัจจัยถือลงทุนแบบ Value
 
 #### 7. Technical Analysis
-* **Pattern:** "Exhaustion Move" ตามด้วย "Waterfall Drop" 
-* **Momentum:** พังทลาย เสี่ยงลงไปทดสอบระดับราคา $1.00 หรือต่ำกว่า
+* **Trend:** Oversold Reversal
+* **Risk:** มีแนวต้านหนักบริเวณ $0.50 (ราคาเพิ่มทุน) หากทะลุไม่ได้อาจจบเวฟการดีดตัว
 
 #### 8. Risk Analysis
-* **Level:** **ความเสี่ยงสูงมากที่สุด (Extreme Risk / Do Not Touch)**
-* **Warning:** เป็นตัวอย่างที่ชัดเจนของ Low Float Manipulation และ Dilution Trap ห้ามเข้าไปถัวเฉลี่ยเด็ดขาด
+* **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
+* **Risk Factors:** Dilution Trap, Pump & Dump
 
 ---
 
-### 4. Codexis, Inc. (NASDAQ: CDXS)
-**"The Post-Offering Biotech Play"**
+### 4. INLIF Limited (INLF)
 
 #### 1. Company Overview
-* **Ticker:** CDXS
-* **Sector:** Biotechnology (RNA Therapeutics)
-* **Market Cap:** ~$134M - $180M
-* **ราคาปัจจุบัน:** $1.46 - $1.48
+* **Company Name:** INLIF Limited
+* **Ticker:** INLF
+* **Sector/Industry:** Technology / Internet Content
+* **Market Cap:** ~$150K - $4.2M [ที่มา: Market Data ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** ราคาแกว่งตัวอยู่ใต้ระดับ $1.50 หลังจากการประกาศเพิ่มทุน
-* **Support:** มีแรงรับบางๆ บริเวณ $1.45 
+* **Movement:** เพิ่งทำ Reverse Split ไปเมื่อต้นเดือน ทำให้ Float ต่ำมาก เมื่อมีแรงซื้อนิดเดียวราคาจะกระชากแรง (Low-float momentum squeeze)
+* **Pre-Market:** บวกขึ้นแรง 49.09% [ที่มา: Market Data 28 ก.ค. 2026]
 
 #### 3. Volume Analysis
-* **Volume:** สูงผิดปกติในช่วงที่ประกาศ Offering (ปิดดีลวันที่ 27 ก.ค. 2026) 
-* **Type:** เป็นการเปลี่ยนมือ (Block transfers) จากสถาบันหรือผู้จัดจำหน่ายหลักทรัพย์
+* **Volume:** Spike เป็นพักๆ
+* **Analysis:** ไร้ปัจจัยพื้นฐานหนุน, เกิดจากการปั่นวอลุ่มในหุ้น Low Float
 
 #### 4. News & Catalyst Analysis
-* **News:** วันที่ 23-27 ก.ค. 2026 บริษัทปิดดีลขายหุ้น 16.66 ล้านหุ้น ที่ราคา $1.50 ต่อหุ้น ได้เงินมา ~$23.1M
-* **Catalyst:** ข่าวร้าย (Dilution) ได้สะท้อนในราคาไปแล้ว (Priced-in) ต่อจากนี้ตลาดจะโฟกัสไปที่การใช้เงินทุนเพื่อพัฒนา Enzyme Solutions
+* **Catalyst:** 1-for-200 Reverse Split มีผลไปเมื่อ 6 ก.ค. 2026 เพื่อพยายามหนีการถูกถอดถอนออกจาก Nasdaq
+* **Impact:** เป็นปัจจัยลบระยะยาว แต่ก่อให้เกิดความผันผวนระยะสั้นเปิดโอกาสให้เทรดเดอร์เข้ามาเล่นรอบ
 
 #### 5. Financial Health
-* **Cash Position:** ดีขึ้นชั่วคราวจากการเพิ่มทุน
-* **Dilution Risk:** ลดลงระยะสั้น (เพิ่งเพิ่มทุนเสร็จ)
+* **Warning:** ขาดทุนต่อเนื่อง ⚠️ Reverse Split Risk (เพิ่งทำไป และมักตามมาด้วยการกดราคา)
 
 #### 6. Market Sentiment
-* **Sentiment:** Cautiously Optimistic มองว่า Downside อาจจำกัดที่ $1.50 ซึ่งเป็นราคา Offering 
+* **Sentiment:** Speculative Casino
+* **Analysis:** เป็นเพียงการเก็งกำไรทางเทคนิคและการพนันของ Day Trader
 
 #### 7. Technical Analysis
-* **Pattern:** Consolidation / Base Building 
-* **Mean Reversion:** อาจมีการรีบาวด์ระยะสั้นกลับไปทดสอบโซน $1.60-$1.70
+* **Trend:** ผันผวนไร้ทิศทาง (Choppy)
+* **Risk:** ระวังถูกขังบนยอดเขา (Liquidity Trap) เนื่องจากสภาพคล่องที่แท้จริงต่ำ
 
 #### 8. Risk Analysis
-* **Level:** **ความเสี่ยงปานกลาง (Medium Risk)**
-* **Warning:** ขาดทุนจากการดำเนินการยังเป็นปัจจัยกดดัน หากไม่มีข่าวความคืบหน้าด้าน Clinical Trial ราคาจะซึมลง
+* **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
+* **Risk Factors:** Low Float Manipulation
 
 ---
 
-### 5. AmeriServ Financial, Inc. (NASDAQ: ASRV)
-**"The Micro-Cap Fundamental Turnaround"**
+### 5. Polar Power, Inc. (POLA)
 
 #### 1. Company Overview
-* **Ticker:** ASRV
-* **Sector:** Financials (Regional Banks)
-* **Market Cap:** ~$70M
-* **ราคาปัจจุบัน:** $4.34
+* **Company Name:** Polar Power, Inc.
+* **Ticker:** POLA
+* **Sector/Industry:** Power Systems (EV, Data Center)
+* **Market Cap:** ~$5.28M - $5.53M [ที่มา: Market Data ณ 28 ก.ค. 2026]
 
 #### 2. Price Action Analysis
-* **Movement:** วิ่งในกรอบ $4.11 - $4.34 แสดงให้เห็นถึงความเสถียรภาพ (Low Volatility) มากที่สุดในกลุ่ม
-* **Relative Strength:** แข็งแกร่ง มีแรงรับซื้อสม่ำเสมอ (Accumulation)
+* **Pre-Market:** ปรับตัวขึ้นโดดเด่นถึง +38.44% [ที่มา: Market Data 28 ก.ค. 2026]
+* **Movement:** มีลักษณะการดีดตัวรุนแรงรับข่าว แต่ต้องระวังแรงขายทำกำไรที่อาจตามมา
 
 #### 3. Volume Analysis
-* **Volume:** ค่อนข้างเบา (Thin Liquidty) เนื่องจากเป็นหุ้นธนาคารขนาดเล็ก 
-* **Smart Money:** มีแรงซื้อจากสาย Value Investor มากกว่านักเก็งกำไร
+* **Volume:** ปกติเทรดแค่หลักหมื่นหุ้นต่อวัน แต่วันที่มีข่าวพุ่งสูงขึ้นระดับแสน-ล้านหุ้น
+* **Analysis:** มีเม็ดเงินเข้าซื้อเก็งกำไรในธีมโครงสร้างพื้นฐาน AI/EV
 
 #### 4. News & Catalyst Analysis
-* **Catalyst (Q2 2026 Earnings):** ประกาศงบวันที่ 21 ก.ค. พลิกกลับมามีกำไรสุทธิ (Turnaround) ที่ $2.73M หรือ $0.16/หุ้น (เทียบกับที่ขาดทุนในปีก่อนหน้า)
-* **Dividend:** ประกาศจ่ายปันผล $0.03 ต่อหุ้น (Ex-Dividend วันที่ 4 ส.ค. 2026) 
+* **Catalyst:** ทำข้อตกลง Committed Equity Facility (CEF) วงเงิน $25 ล้าน กับ Roth Principal Investments สำหรับใช้พัฒนาธุรกิจ Data Center & EV [ที่มา: ข่าวบริษัท ก.ค. 2026]
+* **Impact:** ได้เงินทุนเพื่อต่อลมหายใจและขยายงาน แต่ก็หมายถึง Dilution ที่อาจตามมาเมื่อมีการใช้ Facility นี้
 
 #### 5. Financial Health
-* **Profitability:** กลับมามีกำไร (Turnaround) 
-* **Asset:** มีสินทรัพย์รวมกว่า $1.46 พันล้าน 
-* **Dilution Risk:** **ต่ำมาก (Low Risk)** 
+* **Health:** มี Story ดีอยู่ในเทรนด์อนาคต (Data Center, EV) แต่อยู่ในช่วงต้องการเงินทุน (Cash Burn) เพื่อขยายตลาด
+* **Warning:** ⚠️ สัญญา CEF อาจนำมาซึ่ง Share Offering ที่ค่อยๆ กดดันราคาหุ้นเรื่อยๆ
 
 #### 6. Market Sentiment
-* **Sentiment:** เป็นบวก (Bullish) ไม่มีการเก็งกำไรเกินจริง
+* **Sentiment:** มีความคาดหวังสูง (Hopium) เกี่ยวกับคำว่า "Data Center & EV" ដែលเป็น Narrative หลักของตลาดปัจจุบัน
 
 #### 7. Technical Analysis
-* **Trend:** ค่อยๆ ไต่ระดับขึ้น (Grinding Higher) 
-* **Resistance:** $4.50
+* **Trend:** Breakout กรอบแคบเพื่อตอบรับข่าว
+* **Risk:** มีโอกาสเจอแรงเทขายทำกำไรจากผู้ที่ติดดอยอยู่เดิม
 
 #### 8. Risk Analysis
-* **Level:** **ความเสี่ยงต่ำ-ปานกลาง (Low-Medium Risk)**
-* **Warning:** สภาพคล่องต่ำมาก (Liquidity Trap) ไม่เหมาะกับนักเทรดระยะสั้นที่ต้องการเข้าออกเร็ว 
+* **ระดับความเสี่ยง:** สูง (High Risk)
+* **Risk Factors:** Dilution Risk จาก Equity Facility
 
 ---
 
-## 🧠 สรุป Insight สำคัญ (Analyst Takeaways)
+## 🧠 สรุป Insight สำคัญ (Market Intelligence)
 
-* **หุ้นที่ Smart Money เข้า (Fundamental Play):** **ASRV** มีปัจจัยพื้นฐานรองรับชัดเจน พลิกมีกำไรและจ่ายปันผล เป็นหุ้นที่ปลอดภัยที่สุดใน List นี้
-* **หุ้นที่มีโอกาส Short Squeeze สูงสุด:** **SPCE** แม้พื้นฐานจะย่ำแย่ แต่ด้วย Short Float ที่สูงถึง 40% หากมี Catalyst เล็กๆ ตลาดสามารถดันราคาบีบ Short Seller ได้รุนแรง
-* **หุ้นที่ถูกลากไปเชือด (Pump & Dump):** **ZCMD** เป็นบทเรียนของการเล่นหุ้น Low Float ที่ผู้บริหารรอสับสวิตช์เพิ่มทุนใส่หน้านักลงทุน ห้ามเข้าไปรับมีดเด็ดขาด
-* **หุ้นที่ราคาสะท้อนข่าวร้ายไปแล้ว:** **CDXS** การเพิ่มทุนเพิ่งจบที่ $1.50 ทำให้ราคานี้กลายเป็นฐานแนวรับจิตวิทยาชั่วคราว
-* **หุ้นกระแสเก็งกำไร (Narrative Play):** **RR** เป็นเพียงการเก็งกำไรด้วยคำว่า "AI" และ "Robotics" ควรเข้าออกให้ไวและมี Stop Loss เสมอ
-
----
-
-## 📣 สรุป Watchlist ประจำวัน
-
-* **Top Momentum:** **ASRV** (วิ่งสวนทางหุ้นตัวเล็กอื่น ๆ อย่างแข็งแกร่งด้วยปัจจัยบวก)
-* **Top Risk:** **ZCMD** (อันตรายจากการเพิ่มทุนและ Low Float Manipulation)
-* **Top Volume:** **CDXS** (ปริมาณการซื้อขายหนาแน่นจากการปิดดีลเสนอขายหุ้น)
-* **Top Catalyst:** **ASRV** (พลิกมีกำไรและประกาศจ่ายปันผล)
-* **Top Speculative Play:** **RR** (เก็งกำไรด้วย Narrative ธีม AI และ Robotics)
-
-**การจัดอันดับประจำวัน:**
-🥇 **หุ้นเด่นที่สุดของวัน (Top Watchlist):** **ASRV** (Turnaround Story + Dividend Play)
-⚠️ **หุ้นเสี่ยงที่สุดของวัน (Top Risk):** **ZCMD** (Dilution Trap / Pump & Dump)
-👀 **หุ้นที่ตลาดจับตาที่สุดของวัน (Top Speculative / Squeeze Play):** **SPCE** (40% Short Float)
+* **Momentum แข็งแรงที่สุด & พื้นฐานดีที่สุด:** **GOSS** เป็นตัวเดียวที่มี Catalyst เชิงบวกที่แท้จริงระดับอุตสาหกรรม (FDA & Reacquired Rights) มีโอกาสไปต่อสูงที่สุดในกลุ่มนี้
+* **Volume น่าสนใจที่สุด:** **GOSS** (ทะลุ 350M shares) และ **OMH** (ทะลุ 200M shares) สะท้อนถึงการเข้าลุยของ Smart Money ในตัวแรก และ Retail Speculative ในตัวหลัง
+* **หุ้นที่เป็นแค่เก็งกำไร (Pump & Dump Risk):** **INLF**, **CISS**, **OMH** ขับเคลื่อนด้วยโครงสร้าง Low-float และเทคนิควิศวกรรมทางการเงิน (Reverse Split/Offering) ไม่ใช่ผลประกอบการจริง
+* **เสี่ยงโดนทุบ/เพิ่มทุน (Dilution Risk):** **CISS** (มีประวัติพิมพ์หุ้นออกมาขายอย่างต่อเนื่อง), **POLA** (เพิ่งเซ็นสัญญาหาเงินทุน $25M ซึ่งหมายถึงการทะยอยขายหุ้น)
 
 ---
-*## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-[1] ข้อมูลราคาหุ้นและมูลค่าตลาด: Yahoo Finance, Investing.com, Stockanalysis.com (ณ วันที่ 28 กรกฎาคม 2026)
-[2] ข้อมูล Short Interest: Highshortinterest.com, MarketBeat (ณ วันที่ 28 กรกฎาคม 2026)
-[3] ข่าวล่าวสุด (Catalyst): ข่าวการเพิ่มทุนของ ZCMD จาก TipRanks, ข่าวการจ่ายเงินปันผลของ ASRV จาก Dividend.com, ข่าวจากเว็บไซต์บริษัท RR (ณ วันที่ 28 กรกฎาคม 2026)*
+
+## 📣 สรุป Watchlist ประจำวัน (Top Picks)
+
+* **Top Momentum:** OMH
+* **Top Risk:** CISS, INLF
+* **Top Volume:** GOSS
+* **Top Catalyst:** GOSS (FDA Pipeline Update)
+* **Top Speculative Play:** POLA
+
+### 🏆 อันดับหุ้นที่น่าจับตาที่สุด
+🥇 **หุ้นเด่นที่สุดของวัน:** **GOSS (Gossamer Bio)** - มี Fundamental Catalyst รองรับชัดเจนที่สุด ตอบโจทย์ทั้งข่าวดี (FDA) และปัญหาหนี้ที่ลดลง คาดว่า Smart Money จะให้ความสนใจสะสมเข้าพอร์ต
+⚠️ **หุ้นเสี่ยงที่สุดของวัน:** **CISS (C3is Inc.)** - ข่าว Offering $0.52 ค้ำราคาอยู่ หากนักลงทุนหลงเข้าไปไล่ราคาช่วง Rebound มีโอกาสเผชิญสภาวะ Liquidity Trap เมื่อสถาบันเริ่มปล่อยของ
+👀 **หุ้นที่ตลาดจับตาที่สุดของวัน:** **OMH (Ohmyhome)** - Volatility สูงปรี๊ด เหมาะสำหรับ Day Trader สายลุยที่ถนัดเรื่อง Risk-Reward เพราะการสะบัดตัวแรงทั้งขึ้นและลง
+
+---
+## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
+* ข้อมูลราคาและปริมาณการซื้อขาย (Pre-market Movers): Yahoo Finance, MarketWatch, Bloomberg [ข้อมูล ณ วันที่ 28 กรกฎาคม 2026]
+* ข่าวการปรับโครงสร้าง/เพิ่มทุน: SEC Filings, GlobeNewswire, Benzinga
+* ข่าว FDA / อุตสาหกรรม: ประกาศบริษัท Gossamer Bio 27 ก.ค. 2026, ข่าวเศรษฐกิจ Reuters

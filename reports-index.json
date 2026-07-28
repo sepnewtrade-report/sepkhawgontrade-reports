@@ -1,13 +1,63 @@
 [
   {
-    "title": "🦅 US Small Cap & Penny Stock Research (July 28, 2026)",
+    "title": "Quantitative Options Market Screening",
+    "filename": "options_screen_analysis_2026_07_28.md",
+    "path": "options_screen_analysis_2026_07_28.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-28",
+    "timestamp": 1785236724680.6902,
+    "size": 7849
+  },
+  {
+    "title": "US Pre-Market Analysis (ประจำวันที่ 28 กรกฎาคม 2026)",
+    "filename": "us_pre_market_analysis_2026_07_28.md",
+    "path": "us_pre_market_analysis_2026_07_28.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-07-28",
+    "timestamp": 1785236723472.0676,
+    "size": 14651
+  },
+  {
+    "title": "สรุปภาพรวมตลาดหุ้นสหรัฐฯ: เงินไหลออก Tech ซบ Value ท่ามกลางมรสุม AI และรอดูท่าที Fed",
+    "filename": "market_summary_2026_07_28.md",
+    "path": "market_summary_2026_07_28.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-28",
+    "timestamp": 1785235237546.6711,
+    "size": 15019
+  },
+  {
+    "title": "Short Squeeze & Gamma Squeeze Radar: เจาะลึกหุ้นเสี่ยงบีบซื้อคืนระยะสั้น (24-48 ชั่วโมง)",
+    "filename": "short_squeeze_2026_07_28.md",
+    "path": "short_squeeze_2026_07_28.md",
+    "category": "Bear Squeeze",
+    "categoryThai": "หมีโดนบีบ",
+    "date": "2026-07-28",
+    "timestamp": 1785235114546.4268,
+    "size": 9502
+  },
+  {
+    "title": "Cosmic Trade Signal PRO 🪐",
+    "filename": "cosmic_trade_signal_pro_2026_07_28.md",
+    "path": "cosmic_trade_signal_pro_2026_07_28.md",
+    "category": "Cosmic Trade Signal",
+    "categoryThai": "Cosmic Trade Signal",
+    "date": "2026-07-28",
+    "timestamp": 1785234972298.9983,
+    "size": 18351
+  },
+  {
+    "title": "US Small Cap & Penny Stock Daily Research",
     "filename": "small_cap_research_2026_07_28.md",
     "path": "small_cap_research_2026_07_28.md",
     "category": "Small Cap Radar",
     "categoryThai": "Small Cap Radar",
     "date": "2026-07-28",
-    "timestamp": 1785216697954.6223,
-    "size": 19460
+    "timestamp": 1785233675039.7039,
+    "size": 19039
   },
   {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-07-28",
@@ -20,16 +70,6 @@
     "size": 2420
   },
   {
-    "title": "Options Selection Screen: หาโอกาสเด่นในตลาดช่วงรอยต่อ Earnings (28 ก.ค. 2026)",
-    "filename": "options_screen_analysis_2026_07_28.md",
-    "path": "options_screen_analysis_2026_07_28.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-28",
-    "timestamp": 1785211908976.0745,
-    "size": 7896
-  },
-  {
     "title": "\uddfa\uddf8 US Viral Stock Analysis (Hot Stocks) - 28 กรกฎาคม 2026",
     "filename": "us_viral_stock_analysis_2026_07_28.md",
     "path": "us_viral_stock_analysis_2026_07_28.md",
@@ -40,26 +80,6 @@
     "size": 12327
   },
   {
-    "title": "\uddfa\uddf8 สรุปจบ ทันโลกหุ้น: ตลาดหุ้นสหรัฐฯ (ประจำวันที่ 28 กรกฎาคม 2026)",
-    "filename": "market_summary_2026_07_28.md",
-    "path": "market_summary_2026_07_28.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-28",
-    "timestamp": 1785210852859.9568,
-    "size": 14247
-  },
-  {
-    "title": "\ude80 US Short Squeeze & Gamma Squeeze Watchlist (สัปดาห์ 28 ก.ค. 2026)",
-    "filename": "short_squeeze_2026_07_28.md",
-    "path": "short_squeeze_2026_07_28.md",
-    "category": "Bear Squeeze",
-    "categoryThai": "หมีโดนบีบ",
-    "date": "2026-07-28",
-    "timestamp": 1785209941156.2837,
-    "size": 10442
-  },
-  {
     "title": "Performance Review & Post-Market Recap: 2026-07-28",
     "filename": "bot_stats_2026_07_28.md",
     "path": "bot_stats_2026_07_28.md",
@@ -68,16 +88,6 @@
     "date": "2026-07-28",
     "timestamp": 1785206262299.1138,
     "size": 2337
-  },
-  {
-    "title": "Cosmic Trade Signal PRO: สัญญาณจักรวาลสู่ตลาดการเงินโลก",
-    "filename": "cosmic_trade_signal_pro_2026_07_28.md",
-    "path": "cosmic_trade_signal_pro_2026_07_28.md",
-    "category": "Cosmic Trade Signal",
-    "categoryThai": "Cosmic Trade Signal",
-    "date": "2026-07-28",
-    "timestamp": 1785200778021.5798,
-    "size": 17250
   },
   {
     "title": "Quantitative Options Screening: Premium Sellers Strategy",
