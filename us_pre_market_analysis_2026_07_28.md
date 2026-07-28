@@ -82,7 +82,7 @@
  | 1 | **CISS** | -80.31% | Technical Rebound จาก Public Offering | 
  | 2 | **INLF** | +2.82% | *อยู่ระหว่างการคาดการณ์ของตลาด / Momentum Play* | 
  | 3 | **POLA** | +1.38% | $25M Equity Facility สำหรับ AI Data Center Power | 
- | 4 | **OMH** | -71.12% | *อยู่ระหว่างการคาดการณ์ของตลาด / Low Float Speculation* | 
+ | 4 | **GRPN** | +6.66% | *เก็งกำไร Short Squeeze / Volume Spike* | 
  | 5 | **GOSS** | +46.62% | สัญญาณบวกจาก FDA ในการเตรียมยื่น NDA | 
  | 6 | **SKM** | -1.21% | Sentiment ลบในกลุ่มสื่อสารและเทคโนโลยี | 
  | 7 | **ADVB** | -24.34% | แรงเทขายทำกำไร | 
