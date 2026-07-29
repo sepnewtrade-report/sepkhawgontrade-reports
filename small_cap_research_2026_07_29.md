@@ -144,7 +144,7 @@
 #### 1. Company Overview
 * **Company Name:** Ohmyhome Limited
 * **Ticker:** OMH
-* **Sector/Industry:** Real Estate Services / Technology
+* **Sector/Industry:** Digital Marketing / Technology Services (ปรับโครงสร้างธุรกิจจากอสังหาริมทรัพย์เดิมสู่ Digital Marketing ตั้งแต่กลางปี 2026)
 * **Market Cap:** ~$10M - $18M [ที่มา: Yahoo Finance, 28-29 ก.ค. 2026]
 * **Price Range:** $0.15 - $0.25
 
@@ -157,8 +157,8 @@
 * **Analysis:** แรงซื้อจากเดย์เทรดเดอร์เข้าเก็บหุ้นช่วงราคาตกต่ำสุด
 
 #### 4. News & Catalyst Analysis
-* **Catalyst:** ข่าวการเสนอขายหุ้น Registered Direct Offering มูลค่า $4 ล้าน ที่ราคา $0.20 ต่อหุ้น และความพยายามแก้ไขปัญหาเกณฑ์ราคาต่ำกว่า 1 ดอลลาร์ของ Nasdaq
-* **Impact:** ข่าวเพิ่มทุนกดดันราคา แต่เปิดโอกาสให้เกิดการเก็งกำไรสั้นๆ
+* **Catalyst:** ข่าวการเสนอขายหุ้น Registered Direct Offering จำนวน 20 ล้านหุ้น มูลค่า $4 ล้าน ที่ราคา $0.20 ต่อหุ้น (พร้อม Pre-funded Warrants) และการดิ้นรนแก้ไขปัญหาเกณฑ์ราคาต่ำกว่า 1 ดอลลาร์ของ Nasdaq
+* **Impact:** ข่าวเพิ่มทุนกดดันราคา แต่เปิดโอกาสให้เกิดการเก็งกำไรสั้นๆ สวนกลับ
 
 #### 5. Financial Health
 * **Dilution Risk:** เสี่ยงต่อการเจือจางของหุ้นสูง
@@ -183,37 +183,37 @@
 #### 1. Company Overview
 * **Company Name:** Firy Inc.
 * **Ticker:** FIRY
-* **Sector/Industry:** Consumer Discretionary / Technology Services
-* **Market Cap:** ~$15M - $30M [ที่มา: StockAnalysis, 28-29 ก.ค. 2026]
-* **Price Range:** $1.50 - $3.20
+* **Sector/Industry:** Communication Services / Mobile Gaming Platform
+* **Market Cap:** ~$45M - $85M [ที่มา: Bloomberg, StockAnalysis, 28-29 ก.ค. 2026]
+* **Price Range:** $8.00 - $14.00 (เปิดแถว ~$8.59 พุ่งขึ้นแตะระดับสูงสุดกว่า ~$13.50-$14.00 ก่อนย่อตัวแกว่งในกรอบ $11-$12)
 
 #### 2. Price Action Analysis
-* **Movement:** ปรับตัวเพิ่มขึ้นพุ่งแรงทะลุ +68.90% ในช่วงการซื้อขาย
-* **Analysis:** โมเมนตัมขาขึ้นรุนแรงติดอันดับ Top Gainers ของวัน
+* **Movement:** ทะยานขึ้นพุ่งแรงกว่า +68.90% ในระหว่างวัน แกว่งตัวผันผวนสูงในกรอบ $8.00 ถึง $14.00
+* **Analysis:** การขยับขึ้นอย่างรุนแรงเกิดจากแรงซื้อรับข่าวดีระดับประวัติศาสตร์ทางกฎหมาย
 
 #### 3. Volume Analysis
-* **Volume Activity:** Volume พุ่งสูงกว่าค่าเฉลี่ยปกติหลายเท่า
-* **Analysis:** เป็นการเข้าไล่ราคาตามตาราง Top Gainers ของ Day Traders
+* **Volume Activity:** ปริมาณการซื้อขายมหาศาลสูงกว่าค่าเฉลี่ยปกติหลายเท่า
+* **Analysis:** แรงซื้อเข้าหนาแน่นจากทั้งนักลงทุนรายย่อยและนักลงทุนเก็งกำไรที่รับข่าวผลคดีความ
 
 #### 4. News & Catalyst Analysis
-* **Catalyst:** ไม่มีข่าวใหญ่เฉพาะตัวอย่างเป็นทางการ เคลื่อนไหวตามกระแส Speculative Momentum Play ของหุ้นกลุ่ม Small Cap
-* **Impact:** ขับเคลื่อนด้วยปัจจัยเทคนิคอลและแรงซื้อโซเชียลล้วนๆ
+* **Catalyst:** ศาลแขวงสหรัฐฯ เขตใต้แห่งนิวยอร์ก (S.D.N.Y.) มีคำตัดสินให้ Papaya Gaming คืนกำไรอันไม่ชอบธรรมมูลค่าสูงถึง $719 ล้านดอลลาร์ ให้แก่ Skillz Platform Inc. (บริษัทลูกของ Firy Inc.) จากคดีโฆษณาเท็จ (False Advertising) เพิ่มขึ้นจากคำตัดสินเดิมของคณะลูกขุนที่ $420M เมื่อเดือนเมษายน ถือเป็นคำตัดสินคดีโฆษณาเท็จที่มีมูลค่าสูงสุดในประวัติศาสตร์สหรัฐฯ [ที่มา: คำตัดสินศาลแขวง S.D.N.Y., Press Release, 28 ก.ค. 2026]
+* **Impact:** เป็นปัจจัยบวกมหาศาล (Massive Catalyst) ทางด้านเงินสดและมูลค่าบริษัท เสริมความเชื่อมั่นต่อสินทรัพย์ของ Skillz/Firy
 
 #### 5. Financial Health
-* **Dilution Risk:** ปานกลาง
-* **Warning:** หุ้นไม่มีปัจจัยพื้นฐานรองรับชัดเจน ต้องใช้วินัยสูงในการเทรด
+* **Financial Position:** ได้รับประโยชน์ครั้งใหญ่จากการปรับเพิ่มเงินชดเชยคดีความ (Legal Disgorgement Windfall) $719M
+* **Warning:** ต้องติดตามกระบวนการอุทธรณ์และการเก็บเงินจริงจากฝั่งจำเลย (Collection Risk)
 
 #### 6. Market Sentiment
-* **Sentiment:** FOMO Momentum
-* **Analysis:** แรงซื้อตามกระแสความร้อนแรงของหน้าจอเทรด
+* **Sentiment:** Bullish & High Volatility
+* **Analysis:** ตลาดตอบรับเชิงบวกอย่างรุนแรงกับข่าวชนะคดีประวัติศาสตร์
 
 #### 7. Technical Analysis
-* **Trend:** Breakout ชันสูง
-* **Risk:** เกิดจังหวะพักตัวแรง (Sharp Pullback) ได้ตลอดเวลา
+* **Trend:** Breakout กราฟชันสูงในกรอบ $8 - $14
+* **Risk:** อาจเกิดแรงเทขายทำกำไรชั่วคราวจากนักลงทุนที่เข้ามาดักเก็งกำไรระยะสั้น
 
 #### 8. Risk Analysis
-* **ระดับความเสี่ยง:** สูงมาก (Extreme Risk)
-* **Risk Factors:** No-Catalyst Pump Risk, High Volatility
+* **ระดับความเสี่ยง:** สูง (High Risk จากความผันผวนของราคา)
+* **Risk Factors:** Collection & Appeal Risk ในกระบวนการชั้นศาล, High Price Volatility ($8-$14)
 
 ---
 
