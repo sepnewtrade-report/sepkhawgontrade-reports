@@ -15,7 +15,7 @@
     *   **INTC:** มีการเทรด Options กว่า 820,000 สัญญา โดยพบมี volume สูงใน Call พ.ย. 2026 (ประมาณ 10,000 สัญญาในบาง strike) ชี้ให้เห็นถึงการวางหมากในระยะกลาง (Mid-term Positioning) [ที่มา: Futunn]
     *   **MPWR:** พบความผิดปกติของ Implied Volatility (IV) ใน Call Options เดือนกันยายน สะท้อนความคาดหวังว่าราคาอาจมีการกระชากตัวแรง [ที่มา: Simply Wall St]
 *   **กลุ่ม Big Tech (Earnings Plays):**
-    *   **MSFT & META:** มีการเข้าซื้อ Straddles จำนวนมากก่อนประกาศงบการเงิน สะท้อนการทำ Volatility Play โดยตลาดคาดการณ์การแกว่งตัว (Implied Move) หลังงบออกที่ระดับประมาณ ~7% และ ~8.5% ตามลำดับ [ที่มา: Market Rebellion]
+    *   **MSFT & META:** มีการเข้าซื้อ Straddles จำนวนมากก่อนประกาศงบการเงิน สะท้อนการทำ Volatility Play โดยตลาดคาดการณ์การแกว่งตัว (Implied Move) หลังงบออกที่ระดับประมาณ ~7% และ ~8.5% ตามลำดับ ซึ่งพฤติกรรมการดัน Implied Volatility ให้พุ่งสูงขึ้นของสถาบันนี้ สอดคล้องกับมุมมองเชิงกลยุทธ์ในรายงาน 🔗[Options Selection Screen](options_screen_analysis_2026_07_29.md) ที่แนะนำให้ใช้จังหวะนี้ทำ Short Put Spread เพื่อรับผลประโยชน์จาก IV Crush [ที่มา: Market Rebellion]
 
 ## 2. Dark Pool Activity & Block Trades
 สำหรับความเคลื่อนไหวนอกกระดาน (Off-Exchange) และ Block Trades ขนาดใหญ่ในรอบ 24 ชั่วโมงที่ผ่านมา สถาบันหลักมุ่งเน้นไปที่การลดความเสี่ยง (De-risking) หรือปรับพอร์ตก่อนการแถลงของ FED [ที่มา: Moby Tick Trading, CME Group, ข้อมูลตลาด ณ วันที่ 29 ก.ค. 2026]
