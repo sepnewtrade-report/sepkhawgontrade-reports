@@ -35,7 +35,7 @@
 * **📊 Relative Volume:** สูง
 * **📊 Market Cap:** Large-Cap
 * **🔥 ข่าวหรือ Catalyst:** Q2 Earnings Beat & Raised Guidance
-* **📌 ข่าวเกิดขึ้นเมื่อใด:** เช้า 30 ก.ค. 2026 [ที่มา: simplywall.st]
+* **📌 ข่าวเกิดขึ้นเมื่อใด:** ก่อนตลาดเปิด 29 ก.ค. 2026 [ที่มา: simplywall.st]
 * **📌 รายละเอียดข่าว:** ผลประกอบการไตรมาส 2 ออกมาดีกว่าคาด พร้อมทั้งปรับเพิ่มคาดการณ์รายได้และอัตรากำไร (Guidance Revision) ตลอดปี 2026
 * **📌 ผลกระทบต่อบริษัท:** แสดงให้เห็นถึงอุปสงค์ที่แข็งแกร่งในทุกกลุ่มผลิตภัณฑ์
 * **📌 ผลกระทบต่ออุตสาหกรรม:** เชิงบวกต่อกลุ่ม Consumer Electronics และ Wearables
@@ -71,7 +71,7 @@
 * **📊 Relative Volume:** สูงกว่าค่าเฉลี่ย
 * **📊 Market Cap:** Large-Cap
 * **🔥 ข่าวหรือ Catalyst:** Q2 Beat & Analyst Upgrade
-* **📌 ข่าวเกิดขึ้นเมื่อใด:** เช้า 30 ก.ค. 2026 [ที่มา: simplywall.st]
+* **📌 ข่าวเกิดขึ้นเมื่อใด:** ก่อนตลาดเปิด 29 ก.ค. 2026 [ที่มา: simplywall.st]
 * **📌 รายละเอียดข่าว:** ประกาศงบ Q2 แข็งแกร่ง และโบรกเกอร์ BTIG ได้ปรับเพิ่มราคาเป้าหมาย (Price Target) 
 * **📌 ผลกระทบต่อบริษัท:** เพิ่มความเชื่อมั่นในอัตราการเติบโตหลังแยกตัวออกจาก GE
 * **📌 ผลกระทบต่ออุตสาหกรรม:** เชิงบวกต่อกลุ่ม Medical Devices
@@ -89,7 +89,7 @@
 * **📊 Relative Volume:** สูง
 * **📊 Market Cap:** Large-Cap
 * **🔥 ข่าวหรือ Catalyst:** Mixed Q2 Report & Revenue Miss
-* **📌 ข่าวเกิดขึ้นเมื่อใด:** เช้า 30 ก.ค. 2026 [ที่มา: simplywall.st]
+* **📌 ข่าวเกิดขึ้นเมื่อใด:** ก่อนตลาดเปิด 29 ก.ค. 2026 [ที่มา: simplywall.st]
 * **📌 รายละเอียดข่าว:** รายงานงบ Q2 ผสมผสาน โดยรายได้พลาดเป้าหมาย ประกอบกับ Evercore ISI หั่นราคาเป้าหมายลง
 * **📌 ผลกระทบต่อบริษัท:** ลดทอนความคาดหวังว่าการลงทุน Data Center และ AI จะหนุนบริษัทได้ตามเป้า
 * **📌 ผลกระทบต่ออุตสาหกรรม:** สร้างความกังวลต่อผู้เล่นกลุ่ม Data Center Infrastructure ตัวอื่นๆ
@@ -109,7 +109,7 @@
 * **🔥 ข่าวหรือ Catalyst:** Preliminary Revenue Beat & Squeeze
 * **📌 ข่าวเกิดขึ้นเมื่อใด:** ล่าสุด 27-30 ก.ค. 2026 [ที่มา: benzinga.com, investing.com]
 * **📌 รายละเอียดข่าว:** หุ้นทะยานแรงหลังประกาศยอดขายล่วงหน้า Q2 โต 14% YoY นำโดยการใช้งานระบบ Aquadex ทำให้เกิดแรงเก็งกำไรในหุ้น
-* **📌 ผลกระทบต่อบริษัท:** ราคาหุ้นถูกดึงกลับหลังเพิ่งมีการพูดถึง Reverse Split เมื่อเดือนก่อน
+* **📌 ผลกระทบต่อบริษัท:** ราคาหุ้นถูกดึงกลับหลังเพิ่งมีการพูดถึง Reverse Split เมื่อเดือน ก.ค. 2025
 * **📌 ผลกระทบต่ออุตสาหกรรม:** ไม่มี (เป็นหุ้นรายตัว)
 * **📌 ตลาดตอบสนองอย่างไร:** เกิดลักษณะ Low-Float Squeeze
 * **Catalyst Type:** Earnings, Other (Squeeze)
@@ -135,25 +135,7 @@
 * **Smart Money Signal:** ไม่พบสัญญาณสถาบัน (การเทรดปั่นราคาล้วนๆ)
 * **ความเสี่ยง:** Dilution Risk, Profit Taking Risk ระดับวิกฤต
 
-### 8. 📌 GlucoTrack, Inc. (GCTK)
-* **Company Name:** GlucoTrack, Inc.
-* **ธุรกิจหลัก:** อุปกรณ์และเทคโนโลยีทางการแพทย์
-* **📈 % การเปลี่ยนแปลง:** +52.91%
-* **📊 Pre-Market Volume:** 24.19 ล้านหุ้น [ที่มา: tradingview.com]
-* **📊 Relative Volume:** สูง
-* **📊 Market Cap:** Micro-Cap
-* **🔥 ข่าวหรือ Catalyst:** Clinical Update & Debt Restructuring
-* **📌 ข่าวเกิดขึ้นเมื่อใด:** เย็น 29 ก.ค. / เช้า 30 ก.ค. 2026 [ที่มา: businesswire.com]
-* **📌 รายละเอียดข่าว:** บริษัทย่อยผลักดันโครงการ LT-100 (ใช้ยารักษาข้อเข่าเสื่อม) สู่กลยุทธ์ฉีดเข็มเดียว แทนที่แบบเดิม และประกาศปรับโครงสร้างหนี้ 9 แสนดอลลาร์เป็นหุ้น
-* **📌 ผลกระทบต่อบริษัท:** ลดภาระหนี้และมีพัฒนาการทางคลินิก
-* **📌 ผลกระทบต่ออุตสาหกรรม:** ไม่มี
-* **📌 ตลาดตอบสนองอย่างไร:** เข้าซื้อเก็งกำไรหนาแน่น
-* **Catalyst Type:** FDA/Clinical, Acquisition/Restructuring
-* **Momentum Assessment:** 🟢 Strong Bullish
-* **Smart Money Signal:** ข่าวปรับโครงสร้างหนี้เอื้อต่อผู้ลงทุนระดับสถาบัน/รายใหญ่
-* **ความเสี่ยง:** Dilution Risk 
-
-### 9. 📌 Cognizant Technology Solutions (CTSH)
+### 8. 📌 Cognizant Technology Solutions (CTSH)
 * **Company Name:** Cognizant Technology Solutions
 * **ธุรกิจหลัก:** ให้คำปรึกษาด้านไอทีและซอฟต์แวร์
 * **📈 % การเปลี่ยนแปลง:** +11.25%
@@ -161,7 +143,7 @@
 * **📊 Relative Volume:** สูง
 * **📊 Market Cap:** Large-Cap
 * **🔥 ข่าวหรือ Catalyst:** Q2 Report & Dividend Affirmed
-* **📌 ข่าวเกิดขึ้นเมื่อใด:** เช้า 30 ก.ค. 2026 [ที่มา: simplywall.st]
+* **📌 ข่าวเกิดขึ้นเมื่อใด:** ก่อนตลาดเปิด 29 ก.ค. 2026 [ที่มา: simplywall.st]
 * **📌 รายละเอียดข่าว:** ประกาศงบไตรมาส 2 ผ่านเกณฑ์และยืนยันการจ่ายปันผลต่อเนื่อง
 * **📌 ผลกระทบต่อบริษัท:** เสริมสร้างความมั่นใจให้นักลงทุน
 * **📌 ผลกระทบต่ออุตสาหกรรม:** บวกต่อกลุ่ม IT Services
@@ -171,7 +153,7 @@
 * **Smart Money Signal:** สถาบันถือครองต่อเนื่อง
 * **ความเสี่ยง:** Profit Taking Risk
 
-### 10. 📌 Inovio Pharmaceuticals, Inc. (INO)
+### 9. 📌 Inovio Pharmaceuticals, Inc. (INO)
 * **Company Name:** Inovio Pharmaceuticals, Inc.
 * **ธุรกิจหลัก:** เทคโนโลยีวัคซีนดีเอ็นเอและยา
 * **📈 % การเปลี่ยนแปลง:** -23.07%
@@ -208,12 +190,11 @@
 * **VRT** (ผิดหวังงบและโดนลดเป้าหมาย เสี่ยงโดนเทขายต่อ)
 
 ### 📊 Sector ที่โดดเด่นที่สุด
-**Technology & Cloud (นำโดย MSFT)** สลับกับแรงเทขายในกลุ่ม Digital Ads (META) ขณะเดียวกันกลุ่ม **Medical/HealthCare** ได้รับแรงหนุนจากปัจจัยเฉพาะตัวเช่นงบของ GEHC และพัฒนาการด้านยาของ GCTK
+**Technology & Cloud (นำโดย MSFT)** สลับกับแรงเทขายในกลุ่ม Digital Ads (META) ขณะเดียวกันกลุ่ม **Medical/HealthCare** ได้รับแรงหนุนจากปัจจัยเฉพาะตัวเช่นงบของ GEHC
 
 ---
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 * [thestreet.com] "Market Movers: Microsoft, Meta Platforms" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
 * [simplywall.st] "Pre-Market Update: GRMN, GEHC, VRT, CTSH" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
-* [benzinga.com, tradingview.com] "Nuwellis, T3 Defense, GlucoTrack: Small-cap pre-market momentum" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
-* [businesswire.com] "GlucoTrack Updates on LT-100 Program" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
+* [benzinga.com, tradingview.com] "Nuwellis, T3 Defense: Small-cap pre-market momentum" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
 * [prnewswire.com] "Inovio Pharmaceuticals Prices $20 Million Public Offering" (ข้อมูลตลาด ณ วันที่ 30 ก.ค. 2026)
