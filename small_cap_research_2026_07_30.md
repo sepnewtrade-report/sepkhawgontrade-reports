@@ -163,7 +163,7 @@
 * **ราคาปัจจุบัน:** ~$1.25 [ที่มา: Robinhood]
 
 **2. Price Action Analysis**
-* **Trend Structure:** ราคาประคองตัวในกรอบสะสม (Consolidation) และเริ่มมีการตอบสนองเชิงบวก
+* **Trend Structure:** ราคาประคองตัวในกรอบสะสม (Consolidation) แต่ล่าสุดราคาปรับตัวลดลง -5.24% แม้จะมีข่าวดี (ปฏิกิริยา Sell the news)
 * สภาพคล่องดีกว่าตัวอื่นๆ ในลิสต์นี้ (Liquidity Quality อยู่ในเกณฑ์ที่เทรดได้)
 
 **3. Volume Analysis**
@@ -206,7 +206,7 @@
 * **Top Risk (Avoid):** SXTC (โดนถล่มขายจาก $9M Direct Offering)
 
 ### 🏆 จัดอันดับของวัน:
-* 🥇 **หุ้นเด่นที่สุดของวัน (Top Watchlist):** **OCGN** (Catalyst จาก FDA RMAT แข็งแกร่ง กราฟมีโอกาสไปต่อ)
+* 🥇 **หุ้นเด่นที่สุดของวัน (Top Watchlist):** **OCGN** (แม้จะมีแรงขายระยะสั้นแบบ Sell the news แต่ Catalyst จาก FDA RMAT เป็นบวกต่อพื้นฐานระยะยาว)
 * ⚠️ **หุ้นเสี่ยงที่สุดของวัน (Toxic Trap):** **SXTC** (Dilution หนัก พื้นฐานพังทลาย)
 * 👀 **หุ้นที่ตลาดจับตาที่สุดของวัน (Retail Focus):** **NUWE** (Volume เดือดที่สุดใน Pre-market วันนี้)
 
