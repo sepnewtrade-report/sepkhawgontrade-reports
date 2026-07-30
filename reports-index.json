@@ -1,5 +1,55 @@
 [
   {
+    "title": "Performance Review & Post-Market Recap: 2026-07-30",
+    "filename": "bot_stats_2026_07_30.md",
+    "path": "bot_stats_2026_07_30.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-07-30",
+    "timestamp": 1785369631567.0454,
+    "size": 1910
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "test_venv/lib/python3.9/site-packages/markdown-3.9.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-30",
+    "timestamp": 1785369618252.5713,
+    "size": 1650
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "test_venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-30",
+    "timestamp": 1785369615496.8567,
+    "size": 1541
+  },
+  {
+    "title": "NCSA Open Source License",
+    "filename": "LICENSE.md",
+    "path": "test_venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-30",
+    "timestamp": 1785369614696.4812,
+    "size": 3511
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "test_venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-30",
+    "timestamp": 1785369614419.971,
+    "size": 1096
+  },
+  {
     "title": "\uddfa\uddf8 สรุปจบ ทันโลกหุ้น: ตลาดหุ้นสหรัฐร่วงหนัก พิษเงินเฟ้อ-ดอกเบี้ย และสงครามเดือด!",
     "filename": "market_summary_2026_07_30.md",
     "path": "market_summary_2026_07_30.md",
