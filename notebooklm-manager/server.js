@@ -1801,7 +1801,7 @@ app.post('/api/album/stop', (req, res) => {
   res.json({ success: true, message: 'ปิด Album แล้ว' });
 });
 
-app.listen(PORT, () => {
+const serverApp = app.listen(PORT, '127.0.0.1', () => {
   console.log(`=================================================`);
   console.log(` NotebookLM Manager Web App with Profile Switcher`);
   console.log(` URL: http://localhost:${PORT}`);

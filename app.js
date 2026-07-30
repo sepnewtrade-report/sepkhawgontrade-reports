@@ -56,6 +56,7 @@ const translations = {
         lblMemberTools: "เครื่องมือสมาชิก",
         lblNavPortfolio: "Portfolio หุ้น",
         lblNavBotTrade: "บอทเทรด & ผลงาน",
+        lblNavWebAlbum: "Album รายการผลิตคลิป",
         legendTitle: "คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน",
         legendDesc: "ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:",
         legendAccumText: "วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ",
@@ -160,6 +161,7 @@ const translations = {
         lblMemberTools: "Member Tools",
         lblNavPortfolio: "Stock Portfolio",
         lblNavBotTrade: "Bot Trade & Stats",
+        lblNavWebAlbum: "Video Production Album",
         legendTitle: "CMF (Whale Flow) Signal Reading Guide",
         legendDesc: "CMF (Chaikin Money Flow) measures the accumulated capital flow of large institutional investors (whales) over a 20-day period:",
         legendAccumText: "Whales actively accumulating shares",
@@ -310,6 +312,9 @@ function updateUILanguage() {
 
     const navBotTradeEl = document.getElementById('lbl-nav-bot-trade');
     if (navBotTradeEl) navBotTradeEl.textContent = t.lblNavBotTrade;
+
+    const navWebAlbumEl = document.getElementById('lbl-nav-web-album');
+    if (navWebAlbumEl) navWebAlbumEl.textContent = t.lblNavWebAlbum;
 
     const legendTitleEl = document.getElementById('lbl-legend-title');
     if (legendTitleEl) legendTitleEl.textContent = t.legendTitle;
@@ -641,6 +646,14 @@ function setupEventListeners() {
     if (navSr) {
         navSr.addEventListener('click', () => {
             window.location.hash = 'sr-calc';
+            closeMobileSidebar();
+        });
+    }
+
+    const navAlbum = document.getElementById('nav-web-album');
+    if (navAlbum) {
+        navAlbum.addEventListener('click', () => {
+            window.open('album.html', '_blank');
             closeMobileSidebar();
         });
     }

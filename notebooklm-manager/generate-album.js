@@ -223,7 +223,15 @@ const server = http.createServer((req, res) => {
   res.end('Not Found');
 });
 
-server.listen(PORT, () => {
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Port ${PORT} is already in use.`);
+  } else {
+    console.error(`❌ Server error: ${err.message}`);
+  }
+});
+
+server.listen(PORT, '127.0.0.1', () => {
   resetShutdownTimer();
   console.log('');
   console.log('━'.repeat(55));
