@@ -1,5 +1,25 @@
 [
   {
+    "title": "Options Selection Screen: Quantitative Premium Valuation (31 July 2026)",
+    "filename": "options_screen_analysis_2026_07_31.md",
+    "path": "options_screen_analysis_2026_07_31.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-31",
+    "timestamp": 1785465026819.6633,
+    "size": 8315
+  },
+  {
+    "title": "Whale Flow วาฬขยับ ตลาดสะเทือน: สถาบันไล่ซื้อ AMZN หลังงบโตแกร่ง & เก็บสะสม NVDA เงียบๆ (31 July 2026)",
+    "filename": "whale_flow_analysis_2026_07_31.md",
+    "path": "whale_flow_analysis_2026_07_31.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-07-31",
+    "timestamp": 1785465026670.669,
+    "size": 6031
+  },
+  {
     "title": "Performance Review & Post-Market Recap: 2026-07-31",
     "filename": "bot_stats_2026_07_31.md",
     "path": "bot_stats_2026_07_31.md",
