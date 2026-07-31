@@ -193,41 +193,50 @@ def update_text_block_prices(content, ticker, live_data):
     change_str = f"+{change_pct:.2f}%" if change_pct >= 0 else f"{change_pct:.2f}%"
     modified = False
     
-    # 1. Update prices in patterns like:
-    # **ราคาปัจจุบัน:** $333.02 or **ราคาปัจจุบัน (อ้างอิง...):** $333.02
-    price_patterns = [
-        (r'(\*\*ราคาปัจจุบัน\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
-        (r'(\*\*ราคาล่าสุด\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
-        (r'(\*\*ราคา\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
-    ]
-    for pat, repl in price_patterns:
-        new_content, count = re.subn(pat, repl, content)
-        if count > 0:
-            content = new_content
-            modified = True
-            
-    # 2. Update percentage change lines in patterns like:
-    # **% การเปลี่ยนแปลงราคา:** +4.00% or **% การเปลี่ยนแปลงใน Pre-Market:** -2.5%
-    # Check if we have standard % change lines
-    has_pct_pattern = r'(\*\*%\s*การเปลี่ยนแปลง(?:ใน\s*Pre-Market|ราคา)?:\*\*\s*)([+-]?\d+(?:\.\d+)?%?)'
-    new_content, count = re.subn(has_pct_pattern, r'\g<1>' + change_str, content)
-    if count > 0:
-        content = new_content
-        modified = True
-    else:
-        # If it's a descriptive text format like "**% การเปลี่ยนแปลงราคา:** ปรับตัวลดลงรุนแรง..."
-        # We append the percentage before the description if not already present
-        desc_pattern = r'(\*\*%\s*การเปลี่ยนแปลง(?:ใน\s*Pre-Market|ราคา)?:\*\*\s*)([^\n\[]+)'
-        match = re.search(desc_pattern, content)
-        if match:
-            text_val = match.group(2).strip()
-            # If the description doesn't already start with a percentage format
-            if not re.match(r'^[+-]?\d+(?:\.\d+)?%', text_val):
-                new_content = re.sub(desc_pattern, r'\g<1>' + change_str + f" ({text_val})", content)
-                content = new_content
-                modified = True
+    lines = content.split('\n')
+    ticker_pattern = re.compile(rf'\b{ticker}\b')
+    
+    i = 0
+    while i < len(lines):
+        if ticker_pattern.search(lines[i]):
+            scan_end = min(len(lines), i + 10)
+            for j in range(i + 1, scan_end):
+                sub_line = lines[j]
+                if sub_line.startswith('###') or sub_line.startswith('##'):
+                    if not ticker_pattern.search(sub_line):
+                        break
                 
-    return content, modified
+                price_patterns = [
+                    (r'^(\s*-\s*\*\*ราคาปัจจุบัน\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
+                    (r'^(\s*-\s*\*\*ราคาล่าสุด\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
+                    (r'^(\s*-\s*\*\*ราคา\s*(?:\(อ้างอิง[^)]*\))?:\*\*\s*\$?)\d+(?:\.\d+)?', r'\g<1>' + f"{price:.2f}"),
+                ]
+                
+                for pat, repl in price_patterns:
+                    new_line, count = re.subn(pat, repl, sub_line)
+                    if count > 0:
+                        lines[j] = new_line
+                        modified = True
+                        break
+                
+                pct_pattern = r'^(\s*-\s*\*\*%\s*การเปลี่ยนแปลง(?:ใน\s*Pre-Market|ราคา)?:\*\*\s*)([+-]?\d+(?:\.\d+)?%?)'
+                new_line, count = re.subn(pct_pattern, r'\g<1>' + change_str, lines[j])
+                if count > 0:
+                    lines[j] = new_line
+                    modified = True
+                else:
+                    desc_pattern = r'^(\s*-\s*\*\*%\s*การเปลี่ยนแปลง(?:ใน\s*Pre-Market|ราคา)?:\*\*\s*)([^\n\[]+)'
+                    match = re.search(desc_pattern, lines[j])
+                    if match:
+                        text_val = match.group(2).strip()
+                        if not re.match(r'^[+-]?\d+(?:\.\d+)?%', text_val):
+                            lines[j] = re.sub(desc_pattern, r'\g<1>' + change_str + f" ({text_val})", lines[j])
+                            modified = True
+        i += 1
+        
+    if modified:
+        return "\n".join(lines), True
+    return content, False
 
 def enforce_sourcing(content):
     """
