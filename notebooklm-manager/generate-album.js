@@ -20,19 +20,14 @@ const PORT = 3457;
 const TEMPLATES_FILE = path.join(__dirname, 'templates.json');
 const WORKFLOWS_FILE = path.join(__dirname, 'workflows_history.json');
 
-// Auto-shutdown: เข้าโหมดพักหลังไม่มีคนใช้ 5 นาที
-const AUTO_SHUTDOWN_MS = 5 * 60 * 1000;
+// Auto-shutdown: ปิดการใช้งาน Auto-sleep เพื่อให้เปิดใช้งานตลอดเวลา
+const AUTO_SHUTDOWN_MS = 0;
 let shutdownTimer = null;
 let isPaused = false;
 
 function resetShutdownTimer() {
   if (shutdownTimer) clearTimeout(shutdownTimer);
-  if (isPaused) return; // ไม่ตั้ง timer ถ้าพักอยู่แล้ว
-  shutdownTimer = setTimeout(() => {
-    console.log('\n⏱️  ไม่มีการใช้งาน 5 นาที — เข้าโหมดพักอัตโนมัติ');
-    isPaused = true;
-    console.log('💤 Server เข้าสู่โหมดพัก (กดเปิดได้จากหน้าเว็บ)');
-  }, AUTO_SHUTDOWN_MS);
+  isPaused = false; // ป้องกันการเข้าโหมดพักอัตโนมัติ
 }
 
 function getTimeRemaining() {
@@ -494,10 +489,14 @@ function getCSS() {
     /* Sleep Overlay */
     #sleep-overlay { position:fixed; inset:0; z-index:50; background:rgba(6,6,12,.85); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .4s ease; pointer-events:none; }
     #sleep-overlay.show { opacity:1; pointer-events:auto; }
-    .sleep-content { text-align:center; animation:sleepFloat 3s ease-in-out infinite; }
+    .sleep-content { text-align:center; animation:sleepFloat 3s ease-in-out infinite; background:linear-gradient(180deg,rgba(22,22,40,.95),rgba(12,12,24,.95)); border:1px solid rgba(99,102,241,.3); border-radius:var(--radius-lg); padding:36px 44px; box-shadow:0 20px 60px rgba(0,0,0,.6); max-width:440px; width:90%; }
     .sleep-icon { font-size:4rem; margin-bottom:16px; }
     .sleep-content h2 { font-family:var(--font-heading); font-size:1.8rem; color:var(--text-primary); margin-bottom:8px; }
-    .sleep-content p { color:var(--text-secondary); font-size:1rem; max-width:400px; }
+    .sleep-content p { color:var(--text-secondary); font-size:.95rem; margin-bottom:24px; }
+    .sleep-actions { display:flex; flex-direction:column; align-items:center; gap:16px; }
+    .btn-wake { width:100%; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 28px; background:linear-gradient(135deg,#10b981,#059669); border:none; border-radius:999px; color:#fff; font-size:1rem; font-weight:600; font-family:var(--font-heading); cursor:pointer; transition:all .25s ease; box-shadow:0 6px 20px rgba(16,185,129,.35); }
+    .btn-wake:hover { transform:scale(1.03); box-shadow:0 8px 28px rgba(16,185,129,.5); }
+    .sleep-toggle-row { display:flex; align-items:center; gap:12px; font-size:.9rem; color:var(--text-secondary); }
     @keyframes sleepFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
     /* Toast */
@@ -875,8 +874,18 @@ function getJS() {
           overlay.id = 'sleep-overlay';
           overlay.innerHTML = '<div class="sleep-content">' +
             '<div class="sleep-icon">💤</div>' +
-            '<h2>โหมดพัก</h2>' +
-            '<p>Server กำลังพัก — กดปุ่ม toggle ด้านบนเพื่อเปิดใช้งานอีกครั้ง</p>' +
+            '<h2>โหมดพัก (Sleep Mode)</h2>' +
+            '<p>Server อยู่ในโหมดพักชั่วคราว กดเปิดใช้งานได้ทันทีที่นี่</p>' +
+            '<div class="sleep-actions">' +
+              '<button class="btn-wake" onclick="resumeServer()">⚡ เปิดใช้งานระบบ (Wake Up)</button>' +
+              '<div class="sleep-toggle-row">' +
+                '<span>สวิตช์เปิด/ปิด:</span>' +
+                '<label class="toggle-switch">' +
+                  '<input type="checkbox" id="sleep-overlay-toggle" onchange="if(this.checked)resumeServer()">' +
+                  '<span class="toggle-slider"></span>' +
+                '</label>' +
+              '</div>' +
+            '</div>' +
           '</div>';
           document.body.appendChild(overlay);
         }

@@ -1,5 +1,45 @@
 [
   {
+    "title": "\uddfa\uddf8 US Pre-Market Analysis (31 July 2026)",
+    "filename": "us_pre_market_analysis_2026_07_31.md",
+    "path": "us_pre_market_analysis_2026_07_31.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-07-31",
+    "timestamp": 1785494418083.3564,
+    "size": 15296
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-31",
+    "timestamp": 1785494400256.5112,
+    "size": 1541
+  },
+  {
+    "title": "NCSA Open Source License",
+    "filename": "LICENSE.md",
+    "path": "venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-31",
+    "timestamp": 1785494399448.49,
+    "size": 3511
+  },
+  {
+    "title": "LICENSE.md",
+    "filename": "LICENSE.md",
+    "path": "venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-07-31",
+    "timestamp": 1785494399168.5874,
+    "size": 1096
+  },
+  {
     "title": "Options Selection Screen: Quantitative Premium Valuation (31 July 2026)",
     "filename": "options_screen_analysis_2026_07_31.md",
     "path": "options_screen_analysis_2026_07_31.md",
