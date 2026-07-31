@@ -199,10 +199,11 @@ def update_text_block_prices(content, ticker, live_data):
     i = 0
     while i < len(lines):
         if ticker_pattern.search(lines[i]):
-            scan_end = min(len(lines), i + 10)
-            for j in range(i + 1, scan_end):
+            # Scan forward until the next heading or horizontal rule
+            for j in range(i + 1, len(lines)):
                 sub_line = lines[j]
-                if sub_line.startswith('###') or sub_line.startswith('##'):
+                # Break if we hit a new section, another heading, or a horizontal rule
+                if sub_line.startswith('### ') or sub_line.startswith('## ') or sub_line.startswith('---'):
                     if not ticker_pattern.search(sub_line):
                         break
                 
