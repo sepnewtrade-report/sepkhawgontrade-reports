@@ -15,7 +15,7 @@
 📈 **% การเปลี่ยนแปลงใน Pre-Market:** +15.51% [ที่มา: Investing.com ข้อมูลตลาด ณ วันที่ 31 กรกฎาคม 2026]
 📊 **Pre-Market Volume:** สูงผิดปกติ (High Volume)
 📊 **Relative Volume:** สูงกว่าค่าเฉลี่ย
-📊 **Market Cap:** ~$3.3 Trillion [ที่มา: MarketBeat]
+📊 **Market Cap:** ~$3.35 Trillion [ที่มา: Yahoo Finance ข้อมูล ณ วันที่ 31 กรกฎาคม 2026]
 🔥 **ข่าวหรือ Catalyst:** Earnings Surprise & Positive Cloud Forecast
 📌 **ข่าวเกิดขึ้นเมื่อใด:** คืนวันที่ 30 กรกฎาคม 2026
 📌 **รายละเอียดข่าว:** Microsoft มีการปรับตัวขึ้นอย่างโดดเด่นหลังจากเปิดเผยคาดการณ์แนวโน้มธุรกิจ Cloud (Azure) ในแง่บวก ซึ่งเอาชนะความกังวลของตลาดเกี่ยวกับการลงทุนด้านโครงสร้างพื้นฐาน AI ที่สูงขึ้น [ที่มา: Investing.com]
@@ -36,7 +36,7 @@
 📈 **% การเปลี่ยนแปลงใน Pre-Market:** -67.30% [ที่มา: Benzinga ข้อมูลตลาด ณ วันที่ 31 กรกฎาคม 2026]
 📊 **Pre-Market Volume:** สูงผิดปกติ (Panic Selling)
 📊 **Relative Volume:** สูงกว่าค่าเฉลี่ยมาก
-📊 **Market Cap:** Micro Cap (มูลค่าลดลงอย่างรุนแรง)
+📊 **Market Cap:** ~$158.87 Million (Micro Cap - มูลค่าลดลงอย่างรุนแรง) [ที่มา: Yahoo Finance]
 🔥 **ข่าวหรือ Catalyst:** FDA / Clinical Trial Failure
 📌 **ข่าวเกิดขึ้นเมื่อใด:** 31 กรกฎาคม 2026
 📌 **รายละเอียดข่าว:** บริษัทประกาศความล้มเหลวของการทดลองทางคลินิกระยะที่ 3 (Phase 3 XPORT-EC-042 trial) ซึ่งไม่สามารถบรรลุเป้าหมายหลักด้าน Progression-Free Survival (PFS) ได้ตามที่คาดหวัง [ที่มา: Benzinga]
@@ -57,7 +57,7 @@
 📈 **% การเปลี่ยนแปลงใน Pre-Market:** -1.41% [ที่มา: Global Banking and Finance Review ข้อมูลตลาด ณ วันที่ 31 กรกฎาคม 2026]
 📊 **Pre-Market Volume:** สูง
 📊 **Relative Volume:** สูงกว่าค่าเฉลี่ย
-📊 **Market Cap:** ~$3.3 Trillion [ที่มา: MarketBeat]
+📊 **Market Cap:** ~$4.90 Trillion [ที่มา: Yahoo Finance ข้อมูล ณ วันที่ 31 กรกฎาคม 2026]
 🔥 **ข่าวหรือ Catalyst:** Macro / Guidance (Supply Chain Issues)
 📌 **ข่าวเกิดขึ้นเมื่อใด:** 31 กรกฎาคม 2026
 📌 **รายละเอียดข่าว:** ตลาดมีความกังวลเกี่ยวกับปัญหาคอขวดในห่วงโซ่อุปทาน (Supply Constraints) ซึ่งอาจส่งผลกระทบต่อความสามารถในการทำกำไรและการส่งมอบสินค้า ทำให้เกิดความกังวลในการเติบโตระยะสั้น [ที่มา: Global Banking and Finance Review]
@@ -78,7 +78,7 @@
 📈 **% การเปลี่ยนแปลงใน Pre-Market:** +135.45% [ที่มา: Benzinga ข้อมูลตลาด ณ วันที่ 31 กรกฎาคม 2026]
 📊 **Pre-Market Volume:** สูง
 📊 **Relative Volume:** สูงกว่าค่าเฉลี่ย
-📊 **Market Cap:** Micro Cap
+📊 **Market Cap:** ~$410 Thousand (Micro Cap / Nano Cap) [ที่มา: Yahoo Finance]
 🔥 **ข่าวหรือ Catalyst:** Profit Taking / News Fading
 📌 **ข่าวเกิดขึ้นเมื่อใด:** 31 กรกฎาคม 2026
 📌 **รายละเอียดข่าว:** ราคาหุ้นมีความผันผวนสูงจากการตอบรับข่าวดีเรื่องการตีพิมพ์ผลวิจัยในวารสารการแพทย์ และความสำเร็จในเชิงพาณิชย์ของผลิตภัณฑ์ [ที่มา: Benzinga, Investing.com]
@@ -99,7 +99,7 @@
 📈 **% การเปลี่ยนแปลงใน Pre-Market:** +0.03% [ที่มา: Benzinga ข้อมูลตลาด ณ วันที่ 31 กรกฎาคม 2026]
 📊 **Pre-Market Volume:** ปานกลางถึงสูง
 📊 **Relative Volume:** สูงกว่าค่าเฉลี่ย
-📊 **Market Cap:** Mid Cap
+📊 **Market Cap:** ~$34.27 Billion (Large Cap) [ที่มา: Yahoo Finance]
 🔥 **ข่าวหรือ Catalyst:** Earnings Reaction
 📌 **ข่าวเกิดขึ้นเมื่อใด:** คืนวันที่ 30 กรกฎาคม 2026
 📌 **รายละเอียดข่าว:** ถึงแม้ว่า Reddit จะรายงานผลประกอบการไตรมาส 2 ทั้งรายได้และกำไรที่สูงกว่าคาดการณ์ แต่ราคาหุ้นยังคงเผชิญความท้าทายในการรักษาระดับราคาจากความกังวลเรื่องแนวโน้มการเติบโตในอนาคต [ที่มา: Benzinga]
