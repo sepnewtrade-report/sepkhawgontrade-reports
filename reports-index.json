@@ -1,5 +1,35 @@
 [
   {
+    "title": "สรุปภาพรวมตลาดหุ้นสหรัฐฯ และเศรษฐกิจโลก ย้อนหลังรายสัปดาห์ (Weekly Market Recap - ภาษาไทย)",
+    "filename": "global_market_recap_thai_2026_08_01.md",
+    "path": "global_market_recap_thai_2026_08_01.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-08-01",
+    "timestamp": 1785591604792.9268,
+    "size": 5463
+  },
+  {
+    "title": "สรุปภาพรวมตลาดหุ้นสหรัฐฯ ประจำวันที่ 1 สิงหาคม 2026",
+    "filename": "market_summary_2026_08_01.md",
+    "path": "market_summary_2026_08_01.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-01",
+    "timestamp": 1785591602146.4983,
+    "size": 8611
+  },
+  {
+    "title": "มองทิศทางไปข้างหน้า (Forward-Looking): วิเคราะห์แนวโน้มตลาดหุ้นสหรัฐฯ สัปดาห์แรกของเดือนสิงหาคม 2026",
+    "filename": "whats_next_2026_08_01.md",
+    "path": "whats_next_2026_08_01.md",
+    "category": "What's Next for Market",
+    "categoryThai": "What's Next for Market",
+    "date": "2026-08-01",
+    "timestamp": 1785591595395.0928,
+    "size": 5528
+  },
+  {
     "title": "\udcc5 Economic Calendar: สัปดาห์วันที่ 3 - 9 สิงหาคม 2026 (เสพข่าวก่อนเทรด หุ้นอเมริกา)",
     "filename": "weekly_economic_calendar_2026_08_01.md",
     "path": "weekly_economic_calendar_2026_08_01.md",
@@ -80,26 +110,6 @@
     "size": 3339
   },
   {
-    "title": "มองทิศทางไปข้างหน้า (Forward-Looking): วิเคราะห์แนวโน้มตลาดหุ้นสหรัฐฯ สัปดาห์แรกของเดือนสิงหาคม 2026",
-    "filename": "whats_next_2026_08_01.md",
-    "path": "whats_next_2026_08_01.md",
-    "category": "What's Next for Market",
-    "categoryThai": "What's Next for Market",
-    "date": "2026-08-01",
-    "timestamp": 1785550696282.0703,
-    "size": 5303
-  },
-  {
-    "title": "สรุปภาพรวมตลาดหุ้นสหรัฐฯ และเศรษฐกิจโลก ย้อนหลังรายสัปดาห์ (Weekly Market Recap - ภาษาไทย)",
-    "filename": "global_market_recap_thai_2026_08_01.md",
-    "path": "global_market_recap_thai_2026_08_01.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-08-01",
-    "timestamp": 1785550688007.588,
-    "size": 5435
-  },
-  {
     "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-01",
     "filename": "options_screen_analysis_2026_08_01.md",
     "path": "options_screen_analysis_2026_08_01.md",
@@ -138,16 +148,6 @@
     "date": "2026-08-01",
     "timestamp": 1785550536246.3164,
     "size": 8009
-  },
-  {
-    "title": "สรุปภาพรวมตลาดหุ้นสหรัฐฯ ประจำวันที่ 1 สิงหาคม 2026",
-    "filename": "market_summary_2026_08_01.md",
-    "path": "market_summary_2026_08_01.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-01",
-    "timestamp": 1785550534444.0364,
-    "size": 8630
   },
   {
     "title": "Small Cap Stock Research - เรดาร์หุ้นเล็กศักยภาพสูง ประจำวันที่ 1 สิงหาคม 2026",
