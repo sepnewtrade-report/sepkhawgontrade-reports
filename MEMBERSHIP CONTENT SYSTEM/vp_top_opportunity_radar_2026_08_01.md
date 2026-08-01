@@ -21,7 +21,7 @@
 **Sector:** Consumer Cyclicals / Cloud Infrastructure | **Market Cap Style:** Mega Cap
 
 *   **ราคาปิดล่าสุด:** $271.58 (+15.32%)
-*   **กรอบ 52-Week Range:** $165.50 - $275.00
+*   **กรอบ 52-Week Range:** $196.00 - $278.56
 *   **จุดเข้าซื้อ (Buy Zone):** $260.00 - $265.00 (รอจังหวะย่อตัวชั่วคราว)
 *   **ราคาเป้าหมาย (Target Price):** $295.00 (เป้าหมายระยะ 1-3 สัปดาห์)
 *   **จุดตัดขาดทุน (Stop Loss):** $250.00
@@ -39,7 +39,7 @@
 **Sector:** Semiconductors / Mobile & IoT | **Market Cap Style:** Large Cap
 
 *   **ราคาปิดล่าสุด:** $147.61 (-2.63%)
-*   **กรอบ 52-Week Range:** $135.20 - $230.00
+*   **กรอบ 52-Week Range:** $121.99 - $259.92
 *   **จุดเข้าซื้อ (Buy Zone):** $142.00 - $145.00
 *   **ราคาเป้าหมาย (Target Price):** $165.00 / $175.00
 *   **จุดตัดขาดทุน (Stop Loss):** $138.00
@@ -55,7 +55,7 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 *   **Bloomberg & Refinitiv Eikon:** ข้อมูลการประเมินราคาเป้าหมายสถาบัน (Consensus Price Target) (https://www.bloomberg.com)
-*   **Yahoo Finance & TradingView:** สถิติตัวชี้วัดเทคนิคและราคาปิด ณ วันที่ 31 กรกฎาคม 2026 (https://finance.yahoo.com)
+*   **Yahoo Finance & TradingView:** สถิติตัวชี้วัดเทคนิค สถิติ 52-Week High/Low และราคาปิด ณ วันที่ 31 กรกฎาคม 2026 (https://finance.yahoo.com)
 
 ---
 *Disclaimer: รายงานนี้จัดทำขึ้นสำหรับสมาชิก VP เพื่อประกอบการพิจารณาลงทุนเท่านั้น ผู้ลงทุนควรตรวจสอบความเสี่ยงก่อนทำการซื้อขาย*
