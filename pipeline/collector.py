@@ -17,7 +17,12 @@ def fetch_single_ticker(ticker):
         if hist.empty:
             return ticker, None
         
-        info = t.info
+        try:
+            info = t.info or {}
+            if not isinstance(info, dict):
+                info = {}
+        except Exception:
+            info = {}
         # Get important fundamentals for scanning
         current_price = info.get("currentPrice") or info.get("regularMarketPrice") or hist['Close'].iloc[-1]
         fundamentals = {
