@@ -238,6 +238,7 @@ class OptionsScreenStrategy(BaseStrategy):
         
         results = {
             "ticker": ticker,
+            "price": current_price,
             "hv_30": hv_30,
             "short_term_candidates": [],
             "medium_term_candidates": []
@@ -282,6 +283,7 @@ class OptionsScreenStrategy(BaseStrategy):
                     if 0.40 <= abs_delta <= 0.60:
                         candidates.append({
                             "ticker": ticker,
+                            "underlying_price": current_price,
                             "type": "CALL" if o_type == "calls" else "PUT",
                             "strike": strike,
                             "expiration": exp_date,

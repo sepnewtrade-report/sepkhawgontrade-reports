@@ -182,8 +182,8 @@ def update_tables(content, ticker, live_data):
                         col_val = cols[idx]
                         col_header = header_cols[idx] if idx < len(header_cols) else ""
                         
-                        # Skip RSI, Short Interest, Days, Volume, P/E, Score, Market Cap, etc.
-                        skip_keywords = ["rsi", "short", "day", "days", "cover", "vol", "volume", "cap", "score", "p/e", "pe", "target", "sl", "tp", "stop"]
+                        # Skip RSI, Short Interest, Days, Volume, P/E, Score, Market Cap, IV, Prob of ITM, etc.
+                        skip_keywords = ["rsi", "short", "day", "days", "cover", "vol", "volume", "cap", "score", "p/e", "pe", "target", "sl", "tp", "stop", "iv", "implied", "prob", "itm", "decay", "theta", "delta", "greeks"]
                         if any(kw in col_header for kw in skip_keywords):
                             continue
                             
@@ -196,7 +196,7 @@ def update_tables(content, ticker, live_data):
                                 
                         # Change % column match
                         change_keywords = ["เปลี่ยนแปลง", "change", "%"]
-                        if any(kw in col_header for kw in change_keywords) and not any(kw in col_header for kw in ["short", "float", "interest", "rsi"]):
+                        if any(kw in col_header for kw in change_keywords) and not any(kw in col_header for kw in ["short", "float", "interest", "rsi", "iv", "implied", "prob", "itm"]):
                             if re.match(r'^[+-]?\d+(?:\.\d+)?%?$', col_val) or col_val.endswith("%"):
                                 cols[idx] = change_str
                                 row_modified = True

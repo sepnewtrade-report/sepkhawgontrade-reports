@@ -178,19 +178,18 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             # Get typical DTE to estimate move
             avg_dte = sum(c["dte"] for c in cands) / len(cands) if cands else 30
             
-            # Fetch technical data if available (fallback to default)
-            price = 100.0
-            rsi = 50.0
-            # Let's try to get actual prices from candidates or default values
-            if cands:
-                # We can assume a representative price or use our known verified price
-                # For 2026-07-17: PLTR price is ~134.44, LLY is ~1169.17
-                if ticker == "PLTR":
-                    price = 134.44
-                    rsi = 62.4
-                elif ticker == "LLY":
-                    price = 1169.17
-                    rsi = 54.8
+            # Fetch technical data & actual underlying price
+            price = sig.get("price")
+            if not price and cands:
+                price = cands[0].get("underlying_price")
+            if not price:
+                try:
+                    import yfinance as yf
+                    t_info = yf.Ticker(ticker).info or {}
+                    price = t_info.get("currentPrice") or t_info.get("regularMarketPrice") or 100.0
+                except Exception:
+                    price = 100.0
+            rsi = sig.get("rsi", 50.0)
             
             # Math for Expected Move (1-SD) = Price * IV * sqrt(DTE / 365)
             t_year = avg_dte / 365.0
