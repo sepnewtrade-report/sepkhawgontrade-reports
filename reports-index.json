@@ -1,5 +1,15 @@
 [
   {
+    "title": "Daily Market Summary | สรุปภาพรวมตลาดหุ้นประจำวันที่ 03 สิงหาคม 2026",
+    "filename": "market_summary_2026_08_03.md",
+    "path": "market_summary_2026_08_03.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-03",
+    "timestamp": 1785757476082.6184,
+    "size": 4998
+  },
+  {
     "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-03",
     "filename": "options_screen_analysis_2026_08_03.md",
     "path": "options_screen_analysis_2026_08_03.md",
@@ -38,16 +48,6 @@
     "date": "2026-08-03",
     "timestamp": 1785757228922.292,
     "size": 5348
-  },
-  {
-    "title": "Daily Market Summary | สรุปภาพรวมตลาดหุ้นประจำวันที่ 03 สิงหาคม 2026",
-    "filename": "market_summary_2026_08_03.md",
-    "path": "market_summary_2026_08_03.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-03",
-    "timestamp": 1785757228580.0996,
-    "size": 3670
   },
   {
     "title": "Small Cap Radar Analysis | เจาะลึกหุ้นเล็กศักยภาพสูงประจำวันที่ 03 สิงหาคม 2026",
