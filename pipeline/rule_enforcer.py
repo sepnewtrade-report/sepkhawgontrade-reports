@@ -19,7 +19,8 @@ EXCLUDED_TICKERS = {
     'ETF', 'USA', 'PE', 'EPS', 'CEO', 'IPO', 'AI', 'NYSE', 'AMEX', 
     'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY',
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
-    'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M'
+    'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
+    'AIP', 'FAA'
 }
 
 def extract_tickers(content):
@@ -370,15 +371,18 @@ def main():
     parser.add_argument("--file", help="Absolute path to a specific markdown file to enforce rules on")
     parser.add_argument("--date", help="Target date YYYY-MM-DD to check rules and overlaps for all reports of the day")
     parser.add_argument("--check-only", action="store_true", help="Perform checks only without modifying files")
+    parser.add_argument("--skip-ai-qc", action="store_true", help="Skip Groq AI Quality Audit step")
     args = parser.parse_args()
     
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     auto_correct = not args.check_only
     
     has_violations = False
+    processed_files = []
     
     if args.file:
         modified, errors = process_file(args.file, auto_correct=auto_correct)
+        processed_files.append(args.file)
         if modified and not auto_correct:
             has_violations = True
             print("Rule Violations:")
@@ -409,6 +413,7 @@ def main():
             file_path = os.path.join(root_dir, pattern)
             if os.path.exists(file_path):
                 modified, errors = process_file(file_path, auto_correct=auto_correct)
+                processed_files.append(file_path)
                 if modified and not auto_correct:
                     has_violations = True
                     print(f"Violations in {pattern}:")
@@ -423,6 +428,16 @@ def main():
     else:
         print("Please provide either --file or --date parameter.")
         sys.exit(1)
+
+    # Automatic Groq AI QC Audit step (Runs by default unless --skip-ai-qc is passed)
+    if not args.skip_ai_qc and processed_files:
+        try:
+            from groq_validator import audit_report_with_ai
+            print("\n🤖 Initiating Automatic Groq AI Quality Control Audit on verified reports...")
+            for fpath in processed_files:
+                audit_report_with_ai(fpath)
+        except Exception as e:
+            print(f"⚠️ Could not execute AI QC audit: {e}")
         
     if has_violations:
         sys.exit(1)

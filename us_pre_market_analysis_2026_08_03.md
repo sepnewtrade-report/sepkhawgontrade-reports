@@ -62,12 +62,12 @@
 
 | Ticker | Company | ราคาปิดรอบล่าสุด (31 ก.ค.) | Change (%) | Trend / Setup |
 |--------|---------|---------------------------|------------|---------------|
- | **MSFT** | Microsoft Corp. | $464.72 | +3.02% | Bullish Breakout | 
- | **AMD** | Advanced Micro Devices | $476.15 | -1.90% | Pullback / Neutral | 
- | **TSLA** | Tesla Inc. | $311.21 | +0.76% | Range Bound | 
- | **META** | Meta Platforms | $556.71 | +3.28% | Strong Bullish | 
- | **AVGO** | Broadcom Inc. | $389.28 | +0.37% | Accumulation | 
- | **ATKR** | Atkore Inc. | $72.96 | +2.76% | Industrial Momentum | 
+ | **MSFT** | Microsoft Corp. | $484.35 | +4.22% | Bullish Breakout | 
+ | **AMD** | Advanced Micro Devices | $476.15 | +1.05% | Pullback / Neutral | 
+ | **TSLA** | Tesla Inc. | $311.21 | +4.04% | Range Bound | 
+ | **META** | Meta Platforms | $556.71 | +6.68% | Strong Bullish | 
+ | **AVGO** | Broadcom Inc. | $389.28 | -0.20% | Accumulation | 
+ | **ATKR** | Atkore Inc. | $72.96 | +28.15% | Industrial Momentum | 
 
 ---
 

@@ -1,13 +1,43 @@
 [
   {
+    "title": "Daily Market Summary | สรุปภาพรวมตลาดหุ้นประจำวันที่ 04 สิงหาคม 2026",
+    "filename": "market_summary_2026_08_04.md",
+    "path": "market_summary_2026_08_04.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-04",
+    "timestamp": 1785798250416.3801,
+    "size": 14981
+  },
+  {
     "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-03",
     "filename": "options_screen_analysis_2026_08_03.md",
     "path": "options_screen_analysis_2026_08_03.md",
     "category": "Other Reports",
     "categoryThai": "รายงานทั่วไป",
     "date": "2026-08-03",
-    "timestamp": 1785759056389.539,
-    "size": 433287
+    "timestamp": 1785770635512.3994,
+    "size": 433267
+  },
+  {
+    "title": "US Viral Stock Analysis | วิเคราะห์หุ้นร้อนแรงประจำวันที่ 03 สิงหาคม 2026",
+    "filename": "us_viral_stock_analysis_2026_08_03.md",
+    "path": "us_viral_stock_analysis_2026_08_03.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-03",
+    "timestamp": 1785770632851.5566,
+    "size": 9070
+  },
+  {
+    "title": "\udf05 US Pre-Market Analysis | เจาะลึกหุ้นพุ่งแรงก่อนตลาดเปิดประจำวันที่ 03 สิงหาคม 2026",
+    "filename": "us_pre_market_analysis_2026_08_03.md",
+    "path": "us_pre_market_analysis_2026_08_03.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-03",
+    "timestamp": 1785770631965.3755,
+    "size": 7420
   },
   {
     "title": "\udc0b Whale Flow Analysis | สแกนพฤติกรรมสถาบันและวาฬใหญ่ประจำวันที่ 03 สิงหาคม 2026",
@@ -28,26 +58,6 @@
     "date": "2026-08-03",
     "timestamp": 1785757981904.5273,
     "size": 7830
-  },
-  {
-    "title": "US Viral Stock Analysis | วิเคราะห์หุ้นร้อนแรงประจำวันที่ 03 สิงหาคม 2026",
-    "filename": "us_viral_stock_analysis_2026_08_03.md",
-    "path": "us_viral_stock_analysis_2026_08_03.md",
-    "category": "Hot Stock วันนี้",
-    "categoryThai": "Hot Stock วันนี้",
-    "date": "2026-08-03",
-    "timestamp": 1785757735939.1658,
-    "size": 9071
-  },
-  {
-    "title": "\udf05 US Pre-Market Analysis | เจาะลึกหุ้นพุ่งแรงก่อนตลาดเปิดประจำวันที่ 03 สิงหาคม 2026",
-    "filename": "us_pre_market_analysis_2026_08_03.md",
-    "path": "us_pre_market_analysis_2026_08_03.md",
-    "category": "Pre-Market Analysis",
-    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
-    "date": "2026-08-03",
-    "timestamp": 1785757735014.0452,
-    "size": 7419
   },
   {
     "title": "Daily Market Summary | สรุปภาพรวมตลาดหุ้นประจำวันที่ 03 สิงหาคม 2026",
