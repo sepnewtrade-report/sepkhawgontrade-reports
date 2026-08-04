@@ -20,7 +20,7 @@ EXCLUDED_TICKERS = {
     'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY',
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
     'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
-    'AIP', 'FAA'
+    'AIP', 'FAA', 'GPU'
 }
 
 def extract_tickers(content):
