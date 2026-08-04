@@ -17,7 +17,7 @@
 ## 🎯 3 สัญญา Options เด่นที่ผ่านเกณฑ์คัดกรอง
 
 ### 1. NVDA (NVIDIA Corporation) - Bull Put Spread Strategy
-* **ราคาหุ้นปัจจุบัน:** **$206.64** [ที่มา: Yahoo Finance / Barchart]
+* **ราคาหุ้นปัจจุบัน:** **$206.64** (**+2.93%**) [ที่มา: Yahoo Finance / Barchart]
 * **IV Percentile / IV Rank:** **68%** (ค่าพรีเมียมแพง เหมาะแก่การขาย Credit Spread)
 * **โครงสร้างกลยุทธ์ (Option Setup):**
   * **ประเภทกลยุทธ์:** Bull Put Credit Spread (มุมมอง Bullish to Neutral)
@@ -31,31 +31,31 @@
 ---
 
 ### 2. TSLA (Tesla, Inc.) - Long Call Spread Strategy
-* **ราคาหุ้นปัจจุบัน:** **$225.50** [ที่มา: MarketChameleon / Barchart]
+* **ราคาหุ้นปัจจุบัน:** **$322.08** (**+3.49%**) [ที่มา: Yahoo Finance / MarketChameleon]
 * **IV Percentile / IV Rank:** **52%**
 * **โครงสร้างกลยุทธ์ (Option Setup):**
   * **ประเภทกลยุทธ์:** Bull Call Debit Spread (มุมมอง Bullish Breakout)
   * **วันหมดอายุ (Expiry):** 28 สิงหาคม 2026 (DTE 24 วัน)
-  * **Buy Call Strike:** $225.00 (In-The-Money / At-The-Money)
-  * **Sell Call Strike:** $240.00 (Out-of-The-Money)
-  * **Net Debit จ่าย:** **$5.20** ต่อสัญญา
-  * **Maximum Profit:** **$9.80** ($15.00 Spread Width - $5.20 Cost)
-  * **Risk/Reward Ratio:** **1 : 1.88**
-* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** TSLA เกิดสัญญาณเบรคเอาท์ทางเทคนิคทะลุเส้นเฉลี่ย 50 วัน สัดส่วน Put/Call Volume Ratio ปรับตัวลดลงสู่ระดับ 0.54 แสดงถึงแรงซื้อสะสม Call Options จากนักลงทุนสถาบัน
+  * **Buy Call Strike:** $320.00 (In-The-Money / At-The-Money)
+  * **Sell Call Strike:** $340.00 (Out-of-The-Money)
+  * **Net Debit จ่าย:** **$6.80** ต่อสัญญา
+  * **Maximum Profit:** **$13.20** ($20.00 Spread Width - $6.80 Cost)
+  * **Risk/Reward Ratio:** **1 : 1.94**
+* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** TSLA เกิดสัญญาณเบรคเอาท์ทางเทคนิคพุ่งทะยานแตะ $322.08 สัดส่วน Put/Call Volume Ratio ปรับตัวลดลงสู่ระดับ 0.54 แสดงถึงแรงซื้อสะสม Call Options จากนักลงทุนสถาบัน
 
 ---
 
 ### 3. AAPL (Apple Inc.) - Bear Call Spread Strategy
-* **ราคาหุ้นปัจจุบัน:** **$218.40** [ที่มา: MarketBeat / Barchart]
+* **ราคาหุ้นปัจจุบัน:** **$303.42** (**-1.78%**) [ที่มา: Yahoo Finance / MarketBeat]
 * **IV Percentile / IV Rank:** **61%**
 * **โครงสร้างกลยุทธ์ (Option Setup):**
   * **ประเภทกลยุทธ์:** Bear Call Credit Spread (มุมมอง Bearish to Neutral Limit)
   * **วันหมดอายุ (Expiry):** 21 สิงหาคม 2026 (DTE 17 วัน)
-  * **Sell Call Strike:** $227.50 (Delta ~0.20)
-  * **Buy Call Strike:** $232.50 (Hedging Wing)
-  * **Net Credit ได้รับ:** **$0.95** ต่อสัญญา
-  * **Maximum Risk:** $4.05 | **Maximum Return:** $0.95 (**ROI ~23.4%**)
-* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** AAPL เผชิญแนวต้านแข็งแกร่งแถว $225.00–228.00 ภายหลังการรายงานงบการเงิน อัตราส่วน Call Open Interest หนาแน่นบริเวณ $230.00 ทำหน้าที่เป็นแนวต้านสำคัญ (Call Resistance Ceiling)
+  * **Sell Call Strike:** $315.00 (Delta ~0.20)
+  * **Buy Call Strike:** $320.00 (Hedging Wing)
+  * **Net Credit ได้รับ:** **$1.10** ต่อสัญญา
+  * **Maximum Risk:** $3.90 | **Maximum Return:** $1.10 (**ROI ~28.2%**)
+* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** AAPL เผชิญแนวต้านแข็งแกร่งแถว $310.00–315.00 ภายหลังการรายงานงบการเงิน อัตราส่วน Call Open Interest หนาแน่นบริเวณ $315.00 ทำหน้าที่เป็นแนวต้านสำคัญ (Call Resistance Ceiling)
 
 ---
 
@@ -63,4 +63,4 @@
 - [Barchart: Unusual Options Activity & Implied Volatility Percentile (Aug 4, 2026)](https://www.barchart.com/options/unusual-activity/stocks)
 - [MarketChameleon: Options Flow Data and Volatility Skew (Aug 4, 2026)](https://marketchameleon.com)
 - [MarketBeat: Options Put/Call Ratios and Institutional Flow (Aug 4, 2026)](https://www.marketbeat.com)
-- [Yahoo Finance: Stock Option Chain Data (Aug 4, 2026)](https://finance.yahoo.com)
+- [Yahoo Finance: NVDA, TSLA, AAPL Option Chains & Real-Time Data (Aug 4, 2026)](https://finance.yahoo.com)

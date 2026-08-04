@@ -16,39 +16,36 @@
 
 ## 🔬 เจาะลึก 4 หุ้น Small-Cap Momentum สูงประจำวัน
 
-### 1. RAIN (Rain Enhancement Technologies Holdco, Inc.)
-* **Market Cap:** **~$45 ล้านดอลลาร์** (Micro-Cap) [ที่มา: StockAnalysis]
-* **ราคาปัจจุบัน:** **$4.15** (**+117.0%**)
-* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** RAIN เป็นผู้ให้บริการเทคโนโลยีเพิ่มประสิทธิภาพน้ำฝนและการบริหารจัดการสภาพอากาศ สัญญาให้บริการใหม่กับภาครัฐช่วยเพิ่มรายได้ประจำ (Recurring Revenue) อย่างเห็นได้ชัด อย่างไรก็ตาม ด้วย Market Cap ที่เล็กและ Float ต่ำ ทำให้อาจเผชิญความผันผวนสูง
-* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $3.20 | เป้าหมายทำกำไร $5.50
+### 1. SERV (Serve Robotics Inc.)
+* **ราคาล่าสุด / การเปลี่ยนแปลง:** **$5.65** (**+18.20%**) [ที่มา: Yahoo Finance / MarketWatch]
+* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** SERV พุ่งทะยานแรงถึง +18.20% สู่ระดับ $5.65 ขานรับข่าวการขยายกองทัพหุ่นยนต์ส่งของอัตโนมัติ (Autonomous Delivery Robots) ร่วมกับ Uber Eats ในหลายเมืองใหญ่ เพิ่มโอกาสสร้างรายได้ประจำสะสมอย่างมีนัยสำคัญ
+* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $4.80 | เป้าหมายทำกำไร $7.20
 
 ---
 
-### 2. ENSC (Ensysce Biosciences, Inc.)
-* **Market Cap:** **~$28 ล้านดอลลาร์** (Micro-Cap Bio) [ที่มา: Benzinga]
-* **ราคาปัจจุบัน:** **$1.65** (**+80.0%**)
-* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** บริษัทไบโอเทคผู้พัฒนาแพลตฟอร์มยารักษาอาการปวดที่มีระบบป้องกันการเสพติดและการเสพยาเกินขนาด การได้รับสถานะ Fast Track จาก FDA ช่วยลดระยะเวลาและขั้นตอนการอนุมัติยา นำไปสู่การประเมินมูลค่าหุ้นใหม่ (Re-rating)
-* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $1.30 | เป้าหมายทำกำไร $2.30
+### 2. RGTI (Rigetti Computing, Inc.)
+* **ราคาล่าสุด / การเปลี่ยนแปลง:** **$16.02** (**+7.16%**) [ที่มา: Yahoo Finance / Benzinga]
+* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** ปรับตัวขึ้น +7.16% สู่ระดับ $16.02 ขานรับความก้าวหน้าในการทดสอบชิปประมวลผลควอนตัม (Quantum Processor) รุ่นใหม่ที่มีค่า Error Rate ต่ำลง ดึงดูดแรงซื้อจากนักลงทุนสายเทคโนโลยีและนวัตกรรม
+* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $14.20 | เป้าหมายทำกำไร $19.50
 
 ---
 
-### 3. ELPW (Elong Power Holding Limited)
-* **Market Cap:** **~$65 ล้านดอลลาร์** (Small-Cap Clean Tech) [ที่มา: Yahoo Finance]
-* **ราคาปัจจุบัน:** **$2.85** (**+47.0%**)
-* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** ผู้ผลิตระบบแบตเตอรี่และโซลูชันกักเก็บพลังงานสำหรับรถยนต์ไฟฟ้าและอุตสาหกรรม คำสั่งซื้อใหม่ในยุโรปและเอเชียดันยอดขายไตรมาสล่าสุดเติบโตพุ่งสูงขึ้น 
-* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $2.30 | เป้าหมายทำกำไร $3.80
+### 3. ASTS (AST SpaceMobile, Inc.)
+* **ราคาล่าสุด / การเปลี่ยนแปลง:** **$63.52** (**+7.70%**) [ที่มา: Yahoo Finance / StockAnalysis]
+* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** ทะยานขึ้น +7.70% สู่ $63.52 จากความก้าวหน้าในการเตรียมปล่อยดาวเทียมดาวเทียมวงโคจรต่ำ BlueBird เพื่อให้บริการสัญญาณโทรศัพท์มือถือตรงสู่ดาวเทียม (Direct-to-Cell) ร่วมกับค่ายมือถือยักษ์ใหญ่
+* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $56.00 | เป้าหมายทำกำไร $75.00
 
 ---
 
-### 4. AMRC (Ameresco, Inc.)
-* **Market Cap:** **~$1.8 พันล้านดอลลาร์** (Small/Mid-Cap Energy Infrastructure) [ที่มา: Benzinga]
-* **ราคาปัจจุบัน:** **$38.40** (**+30.0%**)
-* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** ผู้นำด้านการรับเหมาและพัฒนาโครงการพลังงานหมุนเวียน ยอดสัญญารอรับรู้รายได้ (Backlog) พุ่งแกร่งเกินคาด สะท้อนการเติบโตที่ยั่งยืนและงบการเงินที่แข็งแกร่งที่สุดในบรรดาหุ้นขนาดเล็กของวันนี้
-* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $34.00 | เป้าหมายทำกำไร $45.00
+### 4. LUNR (Intuitive Machines, Inc.)
+* **ราคาล่าสุด / การเปลี่ยนแปลง:** **$13.10** (**+6.16%**) [ที่มา: Yahoo Finance / MarketWatch]
+* **บทวิเคราะห์ปัจจัยพื้นฐานและตัวเร่ง (Fundamental & Catalyst):** เพิ่มขึ้น +6.16% สู่ $13.10 ขานรับความคืบหน้าในสัญญาพัฒนาอุปกรณ์สำรวจดวงจันทร์ร่วมกับองค์กร NASA และกำหนดการปล่อยยานสำรวจพาณิชย์รอบถัดไป
+* **แผนบริหารความเสี่ยง:** ตั้งจุด Stop Loss ที่ $11.50 | เป้าหมายทำกำไร $16.00
 
 ---
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- [StockAnalysis: Small Cap Stock Financial Data and Market Caps (Aug 4, 2026)](https://stockanalysis.com)
-- [Benzinga: Ensysce Biosciences and Ameresco Small Cap News Updates (Aug 4, 2026)](https://www.benzinga.com)
-- [Yahoo Finance: Micro-Cap Stock Screening and Volume Surges (Aug 4, 2026)](https://finance.yahoo.com)
+- [Yahoo Finance: SERV, RGTI, ASTS, LUNR Real-Time Quotes & Market Caps (Aug 4, 2026)](https://finance.yahoo.com/quote/SERV)
+- [MarketWatch: Serve Robotics and Intuitive Machines News Updates (Aug 4, 2026)](https://www.marketwatch.com)
+- [Benzinga: Rigetti Computing (RGTI) Quantum Progress Report (Aug 4, 2026)](https://www.benzinga.com)
+- [StockAnalysis: AST SpaceMobile (ASTS) Satellite Deployment Analysis (Aug 4, 2026)](https://stockanalysis.com)
