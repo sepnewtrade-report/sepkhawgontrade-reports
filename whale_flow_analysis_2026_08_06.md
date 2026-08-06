@@ -38,12 +38,12 @@
 
 ---
 
-### 2. PLTR (Palantir Technologies Inc.) - ราคาล่าสุด $158.00 (-2.86%)
+### 2. PLTR (Palantir Technologies Inc.) - ราคาล่าสุด $160.35 (-1.40%)
 * **ปริมาณเงินทุนสุทธิ (Net Institutional Flow):** **+$310 ล้านดอลลาร์** (ฝั่งซื้อสุทธิหลังเปิดเผยงบ) [ที่มา: MarketBeat]
 * **โครงสร้างรายละเอียดเงินทุน (Flow Breakdown):**
-  * รายการ Dark Pool Block Print: **$210 ล้านดอลลาร์** (ราคา $156.50–158.50)
+  * รายการ Dark Pool Block Print: **$210 ล้านดอลลาร์** (ช่วงราคา $160.00–162.00)
   * รายการ Call Options Sweeps Strike $165: **$100 ล้านดอลลาร์**
-* **วิเคราะห์พฤติกรรมวาฬและกลยุทธ์ออปชั่น:** แรงขายทำกำไรของรายย่อยถูกดูดซับโดยสถาบันขนาดใหญ่ที่เข้าตั้งรับผ่าน Dark Pool บริเวณ $156–158 สอดคล้องกับกลยุทธ์ **Bull Put Spread** (Sell Put Strike $150) ในรายงาน 🔗 [Options Selection Screen](options_screen_analysis_2026_08_06.md)
+* **วิเคราะห์พฤติกรรมวาฬและกลยุทธ์ออปชั่น:** แรงขายทำกำไรของรายย่อยถูกดูดซับโดยสถาบันขนาดใหญ่ที่เข้าตั้งรับผ่าน Dark Pool บริเวณ $160.00–162.00 สอดคล้องกับกลยุทธ์ **Bull Put Spread** (Sell Put Strike $150) ในรายงาน 🔗 [Options Selection Screen](options_screen_analysis_2026_08_06.md)
 
 ---
 
