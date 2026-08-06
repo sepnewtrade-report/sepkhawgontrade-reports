@@ -16,28 +16,13 @@
 
 ## 📊 สรุปสภาวะความผันผวนของตลาด (Market Volatility Context)
 
-ดัชนีความผันผวน CBOE Volatility Index (VIX) เคลื่อนไหวทรงตัวในระดับ 15.45 จุด ค่าความผันผวนแฝง (Implied Volatility - IV) ในกลุ่มหุ้นชิป AI และแพลตฟอร์มฟินเทคอยู่ในระดับผันผวนปานกลางถึงสูง เอื้อต่อการวางกลยุทธ์การขาย Credit Spread เพื่อเก็บค่าพรีเมียม และกลยุทธ์ Bull Call Spread เพื่อเก็งกำไรตามโมเมนตัมขาขึ้นอย่างรัดกุม
+ดัชนีความผันผวน CBOE Volatility Index (VIX) เคลื่อนไหวทรงตัวในระดับ 15.45 จุด ค่าความผันผวนแฝง (Implied Volatility - IV) ในกลุ่มหุ้นชิป AI ยานยนต์ไฟฟ้า และแพลตฟอร์มฟินเทคอยู่ในระดับผันผวนปานกลางถึงสูง เอื้อต่อการวางกลยุทธ์การขาย Credit Spread เพื่อเก็บค่าพรีเมียม และกลยุทธ์ Bull Call Spread เพื่อเก็งกำไรตามโมเมนตัมขาขึ้นอย่างรัดกุม
 
 ---
 
-## 🎯 3 สัญญา Options เด่นที่ผ่านเกณฑ์คัดกรอง
+## 🎯 4 สัญญา Options เด่นที่ผ่านเกณฑ์คัดกรอง (ตรงตามพฤติกรรมเงินทุนวาฬสถาบัน)
 
-### 1. PLTR (Palantir Technologies Inc.) - Bull Put Spread Strategy
-* **ราคาหุ้นปัจจุบัน:** **$158.00** (**-2.86%**) [ที่มา: Yahoo Finance / Barchart]
-* **สถานะราคา:** พักตัวย่อลงเล็กน้อยสลับสร้างฐานบริเวณ $158.00 หลังการพุ่งขึ้นแรงเกือบ 30% จากงบการเงินไตรมาส 2 ที่แข็งแกร่ง
-* **IV Percentile / IV Rank:** **63%** (ค่าพรีเมียมอยู่ในระดับสูง เหมาะสำหรับการขาย Credit Spread)
-* **โครงสร้างกลยุทธ์ (Option Setup):**
-  * **ประเภทกลยุทธ์:** Bull Put Credit Spread (มุมมอง Bullish to Neutral)
-  * **วันหมดอายุ (Expiry):** 21 สิงหาคม 2026 (DTE 15 วัน)
-  * **Sell Put Strike:** $150.00 (Delta ~0.21)
-  * **Buy Put Strike:** $145.00 (Hedging Wing)
-  * **Net Credit ได้รับ (ประมาณการ):** **$1.12** ต่อสัญญา
-  * **Maximum Risk:** $3.88 | **Maximum Return:** $1.12 (**ROI ~28.8%** ต่อวงเงินประกัน)
-* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** PLTR มีแนวรับทางเทคนิคแข็งแกร่งที่ระดับ $150.00 สัดส่วน Open Interest ฝั่ง Put สะสมหนาแน่นบริเวณ $150 ช่วยทำหน้าที่เป็น Dealer Gamma Support
-
----
-
-### 2. NVDA (NVIDIA Corporation) - Bull Call Spread Strategy
+### 1. NVDA (NVIDIA Corporation) - Bull Call Spread Strategy
 * **ราคาหุ้นปัจจุบัน:** **$219.22** (**+3.43%**) [ที่มา: Yahoo Finance / MarketChameleon]
 * **สถานะราคา:** ราคาปรับตัวขึ้นแข็งแกร่งสู่ระดับ $219.22 หลัง SpaceX ประกาศเลือกใช้ชิป AI ของ Nvidia แบบ Exclusive
 * **IV Percentile / IV Rank:** **56%**
@@ -49,7 +34,22 @@
   * **Net Debit จ่าย (ประมาณการ):** **$5.25** ต่อสัญญา
   * **Maximum Profit:** **$9.75** ($15.00 Spread Width - $5.25 Cost)
   * **Risk/Reward Ratio:** **1 : 1.85**
-* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** NVDA มีโมเมนตัมแรงซื้อต่อเนื่องและได้รับอานิสงส์จากข่าวใหญ่พันธมิตรอวกาศ ปริมาณ Put/Call Ratio อยู่ในระดับต่ำ 0.42 สะท้อนความเชื่อมั่นฝั่งกระทิง
+* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** NVDA มีโมเมนตัมแรงซื้อต่อเนื่อง สอดคล้องกับยอดเงินทุนวาฬกวาดซื้อ Call Sweeps ปริมาณ Put/Call Ratio อยู่ในระดับต่ำ 0.42 สะท้อนความเชื่อมั่นฝั่งกระทิง
+
+---
+
+### 2. PLTR (Palantir Technologies Inc.) - Bull Put Spread Strategy
+* **ราคาหุ้นปัจจุบัน:** **$158.00** (**-2.86%**) [ที่มา: Yahoo Finance / Barchart]
+* **สถานะราคา:** พักตัวย่อลงเล็กน้อยสลับสร้างฐานบริเวณ $158.00 หลังการพุ่งขึ้นแรงเกือบ 30% จากงบการเงินไตรมาส 2 ที่แข็งแกร่ง
+* **IV Percentile / IV Rank:** **63%** (ค่าพรีเมียมอยู่ในระดับสูง เหมาะสำหรับการขาย Credit Spread)
+* **โครงสร้างกลยุทธ์ (Option Setup):**
+  * **ประเภทกลยุทธ์:** Bull Put Credit Spread (มุมมอง Bullish to Neutral)
+  * **วันหมดอายุ (Expiry):** 21 สิงหาคม 2026 (DTE 15 วัน)
+  * **Sell Put Strike:** $150.00 (Delta ~0.21)
+  * **Buy Put Strike:** $145.00 (Hedging Wing)
+  * **Net Credit ได้รับ (ประมาณการ):** **$1.12** ต่อสัญญา
+  * **Maximum Risk:** $3.88 | **Maximum Return:** $1.12 (**ROI ~28.8%** ต่อวงเงินประกัน)
+* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** PLTR มีแนวรับทางเทคนิคแข็งแกร่งที่ระดับ $150.00 สัดส่วน Open Interest ฝั่ง Put สะสมหนาแน่นบริเวณ $150 ช่วยทำหน้าที่เป็น Dealer Gamma Support
 
 ---
 
@@ -68,8 +68,24 @@
 
 ---
 
+### 4. TSLA (Tesla, Inc.) - Bull Call Spread Strategy
+* **ราคาหุ้นปัจจุบัน:** **$321.55** (**-1.77%**) [ที่มา: Yahoo Finance / TipRanks]
+* **สถานะราคา:** พักตัวในกรอบ $320.00 – $323.00 สอดคล้องกับพฤติกรรมวาฬสถาบันที่กวาดซื้อ Call Sweeps
+* **IV Percentile / IV Rank:** **58%**
+* **โครงสร้างกลยุทธ์ (Option Setup):**
+  * **ประเภทกลยุทธ์:** Bull Call Debit Spread (มุมมอง Bullish Momentum)
+  * **วันหมดอายุ (Expiry):** 28 สิงหาคม 2026 (DTE 22 วัน)
+  * **Buy Call Strike:** $315.00 (In-The-Money)
+  * **Sell Call Strike:** $335.00 (Out-of-The-Money Target)
+  * **Net Debit จ่าย (ประมาณการ):** **$7.10** ต่อสัญญา
+  * **Maximum Profit:** **$12.90** ($20.00 Spread Width - $7.10 Cost)
+  * **Risk/Reward Ratio:** **1 : 1.82**
+* **เหตุผลทางสถิติและการวิเคราะห์หุ้นแม่:** TSLA ได้รับแรงหนุนจากเงินทุนสถาบันกวาดซื้อ Call In-The-Money โดยมีกรอบต้านทานทางเทคนิคทดสอบถัดไปบริเวณ $335.00
+
+---
+
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Barchart: Unusual Options Activity & Implied Volatility Data (Aug 6, 2026)](https://www.barchart.com/options/unusual-activity/stocks)
-- [MarketChameleon: NVIDIA (NVDA) Options Sentiment & Skew (Aug 6, 2026)](https://marketchameleon.com)
+- [MarketChameleon: NVIDIA (NVDA) & Tesla (TSLA) Options Sentiment & Skew (Aug 6, 2026)](https://marketchameleon.com)
 - [MarketBeat: Palantir (PLTR) & Robinhood (HOOD) Options Open Interest (Aug 6, 2026)](https://www.marketbeat.com)
-- [Yahoo Finance: PLTR, NVDA, HOOD Real-Time Quotes & Option Chains (Aug 6, 2026)](https://finance.yahoo.com)
+- [Yahoo Finance: NVDA, PLTR, HOOD, TSLA Real-Time Quotes & Option Chains (Aug 6, 2026)](https://finance.yahoo.com)
