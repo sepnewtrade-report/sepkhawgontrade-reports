@@ -72,6 +72,11 @@ function parseDate(filename) {
   return null;
 }
 
+function sanitizeUTF8(str) {
+  if (!str) return "";
+  return str.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/g, '').trim();
+}
+
 function extractMetadata(filePath, relativePath) {
   const filename = path.basename(filePath);
   const stats = fs.statSync(filePath);
@@ -81,8 +86,9 @@ function extractMetadata(filePath, relativePath) {
   let title = filename;
   const headingMatch = content.match(/^#\s+(.+)$/m);
   if (headingMatch) {
-    title = headingMatch[1].replace(/[📊🌌🏆📈🚨📰🔥🔍💼💎👑]/g, '').trim(); // Strip emojis for cleaner indexing, but keep title
+    title = headingMatch[1].replace(/[📊🌌🏆📈🚨📰🔥🔍💼💎👑]/gu, '').trim(); // Strip emojis cleanly
   }
+  title = sanitizeUTF8(title);
 
   // Check if it is a script file by content keywords in the heading
   const titleLower = title.toLowerCase();
