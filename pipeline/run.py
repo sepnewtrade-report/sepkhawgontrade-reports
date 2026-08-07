@@ -302,7 +302,7 @@ def run_options(date_str):
 
 def main():
     parser = argparse.ArgumentParser(description="SepKhawGonTrade Automated Trading Pipeline")
-    parser.add_argument("--mode", required=True, choices=["1900", "0530", "dryrun", "options"], help="Pipeline run mode")
+    parser.add_argument("--mode", required=True, choices=["1900", "0530", "dryrun", "options", "gold_whale_daily", "gold_whale_weekly"], help="Pipeline run mode")
     parser.add_argument("--date", default=datetime.today().strftime("%Y-%m-%d"), help="Target run date (YYYY-MM-DD)")
     args = parser.parse_args()
     
@@ -314,6 +314,12 @@ def main():
         run_dryrun()
     elif args.mode == "options":
         run_options(args.date)
+    elif args.mode == "gold_whale_daily":
+        print(f"\n==================== STARTING GOLD WHALE DAILY PIPELINE [{args.date}] ====================")
+        print("Scheduled task mode: gold_whale_daily ready.")
+    elif args.mode == "gold_whale_weekly":
+        print(f"\n==================== STARTING GOLD WHALE WEEKLY PIPELINE [{args.date}] ====================")
+        print("Scheduled task mode: gold_whale_weekly ready.")
 
 if __name__ == "__main__":
     main()

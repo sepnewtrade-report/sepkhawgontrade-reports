@@ -20,7 +20,9 @@ const CATEGORY_MAP = {
   'short_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
   'whats_next': { name: "What's Next for Market", thai: "What's Next for Market" },
   'thai_stock': { name: 'Thai Stock Analysis', thai: 'เหลียวหลังมามองหุ้นไทย' },
-  'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' }
+  'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' },
+  'options_screen_analysis': { name: 'Options Selection Screen', thai: 'คัดกรองสัญญาณออปชั่น' },
+  'gold_whale_flow': { name: 'Gold Whale Flow', thai: 'วาฬทองคำ รายวัน' }
 };
 
 function getCategory(filename, title) {
