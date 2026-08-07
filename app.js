@@ -691,23 +691,25 @@ async function fetchReportsIndex() {
     
     try {
         let reportsData = null;
+
+        // Try GitHub Raw Live endpoint FIRST for 100% immediate CDN-bypassing real-time updates
         try {
-            const response = await fetch(`reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
-            if (response.ok) {
-                const data = await response.json();
-                if (data && Array.isArray(data) && data.length > 300) {
+            const rawRes = await fetch(`https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
+            if (rawRes.ok) {
+                const data = await rawRes.json();
+                if (data && Array.isArray(data) && data.length > 0) {
                     reportsData = data;
                 }
             }
         } catch (e) {
-            console.warn('Local reports-index fetch issue, trying live GitHub raw fallback:', e);
+            console.warn('GitHub raw fetch failed, trying local static index:', e);
         }
 
+        // Fallback to local index if raw GitHub is unreachable
         if (!reportsData) {
-            console.log('Fetching live index directly from GitHub raw repository...');
-            const fallbackRes = await fetch(`https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
-            if (fallbackRes.ok) {
-                reportsData = await fallbackRes.json();
+            const localRes = await fetch(`reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
+            if (localRes.ok) {
+                reportsData = await localRes.json();
             }
         }
 
@@ -1077,17 +1079,17 @@ async function renderReportContent(reportMeta) {
     try {
         let markdown = "";
         try {
-            const response = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`, { cache: 'no-store' });
-            if (response.ok) {
-                markdown = await response.text();
+            const rawUrl = `https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/${encodeURI(reportMeta.path)}?v=${Date.now()}`;
+            const rawRes = await fetch(rawUrl, { cache: 'no-store' });
+            if (rawRes.ok) {
+                markdown = await rawRes.text();
             }
         } catch (e) {}
 
         if (!markdown) {
-            const fallbackUrl = `https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/${encodeURI(reportMeta.path)}?v=${Date.now()}`;
-            const fallbackRes = await fetch(fallbackUrl, { cache: 'no-store' });
-            if (fallbackRes.ok) {
-                markdown = await fallbackRes.text();
+            const localRes = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`, { cache: 'no-store' });
+            if (localRes.ok) {
+                markdown = await localRes.text();
             }
         }
 
