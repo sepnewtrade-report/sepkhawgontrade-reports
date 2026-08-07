@@ -1,6 +1,8 @@
-# Disable Jekyll processing and exclude internal directories
-theme: null
-inc: false
+# Disable Jekyll rendering for plain HTML/JS static site
+safe: true
+lsi: false
+markdown: kramdown
+highlighter: rouge
 exclude:
   - venv/
   - pipeline/
@@ -8,3 +10,7 @@ exclude:
   - ".agents/"
   - ".gemini/"
   - ".git/"
+  - "*.py"
+  - "*.db"
+  - "*.log"
+  - "*.txt"
