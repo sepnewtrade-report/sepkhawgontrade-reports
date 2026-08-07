@@ -1,8 +1,15 @@
-# Disable Jekyll rendering for plain HTML/JS static site
+# Disable Jekyll layout template rendering for pure static files
+theme: null
 safe: true
-lsi: false
 markdown: kramdown
 highlighter: rouge
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: null
+
 exclude:
   - venv/
   - pipeline/
@@ -14,3 +21,4 @@ exclude:
   - "*.db"
   - "*.log"
   - "*.txt"
+  - "*.sh"
