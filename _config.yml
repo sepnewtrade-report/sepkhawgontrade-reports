@@ -1,14 +1,8 @@
-# Disable Jekyll layout template rendering for pure static files
+# Disable Liquid template rendering for raw static publishing
 theme: null
 safe: true
-markdown: kramdown
-highlighter: rouge
-
-defaults:
-  - scope:
-      path: ""
-    values:
-      layout: null
+render_with_liquid: false
+plugins: []
 
 exclude:
   - venv/
@@ -20,5 +14,4 @@ exclude:
   - "*.py"
   - "*.db"
   - "*.log"
-  - "*.txt"
   - "*.sh"
