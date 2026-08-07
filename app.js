@@ -690,10 +690,30 @@ async function fetchReportsIndex() {
     }
     
     try {
-        const response = await fetch(`reports-index.json?v=${Date.now()}`);
-        if (!response.ok) throw new Error('Failed to load reports database');
+        let reportsData = null;
+        try {
+            const response = await fetch(`reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
+            if (response.ok) {
+                const data = await response.json();
+                if (data && Array.isArray(data) && data.length > 300) {
+                    reportsData = data;
+                }
+            }
+        } catch (e) {
+            console.warn('Local reports-index fetch issue, trying live GitHub raw fallback:', e);
+        }
+
+        if (!reportsData) {
+            console.log('Fetching live index directly from GitHub raw repository...');
+            const fallbackRes = await fetch(`https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
+            if (fallbackRes.ok) {
+                reportsData = await fallbackRes.json();
+            }
+        }
+
+        if (!reportsData) throw new Error('Failed to load reports database');
         
-        appState.reports = await response.json();
+        appState.reports = reportsData;
         
         // Precompute which reports are the latest for each category
         const latestReports = {};
@@ -1055,10 +1075,23 @@ async function renderReportContent(reportMeta) {
 
     // Load and Compile Markdown file content
     try {
-        const response = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`);
-        if (!response.ok) throw new Error('File not found');
-        
-        const markdown = await response.text();
+        let markdown = "";
+        try {
+            const response = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`, { cache: 'no-store' });
+            if (response.ok) {
+                markdown = await response.text();
+            }
+        } catch (e) {}
+
+        if (!markdown) {
+            const fallbackUrl = `https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/${encodeURI(reportMeta.path)}?v=${Date.now()}`;
+            const fallbackRes = await fetch(fallbackUrl, { cache: 'no-store' });
+            if (fallbackRes.ok) {
+                markdown = await fallbackRes.text();
+            }
+        }
+
+        if (!markdown) throw new Error('File not found');
         
         // Store raw markdown in memory
         appState.rawMarkdown = markdown;
