@@ -1,0 +1,10 @@
+# Disable Jekyll processing and exclude internal directories
+theme: null
+inc: false
+exclude:
+  - venv/
+  - pipeline/
+  - scratch/
+  - ".agents/"
+  - ".gemini/"
+  - ".git/"
