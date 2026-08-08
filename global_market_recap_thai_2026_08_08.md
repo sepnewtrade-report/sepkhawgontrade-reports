@@ -32,4 +32,4 @@
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Yahoo Finance Market Data](https://finance.yahoo.com/)
 - [Investing.com Thailand](https://th.investing.com/)
-- [Bot Trade Internal Analytics](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)
+- [Bot Trade Internal Analytics](https://github.com/)

@@ -18,4 +18,9 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [TradingView Technical Radar](https://www.tradingview.com/)
-- [SepKhawGonTrade Quantitative Engine](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)
+- [SepKhawGonTrade Quantitative Engine Analytics](https://github.com/)
+
+---
+
+> [!WARNING]
+> **คำเตือนความเสี่ยง (Financial Disclaimer):** รายงานฉบับนี้จัดทำขึ้นเพื่อวัตถุประสงค์ในการให้ข้อมูลและการศึกษาวิเคราะห์ทางสถิติเท่านั้น ไม่ถือเป็นคำแนะนำทางการเงิน การลงทุน หรือคำชี้ชวนในการซื้อขายหลักทรัพย์ การลงทุนมีความเสี่ยง ผู้ลงทุนควรศึกษาข้อมูลก่อนตัดสินใจลงทุน

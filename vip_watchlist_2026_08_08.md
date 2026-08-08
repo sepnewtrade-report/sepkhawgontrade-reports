@@ -19,4 +19,10 @@
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Yahoo Finance Quantitative Screener](https://finance.yahoo.com/)
-- [SepKhawGonTrade Internal VIP Database](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)
+- [TradingView Market Data](https://www.tradingview.com/)
+- [SepKhawGonTrade Internal VIP Database Analytics](https://github.com/)
+
+---
+
+> [!WARNING]
+> **คำเตือนความเสี่ยง (Financial Disclaimer):** รายงานฉบับนี้จัดทำขึ้นเพื่อวัตถุประสงค์ในการให้ข้อมูลและการศึกษาวิเคราะห์ทางสถิติเท่านั้น ไม่ถือเป็นคำแนะนำทางการเงิน การลงทุน หรือคำชี้ชวนในการซื้อขายหลักทรัพย์ การลงทุนในตลาดหุ้นและสัญญาอนุพันธ์มีความเสี่ยงสูง ผู้ลงทุนควรศึกษาข้อมูลและใช้วิจารณญาณของตนเองก่อนตัดสินใจลงทุนทุกครั้ง

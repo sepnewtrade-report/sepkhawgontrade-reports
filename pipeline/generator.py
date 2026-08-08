@@ -135,7 +135,7 @@ def generate_0530_report(closed_signals, stats, date_str, output_path):
     content += "## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
     content += "- [Yahoo Finance Market Data](https://finance.yahoo.com/)\n"
     content += "- [Google Finance](https://www.google.com/finance/)\n"
-    content += "- [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)\n"
+    content += "- [SepKhawGonTrade Internal Database Analytics](https://github.com/)\n"
     
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
@@ -279,7 +279,7 @@ def generate_options_report(signals, qc_report, date_str, output_path):
     content += "- [Yahoo Finance Option Chain API](https://finance.yahoo.com/)\n"
     content += "- [CBOE Options Trading Statistics](https://www.cboe.com/)\n"
     content += "- [Option Alpha Greeks Calculator](https://optionalpha.com/)\n"
-    content += "- [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)\n"
+    content += "- [SepKhawGonTrade Internal Database Analytics](https://github.com/)\n"
     
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:

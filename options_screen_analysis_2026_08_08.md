@@ -1491,4 +1491,4 @@
 - [Yahoo Finance Option Chain API](https://finance.yahoo.com/)
 - [CBOE Options Trading Statistics](https://www.cboe.com/)
 - [Option Alpha Greeks Calculator](https://optionalpha.com/)
-- [SepKhawGonTrade Internal Database logs](file:///Users/soontorntachasakulnapaporn/Documents/SepKhawGonTrade_Antigravity/pipeline/market_data.db)
+- [SepKhawGonTrade Internal Database Analytics](https://github.com/)
