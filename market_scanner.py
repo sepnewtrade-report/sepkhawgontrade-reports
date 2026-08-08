@@ -17,6 +17,20 @@ def clean_json_text(text):
         text = text[:-3]
     return text.strip()
 
+TICKER_MAP = {
+    "DJIA": "^DJI",
+    "DXY": "DX-Y.NYB",
+    "VIX": "^VIX",
+    "SPX": "^GSPC",
+    "NDX": "^IXIC",
+    "RUT": "^RUT",
+    "BTC": "BTC-USD",
+    "GOLD": "GC=F",
+    "OIL": "BZ=F",
+    "WTI": "CL=F",
+    "BRENT": "BZ=F",
+}
+
 def override_prices_with_yfinance(data):
     import yfinance as yf
     from concurrent.futures import ThreadPoolExecutor
@@ -41,20 +55,26 @@ def override_prices_with_yfinance(data):
         try:
             # clean ticker name just in case
             t_name = ticker.strip().upper()
-            t = yf.Ticker(t_name)
-            info = t.info
+            yf_symbol = TICKER_MAP.get(t_name, t_name)
+            t = yf.Ticker(yf_symbol)
+            info = t.info or {}
             price = info.get("currentPrice") or info.get("regularMarketPrice")
             prev_close = info.get("previousClose") or info.get("regularMarketPreviousClose")
+            change = info.get("regularMarketChangePercent")
             
-            # fallback to history if info doesn't have it
-            if price is None:
-                hist = t.history(period="1d")
-                if not hist.empty:
-                    price = hist['Close'].iloc[-1]
-                    prev_close = hist['Open'].iloc[-1]
-                    
-            if price is not None and prev_close is not None:
-                change = ((price - prev_close) / prev_close) * 100
+            # fallback to 5d history if info doesn't have it
+            if price is None or prev_close is None or change is None:
+                hist = t.history(period="5d")
+                if len(hist) >= 1:
+                    price = price or hist['Close'].iloc[-1]
+                    if len(hist) >= 2:
+                        prev_close = prev_close or hist['Close'].iloc[-2]
+                        if prev_close and prev_close != 0:
+                            change = ((price - prev_close) / prev_close) * 100
+                            
+            if price is not None and prev_close is not None and prev_close != 0:
+                if change is None:
+                    change = ((price - prev_close) / prev_close) * 100
                 return ticker, price, change
         except Exception:
             pass

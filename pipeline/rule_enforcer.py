@@ -15,12 +15,26 @@ import yfinance as yf
 
 # Excluded keywords that match ticker patterns but are technical terms or organizations
 EXCLUDED_TICKERS = {
-    'RSI', 'EMA', 'MACD', 'FED', 'CPI', 'USD', 'GDP', 'FOMC', 'SEC', 
-    'ETF', 'USA', 'PE', 'EPS', 'CEO', 'IPO', 'AI', 'NYSE', 'AMEX', 
-    'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY',
+    'RSI', 'EMA', 'MACD', 'FED', 'CPI', 'PPI', 'NFP', 'ADP', 'PCE', 'ISM', 'PMI', 'JOLTS',
+    'USD', 'GDP', 'FOMC', 'SEC', 'ETF', 'USA', 'PE', 'EPS', 'CEO', 'IPO', 'AI', 'NYSE', 'AMEX', 
+    'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY', 'BLS',
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
     'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
-    'AIP', 'FAA', 'GPU'
+    'AIP', 'FAA', 'GPU', 'CME', 'COMEX', 'NYMEX', 'ICE', 'CBOE', 'EIA', 'IEA', 'ECB', 'BOJ', 'BOE'
+}
+
+TICKER_MAP = {
+    "DJIA": "^DJI",
+    "DXY": "DX-Y.NYB",
+    "VIX": "^VIX",
+    "SPX": "^GSPC",
+    "NDX": "^IXIC",
+    "RUT": "^RUT",
+    "BTC": "BTC-USD",
+    "GOLD": "GC=F",
+    "OIL": "BZ=F",
+    "WTI": "CL=F",
+    "BRENT": "BZ=F",
 }
 
 def extract_tickers(content):
@@ -42,29 +56,35 @@ def extract_tickers(content):
 def get_live_data(ticker):
     """
     Fetches real-time price and daily change percentage from yfinance.
+    Calculates percentage change relative to previous close (not open price).
     """
+    yf_symbol = TICKER_MAP.get(ticker.upper(), ticker)
     try:
-        t = yf.Ticker(ticker)
-        info = t.info
+        t = yf.Ticker(yf_symbol)
+        info = t.info or {}
         price = info.get("currentPrice") or info.get("regularMarketPrice")
+        prev_close = info.get("previousClose") or info.get("regularMarketPreviousClose")
         change_pct = info.get("regularMarketChangePercent")
         
-        # Fallback to history if info dict is empty
-        if price is None:
-            hist = t.history(period="1d")
-            if not hist.empty:
-                price = hist["Close"].iloc[-1]
-                open_p = hist["Open"].iloc[-1]
-                if open_p:
-                    change_pct = ((price - open_p) / open_p) * 100.0
+        # Fallback to 5-day history if info is missing fields
+        if price is None or prev_close is None or change_pct is None:
+            hist = t.history(period="5d")
+            if len(hist) >= 1:
+                price = price or hist["Close"].iloc[-1]
+                if len(hist) >= 2:
+                    prev_close = prev_close or hist["Close"].iloc[-2]
+                    if prev_close and prev_close != 0:
+                        change_pct = ((price - prev_close) / prev_close) * 100.0
+                elif "Open" in hist and hist["Open"].iloc[-1] != 0:
+                    change_pct = ((price - hist["Open"].iloc[-1]) / hist["Open"].iloc[-1]) * 100.0
                     
-        if price:
+        if price is not None:
             return {
-                "price": price,
-                "change_pct": change_pct or 0.0
+                "price": float(price),
+                "change_pct": float(change_pct) if change_pct is not None else 0.0
             }
     except Exception as e:
-        print(f"Error fetching live data for {ticker}: {e}")
+        print(f"Error fetching live data for {ticker} ({yf_symbol}): {e}")
     return None
 
 def enforce_branding(content):
