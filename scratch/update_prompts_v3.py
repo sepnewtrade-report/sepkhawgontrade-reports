@@ -244,6 +244,32 @@ def update_sidecars():
             print(f"Updated sidecar.json for {item_id} at {spath}")
 
 
+def update_notebooklm_templates():
+    tmpl_path = 'notebooklm-manager/templates.json'
+    if not os.path.exists(tmpl_path):
+        print("templates.json not found!")
+        return
+
+    with open(tmpl_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    updated = 0
+    for item in data:
+        item_id = item.get('id')
+        if item_id in V3_PROMPTS:
+            for k, v in V3_PROMPTS[item_id].items():
+                item[k] = v
+            updated += 1
+            print(f"Updated notebooklm-manager/templates.json for {item_id}")
+
+    if updated > 0:
+        with open(tmpl_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print("Successfully updated notebooklm-manager/templates.json!")
+
+
 if __name__ == "__main__":
     update_album_html()
     update_sidecars()
+    update_notebooklm_templates()
+

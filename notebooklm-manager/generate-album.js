@@ -158,7 +158,11 @@ const server = http.createServer((req, res) => {
           searchV2: 'searchPromptV2', 
           audioV2: 'audioPromptV2', 
           reportV2: 'reportPromptV2', 
-          infoV2: 'infoPromptV2'
+          infoV2: 'infoPromptV2',
+          searchV3: 'searchPromptV3', 
+          audioV3: 'audioPromptV3', 
+          reportV3: 'reportPromptV3', 
+          infoV3: 'infoPromptV3'
         };
         const key = keyMap[promptType];
         if (!key) {
@@ -588,16 +592,17 @@ function getJS() {
         const completed = wfs.filter(w=>w.status==='completed').length;
         const hasV1 = [t.searchPrompt,t.audioPrompt,t.reportPrompt,t.infoPrompt].filter(p=>p&&p.trim()).length;
         const hasV2 = [t.searchPromptV2,t.audioPromptV2,t.reportPromptV2,t.infoPromptV2].filter(p=>p&&p.trim()).length;
-        const hasS = !!((t.searchPrompt && t.searchPrompt.trim()) || (t.searchPromptV2 && t.searchPromptV2.trim()));
-        const hasA = !!((t.audioPrompt && t.audioPrompt.trim()) || (t.audioPromptV2 && t.audioPromptV2.trim()));
-        const hasR = !!((t.reportPrompt && t.reportPrompt.trim()) || (t.reportPromptV2 && t.reportPromptV2.trim()));
-        const hasI = !!((t.infoPrompt && t.infoPrompt.trim()) || (t.infoPromptV2 && t.infoPromptV2.trim()));
+        const hasV3 = [t.searchPromptV3,t.audioPromptV3,t.reportPromptV3,t.infoPromptV3].filter(p=>p&&p.trim()).length;
+        const hasS = !!((t.searchPrompt && t.searchPrompt.trim()) || (t.searchPromptV2 && t.searchPromptV2.trim()) || (t.searchPromptV3 && t.searchPromptV3.trim()));
+        const hasA = !!((t.audioPrompt && t.audioPrompt.trim()) || (t.audioPromptV2 && t.audioPromptV2.trim()) || (t.audioPromptV3 && t.audioPromptV3.trim()));
+        const hasR = !!((t.reportPrompt && t.reportPrompt.trim()) || (t.reportPromptV2 && t.reportPromptV2.trim()) || (t.reportPromptV3 && t.reportPromptV3.trim()));
+        const hasI = !!((t.infoPrompt && t.infoPrompt.trim()) || (t.infoPromptV2 && t.infoPromptV2.trim()) || (t.infoPromptV3 && t.infoPromptV3.trim()));
 
         return '<div class="album-card" onclick="openDetail('+i+')" data-name="'+esc(t.name)+'" data-id="'+esc(t.id)+'">'+
           '<div class="card-header"><span class="card-icon">'+icon+'</span><span class="card-badge '+badge.cls+'">'+badge.text+'</span></div>'+
           '<h3 class="card-title">'+esc(t.name)+'</h3>'+
           '<div class="card-meta">'+
-            '<div class="meta-item"><span>📝</span><span>V1: '+hasV1+' | V2: '+hasV2+' Prompts</span></div>'+
+            '<div class="meta-item"><span>📝</span><span>V1: '+hasV1+' | V2: '+hasV2+(hasV3?' | V3: '+hasV3:'')+' Prompts</span></div>'+
             '<div class="meta-item"><span>🎬</span><span>'+wfs.length+' ครั้งที่รัน'+(completed>0?' ('+completed+' สำเร็จ)':'')+'</span></div>'+
           '</div>'+
           '<div class="card-prompts-preview">'+
@@ -623,14 +628,21 @@ function getJS() {
       const wfs = DATA.workflowsByTemplate[t.id] || [];
       const icon = getIcon(t.id,t.name);
 
+      const getPromptVal = (key) => {
+        if (activeVersion === 'v1') return t[key + 'Prompt'] || '';
+        if (activeVersion === 'v2') return t[key + 'PromptV2'] || '';
+        if (activeVersion === 'v3') return t[key + 'PromptV3'] || '';
+        return '';
+      };
+
       const prompts = [
-        {key:'search',label:'🔍 Prompt ค้นหาข่าว (Search)',cls:'prompt-search',val: (activeVersion === 'v1' ? t.searchPrompt : t.searchPromptV2) || ''},
-        {key:'audio',label:'🎙️ Prompt Audio Overview',cls:'prompt-audio',val: (activeVersion === 'v1' ? t.audioPrompt : t.audioPromptV2) || ''},
-        {key:'report',label:'📱 Prompt Report Facebook',cls:'prompt-report',val: (activeVersion === 'v1' ? t.reportPrompt : t.reportPromptV2) || ''},
-        {key:'info',label:'🖼️ Prompt Infographic',cls:'prompt-info',val: (activeVersion === 'v1' ? t.infoPrompt : t.infoPromptV2) || ''},
+        {key:'search',label:'🔍 Prompt ค้นหาข่าว (Search)',cls:'prompt-search',val: getPromptVal('search')},
+        {key:'audio',label:'🎙️ Prompt Audio Overview',cls:'prompt-audio',val: getPromptVal('audio')},
+        {key:'report',label:'📱 Prompt Report Facebook',cls:'prompt-report',val: getPromptVal('report')},
+        {key:'info',label:'🖼️ Prompt Infographic',cls:'prompt-info',val: getPromptVal('info')},
       ];
 
-      const keySuffix = activeVersion === 'v1' ? '' : 'V2';
+      const keySuffix = activeVersion === 'v1' ? '' : (activeVersion === 'v2' ? 'V2' : 'V3');
 
       let wfRows = '';
       if (wfs.length > 0) {
@@ -658,6 +670,7 @@ function getJS() {
             '<div class="version-selector">'+
               '<button class="btn-version '+(activeVersion==='v1'?'active':'')+'" onclick="switchVersion(\\'v1\\')">Version 1 (ดั้งเดิม)</button>'+
               '<button class="btn-version '+(activeVersion==='v2'?'active':'')+'" onclick="switchVersion(\\'v2\\')">Version 2 (ปรับปรุงใหม่)</button>'+
+              '<button class="btn-version '+(activeVersion==='v3'?'active':'')+'" onclick="switchVersion(\\'v3\\')">👑 Version 3 (Member Exclusive)</button>'+
             '</div>'+
             '<div class="prompt-accordion">'+
             prompts.map(p => {
