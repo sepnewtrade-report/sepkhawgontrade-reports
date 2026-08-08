@@ -2,7 +2,7 @@
 
 # 🐳 VP WHALEZOOM: Premium Institutional Flow Radar ประจำวันที่ 8 สิงหาคม 2026
 
-เรดาร์สแกนรอยเท้าวาฬรายใหญ่สำหรับสมาชิก VP & VIP เจาะลึกราคาต้นทุนสะสมบน Dark Pool (Dark Pool Cost Basis / VWAP) สัญญาออปชันผิดปกติ (Unusual Options Sweep) และกลยุทธ์เก็บพรีเมียมความเสี่ยงต่ำ
+เรดาร์สแกนรอยเท้าวาฬรายใหญ่สำหรับสมาชิก VP & VIP เจาะลึกราคาต้นทุนสะสมบน Dark Pool (Dark Pool Cost Basis / VWAP) สัญญาออปชันผิดปกติ (Unusual Options Sweep) และกลยุทธ์เก็บพรีเมียมความเสี่ยงต่ำ *(เน้นรายชื่อหุ้นสถาบันหมุนเวียน ไม่ซ้ำซ้อนกับ VP Top Opportunity Radar)*
 
 🔗 อ่านบทวิเคราะห์กลยุทธ์ออปชันที่สอดคล้องกับพฤติกรรมวาฬได้ที่: 🔗[Options Selection Screen](options_screen_analysis_2026_08_08.md)
 
@@ -12,24 +12,24 @@
 
 | Ticker | หุ้น | ราคาปิด ($) | ปริมาณ Block Trade | ราคาต้นทุนสถาบัน (Dark Pool VWAP) | สัญญาณออปชัน (Options Sweep) | ทิศทางเงินทุน (Flow Direction) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **AMZN** | Amazon Inc | **$274.48** | 38.2M shares | **$271.20** | Call Sweep $280 Strike (Exp Sep) | **Strong Accumulation (สะสมหนาแน่น)** |
-| **NVDA** | NVIDIA Corp | **$223.96** | 45.1M shares | **$218.50** | OTM Call Sweep $240 Strike (Exp Sep) | **Bullish Flow (วาฬซื้อเก็บ)** |
-| **PLTR** | Palantir Tech | **$172.01** | 22.4M shares | **$162.80** | Large Block Sweep $180 Strike | **Aggressive Buy (ไล่ซื้อรุนแรง)** |
 | **MSFT** | Microsoft Corp | **$499.99** | 16.8M shares | **$492.10** | Bullish Call Spreads $520 Strike | **Steady Inflow (สะสมต่อเนื่อง)** |
+| **AVGO** | Broadcom Inc | **$427.76** | 9.4M shares | **$421.50** | OTM Call Sweep $450 Strike (Exp Sep) | **Bullish Accumulation (ซื้อเก็บ)** |
+| **TSM** | Taiwan Semi | **$420.04** | 12.1M shares | **$414.20** | Long Call Sweep $440 Strike | **Institutional Inflow (สะสมสถาบัน)** |
+| **SMCI** | Super Micro | **$31.13** | 18.5M shares | **$29.80** | Short Covering & Call Sweep | **Rebound Flow (ไหลกลับเข้าซื้อ)** |
 
 ---
 
 ## 💡 2. กลยุทธ์ Options สายพรีเมียมความเสี่ยงต่ำสำหรับสมาชิก (Member Options Income Setup)
 
-### 📌 AMZN - Bull Put Credit Spread (เก็บพรีเมียมบนแนวรับวาฬ)
-- **กลยุทธ์:** Sell Put Strike **$260.00** / Buy Put Strike **$255.00** (Exp 18 Sep 2026)
-- **Delta:** 0.32 | **โอกาสชนะทางสถิติ (Probability of Profit):** **82.5%**
-- **เหตุผลทางเทคนิค:** ราคาต้นทุน Dark Pool ของวาฬอยู่ที่ $271.20 ซึ่งทำหน้าที่เป็นแนวรับไข่ต้ม ทำให้โอกาสที่ราคาจะหลุดต่ำกว่า $260.00 มีน้อยมาก
+### 📌 MSFT - Bull Put Credit Spread (เก็บพรีเมียมบนแนวรับวาฬ)
+- **กลยุทธ์:** Sell Put Strike **$475.00** / Buy Put Strike **$465.00** (Exp 18 Sep 2026)
+- **Delta:** 0.30 | **โอกาสชนะทางสถิติ (Probability of Profit):** **84.0%**
+- **เหตุผลทางเทคนิค:** ราคาต้นทุน Dark Pool ของวาฬอยู่ที่ $492.10 ทำหน้าที่เป็นแนวรับแข็งแกร่ง โอกาสหลุดต่ำกว่า $475.00 มีน้อยมาก
 
-### 📌 NVDA - Cash-Secured Put / Bull Put Spread
-- **กลยุทธ์:** Sell Put Strike **$210.00** / Buy Put Strike **$200.00** (Exp 18 Sep 2026)
-- **Delta:** 0.28 | **โอกาสชนะทางสถิติ (Probability of Profit):** **85.0%**
-- **เหตุผลทางเทคนิค:** วาฬเก็บสะสมที่ VWAP $218.50 ช่วยป้องกันความเสี่ยงขาลงอย่างมีประสิทธิภาพ
+### 📌 AVGO - Cash-Secured Put / Bull Put Spread
+- **กลยุทธ์:** Sell Put Strike **$400.00** / Buy Put Strike **$390.00** (Exp 18 Sep 2026)
+- **Delta:** 0.28 | **โอกาสชนะทางสถิติ (Probability of Profit):** **85.5%**
+- **เหตุผลทางเทคนิค:** วาฬสะสมหนาแน่นที่ VWAP $421.50 ช่วยเป็นเบาะรองรับความเสี่ยงขาลงอย่างมีประสิทธิภาพ
 
 ---
 

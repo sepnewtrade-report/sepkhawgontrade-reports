@@ -124,7 +124,9 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 5. **Member-Only Low-Risk Credit Spread Strategies**:
    Recommend specific Options Income strategies (Bull Put Spread / Cash-Secured Put) with statistical probability of profit.
 
-6. **Financial Disclaimer**: Include standard warning at the bottom.
+6. **VP De-duplication Rule (0% Overlap)**: Ensure the list of tickers featured in VP WHALEZOOM is 100% unique and has 0% overlap with the tickers featured in VP TOP OPPORTUNITY RADAR on the same day.
+
+7. **Financial Disclaimer**: Include standard warning at the bottom.
 
 ข้อกำหนดการบันทึกไฟล์: บันทึกไฟล์เป็น 'MEMBERSHIP CONTENT SYSTEM/vp_whalezoomkephoonarai_YYYY_MM_DD.md' เสมอ
 
