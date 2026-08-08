@@ -197,7 +197,7 @@ const server = http.createServer((req, res) => {
       const projectRoot = path.join(__dirname, '..');
       exportAlbumHtml();
       const output = execSync(
-        'node generate-index.js && git add . && git commit -m "Update album prompts" && git push',
+        'node generate-index.js && git add . && git commit -m "Update album prompts" && git push origin main && git push origin main:gh-pages',
         { cwd: projectRoot, encoding: 'utf8', timeout: 30000 }
       );
       console.log('🚀 Deploy สำเร็จ!');
