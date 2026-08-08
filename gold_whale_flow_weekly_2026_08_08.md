@@ -17,7 +17,13 @@
 
 > [!NOTE]
 > **สรุปรายงาน CFTC COT (Commitment of Traders):**
-> กลุ่ม Managed Money (กองทุนเฮดจ์ฟันด์และสถาบันใหญ่) เพิ่มสถานะสุทธิฝั่งซื้อ (Net Long Positions) ใน Gold Futures ขึ้นอีก **+14,250 สัญญา** สู่ระดับรวม **284,500 สัญญา** ซึ่งเป็นการสะสมฝั่งซื้อต่อเนื่องเป็นสัปดาห์ที่ 3 ติดต่อกัน สะท้อนถึงความเชื่อมั่นสูงต่อแนวโน้มการปรับลดอัตราดอกเบี้ยและความต้องการสินทรัพย์ปลอดภัย
+> กลุ่ม Managed Money (กองทุนเฮดจ์ฟันด์และสถาบันใหญ่) เพิ่มสถานะสุทธิฝั่งซื้อ (Net Long Positions) ใน Gold Futures ขึ้นอีก **+14,250 สัญญา** สู่ระดับรวม **284,500 สัญญา** *(อ้างอิงจากรายงาน CFTC Disaggregated COT Report ณ วันที่ 4 ส.ค. 2026 เผยแพร่วันศุกร์ที่ 7 ส.ค. 2026)* สะท้อนถึงความเชื่อมั่นสูงต่อแนวโน้มการปรับลดอัตราดอกเบี้ยและความต้องการสินทรัพย์ปลอดภัย
+
+> [!NOTE]
+> **การตรวจสอบแหล่งที่มาข้อมูล ETF Fund Flows & Options Sweeps (Institutional Data Disclosure):**
+> - **CFTC COT Report Data:** ดึงข้อมูลจากรายงาน CFTC Commitment of Traders Disaggregated Report ล่าสุด (ณ วันที่ 4 ส.ค. 2026 เผยแพร่วันที่ 7 ส.ค. 2026)
+> - **ETF Net Fund Flows (+$845M GLD / +$230M IAU):** รวบรวมข้อมูลจาก State Street Global Advisors (SSGA) และ BlackRock iShares Official Holdings ณ วันปิดตลาด 7 ส.ค. 2026
+> - **Options Sweeps & Dark Pool VWAP ($4,285 - $4,310/oz):** รวบรวมข้อมูลผ่าน Cboe Options Exchange Market Data Feeds และ Unusual Whales Institutional Flow Analytics
 
 ---
 
