@@ -6,8 +6,13 @@ plugins: []
 
 exclude:
   - venv/
+  - test_venv/
+  - tmp_venv/
   - pipeline/
   - scratch/
+  - automation/
+  - notebooklm-manager/
+  - "MEMBERSHIP CONTENT SYSTEM/"
   - ".agents/"
   - ".gemini/"
   - ".git/"
@@ -15,3 +20,4 @@ exclude:
   - "*.db"
   - "*.log"
   - "*.sh"
+  - "*.txt"
