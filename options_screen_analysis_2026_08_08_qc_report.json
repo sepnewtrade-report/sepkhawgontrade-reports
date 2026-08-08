@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-08-08. พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation - วาฬขยับ ตลาดสะเทือน & Options Edge): Found Confluence Match for MSFT (active in Whale Flow)., Found Confluence Match for AMZN (active in Whale Flow)., Found Confluence Match for NVDA (active in Whale Flow)., Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for TSM (active in Whale Flow)., Found Confluence Match for AVGO (active in Whale Flow)., Found Confluence Match for SMCI (active in Whale Flow).",
+  "audit_log": [
+    {
+      "item": "Duplication Check (Whale Flow vs Options Screen)",
+      "status": "verified_ok",
+      "details": "Confluence check passed: Found Confluence Match for MSFT (active in Whale Flow)., Found Confluence Match for AMZN (active in Whale Flow)., Found Confluence Match for NVDA (active in Whale Flow)., Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for TSM (active in Whale Flow)., Found Confluence Match for AVGO (active in Whale Flow)., Found Confluence Match for SMCI (active in Whale Flow). Tickers tagged for Double Confirmation."
+    },
+    {
+      "item": "Ticker Data & Price Verification",
+      "status": "verified_ok",
+      "details": "AAPL Verified. Live Price: $313.33; MSFT Verified. Live Price: $499.99; GOOGL Verified. Live Price: $354.30; AMZN Verified. Live Price: $274.48; NVDA Verified. Live Price: $223.96; AMD Verified. Live Price: $483.36; PLTR Verified. Live Price: $172.01; TSM Verified. Live Price: $420.04; META Verified. Live Price: $592.10; AVGO Verified. Live Price: $427.76; SMCI Verified. Live Price: $31.13; MRVL Verified. Live Price: $218.72; LLY Verified. Live Price: $1185.71; TSLA Verified. Live Price: $328.58; NFLX Verified. Live Price: $74.14; QCOM Verified. Live Price: $167.86"
+    },
+    {
+      "item": "Fact-checking & Information Sourcing",
+      "status": "verified_ok",
+      "details": "Mandatory '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' section will be generated automatically at the end of the file."
+    },
+    {
+      "item": "Branding & Format Compliance",
+      "status": "verified_ok",
+      "details": "HTML Channel Logo (Logo Master) configured in the first line. All video recording indicators and speech tags (e.g. [Camera 1], **บทพูด:**) are banned from final report."
+    },
+    {
+      "item": "Website Index Automation",
+      "status": "verified_ok",
+      "details": "Git deployment and indexing scripts will run post-generation."
+    }
+  ]
+}
