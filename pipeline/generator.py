@@ -9,7 +9,7 @@ def run_index_updater():
     Executes the Node.js website index rebuild and pushes changes to GitHub.
     """
     parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    cmd = 'node generate-index.js && git add . && git commit -m "Auto-update reports" && git push origin main && git push origin main:gh-pages'
+    cmd = 'node generate-index.js && git add . && git commit -m "Auto-update reports" && git push origin main && git push origin main:gh-pages && git push web main:gh-pages'
     print(f"Executing index automation command: {cmd}")
     try:
         res = subprocess.run(cmd, shell=True, cwd=parent_dir, capture_output=True, text=True)

@@ -1339,7 +1339,7 @@ async function runWorkflowPipeline(workflowId) {
       addWorkflowLog(workflowId, `ขั้นตอนที่ 2.5/8: กำลังอัปเดตสารบัญข่าวบนเว็บและดาวน์โหลดซิงค์ขึ้น GitHub...`);
       
       const parentDir = path.join(__dirname, '..');
-      const syncCmd = `node "${path.join(parentDir, 'generate-index.js')}" && git add . && git commit -m "Auto-update reports" && git push origin main && git push origin main:gh-pages`;
+      const syncCmd = `node "${path.join(parentDir, 'generate-index.js')}" && git add . && git commit -m "Auto-update reports" && git push origin main && git push origin main:gh-pages && git push web main:gh-pages`;
       
       try {
         await runCmd(syncCmd);
