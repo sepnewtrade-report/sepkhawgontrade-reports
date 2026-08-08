@@ -183,6 +183,14 @@
                     <!-- Prompt Editor Section -->
                     <div class="glass-card prompt-editor-card" style="margin-top: 20px;">
                         <h3><i class="fa-solid fa-pen-to-square"></i> ตั้งค่า Prompt สำหรับรายการนี้</h3>
+                        
+                        <!-- Version Selector Tabs -->
+                        <div class="version-tabs" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="version-tab-btn active" data-version="v1" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(99,102,241,0.2); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer;">Version 1 (ดั้งเดิม)</button>
+                            <button class="version-tab-btn" data-version="v2" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer;">Version 2 (ปรับปรุงใหม่)</button>
+                            <button class="version-tab-btn" data-version="v3" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer;">👑 Version 3 (Member Exclusive)</button>
+                        </div>
+
                         <div class="prompt-tabs" style="margin-top: 15px;">
                             <button class="prompt-tab-btn active" data-prompt-type="search">ค้นหาข่าว</button>
                             <button class="prompt-tab-btn" data-prompt-type="audio">ผู้พูด (Audio)</button>

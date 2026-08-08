@@ -14,6 +14,7 @@ let state = {
     templates: [],
     activeTemplateId: '',
     activePromptType: 'search', // default prompt tab
+    activePromptVersion: 'v1', // default prompt version (v1, v2, v3)
     workflowPollingInterval: null,
     selectedWorkflowId: null,
     isReviewing: false,
@@ -136,6 +137,7 @@ const btnEditTemplateConfirm = document.getElementById('btn-edit-template-confir
 
 // Prompt Editor Selectors
 const promptTabBtns = document.querySelectorAll('.prompt-tab-btn');
+const versionTabBtns = document.querySelectorAll('.version-tab-btn');
 const promptTextarea = document.getElementById('prompt-textarea');
 const btnSavePrompts = document.getElementById('btn-save-prompts');
 
@@ -308,6 +310,14 @@ function setupEventListeners() {
         btn.addEventListener('click', () => {
             const promptType = btn.getAttribute('data-prompt-type');
             switchPromptTab(promptType);
+        });
+    });
+
+    // Version Editor tabs switching
+    versionTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const version = btn.getAttribute('data-version');
+            switchPromptVersion(version);
         });
     });
 
@@ -1143,7 +1153,12 @@ function autoSelectFileForShow() {
 function handleTemplateChange(templateId) {
     state.activeTemplateId = templateId;
     autoSelectFileForShow();
-    loadPromptsForActiveTemplate();
+    const memberTemplateIds = ['vip_market_strategy_watchlist', 'vp_top_opportunity_radar', 'vp_whalezoomkephoonarai', 'custom_1782454904186', 'custom_1782454912886'];
+    if (memberTemplateIds.includes(templateId)) {
+        switchPromptVersion('v3');
+    } else {
+        loadPromptsForActiveTemplate();
+    }
 }
 
 // Load prompts into the editor fields based on state.activeTemplateId
@@ -1151,21 +1166,43 @@ function loadPromptsForActiveTemplate() {
     const template = state.templates.find(t => t.id === state.activeTemplateId);
     if (!template) return;
     
-    // Set textarea content for the active prompt tab type
+    // Set textarea content for the active prompt tab type and version
     let promptKey = getPromptKey(state.activePromptType);
     promptTextarea.value = template[promptKey] || '';
     updateCharCounter(promptTextarea.value);
 }
 
-// Map frontend data-prompt-type attributes to templates.json fields
+// Map frontend data-prompt-type attributes & active version to templates.json fields
 function getPromptKey(type) {
+    const ver = state.activePromptVersion || 'v1';
+    const suffix = ver === 'v1' ? '' : (ver === 'v2' ? 'V2' : 'V3');
     switch (type) {
-        case 'search': return 'searchPrompt';
-        case 'audio': return 'audioPrompt';
-        case 'report': return 'reportPrompt';
-        case 'info': return 'infoPrompt';
-        default: return 'searchPrompt';
+        case 'search': return 'searchPrompt' + suffix;
+        case 'audio': return 'audioPrompt' + suffix;
+        case 'report': return 'reportPrompt' + suffix;
+        case 'info': return 'infoPrompt' + suffix;
+        default: return 'searchPrompt' + suffix;
     }
+}
+
+// Switch prompt version tabs (v1, v2, v3) inside the prompt editor
+function switchPromptVersion(version) {
+    updatePromptState(promptTextarea.value);
+    state.activePromptVersion = version;
+    versionTabBtns.forEach(btn => {
+        if (btn.getAttribute('data-version') === version) {
+            btn.classList.add('active');
+            btn.style.background = 'rgba(99,102,241,0.2)';
+            btn.style.color = '#fff';
+            btn.style.fontWeight = '600';
+        } else {
+            btn.classList.remove('active');
+            btn.style.background = 'rgba(255,255,255,0.05)';
+            btn.style.color = 'var(--text-secondary)';
+            btn.style.fontWeight = '500';
+        }
+    });
+    loadPromptsForActiveTemplate();
 }
 
 // Switch prompt tab buttons inside the prompt editor
@@ -1338,6 +1375,13 @@ async function executeWorkflowRunDirectly() {
     workflowLogs.innerHTML += '<div class="log-line">กำลังส่งคำร้องเริ่มการรันระบบอัตโนมัติ...</div>';
     
     try {
+        const getPromptValForWorkflow = (type) => {
+            const ver = state.activePromptVersion || 'v1';
+            const suffix = ver === 'v1' ? '' : (ver === 'v2' ? 'V2' : 'V3');
+            const key = type + 'Prompt' + suffix;
+            return template[key] || template[type + 'Prompt'] || '';
+        };
+
         const response = await fetch('/api/workflow/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1345,10 +1389,10 @@ async function executeWorkflowRunDirectly() {
                 templateId: templateId,
                 selectedFile: selectedFile,
                 dateStr: dateStr,
-                searchPrompt: template.searchPrompt || '',
-                audioPrompt: template.audioPrompt || '',
-                reportPrompt: template.reportPrompt || '',
-                infoPrompt: template.infoPrompt || '',
+                searchPrompt: getPromptValForWorkflow('search'),
+                audioPrompt: getPromptValForWorkflow('audio'),
+                reportPrompt: getPromptValForWorkflow('report'),
+                infoPrompt: getPromptValForWorkflow('info'),
                 genFacebook: genFacebook,
                 resumeWorkflow: resumeWorkflow,
                 pauseForReview: pauseForReview
