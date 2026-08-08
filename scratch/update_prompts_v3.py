@@ -3,7 +3,7 @@ import json
 import re
 import os
 
-# Define Prompt v3 with Quantitative Scenario Planning & Legal Risk Mitigation for Member Reports
+# Define Prompt v3 with Strict Compliance, Qualitative Conviction & Verified Sources for Member Reports
 
 V3_PROMPTS = {
     "vip_market_strategy_watchlist": {
@@ -22,13 +22,13 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
    - **จุดยกเลิกแผนทางเทคนิคอล (Technical Invalidation Level)**: Mathematically calculated level where technical structure breaks.
    - **ฉากทัศน์เป้าหมายราคาตามสถิติ (Scenario A: Bullish Targets)**: Target 1 (50% scale-out) and Target 2 (Final target).
    - **Trailing Stop Rule**: Moving average rule to lock in gains.
-   - **Statistical Probability Note**: Win Rate probability based on historical chart pattern backtest.
+   - **ระดับความเชื่อมั่นเชิงคุณภาพ (Qualitative Conviction Level)**: Use qualitative rating with clear color badges (🟢 สูง High Conviction ~70% / 🟡 ปานกลาง Moderate Conviction ~65%) rather than unverified decimal backtest figures.
 
 3. **Position Sizing & Risk Management Matrix**:
    Include a mandatory Position Sizing Table for 3 portfolio sizes ($10,000 / $50,000 / $100,000) ensuring maximum loss per trade does not exceed 1-1.5% of AUM upon reaching the Technical Invalidation Level.
 
-4. **Transparent Performance Tracker**:
-   Include a historical performance tracking table summarizing both Wins AND Losses transparently for recent technical setups.
+4. **Educational Trading Journal & Risk Checklist (ตารางแบบจำลองตัวอย่างและเช็กลิสต์การเทรด)**:
+   Provide an educational framework table with an explicit note: "หมายเหตุ: ตารางตัวอย่างแสดงกรอบวิธีคำนวณและประเมินผลลัพธ์เพื่อการศึกษาการบริหารความเสี่ยงเท่านั้น ไม่ใช่การกล่าวอ้างผลงานหรือรับประกันผลตอบแทนจริงในอดีตหรืออนาคต".
 
 5. **Financial Disclaimer**: Include at the bottom:
 > [!WARNING]
@@ -39,7 +39,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 กฎเหล็กด้านความถูกต้องและแหล่งที่มา (Anti-Hallucination & Citation Rules):
 1. ทุกครั้งที่สั่งงาน คุณต้องเปิดใช้งานเครื่องมือ Google Search เพื่อสืบค้นข้อมูลดิบ ราคาหุ้น และข่าวสารของสัปดาห์ปัจจุบันแบบเรียลไทม์
 2. ห้ามแต่งตัวเลข ห้ามสุ่มชื่อหุ้น และห้ามคาดเดาข้อมูลที่ไม่มีอยู่จริงเด็ดขาด
-3. ท้ายไฟล์ต้องมีหัวข้อ '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' ที่เป็นลิงก์เว็บสากลเสมอ""",
+3. ท้ายไฟล์ต้องมีหัวข้อ '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' ที่เป็นลิงก์เว็บสากลที่ตรวจสอบได้จริงเท่านั้น ห้ามใส่ลิงก์ placeholder หลอกเด็ดขาด""",
         "audioPromptV3": """คุณคือ Senior Market Strategist และพิธีกรประจำรายการ "เสพข่าวก่อนเทรด หุ้นอเมริกา VIP" ช่วง VIP Watchlist & Scenario Planning (Prompt v.3)
 น้ำเสียง: Professional, Educational, Risk-Conscious, Direct-to-the-point
 
@@ -47,7 +47,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 1. 🎙️ กล่าวต้อนรับสมาชิก VIP และอัปเดตแกนความคิดในการบริหารความเสี่ยงสัปดาห์นี้
 2. 🎯 สรุปการวางฉากทัศน์ราคา (Scenario A: Bullish Target vs Scenario B: Technical Invalidation Level) รายหุ้น
 3. 🛡️ ย้ำเตือนตาราง Position Sizing คุมความเสี่ยงพอร์ตไม่เกิน 1-1.5% เมื่อถึงจุดยกเลิกแผน
-4. 📈 สรุปภาพรวม Performance Tracker ย้อนหลังอย่างโปร่งใสทั้งไม้ชนะและไม้แพ้""",
+4. 📈 สรุปภาพรวมแบบจำลองการบริหารความเสี่ยงเชิงศึกษา""",
         "reportPromptV3": """สรุปใจความสำคัญสำหรับโพสต์ Facebook / Community ชวนสมาชิกดูคลิป VIP Watchlist (Prompt v.3 - Quantitative Scenario Planning)
 - 📌 Hook: "👑 VIP Watchlist v.3: กรอบการวิเคราะห์เชิงสถิติ + การวางฉากทัศน์ If-Then & จุดยกเลิกแผน (Invalidation Level) คืนนี้"
 - 📊 Highlight: สรุปจุดยืนยันสัญญาณ, จุดยกเลิกแผน, และฉากทัศน์เป้าหมายราคา
@@ -70,7 +70,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 <p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
 
 2. **Top 3 High-Conviction Radar & Scenario Planning**:
-   Provide detailed analysis for the Top 3 picks with Conviction Scores (0-100), Fundamental Catalyst, Entry Confirmation Zone, Technical Invalidation Level, and Risk/Reward ratio.
+   Provide detailed analysis for the Top 3 picks with Conviction Scores (0-100), Color Badges (🟢 High Conviction >= 80, 🟡 Moderate Conviction 70-79), Fundamental Catalyst, Entry Confirmation Zone, Technical Invalidation Level, and Risk/Reward ratio.
 
 3. **Visual Scenario Flowchart (Mermaid Diagram)**:
    For each top pick, include a Mermaid diagram illustrating the execution flow:
@@ -87,7 +87,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 
 กฎเหล็กด้านความถูกต้องและแหล่งที่มา (Anti-Hallucination & Citation Rules):
 1. เปิดใช้งาน Google Search ดึงข้อมูลราคาและข่าวล่าสุดเสมอ
-2. ท้ายไฟล์ต้องมีหัวข้อ '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' ที่เป็นลิงก์เว็บสากล""",
+2. ท้ายไฟล์ต้องมีหัวข้อ '## 🌐 แหล่งข้อมูลอ้างอิง (Sources)' ที่เป็นลิงก์เว็บสากลที่ตรวจสอบได้จริงเท่านั้น""",
         "audioPromptV3": """คุณคือพิธีกรประจำรายการ "เสพข่าวก่อนเทรด หุ้นอเมริกา VP & VIP" ช่วง TOP OPPORTUNITY RADAR (Prompt v.3 - 3-Min Fast Briefing)
 สไตล์: สรุปเร็ว กระชับ 3 นาที เน้นการวางฉากทัศน์และวินัยบริหารความเสี่ยง
 1. 🎙️ ทักทายสมาชิก VP & VIP และแจ้งวันที่
@@ -131,7 +131,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 
 ข้อกำหนดการบันทึกไฟล์: บันทึกไฟล์เป็น 'MEMBERSHIP CONTENT SYSTEM/vp_whalezoomkephoonarai_YYYY_MM_DD.md' เสมอ
 
-กฎเหล็ก: ค้นหาข้อมูลราคาจริงผ่าน Google Search และใส่ลิงก์ Sources สากลท้ายไฟล์เสมอ""",
+กฎเหล็ก: ค้นหาข้อมูลราคาจริงผ่าน Google Search และใส่ลิงก์ Sources สากลที่ตรวจสอบได้จริงเท่านั้น""",
         "audioPromptV3": """คุณคือผู้เชี่ยวชาญด้าน Institutional Flow ประจำช่วง "VP WHALEZOOM: วาฬซุ่มเก็บหุ้นอะไร (Prompt v.3)"
 1. 🎙️ อัปเดตทิศทางเงินสถาบัน (Smart Money Flow) ประจำสัปดาห์
 2. 🐋 เผยราคาต้นทุนเฉลี่ยของวาฬบน Dark Pool (VWAP Cost Basis)
@@ -168,7 +168,7 @@ CRITICAL REPORT REQUIREMENTS (Prompt v.3):
 
 ข้อกำหนดการบันทึกไฟล์: บันทึกไฟล์เป็น '[TICKER]_ขอมา_จัดให้_YYYY_MM_DD.md' เสมอ
 
-กฎเหล็ก: ค้นหาข้อมูลราคาจริงผ่าน Google Search และใส่ลิงก์ Sources สากลท้ายไฟล์เสมอ""",
+กฎเหล็ก: ค้นหาข้อมูลราคาจริงผ่าน Google Search และใส่ลิงก์ Sources สากลที่ตรวจสอบได้จริงเท่านั้น""",
         "audioPromptV3": """คุณคือพิธีกรรายการ "หุ้นในดวงใจ / ขอมา...จัดให้ (Prompt v.3)"
 1. 🎙️ ทักทายสมาชิกและเปิดประเด็นวิเคราะห์หุ้นที่สมาชิกโหวต/ขอเข้ามามากที่สุด
 2. 📊 สรุปประเมินมูลค่า Fair Value (DCF vs ราคาปัจจุบัน)
@@ -217,7 +217,7 @@ def update_album_html():
     if modified:
         with open(album_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        print("Successfully updated album.html with Scenario Planning Prompt v.3!")
+        print("Successfully updated album.html with Strict Compliance Prompt v.3!")
 
 
 def update_sidecars():

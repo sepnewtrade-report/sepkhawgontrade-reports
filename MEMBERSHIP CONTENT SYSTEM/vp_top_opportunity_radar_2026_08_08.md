@@ -8,11 +8,13 @@
 
 ## 👑 1. ตารางคะแนนความเชื่อมั่นและการวางฉากทัศน์ราคา (Top 3 Scenario Radar)
 
+*สัญลักษณ์ความเชื่อมั่น: 🟢 สูง (High Conviction - คะแนน >= 80) | 🟡 ปานกลาง (Moderate Conviction - คะแนน 70-79)*
+
 | Ticker | หุ้น | ราคาปิด ($) | คะแนนความเชื่อมั่น (Conviction Score) | R/R Ratio | จุดยืนยันสัญญาณ (Entry Confirmation Zone) | จุดยกเลิกแผน (Technical Invalidation Level) | ปัจจัยเติบโตหลัก (Key Growth Catalyst) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **NVDA** | NVIDIA Corp | **$223.96** | **85 / 100** | **1:2.0** | ปิดแท่ง 15 นาทีเหนือ **$224.00** | **$208.66** | ออเดอร์ชิป Blackwell เร่งตัวขึ้นสูง |
-| **AMZN** | Amazon.com Inc | **$274.48** | **85 / 100** | **1:2.0** | ปิดแท่ง 15 นาทีเหนือ **$274.50** | **$255.77** | รายได้ AWS เติบโตแข็งแกร่งเกินคาด |
-| **PLTR** | Palantir Tech | **$172.01** | **70 / 100** | **1:2.2** | ย่อตัวสะสม **$165.00 - $170.00** | **$154.04** | การขยายตัวของระบบ AIP ภาคองค์กร |
+| **NVDA** | NVIDIA Corp | **$223.96** | 🟢 **85 / 100** | **1:2.0** | ปิดแท่ง 15 นาทีเหนือ **$224.00** | **$208.66** | ออเดอร์ชิป Blackwell เร่งตัวขึ้นสูง |
+| **AMZN** | Amazon.com Inc | **$274.48** | 🟢 **85 / 100** | **1:2.0** | ปิดแท่ง 15 นาทีเหนือ **$274.50** | **$255.77** | รายได้ AWS เติบโตแข็งแกร่งเกินคาด |
+| **PLTR** | Palantir Tech | **$172.01** | 🟡 **70 / 100** | **1:2.2** | ย่อตัวสะสม **$165.00 - $170.00** | **$154.04** | การขยายตัวของระบบ AIP ภาคองค์กร |
 
 ---
 
@@ -53,7 +55,8 @@ flowchart LR
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [TradingView Technical Radar](https://www.tradingview.com/)
-- [SepKhawGonTrade Quantitative Engine Analytics](https://github.com/)
+- [Yahoo Finance Quantitative Screener](https://finance.yahoo.com/)
+- [SEC EDGAR Database](https://www.sec.gov/edgar)
 
 ---
 

@@ -36,7 +36,7 @@
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
 - [Unusual Whales Premium Flow Analytics](https://unusualwhales.com/)
 - [Cboe Options Exchange Market Data](https://www.cboe.com/)
-- [SepKhawGonTrade Internal VIP Database Analytics](https://github.com/)
+- [Yahoo Finance Market Data](https://finance.yahoo.com/)
 
 ---
 
