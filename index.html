@@ -1,75 +1,1379 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ปิดให้บริการ | SepKhawGonTrade</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #090d16;
-            color: #94a3b8;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .closed-card {
-            max-width: 460px;
-            width: 100%;
-            padding: 40px 30px;
-            background: #0f172a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-        .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        h1 {
-            color: #f8fafc;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #64748b;
-            margin-bottom: 24px;
-        }
-        .yt-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-            transition: all 0.2s ease;
-        }
-        .yt-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
-        }
-    </style>
+    <title>📊 INVESTOR CALCULATOR — เครื่องมือช่วยคำนวณและวางแผนการลงทุน</title>
+    <meta name="description" content="เครื่องมือช่วยคำนวณและวางแผนการลงทุนสำหรับนักลงทุนหุ้น Position Size, Risk/Reward, DCA, Portfolio Allocation, Drawdown & Recovery">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- App Styles -->
+    <link rel="stylesheet" href="styles.css?v=4.0.0">
 </head>
 <body>
-    <div class="closed-card">
-        <div class="icon">🔒</div>
-        <h1>เว็บไซต์ปิดให้บริการแล้ว</h1>
-        <p>ระบบรายงานบทวิเคราะห์และเครื่องมือคำนวณได้รับการปิดการเชื่อมต่อและการเผยแพร่เรียบร้อยแล้ว</p>
-        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" class="yt-btn">เข้าชมช่อง YouTube เสพข่าวก่อนเทรด</a>
+
+    <!-- Ambient Top Glow -->
+    <div class="top-glow"></div>
+
+    <!-- Data Privacy Banner -->
+    <div class="privacy-banner">
+        <i class="fa-solid fa-lock"></i>
+        <span>🔒 <b>Data Privacy Guarantee:</b> ข้อมูลที่คุณกรอกถูกประมวลผลภายในอุปกรณ์ของคุณ 100% และไม่มีการส่งข้อมูล Portfolio ไปยัง Server ภายนอก</span>
+        <button class="close-privacy-btn" id="close-privacy-btn">&times;</button>
     </div>
+
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation (Desktop) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="fa-solid fa-chart-line logo-icon"></i>
+                </div>
+                <h1 class="app-title">INVESTOR <span>CALCULATOR</span></h1>
+                <p class="app-subtitle">คิดก่อนลงทุน • คำนวณก่อนตัดสินใจ</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">เมนูหลัก</div>
+                <a href="#home" class="nav-item active" data-tab="home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>🏠 หน้าแรก (Home)</span>
+                </a>
+
+                <div class="nav-section-label">TRADE PLANNING</div>
+                <a href="#position" class="nav-item" data-tab="position">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>💰 Position Size</span>
+                </a>
+                <a href="#risk-reward" class="nav-item" data-tab="risk-reward">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>🎯 Risk / Reward</span>
+                </a>
+                <a href="#profit-loss" class="nav-item" data-tab="profit-loss">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <span>📊 Profit / Loss</span>
+                </a>
+                <a href="#target-price" class="nav-item" data-tab="target-price">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span>🎯 Target Price</span>
+                </a>
+
+                <div class="nav-section-label">PORTFOLIO MANAGEMENT</div>
+                <a href="#avg-cost" class="nav-item" data-tab="avg-cost">
+                    <i class="fa-solid fa-coins"></i>
+                    <span>🔄 Average Cost</span>
+                </a>
+                <a href="#dca" class="nav-item" data-tab="dca">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>📈 DCA Calculator</span>
+                </a>
+                <a href="#portfolio-alloc" class="nav-item" data-tab="portfolio-alloc">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>🛡️ Portfolio Allocation</span>
+                </a>
+                <a href="#rebalance" class="nav-item" data-tab="rebalance">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>🔄 Rebalancing</span>
+                </a>
+
+                <div class="nav-section-label">RISK MANAGEMENT</div>
+                <a href="#breakeven" class="nav-item" data-tab="breakeven">
+                    <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                    <span>📉 Break-Even</span>
+                </a>
+                <a href="#multi-entry" class="nav-item" data-tab="multi-entry">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>💎 Multi-Entry Planner</span>
+                </a>
+                <a href="#cash-deploy" class="nav-item" data-tab="cash-deploy">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>💵 Cash Deployment</span>
+                </a>
+                <a href="#drawdown" class="nav-item" data-tab="drawdown">
+                    <i class="fa-solid fa-arrow-trend-down"></i>
+                    <span>📉 Drawdown & Recovery</span>
+                </a>
+
+                <div class="nav-section-label">ข้อมูลเพิ่มเติม</div>
+                <a href="#about" class="nav-item" data-tab="about">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>ℹ️ ข้อตกลง & วิธีใช้งาน</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="footer-copy">&copy; 2026 INVESTOR CALCULATOR</div>
+                <div class="footer-tagline">Decision Support Tool for Smart Investors</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Top Global Header Bar -->
+            <header class="top-header">
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="header-branding-mobile">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>INVESTOR <b>CALCULATOR</b></span>
+                </div>
+
+                <div class="global-controls">
+                    <!-- Currency Switcher -->
+                    <div class="control-group">
+                        <label class="control-label"><i class="fa-solid fa-globe"></i> สกุลเงิน:</label>
+                        <div class="segmented-control" id="currency-switcher">
+                            <button class="segment-btn active" data-currency="USD">$ USD</button>
+                            <button class="segment-btn" data-currency="THB">฿ THB</button>
+                        </div>
+                    </div>
+
+                    <!-- Fractional Shares Toggle -->
+                    <div class="control-group">
+                        <label class="control-label"><i class="fa-solid fa-puzzle-piece"></i> หุ้น:</label>
+                        <div class="segmented-control" id="shares-mode-switcher">
+                            <button class="segment-btn active" data-shares="whole">เต็มหุ้น</button>
+                            <button class="segment-btn" data-shares="fractional">ทศนิยม</button>
+                        </div>
+                    </div>
+
+                    <!-- Dark/Light Theme Switcher -->
+                    <button class="theme-toggle-btn" id="theme-toggle-btn" title="เปลี่ยนธีม สว่าง/มืด">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic Tab Content Views -->
+            <div class="view-container">
+
+                <!-- ==========================================
+                     0. HOME PAGE VIEW (#home)
+                     ========================================== -->
+                <section id="view-home" class="tab-view active">
+                    <div class="hero-section">
+                        <div class="hero-badge">📊 FINTECH DECISION SUPPORT TERMINAL</div>
+                        <h1 class="hero-title">คิดก่อนลงทุน — คำนวณก่อนตัดสินใจ</h1>
+                        <p class="hero-subtitle">
+                            ชุดเครื่องมือช่วยนักลงทุนวางแผนการลงทุน บริหารขนาดพอร์ต และประเมินความเสี่ยงอย่างเป็นระบบด้วยข้อมูลตัวเลขที่แม่นยำ
+                        </p>
+                        
+                        <div class="hero-stats">
+                            <div class="h-stat-item">
+                                <span class="h-stat-num">12</span>
+                                <span class="h-stat-lbl">เครื่องมือคำนวณระดับมืออาชีพ</span>
+                            </div>
+                            <div class="h-stat-item">
+                                <span class="h-stat-num">100%</span>
+                                <span class="h-stat-lbl">Client-side ความปลอดภัยสูง</span>
+                            </div>
+                            <div class="h-stat-item">
+                                <span class="h-stat-num">0%</span>
+                                <span class="h-stat-lbl">ไม่มีการเก็บข้อมูลออกภายนอก</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Cards Category Sections -->
+                    <div class="category-group">
+                        <h2 class="category-group-title"><i class="fa-solid fa-crosshairs"></i> 1. TRADE PLANNING (วางแผนการเทรด)</h2>
+                        <div class="calc-cards-grid">
+                            <div class="calc-card" onclick="switchTab('position')">
+                                <div class="card-icon c-green"><i class="fa-solid fa-calculator"></i></div>
+                                <h3>1. Position Size Calculator</h3>
+                                <p>คำนวณจำนวนหุ้นที่เหมาะสมตามขนาดพอร์ตและความเสี่ยงที่ยอมรับได้ เพื่อป้องกันการ Overtrade</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('risk-reward')">
+                                <div class="card-icon c-cyan"><i class="fa-solid fa-scale-balanced"></i></div>
+                                <h3>2. Risk / Reward Calculator</h3>
+                                <p>ประเมินอัตราส่วนผลตอบแทนต่อความเสี่ยง (R/R Ratio) เปรียบเทียบจุดตัดขาดทุนกับเป้าหมายกำไร</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('profit-loss')">
+                                <div class="card-icon c-purple"><i class="fa-solid fa-chart-simple"></i></div>
+                                <h3>3. Profit / Loss Calculator</h3>
+                                <p>คำนวณกำไร/ขาดทุนสุทธิหลังหักค่าธรรมเนียมและคอมมิชชันจากการขายหุ้น</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('target-price')">
+                                <div class="card-icon c-gold"><i class="fa-solid fa-bullseye"></i></div>
+                                <h3>4. Target Price Calculator</h3>
+                                <p>คำนวณหาราคาเป้าหมายจาก % ผลตอบแทนที่ต้องการ หรือคำนวณ % กำไรจากราคาเป้าหมาย</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-group">
+                        <h2 class="category-group-title"><i class="fa-solid fa-pie-chart"></i> 2. PORTFOLIO MANAGEMENT (บริหารจัดการพอร์ต)</h2>
+                        <div class="calc-cards-grid">
+                            <div class="calc-card" onclick="switchTab('avg-cost')">
+                                <div class="card-icon c-cyan"><i class="fa-solid fa-coins"></i></div>
+                                <h3>5. Average Cost Calculator</h3>
+                                <p>คำนวณต้นทุนเฉลี่ยสะสมจากการซื้อหุ้นหลายไม้ในราคาที่แตกต่างกัน</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('dca')">
+                                <div class="card-icon c-green"><i class="fa-solid fa-calendar-days"></i></div>
+                                <h3>6. DCA Calculator</h3>
+                                <p>จำลองการลงทุนแบบถัวเฉลี่ยรายเดือน/รายงวด พร้อมคำนวณกำไร/ขาดทุนสะสมตามราคาปัจจุบัน</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('portfolio-alloc')">
+                                <div class="card-icon c-purple"><i class="fa-solid fa-chart-pie"></i></div>
+                                <h3>7. Portfolio Allocation Calculator</h3>
+                                <p>วิเคราะห์สัดส่วนสินทรัพย์ในพอร์ต เปรียบเทียบกับเป้าหมาย Target Allocation พร้อม Donut Chart</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('rebalance')">
+                                <div class="card-icon c-gold"><i class="fa-solid fa-sliders"></i></div>
+                                <h3>8. Rebalancing Calculator</h3>
+                                <p>คำนวณจำนวนเงินที่ต้องปรับเพิ่ม/ลด ในแต่ละสินทรัพย์เพื่อให้สัดส่วนพอร์ตกลับสู่เป้าหมายที่วางไว้</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-group">
+                        <h2 class="category-group-title"><i class="fa-solid fa-shield-halved"></i> 3. RISK MANAGEMENT (บริหารความเสี่ยง)</h2>
+                        <div class="calc-cards-grid">
+                            <div class="calc-card" onclick="switchTab('breakeven')">
+                                <div class="card-icon c-red"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+                                <h3>9. Break-Even Calculator</h3>
+                                <p>คำนวณ % การฟื้นตัวที่จำเป็น (Required Recovery %) เพื่อให้ราคาหุ้นกลับมาเท่าทุนหลังจากติดดอย</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('multi-entry')">
+                                <div class="card-icon c-purple"><i class="fa-solid fa-layer-group"></i></div>
+                                <h3>10. Multi-Entry Planner</h3>
+                                <p>วางแผนแบ่งเงินซื้อหุ้นหลายไม้ (Scale In) พร้อมคำนวณราคาเฉลี่ยถ่วงน้ำหนัก (Weighted Average)</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('cash-deploy')">
+                                <div class="card-icon c-green"><i class="fa-solid fa-wallet"></i></div>
+                                <h3>11. Cash Deployment Calculator</h3>
+                                <p>จัดสรรเงินสดที่มีอยู่แบ่งทยอยเข้าซื้อตามสัดส่วนที่ต้องการเพื่อควบคุมวินัยเงินทุน</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+
+                            <div class="calc-card" onclick="switchTab('drawdown')">
+                                <div class="card-icon c-red"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                                <h3>12. Drawdown & Recovery Calculator</h3>
+                                <p>ประเมินเปอร์เซ็นต์การย่อตัวจากจุดสูงสุด (Peak) และคำนวณ % ผลตอบแทนที่ต้องทำได้เพื่อดึงพอร์ตกลับคืนมา</p>
+                                <span class="card-btn">ใช้งานเครื่องมือ <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     1. POSITION SIZE CALCULATOR (#position)
+                     ========================================== -->
+                <section id="view-position" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>💰 Position Size Calculator</h2>
+                            <p class="view-desc">คำนวณจำนวนหุ้นที่เหมาะสมตามมูลค่าพอร์ตและความเสี่ยงสูงสุดที่ยอมรับได้</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('position')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <!-- Inputs Panel -->
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-pen-to-square"></i> กรอกข้อมูลการลงทุน</h3>
+                            
+                            <div class="input-field">
+                                <label>มูลค่าพอร์ตรวม (Portfolio Value):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pos-portfolio" value="100000" step="100" min="0" placeholder="100000">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ความเสี่ยงที่ยอมรับได้ต่อไม้ (Risk per Trade %):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="pos-risk-pct" value="1.0" step="0.1" min="0.01" max="100" placeholder="1.0">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                                <span class="input-hint">แนะนำทั่วไป: 1.0% - 2.0% ของพอร์ต</span>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ราคาซื้อ (Entry Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pos-entry" value="50.00" step="0.01" min="0" placeholder="50.00">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>จุดตัดขาดทุน (Stop Loss Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pos-stop" value="45.00" step="0.01" min="0" placeholder="45.00">
+                                </div>
+                            </div>
+
+                            <div id="pos-error" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <!-- Results Panel -->
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-line"></i> ผลลัพธ์การคำนวณ</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">จำนวนหุ้นที่ควรซื้อ (Position Size)</span>
+                                <div class="res-value-main" id="pos-res-shares">200 หุ้น</div>
+                                <div class="res-sub text-muted" id="pos-res-shares-sub">(ปัดลงเป็นจำนวนเต็ม)</div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">ความเสี่ยงสูงสุด (Max Risk)</span>
+                                    <span class="res-card-value text-red" id="pos-res-max-risk">$1,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ความเสี่ยงต่อหุ้น (Risk / Share)</span>
+                                    <span class="res-card-value" id="pos-res-risk-share">$5.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">มูลค่าเงินลงทุน (Position Value)</span>
+                                    <span class="res-card-value" id="pos-res-pos-val">$10,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">สัดส่วนพอร์ต (Allocation %)</span>
+                                    <span class="res-card-value" id="pos-res-alloc">10.00%</span>
+                                </div>
+                            </div>
+
+                            <!-- Risk Status Indicator Badge -->
+                            <div class="risk-badge-box" id="pos-risk-badge-box">
+                                <span class="badge-status-title">ระดับความเสี่ยงพอร์ต (Portfolio Risk):</span>
+                                <span class="risk-badge badge-green" id="pos-risk-badge">🟢 Normal (&le; 10%)</span>
+                            </div>
+
+                            <!-- Decision Support Insight Callout -->
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="pos-insight-text">
+                                    💡 <b>Decision Insight:</b> หากราคาลดลงถึง Stop Loss ($45.00) คุณจะเสียหายประมาณ <b>$1,000.00</b> คิดเป็น <b>1.00%</b> ของมูลค่าพอร์ตรวมของคุณ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Educational Accordion -->
+                    <div class="edu-accordion">
+                        <details>
+                            <summary><i class="fa-solid fa-circle-question"></i> 💡 วิธีคำนวณ & ℹ️ หมายเหตุ</summary>
+                            <div class="accordion-content">
+                                <h4>สูตรการคำนวณ (Formulas):</h4>
+                                <ul>
+                                    <li><b>Max Risk ($)</b> = Portfolio Value &times; (Risk % &divide; 100)</li>
+                                    <li><b>Risk per Share</b> = Entry Price &minus; Stop Loss Price</li>
+                                    <li><b>Position Size (Shares)</b> = Max Risk &divide; Risk per Share</li>
+                                    <li><b>Position Value ($)</b> = Position Size &times; Entry Price</li>
+                                    <li><b>Portfolio Allocation (%)</b> = (Position Value &divide; Portfolio Value) &times; 100</li>
+                                </ul>
+                                <p class="note-text">ℹ️ <b>หมายเหตุ:</b> Position Sizing ช่วยควบคุมไม่ให้การขาดทุนในหุ้นตัวเดียวทำลายเงินทุนส่วนใหญ่ของคุณ โดยหลักสถิติสถาบันนิยมจำกัดความเสี่ยงไม่เกิน 1-2% ต่อหนึ่งไม้</p>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     2. RISK / REWARD CALCULATOR (#risk-reward)
+                     ========================================== -->
+                <section id="view-risk-reward" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>🎯 Risk / Reward Calculator</h2>
+                            <p class="view-desc">คำนวณอัตราส่วนผลตอบแทนต่อความเสี่ยง (R/R Ratio) เพื่อคัดกรองการเทรดที่มีความคุ้มค่าทางสถิติ</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('rr')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <!-- Inputs Panel -->
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><div class="panel-title-text"><i class="fa-solid fa-pen-to-square"></i> กรอกระดับราคาการเทรด</div></h3>
+                            
+                            <div class="input-field">
+                                <label>ราคาซื้อ (Entry Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="rr-entry" value="100.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ราคาเป้าหมายกำไร (Target Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="rr-target" value="130.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>จุดตัดขาดทุน (Stop Loss Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="rr-stop" value="90.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>จำนวนหุ้น (Number of Shares):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="rr-shares" value="100" step="1" min="1">
+                                </div>
+                            </div>
+
+                            <div id="rr-error" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <!-- Results Panel -->
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-pie"></i> อัตราส่วนความคุ้มค่า (Risk/Reward)</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">Risk / Reward Ratio</span>
+                                <div class="res-value-main text-cyan" id="rr-res-ratio">3.00x</div>
+                                <div class="rating-badge rating-excellent" id="rr-res-rating">⭐ Excellent (ดีเยี่ยม &ge; 3.0x)</div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">กำไรต่อหุ้น (Potential Profit/Share)</span>
+                                    <span class="res-card-value text-green" id="rr-res-profit-share">+$30.00 (+30.00%)</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ขาดทุนต่อหุ้น (Potential Loss/Share)</span>
+                                    <span class="res-card-value text-red" id="rr-res-loss-share">-$10.00 (-10.00%)</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">กำไรรวมสูงสุด (Total Potential Profit)</span>
+                                    <span class="res-card-value text-green" id="rr-res-total-profit">+$3,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ขาดทุนรวมสูงสุด (Total Potential Loss)</span>
+                                    <span class="res-card-value text-red" id="rr-res-total-loss">-$1,000.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="rr-insight-text">
+                                    💡 <b>Risk/Reward Evaluation:</b> อัตราส่วน Risk/Reward อยู่ในระดับ <b>3.00x</b> (ทุกการเสี่ยง $1 มีโอกาสทำกำไร $3.00) มีความได้เปรียบทางสถิติสูงมาก
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-accordion">
+                        <details>
+                            <summary><i class="fa-solid fa-circle-question"></i> 💡 วิธีคำนวณ & ℹ️ หมายเหตุ</summary>
+                            <div class="accordion-content">
+                                <h4>สูตรการคำนวณ:</h4>
+                                <ul>
+                                    <li><b>Potential Profit / Share</b> = Target Price &minus; Entry Price</li>
+                                    <li><b>Potential Loss / Share</b> = Entry Price &minus; Stop Loss Price</li>
+                                    <li><b>Risk / Reward Ratio</b> = Potential Profit &divide; Potential Loss</li>
+                                </ul>
+                                <p class="note-text">ℹ️ <b>หมายเหตุ:</b> นักลงทุนมืออาชีพนิยมมองหาแผนการเทรดที่มี R/R Ratio ตั้งแต่ 2.0x ขึ้นไป เพื่อให้แม้ชนะเพียง 40-50% ของจำนวนครั้งก็ยังสร้างผลตอบแทนบวกในระยะยาวได้</p>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     3. PROFIT / LOSS CALCULATOR (#profit-loss)
+                     ========================================== -->
+                <section id="view-profit-loss" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>📊 Profit / Loss Calculator</h2>
+                            <p class="view-desc">คำนวณผลตอบแทน กำไร/ขาดทุน สุทธิจากการปิดสถานะขายหุ้นหลังหักค่าธรรมเนียม</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('pl')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-pen-to-square"></i> รายละเอียดการเทรด</h3>
+                            
+                            <div class="input-field">
+                                <label>ราคาซื้อ (Buy Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pl-buy-price" value="100.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ราคาขาย (Sell Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pl-sell-price" value="125.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>จำนวนหุ้น (Shares):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="pl-shares" value="100" step="1" min="1">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ค่าคอมมิชชันรวม (Commission %):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="pl-comm-pct" value="0.10" step="0.01" min="0">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ค่าธรรมเนียมอื่น ๆ สุทธิ (Other Fees):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="pl-other-fees" value="2.00" step="0.01" min="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-receipt"></i> สรุปผลตอบแทนสุทธิ (Net P/L)</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">กำไร / ขาดทุนสุทธิ (Net P/L)</span>
+                                <div class="res-value-main text-green" id="pl-res-net-pl">+$2,473.00</div>
+                                <div class="res-sub" id="pl-res-return-pct">ผลตอบแทนสุทธิ: <b>+24.73%</b></div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">ต้นทุนซื้อรวม (Investment Cost)</span>
+                                    <span class="res-card-value" id="pl-res-cost">$10,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">รายรับจากการขาย (Gross Proceeds)</span>
+                                    <span class="res-card-value" id="pl-res-proceeds">$12,500.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">กำไรขั้นต้น (Gross P/L)</span>
+                                    <span class="res-card-value text-green" id="pl-res-gross-pl">+$2,500.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ค่าธรรมเนียมรวม (Total Fees)</span>
+                                    <span class="res-card-value text-red" id="pl-res-total-fees">-$27.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="pl-insight-text">
+                                    💡 <b>Net Return Overview:</b> จากการขายหุ้นครั้งนี้ คุณได้รับกำไรสุทธิหลังหักค่าธรรมเนียม <b>$2,473.00</b> คิดเป็นผลตอบแทน <b>+24.73%</b> ของต้นทุน
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-accordion">
+                        <details>
+                            <summary><i class="fa-solid fa-circle-question"></i> 💡 วิธีคำนวณ & ℹ️ หมายเหตุ</summary>
+                            <div class="accordion-content">
+                                <h4>สูตรการคำนวณ:</h4>
+                                <ul>
+                                    <li><b>Investment Cost</b> = Buy Price &times; Shares</li>
+                                    <li><b>Gross Proceeds</b> = Sell Price &times; Shares</li>
+                                    <li><b>Gross P/L</b> = Gross Proceeds &minus; Investment Cost</li>
+                                    <li><b>Total Fees</b> = (Buy Value + Sell Value) &times; Commission % + Other Fees</li>
+                                    <li><b>Net P/L</b> = Gross P/L &minus; Total Fees</li>
+                                    <li><b>Return %</b> = (Net P/L &divide; Investment Cost) &times; 100</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     4. TARGET PRICE CALCULATOR (#target-price)
+                     ========================================== -->
+                <section id="view-target-price" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>🎯 Target Price Calculator</h2>
+                            <p class="view-desc">คำนวณราคาเป้าหมายจากผลตอบแทนที่ต้องการ หรือคำนวณผลตอบแทนจากราคาขายเป้าหมาย</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('target')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="segmented-control mode-selector" id="target-mode-selector">
+                        <button class="segment-btn active" data-mode="A">Mode A: คำนวณราคาเป้าหมายจาก % กำไรที่ต้องการ</button>
+                        <button class="segment-btn" data-mode="B">Mode B: คำนวณ % กำไรจากราคาเป้าหมายที่กำหนด</button>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <!-- Mode A Panel -->
+                        <div class="panel input-panel" id="target-panel-A">
+                            <h3 class="panel-title"><i class="fa-solid fa-bullseye"></i> Mode A: กำหนด % กำไรที่ต้องการ</h3>
+                            
+                            <div class="input-field">
+                                <label>ราคาซื้อ (Entry Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="target-a-entry" value="100.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ผลตอบแทนที่ต้องการ (Desired Return %):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="target-a-pct" value="20.0" step="0.1">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mode B Panel -->
+                        <div class="panel input-panel" id="target-panel-B" style="display:none;">
+                            <h3 class="panel-title"><i class="fa-solid fa-calculator"></i> Mode B: กำหนดราคาเป้าหมาย</h3>
+                            
+                            <div class="input-field">
+                                <label>ราคาซื้อ (Entry Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="target-b-entry" value="100.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ราคาเป้าหมาย (Target Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="target-b-target" value="135.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>จำนวนหุ้น (Shares):</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="target-b-shares" value="100" step="1" min="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Panel -->
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-flag-checkered"></i> ผลลัพธ์เป้าหมายการลงทุน</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label" id="target-res-label">ราคาขายเป้าหมายที่ต้องตั้ง (Target Price)</span>
+                                <div class="res-value-main text-green" id="target-res-main">$120.00</div>
+                                <div class="res-sub" id="target-res-sub">ผลตอบแทน: <b>+20.00%</b></div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">ส่วนต่างราคาต่อหุ้น (Profit / Share)</span>
+                                    <span class="res-card-value text-green" id="target-res-diff">+$20.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">กำไรรวมหากซื้อ 100 หุ้น</span>
+                                    <span class="res-card-value text-green" id="target-res-total-prof">+$2,000.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="target-insight-text">
+                                    💡 <b>Target Goal Insight:</b> หากต้องการกำไร <b>20.00%</b> จากราคาซื้อ $100.00 คุณต้องตั้งราคาขายเป้าหมายที่ <b>$120.00</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     5. AVERAGE COST CALCULATOR (#avg-cost)
+                     ========================================== -->
+                <section id="view-avg-cost" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>🔄 Average Cost Calculator</h2>
+                            <p class="view-desc">คำนวณต้นทุนเฉลี่ยสะสมจากการเข้าซื้อหุ้นหลายครั้งในราคาที่แตกต่างกัน</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('avg-cost')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <div class="panel-header-row">
+                                <h3 class="panel-title"><i class="fa-solid fa-list-ol"></i> ตารางรายการเข้าซื้อหุ้น</h3>
+                                <button class="add-row-btn" id="avg-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มรายการ</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="avg-cost-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ครั้งที่</th>
+                                            <th>จำนวนหุ้น</th>
+                                            <th>ราคาซื้อต่อหุ้น ($)</th>
+                                            <th>รวมเงิน ($)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="avg-cost-tbody">
+                                        <!-- Rows inserted via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-calculator"></i> ต้นทุนเฉลี่ยสะสมรวม</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">ราคาต้นทุนเฉลี่ยต่อหุ้น (Average Cost)</span>
+                                <div class="res-value-main text-cyan" id="avg-res-cost">$92.00 / หุ้น</div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">จำนวนหุ้นรวมทั้งหมด (Total Shares)</span>
+                                    <span class="res-card-value" id="avg-res-shares">250 หุ้น</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">เงินลงทุนรวมทั้งหมด (Total Investment)</span>
+                                    <span class="res-card-value" id="avg-res-total-cost">$23,000.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="avg-insight-text">
+                                    💡 <b>Average Summary:</b> จากการเข้าซื้อรวม 3 ครั้ง เป็นจำนวน 250 หุ้น ทำให้ได้ราคาต้นทุนเฉลี่ยใหม่สะสมอยู่ที่ <b>$92.00 ต่อหุ้น</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     6. DCA CALCULATOR (#dca)
+                     ========================================== -->
+                <section id="view-dca" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>📈 DCA Calculator (Dollar-Cost Averaging)</h2>
+                            <p class="view-desc">คำนวณและจำลองการสะสมหุ้นแบบถัวเฉลี่ยรายงวด พร้อมประเมินกำไร/ขาดทุนตามราคาปัจจุบัน</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('dca')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <div class="panel-header-row">
+                                <h3 class="panel-title"><i class="fa-solid fa-calendar-check"></i> ประวัติการซื้อ DCA รายงวด</h3>
+                                <button class="add-row-btn" id="dca-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มงวด</button>
+                            </div>
+
+                            <div class="input-field" style="margin-bottom: 16px;">
+                                <label style="color: var(--accent-cyan); font-weight: 700;">ราคาปัจจุบันสำหรับจำลองผลลัพธ์ (Current Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="dca-current-price" value="110.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="dca-table">
+                                    <thead>
+                                        <tr>
+                                            <th>งวดที่</th>
+                                            <th>จำนวนหุ้น</th>
+                                            <th>ราคาซื้อ ($)</th>
+                                            <th>รวมเงิน ($)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dca-tbody">
+                                        <!-- Rows via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-line"></i> สถานะพอร์ต DCA ปัจจุบัน</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">กำไร / ขาดทุนสะสม (Unrealized P/L)</span>
+                                <div class="res-value-main text-green" id="dca-res-unrealized">+$3,000.00</div>
+                                <div class="res-sub" id="dca-res-unrealized-pct">ผลตอบแทน: <b>+15.00%</b></div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">จำนวนหุ้นสะสมรวม (Total Shares)</span>
+                                    <span class="res-card-value" id="dca-res-total-shares">200 หุ้น</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ต้นทุนรวมทั้งหมด (Total Cost)</span>
+                                    <span class="res-card-value" id="dca-res-total-cost">$20,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ต้นทุนเฉลี่ยต่อหุ้น (Avg Cost)</span>
+                                    <span class="res-card-value" id="dca-res-avg-cost">$100.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">มูลค่าตลาดปัจจุบัน (Market Value)</span>
+                                    <span class="res-card-value text-cyan" id="dca-res-market-val">$22,000.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     7. BREAK-EVEN CALCULATOR (#breakeven)
+                     ========================================== -->
+                <section id="view-breakeven" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>📉 Break-Even Calculator</h2>
+                            <p class="view-desc">คำนวณเปอร์เซ็นต์ผลตอบแทนที่ต้องทำได้เพิ่มขึ้น เพื่อดึงราคาหุ้นให้กลับมาที่จุดคุ้มทุนหลังขาดทุน</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('breakeven')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-pen-to-square"></i> กรอกราคาต้นทุนและราคาปัจจุบัน</h3>
+                            
+                            <div class="input-field">
+                                <label>ราคาต้นทุนเดิม (Cost / Entry Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="be-cost" value="100.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>ราคาปัจจุบัน (Current Price):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="be-current" value="70.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div id="be-error" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-arrows-split-up-and-left"></i> เปอร์เซ็นต์ฟื้นตัวที่จำเป็น (Required Recovery)</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">เปอร์เซ็นต์ที่ต้องขึ้นเพิ่มเพื่อเท่าทุน (Required Recovery %)</span>
+                                <div class="res-value-main text-gold" id="be-res-recovery">+42.86%</div>
+                                <div class="res-sub text-red" id="be-res-loss">เปอร์เซ็นต์ที่ขาดทุนอยู่ปัจจุบัน: <b>-30.00%</b></div>
+                            </div>
+
+                            <!-- Asymmetric Loss Recovery Visual Bar -->
+                            <div class="recovery-visual-box">
+                                <div class="rec-step">
+                                    <span class="step-lbl">ราคาต้นทุนเดิม</span>
+                                    <span class="step-val" id="be-step-cost">$100.00</span>
+                                </div>
+                                <div class="rec-arrow text-red"><i class="fa-solid fa-arrow-down"></i> ขาดทุน -30.00%</div>
+                                <div class="rec-step current-step">
+                                    <span class="step-lbl">ราคาปัจจุบัน</span>
+                                    <span class="step-val" id="be-step-current">$70.00</span>
+                                </div>
+                                <div class="rec-arrow text-green"><i class="fa-solid fa-arrow-up"></i> ต้องขึ้น +42.86%</div>
+                                <div class="rec-step">
+                                    <span class="step-lbl">จุดคุ้มทุน (Break-Even)</span>
+                                    <span class="step-val" id="be-step-target">$100.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <div class="insight-text" id="be-insight-text">
+                                    ⚠️ <b>Asymmetric Recovery Warning:</b> หากราคาลดลง <b>30.00%</b> จากต้นทุนเดิม ($100.00 &rarr; $70.00) ราคาหุ้นจะต้องเพิ่มขึ้นถึง <b>+42.86%</b> จากราคาปัจจุบันจึงจะสามารถกลับมาที่จุดเท่าทุนได้
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     8. MULTI-ENTRY PLANNER (#multi-entry)
+                     ========================================== -->
+                <section id="view-multi-entry" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>💎 Multi-Entry Planner</h2>
+                            <p class="view-desc">วางแผนกระจายเข้าซื้อหุ้นหลายไม้ (Scale-In Plan) พร้อมคำนวณราคาเฉลี่ยถ่วงน้ำหนัก</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('multi-entry')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-layer-group"></i> กำหนดเงินทุนและโซนซื้อ</h3>
+                            
+                            <div class="input-field">
+                                <label>เงินทุนรวมที่เตรียมซื้อ (Total Capital):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="me-capital" value="10000" step="100" min="0">
+                                </div>
+                            </div>
+
+                            <div class="panel-header-row" style="margin-top: 16px;">
+                                <span class="input-label-bold">ตารางสัดส่วนไม้ซื้อ (Entries Allocation)</span>
+                                <button class="add-row-btn" id="me-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มไม้</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="me-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ไม้ที่</th>
+                                            <th>สัดส่วน (%)</th>
+                                            <th>ราคาซื้อ ($)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="me-tbody">
+                                        <!-- Rows via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="me-alloc-warning" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-bar"></i> สรุปแผนการซื้อหลายไม้</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">ราคาซื้อเฉลี่ยถ่วงน้ำหนัก (Weighted Avg Price)</span>
+                                <div class="res-value-main text-purple" id="me-res-weighted-avg">$84.00</div>
+                            </div>
+
+                            <div class="results-grid">
+                                <div class="res-card">
+                                    <span class="res-card-label">จำนวนหุ้นรวมที่ได้ (Total Shares)</span>
+                                    <span class="res-card-value" id="me-res-total-shares">118 หุ้น</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">เงินทุนที่ถูกนำไปใช้ (Capital Used)</span>
+                                    <span class="res-card-value" id="me-res-total-used">$10,000.00 (100%)</span>
+                                </div>
+                            </div>
+
+                            <div id="me-breakdown-box" class="breakdown-box">
+                                <!-- Breakdown Table via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     9. PORTFOLIO ALLOCATION (#portfolio-alloc)
+                     ========================================== -->
+                <section id="view-portfolio-alloc" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>🛡️ Portfolio Allocation Calculator</h2>
+                            <p class="view-desc">วิเคราะห์และเปรียบเทียบสัดส่วนสินทรัพย์ในพอร์ตโฟลิโอกับเป้าหมาย (Target Allocation)</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('port-alloc')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <div class="panel-header-row">
+                                <h3 class="panel-title"><i class="fa-solid fa-list-check"></i> สินทรัพย์ในพอร์ตโฟลิโอ</h3>
+                                <button class="add-row-btn" id="pa-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มสินทรัพย์</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="pa-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ชื่อสินทรัพย์</th>
+                                            <th>มูลค่า ($)</th>
+                                            <th>เป้าหมาย (%)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pa-tbody">
+                                        <!-- Rows via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-pie"></i> แผนภูมิสัดส่วนสินทรัพย์</h3>
+                            
+                            <div class="chart-container">
+                                <canvas id="pa-donut-chart" width="260" height="260"></canvas>
+                            </div>
+
+                            <div class="results-grid" style="margin-top: 16px;">
+                                <div class="res-card">
+                                    <span class="res-card-label">มูลค่าพอร์ตรวม (Total Portfolio)</span>
+                                    <span class="res-card-value text-cyan" id="pa-res-total-val">$60,000.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">สัดส่วนเงินสด (Cash Weight)</span>
+                                    <span class="res-card-value" id="pa-res-cash-weight">25.00%</span>
+                                </div>
+                            </div>
+
+                            <div id="pa-status-table-box" class="breakdown-box" style="margin-top: 16px;">
+                                <!-- Status breakdown table -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     10. REBALANCING CALCULATOR (#rebalance)
+                     ========================================== -->
+                <section id="view-rebalance" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>🔄 Rebalancing Calculator</h2>
+                            <p class="view-desc">คำนวณจำนวนเงินที่ต้องปรับเพิ่ม/ลด ในแต่ละสินทรัพย์เพื่อให้สัดส่วนพอร์ตกลับสู่เป้าหมายที่วางไว้</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('rebalance')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <div class="panel-header-row">
+                                <h3 class="panel-title"><i class="fa-solid fa-scale-unbalanced-flip"></i> สินทรัพย์ที่ต้องการ Rebalance</h3>
+                                <button class="add-row-btn" id="reb-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มสินทรัพย์</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="reb-table">
+                                    <thead>
+                                        <tr>
+                                            <th>สินทรัพย์</th>
+                                            <th>มูลค่าปัจจุบัน ($)</th>
+                                            <th>เป้าหมาย (%)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reb-tbody">
+                                        <!-- Rows via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> คำแนะนำการปรับสัดส่วน (Adjustments)</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">มูลค่าพอร์ตลงทุนรวม</span>
+                                <div class="res-value-main text-cyan" id="reb-res-total">$100,000.00</div>
+                            </div>
+
+                            <div id="reb-output-box" class="breakdown-box">
+                                <!-- Rebalance adjustments table via JS -->
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <div class="insight-text">
+                                    ℹ️ <b>Rebalancing Principle:</b> การปรับสมดุลพอร์ตช่วยรักษาระดับความเสี่ยงให้เหมาะสมตามเป้าหมาย โดยจำนวนเงินที่ระบุเป็นเพียงตัวเลขแนะนำทางสถิติตาม Target Allocation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     11. CASH DEPLOYMENT CALCULATOR (#cash-deploy)
+                     ========================================== -->
+                <section id="view-cash-deploy" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>💵 Cash Deployment Calculator</h2>
+                            <p class="view-desc">จัดสรรเงินสดที่มีอยู่แบ่งทยอยเข้าซื้อตามสัดส่วนที่ต้องการเพื่อควบคุมวินัยเงินทุน</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('cash-deploy')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-wallet"></i> จำนวนเงินสดที่มีอยู่</h3>
+                            
+                            <div class="input-field">
+                                <label>เงินสดพร้อมลงทุน (Available Cash):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="cd-cash" value="20000" step="100" min="0">
+                                </div>
+                            </div>
+
+                            <div class="panel-header-row" style="margin-top: 16px;">
+                                <span class="input-label-bold">กำหนดสัดส่วนไม้ซื้อ (Cash Allocation %)</span>
+                                <button class="add-row-btn" id="cd-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มไม้</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="entry-table" id="cd-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ไม้ที่</th>
+                                            <th>สัดส่วน (%)</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cd-tbody">
+                                        <!-- Rows via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="cd-alloc-warning" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-money-bill-wave"></i> ตารางจัดสรรเงินทุน</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">เงินสดจัดสรรครบทั้งหมด</span>
+                                <div class="res-value-main text-green" id="cd-res-total">$20,000.00</div>
+                            </div>
+
+                            <div id="cd-breakdown-box" class="breakdown-box">
+                                <!-- Breakdown table via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     12. DRAWDOWN & RECOVERY CALCULATOR (#drawdown)
+                     ========================================== -->
+                <section id="view-drawdown" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>📉 Drawdown & Recovery Calculator</h2>
+                            <p class="view-desc">ประเมินเปอร์เซ็นต์การย่อตัวจากจุดสูงสุด (Peak) และคำนวณ % ผลตอบแทนที่ต้องทำได้เพื่อดึงพอร์ตกลับคืนมา</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="tool-btn reset-btn" onclick="resetCalculator('drawdown')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-layout-grid">
+                        <div class="panel input-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-pen-to-square"></i> ข้อมูลมูลค่าพอร์ตโฟลิโอ</h3>
+                            
+                            <div class="input-field">
+                                <label>มูลค่าพอร์ตสูงสุดเดิม (Peak Portfolio Value):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="dd-peak" value="100000" step="1000" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-field">
+                                <label>มูลค่าพอร์ตปัจจุบัน (Current Portfolio Value):</label>
+                                <div class="input-wrapper">
+                                    <span class="curr-symbol">$</span>
+                                    <input type="number" id="dd-current" value="70000" step="1000" min="0">
+                                </div>
+                            </div>
+
+                            <div id="dd-error" class="error-alert" style="display:none;"></div>
+                        </div>
+
+                        <div class="panel result-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-line"></i> ผลการประเมิน Drawdown & Recovery</h3>
+                            
+                            <div class="hero-result-box">
+                                <span class="res-label">Drawdown จากจุดสูงสุด (Max Drawdown)</span>
+                                <div class="res-value-main text-red" id="dd-res-drawdown">-30.00%</div>
+                                <div class="res-sub text-green" id="dd-res-recovery">ผลตอบแทนที่ต้องทำได้เพิ่มขึ้น: <b>+42.86%</b></div>
+                            </div>
+
+                            <div class="recovery-visual-box">
+                                <div class="rec-step">
+                                    <span class="step-lbl">มูลค่าสูงสุด (Peak)</span>
+                                    <span class="step-val" id="dd-step-peak">$100,000.00</span>
+                                </div>
+                                <div class="rec-arrow text-red"><i class="fa-solid fa-arrow-down"></i> Drawdown -30.00%</div>
+                                <div class="rec-step current-step">
+                                    <span class="step-lbl">มูลค่าปัจจุบัน (Current)</span>
+                                    <span class="step-val" id="dd-step-current">$70,000.00</span>
+                                </div>
+                                <div class="rec-arrow text-green"><i class="fa-solid fa-arrow-up"></i> ต้องทำเพิ่ม +42.86%</div>
+                                <div class="rec-step">
+                                    <span class="step-lbl">เป้าหมายกลับคืนยอดเดิม</span>
+                                    <span class="step-val" id="dd-step-target">$100,000.00</span>
+                                </div>
+                            </div>
+
+                            <div class="insight-callout">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <div class="insight-text" id="dd-insight-text">
+                                    💡 <b>Recovery Insight:</b> เมื่อพอร์ตย่อตัวลง <b>30.00%</b> คุณต้องทำผลตอบแทนให้ได้ <b>+42.86%</b> จากเงินทุนที่เหลือเพื่อดึงพอร์ตกลับไปที่ $100,000.00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==========================================
+                     13. ABOUT & DISCLAIMER PAGE (#about)
+                     ========================================== -->
+                <section id="view-about" class="tab-view">
+                    <div class="view-header">
+                        <div class="view-title-wrap">
+                            <h2>ℹ️ เกี่ยวกับ INVESTOR CALCULATOR</h2>
+                            <p class="view-desc">เครื่องมือสนับสนุนการตัดสินใจสำหรับนักลงทุน (Decision Support Tool for Smart Investors)</p>
+                        </div>
+                    </div>
+
+                    <div class="about-content-card">
+                        <h3><i class="fa-solid fa-bullseye"></i> วิสัยทัศน์ของผลิตภัณฑ์ (Product Vision)</h3>
+                        <blockquote class="vision-quote">
+                            "คิดก่อนลงทุน — คำนวณก่อนตัดสินใจ"
+                        </blockquote>
+                        <p>
+                            INVESTOR CALCULATOR ถูกสร้างขึ้นมาเพื่อเปลี่ยนวิธีการตัดสินใจของนักลงทุนจากการเดาหรือใช้อารมณ์ ให้กลายเป็นการวางแผนด้วยข้อมูลตัวเลขที่ชัดเจนก่อนการเข้าเทรดทุกครั้ง เพื่อช่วยตอบคำถามสำคัญ:
+                        </p>
+                        <ul>
+                            <li><b>เงินลงทุนเท่าไร?</b> สอดคล้องกับขนาดพอร์ตหรือไม่?</li>
+                            <li><b>เสี่ยงเท่าไร?</b> หากราคาลงถึง Stop Loss จะเสียหายกี่ % ของพอร์ต?</li>
+                            <li><b>ถ้าถัวเฉลี่ย</b> ต้นทุนใหม่สะสมจะเป็นเท่าไร?</li>
+                            <li><b>ถ้าขาดทุนไป X%</b> ต้องทำกำไรคืนมาอีกกี่ % ถึงจะเท่าทุน?</li>
+                        </ul>
+
+                        <hr class="divider">
+
+                        <h3><i class="fa-solid fa-shield-cat"></i> ข้อตกลงและคำเตือนความเสี่ยง (Disclaimer)</h3>
+                        <div class="disclaimer-alert">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <b>ข้อความปฏิเสธความรับผิดชอบ (Disclaimer):</b><br>
+                                เครื่องมือนี้มีวัตถุประสงค์เพื่อช่วยคำนวณตัวเลขทางคณิตศาสตร์และการเงินเพื่อการศึกษาและการวางแผนเท่านั้น <b>ไม่ถือเป็นคำแนะนำการลงทุน คำแนะนำการซื้อ หรือคำแนะนำการขายหลักทรัพย์ใด ๆ</b> ผลลัพธ์จากการคำนวณขึ้นอยู่กับข้อมูลตัวเลขที่ผู้ใช้ป้อน ผู้ลงทุนควรศึกษาข้อมูล พิจารณาความเสี่ยง และตัดสินใจลงทุนด้วยตนเองอย่างรอบคอบ
+                            </div>
+                        </div>
+
+                        <hr class="divider">
+
+                        <h3><i class="fa-solid fa-lock"></i> การรักษาความเป็นส่วนตัวของข้อมูล (Data Privacy)</h3>
+                        <p>
+                            แอปพลิเคชันนี้ทำงานในรูปแบบ <b>Client-Side Application 100%</b> ประมวลผลข้อมูลทั้งหมดภายในเว็บเบราว์เซอร์ของอุปกรณ์คุณเท่านั้น โดยไม่มีการส่งข้อมูลพอร์ตการลงทุน หรือข้อมูลการป้อนค่าใด ๆ ออกไปข้างนอกไปยัง Server ภายนอกอย่างสิ้นเชิง
+                        </p>
+                    </div>
+                </section>
+
+            </div> <!-- /view-container -->
+
+            <!-- Global Footer -->
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>INVESTOR <b>CALCULATOR</b></span>
+                    </div>
+                    <p class="footer-desc">เครื่องมือช่วยคำนวณและวางแผนการลงทุนสำหรับนักลงทุนหุ้น</p>
+                    <div class="footer-disclaimer-box">
+                        <b>Disclaimer:</b> เครื่องมือนี้มีวัตถุประสงค์เพื่อช่วยคำนวณและให้ข้อมูลเชิงการศึกษาเท่านั้น ไม่ถือเป็นคำแนะนำการลงทุน ผลลัพธ์จากเครื่องมือขึ้นอยู่กับข้อมูลที่ผู้ใช้ป้อน และผู้ลงทุนควรพิจารณาความเสี่ยงและข้อมูลอื่นประกอบการตัดสินใจด้วยตนเอง
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="#home" class="b-nav-item active" data-tab="home">
+            <i class="fa-solid fa-house"></i>
+            <span>หน้าแรก</span>
+        </a>
+        <a href="#position" class="b-nav-item" data-tab="position">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Position</span>
+        </a>
+        <a href="#risk-reward" class="b-nav-item" data-tab="risk-reward">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <span>R / R</span>
+        </a>
+        <a href="#portfolio-alloc" class="b-nav-item" data-tab="portfolio-alloc">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Portfolio</span>
+        </a>
+        <a href="#drawdown" class="b-nav-item" data-tab="drawdown">
+            <i class="fa-solid fa-arrow-trend-down"></i>
+            <span>Drawdown</span>
+        </a>
+    </nav>
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div class="mobile-backdrop" id="mobile-backdrop"></div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js?v=4.0.0" defer></script>
 </body>
 </html>
