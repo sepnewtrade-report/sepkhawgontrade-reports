@@ -151,15 +151,24 @@ html, body {
 }
 
 .logo-box {
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 10px auto;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 14px auto;
+    border-radius: 18px;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--glow-cyan);
+    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.25);
+    padding: 0;
+    overflow: hidden;
+}
+
+.brand-logo-img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    border-radius: 18px;
 }
 
 .logo-icon {
