@@ -278,7 +278,8 @@ function cacheElements() {
         srBtnSaveWatchlist: document.getElementById('sr-btn-save-watchlist'),
         srBtnClearCustom: document.getElementById('sr-btn-clear-custom'),
         srWatchlistList: document.getElementById('sr-watchlist-list'),
-        navBotTrade: document.getElementById('nav-bot-trade')
+        navBotTrade: document.getElementById('nav-bot-trade'),
+        btnClearCache: document.getElementById('btn-clear-cache')
     };
 }
 
@@ -332,6 +333,19 @@ function setupEventListeners() {
     if (elements.btnCopyLink) elements.btnCopyLink.addEventListener('click', copyReportLink);
     if (elements.btnPrint) elements.btnPrint.addEventListener('click', () => window.print());
     if (elements.btnRaw) elements.btnRaw.addEventListener('click', toggleRawMarkdown);
+
+    // Clear Cache Button
+    if (elements.btnClearCache) {
+        elements.btnClearCache.addEventListener('click', () => {
+            if (confirm(appState.lang === 'th' ? 'คุณต้องการล้างแคชและรีเซ็ตข้อมูลเว็บใช่หรือไม่?' : 'Do you want to clear browser cache and reset site state?')) {
+                try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                } catch(e) {}
+                window.location.href = window.location.pathname + '?nocache=' + Date.now();
+            }
+        });
+    }
 
     // Language switcher
     document.querySelectorAll('.lang-switcher').forEach(switcher => {
