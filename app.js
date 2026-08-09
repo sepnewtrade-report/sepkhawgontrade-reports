@@ -53,49 +53,50 @@ const translations = {
         otherReports: "รายงานทั่วไป",
         readFullReport: "อ่านรายงานฉบับเต็ม",
         latestReportBadge: "รายงานล่าสุด",
-        lblMemberTools: "เครื่องมือสมาชิก",
-        lblNavPortfolio: "Portfolio หุ้น",
+        lblMemberTools: "เครื่องมือคำนวณ & สื่อ",
+        lblNavPortfolio: "คำนวณต้นทุนเฉลี่ย & Break Even",
         lblNavBotTrade: "บอทเทรด & ผลงาน",
         lblNavWebAlbum: "Album รายการผลิตคลิป",
+        lblNavYoutube: "รับชมช่อง YouTube",
         legendTitle: "คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน",
         legendDesc: "ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:",
         legendAccumText: "วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ",
         legendBuyText: "มีเงินไหลเข้าสะสมทั่วไป",
         legendDistribText: "วาฬกำลังทยอยเทขายอย่างมีนัยสำคัญ",
         legendSellText: "มีเงินไหลออกสะสมทั่วไป",
-        portfolioTitle: "📊 Portfolio หุ้น",
-        portfolioSubtitle: "ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน",
-        portfolioOverview: "ภาพรวม Portfolio",
-        lblPtCost: "ต้นทุนรวมทั้ง portfolio",
+        portfolioTitle: "🧮 คำนวณต้นทุนเฉลี่ย & หา Break Even",
+        portfolioSubtitle: "ระบบคำนวณต้นทุนเฉลี่ยสะสม ราคา Break Even และสรุปผลตอบแทนกำไร/ขาดทุนของหุ้น",
+        portfolioOverview: "ภาพรวมต้นทุน & พอร์ตลงทุน",
+        lblPtCost: "ต้นทุนรวมทั้งหมด",
         lblPtRealized: "กำไร/ขาดทุนที่ขายแล้ว",
         lblPtHolding: "ต้นทุนหุ้นที่ถืออยู่",
-        lblPtCount: "จำนวนหุ้นในพอร์ต",
+        lblPtCount: "จำนวนหุ้นในระบบ",
         stocksCountUnit: "{count} ตัว",
         addStockBtn: "+ เพิ่มหุ้นใหม่",
         refreshBtn: "↺ รีเฟรช",
         emptyBuys: "ยังไม่มีรายการซื้อ",
         emptySells: "ยังไม่มีรายการขาย",
-        avgLabel: "เฉลี่ย {price}",
+        avgLabel: "เฉลี่ย ${price}",
         tagBuy: "ซื้อ",
         tagSell: "ขาย",
-        lblCost: "ต้นทุนรวม",
-        lblTotalShares: "หุ้นทั้งหมด",
+        lblCost: "ต้นทุนซื้อรวม",
+        lblTotalShares: "หุ้นทั้งหมดที่ซื้อ",
         sharesUnit: "{shares} หุ้น",
         lblAvgCostPerShare: "ต้นทุนเฉลี่ย/หุ้น",
-        lblRemainShares: "หุ้นที่เหลือ",
+        lblRemainShares: "หุ้นที่ถืออยู่คงเหลือ",
         lblRealizedPL: "กำไร/ขาดทุนที่ขายแล้วรวม",
-        lblBreakEvenForRemain: "ราคา break-even ของหุ้นที่เหลือ {remain} หุ้น",
+        lblBreakEvenForRemain: "ราคา Break-Even ของหุ้นที่เหลือ {remain} หุ้น",
         beSoldOut: "ขายหุ้นหมดแล้ว",
         beNoData: "ยังไม่มีข้อมูล",
-        placeholderStockName: "ชื่อหุ้น",
-        placeholderPrice: "ราคา ฿",
-        placeholderQty: "จำนวน",
+        placeholderStockName: "ชื่อหุ้น (เช่น NVDA, AAPL)",
+        placeholderPrice: "ราคา $",
+        placeholderQty: "จำนวนหุ้น",
         visitLabel: "ผู้เข้าชม:",
         onlineLabel: "ออนไลน์:",
         statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว",
         lblNavSrCalc: "ตารางคำนวณ แนวรับ-แนวต้าน",
-        srCalcTitle: "📐 ตารางคำนวณ แนวรับ-แนวต้าน",
-        srCalcSubtitle: "เครื่องมือคำนวณสัดส่วนกำไรและเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน",
+        srCalcTitle: "📐 ตารางคำนวณ แนวรับ-แนวต้าน (Support & Resistance)",
+        srCalcSubtitle: "เครื่องมือคำนวณสัดส่วนกำไร/ขาดทุน และเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน",
         lblSrInvestment: "ใส่เงินลงทุนเพิ่ม (USD)",
         lblSrRemember: "จดจำจำนวนเงินนี้ไว้",
         lblSrUseS0: "ใช้ราคาปัจจุบันเป็น S0",
@@ -158,49 +159,50 @@ const translations = {
         otherReports: "General Reports",
         readFullReport: "Read Full Report",
         latestReportBadge: "Latest Report",
-        lblMemberTools: "Member Tools",
-        lblNavPortfolio: "Stock Portfolio",
+        lblMemberTools: "Calculators & Media",
+        lblNavPortfolio: "Average Cost & Break-Even",
         lblNavBotTrade: "Bot Trade & Stats",
         lblNavWebAlbum: "Video Production Album",
+        lblNavYoutube: "YouTube Channel",
         legendTitle: "CMF (Whale Flow) Signal Reading Guide",
         legendDesc: "CMF (Chaikin Money Flow) measures the accumulated capital flow of large institutional investors (whales) over a 20-day period:",
         legendAccumText: "Whales actively accumulating shares",
         legendBuyText: "General capital inflow",
         legendDistribText: "Whales actively distributing shares",
         legendSellText: "General capital outflow",
-        portfolioTitle: "📊 Stock Portfolio",
-        portfolioSubtitle: "Calculate average cost, break-even price, and track realized P&L",
-        portfolioOverview: "Portfolio Overview",
+        portfolioTitle: "🧮 Average Cost & Break-Even Calculator",
+        portfolioSubtitle: "Calculate average cost per share, break-even prices, and profit/loss metrics",
+        portfolioOverview: "Portfolio Overview & Cost Summary",
         lblPtCost: "Total Portfolio Cost",
         lblPtRealized: "Realized P&L",
         lblPtHolding: "Holding Cost",
-        lblPtCount: "Stocks in Portfolio",
+        lblPtCount: "Tracked Stocks",
         stocksCountUnit: "{count} stocks",
         addStockBtn: "+ Add New Stock",
         refreshBtn: "↺ Refresh",
         emptyBuys: "No buy transactions yet",
         emptySells: "No sell transactions yet",
-        avgLabel: "Avg {price}",
+        avgLabel: "Avg ${price}",
         tagBuy: "BUY",
         tagSell: "SELL",
-        lblCost: "Total Cost",
-        lblTotalShares: "Total Shares",
+        lblCost: "Total Buy Cost",
+        lblTotalShares: "Total Shares Bought",
         sharesUnit: "{shares} shares",
         lblAvgCostPerShare: "Avg Cost / Share",
-        lblRemainShares: "Remaining Shares",
+        lblRemainShares: "Remaining Shares Held",
         lblRealizedPL: "Total Realized P&L",
         lblBreakEvenForRemain: "Break-even price for remaining {remain} shares",
         beSoldOut: "All shares sold out",
         beNoData: "No data available",
-        placeholderStockName: "Stock name",
-        placeholderPrice: "Price ฿",
+        placeholderStockName: "Stock Ticker (e.g. NVDA, AAPL)",
+        placeholderPrice: "Price $",
         placeholderQty: "Qty",
         visitLabel: "Visits:",
         onlineLabel: "Online:",
         statusConnected: "Connected to News Database",
-        lblNavSrCalc: "S/R Calculator",
+        lblNavSrCalc: "Support & Resistance Calculator",
         srCalcTitle: "📐 Support & Resistance Calculator",
-        srCalcSubtitle: "Calculate profit margins and return targets from support-resistance zones",
+        srCalcSubtitle: "Calculate profit margins and return targets from support & resistance zones",
         lblSrInvestment: "Investment Amount (USD)",
         lblSrRemember: "Remember this investment",
         lblSrUseS0: "Use current price as S0",
@@ -543,10 +545,10 @@ async function initApp() {
         if (savedStocks) {
             appState.portfolioStocks = JSON.parse(savedStocks);
         } else {
-            // Fallback default mockup data
+            // Fallback default mockup data for US stock trading
             appState.portfolioStocks = [
-                {name: 'หุ้น A', open: true, buys: [{price: 100, shares: 100}, {price: 80, shares: 50}], sells: [{price: 90, shares: 50}]},
-                {name: 'หุ้น B', open: false, buys: [{price: 50, shares: 200}], sells: []}
+                {name: 'NVDA (NVIDIA)', open: true, buys: [{price: 120, shares: 50}, {price: 110, shares: 50}], sells: [{price: 135, shares: 30}]},
+                {name: 'AAPL (Apple)', open: false, buys: [{price: 220, shares: 25}], sells: []}
             ];
         }
     } catch (e) {
@@ -1660,9 +1662,9 @@ function renderPortfolioBody(s, body, stockIndex) {
     const remainUnitText = t.sharesUnit.replace('{shares}', fmtI(r.remain));
     
     mg.innerHTML = `
-        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblCost}</p><p class="portfolio-mv">฿${fmt(r.totalCost)}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblCost}</p><p class="portfolio-mv">$${fmt(r.totalCost)}</p></div>
         <div class="portfolio-metric"><p class="portfolio-ml">${t.lblTotalShares}</p><p class="portfolio-mv">${sharesUnitText}</p></div>
-        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblAvgCostPerShare}</p><p class="portfolio-mv">${r.totalShares > 0 ? '฿' + fmt(r.avg) : '-'}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblAvgCostPerShare}</p><p class="portfolio-mv">${r.totalShares > 0 ? '$' + fmt(r.avg) : '-'}</p></div>
         <div class="portfolio-metric"><p class="portfolio-ml">${t.lblRemainShares}</p><p class="portfolio-mv">${remainUnitText}</p></div>
     `;
     body.appendChild(mg);
@@ -1677,9 +1679,9 @@ function renderPortfolioBody(s, body, stockIndex) {
         const sr = document.createElement('div');
         sr.className = 'portfolio-srow';
         const saleText = appState.lang === 'th' 
-            ? `ขาย ${vi + 1}: ${fmtI(sv.shares)} หุ้น × ฿${fmt(sv.price)}`
-            : `Sell ${vi + 1}: ${fmtI(sv.shares)} sh × ฿${fmt(sv.price)}`;
-        sr.innerHTML = `<span class="portfolio-k">${saleText}</span><span class="${pnl >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${pnl >= 0 ? '+' : ''}฿${fmt(pnl)}</span>`;
+            ? `ขาย ${vi + 1}: ${fmtI(sv.shares)} หุ้น × $${fmt(sv.price)}`
+            : `Sell ${vi + 1}: ${fmtI(sv.shares)} sh × $${fmt(sv.price)}`;
+        sr.innerHTML = `<span class="portfolio-k">${saleText}</span><span class="${pnl >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${pnl >= 0 ? '+' : ''}$${fmt(pnl)}</span>`;
         body.appendChild(sr);
     });
 
@@ -1687,7 +1689,7 @@ function renderPortfolioBody(s, body, stockIndex) {
         const tr = document.createElement('div');
         tr.className = 'portfolio-srow';
         tr.style.marginTop = '8px';
-        tr.innerHTML = `<span class="portfolio-k" style="font-weight:600">${t.lblRealizedPL}</span><span class="${r.realized >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${r.realized >= 0 ? '+' : ''}฿${fmt(r.realized)}</span>`;
+        tr.innerHTML = `<span class="portfolio-k" style="font-weight:600">${t.lblRealizedPL}</span><span class="${r.realized >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${r.realized >= 0 ? '+' : ''}$${fmt(r.realized)}</span>`;
         body.appendChild(tr);
     }
 
@@ -1695,7 +1697,19 @@ function renderPortfolioBody(s, body, stockIndex) {
     if (r.bePrice !== null) {
         be.className = `portfolio-be-box ${r.bePrice <= r.avg ? 'green' : 'red'}`;
         const beLabel = t.lblBreakEvenForRemain.replace('{remain}', fmtI(r.remain));
-        be.innerHTML = `<p class="portfolio-bll">${beLabel}</p><p class="portfolio-bv">฿${fmt(r.bePrice)} / หุ้น</p>`;
+        const target5 = (r.bePrice * 1.05).toFixed(2);
+        const target10 = (r.bePrice * 1.10).toFixed(2);
+        const target20 = (r.bePrice * 1.20).toFixed(2);
+        
+        be.innerHTML = `
+            <p class="portfolio-bll">${beLabel}</p>
+            <p class="portfolio-bv">$${fmt(r.bePrice)} / หุ้น</p>
+            <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15); display: flex; gap: 12px; font-size: 12px; justify-content: space-around;">
+                <span style="opacity:0.85;">🎯 เป้ากำไร +5%: <b>$${target5}</b></span>
+                <span style="opacity:0.85;">🎯 เป้ากำไร +10%: <b>$${target10}</b></span>
+                <span style="opacity:0.85;">🚀 เป้ากำไร +20%: <b>$${target20}</b></span>
+            </div>
+        `;
     } else {
         be.className = 'portfolio-be-box gray';
         const statusText = r.remain === 0 && r.totalShares > 0 ? t.beSoldOut : t.beNoData;
@@ -1754,7 +1768,7 @@ function renderPortfolio() {
         
         const badge = document.createElement('span');
         badge.className = 'portfolio-badge ' + (r.realized > 0 ? 'portfolio-bp' : r.realized < 0 ? 'portfolio-bl2' : 'portfolio-bz');
-        badge.textContent = r.realized > 0 ? `+฿${fmt(r.realized)}` : r.realized < 0 ? `-฿${fmt(Math.abs(r.realized))}` : '฿0.00';
+        badge.textContent = r.realized > 0 ? `+$${fmt(r.realized)}` : r.realized < 0 ? `-$${fmt(Math.abs(r.realized))}` : '$0.00';
         hl.append(nw, badge);
         
         const hr2 = document.createElement('div');
@@ -1762,7 +1776,7 @@ function renderPortfolio() {
         
         const avgSp = document.createElement('span');
         avgSp.style.cssText = 'font-size:14px;color:var(--text-secondary)';
-        const avgPriceText = r.totalShares > 0 ? '฿' + fmt(r.avg) : '-';
+        const avgPriceText = r.totalShares > 0 ? '$' + fmt(r.avg) : '-';
         avgSp.textContent = t.avgLabel.replace('{price}', avgPriceText);
         
         const tb = document.createElement('button');
@@ -1805,13 +1819,13 @@ function updatePortfolioSummary() {
         h += r.remainCost;
     });
     
-    document.getElementById('pt-cost').textContent = '฿' + fmt(c);
+    document.getElementById('pt-cost').textContent = '$' + fmt(c);
     
     const rEl = document.getElementById('pt-realized');
-    rEl.textContent = (rv >= 0 ? '+' : '') + '฿' + fmt(Math.abs(rv));
+    rEl.textContent = (rv >= 0 ? '+' : '') + '$' + fmt(Math.abs(rv));
     rEl.style.color = rv > 0 ? 'var(--accent-primary)' : rv < 0 ? 'var(--accent-red)' : 'var(--text-primary)';
     
-    document.getElementById('pt-holding').textContent = '฿' + fmt(h);
+    document.getElementById('pt-holding').textContent = '$' + fmt(h);
     
     const countUnit = translations[appState.lang].stocksCountUnit.replace('{count}', appState.portfolioStocks.length);
     document.getElementById('pt-count').textContent = countUnit;

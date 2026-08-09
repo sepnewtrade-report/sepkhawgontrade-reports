@@ -2726,3 +2726,115 @@ body {
     width: 100%;
     text-align: left;
 }
+
+/* ==========================================================================
+   YouTube Channel Integration & Branding Styles
+   ========================================================================== */
+
+.yt-header-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.15);
+}
+
+.yt-header-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, rgba(220, 38, 38, 0.15) 100%);
+    border-color: #ff3333;
+    box-shadow: 0 0 16px rgba(255, 0, 0, 0.4);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+.yt-header-btn .yt-icon {
+    color: #FF0000;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.yt-header-btn:hover .yt-icon {
+    transform: scale(1.15);
+}
+
+.yt-header-btn .yt-arrow {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+.yt-menu-item {
+    padding: 0 !important;
+}
+
+.yt-nav-anchor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.yt-nav-anchor:hover {
+    color: var(--text-primary);
+}
+
+.yt-badge {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: auto;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(255, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+.yt-reader-action-btn {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(185, 28, 28, 0.05) 100%) !important;
+    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.yt-reader-action-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, rgba(185, 28, 28, 0.15) 100%) !important;
+    border-color: #ff3333 !important;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.3);
+}
+

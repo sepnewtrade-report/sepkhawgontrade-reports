@@ -58,6 +58,12 @@
                     <button class="lang-btn active" data-lang="th">TH</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
+                <!-- YouTube Channel Quick Link Button -->
+                <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-header-btn" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
+                    <i class="fa-brands fa-youtube yt-icon"></i>
+                    <span>รับชมช่อง YouTube</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square yt-arrow"></i>
+                </a>
             </div>
 
             <!-- Search Area -->
@@ -82,15 +88,22 @@
 
             <!-- Member Tools Nav -->
             <nav class="member-nav" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                <div class="nav-section-title" id="lbl-member-tools">เครื่องมือสมาชิก</div>
+                <div class="nav-section-title" id="lbl-member-tools">เครื่องมือคำนวณ & สื่อ</div>
                 <ul class="category-list">
                     <li class="category-item" id="nav-portfolio">
-                        <i class="fa-solid fa-chart-pie"></i>
-                        <span id="lbl-nav-portfolio">Portfolio หุ้น</span>
+                        <i class="fa-solid fa-calculator" style="color: var(--accent-primary);"></i>
+                        <span id="lbl-nav-portfolio">คำนวณต้นทุนเฉลี่ย & Break Even</span>
                     </li>
                     <li class="category-item" id="nav-sr-calc">
-                        <i class="fa-solid fa-calculator"></i>
+                        <i class="fa-solid fa-chart-line" style="color: var(--accent-purple);"></i>
                         <span id="lbl-nav-sr-calc">ตารางคำนวณ แนวรับ-แนวต้าน</span>
+                    </li>
+                    <li class="category-item yt-menu-item" id="nav-youtube-item">
+                        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-nav-anchor">
+                            <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 16px;"></i>
+                            <span id="lbl-nav-youtube">รับชมช่อง YouTube</span>
+                            <span class="badge yt-badge">LIVE</span>
+                        </a>
                     </li>
                     <li class="category-item" id="nav-bot-trade">
                         <i class="fa-solid fa-robot"></i>
@@ -107,7 +120,7 @@
             <div class="sidebar-footer">
                 <p>&copy; 2026 SepKhawGonTrade</p>
                 <div class="social-links">
-                    <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" title="YouTube Channel"><i class="fa-brands fa-youtube" style="color: #ff3333;"></i></a>
                     <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
                     <a href="#" title="Premium Telegram"><i class="fa-solid fa-paper-plane"></i></a>
                 </div>
@@ -228,12 +241,12 @@
                 </div>
             </section>
 
-            <!-- Portfolio Tracker View -->
+            <!-- Portfolio / Average Cost & Break-Even Calculator View -->
             <section id="portfolio-view" class="content-section">
                 <div class="section-header">
                     <div class="header-text-group">
-                        <h2 class="section-title" id="portfolio-title">📊 Portfolio หุ้น</h2>
-                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณและวางแผนต้นทุนเฉลี่ยสะสมหักล้างกำไรพอร์ตลงทุน</p>
+                        <h2 class="section-title" id="portfolio-title">🧮 คำนวณต้นทุนเฉลี่ย & หา Break Even</h2>
+                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณต้นทุนเฉลี่ยสะสม ราคา Break Even และสรุปผลตอบแทนกำไร/ขาดทุนของหุ้น</p>
                     </div>
                     <div class="status-indicator">
                         <span class="pulse-dot"></span>
@@ -419,6 +432,10 @@
                     </button>
                     
                     <div class="reader-actions">
+                        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="action-btn yt-reader-action-btn" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
+                            <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 16px;"></i>
+                            <span>รับชมบน YouTube</span>
+                        </a>
                         <button id="btn-copy-link" class="action-btn" title="คัดลอกลิงก์รายงาน">
                             <i class="fa-solid fa-link"></i>
                         </button>
