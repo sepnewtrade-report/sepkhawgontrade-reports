@@ -20,7 +20,8 @@ EXCLUDED_TICKERS = {
     'BATS', 'VWAP', 'SMA', 'WACC', 'THB', 'EUR', 'GBP', 'JPY', 'CNY', 'BLS',
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
     'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
-    'AIP', 'FAA', 'GPU', 'CME', 'COMEX', 'NYMEX', 'ICE', 'CBOE', 'EIA', 'IEA', 'ECB', 'BOJ', 'BOE'
+    'AIP', 'FAA', 'GPU', 'CME', 'COMEX', 'NYMEX', 'ICE', 'CBOE', 'EIA', 'IEA', 'ECB', 'BOJ', 'BOE',
+    'ARPAC', 'GMV', 'ARR', 'BMO', 'AMC', 'EUV', 'HBM', 'NPL', 'X'
 }
 
 TICKER_MAP = {
