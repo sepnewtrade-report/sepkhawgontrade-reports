@@ -8,7 +8,7 @@
 
 ## 📊 1. ตารางคัดกรอง 5 หุ้น Short Squeeze สูงน่าจับตาประจำสัปดาห์ (Top Short Squeeze Candidates)
 
-| Ticker | ชื่อบริษัท | ราคาปิดล่าสุด ($) | % การเปลี่ยนแปลงรายวัน | Short Interest (% of Float) | Days to Cover (DTC) | ปริมาณหุ้นชอร์ตคงค้าง | สัญญาณเทคนิคอล & ตัวเร่งปฏิกิริยา (Squeeze Catalyst) |
+| Ticker | ชื่อบริษัท | ราคาปิดล่าสุด ($) | % การเปลี่ยนแปลงรายวัน | Short Interest (% of Float) | Days to Cover (จำนวนวันชอร์ต) | ปริมาณหุ้นชอร์ตคงค้าง | สัญญาณเทคนิคอล & ตัวเร่งปฏิกิริยา (Squeeze Catalyst) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ASTS** | AST SpaceMobile | **$71.94** | 📈 **+6.80%** | **21.8%** | 4.5 days | 18.2M shares | เบรกนิวไฮ / คาดการณ์งบ Q2 & ดาวเทียม BlueBird |
 | **SMCI** | Super Micro Computer | **$31.13** | 📈 **+5.96%** | **19.6%** | 3.2 days | 42.5M shares | ทะลุเส้น 20-EMA / ออเดอร์เซิร์ฟเวอร์ Blackwell DLC |
