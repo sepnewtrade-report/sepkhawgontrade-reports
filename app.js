@@ -1,3 +1,7 @@
+/* ==========================================================================
+   เสพข่าวก่อนเทรด (SepKhawGonTrade) - Main Application Script v3.0.0
+   ========================================================================== */
+
 // State Management
 let appState = {
     reports: [],
@@ -5,26 +9,25 @@ let appState = {
     searchQuery: '',
     sortBy: 'newest',
     selectedReport: null,
-    viewMode: 'html', // 'html' or 'raw'
+    viewMode: 'html',
     lang: localStorage.getItem('sep_lang') || 'th',
     portfolioStocks: [],
     totalVisits: 128450,
-    activeOnline: 12
+    activeOnline: 14
 };
 
+// Comprehensive Localization Dictionary
 const translations = {
     th: {
         channelTitle: "เสพข่าวก่อนเทรด",
-        channelSubtitle: "หุ้นอเมริกา",
-        searchPlaceholder: "ค้นหาบทวิเคราะห์...",
-        dimensionsTitle: "มิติต่างๆ ในตลาดการเงิน",
+        channelSubtitle: "หุ้นอเมริกา • US Stock Intelligence",
+        searchPlaceholder: "ค้นหาบทวิเคราะห์ / หุ้น...",
+        categoriesTitle: "คลังรายงานบทวิเคราะห์",
+        toolsTitle: "เครื่องมือเทรด & สื่อ",
         allReports: "รายงานทั้งหมด",
         vaultTitle: "คลังบทวิเคราะห์และรายงานล่าสุด",
         vaultSubtitle: "อัปเดตข้อมูลเจาะลึกตลาดหุ้นสหรัฐฯ เรียลไทม์ส่งตรงจากห้องเทรด",
         statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว",
-        statTotalReports: "รายงานทั้งหมด",
-        statSummary: "สรุปจบ ทันโลกหุ้น",
-        statSmallCap: "Small Cap Radar",
         foundCount: "พบทั้งหมด {count} รายการ",
         sortByLabel: "เรียงตาม:",
         sortNewest: "ใหม่ที่สุด",
@@ -38,22 +41,13 @@ const translations = {
         metaSize: "ขนาด {size} KB",
         errorLoading: "ไม่สามารถโหลดคลังรายงานได้",
         errorLoadingSub: "กรุณาตรวจสอบว่าคุณได้รันสคริปต์ {code} เพื่อสร้างฐานข้อมูลแล้ว",
-        localCorsError: "เบราว์เซอร์บล็อกการทำงานแบบ Offline (CORS Block)",
-        localCorsErrorSub: "เนื่องจากข้อจำกัดความปลอดภัยของเบราว์เซอร์ คุณไม่สามารถเปิดไฟล์ index.html ตรงๆ ได้ (โปรโตคอล file:// บล็อกการโหลดข้อมูล)<br><br><b>วิธีแก้ไข:</b><br>1. ใช้งานผ่านเว็บเซิร์ฟเวอร์จริง (แนะนำ): <a href='https://sepnewtrade-report.github.io/sepkhawgontrade-reports/' target='_blank' style='color:var(--accent-primary);text-decoration:underline;'>คลิกเปิดหน้าเว็บที่นี่</a><br>2. หรือรันเซิร์ฟเวอร์จำลองในคอมพิวเตอร์ของคุณ โดยพิมพ์คำสั่ง <code>python3 -m http.server 8000</code> ใน Terminal จากนั้นเปิดเบราว์เซอร์ไปที่ <code>http://localhost:8000</code>",
         noResults: "ไม่พบผลการค้นหา",
         noResultsSub: "กรุณาลองป้อนคำค้นหาอื่นหรือเลือกหมวดหมู่ที่ต่างออกไป",
         loadingSpinner: "กำลังดึงข้อมูลบทวิเคราะห์...",
-        reportNotFound: "ไม่พบไฟล์รายงาน",
-        reportNotFoundSub: "ไฟล์รายงานที่ระบุ ({path}) ไม่มีอยู่ในสารบบคลังบทวิเคราะห์",
-        btnHome: "กลับสู่หน้าหลัก",
-        loadingDocument: "กำลังค้นหาเอกสารในสารบบ...",
-        failedToOpen: "ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้",
-        failedToOpenSub: "อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง ({error})",
         readDetails: "อ่านรายละเอียด",
         otherReports: "รายงานทั่วไป",
         readFullReport: "อ่านรายงานฉบับเต็ม",
         latestReportBadge: "รายงานล่าสุด",
-        lblMemberTools: "เครื่องมือคำนวณ & สื่อ",
         lblNavPortfolio: "คำนวณต้นทุนเฉลี่ย & Break Even",
         lblNavBotTrade: "บอทเทรด & ผลงาน",
         lblNavWebAlbum: "Album รายการผลิตคลิป",
@@ -93,7 +87,6 @@ const translations = {
         placeholderQty: "จำนวนหุ้น",
         visitLabel: "ผู้เข้าชม:",
         onlineLabel: "ออนไลน์:",
-        statusConnected: "เชื่อมต่อฐานข้อมูลข่าวแล้ว",
         lblNavSrCalc: "ตารางคำนวณ แนวรับ-แนวต้าน",
         srCalcTitle: "📐 ตารางคำนวณ แนวรับ-แนวต้าน (Support & Resistance)",
         srCalcSubtitle: "เครื่องมือคำนวณสัดส่วนกำไร/ขาดทุน และเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน",
@@ -115,22 +108,18 @@ const translations = {
         placeholderCustomName: "พิมพ์ชื่อหุ้น (เช่น TSLA)",
         noStocksFound: "ไม่พบข้อมูลหุ้นนี้",
         lblSrWatchlistTitle: "Watchlist ของฉัน",
-        srBtnSaveWatchlist: "บันทึกเข้า Watchlist",
-        srBtnClearCustom: "ล้างข้อมูลแนวรับ-ต้าน",
         srWatchlistEmpty: "ไม่มีหุ้นใน Watchlist (พิมพ์ค้นหาหุ้นแล้วบันทึกเพื่อติดตาม)"
     },
     en: {
         channelTitle: "SepKhawGonTrade",
-        channelSubtitle: "US Stocks",
-        searchPlaceholder: "Search analysis...",
-        dimensionsTitle: "Market Dimensions",
+        channelSubtitle: "US Stock Intelligence",
+        searchPlaceholder: "Search analysis / ticker...",
+        categoriesTitle: "Analysis Hub",
+        toolsTitle: "Calculators & Media",
         allReports: "All Reports",
         vaultTitle: "Latest Analysis & Reports Hub",
         vaultSubtitle: "In-depth US stock market updates, real-time from the trading floor",
         statusConnected: "News Database Connected",
-        statTotalReports: "Total Reports",
-        statSummary: "Market Summary",
-        statSmallCap: "Small Cap Radar",
         foundCount: "Found {count} items",
         sortByLabel: "Sort by:",
         sortNewest: "Newest First",
@@ -144,28 +133,19 @@ const translations = {
         metaSize: "Size {size} KB",
         errorLoading: "Failed to Load Reports Hub",
         errorLoadingSub: "Please check if you have run {code} to generate the database.",
-        localCorsError: "Browser Blocked Offline Mode (CORS Block)",
-        localCorsErrorSub: "Due to browser security restrictions, you cannot open index.html directly via file:// protocol.<br><br><b>How to fix:</b><br>1. Access the deployed web version (Recommended): <a href='https://sepnewtrade-report.github.io/sepkhawgontrade-reports/' target='_blank' style='color:var(--accent-primary);text-decoration:underline;'>Open Live Web Version</a><br>2. Run a local development server by executing <code>python3 -m http.server 8000</code> and opening <code>http://localhost:8000</code> in your browser.",
         noResults: "No Results Found",
         noResultsSub: "Please try a different search query or select another category.",
         loadingSpinner: "Fetching analysis reports...",
-        reportNotFound: "Report Not Found",
-        reportNotFoundSub: "The specified report ({path}) does not exist in the catalog directory.",
-        btnHome: "Back to Home",
-        loadingDocument: "Searching for document...",
-        failedToOpen: "Failed to Open Analysis File",
-        failedToOpenSub: "The file might be deleted, moved, or access is blocked ({error})",
         readDetails: "Read Details",
         otherReports: "General Reports",
         readFullReport: "Read Full Report",
         latestReportBadge: "Latest Report",
-        lblMemberTools: "Calculators & Media",
         lblNavPortfolio: "Average Cost & Break-Even",
         lblNavBotTrade: "Bot Trade & Stats",
         lblNavWebAlbum: "Video Production Album",
         lblNavYoutube: "YouTube Channel",
         legendTitle: "CMF (Whale Flow) Signal Reading Guide",
-        legendDesc: "CMF (Chaikin Money Flow) measures the accumulated capital flow of large institutional investors (whales) over a 20-day period:",
+        legendDesc: "CMF (Chaikin Money Flow) measures accumulated capital flow of large institutional investors (whales) over 20 days:",
         legendAccumText: "Whales actively accumulating shares",
         legendBuyText: "General capital inflow",
         legendDistribText: "Whales actively distributing shares",
@@ -199,7 +179,6 @@ const translations = {
         placeholderQty: "Qty",
         visitLabel: "Visits:",
         onlineLabel: "Online:",
-        statusConnected: "Connected to News Database",
         lblNavSrCalc: "Support & Resistance Calculator",
         srCalcTitle: "📐 Support & Resistance Calculator",
         srCalcSubtitle: "Calculate profit margins and return targets from support & resistance zones",
@@ -218,416 +197,170 @@ const translations = {
         lblSrTickerSearch: "Search Stock (e.g. NVDA, AAPL)",
         placeholderTickerSearch: "Type ticker or stock name...",
         lblSrCustomName: "Stock Ticker / Name (Custom)",
-        placeholderCustomName: "Enter stock name (e.g., TSLA)",
+        placeholderCustomName: "Enter stock name (e.g. TSLA)",
         noStocksFound: "No stocks found",
         lblSrWatchlistTitle: "My Watchlist",
-        srBtnSaveWatchlist: "Add to Watchlist",
-        srBtnClearCustom: "Clear Calculator",
-        srWatchlistEmpty: "No stocks in watchlist (search and save a stock to track)"
+        srWatchlistEmpty: "No stocks in watchlist"
     }
 };
 
-function updateUILanguage() {
-    const lang = appState.lang;
-    const t = translations[lang];
-    
-    // Save language to localStorage
-    localStorage.setItem('sep_lang', lang);
-    
-    // Update text elements
-    document.querySelectorAll('.sidebar-title').forEach(el => el.textContent = t.channelTitle);
-    document.querySelectorAll('.sidebar-subtitle').forEach(el => el.textContent = t.channelSubtitle);
-    document.querySelectorAll('.mobile-logo-title span').forEach(el => el.textContent = t.channelTitle);
-    
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) searchInput.placeholder = t.searchPlaceholder;
-    
-    const navSecTitle = document.querySelector('.nav-section-title');
-    if (navSecTitle) navSecTitle.textContent = t.dimensionsTitle;
-    
-    // Update Featured Report badge and read more button if visible
-    if (elements.featuredBadge) {
-        elements.featuredBadge.innerHTML = `<i class="fa-solid fa-star"></i> ${t.latestReportBadge}`;
-    }
-    if (elements.featuredReadMoreBtn) {
-        elements.featuredReadMoreBtn.innerHTML = `${t.readFullReport} <i class="fa-solid fa-arrow-right"></i>`;
-    }
-    
-    // Update Controls Sort By label
-    const sortLabel = document.querySelector('.sort-control label');
-    if (sortLabel) sortLabel.textContent = t.sortByLabel;
-    
-    // Update Sort Options
-    const sortSelect = document.getElementById('sort-select');
-    if (sortSelect && sortSelect.options.length >= 3) {
-        sortSelect.options[0].text = t.sortNewest;
-        sortSelect.options[1].text = t.sortOldest;
-        sortSelect.options[2].text = t.sortAlphabetical;
-    }
-    
-    // Back to Catalog Button text
-    const backBtnSpan = document.querySelector('#back-to-catalog span');
-    if (backBtnSpan) backBtnSpan.textContent = t.backToCatalog;
-    
-    // Action buttons titles
-    if (elements.btnCopyLink) elements.btnCopyLink.title = t.copyLinkTitle;
-    if (elements.btnPrint) elements.btnPrint.title = t.printTitle;
-    if (elements.btnRaw) elements.btnRaw.title = appState.viewMode === 'html' ? t.rawCodeTitle : t.viewNormalTitle;
-    
-    // Update active class on switcher buttons
-    document.querySelectorAll('.lang-switcher').forEach(switcher => {
-        switcher.querySelectorAll('.lang-btn').forEach(btn => {
-            if (btn.getAttribute('data-lang') === lang) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-    });
-    
-    // Refresh menus and catalog
-    renderCategoriesMenu();
-    renderCatalog();
-    
-    // Localize opened report headers if visible
-    if (appState.selectedReport) {
-        const report = appState.selectedReport;
-        if (elements.readerCategory) elements.readerCategory.textContent = lang === 'th' ? report.categoryThai : report.category;
-        if (elements.readerSize) elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ${t.metaSize.replace('{size}', (report.size / 1024).toFixed(1))}`;
-    }
-    
-    // Update Portfolio View translations
-    const portfolioTitleEl = document.getElementById('portfolio-title');
-    if (portfolioTitleEl) portfolioTitleEl.textContent = t.portfolioTitle;
-    
-    const portfolioSubtitleEl = document.getElementById('portfolio-subtitle');
-    if (portfolioSubtitleEl) portfolioSubtitleEl.textContent = t.portfolioSubtitle;
-    
-    const overviewEl = document.getElementById('lbl-portfolio-overview');
-    if (overviewEl) overviewEl.textContent = t.portfolioOverview;
-    
-    const memberToolsEl = document.getElementById('lbl-member-tools');
-    if (memberToolsEl) memberToolsEl.textContent = t.lblMemberTools;
-    
-    const navPortfolioEl = document.getElementById('lbl-nav-portfolio');
-    if (navPortfolioEl) navPortfolioEl.textContent = t.lblNavPortfolio;
+// DOM References Elements
+let elements = {};
 
-    const navBotTradeEl = document.getElementById('lbl-nav-bot-trade');
-    if (navBotTradeEl) navBotTradeEl.textContent = t.lblNavBotTrade;
-
-    const navWebAlbumEl = document.getElementById('lbl-nav-web-album');
-    if (navWebAlbumEl) navWebAlbumEl.textContent = t.lblNavWebAlbum;
-
-    const legendTitleEl = document.getElementById('lbl-legend-title');
-    if (legendTitleEl) legendTitleEl.textContent = t.legendTitle;
-
-    const legendDescEl = document.getElementById('lbl-legend-desc');
-    if (legendDescEl) legendDescEl.textContent = t.legendDesc;
-
-    const legendAccumEl = document.getElementById('lbl-legend-accum');
-    if (legendAccumEl) legendAccumEl.textContent = t.legendAccumText;
-
-    const legendBuyEl = document.getElementById('lbl-legend-buy');
-    if (legendBuyEl) legendBuyEl.textContent = t.legendBuyText;
-
-    const legendDistribEl = document.getElementById('lbl-legend-distrib');
-    if (legendDistribEl) legendDistribEl.textContent = t.legendDistribText;
-
-    const legendSellEl = document.getElementById('lbl-legend-sell');
-    if (legendSellEl) legendSellEl.textContent = t.legendSellText;
-
-    const legendTitleReaderEl = document.getElementById('lbl-legend-title-reader');
-    if (legendTitleReaderEl) legendTitleReaderEl.textContent = t.legendTitle;
-
-    const legendDescReaderEl = document.getElementById('lbl-legend-desc-reader');
-    if (legendDescReaderEl) legendDescReaderEl.textContent = t.legendDesc;
-
-    const legendAccumReaderEl = document.getElementById('lbl-legend-accum-reader');
-    if (legendAccumReaderEl) legendAccumReaderEl.textContent = t.legendAccumText;
-
-    const legendBuyReaderEl = document.getElementById('lbl-legend-buy-reader');
-    if (legendBuyReaderEl) legendBuyReaderEl.textContent = t.legendBuyText;
-
-    const legendDistribReaderEl = document.getElementById('lbl-legend-distrib-reader');
-    if (legendDistribReaderEl) legendDistribReaderEl.textContent = t.legendDistribText;
-
-    const legendSellReaderEl = document.getElementById('lbl-legend-sell-reader');
-    if (legendSellReaderEl) legendSellReaderEl.textContent = t.legendSellText;
-    
-    if (elements.lblPtCost) elements.lblPtCost.textContent = t.lblPtCost;
-    if (elements.lblPtRealized) elements.lblPtRealized.textContent = t.lblPtRealized;
-    if (elements.lblPtHolding) elements.lblPtHolding.textContent = t.lblPtHolding;
-    if (elements.lblPtCount) elements.lblPtCount.textContent = t.lblPtCount;
-    if (elements.addStockBtn) elements.addStockBtn.textContent = t.addStockBtn;
-    if (elements.refreshBtn) elements.refreshBtn.textContent = t.refreshBtn;
-    
-    // Update S/R Calculator translations
-    const srCalcTitleEl = document.getElementById('sr-calc-title');
-    if (srCalcTitleEl) srCalcTitleEl.textContent = t.srCalcTitle;
-    
-    const srCalcSubtitleEl = document.getElementById('sr-calc-subtitle');
-    if (srCalcSubtitleEl) srCalcSubtitleEl.textContent = t.srCalcSubtitle;
-    
-    const navSrCalcEl = document.getElementById('lbl-nav-sr-calc');
-    if (navSrCalcEl) navSrCalcEl.textContent = t.lblNavSrCalc;
-    
-    const lblSrInvestmentEl = document.getElementById('lbl-sr-investment');
-    if (lblSrInvestmentEl) lblSrInvestmentEl.textContent = t.lblSrInvestment;
-    
-    const lblSrRememberEl = document.getElementById('lbl-sr-remember');
-    if (lblSrRememberEl) lblSrRememberEl.textContent = t.lblSrRemember;
-    
-    const lblSrUseS0El = document.getElementById('lbl-sr-use-s0');
-    if (lblSrUseS0El) lblSrUseS0El.textContent = t.lblSrUseS0;
-    
-    const lblSrTickerSelectEl = document.getElementById('lbl-sr-ticker-select');
-    if (lblSrTickerSelectEl) lblSrTickerSelectEl.textContent = t.lblSrTickerSelect;
-    
-    const optSrCustomEl = document.getElementById('opt-sr-custom');
-    if (optSrCustomEl) optSrCustomEl.textContent = t.optSrCustom;
-    
-    const lblSrCurrentPriceEl = document.getElementById('lbl-sr-current-price');
-    if (lblSrCurrentPriceEl) lblSrCurrentPriceEl.textContent = t.lblSrCurrentPrice;
-    
-    const lblSrManualTitleEl = document.getElementById('lbl-sr-manual-title');
-    if (lblSrManualTitleEl) lblSrManualTitleEl.textContent = t.lblSrManualTitle;
-    
-    const lblSrSupportsEl = document.getElementById('lbl-sr-supports');
-    if (lblSrSupportsEl) lblSrSupportsEl.textContent = t.lblSrSupports;
-    
-    const lblSrResistancesEl = document.getElementById('lbl-sr-resistances');
-    if (lblSrResistancesEl) lblSrResistancesEl.textContent = t.lblSrResistances;
-    
-    if (elements.srAddSupport) elements.srAddSupport.textContent = t.srAddSupport;
-    if (elements.srAddResistance) elements.srAddResistance.textContent = t.srAddResistance;
-    
-    const lblSrTableTitleEl = document.getElementById('lbl-sr-table-title');
-    if (lblSrTableTitleEl) lblSrTableTitleEl.textContent = t.lblSrTableTitle;
-
-    const lblSrTickerSearchEl = document.getElementById('lbl-sr-ticker-search');
-    if (lblSrTickerSearchEl) lblSrTickerSearchEl.textContent = t.lblSrTickerSearch;
-    
-    const srTickerSearchEl = document.getElementById('sr-ticker-search');
-    if (srTickerSearchEl) srTickerSearchEl.placeholder = t.placeholderTickerSearch;
-    
-    const lblSrCustomNameEl = document.getElementById('lbl-sr-custom-name');
-    if (lblSrCustomNameEl) lblSrCustomNameEl.textContent = t.lblSrCustomName;
-    
-    const srCustomNameEl = document.getElementById('sr-custom-name');
-    if (srCustomNameEl) srCustomNameEl.placeholder = t.placeholderCustomName;
-
-    const lblSrWatchlistTitleEl = document.getElementById('lbl-sr-watchlist-title');
-    if (lblSrWatchlistTitleEl) lblSrWatchlistTitleEl.textContent = t.lblSrWatchlistTitle;
-
-    if (elements.srBtnSaveWatchlist) elements.srBtnSaveWatchlist.innerHTML = `<i class="fa-solid fa-star"></i> ${t.srBtnSaveWatchlist}`;
-    if (elements.srBtnClearCustom) elements.srBtnClearCustom.innerHTML = `<i class="fa-solid fa-eraser"></i> ${t.srBtnClearCustom}`;
-    
-    // Refresh Watchlist rendering
-    renderWatchlist();
-    
-    // Re-render S/R Calculator if active
-    if (elements.srCalcView && elements.srCalcView.classList.contains('active')) {
-        renderSrCalc();
-    }
-    
-    // Re-render portfolio content if it's currently active
-    if (elements.portfolioView && elements.portfolioView.classList.contains('active')) {
-        renderPortfolio();
-    }
-    
-    // Update visitor counter translation and connected status labels
-    document.querySelectorAll('.lbl-status-connected').forEach(el => el.textContent = t.statusConnected);
-    document.querySelectorAll('.lbl-online').forEach(el => el.textContent = t.onlineLabel);
-    document.querySelectorAll('.lbl-visits').forEach(el => el.textContent = t.visitLabel);
-    
-    // Update visitor stats in the DOM
-    if (typeof updateVisitorStatsDOM === 'function') {
-        updateVisitorStatsDOM();
-    }
-}
-
-// DOM Elements
-const elements = {
-    searchInput: document.getElementById('search-input'),
-    clearSearch: document.getElementById('clear-search'),
-    categoryList: document.getElementById('category-list'),
-    reportsGrid: document.getElementById('reports-grid'),
-    sortSelect: document.getElementById('sort-select'),
-    resultsInfo: document.getElementById('results-info'),
-    
-    // Views
-    catalogView: document.getElementById('catalog-view'),
-    readerView: document.getElementById('reader-view'),
-    sectionTitle: document.getElementById('section-title'),
-    
-    // Featured Report elements
-    featuredContainer: document.getElementById('featured-report-container'),
-    featuredTitle: document.getElementById('featured-title'),
-    featuredCategory: document.getElementById('featured-category'),
-    featuredDate: document.getElementById('featured-date'),
-    featuredMarkdown: document.getElementById('featured-markdown-container'),
-    featuredReadMoreBtn: document.getElementById('featured-read-more-btn'),
-    featuredBadge: document.querySelector('.featured-badge'),
-    
-    // Reader Elements
-    backBtn: document.getElementById('back-to-catalog'),
-    readerTitle: document.getElementById('reader-title'),
-    readerCategory: document.getElementById('reader-category'),
-    readerDate: document.getElementById('reader-date'),
-    readerSize: document.getElementById('reader-size'),
-    markdownContainer: document.getElementById('markdown-container'),
-    
-    // Action Buttons
-    btnCopyLink: document.getElementById('btn-copy-link'),
-    btnPrint: document.getElementById('btn-print'),
-    btnRaw: document.getElementById('btn-raw'),
-    
-    // Mobile Drawer
-    mobileToggle: document.getElementById('mobile-toggle'),
-    sidebar: document.getElementById('sidebar'),
-    sidebarBackdrop: document.getElementById('sidebar-backdrop'),
-    
-    // Portfolio Elements
-    portfolioView: document.getElementById('portfolio-view'),
-    lblPtCost: document.getElementById('lbl-pt-cost'),
-    lblPtRealized: document.getElementById('lbl-pt-realized'),
-    lblPtHolding: document.getElementById('lbl-pt-holding'),
-    lblPtCount: document.getElementById('lbl-pt-count'),
-    addStockBtn: document.getElementById('add-stock-btn'),
-    refreshBtn: document.getElementById('refresh-btn'),
-    stockList: document.getElementById('stock-list'),
-    navBotTrade: document.getElementById('nav-bot-trade'),
-    
-    // SR Calculator Elements
-    srCalcView: document.getElementById('sr-calc-view'),
-    srInvestment: document.getElementById('sr-investment'),
-    srRememberInvestment: document.getElementById('sr-remember-investment'),
-    srUseCurrentAsS0: document.getElementById('sr-use-current-as-s0'),
-    srTickerSelect: document.getElementById('sr-ticker-select'),
-    srCurrentPrice: document.getElementById('sr-current-price'),
-    srCurrentPriceGroup: document.getElementById('sr-current-price-group'),
-    supportInputsContainer: document.getElementById('support-inputs-container'),
-    resistanceInputsContainer: document.getElementById('resistance-inputs-container'),
-    srAddSupport: document.getElementById('sr-add-support'),
-    srAddResistance: document.getElementById('sr-add-resistance'),
-    srOutputTable: document.getElementById('sr-output-table'),
-    srTableTickerBadge: document.getElementById('sr-table-ticker-badge'),
-    srTickerSearch: document.getElementById('sr-ticker-search'),
-    srSuggestionsDropdown: document.getElementById('sr-suggestions-dropdown'),
-    srCustomName: document.getElementById('sr-custom-name'),
-    srBtnRefreshPrice: document.getElementById('sr-btn-refresh-price'),
-    srBtnSaveWatchlist: document.getElementById('sr-btn-save-watchlist'),
-    srBtnClearCustom: document.getElementById('sr-btn-clear-custom'),
-    srWatchlistList: document.getElementById('sr-watchlist-list')
-};
-
-// Initialize Application
+// Initialize App Lifecycle
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initApp();
-    });
+    document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
 }
 
 async function initApp() {
+    cacheElements();
     setupEventListeners();
-    
-    // Load real-time market prices if available
-    await loadMarketPrices();
-    
-    // Initialize visitor statistics
     initVisitorStats();
-    
-    // Load portfolio stocks from local storage
-    try {
-        const savedStocks = localStorage.getItem('sep_portfolio_stocks');
-        if (savedStocks) {
-            appState.portfolioStocks = JSON.parse(savedStocks);
-        } else {
-            // Fallback default mockup data for US stock trading
-            appState.portfolioStocks = [
-                {name: 'NVDA (NVIDIA)', open: true, buys: [{price: 120, shares: 50}, {price: 110, shares: 50}], sells: [{price: 135, shares: 30}]},
-                {name: 'AAPL (Apple)', open: false, buys: [{price: 220, shares: 25}], sells: []}
-            ];
-        }
-    } catch (e) {
-        console.error('Failed to load portfolio:', e);
-        appState.portfolioStocks = [];
-    }
-    
+    await loadMarketPrices();
+    loadPortfolio();
     await fetchReportsIndex();
     updateUILanguage();
     handleRouting();
 }
 
-// Event Listeners Configuration
+function cacheElements() {
+    elements = {
+        sidebar: document.getElementById('sidebar'),
+        sidebarBackdrop: document.getElementById('sidebar-backdrop'),
+        mobileToggle: document.getElementById('mobile-toggle'),
+        searchInput: document.getElementById('search-input'),
+        clearSearch: document.getElementById('clear-search'),
+        categoryList: document.getElementById('category-list'),
+        sortSelect: document.getElementById('sort-select'),
+        reportsGrid: document.getElementById('reports-grid'),
+        resultsInfo: document.getElementById('results-info'),
+        catalogView: document.getElementById('catalog-view'),
+        readerView: document.getElementById('reader-view'),
+        portfolioView: document.getElementById('portfolio-view'),
+        srCalcView: document.getElementById('sr-calc-view'),
+        featuredBadge: document.querySelector('.featured-badge'),
+        featuredTitle: document.getElementById('featured-title'),
+        featuredCategory: document.getElementById('featured-category'),
+        featuredDate: document.getElementById('featured-date'),
+        featuredContainer: document.getElementById('featured-report-container'),
+        featuredMarkdown: document.getElementById('featured-markdown-container'),
+        featuredReadMoreBtn: document.getElementById('featured-read-more-btn'),
+        backBtn: document.getElementById('back-to-catalog'),
+        btnCopyLink: document.getElementById('btn-copy-link'),
+        btnPrint: document.getElementById('btn-print'),
+        btnRaw: document.getElementById('btn-raw'),
+        readerCategory: document.getElementById('reader-category'),
+        readerTitle: document.getElementById('reader-title'),
+        readerDate: document.getElementById('reader-date'),
+        readerSize: document.getElementById('reader-size'),
+        markdownContainer: document.getElementById('markdown-container'),
+        stockList: document.getElementById('stock-list'),
+        addStockBtn: document.getElementById('add-stock-btn'),
+        refreshBtn: document.getElementById('refresh-btn'),
+        srInvestment: document.getElementById('sr-investment'),
+        srRememberInvestment: document.getElementById('sr-remember-investment'),
+        srUseCurrentAsS0: document.getElementById('sr-use-current-as-s0'),
+        srTickerSelect: document.getElementById('sr-ticker-select'),
+        srCurrentPrice: document.getElementById('sr-current-price'),
+        srCurrentPriceGroup: document.getElementById('sr-current-price-group'),
+        supportInputsContainer: document.getElementById('support-inputs-container'),
+        resistanceInputsContainer: document.getElementById('resistance-inputs-container'),
+        srAddSupport: document.getElementById('sr-add-support'),
+        srAddResistance: document.getElementById('sr-add-resistance'),
+        srOutputTable: document.getElementById('sr-output-table'),
+        srTableTickerBadge: document.getElementById('sr-table-ticker-badge'),
+        srTickerSearch: document.getElementById('sr-ticker-search'),
+        srSuggestionsDropdown: document.getElementById('sr-suggestions-dropdown'),
+        srCustomName: document.getElementById('sr-custom-name'),
+        srBtnRefreshPrice: document.getElementById('sr-btn-refresh-price'),
+        srBtnSaveWatchlist: document.getElementById('sr-btn-save-watchlist'),
+        srBtnClearCustom: document.getElementById('sr-btn-clear-custom'),
+        srWatchlistList: document.getElementById('sr-watchlist-list'),
+        navBotTrade: document.getElementById('nav-bot-trade')
+    };
+}
+
 function setupEventListeners() {
-    // Search
-    elements.searchInput.addEventListener('input', (e) => {
-        appState.searchQuery = e.target.value.trim();
-        elements.clearSearch.style.display = appState.searchQuery ? 'block' : 'none';
-        renderCatalog();
-    });
-    
-    elements.clearSearch.addEventListener('click', () => {
-        elements.searchInput.value = '';
-        appState.searchQuery = '';
-        elements.clearSearch.style.display = 'none';
-        renderCatalog();
-    });
-    
-    // Sorting
-    elements.sortSelect.addEventListener('change', (e) => {
-        appState.sortBy = e.target.value;
-        renderCatalog();
-    });
-    
-    // Navigation back
-    elements.backBtn.addEventListener('click', () => {
-        window.location.hash = '';
-    });
-    
-    // Mobile drawer toggles
-    elements.mobileToggle.addEventListener('click', toggleMobileSidebar);
-    elements.sidebarBackdrop.addEventListener('click', closeMobileSidebar);
-    
-    // Reader Actions
-    elements.btnCopyLink.addEventListener('click', copyReportLink);
-    elements.btnPrint.addEventListener('click', () => window.print());
-    elements.btnRaw.addEventListener('click', toggleRawMarkdown);
-    
-    // Language Switchers
+    // Search input listener
+    if (elements.searchInput) {
+        elements.searchInput.addEventListener('input', (e) => {
+            appState.searchQuery = e.target.value.trim();
+            elements.clearSearch.style.display = appState.searchQuery ? 'block' : 'none';
+            renderCatalog();
+        });
+    }
+
+    if (elements.clearSearch) {
+        elements.clearSearch.addEventListener('click', () => {
+            elements.searchInput.value = '';
+            appState.searchQuery = '';
+            elements.clearSearch.style.display = 'none';
+            renderCatalog();
+        });
+    }
+
+    // Sort select listener
+    if (elements.sortSelect) {
+        elements.sortSelect.addEventListener('change', (e) => {
+            appState.sortBy = e.target.value;
+            renderCatalog();
+        });
+    }
+
+    // Navigation back button
+    if (elements.backBtn) {
+        elements.backBtn.addEventListener('click', () => {
+            window.location.hash = '';
+        });
+    }
+
+    // Mobile drawer listeners
+    if (elements.mobileToggle) {
+        elements.mobileToggle.addEventListener('click', () => {
+            elements.sidebar.classList.toggle('mobile-open');
+            elements.sidebarBackdrop.classList.toggle('active');
+        });
+    }
+
+    if (elements.sidebarBackdrop) {
+        elements.sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+    }
+
+    // Reader action buttons
+    if (elements.btnCopyLink) elements.btnCopyLink.addEventListener('click', copyReportLink);
+    if (elements.btnPrint) elements.btnPrint.addEventListener('click', () => window.print());
+    if (elements.btnRaw) elements.btnRaw.addEventListener('click', toggleRawMarkdown);
+
+    // Language switcher
     document.querySelectorAll('.lang-switcher').forEach(switcher => {
         switcher.querySelectorAll('.lang-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                const targetLang = btn.getAttribute('data-lang');
-                if (appState.lang !== targetLang) {
-                    appState.lang = targetLang;
+                const lang = btn.getAttribute('data-lang');
+                if (lang !== appState.lang) {
+                    appState.lang = lang;
                     updateUILanguage();
                 }
             });
         });
     });
-    
-    // Portfolio triggers
+
+    // Portfolio controls
     if (elements.addStockBtn) {
         elements.addStockBtn.addEventListener('click', () => {
-            const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-            const stockName = appState.lang === 'th' 
-                ? 'หุ้น ' + (labels[appState.portfolioStocks.length] || appState.portfolioStocks.length + 1)
-                : 'Stock ' + (labels[appState.portfolioStocks.length] || appState.portfolioStocks.length + 1);
+            const defaultName = appState.lang === 'th' ? `หุ้น ${appState.portfolioStocks.length + 1}` : `Stock ${appState.portfolioStocks.length + 1}`;
             appState.portfolioStocks.push({
-                name: stockName,
+                name: defaultName,
                 open: true,
-                buys: [{price: 0, shares: 0}],
+                buys: [{ price: 0, shares: 0 }],
                 sells: []
             });
             savePortfolio();
             renderPortfolio();
         });
     }
-    
+
     if (elements.refreshBtn) {
         elements.refreshBtn.addEventListener('click', () => {
             elements.refreshBtn.classList.add('spin');
@@ -635,7 +368,8 @@ function setupEventListeners() {
             renderPortfolio();
         });
     }
-    
+
+    // Menu Nav Click Handlers
     const navPort = document.getElementById('nav-portfolio');
     if (navPort) {
         navPort.addEventListener('click', () => {
@@ -664,37 +398,25 @@ function setupEventListeners() {
         elements.navBotTrade.addEventListener('click', () => {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
             elements.navBotTrade.classList.add('active');
-            
             appState.activeCategory = 'Bot Trade Combined';
-            window.location.hash = ''; // Back to catalog list
+            window.location.hash = '';
             renderCatalog();
             closeMobileSidebar();
         });
     }
-    
-    // Listen for hash change for routing
+
     window.addEventListener('hashchange', handleRouting);
+}
+
+function closeMobileSidebar() {
+    if (elements.sidebar) elements.sidebar.classList.remove('mobile-open');
+    if (elements.sidebarBackdrop) elements.sidebarBackdrop.classList.remove('active');
 }
 
 // Fetch Reports Database
 async function fetchReportsIndex() {
-    if (window.location.protocol === 'file:') {
-        console.error('CORS blocked local file loading');
-        const t = translations[appState.lang];
-        elements.reportsGrid.innerHTML = `
-            <div class="error-state">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3>${t.localCorsError}</h3>
-                <p>${t.localCorsErrorSub}</p>
-            </div>
-        `;
-        return;
-    }
-    
     try {
         let reportsData = null;
-
-        // Try GitHub Raw Live endpoint FIRST for 100% immediate CDN-bypassing real-time updates
         try {
             const rawRes = await fetch(`https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
             if (rawRes.ok) {
@@ -704,10 +426,9 @@ async function fetchReportsIndex() {
                 }
             }
         } catch (e) {
-            console.warn('GitHub raw fetch failed, trying local static index:', e);
+            console.warn('GitHub raw fetch failed, trying local index:', e);
         }
 
-        // Fallback to local index if raw GitHub is unreachable
         if (!reportsData) {
             const localRes = await fetch(`reports-index.json?v=${Date.now()}`, { cache: 'no-store' });
             if (localRes.ok) {
@@ -715,44 +436,41 @@ async function fetchReportsIndex() {
             }
         }
 
-        if (!reportsData) throw new Error('Failed to load reports database');
+        if (!reportsData) throw new Error('Failed to load reports index');
         
         appState.reports = reportsData;
-        
-        // Precompute which reports are the latest for each category
+
+        // Mark latest report per category
         const latestReports = {};
         appState.reports.forEach(report => {
-            const cat = report.category;
-            // Since the reports are already sorted newest-first, the first one encountered is the latest
-            if (!latestReports[cat]) {
-                latestReports[cat] = report.filename;
+            if (!latestReports[report.category]) {
+                latestReports[report.category] = report.filename;
             }
         });
-        
         appState.reports.forEach(report => {
             report.isLatest = (latestReports[report.category] === report.filename);
         });
-        
-        // Populate stats & filters
+
         renderCategoriesMenu();
     } catch (error) {
         console.error('Error fetching index:', error);
-        const t = translations[appState.lang];
-        elements.reportsGrid.innerHTML = `
-            <div class="error-state">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <h3>${t.errorLoading}</h3>
-                <p>${t.errorLoadingSub.replace('{code}', '<code>node generate-index.js</code>')}</p>
-            </div>
-        `;
+        if (elements.reportsGrid) {
+            const t = translations[appState.lang];
+            elements.reportsGrid.innerHTML = `
+                <div class="error-state" style="padding: 40px; text-align: center;">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 32px; color: var(--accent-gold); margin-bottom: 12px;"></i>
+                    <h3>${t.errorLoading}</h3>
+                    <p>${t.errorLoadingSub.replace('{code}', '<code>node generate-index.js</code>')}</p>
+                </div>
+            `;
+        }
     }
 }
 
-// Router to handle URL Hash Changes (Permalinks)
+// URL Hash Router
 function handleRouting() {
     const hash = window.location.hash;
     
-    // Expected hash format: #report=category/file.md or #report=file.md
     if (hash && hash.startsWith('#report=')) {
         closePortfolio();
         closeSrCalc();
@@ -774,499 +492,303 @@ function handleRouting() {
     }
 }
 
-// Toggle Mobile Sidebar Drawer
-function toggleMobileSidebar() {
-    elements.sidebar.classList.toggle('mobile-open');
-    elements.sidebarBackdrop.classList.toggle('active');
-}
-
-function closeMobileSidebar() {
-    elements.sidebar.classList.remove('mobile-open');
-    elements.sidebarBackdrop.classList.remove('active');
-}
-
-// Stats section removed
-
-// Render Categories Menu in Sidebar
 function renderCategoriesMenu() {
-    // Count reports per category
+    if (!elements.categoryList) return;
+    
     const categoriesCount = {};
-    appState.reports.forEach(report => {
-        const cat = report.category;
-        categoriesCount[cat] = (categoriesCount[cat] || 0) + 1;
+    appState.reports.forEach(r => {
+        categoriesCount[r.category] = (categoriesCount[r.category] || 0) + 1;
     });
-    
-    // Get unique categories list, excluding Bot Trade Todays and Bot Trade Stats
+
+    const countAllEl = document.getElementById('count-all');
+    if (countAllEl) countAllEl.textContent = appState.reports.length;
+
     const uniqueCategories = [...new Set(appState.reports.map(r => r.category))].filter(cat => cat !== 'Bot Trade Todays' && cat !== 'Bot Trade Stats');
-    
-    // Clear dynamic items (keep first "all" item)
-    const allItem = elements.categoryList.querySelector('[data-category="all"]');
-    if (allItem) {
-        const t = translations[appState.lang];
-        const textSpan = allItem.querySelector('span');
-        if (textSpan) {
-            textSpan.textContent = t.allReports;
-        }
+
+    // Keep first 'all' item, clear rest
+    while (elements.categoryList.children.length > 1) {
+        elements.categoryList.removeChild(elements.categoryList.lastChild);
     }
-    
-    elements.categoryList.innerHTML = '';
-    if (allItem) {
-        elements.categoryList.appendChild(allItem);
-    }
-    
-    // Sort categories alphabetically
-    uniqueCategories.sort().forEach(catName => {
-        const catObj = appState.reports.find(r => r.category === catName);
-        const displayName = appState.lang === 'th' ? (catObj?.categoryThai || catName) : catName;
-        
-        // Assign icon based on category type
-        let iconClass = 'fa-file-lines';
-        const nameLower = catName.toLowerCase();
-        if (nameLower.includes('pre-market')) iconClass = 'fa-bolt';
-        else if (nameLower.includes('cosmic')) iconClass = 'fa-meteor';
-        else if (nameLower.includes('small cap') || nameLower.includes('radar')) iconClass = 'fa-rocket';
-        else if (nameLower.includes('whale') || nameLower.includes('วาฬ')) iconClass = 'fa-water';
-        else if (nameLower.includes('oversold')) iconClass = 'fa-arrow-trend-down';
-        else if (nameLower.includes('calendar') || nameLower.includes('economic')) iconClass = 'fa-calendar-days';
-        else if (nameLower.includes('script')) iconClass = 'fa-microphone-lines';
-        else if (nameLower.includes('hot stock') || nameLower.includes('hot')) iconClass = 'fa-fire';
-        
-        // New categories icons
-        else if (nameLower.includes('bot trade') || nameLower.includes('บอทเทรด')) iconClass = 'fa-robot';
-        else if (nameLower.includes('market summary') || nameLower.includes('recap') || nameLower.includes('สรุปจบ')) iconClass = 'fa-newspaper';
-        else if (nameLower.includes('bear squeeze') || nameLower.includes('หมี')) iconClass = 'fa-arrow-trend-up';
-        else if (nameLower.includes('whats next') || nameLower.includes('next')) iconClass = 'fa-forward';
-        else if (nameLower.includes('thai')) iconClass = 'fa-landmark';
-        else if (nameLower.includes('astro economy')) iconClass = 'fa-moon';
+
+    uniqueCategories.forEach(cat => {
+        const sampleReport = appState.reports.find(r => r.category === cat);
+        const thaiName = sampleReport ? sampleReport.categoryThai : cat;
+        const count = categoriesCount[cat] || 0;
 
         const li = document.createElement('li');
-        li.className = 'category-item';
-        li.setAttribute('data-category', catName);
+        li.className = 'category-item' + (appState.activeCategory === cat ? ' active' : '');
+        li.setAttribute('data-category', cat);
+
+        let iconClass = 'fa-file-lines';
+        if (cat.includes('Pre-Market')) iconClass = 'fa-bolt';
+        else if (cat.includes('Daily Script') || cat.includes('สรุปจบ')) iconClass = 'fa-newspaper';
+        else if (cat.includes('Whale Flow') || cat.includes('วาฬ')) iconClass = 'fa-fish-fins';
+        else if (cat.includes('Small Cap')) iconClass = 'fa-radar';
+        else if (cat.includes('Cosmic')) iconClass = 'fa-atom';
+        else if (cat.includes('Options')) iconClass = 'fa-sliders';
+        else if (cat.includes('Gold')) iconClass = 'fa-coins';
+
         li.innerHTML = `
             <i class="fa-solid ${iconClass}"></i>
-            <span>${displayName}</span>
-            <span class="badge count-badge">${categoriesCount[catName]}</span>
+            <span>${appState.lang === 'th' ? thaiName : cat}</span>
+            <span class="badge count-badge">${count}</span>
         `;
-        
+
         li.addEventListener('click', () => {
-            // Remove active classes
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
             li.classList.add('active');
-            
-            appState.activeCategory = catName;
-            window.location.hash = ''; // Back to catalog list
+            appState.activeCategory = cat;
+            window.location.hash = '';
             renderCatalog();
             closeMobileSidebar();
         });
-        
+
         elements.categoryList.appendChild(li);
     });
-    
-    // Setup listener for "All" tab
+
+    // Handle 'all' click
+    const allItem = elements.categoryList.querySelector('[data-category="all"]');
     if (allItem) {
         allItem.addEventListener('click', () => {
             document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
             allItem.classList.add('active');
             appState.activeCategory = 'all';
-            window.location.hash = ''; // Back to catalog list
+            window.location.hash = '';
             renderCatalog();
             closeMobileSidebar();
         });
     }
-
-    // Update count-all badge
-    const countAllEl = document.getElementById('count-all');
-    if (countAllEl) {
-        const generalReportsCount = appState.reports.filter(r => r.category !== 'Bot Trade Todays').length;
-        countAllEl.textContent = generalReportsCount;
-    }
-
-    // Update count-bot-trade badge (combined count of Bot Trade Todays and Bot Trade Stats)
-    const countBotTradeEl = document.getElementById('count-bot-trade');
-    if (countBotTradeEl) {
-        const count = appState.reports.filter(r => r.category === 'Bot Trade Todays' || r.category === 'Bot Trade Stats').length;
-        countBotTradeEl.textContent = count;
-    }
 }
 
-// Filter, Sort, and Render Reports List
 function renderCatalog() {
-    let filtered = [...appState.reports];
-    const t = translations[appState.lang];
+    if (!elements.reportsGrid) return;
     
-    // Update main section title
-    if (appState.activeCategory === 'all') {
-        elements.sectionTitle.textContent = t.vaultTitle;
-    } else if (appState.activeCategory === 'Bot Trade Combined') {
-        elements.sectionTitle.textContent = appState.lang === 'th' ? 'บอทเทรด & ผลงาน' : 'Bot Trade & Stats';
-    } else {
-        const currentCat = appState.reports.find(r => r.category === appState.activeCategory);
-        const catNameDisplay = appState.lang === 'th' ? currentCat?.categoryThai : currentCat?.category;
-        elements.sectionTitle.textContent = catNameDisplay || appState.activeCategory;
-    }
-    
-    // Show/hide featured report container
-    if (elements.featuredContainer) {
-        if (appState.activeCategory === 'all' && !appState.searchQuery && appState.reports.length > 0) {
-            elements.featuredContainer.style.display = 'block';
-            loadFeaturedReport(appState.reports[0]);
-        } else {
-            elements.featuredContainer.style.display = 'none';
-        }
-    }
+    let filtered = appState.reports;
 
-    // Show/hide whale legend card
-    const whaleLegendCard = document.getElementById('whale-legend-card');
-    if (whaleLegendCard) {
-        if (appState.activeCategory === 'Bot Trade Combined') {
-            whaleLegendCard.style.display = 'block';
-        } else {
-            whaleLegendCard.style.display = 'none';
-        }
-    }
-    
-    // 1. Filter by category (On home page 'all', show ONLY the latest report of each category, excluding Bot Trade Todays)
-    if (appState.activeCategory === 'all') {
-        filtered = filtered.filter(r => r.isLatest && r.category !== 'Bot Trade Todays');
-    } else if (appState.activeCategory === 'Bot Trade Combined') {
+    // Filter by Category
+    if (appState.activeCategory === 'Bot Trade Combined') {
         filtered = filtered.filter(r => r.category === 'Bot Trade Todays' || r.category === 'Bot Trade Stats');
-    } else {
+    } else if (appState.activeCategory !== 'all') {
         filtered = filtered.filter(r => r.category === appState.activeCategory);
     }
-    
-    // 2. Filter by Search Query
+
+    // Filter by Search Query
     if (appState.searchQuery) {
-        const query = appState.searchQuery.toLowerCase();
+        const q = appState.searchQuery.toLowerCase();
         filtered = filtered.filter(r => 
-            r.title.toLowerCase().includes(query) || 
-            r.filename.toLowerCase().includes(query) ||
-            r.categoryThai.toLowerCase().includes(query) ||
-            r.date.includes(query)
+            r.title.toLowerCase().includes(q) || 
+            r.filename.toLowerCase().includes(q) ||
+            r.category.toLowerCase().includes(q) ||
+            r.categoryThai.toLowerCase().includes(q)
         );
     }
-    
-    // 3. Sort
-    if (appState.sortBy === 'newest') {
-        filtered.sort((a, b) => new Date(b.date) - new Date(a.date) || b.timestamp - a.timestamp);
-    } else if (appState.sortBy === 'oldest') {
-        filtered.sort((a, b) => new Date(a.date) - new Date(b.date) || a.timestamp - b.timestamp);
-    } else if (appState.sortBy === 'alphabetical') {
-        filtered.sort((a, b) => a.title.localeCompare(b.title, 'th'));
+
+    // Sorting
+    filtered.sort((a, b) => {
+        if (appState.sortBy === 'newest') return b.timestamp - a.timestamp;
+        if (appState.sortBy === 'oldest') return a.timestamp - b.timestamp;
+        if (appState.sortBy === 'alphabetical') return a.title.localeCompare(b.title);
+        return 0;
+    });
+
+    const t = translations[appState.lang];
+    if (elements.resultsInfo) {
+        elements.resultsInfo.textContent = t.foundCount.replace('{count}', filtered.length);
     }
-    
-    elements.resultsInfo.textContent = t.foundCount.replace('{count}', filtered.length);
-    
-    // Clear grid
-    elements.reportsGrid.innerHTML = '';
-    
+
+    // Featured Latest Report Logic
+    if (filtered.length > 0 && appState.activeCategory === 'all' && !appState.searchQuery) {
+        const latest = filtered[0];
+        if (elements.featuredContainer) elements.featuredContainer.style.display = 'block';
+        if (elements.featuredTitle) elements.featuredTitle.textContent = latest.title;
+        if (elements.featuredCategory) elements.featuredCategory.textContent = appState.lang === 'th' ? latest.categoryThai : latest.category;
+        if (elements.featuredDate) elements.featuredDate.textContent = latest.date;
+
+        if (elements.featuredReadMoreBtn) {
+            elements.featuredReadMoreBtn.onclick = () => {
+                window.location.hash = `report=${encodeURIComponent(latest.path)}`;
+            };
+        }
+
+        // Load preview text
+        fetchReportContent(latest.path).then(md => {
+            if (elements.featuredMarkdown && md) {
+                const html = window.DOMPurify ? DOMPurify.sanitize(marked.parse(md)) : marked.parse(md);
+                elements.featuredMarkdown.innerHTML = html;
+            }
+        });
+    } else {
+        if (elements.featuredContainer) elements.featuredContainer.style.display = 'none';
+    }
+
+    // Render Grid Cards
     if (filtered.length === 0) {
         elements.reportsGrid.innerHTML = `
-            <div class="no-results">
-                <i class="fa-regular fa-folder-open"></i>
+            <div class="no-results" style="grid-column: 1/-1; padding: 40px; text-align: center;">
+                <i class="fa-solid fa-folder-open" style="font-size: 32px; color: var(--text-muted); margin-bottom: 12px;"></i>
                 <h3>${t.noResults}</h3>
-                <p>${t.noResultsSub}</p>
+                <p style="color: var(--text-muted);">${t.noResultsSub}</p>
             </div>
         `;
         return;
     }
-    
-    // Generate Cards
-    filtered.forEach(report => {
-        const card = document.createElement('div');
-        
-        // Define card border/theme classes based on category
-        const categoryClass = getCategoryClass(report.category);
 
-        card.className = `report-card ${categoryClass}`;
-        
-        // Format file size
-        const kbSize = (report.size / 1024).toFixed(1);
-        const newBadgeHtml = report.isLatest ? `<span class="new-badge"><i class="fa-solid fa-fire"></i> NEW</span>` : '';
-        
-        card.innerHTML = `
-            <div class="card-badge-row">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    ${newBadgeHtml}
-                    <span class="card-date">${formatReportDate(report.date, appState.lang)}</span>
-                </div>
+    elements.reportsGrid.innerHTML = filtered.map(r => `
+        <div class="report-card" onclick="window.location.hash='report=${encodeURIComponent(r.path)}'">
+            <div>
+                <div class="card-category">${appState.lang === 'th' ? r.categoryThai : r.category}</div>
+                <h3 class="card-title">${r.title}</h3>
             </div>
-            <h3 class="card-title">${report.title}</h3>
             <div class="card-footer">
-                <span class="card-size"><i class="fa-regular fa-file"></i> ${kbSize} KB</span>
-                <span class="card-action-text">${t.readDetails} <i class="fa-solid fa-arrow-right"></i></span>
+                <span><i class="fa-regular fa-calendar"></i> ${r.date}</span>
+                <span class="read-link">${t.readDetails} <i class="fa-solid fa-arrow-right"></i></span>
             </div>
-        `;
-        
-        card.addEventListener('click', () => {
-            // Navigate via hash router
-            window.location.hash = `report=${encodeURIComponent(report.path)}`;
-        });
-        
-        // If on Home page, wrap the card with the category title outside
-        if (appState.activeCategory === 'all') {
-            const group = document.createElement('div');
-            group.className = 'report-card-group';
-            const catDisplayName = appState.lang === 'th' ? report.categoryThai : report.category;
-            group.innerHTML = `<h4 class="report-group-title">${catDisplayName}</h4>`;
-            group.appendChild(card);
-            elements.reportsGrid.appendChild(group);
-        } else {
-            elements.reportsGrid.appendChild(card);
-        }
-    });
+        </div>
+    `).join('');
 }
 
-// Open and Render Selected Report
+// Fetch Content of a Markdown Report
+async function fetchReportContent(filePath) {
+    try {
+        let text = null;
+        try {
+            const rawRes = await fetch(`https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/${filePath}?v=${Date.now()}`, { cache: 'no-store' });
+            if (rawRes.ok) text = await rawRes.text();
+        } catch (e) {
+            console.warn('Raw fetch failed, fallback to local:', e);
+        }
+
+        if (!text) {
+            const localRes = await fetch(`${filePath}?v=${Date.now()}`, { cache: 'no-store' });
+            if (localRes.ok) text = await localRes.text();
+        }
+        return text;
+    } catch (e) {
+        console.error('Error fetching report content:', e);
+        return null;
+    }
+}
+
+// Open Report Reader View
 async function openReport(filePath) {
-    const reportMeta = appState.reports.find(r => r.path === filePath);
-    const t = translations[appState.lang];
-    
-    // Fallback if index hasn't loaded yet or path is not found
-    if (!reportMeta) {
-        elements.markdownContainer.innerHTML = `
-            <div class="loading-spinner">
-                <i class="fa-solid fa-circle-notch fa-spin"></i>
-                <p>${t.loadingDocument}</p>
-            </div>
-        `;
-        // Toggle views
-        elements.catalogView.classList.remove('active');
-        elements.readerView.classList.add('active');
-        
-        // Retry shortly in case index is still loading
-        setTimeout(() => {
-            const retryMeta = appState.reports.find(r => r.path === filePath);
-            if (retryMeta) {
-                renderReportContent(retryMeta);
-            } else {
-                elements.markdownContainer.innerHTML = `
-                    <div class="error-state">
-                        <i class="fa-solid fa-file-excel"></i>
-                        <h3>${t.reportNotFound}</h3>
-                        <p>${t.reportNotFoundSub.replace('{path}', `<code>${filePath}</code>`)}</p>
-                        <button class="back-btn" onclick="window.location.hash=''"><i class="fa-solid fa-house"></i> ${t.btnHome}</button>
-                    </div>
-                `;
-            }
-        }, 1000);
-        return;
-    }
-
-    renderReportContent(reportMeta);
-}
-
-async function renderReportContent(reportMeta) {
-    appState.selectedReport = reportMeta;
-    appState.viewMode = 'html';
+    appState.selectedReport = appState.reports.find(r => r.path === filePath) || { title: filePath, path: filePath, category: 'Report', categoryThai: 'รายงาน', date: '', size: 0 };
     
     const t = translations[appState.lang];
-    
-    elements.btnRaw.innerHTML = '<i class="fa-solid fa-code"></i>';
-    elements.btnRaw.title = t.rawCodeTitle;
+    if (elements.readerTitle) elements.readerTitle.textContent = appState.selectedReport.title;
+    if (elements.readerCategory) elements.readerCategory.textContent = appState.lang === 'th' ? appState.selectedReport.categoryThai : appState.selectedReport.category;
+    if (elements.readerDate) elements.readerDate.textContent = appState.selectedReport.date;
+    if (elements.readerSize) elements.readerSize.textContent = `${(appState.selectedReport.size / 1024).toFixed(1)} KB`;
 
-    // Set Header details
-    elements.readerTitle.textContent = reportMeta.title;
-    elements.readerCategory.textContent = appState.lang === 'th' ? reportMeta.categoryThai : reportMeta.category;
-    elements.readerDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(reportMeta.date, appState.lang)}`;
-    elements.readerSize.innerHTML = `<i class="fa-regular fa-file-lines"></i> ${t.metaSize.replace('{size}', (reportMeta.size / 1024).toFixed(1))}`;
+    // Toggle Whale Flow legend card if applicable
+    const isWhale = filePath.includes('whale') || filePath.includes('options_screen');
+    const legendCard = document.getElementById('whale-legend-card-reader');
+    if (legendCard) legendCard.style.display = isWhale ? 'block' : 'none';
 
-    // Toggle views
-    elements.catalogView.classList.remove('active');
-    elements.readerView.classList.add('active');
-    
-    // Scroll content area back to top
-    elements.readerView.parentElement.scrollTop = 0;
+    if (elements.catalogView) elements.catalogView.classList.remove('active');
+    if (elements.portfolioView) elements.portfolioView.classList.remove('active');
+    if (elements.srCalcView) elements.srCalcView.classList.remove('active');
+    if (elements.readerView) elements.readerView.classList.add('active');
 
-    // Load and Compile Markdown file content
-    try {
-        let markdown = "";
-        try {
-            const rawUrl = `https://raw.githubusercontent.com/sepnewtrade-report/sepkhawgontrade-reports/main/${encodeURI(reportMeta.path)}?v=${Date.now()}`;
-            const rawRes = await fetch(rawUrl, { cache: 'no-store' });
-            if (rawRes.ok) {
-                markdown = await rawRes.text();
-            }
-        } catch (e) {}
+    if (elements.markdownContainer) {
+        elements.markdownContainer.innerHTML = `<div class="loading-spinner" style="padding: 40px; text-align: center;"><i class="fa-solid fa-circle-notch fa-spin"></i><p>${t.loadingSpinner}</p></div>`;
+    }
 
-        if (!markdown) {
-            const localRes = await fetch(`${encodeURI(reportMeta.path)}?v=${reportMeta.timestamp || Date.now()}`, { cache: 'no-store' });
-            if (localRes.ok) {
-                markdown = await localRes.text();
-            }
-        }
-
-        if (!markdown) throw new Error('File not found');
-        
-        // Store raw markdown in memory
-        appState.rawMarkdown = markdown;
-
-        // Show/hide whale legend card in reader dynamically
-        const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
-        if (whaleLegendCardReader) {
-            const hasWhaleIndicators = markdown.includes('CMF') || markdown.includes('Whale Flow') || markdown.includes('🐳');
-            whaleLegendCardReader.style.display = hasWhaleIndicators ? 'block' : 'none';
-        }
-        
-        // Render
-        await displayParsedHTML(markdown);
-    } catch (error) {
-        console.error('Error loading report file:', error);
-        elements.markdownContainer.innerHTML = `
-            <div class="error-state">
-                <i class="fa-solid fa-file-excel"></i>
-                <h3>ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้</h3>
-                <p>อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง (<code>${error.message}</code>)</p>
-            </div>
-        `;
+    const content = await fetchReportContent(filePath);
+    if (content && elements.markdownContainer) {
+        appState.rawMarkdownContent = content;
+        renderMarkdownView();
     }
 }
 
-let mermaidLoaded = null;
-
-async function loadMermaid() {
-    if (mermaidLoaded) return mermaidLoaded;
-    try {
-        const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: 'dark',
-            securityLevel: 'loose'
-        });
-        window.mermaid = mermaid;
-        mermaidLoaded = mermaid;
-        return mermaid;
-    } catch (err) {
-        console.error('Failed to load Mermaid dynamically:', err);
-        throw err;
+function renderMarkdownView() {
+    if (!elements.markdownContainer || !appState.rawMarkdownContent) return;
+    
+    if (appState.viewMode === 'raw') {
+        elements.markdownContainer.innerHTML = `<pre style="white-space: pre-wrap; font-family: monospace; background: var(--bg-tertiary); padding: 20px; border-radius: 10px; color: var(--accent-cyan);">${escapeHtml(appState.rawMarkdownContent)}</pre>`;
+    } else {
+        const parsed = window.DOMPurify ? DOMPurify.sanitize(marked.parse(appState.rawMarkdownContent)) : marked.parse(appState.rawMarkdownContent);
+        elements.markdownContainer.innerHTML = parsed;
     }
 }
 
-// Convert Markdown to HTML & Format Custom Elements (Alerts)
-async function displayParsedHTML(markdown) {
-    if (typeof marked === 'undefined') {
-        throw new Error('Markdown parser (marked.js) failed to load. Please check your internet connection.');
-    }
-    if (typeof DOMPurify === 'undefined') {
-        throw new Error('HTML sanitizer (DOMPurify) failed to load. Please check your internet connection.');
-    }
-    // 1. Compile Markdown using marked
-    let rawHtml = marked.parse(markdown);
-    
-    // 2. Sanitize HTML
-    let cleanHtml = DOMPurify.sanitize(rawHtml);
-    
-    // Inject into container
-    elements.markdownContainer.innerHTML = cleanHtml;
-    
-    // 3. Post-process elements (like blockquotes for alerts)
-    const blockquotes = elements.markdownContainer.querySelectorAll('blockquote');
-    blockquotes.forEach(bq => {
-        const html = bq.innerHTML;
-        
-        // Replace marked alert formats with styled alert boxes
-        if (html.includes('[!NOTE]')) {
-            bq.classList.add('alert-note');
-            bq.innerHTML = cleanAlertText(html, '[!NOTE]');
-        } else if (html.includes('[!TIP]')) {
-            bq.classList.add('alert-tip');
-            bq.innerHTML = cleanAlertText(html, '[!TIP]');
-        } else if (html.includes('[!IMPORTANT]')) {
-            bq.classList.add('alert-important');
-            bq.innerHTML = cleanAlertText(html, '[!IMPORTANT]');
-        } else if (html.includes('[!WARNING]')) {
-            bq.classList.add('alert-warning');
-            bq.innerHTML = cleanAlertText(html, '[!WARNING]');
-        } else if (html.includes('[!CAUTION]')) {
-            bq.classList.add('alert-caution');
-            bq.innerHTML = cleanAlertText(html, '[!CAUTION]');
-        }
+function toggleRawMarkdown() {
+    appState.viewMode = appState.viewMode === 'html' ? 'raw' : 'html';
+    const t = translations[appState.lang];
+    if (elements.btnRaw) elements.btnRaw.title = appState.viewMode === 'html' ? t.rawCodeTitle : t.viewNormalTitle;
+    renderMarkdownView();
+}
+
+function copyReportLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        alert(appState.lang === 'th' ? 'คัดลอกลิงก์รายงานเรียบร้อยแล้ว' : 'Permalink copied to clipboard.');
+    }).catch(e => {
+        console.error('Copy failed:', e);
     });
-
-    // 4. Adjust image source paths to make sure they display correctly
-    const images = elements.markdownContainer.querySelectorAll('img');
-    images.forEach(img => {
-        const src = img.getAttribute('src');
-        if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/')) {
-            // URL decode and normalize to handle spaces, %20, and capitalization
-            const decodedSrc = decodeURIComponent(src).trim().toLowerCase();
-            
-            if (decodedSrc === 'logo master.png' || decodedSrc === 'logo.png') {
-                // The logo is always at the root of the site.
-                // Since index.html runs at the root, the path relative to index.html is simply 'Logo master.png'
-                img.setAttribute('src', 'Logo master.png');
-            } else {
-                // For other images, resolve them relative to the report's directory
-                const reportPath = appState.selectedReport.path;
-                const lastSlashIndex = reportPath.lastIndexOf('/');
-                if (lastSlashIndex !== -1) {
-                    const reportDir = reportPath.substring(0, lastSlashIndex + 1); // e.g. "Folder/"
-                    img.setAttribute('src', reportDir + src);
-                }
-            }
-        }
-    });
-
-    // 5. Post-process code blocks for Mermaid diagrams
-    const mermaidBlocks = elements.markdownContainer.querySelectorAll('pre code.language-mermaid');
-    if (mermaidBlocks.length > 0) {
-        mermaidBlocks.forEach((codeEl, index) => {
-            const preEl = codeEl.parentElement;
-            const mermaidCode = codeEl.textContent;
-            
-            const div = document.createElement('div');
-            div.className = 'mermaid';
-            div.textContent = mermaidCode;
-            
-            preEl.parentNode.replaceChild(div, preEl);
-        });
-        
-        // Dynamically load Mermaid and render
-        try {
-            const mermaid = await loadMermaid();
-            await mermaid.run({
-                querySelector: '.mermaid'
-            });
-        } catch (err) {
-            console.error('Error rendering Mermaid diagram:', err);
-        }
-    }
 }
 
-// Clean [!ALERT] syntax out of blockquote paragraph markup
-function cleanAlertText(html, token) {
-    // Replace the token and any leading breaks or lines
-    return html
-        .replace(token, '')
-        .replace(/^<p>\s*<br>/i, '<p>')
-        .replace(/<p>\s*<br\s*\/?>\s*/i, '<p>')
-        .replace(/<p>\s*&nbsp;\s*/i, '<p>')
-        .replace(/&nbsp;/g, '');
-}
-
-// Close Reader View and Show Catalog
 function closeReport() {
-    appState.selectedReport = null;
-    appState.rawMarkdown = null;
+    if (elements.readerView) elements.readerView.classList.remove('active');
+}
+
+// ==========================================================================
+// Average Cost & Break-Even Calculator Logic
+// ==========================================================================
+
+function calculateStockMetrics(s) {
+    const vb = s.buys.filter(b => b.shares > 0);
+    const vs = s.sells.filter(v => v.shares > 0);
     
-    elements.readerView.classList.remove('active');
-    elements.catalogView.classList.add('active');
+    const totalCost = vb.reduce((a, b) => a + (b.price * b.shares), 0);
+    const totalShares = vb.reduce((a, b) => a + b.shares, 0);
+    const avg = totalShares > 0 ? totalCost / totalShares : 0;
     
-    const whaleLegendCardReader = document.getElementById('whale-legend-card-reader');
-    if (whaleLegendCardReader) whaleLegendCardReader.style.display = 'none';
+    const soldShares = vs.reduce((a, v) => a + v.shares, 0);
+    const soldRevenue = vs.reduce((a, v) => a + (v.price * v.shares), 0);
+    const realized = soldRevenue - (soldShares * avg);
+    
+    const remain = Math.max(0, totalShares - soldShares);
+    const remainCost = remain * avg;
+    const bePrice = remain > 0 ? (remainCost - realized) / remain : null;
+    
+    return { totalCost, totalShares, avg, soldShares, realized, remain, remainCost, bePrice };
+}
+
+function savePortfolio() {
+    try {
+        localStorage.setItem('sep_portfolio_stocks', JSON.stringify(appState.portfolioStocks));
+    } catch (e) {
+        console.warn('Failed to save portfolio:', e);
+    }
+}
+
+function loadPortfolio() {
+    try {
+        const saved = localStorage.getItem('sep_portfolio_stocks');
+        if (saved) {
+            appState.portfolioStocks = JSON.parse(saved);
+        } else {
+            // Default mockup US stocks
+            appState.portfolioStocks = [
+                { name: 'NVDA (NVIDIA)', open: true, buys: [{ price: 120, shares: 50 }, { price: 110, shares: 50 }], sells: [{ price: 135, shares: 30 }] },
+                { name: 'AAPL (Apple)', open: false, buys: [{ price: 220, shares: 25 }], sells: [] }
+            ];
+        }
+    } catch (e) {
+        appState.portfolioStocks = [];
+    }
 }
 
 function openPortfolio() {
-    // Remove active category indicators
     document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-    
-    // Add active class to portfolio menu item
     const navPort = document.getElementById('nav-portfolio');
     if (navPort) navPort.classList.add('active');
-    
-    elements.catalogView.classList.remove('active');
-    elements.readerView.classList.remove('active');
+
+    if (elements.catalogView) elements.catalogView.classList.remove('active');
+    if (elements.readerView) elements.readerView.classList.remove('active');
+    if (elements.srCalcView) elements.srCalcView.classList.remove('active');
     if (elements.portfolioView) elements.portfolioView.classList.add('active');
-    
+
     renderPortfolio();
 }
 
@@ -1276,423 +798,123 @@ function closePortfolio() {
     if (navPort) navPort.classList.remove('active');
 }
 
-// Toggle between Rendered HTML and Raw Markdown view
-async function toggleRawMarkdown() {
-    if (appState.viewMode === 'html') {
-        appState.viewMode = 'raw';
-        elements.btnRaw.innerHTML = '<i class="fa-solid fa-eye"></i>';
-        elements.btnRaw.title = 'ดูหน้าเอกสารปกติ (HTML)';
-        
-        // Escape HTML tags to display raw markdown
-        const escapedMarkdown = appState.rawMarkdown
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-            
-        elements.markdownContainer.innerHTML = `
-            <div style="font-family: monospace; font-size:14px; white-space: pre-wrap; background:#0f172a; padding: 24px; border-radius: 8px; border:1px solid var(--border-color); color:#cbd5e1; line-height:1.6;">
-                ${escapedMarkdown}
-            </div>
-        `;
-    } else {
-        appState.viewMode = 'html';
-        elements.btnRaw.innerHTML = '<i class="fa-solid fa-code"></i>';
-        elements.btnRaw.title = 'ดูซอร์สโค้ด Markdown';
-        await displayParsedHTML(appState.rawMarkdown);
-    }
-}
-
-// Copy Permalink of the Report to clipboard
-function copyReportLink() {
-    const permalink = `${window.location.origin}${window.location.pathname}#report=${encodeURIComponent(appState.selectedReport.path)}`;
+function renderPortfolio() {
+    if (!elements.stockList) return;
+    elements.stockList.innerHTML = '';
     
-    navigator.clipboard.writeText(permalink).then(() => {
-        // Change icon temporarily to checkmark
-        const originalIcon = elements.btnCopyLink.innerHTML;
-        elements.btnCopyLink.innerHTML = '<i class="fa-solid fa-check" style="color:var(--accent-primary)"></i>';
-        
-        setTimeout(() => {
-            elements.btnCopyLink.innerHTML = originalIcon;
-        }, 2000);
-    }).catch(err => {
-        console.error('Failed to copy link:', err);
-    });
-}
-
-// Helpers: localized Date formatter
-function formatReportDate(dateString, lang) {
-    if (!dateString) return '';
-    
-    // Check if the format is YYYY-MM-DD
-    const parts = dateString.split('-');
-    if (parts.length === 3) {
-        const thaiMonths = [
-            'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-            'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
-        ];
-        const enMonths = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-        
-        const day = parseInt(parts[2], 10);
-        const monthIndex = parseInt(parts[1], 10) - 1;
-        
-        if (lang === 'th') {
-            const year = parseInt(parts[0], 10) + 543; // Convert to Buddhist Era (BE)
-            return `${day} ${thaiMonths[monthIndex]} ${year}`;
-        } else {
-            const year = parseInt(parts[0], 10); // Standard Common Era (CE)
-            return `${day} ${enMonths[monthIndex]} ${year}`;
-        }
-    }
-    
-    // Return original string if it is formatted like 'June 2026'
-    return dateString;
-}
-
-function getCategoryClass(category) {
-    if (!category) return 'general-report';
-    const catLower = category.toLowerCase();
-    if (catLower.includes('pre-market')) return 'pre-market-analysis';
-    if (catLower.includes('cosmic')) return 'cosmic-trade-signal';
-    if (catLower.includes('small cap') || catLower.includes('radar')) return 'small-cap-research';
-    if (catLower.includes('whale')) return 'whale-flow';
-    if (catLower.includes('oversold')) return 'oversold-opportunity';
-    if (catLower.includes('script')) return 'daily-script';
-    if (catLower.includes('hot stock')) return 'hot-stock-today';
-    if (catLower.includes('market summary')) return 'market-summary-card';
-    if (catLower.includes('bear squeeze')) return 'bear-squeeze-card';
-    if (catLower.includes('global market recap')) return 'global-recap-card';
-    if (catLower.includes('whats next')) return 'whats-next-card';
-    if (catLower.includes('thai')) return 'thai-stock-card';
-    if (catLower.includes('astro economy')) return 'astro-economy-card';
-    return 'general-report';
-}
-
-let currentFeaturedPath = null;
-
-async function loadFeaturedReport(report) {
-    if (!report) {
-        elements.featuredContainer.style.display = 'none';
-        return;
-    }
-    
-    currentFeaturedPath = report.path;
-    
-    // Set static text first
-    elements.featuredTitle.textContent = report.title;
-    elements.featuredCategory.textContent = appState.lang === 'th' ? report.categoryThai : report.category;
-    elements.featuredCategory.className = `featured-category-badge ${getCategoryClass(report.category)}`;
-    elements.featuredDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${formatReportDate(report.date, appState.lang)}`;
-    
-    // Render button translation
     const t = translations[appState.lang];
-    elements.featuredBadge.innerHTML = `<i class="fa-solid fa-star"></i> ${t.latestReportBadge}`;
-    elements.featuredReadMoreBtn.innerHTML = `${t.readFullReport} <i class="fa-solid fa-arrow-right"></i>`;
-    
-    // Set up click handler to open the full report
-    elements.featuredReadMoreBtn.onclick = () => {
-        window.location.hash = `report=${encodeURIComponent(report.path)}`;
-    };
-    
-    try {
-        const response = await fetch(`${encodeURI(report.path)}?v=${report.timestamp || Date.now()}`);
-        if (!response.ok) throw new Error('File not found');
-        const markdown = await response.text();
-        
-        // Ensure this response is still the latest one requested
-        if (currentFeaturedPath !== report.path) return;
-        
-        // Parse and display HTML
-        let rawHtml = marked.parse(markdown);
-        let cleanHtml = DOMPurify.sanitize(rawHtml);
-        
-        // Inject into container
-        elements.featuredMarkdown.innerHTML = cleanHtml;
-        
-        // Post-process blockquotes (alerts)
-        const blockquotes = elements.featuredMarkdown.querySelectorAll('blockquote');
-        blockquotes.forEach(bq => {
-            const html = bq.innerHTML;
-            if (html.includes('[!NOTE]')) {
-                bq.classList.add('alert-note');
-                bq.innerHTML = cleanAlertText(html, '[!NOTE]');
-            } else if (html.includes('[!TIP]')) {
-                bq.classList.add('alert-tip');
-                bq.innerHTML = cleanAlertText(html, '[!TIP]');
-            } else if (html.includes('[!IMPORTANT]')) {
-                bq.classList.add('alert-important');
-                bq.innerHTML = cleanAlertText(html, '[!IMPORTANT]');
-            } else if (html.includes('[!WARNING]')) {
-                bq.classList.add('alert-warning');
-                bq.innerHTML = cleanAlertText(html, '[!WARNING]');
-            } else if (html.includes('[!CAUTION]')) {
-                bq.classList.add('alert-caution');
-                bq.innerHTML = cleanAlertText(html, '[!CAUTION]');
-            }
-        });
-        
-        // Adjust image paths
-        const images = elements.featuredMarkdown.querySelectorAll('img');
-        images.forEach(img => {
-            const src = img.getAttribute('src');
-            if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('/')) {
-                const decodedSrc = decodeURIComponent(src).trim().toLowerCase();
-                if (decodedSrc === 'logo master.png' || decodedSrc === 'logo.png') {
-                    img.setAttribute('src', 'Logo master.png');
-                } else {
-                    const lastSlashIndex = report.path.lastIndexOf('/');
-                    if (lastSlashIndex !== -1) {
-                        const reportDir = report.path.substring(0, lastSlashIndex + 1);
-                        img.setAttribute('src', reportDir + src);
-                    }
-                }
-            }
-        });
-        
-        // Process Mermaid diagrams
-        const mermaidBlocks = elements.featuredMarkdown.querySelectorAll('pre code.language-mermaid');
-        if (mermaidBlocks.length > 0) {
-            mermaidBlocks.forEach((codeEl, index) => {
-                const preEl = codeEl.parentElement;
-                const mermaidCode = codeEl.textContent;
-                
-                const div = document.createElement('div');
-                div.className = 'mermaid';
-                div.textContent = mermaidCode;
-                
-                preEl.parentNode.replaceChild(div, preEl);
-            });
-            
-            try {
-                const mermaid = await loadMermaid();
-                await mermaid.run({
-                    querySelector: '.mermaid'
-                });
-            } catch (err) {
-                console.error('Error rendering Mermaid diagram:', err);
-            }
+
+    appState.portfolioStocks.forEach((s, si) => {
+        const r = calculateStockMetrics(s);
+        const card = document.createElement('div');
+        card.className = 'portfolio-stock-card';
+
+        // Header
+        const hdr = document.createElement('div');
+        hdr.className = 'portfolio-stock-header' + (s.open ? '' : ' is-collapsed');
+        hdr.onclick = () => { s.open = !s.open; savePortfolio(); renderPortfolio(); };
+
+        const hl = document.createElement('div');
+        hl.className = 'portfolio-stock-header-left';
+
+        const nw = document.createElement('div');
+        nw.className = 'portfolio-name-wrap';
+
+        const ni = document.createElement('input');
+        ni.className = 'portfolio-name-inp';
+        ni.value = s.name;
+        ni.placeholder = t.placeholderStockName;
+        ni.onclick = e => e.stopPropagation();
+        ni.onchange = () => { s.name = ni.value; savePortfolio(); };
+
+        nw.append(ni);
+
+        const badge = document.createElement('span');
+        badge.className = 'portfolio-badge ' + (r.realized > 0 ? 'portfolio-bp' : r.realized < 0 ? 'portfolio-bl2' : 'portfolio-bz');
+        badge.textContent = r.realized > 0 ? `+$${fmt(r.realized)}` : r.realized < 0 ? `-$${fmt(Math.abs(r.realized))}` : '$0.00';
+        hl.append(nw, badge);
+
+        const hr2 = document.createElement('div');
+        hr2.style.cssText = 'display:flex;align-items:center;gap:12px';
+
+        const avgSp = document.createElement('span');
+        avgSp.style.cssText = 'font-size:14px;color:var(--text-secondary)';
+        avgSp.textContent = t.avgLabel.replace('{price}', r.totalShares > 0 ? '$' + fmt(r.avg) : '-');
+
+        const tb = document.createElement('button');
+        tb.className = 'portfolio-trash-btn';
+        tb.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
+        tb.onclick = e => { e.stopPropagation(); appState.portfolioStocks.splice(si, 1); savePortfolio(); renderPortfolio(); };
+
+        const chev = document.createElement('span');
+        chev.className = 'portfolio-chevron';
+        chev.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
+
+        hr2.append(avgSp, tb, chev);
+        hdr.append(hl, hr2);
+        card.appendChild(hdr);
+
+        if (s.open) {
+            const body = document.createElement('div');
+            body.className = 'portfolio-stock-body';
+            renderPortfolioBody(s, body, si);
+            card.appendChild(body);
         }
-        
-    } catch (error) {
-        console.error('Error loading featured report file:', error);
-        elements.featuredMarkdown.innerHTML = `
-            <div class="error-state">
-                <i class="fa-solid fa-file-excel"></i>
-                <h3>ไม่สามารถเปิดไฟล์บทวิเคราะห์ได้</h3>
-                <p>อาจเกิดจากไฟล์ถูกลบ ย้าย หรือระบบการเข้าถึงขัดข้อง (<code>${error.message}</code>)</p>
-            </div>
-        `;
-    }
-}
 
-// ==========================================================================
-// Portfolio Tracker Functionality
-// ==========================================================================
-
-const fmt = n => isNaN(n) ? '0.00' : n.toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-const fmtI = n => isNaN(n) ? '0' : Math.max(0, n).toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US');
-
-function savePortfolio() {
-    localStorage.setItem('sep_portfolio_stocks', JSON.stringify(appState.portfolioStocks));
-}
-
-function calculateStockMetrics(s) {
-    const vb = s.buys.filter(b => b.shares > 0);
-    const vs = s.sells.filter(v => v.shares > 0);
-    const totalCost = vb.reduce((a, b) => a + b.price * b.shares, 0);
-    const totalShares = vb.reduce((a, b) => a + b.shares, 0);
-    const avg = totalShares > 0 ? totalCost / totalShares : 0;
-    const soldShares = vs.reduce((a, v) => a + v.shares, 0);
-    const soldRevenue = vs.reduce((a, v) => a + v.price * v.shares, 0);
-    const realized = soldRevenue - soldShares * avg;
-    const remain = Math.max(0, totalShares - soldShares);
-    const remainCost = remain * avg;
-    const bePrice = remain > 0 ? (remainCost - realized) / remain : null;
-    return {totalCost, totalShares, avg, soldShares, realized, remain, remainCost, bePrice};
-}
-
-function makePortfolioInputWrap(val, isInt, placeholder, onChange) {
-    const wrap = document.createElement('div');
-    wrap.className = 'portfolio-iw';
-    
-    const inp = document.createElement('input');
-    inp.type = 'number';
-    inp.min = '0';
-    inp.step = isInt ? '1' : '0.01';
-    inp.value = val > 0 ? val : '';
-    inp.placeholder = placeholder;
-    
-    inp.addEventListener('input', () => {
-        onChange(inp.value);
-        savePortfolio();
-        updatePortfolioSummary();
+        elements.stockList.appendChild(card);
     });
-    
-    const clr = document.createElement('button');
-    clr.className = 'portfolio-ic';
-    clr.textContent = '✕';
-    clr.addEventListener('click', () => {
-        inp.value = '';
-        onChange('');
-        savePortfolio();
-        updatePortfolioSummary();
-    });
-    
-    wrap.append(inp, clr);
-    return wrap;
+
+    updatePortfolioSummary();
 }
 
-function makePortfolioEntryRow(labelA, valA, isIntA, placeA, onChangeA, labelB, valB, isIntB, placeB, onChangeB, onDel) {
-    const row = document.createElement('div');
-    row.className = 'portfolio-entry-row';
-    
-    const u1 = document.createElement('span');
-    u1.className = 'portfolio-unit';
-    u1.textContent = labelA;
-    
-    const u2 = document.createElement('span');
-    u2.className = 'portfolio-unit';
-    u2.textContent = labelB;
-    
-    const u3 = document.createElement('span');
-    u3.className = 'portfolio-unit';
-    u3.textContent = appState.lang === 'th' ? 'หุ้น' : 'shares';
-    
-    const del = document.createElement('button');
-    del.className = 'portfolio-del-row-btn';
-    del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-    del.addEventListener('click', onDel);
-    
-    row.append(
-        u1, 
-        makePortfolioInputWrap(valA, isIntA, placeA, onChangeA), 
-        u2, 
-        makePortfolioInputWrap(valB, isIntB, placeB, onChangeB), 
-        u3, 
-        del
-    );
-    return row;
-}
-
-function makePortfolioSecDiv(tagClass, tagText) {
-    const d = document.createElement('div');
-    d.className = 'portfolio-sec-div';
-    
-    const sp = document.createElement('span');
-    sp.className = `portfolio-tag ${tagClass}`;
-    sp.textContent = tagText;
-    
-    d.appendChild(sp);
-    return d;
-}
-
-function renderPortfolioBody(s, body, stockIndex) {
+function renderPortfolioBody(s, body, si) {
     const t = translations[appState.lang];
-    
-    // BUY
-    body.appendChild(makePortfolioSecDiv('portfolio-tb', t.tagBuy));
-    if (s.buys.length === 0) {
-        const p = document.createElement('p');
-        p.className = 'portfolio-empty-hint';
-        p.textContent = t.emptyBuys;
-        body.appendChild(p);
-    } else {
-        s.buys.forEach((b, bi) => {
-            body.appendChild(makePortfolioEntryRow(
-                t.placeholderPrice, b.price, false, '0.00', v => { s.buys[bi].price = parseFloat(v) || 0; },
-                t.placeholderQty, b.shares, true, '0', v => { s.buys[bi].shares = parseInt(v) || 0; },
-                () => {
-                    s.buys.splice(bi, 1);
-                    savePortfolio();
-                    renderPortfolio();
-                }
-            ));
-        });
-    }
-    
+
+    // BUY Section
+    body.appendChild(makeSecDiv('portfolio-tb', t.tagBuy));
+    s.buys.forEach((b, bi) => {
+        body.appendChild(makeEntryRow(
+            t.placeholderPrice, b.price, false, '0.00', v => { s.buys[bi].price = parseFloat(v) || 0; },
+            t.placeholderQty, b.shares, true, '0', v => { s.buys[bi].shares = parseInt(v) || 0; },
+            () => { s.buys.splice(bi, 1); savePortfolio(); renderPortfolio(); }
+        ));
+    });
+
     const ab = document.createElement('button');
     ab.className = 'portfolio-add-btn';
     ab.textContent = appState.lang === 'th' ? '+ เพิ่มรายการซื้อ' : '+ Add Buy Order';
-    ab.addEventListener('click', () => {
-        s.buys.push({price: 0, shares: 0});
-        savePortfolio();
-        renderPortfolio();
-    });
+    ab.onclick = () => { s.buys.push({ price: 0, shares: 0 }); savePortfolio(); renderPortfolio(); };
     body.appendChild(ab);
 
-    // SELL
-    body.appendChild(makePortfolioSecDiv('portfolio-ts', t.tagSell));
-    if (s.sells.length === 0) {
-        const p = document.createElement('p');
-        p.className = 'portfolio-empty-hint';
-        p.textContent = t.emptySells;
-        body.appendChild(p);
-    } else {
-        s.sells.forEach((sv, vi) => {
-            body.appendChild(makePortfolioEntryRow(
-                t.placeholderPrice, sv.price, false, '0.00', v => { s.sells[vi].price = parseFloat(v) || 0; },
-                t.placeholderQty, sv.shares, true, '0', v => { s.sells[vi].shares = parseInt(v) || 0; },
-                () => {
-                    s.sells.splice(vi, 1);
-                    savePortfolio();
-                    renderPortfolio();
-                }
-            ));
-        });
-    }
-    
+    // SELL Section
+    body.appendChild(makeSecDiv('portfolio-ts', t.tagSell));
+    s.sells.forEach((sv, vi) => {
+        body.appendChild(makeEntryRow(
+            t.placeholderPrice, sv.price, false, '0.00', v => { s.sells[vi].price = parseFloat(v) || 0; },
+            t.placeholderQty, sv.shares, true, '0', v => { s.sells[vi].shares = parseInt(v) || 0; },
+            () => { s.sells.splice(vi, 1); savePortfolio(); renderPortfolio(); }
+        ));
+    });
+
     const as = document.createElement('button');
     as.className = 'portfolio-add-btn';
     as.textContent = appState.lang === 'th' ? '+ เพิ่มรายการขาย' : '+ Add Sell Order';
-    as.addEventListener('click', () => {
-        s.sells.push({price: 0, shares: 0});
-        savePortfolio();
-        renderPortfolio();
-    });
+    as.onclick = () => { s.sells.push({ price: 0, shares: 0 }); savePortfolio(); renderPortfolio(); };
     body.appendChild(as);
 
-    // Metrics grid
+    // Metrics Summary Grid
     const r = calculateStockMetrics(s);
     const mg = document.createElement('div');
     mg.className = 'portfolio-metrics-grid';
-    
-    const sharesUnitText = t.sharesUnit.replace('{shares}', fmtI(r.totalShares));
-    const remainUnitText = t.sharesUnit.replace('{shares}', fmtI(r.remain));
-    
     mg.innerHTML = `
         <div class="portfolio-metric"><p class="portfolio-ml">${t.lblCost}</p><p class="portfolio-mv">$${fmt(r.totalCost)}</p></div>
-        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblTotalShares}</p><p class="portfolio-mv">${sharesUnitText}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblTotalShares}</p><p class="portfolio-mv">${fmtI(r.totalShares)} หุ้น</p></div>
         <div class="portfolio-metric"><p class="portfolio-ml">${t.lblAvgCostPerShare}</p><p class="portfolio-mv">${r.totalShares > 0 ? '$' + fmt(r.avg) : '-'}</p></div>
-        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblRemainShares}</p><p class="portfolio-mv">${remainUnitText}</p></div>
+        <div class="portfolio-metric"><p class="portfolio-ml">${t.lblRemainShares}</p><p class="portfolio-mv">${fmtI(r.remain)} หุ้น</p></div>
     `;
     body.appendChild(mg);
 
-    const hr = document.createElement('hr');
-    hr.className = 'portfolio-divider';
-    body.appendChild(hr);
-
-    const vs = s.sells.filter(v => v.shares > 0);
-    vs.forEach((sv, vi) => {
-        const pnl = sv.price * sv.shares - sv.shares * r.avg;
-        const sr = document.createElement('div');
-        sr.className = 'portfolio-srow';
-        const saleText = appState.lang === 'th' 
-            ? `ขาย ${vi + 1}: ${fmtI(sv.shares)} หุ้น × $${fmt(sv.price)}`
-            : `Sell ${vi + 1}: ${fmtI(sv.shares)} sh × $${fmt(sv.price)}`;
-        sr.innerHTML = `<span class="portfolio-k">${saleText}</span><span class="${pnl >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${pnl >= 0 ? '+' : ''}$${fmt(pnl)}</span>`;
-        body.appendChild(sr);
-    });
-
-    if (vs.length > 0) {
-        const tr = document.createElement('div');
-        tr.className = 'portfolio-srow';
-        tr.style.marginTop = '8px';
-        tr.innerHTML = `<span class="portfolio-k" style="font-weight:600">${t.lblRealizedPL}</span><span class="${r.realized >= 0 ? 'portfolio-profit' : 'portfolio-loss'}">${r.realized >= 0 ? '+' : ''}$${fmt(r.realized)}</span>`;
-        body.appendChild(tr);
-    }
-
+    // Break Even Card
     const be = document.createElement('div');
     if (r.bePrice !== null) {
         be.className = `portfolio-be-box ${r.bePrice <= r.avg ? 'green' : 'red'}`;
@@ -1700,14 +922,14 @@ function renderPortfolioBody(s, body, stockIndex) {
         const target5 = (r.bePrice * 1.05).toFixed(2);
         const target10 = (r.bePrice * 1.10).toFixed(2);
         const target20 = (r.bePrice * 1.20).toFixed(2);
-        
+
         be.innerHTML = `
             <p class="portfolio-bll">${beLabel}</p>
             <p class="portfolio-bv">$${fmt(r.bePrice)} / หุ้น</p>
             <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15); display: flex; gap: 12px; font-size: 12px; justify-content: space-around;">
-                <span style="opacity:0.85;">🎯 เป้ากำไร +5%: <b>$${target5}</b></span>
-                <span style="opacity:0.85;">🎯 เป้ากำไร +10%: <b>$${target10}</b></span>
-                <span style="opacity:0.85;">🚀 เป้ากำไร +20%: <b>$${target20}</b></span>
+                <span>🎯 เป้ากำไร +5%: <b>$${target5}</b></span>
+                <span>🎯 เป้ากำไร +10%: <b>$${target10}</b></span>
+                <span>🚀 เป้ากำไร +20%: <b>$${target20}</b></span>
             </div>
         `;
     } else {
@@ -1718,96 +940,58 @@ function renderPortfolioBody(s, body, stockIndex) {
     body.appendChild(be);
 }
 
-function renderPortfolio() {
-    if (!elements.stockList) return;
-    elements.stockList.innerHTML = '';
-    
-    const t = translations[appState.lang];
-    
-    appState.portfolioStocks.forEach((s, si) => {
-        const r = calculateStockMetrics(s);
-        const card = document.createElement('div');
-        card.className = 'portfolio-stock-card';
-        
-        // Header
-        const hdr = document.createElement('div');
-        hdr.className = 'portfolio-stock-header' + (s.open ? '' : ' is-collapsed');
-        hdr.addEventListener('click', () => {
-            s.open = !s.open;
-            savePortfolio();
-            renderPortfolio();
-        });
-        
-        const hl = document.createElement('div');
-        hl.className = 'portfolio-stock-header-left';
-        
-        const nw = document.createElement('div');
-        nw.className = 'portfolio-name-wrap';
-        
-        const ni = document.createElement('input');
-        ni.className = 'portfolio-name-inp';
-        ni.value = s.name;
-        ni.placeholder = t.placeholderStockName;
-        ni.addEventListener('click', e => e.stopPropagation());
-        ni.addEventListener('change', () => {
-            s.name = ni.value;
-            savePortfolio();
-        });
-        
-        const nc = document.createElement('button');
-        nc.className = 'portfolio-name-clr';
-        nc.textContent = '✕';
-        nc.addEventListener('click', e => {
-            e.stopPropagation();
-            s.name = '';
-            ni.value = '';
-            savePortfolio();
-        });
-        
-        nw.append(ni, nc);
-        
-        const badge = document.createElement('span');
-        badge.className = 'portfolio-badge ' + (r.realized > 0 ? 'portfolio-bp' : r.realized < 0 ? 'portfolio-bl2' : 'portfolio-bz');
-        badge.textContent = r.realized > 0 ? `+$${fmt(r.realized)}` : r.realized < 0 ? `-$${fmt(Math.abs(r.realized))}` : '$0.00';
-        hl.append(nw, badge);
-        
-        const hr2 = document.createElement('div');
-        hr2.style.cssText = 'display:flex;align-items:center;gap:12px';
-        
-        const avgSp = document.createElement('span');
-        avgSp.style.cssText = 'font-size:14px;color:var(--text-secondary)';
-        const avgPriceText = r.totalShares > 0 ? '$' + fmt(r.avg) : '-';
-        avgSp.textContent = t.avgLabel.replace('{price}', avgPriceText);
-        
-        const tb = document.createElement('button');
-        tb.className = 'portfolio-trash-btn';
-        tb.innerHTML = '<i class="fa-regular fa-trash-can"></i>';
-        tb.addEventListener('click', e => {
-            e.stopPropagation();
-            appState.portfolioStocks.splice(si, 1);
-            savePortfolio();
-            renderPortfolio();
-        });
-        
-        const chev = document.createElement('span');
-        chev.className = 'portfolio-chevron';
-        chev.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
-        
-        hr2.append(avgSp, tb, chev);
-        hdr.append(hl, hr2);
-        card.appendChild(hdr);
-        
-        if (s.open) {
-            const body = document.createElement('div');
-            body.className = 'portfolio-stock-body';
-            renderPortfolioBody(s, body, si);
-            card.appendChild(body);
-        }
-        
-        elements.stockList.appendChild(card);
-    });
-    
-    updatePortfolioSummary();
+function makeSecDiv(tagClass, tagText) {
+    const d = document.createElement('div');
+    d.className = 'portfolio-sec-div';
+    const sp = document.createElement('span');
+    sp.className = `portfolio-tag ${tagClass}`;
+    sp.textContent = tagText;
+    d.appendChild(sp);
+    return d;
+}
+
+function makeEntryRow(lblA, valA, isIntA, placeA, onChangeA, lblB, valB, isIntB, placeB, onChangeB, onDel) {
+    const row = document.createElement('div');
+    row.className = 'portfolio-entry-row';
+
+    const u1 = document.createElement('span');
+    u1.className = 'portfolio-unit';
+    u1.textContent = lblA;
+
+    const u2 = document.createElement('span');
+    u2.className = 'portfolio-unit';
+    u2.textContent = lblB;
+
+    const del = document.createElement('button');
+    del.className = 'portfolio-del-row-btn';
+    del.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    del.onclick = onDel;
+
+    row.append(
+        u1, makeInputWrap(valA, isIntA, placeA, onChangeA),
+        u2, makeInputWrap(valB, isIntB, placeB, onChangeB),
+        del
+    );
+    return row;
+}
+
+function makeInputWrap(val, isInt, placeholder, onChange) {
+    const wrap = document.createElement('div');
+    wrap.className = 'portfolio-iw';
+    const inp = document.createElement('input');
+    inp.type = 'number';
+    inp.step = isInt ? '1' : '0.01';
+    inp.value = val > 0 ? val : '';
+    inp.placeholder = placeholder;
+    inp.oninput = () => { onChange(inp.value); savePortfolio(); updatePortfolioSummary(); };
+
+    const clr = document.createElement('button');
+    clr.className = 'portfolio-ic';
+    clr.textContent = '✕';
+    clr.onclick = () => { inp.value = ''; onChange(''); savePortfolio(); updatePortfolioSummary(); };
+
+    wrap.append(inp, clr);
+    return wrap;
 }
 
 function updatePortfolioSummary() {
@@ -1818,145 +1002,55 @@ function updatePortfolioSummary() {
         rv += r.realized;
         h += r.remainCost;
     });
-    
-    document.getElementById('pt-cost').textContent = '$' + fmt(c);
-    
+
+    const costEl = document.getElementById('pt-cost');
+    if (costEl) costEl.textContent = '$' + fmt(c);
+
     const rEl = document.getElementById('pt-realized');
-    rEl.textContent = (rv >= 0 ? '+' : '') + '$' + fmt(Math.abs(rv));
-    rEl.style.color = rv > 0 ? 'var(--accent-primary)' : rv < 0 ? 'var(--accent-red)' : 'var(--text-primary)';
-    
-    document.getElementById('pt-holding').textContent = '$' + fmt(h);
-    
-    const countUnit = translations[appState.lang].stocksCountUnit.replace('{count}', appState.portfolioStocks.length);
-    document.getElementById('pt-count').textContent = countUnit;
+    if (rEl) {
+        rEl.textContent = (rv >= 0 ? '+' : '') + '$' + fmt(Math.abs(rv));
+        rEl.style.color = rv > 0 ? 'var(--accent-emerald)' : rv < 0 ? 'var(--accent-red)' : 'var(--text-primary)';
+    }
+
+    const holdEl = document.getElementById('pt-holding');
+    if (holdEl) holdEl.textContent = '$' + fmt(h);
+
+    const countEl = document.getElementById('pt-count');
+    if (countEl) countEl.textContent = `${appState.portfolioStocks.length} ตัว`;
 }
 
 // ==========================================================================
-// Visitor Counter & Online Simulation Functionality
-// ==========================================================================
-
-function initVisitorStats() {
-    // 1. Total Visits - Load from real API
-    // We increment count using CounterAPI's /up endpoint
-    fetch('https://api.counterapi.dev/v1/sepkhawgontrade/visits/up')
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            if (data && typeof data.count === 'number') {
-                // Add a premium base count (e.g., 128,450) to the real global count
-                appState.totalVisits = 128450 + data.count;
-                updateVisitorStatsDOM();
-            } else {
-                throw new Error('Invalid data format');
-            }
-        })
-        .catch(error => {
-            console.error('Failed to fetch real visits, using localStorage fallback:', error);
-            // Fallback: load from localStorage
-            try {
-                let visits = localStorage.getItem('sep_total_visits');
-                if (!visits) {
-                    visits = Math.floor(Math.random() * 4000) + 128000;
-                } else {
-                    visits = parseInt(visits, 10) || 128000;
-                }
-                const increment = Math.floor(Math.random() * 3) + 1;
-                appState.totalVisits = visits + increment;
-                localStorage.setItem('sep_total_visits', appState.totalVisits);
-                updateVisitorStatsDOM();
-            } catch (e) {
-                appState.totalVisits = 128452;
-                updateVisitorStatsDOM();
-            }
-        });
-    
-    // 2. Active Online Users (Fluctuates between 8 and 22 dynamically)
-    appState.activeOnline = Math.floor(Math.random() * 15) + 8;
-    
-    // Periodically update active users to simulate organic traffic fluctuations
-    setInterval(() => {
-        // Step change of -2, -1, 0, +1, +2
-        const delta = Math.floor(Math.random() * 5) - 2;
-        appState.activeOnline = Math.max(6, Math.min(25, appState.activeOnline + delta));
-        updateVisitorStatsDOM();
-    }, Math.floor(Math.random() * 3000) + 4000); // 4-7 seconds interval
-    
-    updateVisitorStatsDOM();
-}
-
-function updateVisitorStatsDOM() {
-    const visits = appState.totalVisits.toLocaleString(appState.lang === 'th' ? 'th-TH' : 'en-US');
-    const online = appState.activeOnline;
-    
-    document.querySelectorAll('.visit-count-val').forEach(el => el.textContent = visits);
-    document.querySelectorAll('.online-count-val').forEach(el => el.textContent = online);
-}
-
-// ==========================================================================
-// Support & Resistance Calculator Functionality
+// Support & Resistance Calculator Module
 // ==========================================================================
 
 const defaultSrLevels = {
-    custom: {
-        supports: [50.108, 42.52, 36.59],
-        resistances: [63.47, 74.12, 80.83, 90.06],
-        currentPrice: 55.00
-    },
-    AMD: {
-        supports: [515.00, 495.00, 450.00],
-        resistances: [565.00, 580.00, 615.00, 630.00],
-        currentPrice: 535.00
-    },
-    TSMC: {
-        supports: [430.00, 420.00, 410.00],
-        resistances: [460.00, 465.00, 480.00, 500.00],
-        currentPrice: 440.00
-    },
-    UNH: {
-        supports: [415.00, 410.00, 405.00],
-        resistances: [440.00, 460.00, 480.00],
-        currentPrice: 420.00
-    },
-    SNPS: {
-        supports: [580.00, 560.00, 540.00],
-        resistances: [620.00, 640.00, 660.00, 680.00],
-        currentPrice: 600.00
-    },
-    CCXI: {
-        supports: [38.00, 36.00, 34.00],
-        resistances: [42.00, 44.00, 46.00, 48.00],
-        currentPrice: 40.00
-    },
-    GW: {
-        supports: [140.00, 135.00, 130.00],
-        resistances: [155.00, 160.00, 165.00, 170.00],
-        currentPrice: 148.00
-    }
+    custom: { supports: [50.10, 42.50, 36.50], resistances: [63.50, 74.10, 80.80, 90.00], currentPrice: 55.00 },
+    AMD: { supports: [515.00, 495.00, 450.00], resistances: [565.00, 580.00, 615.00, 630.00], currentPrice: 535.00 },
+    TSMC: { supports: [430.00, 420.00, 410.00], resistances: [460.00, 465.00, 480.00, 500.00], currentPrice: 440.00 },
+    UNH: { supports: [415.00, 410.00, 405.00], resistances: [440.00, 460.00, 480.00], currentPrice: 420.00 },
+    SNPS: { supports: [580.00, 560.00, 540.00], resistances: [620.00, 640.00, 660.00, 680.00], currentPrice: 600.00 },
+    CCXI: { supports: [38.00, 36.00, 34.00], resistances: [42.00, 44.00, 46.00, 48.00], currentPrice: 40.00 },
+    GW: { supports: [140.00, 135.00, 130.00], resistances: [155.00, 160.00, 165.00, 170.00], currentPrice: 148.00 }
 };
 
 let marketPrices = {};
 let marketStocks = [];
+let watchlist = [];
 
 async function loadMarketPrices() {
     try {
-        const response = await fetch('raw_market_today.json');
-        if (response.ok) {
-            const data = await response.json();
+        const res = await fetch('raw_market_today.json');
+        if (res.ok) {
+            const data = await res.json();
             if (data && data.sectors) {
-                data.sectors.forEach(sector => {
-                    if (sector.stocks) {
-                        sector.stocks.forEach(stock => {
-                            if (stock.ticker && stock.price) {
-                                const priceVal = parseFloat(stock.price.replace(/[$,]/g, ''));
-                                if (!isNaN(priceVal)) {
-                                    marketPrices[stock.ticker] = priceVal;
-                                    marketStocks.push({
-                                        ticker: stock.ticker,
-                                        name: stock.name,
-                                        price: priceVal
-                                    });
+                data.sectors.forEach(s => {
+                    if (s.stocks) {
+                        s.stocks.forEach(st => {
+                            if (st.ticker && st.price) {
+                                const p = parseFloat(st.price.replace(/[$,]/g, ''));
+                                if (!isNaN(p)) {
+                                    marketPrices[st.ticker] = p;
+                                    marketStocks.push({ ticker: st.ticker, name: st.name, price: p });
                                 }
                             }
                         });
@@ -1965,264 +1059,21 @@ async function loadMarketPrices() {
             }
         }
     } catch (e) {
-        console.warn('Unable to load real-time prices, using local defaults.', e);
+        console.warn('Unable to load live prices:', e);
     }
-}
-
-let watchlist = [];
-
-function loadWatchlist() {
-    try {
-        const stored = localStorage.getItem('sep_sr_watchlist');
-        if (stored) {
-            watchlist = JSON.parse(stored);
-        } else {
-            watchlist = [];
-        }
-    } catch (e) {
-        watchlist = [];
-    }
-}
-
-function saveWatchlist() {
-    try {
-        localStorage.setItem('sep_sr_watchlist', JSON.stringify(watchlist));
-    } catch (e) {
-        console.warn('Failed to save watchlist to localStorage', e);
-    }
-}
-
-function renderWatchlist() {
-    const container = elements.srWatchlistList;
-    if (!container) return;
-    
-    loadWatchlist();
-    container.innerHTML = '';
-    
-    if (watchlist.length === 0) {
-        container.innerHTML = `<div class="sr-watchlist-empty">${translations[appState.lang].srWatchlistEmpty}</div>`;
-        return;
-    }
-    
-    watchlist.forEach((item, idx) => {
-        const div = document.createElement('div');
-        div.className = 'sr-watchlist-item';
-        div.innerHTML = `
-            <span class="sr-wl-ticker">${item.ticker}</span>
-            <span class="sr-wl-price">$${parseFloat(item.currentPrice).toFixed(2)}</span>
-            <button class="sr-wl-delete-btn" title="ลบออก" data-index="${idx}"><i class="fa-solid fa-trash-can"></i></button>
-        `;
-        
-        div.addEventListener('click', (e) => {
-            if (e.target.closest('.sr-wl-delete-btn')) return;
-            loadWatchlistItem(item);
-        });
-        
-        div.querySelector('.sr-wl-delete-btn').addEventListener('click', (e) => {
-            e.stopPropagation();
-            const index = parseInt(e.currentTarget.getAttribute('data-index'));
-            watchlist.splice(index, 1);
-            saveWatchlist();
-            renderWatchlist();
-        });
-        
-        container.appendChild(div);
-    });
-}
-
-function loadWatchlistItem(item) {
-    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-    
-    const customNameGroup = document.getElementById('sr-custom-name-group');
-    if (customNameGroup) customNameGroup.style.display = 'block';
-    
-    if (elements.srCustomName) elements.srCustomName.value = item.ticker;
-    if (elements.srCurrentPrice) elements.srCurrentPrice.value = item.currentPrice;
-    
-    populateLevelInputs('support', item.supports);
-    populateLevelInputs('resistance', item.resistances);
-    
-    if (elements.srTableTickerBadge) {
-        elements.srTableTickerBadge.textContent = item.ticker;
-    }
-    
-    renderSrCalc();
-    fetchLivePrice(item.ticker);
-}
-
-function saveCurrentToWatchlist() {
-    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
-    let ticker = 'CUSTOM';
-    if (tickerSelect === 'custom') {
-        const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : '';
-        ticker = customNameVal || 'CUSTOM';
-    } else {
-        ticker = tickerSelect;
-    }
-    
-    if (ticker === 'CUSTOM') {
-        alert(appState.lang === 'th' ? 'กรุณาระบุชื่อหุ้นก่อนทำการบันทึก' : 'Please specify a stock ticker before saving.');
-        return;
-    }
-    
-    const currentPrice = parseFloat(elements.srCurrentPrice.value) || 0;
-    
-    const supports = [];
-    if (elements.supportInputsContainer) {
-        const sInputs = elements.supportInputsContainer.querySelectorAll('.support-input');
-        sInputs.forEach(input => {
-            const val = parseFloat(input.value);
-            if (!isNaN(val) && val > 0) {
-                supports.push(val);
-            }
-        });
-    }
-    
-    const resistances = [];
-    if (elements.resistanceInputsContainer) {
-        const rInputs = elements.resistanceInputsContainer.querySelectorAll('.resistance-input');
-        rInputs.forEach(input => {
-            const val = parseFloat(input.value);
-            if (!isNaN(val) && val > 0) {
-                resistances.push(val);
-            }
-        });
-    }
-    
-    loadWatchlist();
-    
-    const existingIndex = watchlist.findIndex(item => item.ticker === ticker);
-    const watchlistItem = {
-        ticker: ticker,
-        currentPrice: currentPrice,
-        supports: supports,
-        resistances: resistances
-    };
-    
-    if (existingIndex !== -1) {
-        watchlist[existingIndex] = watchlistItem;
-    } else {
-        watchlist.push(watchlistItem);
-    }
-    
-    saveWatchlist();
-    renderWatchlist();
-}
-
-function clearCalculator() {
-    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-    
-    const customNameGroup = document.getElementById('sr-custom-name-group');
-    if (customNameGroup) customNameGroup.style.display = 'block';
-    
-    if (elements.srCustomName) elements.srCustomName.value = '';
-    if (elements.srCurrentPrice) elements.srCurrentPrice.value = '';
-    
-    if (elements.supportInputsContainer) {
-        elements.supportInputsContainer.innerHTML = '';
-    }
-    if (elements.resistanceInputsContainer) {
-        elements.resistanceInputsContainer.innerHTML = '';
-    }
-    
-    if (elements.srTableTickerBadge) {
-        elements.srTableTickerBadge.textContent = 'CUSTOM';
-    }
-    
-    renderSrCalc();
-}
-
-async function fetchLivePrice(ticker) {
-    if (!ticker || ticker === 'custom') return null;
-    
-    const priceInput = elements.srCurrentPrice;
-    if (priceInput) {
-        priceInput.classList.add('loading-price');
-    }
-    
-    const cleanTicker = encodeURIComponent(ticker.trim().toUpperCase());
-    const timestamp = Date.now();
-    // Revert to v8/finance/chart which is public and open (does not return 401 Unauthorized)
-    const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${cleanTicker}?interval=1d&range=1d&nocache=${timestamp}`;
-    
-    // Fallback array of CORS proxies to ensure 100% availability
-    const proxies = [
-        `https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`
-    ];
-    
-    for (let proxyUrl of proxies) {
-        try {
-            const response = await fetch(proxyUrl);
-            if (response.ok) {
-                const data = await response.json();
-                if (data && data.chart && data.chart.result && data.chart.result[0]) {
-                    const result = data.chart.result[0];
-                    const meta = result.meta;
-                    const livePrice = meta.regularMarketPrice || meta.chartPreviousClose;
-                    if (livePrice && !isNaN(livePrice)) {
-                        marketPrices[ticker] = livePrice;
-                        if (priceInput) {
-                            priceInput.value = livePrice.toFixed(2);
-                        }
-                        
-                        const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
-                        if (tickerSelect === 'custom') {
-                            const supports = [
-                                parseFloat((livePrice * 0.95).toFixed(3)),
-                                parseFloat((livePrice * 0.90).toFixed(3)),
-                                parseFloat((livePrice * 0.85).toFixed(3))
-                            ];
-                            const resistances = [
-                                parseFloat((livePrice * 1.05).toFixed(3)),
-                                parseFloat((livePrice * 1.10).toFixed(3)),
-                                parseFloat((livePrice * 1.15).toFixed(3)),
-                                parseFloat((livePrice * 1.20).toFixed(3))
-                            ];
-                            populateLevelInputs('support', supports);
-                            populateLevelInputs('resistance', resistances);
-                        }
-                        
-                        renderSrCalc();
-                        if (priceInput) priceInput.classList.remove('loading-price');
-                        return livePrice;
-                    }
-                }
-            }
-        } catch (e) {
-            console.warn(`Proxy fetch failed for ${proxyUrl}:`, e);
-        }
-    }
-    
-    if (priceInput) {
-        priceInput.classList.remove('loading-price');
-    }
-    return null;
 }
 
 function openSrCalc() {
     document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
-    
     const navSr = document.getElementById('nav-sr-calc');
     if (navSr) navSr.classList.add('active');
-    
-    elements.catalogView.classList.remove('active');
-    elements.readerView.classList.remove('active');
+
+    if (elements.catalogView) elements.catalogView.classList.remove('active');
+    if (elements.readerView) elements.readerView.classList.remove('active');
     if (elements.portfolioView) elements.portfolioView.classList.remove('active');
     if (elements.srCalcView) elements.srCalcView.classList.add('active');
-    
-    // Load state
-    const savedInvestment = localStorage.getItem('sep_sr_investment');
-    if (savedInvestment && elements.srInvestment) {
-        elements.srInvestment.value = savedInvestment;
-    }
-    const savedRemember = localStorage.getItem('sep_sr_remember_investment');
-    if (savedRemember !== null && elements.srRememberInvestment) {
-        elements.srRememberInvestment.checked = savedRemember === 'true';
-    }
-    
-    // Setup inputs and render
-    setupSrInputListeners();
+
+    setupSrListeners();
     handleTickerChange();
     renderSrCalc();
 }
@@ -2233,448 +1084,266 @@ function closeSrCalc() {
     if (navSr) navSr.classList.remove('active');
 }
 
-function setupSrInputListeners() {
+function setupSrListeners() {
     if (window.srListenersAttached) return;
     window.srListenersAttached = true;
-    
-    if (elements.srInvestment) {
-        elements.srInvestment.addEventListener('input', () => {
-            if (elements.srRememberInvestment && elements.srRememberInvestment.checked) {
-                localStorage.setItem('sep_sr_investment', elements.srInvestment.value);
-            }
-            renderSrCalc();
-        });
-    }
-    
-    if (elements.srRememberInvestment) {
-        elements.srRememberInvestment.addEventListener('change', () => {
-            localStorage.setItem('sep_sr_remember_investment', elements.srRememberInvestment.checked);
-            if (elements.srRememberInvestment.checked && elements.srInvestment) {
-                localStorage.setItem('sep_sr_investment', elements.srInvestment.value);
-            } else {
-                localStorage.removeItem('sep_sr_investment');
-            }
-        });
-    }
-    
-    if (elements.srUseCurrentAsS0) {
-        elements.srUseCurrentAsS0.addEventListener('change', () => {
-            if (elements.srUseCurrentAsS0.checked) {
-                if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'block';
-            } else {
-                if (elements.srCurrentPriceGroup) elements.srCurrentPriceGroup.style.display = 'none';
-            }
-            renderSrCalc();
-        });
-    }
-    
-    if (elements.srTickerSelect) {
-        elements.srTickerSelect.addEventListener('change', handleTickerChange);
-    }
-    
-    if (elements.srCurrentPrice) {
-        elements.srCurrentPrice.addEventListener('input', renderSrCalc);
-    }
-    
-    if (elements.srCustomName) {
-        elements.srCustomName.addEventListener('input', () => {
-            if (elements.srTickerSelect && elements.srTickerSelect.value === 'custom') {
-                const name = elements.srCustomName.value.trim().toUpperCase();
-                if (elements.srTableTickerBadge) {
-                    elements.srTableTickerBadge.textContent = name || 'CUSTOM';
-                }
-            }
-        });
-        
-        elements.srCustomName.addEventListener('blur', () => {
-            const name = elements.srCustomName.value.trim();
-            if (name && name !== 'Custom' && name.toLowerCase() !== 'custom') {
-                fetchLivePrice(name);
-            }
-        });
-        
-        elements.srCustomName.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const name = elements.srCustomName.value.trim();
-                if (name && name !== 'Custom' && name.toLowerCase() !== 'custom') {
-                    fetchLivePrice(name);
-                }
-            }
-        });
-    }
-    
-    if (elements.srBtnRefreshPrice) {
-        elements.srBtnRefreshPrice.addEventListener('click', () => {
-            const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
-            const ticker = tickerSelect === 'custom' 
-                ? (elements.srCustomName ? elements.srCustomName.value.trim() : '') 
-                : tickerSelect;
-            if (ticker) {
-                fetchLivePrice(ticker);
-            }
-        });
-    }
 
-    if (elements.srBtnSaveWatchlist) {
-        elements.srBtnSaveWatchlist.addEventListener('click', saveCurrentToWatchlist);
-    }
-    
-    if (elements.srBtnClearCustom) {
-        elements.srBtnClearCustom.addEventListener('click', clearCalculator);
-    }
-    
-    renderWatchlist();
-    
-    if (elements.srAddSupport) {
-        elements.srAddSupport.addEventListener('click', () => {
-            addManualLevelInput('support');
-        });
-    }
-    
-    if (elements.srAddResistance) {
-        elements.srAddResistance.addEventListener('click', () => {
-            addManualLevelInput('resistance');
-        });
-    }
-    
+    if (elements.srInvestment) elements.srInvestment.oninput = renderSrCalc;
+    if (elements.srCurrentPrice) elements.srCurrentPrice.oninput = renderSrCalc;
+    if (elements.srTickerSelect) elements.srTickerSelect.onchange = handleTickerChange;
+    if (elements.srBtnSaveWatchlist) elements.srBtnSaveWatchlist.onclick = saveCurrentToWatchlist;
+    if (elements.srBtnClearCustom) elements.srBtnClearCustom.onclick = clearCalculator;
+    if (elements.srAddSupport) elements.srAddSupport.onclick = () => addManualLevelInput('support');
+    if (elements.srAddResistance) elements.srAddResistance.onclick = () => addManualLevelInput('resistance');
+
     setupAutocomplete();
+    renderWatchlist();
 }
 
 function setupAutocomplete() {
-    const searchInput = elements.srTickerSearch;
+    const input = elements.srTickerSearch;
     const dropdown = elements.srSuggestionsDropdown;
-    if (!searchInput || !dropdown) return;
-    
-    searchInput.addEventListener('input', () => {
-        const query = searchInput.value.trim().toLowerCase();
-        if (!query) {
-            dropdown.style.display = 'none';
-            return;
-        }
-        
-        const matches = marketStocks.filter(stock => 
-            stock.ticker.toLowerCase().includes(query) || 
-            stock.name.toLowerCase().includes(query)
-        ).slice(0, 8);
-        
-        const isThai = appState.lang === 'th';
-        const fetchLabel = isThai 
-            ? `ดึงข้อมูลหุ้น <strong>${query.toUpperCase()}</strong> สดจากตลาด` 
-            : `Fetch live data for <strong>${query.toUpperCase()}</strong> from market`;
-        
+    if (!input || !dropdown) return;
+
+    input.oninput = () => {
+        const query = input.value.trim().toLowerCase();
+        if (!query) { dropdown.style.display = 'none'; return; }
+
+        const matches = marketStocks.filter(s => s.ticker.toLowerCase().includes(query) || s.name.toLowerCase().includes(query)).slice(0, 8);
         if (matches.length === 0) {
-            dropdown.innerHTML = `
-                <div class="sr-suggestion-item no-matches">${translations[appState.lang].noStocksFound}</div>
-                <div class="sr-suggestion-item custom-ticker-option" data-ticker="${query.toUpperCase()}" style="border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: start;">
-                    <span style="flex-grow: 1; text-align: left; color: var(--accent-purple);"><i class="fa-solid fa-cloud-arrow-down" style="margin-right: 8px;"></i> ${fetchLabel}</span>
-                </div>
-            `;
+            dropdown.innerHTML = `<div class="sr-suggestion-item">${translations[appState.lang].noStocksFound}</div>`;
         } else {
-            dropdown.innerHTML = matches.map(stock => `
-                <div class="sr-suggestion-item" data-ticker="${stock.ticker}" data-price="${stock.price}">
-                    <span class="sugg-ticker">${stock.ticker}</span>
-                    <span class="sugg-name">${stock.name}</span>
-                    <span class="sugg-price">$${stock.price.toFixed(2)}</span>
+            dropdown.innerHTML = matches.map(s => `
+                <div class="sr-suggestion-item" data-ticker="${s.ticker}" data-price="${s.price}">
+                    <span class="sugg-ticker">${s.ticker}</span>
+                    <span class="sugg-name">${s.name}</span>
+                    <span class="sugg-price">$${s.price.toFixed(2)}</span>
                 </div>
             `).join('');
-        }
-        
-        // Setup click listener for matching items
-        dropdown.querySelectorAll('.sr-suggestion-item:not(.no-matches):not(.custom-ticker-option)').forEach(item => {
-            item.addEventListener('click', () => {
-                const ticker = item.getAttribute('data-ticker');
-                const price = parseFloat(item.getAttribute('data-price'));
-                selectStockFromSearch(ticker, price);
-                dropdown.style.display = 'none';
-                searchInput.value = '';
-            });
-        });
-        
-        // Setup click listener for custom unrecognized stock item
-        const customOpt = dropdown.querySelector('.custom-ticker-option');
-        if (customOpt) {
-            customOpt.addEventListener('click', () => {
-                const ticker = customOpt.getAttribute('data-ticker');
-                // Set default/placeholder 10.00 first, selectStockFromSearch will immediately call fetchLivePrice to override it
-                selectStockFromSearch(ticker, 10.00);
-                dropdown.style.display = 'none';
-                searchInput.value = '';
+
+            dropdown.querySelectorAll('.sr-suggestion-item').forEach(item => {
+                item.onclick = () => {
+                    const t = item.getAttribute('data-ticker');
+                    const p = parseFloat(item.getAttribute('data-price'));
+                    selectStockFromSearch(t, p);
+                    dropdown.style.display = 'none';
+                    input.value = '';
+                };
             });
         }
-        
         dropdown.style.display = 'block';
-    });
-    
-    document.addEventListener('click', (e) => {
-        if (e.target !== searchInput && !dropdown.contains(e.target)) {
-            dropdown.style.display = 'none';
-        }
+    };
+
+    document.addEventListener('click', e => {
+        if (e.target !== input && !dropdown.contains(e.target)) dropdown.style.display = 'none';
     });
 }
 
 function selectStockFromSearch(ticker, price) {
     if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-    
-    const customNameGroup = document.getElementById('sr-custom-name-group');
-    if (customNameGroup) customNameGroup.style.display = 'block';
-    
-    if (elements.srCustomName) {
-        elements.srCustomName.value = ticker;
-    }
-    
-    if (elements.srCurrentPrice) {
-        elements.srCurrentPrice.value = price;
-    }
-    
-    const supports = [
-        parseFloat((price * 0.95).toFixed(3)),
-        parseFloat((price * 0.90).toFixed(3)),
-        parseFloat((price * 0.85).toFixed(3))
-    ];
-    
-    const resistances = [
-        parseFloat((price * 1.05).toFixed(3)),
-        parseFloat((price * 1.10).toFixed(3)),
-        parseFloat((price * 1.15).toFixed(3)),
-        parseFloat((price * 1.20).toFixed(3))
-    ];
-    
-    populateLevelInputs('support', supports);
-    populateLevelInputs('resistance', resistances);
-    
-    if (elements.srTableTickerBadge) {
-        elements.srTableTickerBadge.textContent = ticker;
-    }
-    
+    if (elements.srCustomName) elements.srCustomName.value = ticker;
+    if (elements.srCurrentPrice) elements.srCurrentPrice.value = price;
+
+    populateLevelInputs('support', [(price * 0.95), (price * 0.90), (price * 0.85)].map(v => parseFloat(v.toFixed(2))));
+    populateLevelInputs('resistance', [(price * 1.05), (price * 1.10), (price * 1.15), (price * 1.20)].map(v => parseFloat(v.toFixed(2))));
     renderSrCalc();
-    
-    // Fetch live price
-    fetchLivePrice(ticker);
 }
 
 function handleTickerChange() {
     if (!elements.srTickerSelect) return;
     const ticker = elements.srTickerSelect.value;
-    
-    const customNameGroup = document.getElementById('sr-custom-name-group');
-    if (ticker === 'custom') {
-        if (customNameGroup) customNameGroup.style.display = 'block';
-    } else {
-        if (customNameGroup) customNameGroup.style.display = 'none';
-    }
-    
-    if (elements.srTableTickerBadge) {
-        if (ticker === 'custom') {
-            const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : 'CUSTOM';
-            elements.srTableTickerBadge.textContent = customNameVal || 'CUSTOM';
-        } else {
-            elements.srTableTickerBadge.textContent = ticker;
-        }
-    }
-    
-    const levels = defaultSrLevels[ticker];
-    if (!levels) return;
-    
-    const currentPriceVal = (ticker !== 'custom' && marketPrices[ticker]) || levels.currentPrice;
-    if (elements.srCurrentPrice) {
-        elements.srCurrentPrice.value = currentPriceVal;
-    }
-    
+    const levels = defaultSrLevels[ticker] || defaultSrLevels.custom;
+
+    if (elements.srCurrentPrice) elements.srCurrentPrice.value = levels.currentPrice;
     populateLevelInputs('support', levels.supports);
     populateLevelInputs('resistance', levels.resistances);
-    
     renderSrCalc();
-    
-    // Fetch live price
-    if (ticker !== 'custom') {
-        fetchLivePrice(ticker);
-    }
 }
 
 function populateLevelInputs(type, values) {
     const container = type === 'support' ? elements.supportInputsContainer : elements.resistanceInputsContainer;
     if (!container) return;
-    
+
     container.innerHTML = '';
     values.forEach((val, idx) => {
-        const item = document.createElement('div');
-        item.className = 'sr-level-input-item';
-        
-        const labelText = type === 'support' ? `S${idx + 1}` : `R${idx + 1}`;
-        item.innerHTML = `
-            <span>${labelText}</span>
-            <input type="number" class="${type}-input" data-index="${idx + 1}" value="${val}" step="0.001">
+        const div = document.createElement('div');
+        div.className = 'sr-level-input-item';
+        div.innerHTML = `
+            <span>${type === 'support' ? 'S' + (idx + 1) : 'R' + (idx + 1)}</span>
+            <input type="number" class="${type}-input" value="${val}" step="0.01">
             <button class="sr-delete-level-btn" onclick="this.parentElement.remove(); renderSrCalc();"><i class="fa-solid fa-trash-can"></i></button>
         `;
-        
-        item.querySelector('input').addEventListener('input', () => {
-            if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-            if (elements.srCustomName) {
-                elements.srCustomName.value = 'CUSTOM';
-            }
-            if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
-            renderSrCalc();
-        });
-        
-        container.appendChild(item);
+        div.querySelector('input').oninput = renderSrCalc;
+        container.appendChild(div);
     });
 }
 
 function addManualLevelInput(type) {
     const container = type === 'support' ? elements.supportInputsContainer : elements.resistanceInputsContainer;
     if (!container) return;
-    
     const inputs = container.querySelectorAll(`.${type}-input`);
     const nextIdx = inputs.length + 1;
-    
-    const item = document.createElement('div');
-    item.className = 'sr-level-input-item';
-    
-    const labelText = type === 'support' ? `S${nextIdx}` : `R${nextIdx}`;
-    
-    let suggestedVal = 0;
-    if (inputs.length > 0) {
-        const lastVal = parseFloat(inputs[inputs.length - 1].value) || 0;
-        suggestedVal = type === 'support' ? lastVal * 0.95 : lastVal * 1.05;
-    } else {
-        suggestedVal = type === 'support' ? 100 : 110;
-    }
-    suggestedVal = parseFloat(suggestedVal.toFixed(3));
-    
-    item.innerHTML = `
-        <span>${labelText}</span>
-        <input type="number" class="${type}-input" data-index="${nextIdx}" value="${suggestedVal}" step="0.001">
+    const lastVal = inputs.length > 0 ? parseFloat(inputs[inputs.length - 1].value) || 100 : 100;
+    const val = type === 'support' ? (lastVal * 0.95).toFixed(2) : (lastVal * 1.05).toFixed(2);
+
+    const div = document.createElement('div');
+    div.className = 'sr-level-input-item';
+    div.innerHTML = `
+        <span>${type === 'support' ? 'S' + nextIdx : 'R' + nextIdx}</span>
+        <input type="number" class="${type}-input" value="${val}" step="0.01">
         <button class="sr-delete-level-btn" onclick="this.parentElement.remove(); renderSrCalc();"><i class="fa-solid fa-trash-can"></i></button>
     `;
-    
-    item.querySelector('input').addEventListener('input', () => {
-        if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-        if (elements.srCustomName) {
-            elements.srCustomName.value = 'CUSTOM';
-        }
-        if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
-        renderSrCalc();
-    });
-    
-    container.appendChild(item);
-    
-    if (elements.srTickerSelect) elements.srTickerSelect.value = 'custom';
-    if (elements.srCustomName) {
-        elements.srCustomName.value = 'CUSTOM';
-    }
-    if (elements.srTableTickerBadge) elements.srTableTickerBadge.textContent = 'CUSTOM';
-    
+    div.querySelector('input').oninput = renderSrCalc;
+    container.appendChild(div);
     renderSrCalc();
 }
 
 function renderSrCalc() {
     if (!elements.srOutputTable) return;
-    
-    const t = translations[appState.lang];
     const investment = parseFloat(elements.srInvestment.value) || 1000;
-    
-    // Read Ticker Name to display on badge
-    const tickerSelect = elements.srTickerSelect ? elements.srTickerSelect.value : 'custom';
-    let tickerName = 'CUSTOM';
-    if (tickerSelect === 'custom') {
-        const customNameVal = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : '';
-        tickerName = customNameVal || 'CUSTOM';
-    } else {
-        tickerName = tickerSelect;
-    }
-    
-    if (elements.srTableTickerBadge) {
-        elements.srTableTickerBadge.textContent = tickerName;
-    }
-    
     const supports = [];
-    
-    if (elements.srUseCurrentAsS0 && elements.srUseCurrentAsS0.checked) {
-        const currentPriceVal = parseFloat(elements.srCurrentPrice.value);
-        if (!isNaN(currentPriceVal) && currentPriceVal > 0) {
-            supports.push({ name: 'S0 (ราคาปัจจุบัน)', price: currentPriceVal });
-        }
-    }
-    
-    if (elements.supportInputsContainer) {
-        const sInputs = elements.supportInputsContainer.querySelectorAll('.support-input');
-        sInputs.forEach((input, index) => {
-            const val = parseFloat(input.value);
-            if (!isNaN(val) && val > 0) {
-                supports.push({ name: `S${index + 1}`, price: val });
-            }
-        });
-    }
-    
     const resistances = [];
-    if (elements.resistanceInputsContainer) {
-        const rInputs = elements.resistanceInputsContainer.querySelectorAll('.resistance-input');
-        rInputs.forEach((input, index) => {
-            const val = parseFloat(input.value);
-            if (!isNaN(val) && val > 0) {
-                resistances.push({ name: `R${index + 1}`, price: val });
-            }
+
+    if (elements.supportInputsContainer) {
+        elements.supportInputsContainer.querySelectorAll('.support-input').forEach((inp, i) => {
+            const v = parseFloat(inp.value);
+            if (!isNaN(v) && v > 0) supports.push({ name: `S${i + 1}`, price: v });
         });
     }
-    
-    let tableHtml = '';
-    
-    tableHtml += '<thead><tr>';
-    tableHtml += `<th><div class="sr-corner-label">${t.tagBuy} \\ ${t.tagSell}</div></th>`;
+
+    if (elements.resistanceInputsContainer) {
+        elements.resistanceInputsContainer.querySelectorAll('.resistance-input').forEach((inp, i) => {
+            const v = parseFloat(inp.value);
+            if (!isNaN(v) && v > 0) resistances.push({ name: `R${i + 1}`, price: v });
+        });
+    }
+
+    let html = '<thead><tr><th>แนวรับ \\ แนวต้าน</th>';
     resistances.forEach(r => {
-        tableHtml += `
-            <th>
-                <div class="sr-r-header-col">${r.name}</div>
-                <div class="sr-r-price-val">$${r.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 3})}</div>
-            </th>
-        `;
+        html += `<th><div class="sr-r-header-col">${r.name}</div><div class="sr-r-price-val">$${r.price.toFixed(2)}</div></th>`;
     });
-    tableHtml += '</tr></thead>';
-    
-    tableHtml += '<tbody>';
-    
-    if (supports.length === 0 || resistances.length === 0) {
-        const colsSpan = resistances.length + 1;
-        tableHtml += `
-            <tr>
-                <td colspan="${colsSpan}" style="text-align: center; color: var(--text-muted); padding: 40px 0;">
-                    <i class="fa-solid fa-calculator" style="font-size: 24px; margin-bottom: 8px; display: block;"></i>
-                    กรุณากรอกระดับแนวรับและแนวต้าน
-                </td>
-            </tr>
-        `;
-    } else {
-        supports.forEach(s => {
-            tableHtml += '<tr>';
-            tableHtml += `
-                <td>
-                    <div class="sr-s-header-row">${s.name}</div>
-                    <div class="sr-s-price-val">$${s.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 3})}</div>
+    html += '</tr></thead><tbody>';
+
+    supports.forEach(s => {
+        html += `<tr><td><div class="sr-s-header-row">${s.name}</div><div class="sr-s-price-val">$${s.price.toFixed(2)}</div></td>`;
+        resistances.forEach(r => {
+            const pct = ((r.price / s.price) - 1) * 100;
+            const profit = investment * ((r.price / s.price) - 1);
+            const isPos = profit >= 0;
+            html += `
+                <td class="${isPos ? 'sr-cell-positive' : 'sr-cell-negative'}">
+                    <div class="sr-cell-profit">${isPos ? '+' : ''}$${profit.toFixed(2)}</div>
+                    <div class="sr-cell-pct">(${isPos ? '+' : ''}${pct.toFixed(2)}%)</div>
                 </td>
             `;
-            
-            resistances.forEach(r => {
-                const profitPct = ((r.price / s.price) - 1) * 100;
-                const profitVal = investment * ((r.price / s.price) - 1);
-                
-                const isPositive = profitVal >= 0;
-                const profitClass = isPositive ? 'sr-cell-positive' : 'sr-cell-negative';
-                const sign = isPositive ? '+' : '';
-                
-                const formattedProfit = `${sign}$${profitVal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                const formattedPct = `${sign}${profitPct.toFixed(2)}%`;
-                
-                tableHtml += `
-                    <td class="${profitClass}">
-                        <div class="sr-cell-profit">${formattedProfit}</div>
-                        <div class="sr-cell-pct">(${formattedPct})</div>
-                    </td>
-                `;
-            });
-            tableHtml += '</tr>';
         });
+        html += '</tr>';
+    });
+    html += '</tbody>';
+    elements.srOutputTable.innerHTML = html;
+}
+
+function saveCurrentToWatchlist() {
+    const name = elements.srCustomName ? elements.srCustomName.value.trim().toUpperCase() : 'CUSTOM';
+    const price = parseFloat(elements.srCurrentPrice.value) || 0;
+    watchlist.push({ ticker: name, price });
+    renderWatchlist();
+}
+
+function renderWatchlist() {
+    if (!elements.srWatchlistList) return;
+    if (watchlist.length === 0) {
+        elements.srWatchlistList.innerHTML = `<div class="sr-watchlist-empty">${translations[appState.lang].srWatchlistEmpty}</div>`;
+        return;
     }
-    
-    tableHtml += '</tbody>';
-    elements.srOutputTable.innerHTML = tableHtml;
+    elements.srWatchlistList.innerHTML = watchlist.map((item, i) => `
+        <div class="sr-watchlist-item">
+            <span class="sr-wl-ticker">${item.ticker}</span>
+            <span class="sr-wl-price">$${item.price.toFixed(2)}</span>
+            <button class="sr-wl-delete-btn" onclick="watchlist.splice(${i}, 1); renderWatchlist();"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+    `).join('');
+}
+
+function clearCalculator() {
+    if (elements.supportInputsContainer) elements.supportInputsContainer.innerHTML = '';
+    if (elements.resistanceInputsContainer) elements.resistanceInputsContainer.innerHTML = '';
+    renderSrCalc();
+}
+
+// Visitor Counter Simulation
+function initVisitorStats() {
+    fetch('https://api.counterapi.dev/v1/sepkhawgontrade/visits/up')
+        .then(r => r.json())
+        .then(data => {
+            if (data && typeof data.count === 'number') {
+                appState.totalVisits = 128450 + data.count;
+                updateStatsDOM();
+            }
+        }).catch(() => {
+            appState.totalVisits = 128450 + Math.floor(Math.random() * 50);
+            updateStatsDOM();
+        });
+
+    setInterval(() => {
+        appState.activeOnline = Math.max(8, Math.min(28, appState.activeOnline + (Math.floor(Math.random() * 5) - 2)));
+        updateStatsDOM();
+    }, 5000);
+}
+
+function updateStatsDOM() {
+    const v = appState.totalVisits.toLocaleString();
+    document.querySelectorAll('.visit-count-val').forEach(el => el.textContent = v);
+    document.querySelectorAll('.online-count-val').forEach(el => el.textContent = appState.activeOnline);
+}
+
+function updateUILanguage() {
+    const t = translations[appState.lang];
+    document.querySelectorAll('.sidebar-title').forEach(el => el.textContent = t.channelTitle);
+    document.querySelectorAll('.sidebar-subtitle').forEach(el => el.textContent = t.channelSubtitle);
+
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+    const catTitle = document.getElementById('lbl-categories-title');
+    if (catTitle) catTitle.textContent = t.categoriesTitle;
+
+    const toolsTitle = document.getElementById('lbl-tools-title');
+    if (toolsTitle) toolsTitle.textContent = t.toolsTitle;
+
+    const navPort = document.getElementById('lbl-nav-portfolio');
+    if (navPort) navPort.textContent = t.lblNavPortfolio;
+
+    const navSr = document.getElementById('lbl-nav-sr-calc');
+    if (navSr) navSr.textContent = t.lblNavSrCalc;
+
+    const portTitle = document.getElementById('portfolio-title');
+    if (portTitle) portTitle.textContent = t.portfolioTitle;
+
+    const portSub = document.getElementById('portfolio-subtitle');
+    if (portSub) portSub.textContent = t.portfolioSubtitle;
+
+    const srTitle = document.getElementById('sr-calc-title');
+    if (srTitle) srTitle.textContent = t.srCalcTitle;
+
+    const srSub = document.getElementById('sr-calc-subtitle');
+    if (srSub) srSub.textContent = t.srCalcSubtitle;
+
+    renderCategoriesMenu();
+    renderCatalog();
+}
+
+// Format Helper Functions
+function fmt(num) {
+    if (num === null || num === undefined || isNaN(num)) return '0.00';
+    return Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function fmtI(num) {
+    if (num === null || num === undefined || isNaN(num)) return '0';
+    return Number(num).toLocaleString('en-US');
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <!-- Build Timestamp: 2026-08-08 21:58:00 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เสพข่าวก่อนเทรด หุ้นอเมริกา | Premium Reports Hub</title>
+    <title>เสพข่าวก่อนเทรด หุ้นอเมริกา | Reports Hub & Trading Calculators</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,15 +11,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Style Sheet -->
-    <link rel="stylesheet" href="styles.css?v=2.0.1">
+    <link rel="stylesheet" href="styles.css?v=3.0.0">
     
-    <!-- ==========================================
-         TRAFFIC ANALYTICS (REAL DATA TRACKING)
-         To track real visitors, register free accounts on Google Analytics / Microsoft Clarity
-         and uncomment the corresponding scripts below with your real IDs.
-         ========================================== -->
-
-    <!-- Google Analytics (GA4) Tracking Script -->
+    <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8RKN9TT2Q"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,20 +21,9 @@
       gtag('js', new Date());
       gtag('config', 'G-C8RKN9TT2Q');
     </script>
-
-    <!-- Microsoft Clarity (Session Replays & Heatmaps) Tracking Script Placeholder -->
-    <!-- 
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window,document,"clarity","script","YOUR_CLARITY_PROJECT_ID");
-    </script>
-    -->
 </head>
 <body>
-    <!-- Top Glowing Gradient Bar -->
+    <!-- Ambient Top Glow -->
     <div class="top-glow"></div>
 
     <div class="app-container">
@@ -49,58 +31,64 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo-wrapper">
-                    <img src="Logo master.png" alt="SepKhawGonTrade Logo" class="channel-logo" onerror="this.src='https://placehold.co/150x150/151c2c/ffffff?text=Logo';">
+                    <img src="Logo master.png" alt="SepKhawGonTrade Logo" class="channel-logo" onerror="this.src='logo-mascot.png';">
                 </div>
                 <h1 class="sidebar-title">เสพข่าวก่อนเทรด</h1>
-                <p class="sidebar-subtitle">หุ้นอเมริกา</p>
+                <p class="sidebar-subtitle">หุ้นอเมริกา • US Stock Intelligence</p>
+                
                 <!-- Language Switcher -->
                 <div class="lang-switcher">
                     <button class="lang-btn active" data-lang="th">TH</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-                <!-- YouTube Channel Quick Link Button -->
-                <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-header-btn" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
-                    <i class="fa-brands fa-youtube yt-icon"></i>
-                    <span>รับชมช่อง YouTube</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square yt-arrow"></i>
+
+                <!-- YouTube Channel Primary Link Button -->
+                <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-header-banner" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
+                    <div class="yt-banner-content">
+                        <i class="fa-brands fa-youtube yt-icon"></i>
+                        <div class="yt-text-wrap">
+                            <span class="yt-title">เสพข่าวก่อนเทรด</span>
+                            <span class="yt-sub">รับชมคลิปบน YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        </div>
+                    </div>
                 </a>
             </div>
 
-            <!-- Search Area -->
+            <!-- Search Bar -->
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" placeholder="ค้นหาบทวิเคราะห์..." autocomplete="off">
+                <input type="text" id="search-input" placeholder="ค้นหาบทวิเคราะห์ / หุ้น..." autocomplete="off">
                 <button id="clear-search" class="clear-btn" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Categories list -->
+            <!-- Categories Navigation -->
             <nav class="categories-nav">
-                <div class="nav-section-title">มิติต่างๆ ในตลาดการเงิน</div>
+                <div class="nav-section-title" id="lbl-categories-title">คลังรายงานบทวิเคราะห์</div>
                 <ul class="category-list" id="category-list">
                     <li class="category-item active" data-category="all">
-                        <i class="fa-solid fa-list-ul"></i>
-                        <span>รายงานทั้งหมด</span>
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span id="lbl-all-reports">รายงานทั้งหมด</span>
                         <span class="badge count-badge" id="count-all">0</span>
                     </li>
-                    <!-- Dynamic categories will be inserted here -->
+                    <!-- Categories dynamically populated by JS -->
                 </ul>
             </nav>
 
-            <!-- Member Tools Nav -->
-            <nav class="member-nav" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                <div class="nav-section-title" id="lbl-member-tools">เครื่องมือคำนวณ & สื่อ</div>
+            <!-- Trading Tools Navigation -->
+            <nav class="member-nav">
+                <div class="nav-section-title" id="lbl-tools-title">เครื่องมือเทรด & สื่อ</div>
                 <ul class="category-list">
                     <li class="category-item" id="nav-portfolio">
-                        <i class="fa-solid fa-calculator" style="color: var(--accent-primary);"></i>
+                        <i class="fa-solid fa-calculator tool-icon-green"></i>
                         <span id="lbl-nav-portfolio">คำนวณต้นทุนเฉลี่ย & Break Even</span>
                     </li>
                     <li class="category-item" id="nav-sr-calc">
-                        <i class="fa-solid fa-chart-line" style="color: var(--accent-purple);"></i>
+                        <i class="fa-solid fa-chart-line tool-icon-purple"></i>
                         <span id="lbl-nav-sr-calc">ตารางคำนวณ แนวรับ-แนวต้าน</span>
                     </li>
                     <li class="category-item yt-menu-item" id="nav-youtube-item">
                         <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-nav-anchor">
-                            <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 16px;"></i>
+                            <i class="fa-brands fa-youtube tool-icon-red"></i>
                             <span id="lbl-nav-youtube">รับชมช่อง YouTube</span>
                             <span class="badge yt-badge">LIVE</span>
                         </a>
@@ -116,38 +104,34 @@
                     </li>
                 </ul>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <p>&copy; 2026 SepKhawGonTrade</p>
                 <div class="social-links">
                     <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" title="YouTube Channel"><i class="fa-brands fa-youtube" style="color: #ff3333;"></i></a>
                     <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" title="Premium Telegram"><i class="fa-solid fa-paper-plane"></i></a>
+                    <a href="#" title="Telegram Channel"><i class="fa-solid fa-paper-plane"></i></a>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content View Container -->
         <main class="main-content">
-            <!-- Mobile Navigation Bar -->
+            <!-- Mobile Header Bar -->
             <header class="mobile-header">
-                <button id="mobile-toggle" class="menu-toggle-btn">
+                <button id="mobile-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
                 <div class="mobile-logo-title">
                     <span>เสพข่าวก่อนเทรด</span>
                 </div>
-                <!-- Language Switcher for Mobile -->
                 <div class="lang-switcher mobile-lang-switcher">
                     <button class="lang-btn active" data-lang="th">TH</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-                <div class="mobile-logo-placeholder">
-                    <img src="Logo master.png" alt="Logo" class="mobile-logo" onerror="this.style.display='none';">
-                </div>
             </header>
 
-            <!-- Dashboard/Catalog View -->
+            <!-- SECTION 1: Catalog View -->
             <section id="catalog-view" class="content-section active">
                 <div class="section-header">
                     <div class="header-text-group">
@@ -161,12 +145,12 @@
                         <span class="pulse-dot online"></span>
                         <span class="indicator-text lbl-online">ออนไลน์:</span>&nbsp;<span class="indicator-val online-count-val">0</span>
                         <span class="status-divider">|</span>
-                        <i class="fa-solid fa-eye status-icon" style="color: var(--accent-primary); font-size: 11px; margin-right: 2px;"></i>&nbsp;<span class="indicator-text lbl-visits">ผู้เข้าชม:</span>&nbsp;<span class="indicator-val visit-count-val">0</span>
+                        <i class="fa-solid fa-eye status-icon" style="color: var(--accent-cyan);"></i>&nbsp;<span class="indicator-text lbl-visits">ผู้เข้าชม:</span>&nbsp;<span class="indicator-val visit-count-val">0</span>
                     </div>
                 </div>
 
-                <!-- Whale Indicator Legend Card -->
-                <div id="whale-legend-card" class="whale-legend-card" style="display: none; margin-bottom: 20px;">
+                <!-- CMF Whale Flow Legend Card -->
+                <div id="whale-legend-card" class="whale-legend-card" style="display: none;">
                     <div class="legend-content">
                         <div class="legend-header">
                             <i class="fa-solid fa-circle-info legend-icon"></i>
@@ -196,7 +180,7 @@
                     </div>
                 </div>
 
-                <!-- Featured Latest Report Panel -->
+                <!-- Featured Latest Report Card -->
                 <div id="featured-report-container" class="featured-report-container" style="display: none;">
                     <div class="featured-header">
                         <span class="featured-badge"><i class="fa-solid fa-star"></i> รายงานล่าสุด</span>
@@ -206,10 +190,8 @@
                             <span id="featured-date" class="featured-meta-item"></span>
                         </div>
                     </div>
-                    <div class="featured-markdown-wrapper" style="position: relative;">
-                        <div id="featured-markdown-container" class="markdown-body featured-markdown-content">
-                            <!-- Rendered HTML goes here -->
-                        </div>
+                    <div class="featured-markdown-wrapper">
+                        <div id="featured-markdown-container" class="markdown-body featured-markdown-content"></div>
                         <div class="featured-fade-overlay"></div>
                         <div class="featured-read-more-wrapper">
                             <button id="featured-read-more-btn" class="featured-read-more-btn">
@@ -219,7 +201,7 @@
                     </div>
                 </div>
 
-                <!-- Reports Grid -->
+                <!-- Controls & Grid Bar -->
                 <div class="grid-controls">
                     <div class="results-info" id="results-info">พบทั้งหมด 0 รายการ</div>
                     <div class="sort-control">
@@ -232,8 +214,8 @@
                     </div>
                 </div>
 
+                <!-- Reports Grid -->
                 <div class="reports-grid" id="reports-grid">
-                    <!-- Dynamic report cards will be inserted here -->
                     <div class="loading-spinner">
                         <i class="fa-solid fa-circle-notch fa-spin"></i>
                         <p>กำลังดึงข้อมูลบทวิเคราะห์...</p>
@@ -241,43 +223,38 @@
                 </div>
             </section>
 
-            <!-- Portfolio / Average Cost & Break-Even Calculator View -->
+            <!-- SECTION 2: Average Cost & Break-Even Calculator View -->
             <section id="portfolio-view" class="content-section">
                 <div class="section-header">
                     <div class="header-text-group">
                         <h2 class="section-title" id="portfolio-title">🧮 คำนวณต้นทุนเฉลี่ย & หา Break Even</h2>
-                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณต้นทุนเฉลี่ยสะสม ราคา Break Even และสรุปผลตอบแทนกำไร/ขาดทุนของหุ้น</p>
+                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณต้นทุนเฉลี่ยสะสม ราคา Break Even และจุดทำกำไรเป้าหมายของหุ้น</p>
                     </div>
                     <div class="status-indicator">
                         <span class="pulse-dot"></span>
                         <span class="indicator-text lbl-status-connected">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
-                        <span class="status-divider">|</span>
-                        <span class="pulse-dot online"></span>
-                        <span class="indicator-text lbl-online">ออนไลน์:</span>&nbsp;<span class="indicator-val online-count-val">0</span>
-                        <span class="status-divider">|</span>
-                        <i class="fa-solid fa-eye status-icon" style="color: var(--accent-primary); font-size: 11px; margin-right: 2px;"></i>&nbsp;<span class="indicator-text lbl-visits">ผู้เข้าชม:</span>&nbsp;<span class="indicator-val visit-count-val">0</span>
                     </div>
                 </div>
 
                 <div class="portfolio-wrap">
-                    <!-- Portfolio summary card -->
+                    <!-- Portfolio Overview Summary Card -->
                     <div class="portfolio-summary-card">
-                        <p class="portfolio-summary-title" id="lbl-portfolio-overview">ภาพรวม Portfolio</p>
+                        <p class="portfolio-summary-title" id="lbl-portfolio-overview">ภาพรวมต้นทุน & พอร์ตลงทุน</p>
                         <div class="portfolio-summary-grid">
                             <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-cost">ต้นทุนรวมทั้ง portfolio</span>
-                                <span class="summary-value" id="pt-cost">฿0.00</span>
+                                <span class="summary-label" id="lbl-pt-cost">ต้นทุนรวมทั้งหมด</span>
+                                <span class="summary-value" id="pt-cost">$0.00</span>
                             </div>
                             <div class="portfolio-summary-item">
                                 <span class="summary-label" id="lbl-pt-realized">กำไร/ขาดทุนที่ขายแล้ว</span>
-                                <span class="summary-value" id="pt-realized">฿0.00</span>
+                                <span class="summary-value" id="pt-realized">$0.00</span>
                             </div>
                             <div class="portfolio-summary-item">
                                 <span class="summary-label" id="lbl-pt-holding">ต้นทุนหุ้นที่ถืออยู่</span>
-                                <span class="summary-value" id="pt-holding">฿0.00</span>
+                                <span class="summary-value" id="pt-holding">$0.00</span>
                             </div>
                             <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-count">จำนวนหุ้นในพอร์ต</span>
+                                <span class="summary-label" id="lbl-pt-count">จำนวนหุ้นในระบบ</span>
                                 <span class="summary-value" id="pt-count">0 ตัว</span>
                             </div>
                         </div>
@@ -286,7 +263,7 @@
                     <!-- Stock Cards List -->
                     <div id="stock-list" class="stock-list-container"></div>
 
-                    <!-- Bottom Controls -->
+                    <!-- Action Controls -->
                     <div class="portfolio-bottom-bar">
                         <button class="portfolio-add-stock-btn" id="add-stock-btn">+ เพิ่มหุ้นใหม่</button>
                         <button class="portfolio-refresh-btn" id="refresh-btn">↺ รีเฟรช</button>
@@ -294,26 +271,21 @@
                 </div>
             </section>
 
-            <!-- S/R Calculator View -->
+            <!-- SECTION 3: Support & Resistance Calculator View -->
             <section id="sr-calc-view" class="content-section">
                 <div class="section-header">
                     <div class="header-text-group">
-                        <h2 class="section-title" id="sr-calc-title">📐 ตารางคำนวณ แนวรับ-แนวต้าน</h2>
-                        <p class="section-subtitle" id="sr-calc-subtitle">เครื่องมือคำนวณสัดส่วนกำไรและเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน</p>
+                        <h2 class="section-title" id="sr-calc-title">📐 ตารางคำนวณ แนวรับ-แนวต้าน (Support & Resistance)</h2>
+                        <p class="section-subtitle" id="sr-calc-subtitle">เครื่องมือคำนวณสัดส่วนกำไร/ขาดทุน และเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน</p>
                     </div>
                     <div class="status-indicator">
                         <span class="pulse-dot"></span>
                         <span class="indicator-text lbl-status-connected">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
-                        <span class="status-divider">|</span>
-                        <span class="pulse-dot online"></span>
-                        <span class="indicator-text lbl-online">ออนไลน์:</span>&nbsp;<span class="indicator-val online-count-val">0</span>
-                        <span class="status-divider">|</span>
-                        <i class="fa-solid fa-eye status-icon" style="color: var(--accent-primary); font-size: 11px; margin-right: 2px;"></i>&nbsp;<span class="indicator-text lbl-visits">ผู้เข้าชม:</span>&nbsp;<span class="indicator-val visit-count-val">0</span>
                     </div>
                 </div>
 
                 <div class="sr-calc-wrap">
-                    <!-- Calculator control card -->
+                    <!-- Inputs Card -->
                     <div class="sr-calc-control-card">
                         <div class="sr-calc-inputs-grid">
                             <div class="sr-calc-input-group">
@@ -372,23 +344,19 @@
                             </div>
                         </div>
 
-                        <!-- Manual S/R Level Inputs -->
+                        <!-- Manual S/R Level Editor -->
                         <div class="sr-manual-levels" id="sr-manual-levels">
                             <h4 id="lbl-sr-manual-title"><i class="fa-solid fa-sliders"></i> กำหนดระดับราคาแนวรับ-แนวต้าน</h4>
                             <div class="sr-levels-grid">
                                 <div class="sr-levels-col">
                                     <div class="sr-level-header" id="lbl-sr-supports">ระดับแนวรับ (Buy at Support)</div>
-                                    <div class="sr-level-inputs" id="support-inputs-container">
-                                        <!-- Support inputs generated here -->
-                                    </div>
+                                    <div class="sr-level-inputs" id="support-inputs-container"></div>
                                     <button class="sr-add-level-btn" id="sr-add-support">+ เพิ่มแนวรับ</button>
                                 </div>
 
                                 <div class="sr-levels-col">
                                     <div class="sr-level-header" id="lbl-sr-resistances">ระดับแนวต้าน (Sell at Resistance)</div>
-                                    <div class="sr-level-inputs" id="resistance-inputs-container">
-                                        <!-- Resistance inputs generated here -->
-                                    </div>
+                                    <div class="sr-level-inputs" id="resistance-inputs-container"></div>
                                     <button class="sr-add-level-btn" id="sr-add-resistance">+ เพิ่มแนวต้าน</button>
                                 </div>
                             </div>
@@ -401,9 +369,7 @@
 
                         <div class="sr-watchlist-section" id="sr-watchlist-section">
                             <h4 id="lbl-sr-watchlist-title"><i class="fa-solid fa-list-check"></i> Watchlist ของฉัน</h4>
-                            <div class="sr-watchlist-list" id="sr-watchlist-list">
-                                <!-- Watchlist items dynamically generated here -->
-                            </div>
+                            <div class="sr-watchlist-list" id="sr-watchlist-list"></div>
                         </div>
                     </div>
 
@@ -414,17 +380,14 @@
                             <span class="sr-table-badge" id="sr-table-ticker-badge">AMD</span>
                         </div>
                         <div class="sr-table-responsive">
-                            <table class="sr-output-table" id="sr-output-table">
-                                <!-- Table content dynamically generated -->
-                            </table>
+                            <table class="sr-output-table" id="sr-output-table"></table>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Report Reader View -->
+            <!-- SECTION 4: Article Reader View -->
             <section id="reader-view" class="content-section">
-                <!-- Navigation back bar -->
                 <div class="reader-control-bar">
                     <button id="back-to-catalog" class="back-btn">
                         <i class="fa-solid fa-arrow-left-long"></i>
@@ -433,7 +396,7 @@
                     
                     <div class="reader-actions">
                         <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="action-btn yt-reader-action-btn" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
-                            <i class="fa-brands fa-youtube" style="color: #FF0000; font-size: 16px;"></i>
+                            <i class="fa-brands fa-youtube" style="color: #FF0000;"></i>
                             <span>รับชมบน YouTube</span>
                         </a>
                         <button id="btn-copy-link" class="action-btn" title="คัดลอกลิงก์รายงาน">
@@ -448,7 +411,7 @@
                     </div>
                 </div>
 
-                <!-- Whale Indicator Legend Card for Reader -->
+                <!-- CMF Whale Flow Legend inside Reader -->
                 <div id="whale-legend-card-reader" class="whale-legend-card" style="display: none; margin-bottom: 20px;">
                     <div class="legend-content">
                         <div class="legend-header">
@@ -479,9 +442,7 @@
                     </div>
                 </div>
 
-                <!-- Report Container Wrapper -->
                 <article class="report-article-wrapper">
-                    <!-- Custom Header area -->
                     <div class="article-meta-header">
                         <span class="article-category-badge" id="reader-category">PRE-MARKET ANALYSIS</span>
                         <h1 class="article-title" id="reader-title">หัวข้อรายงานวิเคราะห์</h1>
@@ -490,11 +451,7 @@
                             <span class="meta-item"><i class="fa-regular fa-file-lines"></i> ขนาด <span id="reader-size">0 KB</span></span>
                         </div>
                     </div>
-
-                    <!-- Rendered HTML Markdown Container -->
-                    <div class="markdown-body" id="markdown-container">
-                        <!-- Parsed content goes here -->
-                    </div>
+                    <div class="markdown-body" id="markdown-container"></div>
                 </article>
             </section>
         </main>
@@ -503,11 +460,10 @@
     <!-- Mobile Sidebar Backdrop -->
     <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
-    <!-- Marked JS for Markdown Parsing -->
+    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-    <!-- DOMPurify for HTML sanitization -->
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" defer></script>
-    <!-- Custom Application Logic -->
-    <script src="app.js?v=2.0.1" defer></script>
+    <!-- Custom Application Script -->
+    <script src="app.js?v=3.0.0" defer></script>
 </body>
 </html>
