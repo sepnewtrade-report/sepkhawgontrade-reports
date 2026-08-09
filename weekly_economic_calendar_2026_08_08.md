@@ -30,7 +30,7 @@
 ### 📅 วันที่สำคัญที่สุดของสัปดาห์ (The Most Critical Days)
 * **วันจันทร์ที่ 10 สิงหาคม 2026:** การรายงานงบของคู่หูหุ้นอวกาศ **Rocket Lab (RKLB)** และ **AST SpaceMobile (ASTS)** หลังตลาดปิด
 * **วันพุธที่ 12 สิงหาคม 2026:** การประกาศตัวเลข **US CPI** เวลา 19:30 น. ตามด้วยผลประกอบการของ **Cisco Systems (CSCO)** และ **Brinker International (EAT)** หลังตลาดปิด
-* **วันพฤหัสบดีที่ 13 สิงหาคม 2026:** การประกาศตัวเลข **US PPI** เวลา 19:30 น. ร่วมกับงบการเงินของ **Applied Materials (AMAT)**, **Nu Holdings (NU)**, **Intuitive Machines (LUNR)**, และ **Deere & Company (DE)**
+* **วันพฤหัสบดีที่ 13 สิงหาคม 2026:** การประกาศตัวเลข **US PPI** เวลา 19:30 น. ร่วมกับงบการเงินของ **Applied Materials (AMAT)**, **Nu Holdings (NU)**, และ **Intuitive Machines (LUNR)**
 
 ---
 
@@ -125,24 +125,22 @@
 * **คาดการณ์งบ:** คาดการณ์ EPS ที่ **$2.02** และรายได้ **$6.68B**
 * **ประเด็นที่ตลาดจับตา:** ยอดขายเครื่องจักรผลิตชิปขั้นสูงสำหรับหน่วยความจำ HBM (High Bandwidth Memory), เทคโนโลยี Advanced Packaging, และผลกระทบจากมาตรการจำกัดการส่งออกชิปไปจีน
 
-#### 🚜 Deere & Company (Ticker: DE)
-* **Market Cap:** **$167.59B** *(ราคาปิดล่าสุด $620.83, +0.97%)* *(ที่มา: Yahoo Finance)*
-* **วันประกาศงบ:** **วันพฤหัสบดีที่ 13 สิงหาคม 2026 (ก่อนตลาดเปิด - BMO)** *(ที่มา: Deere IR)*
-* **คาดการณ์งบ:** คาดการณ์ EPS ที่ **$5.75** และรายได้ **$10.85B**
-
 #### 🛍️ Sea Limited (Ticker: SE)
 * **Market Cap:** **$69.47B** *(ราคาปิดล่าสุด $113.43, +2.19%)* *(ที่มา: Yahoo Finance)*
 * **วันประกาศงบ:** **วันอังคารที่ 11 สิงหาคม 2026 (ก่อนตลาดเปิด - BMO)** *(ที่มา: Sea Ltd IR)*
 * **คาดการณ์งบ:** คาดการณ์ EPS ที่ **$0.62** และรายได้ **$3.82B**
+* **ประเด็นที่ตลาดจับตา:** การเติบโตของยอดขายรวม (GMV) บน Shopee, อัตราทำกำไรของธุรกิจอีคอมเมิร์ซท่ามกลางการแข่งขันกับ TikTok Shop, และรายได้ฟื้นตัวของเกม Free Fire (Garena)
 
 #### 💳 Nu Holdings Ltd. (Ticker: NU - Nubank)
 * **Market Cap:** **$66.85B** *(ราคาปิดล่าสุด $13.84, -1.98%)* *(ที่มา: Yahoo Finance)*
 * **วันประกาศงบ:** **วันพฤหัสบดีที่ 13 สิงหาคม 2026 (หลังตลาดปิด - AMC)** *(ที่มา: Nubank IR)*
 * **คาดการณ์งบ:** คาดการณ์ EPS ที่ **$0.10** และรายได้ **$2.42B**
+* **ประเด็นที่ตลาดจับตา:** จำนวนผู้ใช้ใหม่ในเม็กซิโกและโคลอมเบีย, รายได้เฉลี่ยต่อผู้ใช้ (ARPAC), และคุณภาพสินเชื่อ / อัตราหนี้เสีย (NPL Ratio) *(เป็นหุ้นขวัญใจนักลงทุนสถาบันและ Reddit r/stocks)*
 
 #### 💊 Cardinal Health, Inc. (Ticker: CAH)
 * **Market Cap:** **$55.37B** *(ราคาปิดล่าสุด $236.40, -0.53%)* *(ที่มา: Yahoo Finance)*
 * **วันประกาศงบ:** **วันอังคารที่ 11 สิงหาคม 2026 (ก่อนตลาดเปิด - BMO)** *(ที่มา: Cardinal Health IR)*
+* **คาดการณ์งบ:** คาดการณ์ EPS ที่ **$1.73** และรายได้ **$58.6B**
 
 ---
 
@@ -166,10 +164,6 @@
 * **Market Cap:** **$9.66B** *(ราคาปิดล่าสุด $225.20, -0.91%)* *(ที่มา: Yahoo Finance)*
 * **วันประกาศงบ:** **วันพุธที่ 12 สิงหาคม 2026 (ก่อนตลาดเปิด - BMO)** *(ที่มา: Brinker IR)*
 
-#### 🤼 TKO Group Holdings, Inc. (Ticker: TKO)
-* **Market Cap:** **$35.31B** *(ราคาปิดล่าสุด $186.56, -0.39%)* *(ที่มา: Yahoo Finance)*
-* **วันประกาศงบ:** **วันจันทร์ที่ 10 สิงหาคม 2026 (หลังตลาดปิด - AMC)** *(ที่มา: TKO IR)*
-
 #### 🎵 Tencent Music Entertainment (Ticker: TME)
 * **Market Cap:** **$15.60B** *(ราคาปิดล่าสุด $9.53, -0.63%)* *(ที่มา: Yahoo Finance)*
 * **วันประกาศงบ:** **วันอังคารที่ 11 สิงหาคม 2026 (ก่อนตลาดเปิด - BMO)** *(ที่มา: TME IR)*
@@ -187,7 +181,6 @@
 | **จันทร์ 10 ส.ค.** | ☀️ BMO | **MNDY** | monday.com Ltd. | SaaS / Enterprise Software | $3.94B | [monday.com IR](https://ir.monday.com/) |
 | **จันทร์ 10 ส.ค.** | 🌙 AMC | **RKLB** | Rocket Lab USA | 🚀 Space Launch & Systems | $51.75B | [Rocket Lab IR](https://investors.rocketlabusa.com/) |
 | **จันทร์ 10 ส.ค.** | 🌙 AMC | **ASTS** | AST SpaceMobile | 🛰️ Space Satellite Telecom | $27.92B | [AST SpaceMobile IR](https://ast-science.com/investors/) |
-| **จันทร์ 10 ส.ค.** | 🌙 AMC | **TKO** | TKO Group Holdings | Media & Entertainment | $35.31B | [TKO IR](https://tkogrp.com/) |
 | **อังคาร 11 ส.ค.** | ☀️ BMO | **SE** | Sea Limited | E-Commerce & Gaming | $69.47B | [Sea IR](https://www.sea.com/investor/home) |
 | **อังคาร 11 ส.ค.** | ☀️ BMO | **CAH** | Cardinal Health | Healthcare Distribution | $55.37B | [Cardinal Health IR](https://ir.cardinalhealth.com/) |
 | **อังคาร 11 ส.ค.** | ☀️ BMO | **TME** | Tencent Music | Digital Streaming | $15.60B | [Tencent Music IR](https://ir.tencentmusic.com/) |
@@ -197,10 +190,15 @@
 | **พุธ 12 ส.ค.** | ☀️ BMO | **EAT** | Brinker International | Restaurant & Dining | $9.66B | [Brinker IR](https://investors.brinker.com/) |
 | **พุธ 12 ส.ค.** | 🌙 AMC | **CSCO** | Cisco Systems | Enterprise Tech & Networking | $478.61B | [Cisco IR](https://investor.cisco.com/) |
 | **พุธ 12 ส.ค.** | 🌙 AMC | **SPIR** | Spire Global | 🛰️ Space Data Analytics | $0.55B | [Spire IR](https://ir.spire.com/) |
-| **พฤหัสบดี 13 ส.ค.** | ☀️ BMO | **DE** | Deere & Company | Industrial & Agriculture | $167.59B | [Deere IR](https://about.deere.com/en-us/investor-relations) |
 | **พฤหัสบดี 13 ส.ค.** | ☀️ BMO | **LUNR** | Intuitive Machines | 🌙 Lunar Space Exploration | $2.63B | [Intuitive Machines IR](https://investors.intuitivemachines.com/) |
 | **พฤหัสบดี 13 ส.ค.** | 🌙 AMC | **AMAT** | Applied Materials | Semiconductor Equipment | $428.06B | [Applied Materials IR](https://ir.appliedmaterials.com/) |
 | **พฤหัสบดี 13 ส.ค.** | 🌙 AMC | **NU** | Nu Holdings (Nubank) | FinTech & Banking | $66.85B | [Nubank IR](https://investidores.nu/) |
+
+---
+
+### 📌 หมายเหตุเพิ่มเติมเกี่ยวกับกำหนดการรายงานงบ
+* **Deere & Company (DE):** จากข่าวประชาสัมพันธ์อย่างเป็นทางการของบริษัท *(PRNewswire, 5 ส.ค. 2026)* Deere & Company มีกำหนดการรายงานผลประกอบการไตรมาส 3/2026 ใน**วันพฤหัสบดีที่ 20 สิงหาคม 2026** *(จึงนำออกจากตารางสัปดาห์นี้)*
+* **TKO Group Holdings, Inc. (TKO):** ได้รายงานผลประกอบการไตรมาส 2/2026 เป็นที่เรียบร้อยแล้วเมื่อ**วันจันทร์ที่ 3 สิงหาคม 2026** *(จึงนำออกจากตารางสัปดาห์นี้)*
 
 ---
 
