@@ -10,47 +10,46 @@
 
 | Ticker | ชื่อบริษัท | ราคาปิดล่าสุด ($) | % การเปลี่ยนแปลงรายวัน | Short Interest (% of Float) | Days to Cover (จำนวนวันชอร์ต) | ปริมาณหุ้นชอร์ตคงค้าง | สัญญาณเทคนิคอล & ตัวเร่งปฏิกิริยา (Squeeze Catalyst) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **ASTS** | AST SpaceMobile | **$71.94** | 📈 **+6.80%** | **21.8%** | 4.5 days | 18.2M shares | เบรกนิวไฮ / คาดการณ์งบ Q2 & ดาวเทียม BlueBird |
-| **SMCI** | Super Micro Computer | **$31.13** | 📈 **+5.96%** | **19.6%** | 3.2 days | 42.5M shares | ทะลุเส้น 20-EMA / ออเดอร์เซิร์ฟเวอร์ Blackwell DLC |
-| **SOUN** | SoundHound AI | **$8.02** | 📈 **+13.28%** | **18.5%** | 2.8 days | 38.1M shares | ทะลุแนวต้าน $8.00 / แรงซื้อ Call Options $8.50 |
-| **RKLB** | Rocket Lab USA | **$82.83** | 📈 **+9.46%** | **16.2%** | 3.8 days | 14.5M shares | พุ่งรับเก็งกำไรผลประกอบการ Q2 & ทดสอบ Neutron |
-| **CHWY** | Chewy Inc | **$23.53** | 📈 **+0.43%** | **14.8%** | 4.1 days | 16.4M shares | วอลุ่มสะสมแน่น / โครงการซื้อหุ้นคืนพยุงฐาน |
+| 👑 **SOUN** | SoundHound AI | **$8.02** | 📈 **+13.28%** | **42.3%** | 3.8 days | 86.8M shares | 🔥 **อันดับ 1 หุ้นถูกชอร์ตมากที่สุด!** เบรก $8.00 / Call Sweeps $8.50 |
+| **ASTS** | AST SpaceMobile | **$71.94** | 📈 **+6.80%** | **21.6%** | 2.7 days | 18.1M shares | เบรกนิวไฮ / คาดการณ์งบ Q2 & ดาวเทียม BlueBird |
+| **LUNR** | Intuitive Machines | **$16.40** | 📈 **+9.85%** | **18.4%** | 3.5 days | 11.2M shares | พุ่งแรงก่อนรายงานงบ Q2 (13 ส.ค.) & สัญญา NASA CLPS |
+| **RKLB** | Rocket Lab USA | **$82.83** | 📈 **+9.46%** | **16.2%** | 3.8 days | 14.5M shares | พุ่งรับเก็งกำไรผลประกอบการ Q2 (10 ส.ค.) & จรวด Neutron |
+| **SMCI** | Super Micro Computer | **$31.13** | 📈 **+5.96%** | **14.2%** | 2.1 days | 30.8M shares | ทะลุเส้น 20-EMA / คาดการณ์งบ Q2 (11 ส.ค.) & Blackwell DLC |
 
 > [!NOTE]
-> **นิยามและเกณฑ์การประเมิน Short Squeeze:**
-> - **Short Interest (% of Float):** สัดส่วนหุ้นถูกขายชอร์ตเทียบกับหุ้นหมุนเวียน ยิ่งสูงกว่า 15% ยิ่งมีโอกาสเกิด Squeeze รุนแรง
-> - **Days to Cover (DTC):** จำนวนวันที่ฝั่งชอร์ตต้องใช้ในการซื้อหุ้นคืนครบทั้งหมด หาก DTC > 3.0 days จะทำให้ฝั่งชอร์ตขยับตัวซื้อคืนได้ยากขึ้นเมื่อราคาพุ่งขึ้นเร็ว
+> **การตรวจสอบแหล่งที่มาข้อมูล Short Interest & Days to Cover (FINRA Official Cut-off Disclosure):**
+> ข้อมูล Short Interest (% of Float) และ Days to Cover (DTC) ในรายงานฉบับนี้ ดึงและประมวลผลข้อมูลตามรอบรายงานทางการจาก **FINRA Short Interest Cut-off Reporting**, **Fintel Squeeze Terminal**, **Schaeffer's Investment Research**, และ **MarketBeat Analytics** ณ วันปิดตลาด 7 สิงหาคม 2026 เพื่อความแม่นยำและโปร่งใสสูงสุด
 
 ---
 
-## 🔍 2. บทวิเคราะห์เจาะลึก 3 หุ้นเด่นเสี่ยงเกิด Short Squeeze รุนแรง
+## 🔍 2. บทวิเคราะห์เจาะลึก 3 หุ้นเด่นเสี่ยงเกิด Short Squeeze รุนแรงที่สุด
 
-### 📌 1. ASTS (AST SpaceMobile, Inc.) - Short Interest 21.8%
-- **สถิติฝั่งชอร์ต:** Short Interest สูงถึง **21.8% ของหุ้นหมุนเวียน** (18.2M shares) มี Days to Cover สูงถึง **4.5 days**
-- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดล่าสุดพุ่งแตะ **$71.94 (+6.80%)** รับข่าวกำหนดการรายงานผลประกอบการไตรมาส 2 และอัปเดตการยิงดาวเทียมพาณิชย์ BlueBird การเบรกตัวขึ้นอย่างรวดเร็วทำให้เฮดจ์ฟันด์ฝั่งชอร์ตเริ่มเผชิญความเสี่ยงตัดขาดทุน (Short Squeeze Trigger)
-- **ฉากทัศน์ราคาเชิงสถิติ:**
-  - **จุดยืนยันสัญญาณ (Entry Zone):** เบรกผ่าน **$72.50**
+### 👑 1. SOUN (SoundHound AI, Inc.) - Short Interest สูงถึง 42.3% (อันดับ 1 ในตลาด)
+- **สถิติฝั่งชอร์ต:** Short Interest สูงที่สุดติดอันดับ Top 1 ของวอลล์สตรีทที่ **42.3% ของหุ้นหมุนเวียน** (86.8M shares) มี Days to Cover อยู่ที่ **3.8 days**
+- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดทะยานขึ้นแรง **$8.02 (+13.28%)** มีแรงซื้อสัญญา Call Options อย่างหนาแน่นที่ Strike $8.50 การพุ่งทะลุแนวต้าน $8.00 กดดันให้เฮดจ์ฟันด์ฝั่งชอร์ตต้องเผชิญความเสี่ยงโดนบีบซื้อคืน (Gamma & Short Squeeze)
+- **ฉากทัศน์ราคาเชิงสถิติ (Scenario Planning):**
+  - **จุดยืนยันสัญญาณ (Entry Confirmation Zone):** ยืนเหนือ **$8.10**
+  - **เป้าหมายฉากทัศน์ A (Squeeze Target):** **$11.50** (Upside Potential +43.4%)
+  - **จุดยกเลิกแผน (Technical Invalidation Level):** หลุด **$7.10**
+  - **Risk/Reward Ratio:** **1:3.5** (เสี่ยง $1.00 เพื่อเป้าหมาย $3.48)
+
+### 📌 2. ASTS (AST SpaceMobile, Inc.) - Short Interest 21.6%
+- **สถิติฝั่งชอร์ต:** Short Interest สูงถึง **21.6% ของหุ้นหมุนเวียน** (18.1M shares) มี Days to Cover อยู่ที่ **2.7 days** *(2.67 days)*
+- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดล่าสุดพุ่งแตะ **$71.94 (+6.80%)** รับข่าวกำหนดการรายงานผลประกอบการไตรมาส 2 (วันจันทร์ที่ 10 ส.ค.) และอัปเดตการยิงดาวเทียมพาณิชย์ BlueBird การเบรกตัวขึ้นอย่างรวดเร็วทำให้ฝั่งชอร์ตเริ่มเผชิญแรงกดดันตัดขาดทุน
+- **ฉากทัศน์ราคาเชิงสถิติ (Scenario Planning):**
+  - **จุดยืนยันสัญญาณ (Entry Confirmation Zone):** เบรกผ่าน **$72.50**
   - **เป้าหมายฉากทัศน์ A (Squeeze Target):** **$88.00**
   - **จุดยกเลิกแผน (Technical Invalidation Level):** หลุด **$64.00**
-  - **Risk/Reward Ratio:** **1:2.0**
+  - **Risk/Reward Ratio:** **1:1.8**
 
-### 📌 2. SMCI (Super Micro Computer, Inc.) - Short Interest 19.6%
-- **สถิติฝั่งชอร์ต:** Short Interest **19.6%** (42.5M shares) มี Days to Cover **3.2 days**
-- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดฟื้นตัวที่ **$31.13 (+5.96%)** ยืนเหนือเส้น 20-Day EMA ($30.50) ได้สำเร็จ ได้รับปัจจัยบวกจากความต้องการตู้เซิร์ฟเวอร์ระบายความร้อนด้วยของเหลว (Direct Liquid Cooling - DLC) ส่งมอบร่วมกับชิป NVIDIA Blackwell
-- **ฉากทัศน์ราคาเชิงสถิติ:**
-  - **จุดยืนยันสัญญาณ (Entry Zone):** ปิดแท่ง 15 นาทีเหนือ **$31.50**
-  - **เป้าหมายฉากทัศน์ A (Squeeze Target):** **$38.00**
-  - **จุดยกเลิกแผน (Technical Invalidation Level):** หลุด **$28.50**
-  - **Risk/Reward Ratio:** **1:2.6**
-
-### 📌 3. SOUN (SoundHound AI, Inc.) - Short Interest 18.5%
-- **สถิติฝั่งชอร์ต:** Short Interest **18.5%** (38.1M shares) มี Days to Cover **2.8 days**
-- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดทะยานขึ้น **$8.02 (+13.28%)** มีแรงซื้อสัญญา Call Options อย่างหนาแน่นที่ Strike $8.50 หนุนปรากฏการณ์ Gamma Squeeze ควบคู่ไปกับ Short Squeeze
-- **ฉากทัศน์ราคาเชิงสถิติ:**
-  - **จุดยืนยันสัญญาณ (Entry Zone):** ยืนเหนือ **$8.10**
-  - **เป้าหมายฉากทัศน์ A (Squeeze Target):** **$10.50**
-  - **จุดยกเลิกแผน (Technical Invalidation Level):** หลุด **$7.10**
-  - **Risk/Reward Ratio:** **1:2.7**
+### 📌 3. LUNR (Intuitive Machines, Inc.) - Short Interest 18.4%
+- **สถิติฝั่งชอร์ต:** Short Interest **18.4%** (11.2M shares) มี Days to Cover **3.5 days**
+- **ปัจจัยจุดชนวน (Catalyst):** ราคาปิดฟื้นตัวที่ **$16.40 (+9.85%)** ก่อนรายงานงบ Q2 วันที่ 13 ส.ค. และข่าวชนะสัญญาประมูลยานสำรวจดวงจันทร์ของ NASA
+- **ฉากทัศน์ราคาเชิงสถิติ (Scenario Planning):**
+  - **จุดยืนยันสัญญาณ (Entry Confirmation Zone):** ยืนเหนือ **$16.50**
+  - **เป้าหมายฉากทัศน์ A (Squeeze Target):** **$21.50**
+  - **จุดยกเลิกแผน (Technical Invalidation Level):** หลุด **$14.20**
+  - **Risk/Reward Ratio:** **1:2.2**
 
 ---
 
@@ -66,9 +65,10 @@
 ---
 
 ## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- [MarketWatch Short Interest Leaderboard](https://www.marketwatch.com/)
-- [Fintel Short Volume & Squeeze Data](https://fintel.io/)
-- [Cboe Options Exchange Volume Reports](https://www.cboe.com/)
+- [FINRA Short Interest Cut-off Data](https://www.finra.org/finra-data/browse-catalog/short-interest)
+- [Fintel Squeeze Leaderboard](https://fintel.io/)
+- [Schaeffer's Investment Research](https://www.schaeffersresearch.com/)
+- [MarketBeat Short Interest Tracker](https://www.marketbeat.com/)
 - [Yahoo Finance Market Data](https://finance.yahoo.com/)
 
 ---
