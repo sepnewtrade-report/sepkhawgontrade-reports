@@ -3,470 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เสพข่าวก่อนเทรด หุ้นอเมริกา | Reports Hub & Trading Calculators</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Style Sheet -->
-    <link rel="stylesheet" href="styles.css?v=3.0.1_nocache">
-    
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8RKN9TT2Q"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-C8RKN9TT2Q');
-    </script>
+    <title>ปิดให้บริการ | SepKhawGonTrade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #090d16;
+            color: #94a3b8;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .closed-card {
+            max-width: 460px;
+            width: 100%;
+            padding: 40px 30px;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        h1 {
+            color: #f8fafc;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .yt-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            transition: all 0.2s ease;
+        }
+        .yt-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+        }
+    </style>
 </head>
 <body>
-    <!-- Ambient Top Glow -->
-    <div class="top-glow"></div>
-
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-wrapper">
-                    <img src="Logo master.png" alt="SepKhawGonTrade Logo" class="channel-logo" onerror="this.src='logo-mascot.png';">
-                </div>
-                <h1 class="sidebar-title">เสพข่าวก่อนเทรด</h1>
-                <p class="sidebar-subtitle">หุ้นอเมริกา • US Stock Intelligence</p>
-                
-                <!-- Language Switcher -->
-                <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="th">TH</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </div>
-
-                <!-- YouTube Channel Primary Link Button -->
-                <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-header-banner" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
-                    <div class="yt-banner-content">
-                        <i class="fa-brands fa-youtube yt-icon"></i>
-                        <div class="yt-text-wrap">
-                            <span class="yt-title">เสพข่าวก่อนเทรด</span>
-                            <span class="yt-sub">รับชมคลิปบน YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Search Bar -->
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" placeholder="ค้นหาบทวิเคราะห์ / หุ้น..." autocomplete="off">
-                <button id="clear-search" class="clear-btn" style="display: none;"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <!-- Categories Navigation -->
-            <nav class="categories-nav">
-                <div class="nav-section-title" id="lbl-categories-title">คลังรายงานบทวิเคราะห์</div>
-                <ul class="category-list" id="category-list">
-                    <li class="category-item active" data-category="all">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span id="lbl-all-reports">รายงานทั้งหมด</span>
-                        <span class="badge count-badge" id="count-all">0</span>
-                    </li>
-                    <!-- Categories dynamically populated by JS -->
-                </ul>
-            </nav>
-
-            <!-- Trading Tools Navigation -->
-            <nav class="member-nav">
-                <div class="nav-section-title" id="lbl-tools-title">เครื่องมือเทรด & สื่อ</div>
-                <ul class="category-list">
-                    <li class="category-item" id="nav-portfolio">
-                        <i class="fa-solid fa-calculator tool-icon-green"></i>
-                        <span id="lbl-nav-portfolio">คำนวณต้นทุนเฉลี่ย & Break Even</span>
-                    </li>
-                    <li class="category-item" id="nav-sr-calc">
-                        <i class="fa-solid fa-chart-line tool-icon-purple"></i>
-                        <span id="lbl-nav-sr-calc">ตารางคำนวณ แนวรับ-แนวต้าน</span>
-                    </li>
-                    <li class="category-item yt-menu-item" id="nav-youtube-item">
-                        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="yt-nav-anchor">
-                            <i class="fa-brands fa-youtube tool-icon-red"></i>
-                            <span id="lbl-nav-youtube">รับชมช่อง YouTube</span>
-                            <span class="badge yt-badge">LIVE</span>
-                        </a>
-                    </li>
-                    <li class="category-item" id="nav-bot-trade">
-                        <i class="fa-solid fa-robot"></i>
-                        <span id="lbl-nav-bot-trade">บอทเทรด & ผลงาน</span>
-                        <span class="badge count-badge" id="count-bot-trade">0</span>
-                    </li>
-                    <li class="category-item" id="nav-web-album">
-                        <i class="fa-solid fa-film"></i>
-                        <span id="lbl-nav-web-album">Album รายการผลิตคลิป</span>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-footer">
-                <p>&copy; 2026 SepKhawGonTrade</p>
-                <div class="social-links">
-                    <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" title="YouTube Channel"><i class="fa-brands fa-youtube" style="color: #ff3333;"></i></a>
-                    <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" title="Telegram Channel"><i class="fa-solid fa-paper-plane"></i></a>
-                </div>
-                <button id="btn-clear-cache" class="sidebar-clear-cache-btn" style="margin-top: 10px; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px; color: var(--text-muted); font-size: 11px; cursor: pointer; transition: all 0.2s;" title="ล้างแคชข้อมูลเบราว์เซอร์">
-                    <i class="fa-solid fa-broom"></i> ล้างแคช & รีเฟรชข้อมูล
-                </button>
-            </div>
-        </aside>
-
-        <!-- Main Content View Container -->
-        <main class="main-content">
-            <!-- Mobile Header Bar -->
-            <header class="mobile-header">
-                <button id="mobile-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
-                    <i class="fa-solid fa-bars-staggered"></i>
-                </button>
-                <div class="mobile-logo-title">
-                    <span>เสพข่าวก่อนเทรด</span>
-                </div>
-                <div class="lang-switcher mobile-lang-switcher">
-                    <button class="lang-btn active" data-lang="th">TH</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </div>
-            </header>
-
-            <!-- SECTION 1: Catalog View -->
-            <section id="catalog-view" class="content-section active">
-                <div class="section-header">
-                    <div class="header-text-group">
-                        <h2 class="section-title" id="section-title">คลังบทวิเคราะห์และรายงานล่าสุด</h2>
-                        <p class="section-subtitle">อัปเดตข้อมูลเจาะลึกตลาดหุ้นสหรัฐฯ เรียลไทม์ส่งตรงจากห้องเทรด</p>
-                    </div>
-                    <div class="status-indicator">
-                        <span class="pulse-dot"></span>
-                        <span class="indicator-text lbl-status-connected">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
-                        <span class="status-divider">|</span>
-                        <span class="pulse-dot online"></span>
-                        <span class="indicator-text lbl-online">ออนไลน์:</span>&nbsp;<span class="indicator-val online-count-val">0</span>
-                        <span class="status-divider">|</span>
-                        <i class="fa-solid fa-eye status-icon" style="color: var(--accent-cyan);"></i>&nbsp;<span class="indicator-text lbl-visits">ผู้เข้าชม:</span>&nbsp;<span class="indicator-val visit-count-val">0</span>
-                    </div>
-                </div>
-
-                <!-- CMF Whale Flow Legend Card -->
-                <div id="whale-legend-card" class="whale-legend-card" style="display: none;">
-                    <div class="legend-content">
-                        <div class="legend-header">
-                            <i class="fa-solid fa-circle-info legend-icon"></i>
-                            <h4 id="lbl-legend-title">คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน</h4>
-                        </div>
-                        <p class="legend-desc" id="lbl-legend-desc">
-                            ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:
-                        </p>
-                        <div class="legend-grid">
-                            <div class="legend-item accum">
-                                <span class="legend-badge">🐳 Accum (&gt;= +0.10)</span>
-                                <span class="legend-text" id="lbl-legend-accum">วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ</span>
-                            </div>
-                            <div class="legend-item buy">
-                                <span class="legend-badge">Buy Flow (&gt; 0)</span>
-                                <span class="legend-text" id="lbl-legend-buy">มีเงินไหลเข้าสะสมทั่วไป</span>
-                            </div>
-                            <div class="legend-item distrib">
-                                <span class="legend-badge">🐳 Distrib (&lt;= -0.10)</span>
-                                <span class="legend-text" id="lbl-legend-distrib">วาฬกำลังทยอยเทขายอย่างมีนัยสำคัญ</span>
-                            </div>
-                            <div class="legend-item sell">
-                                <span class="legend-badge">Sell Flow (&lt; 0)</span>
-                                <span class="legend-text" id="lbl-legend-sell">มีเงินไหลออกสะสมทั่วไป</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Featured Latest Report Card -->
-                <div id="featured-report-container" class="featured-report-container" style="display: none;">
-                    <div class="featured-header">
-                        <span class="featured-badge"><i class="fa-solid fa-star"></i> รายงานล่าสุด</span>
-                        <h2 id="featured-title" class="featured-title"></h2>
-                        <div class="featured-meta">
-                            <span id="featured-category" class="featured-category-badge"></span>
-                            <span id="featured-date" class="featured-meta-item"></span>
-                        </div>
-                    </div>
-                    <div class="featured-markdown-wrapper">
-                        <div id="featured-markdown-container" class="markdown-body featured-markdown-content"></div>
-                        <div class="featured-fade-overlay"></div>
-                        <div class="featured-read-more-wrapper">
-                            <button id="featured-read-more-btn" class="featured-read-more-btn">
-                                อ่านรายงานฉบับเต็ม <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Controls & Grid Bar -->
-                <div class="grid-controls">
-                    <div class="results-info" id="results-info">พบทั้งหมด 0 รายการ</div>
-                    <div class="sort-control">
-                        <label for="sort-select">เรียงตาม:</label>
-                        <select id="sort-select">
-                            <option value="newest">ใหม่ที่สุด</option>
-                            <option value="oldest">เก่าที่สุด</option>
-                            <option value="alphabetical">ชื่อบทความ A-Z</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Reports Grid -->
-                <div class="reports-grid" id="reports-grid">
-                    <div class="loading-spinner">
-                        <i class="fa-solid fa-circle-notch fa-spin"></i>
-                        <p>กำลังดึงข้อมูลบทวิเคราะห์...</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 2: Average Cost & Break-Even Calculator View -->
-            <section id="portfolio-view" class="content-section">
-                <div class="section-header">
-                    <div class="header-text-group">
-                        <h2 class="section-title" id="portfolio-title">🧮 คำนวณต้นทุนเฉลี่ย & หา Break Even</h2>
-                        <p class="section-subtitle" id="portfolio-subtitle">ระบบคำนวณต้นทุนเฉลี่ยสะสม ราคา Break Even และจุดทำกำไรเป้าหมายของหุ้น</p>
-                    </div>
-                    <div class="status-indicator">
-                        <span class="pulse-dot"></span>
-                        <span class="indicator-text lbl-status-connected">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-wrap">
-                    <!-- Portfolio Overview Summary Card -->
-                    <div class="portfolio-summary-card">
-                        <p class="portfolio-summary-title" id="lbl-portfolio-overview">ภาพรวมต้นทุน & พอร์ตลงทุน</p>
-                        <div class="portfolio-summary-grid">
-                            <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-cost">ต้นทุนรวมทั้งหมด</span>
-                                <span class="summary-value" id="pt-cost">$0.00</span>
-                            </div>
-                            <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-realized">กำไร/ขาดทุนที่ขายแล้ว</span>
-                                <span class="summary-value" id="pt-realized">$0.00</span>
-                            </div>
-                            <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-holding">ต้นทุนหุ้นที่ถืออยู่</span>
-                                <span class="summary-value" id="pt-holding">$0.00</span>
-                            </div>
-                            <div class="portfolio-summary-item">
-                                <span class="summary-label" id="lbl-pt-count">จำนวนหุ้นในระบบ</span>
-                                <span class="summary-value" id="pt-count">0 ตัว</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stock Cards List -->
-                    <div id="stock-list" class="stock-list-container"></div>
-
-                    <!-- Action Controls -->
-                    <div class="portfolio-bottom-bar">
-                        <button class="portfolio-add-stock-btn" id="add-stock-btn">+ เพิ่มหุ้นใหม่</button>
-                        <button class="portfolio-refresh-btn" id="refresh-btn">↺ รีเฟรช</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 3: Support & Resistance Calculator View -->
-            <section id="sr-calc-view" class="content-section">
-                <div class="section-header">
-                    <div class="header-text-group">
-                        <h2 class="section-title" id="sr-calc-title">📐 ตารางคำนวณ แนวรับ-แนวต้าน (Support & Resistance)</h2>
-                        <p class="section-subtitle" id="sr-calc-subtitle">เครื่องมือคำนวณสัดส่วนกำไร/ขาดทุน และเป้าหมายผลตอบแทนจากโซนแนวรับ-แนวต้าน</p>
-                    </div>
-                    <div class="status-indicator">
-                        <span class="pulse-dot"></span>
-                        <span class="indicator-text lbl-status-connected">เชื่อมต่อฐานข้อมูลข่าวแล้ว</span>
-                    </div>
-                </div>
-
-                <div class="sr-calc-wrap">
-                    <!-- Inputs Card -->
-                    <div class="sr-calc-control-card">
-                        <div class="sr-calc-inputs-grid">
-                            <div class="sr-calc-input-group">
-                                <label for="sr-investment" id="lbl-sr-investment">ใส่เงินลงทุนเพิ่ม (USD)</label>
-                                <div class="sr-investment-input-wrapper">
-                                    <span class="currency-symbol">$</span>
-                                    <input type="number" id="sr-investment" value="1000" placeholder="1000" min="1" step="100">
-                                </div>
-                            </div>
-                            
-                            <div class="sr-calc-checkbox-group">
-                                <label class="sr-checkbox-label">
-                                    <input type="checkbox" id="sr-remember-investment" checked>
-                                    <span class="custom-checkbox"></span>
-                                    <span id="lbl-sr-remember">จดจำจำนวนเงินนี้ไว้</span>
-                                </label>
-                                <label class="sr-checkbox-label">
-                                    <input type="checkbox" id="sr-use-current-as-s0">
-                                    <span class="custom-checkbox"></span>
-                                    <span id="lbl-sr-use-s0">ใช้ราคาปัจจุบันเป็น S0</span>
-                                </label>
-                            </div>
-
-                            <div class="sr-calc-input-group">
-                                <label for="sr-ticker-search" id="lbl-sr-ticker-search">ค้นหาหุ้นในตลาด (เช่น NVDA, AAPL)</label>
-                                <div class="sr-search-wrapper" style="position: relative;">
-                                    <input type="text" id="sr-ticker-search" placeholder="พิมพ์ Ticker หรือชื่อหุ้น..." autocomplete="off">
-                                    <div class="sr-suggestions-dropdown" id="sr-suggestions-dropdown" style="display: none;"></div>
-                                </div>
-                            </div>
-
-                            <div class="sr-calc-input-group">
-                                <label for="sr-ticker-select" id="lbl-sr-ticker-select">เลือกหุ้นจากบทวิเคราะห์</label>
-                                <select id="sr-ticker-select">
-                                    <option value="custom" id="opt-sr-custom" selected>-- ป้อนข้อมูลเอง (Custom) --</option>
-                                    <option value="AMD">AMD (Advanced Micro Devices)</option>
-                                    <option value="TSMC">TSMC (Taiwan Semiconductor)</option>
-                                    <option value="SNPS">SNPS (Synopsys)</option>
-                                    <option value="CCXI">CCXI (Chemocentryx)</option>
-                                    <option value="UNH">UNH (UnitedHealth)</option>
-                                    <option value="GW">GW (GW Pharmaceuticals)</option>
-                                </select>
-                            </div>
-
-                            <div class="sr-calc-input-group" id="sr-custom-name-group">
-                                <label for="sr-custom-name" id="lbl-sr-custom-name">ชื่อหุ้น / Ticker (ระบุเอง)</label>
-                                <input type="text" id="sr-custom-name" value="Custom" placeholder="พิมพ์ชื่อหุ้น (เช่น TSLA)">
-                            </div>
-
-                            <div class="sr-calc-input-group" id="sr-current-price-group" style="display: none;">
-                                <label for="sr-current-price" id="lbl-sr-current-price">ราคาปัจจุบัน (USD)</label>
-                                <div style="display: flex; gap: 8px; width: 100%;">
-                                    <input type="number" id="sr-current-price" value="535.00" step="0.01" style="flex-grow: 1;">
-                                    <button id="sr-btn-refresh-price" class="sr-refresh-price-btn" style="flex-shrink: 0;" title="ดึงราคารอบล่าสุด"><i class="fa-solid fa-rotate"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Manual S/R Level Editor -->
-                        <div class="sr-manual-levels" id="sr-manual-levels">
-                            <h4 id="lbl-sr-manual-title"><i class="fa-solid fa-sliders"></i> กำหนดระดับราคาแนวรับ-แนวต้าน</h4>
-                            <div class="sr-levels-grid">
-                                <div class="sr-levels-col">
-                                    <div class="sr-level-header" id="lbl-sr-supports">ระดับแนวรับ (Buy at Support)</div>
-                                    <div class="sr-level-inputs" id="support-inputs-container"></div>
-                                    <button class="sr-add-level-btn" id="sr-add-support">+ เพิ่มแนวรับ</button>
-                                </div>
-
-                                <div class="sr-levels-col">
-                                    <div class="sr-level-header" id="lbl-sr-resistances">ระดับแนวต้าน (Sell at Resistance)</div>
-                                    <div class="sr-level-inputs" id="resistance-inputs-container"></div>
-                                    <button class="sr-add-level-btn" id="sr-add-resistance">+ เพิ่มแนวต้าน</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sr-calc-actions-row">
-                            <button id="sr-btn-save-watchlist" class="sr-action-btn sr-save-btn"><i class="fa-solid fa-star"></i> บันทึกเข้า Watchlist</button>
-                            <button id="sr-btn-clear-custom" class="sr-action-btn sr-clear-btn"><i class="fa-solid fa-eraser"></i> ล้างข้อมูลแนวรับ-ต้าน</button>
-                        </div>
-
-                        <div class="sr-watchlist-section" id="sr-watchlist-section">
-                            <h4 id="lbl-sr-watchlist-title"><i class="fa-solid fa-list-check"></i> Watchlist ของฉัน</h4>
-                            <div class="sr-watchlist-list" id="sr-watchlist-list"></div>
-                        </div>
-                    </div>
-
-                    <!-- Output Grid Card -->
-                    <div class="sr-calc-table-card">
-                        <div class="sr-table-header-row">
-                            <span class="sr-table-title" id="lbl-sr-table-title">ตารางคำนวณ แนวรับ-แนวต้าน</span>
-                            <span class="sr-table-badge" id="sr-table-ticker-badge">AMD</span>
-                        </div>
-                        <div class="sr-table-responsive">
-                            <table class="sr-output-table" id="sr-output-table"></table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 4: Article Reader View -->
-            <section id="reader-view" class="content-section">
-                <div class="reader-control-bar">
-                    <button id="back-to-catalog" class="back-btn">
-                        <i class="fa-solid fa-arrow-left-long"></i>
-                        <span>กลับไปหน้าคลังรายงาน</span>
-                    </button>
-                    
-                    <div class="reader-actions">
-                        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" rel="noopener noreferrer" class="action-btn yt-reader-action-btn" title="เข้าชมช่อง YouTube เสพข่าวก่อนเทรด">
-                            <i class="fa-brands fa-youtube" style="color: #FF0000;"></i>
-                            <span>รับชมบน YouTube</span>
-                        </a>
-                        <button id="btn-copy-link" class="action-btn" title="คัดลอกลิงก์รายงาน">
-                            <i class="fa-solid fa-link"></i>
-                        </button>
-                        <button id="btn-print" class="action-btn" title="พิมพ์หน้านี้ / บันทึกเป็น PDF">
-                            <i class="fa-solid fa-print"></i>
-                        </button>
-                        <button id="btn-raw" class="action-btn" title="ดูซอร์สโค้ด Markdown">
-                            <i class="fa-solid fa-code"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CMF Whale Flow Legend inside Reader -->
-                <div id="whale-legend-card-reader" class="whale-legend-card" style="display: none; margin-bottom: 20px;">
-                    <div class="legend-content">
-                        <div class="legend-header">
-                            <i class="fa-solid fa-circle-info legend-icon"></i>
-                            <h4 id="lbl-legend-title-reader">คู่มือการอ่านสัญญาณ CMF (Whale Flow) ในตารางรายงาน</h4>
-                        </div>
-                        <p class="legend-desc" id="lbl-legend-desc-reader">
-                            ค่า CMF (Chaikin Money Flow) เป็นตัวชี้วัดกระแสเงินทุนไหลเข้า/ออกสะสมของสถาบันรายใหญ่ (วาฬ) ย้อนหลัง 20 วัน:
-                        </p>
-                        <div class="legend-grid">
-                            <div class="legend-item accum">
-                                <span class="legend-badge">🐳 Accum (&gt;= +0.10)</span>
-                                <span class="legend-text" id="lbl-legend-accum-reader">วาฬกำลังซื้อสะสมอย่างมีนัยสำคัญ</span>
-                            </div>
-                            <div class="legend-item buy">
-                                <span class="legend-badge">Buy Flow (&gt; 0)</span>
-                                <span class="legend-text" id="lbl-legend-buy-reader">มีเงินไหลเข้าสะสมทั่วไป</span>
-                            </div>
-                            <div class="legend-item distrib">
-                                <span class="legend-badge">🐳 Distrib (&lt;= -0.10)</span>
-                                <span class="legend-text" id="lbl-legend-distrib-reader">วาฬกำลังทยอยเทขายอย่างมีนัยสำคัญ</span>
-                            </div>
-                            <div class="legend-item sell">
-                                <span class="legend-badge">Sell Flow (&lt; 0)</span>
-                                <span class="legend-text" id="lbl-legend-sell-reader">มีเงินไหลออกสะสมทั่วไป</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <article class="report-article-wrapper">
-                    <div class="article-meta-header">
-                        <span class="article-category-badge" id="reader-category">PRE-MARKET ANALYSIS</span>
-                        <h1 class="article-title" id="reader-title">หัวข้อรายงานวิเคราะห์</h1>
-                        <div class="article-meta-info">
-                            <span class="meta-item"><i class="fa-regular fa-calendar"></i> <span id="reader-date">18 มิถุนายน 2026</span></span>
-                            <span class="meta-item"><i class="fa-regular fa-file-lines"></i> ขนาด <span id="reader-size">0 KB</span></span>
-                        </div>
-                    </div>
-                    <div class="markdown-body" id="markdown-container"></div>
-                </article>
-            </section>
-        </main>
+    <div class="closed-card">
+        <div class="icon">🔒</div>
+        <h1>เว็บไซต์ปิดให้บริการแล้ว</h1>
+        <p>ระบบรายงานบทวิเคราะห์และเครื่องมือคำนวณได้รับการปิดการเชื่อมต่อและการเผยแพร่เรียบร้อยแล้ว</p>
+        <a href="https://www.youtube.com/@SepKhawGonTrade" target="_blank" class="yt-btn">เข้าชมช่อง YouTube เสพข่าวก่อนเทรด</a>
     </div>
-
-    <!-- Mobile Sidebar Backdrop -->
-    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
-
-    <!-- External Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" defer></script>
-    <!-- Custom Application Script -->
-    <script src="app.js?v=3.0.1_nocache" defer></script>
 </body>
 </html>
