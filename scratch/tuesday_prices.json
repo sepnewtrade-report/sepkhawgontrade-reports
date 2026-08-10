@@ -1,0 +1,116 @@
+{
+  "MSFT": {
+    "price": 506.06,
+    "change_pct": 1.21,
+    "volume": 31137345,
+    "rsi": 84.5
+  },
+  "AAPL": {
+    "price": 308.26,
+    "change_pct": -1.62,
+    "volume": 43391681,
+    "rsi": 37.21
+  },
+  "META": {
+    "price": 594.92,
+    "change_pct": 0.48,
+    "volume": 14317252,
+    "rsi": 35.21
+  },
+  "GOOGL": {
+    "price": 357.52,
+    "change_pct": 0.91,
+    "volume": 18914905,
+    "rsi": 54.25
+  },
+  "AMZN": {
+    "price": 278.09,
+    "change_pct": 1.32,
+    "volume": 34530747,
+    "rsi": 65.93
+  },
+  "NVDA": {
+    "price": 217.55,
+    "change_pct": -2.86,
+    "volume": 108135773,
+    "rsi": 57.47
+  },
+  "TSLA": {
+    "price": 330.88,
+    "change_pct": 0.7,
+    "volume": 24364376,
+    "rsi": 31.35
+  },
+  "AMD": {
+    "price": 469.56,
+    "change_pct": -2.86,
+    "volume": 19283602,
+    "rsi": 37.59
+  },
+  "PLTR": {
+    "price": 175.23,
+    "change_pct": 1.87,
+    "volume": 55252372,
+    "rsi": 72.63
+  },
+  "SMCI": {
+    "price": 31.46,
+    "change_pct": 1.06,
+    "volume": 54395598,
+    "rsi": 63.81
+  },
+  "ARM": {
+    "price": 267.85,
+    "change_pct": -5.21,
+    "volume": 3165381,
+    "rsi": 43.75
+  },
+  "COIN": {
+    "price": 148.68,
+    "change_pct": -3.2,
+    "volume": 5466796,
+    "rsi": 32.74
+  },
+  "ASTS": {
+    "price": 68.76,
+    "change_pct": -4.42,
+    "volume": 12735438,
+    "rsi": 56.38
+  },
+  "SOUN": {
+    "price": 7.46,
+    "change_pct": -6.98,
+    "volume": 35019027,
+    "rsi": 60.11
+  },
+  "IONQ": {
+    "price": 42.53,
+    "change_pct": -4.28,
+    "volume": 16875591,
+    "rsi": 62.53
+  },
+  "GLD": {
+    "price": 402.54,
+    "change_pct": 1.02,
+    "volume": 10806972,
+    "rsi": 71.43
+  },
+  "NEM": {
+    "price": 117.26,
+    "change_pct": 3.79,
+    "volume": 8470848,
+    "rsi": 82.38
+  },
+  "GOLD": {
+    "price": 43.47,
+    "change_pct": -0.09,
+    "volume": 267733,
+    "rsi": 65.61
+  },
+  "AVGO": {
+    "price": 422.4,
+    "change_pct": -1.25,
+    "volume": 13766512,
+    "rsi": 67.56
+  }
+}

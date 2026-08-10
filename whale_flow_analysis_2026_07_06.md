@@ -1,120 +1,91 @@
 <p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
 
-# รายงานวิเคราะห์กระแสเงินทุนสถาบันและกองทุนขนาดใหญ่ (Whale Flow Analysis)
-### การหมุนเวียนเงินทุนเชิงโครงสร้าง (Structural Style Rotation) ของตลาดหุ้นสหรัฐฯ
-**ประจำวันที่ 6 กรกฎาคม 2026**
+# 🐋 วาฬขยับ ตลาดสะเทือน — 2026-07-06
+**ช่วง:** วาฬขยับ ตลาดสะเทือน (Daily/Premarket Update)  
+**ประจำวันที่:** 6 กรกฎาคม 2026  
+**ผู้จัดทำ:** กองบรรณาธิการ เสพข่าวก่อนเทรด หุ้นอเมริกา  
 
 ---
 
-## 1. ภาพรวมตลาดและการเปลี่ยนผ่านเชิงโครงสร้าง (Macro Architecture & Flow Dynamics)
+## OPENING (Hook)
+"เมื่อคืนนี้ วาฬเริ่มขยับ และเงินก้อนใหญ่กำลังไหลเข้าสู่บางหุ้นแบบผิดปกติรับไตรมาสที่ 3 ครับ! มีหุ้นบางตัวที่รายย่อยยังไม่ทันเห็น แต่ Smart Money เริ่มสะสมเงียบ ๆ แล้ว และบางตัวก็เป็นยุทธศาสตร์การปรับพอร์ตครั้งใหญ่เพื่อลดความเสี่ยงจากฟองสบู่ AI หันมาซบพอร์ตคุณค่า และการแพทย์เชิงป้องกัน!
 
-ตลาดการเงินสหรัฐฯ ในช่วงเปิดฉากครึ่งหลังของปี 2026 กำลังเผชิญกับจุดเปลี่ยนสำคัญทางโครงสร้าง (Structural Transformation) ที่กำหนดทิศทางโดยกระแสเงินทุนของสถาบันการเงินขนาดใหญ่ (Smart Money) ล่าสุดในการซื้อขายรอบ 24 ชั่วโมงที่ผ่านมา (ก่อนการปิดทำการในวันชาติสหรัฐฯ และกลับมาเปิดตลาดในวันจันทร์ที่ 6 กรกฎาคม 2026) ตลาดได้แสดงปฏิกิริยาอย่างรุนแรงต่อข้อมูลทางเศรษฐกิจและการปรับเปลี่ยนคาดการณ์นโยบายการเงิน
+ภายใต้ความเงียบสงบของช่วงวันหยุดวันชาติสหรัฐฯ ดัชนีหลักมีความเคลื่อนไหวที่เป็นสัญญาณเตือนสำคัญครับ เมื่อ **ดัชนีดาวโจนส์ (DJIA) พุ่งขึ้น 1.1% ทะลุระดับ 52,900.07 จุด** ทำสถิติปิดสูงสุดครั้งที่ 20 ของปี 2026 ทว่าฝั่ง **Nasdaq กลับดิ่งลง 0.8%** เพราะโดนแรงเทขายสกัดในกลุ่มเซมิคอนดักเตอร์อย่างรุนแรง โดยดัชนีชิป SOXX ร่วงลงกว่า 5.42% หลังจากตัวเลขจ้างงานนอกภาคเกษตร (Non-farm Payrolls) มิถุนายนออกมาต่ำคาดอย่างหนักที่ **57,000 ตำแหน่ง** ชี้ชัดว่าเศรษฐกิจกำลังชะลอตัว และบีบให้สถาบันขนาดใหญ่ต้องทำ **Sector Rotation** หรือการโยกย้ายเงินก้อนโตทันที!
 
-### ภาวะเศรษฐกิจและการจ้างงานที่เป็นตัวเร่ง (Catalysts)
-ตัวเลขการจ้างงานนอกภาคเกษตร (Non-farm Payrolls) ประจำเดือนมิถุนายน เพิ่มขึ้นเพียง **57,000 ตำแหน่ง** ซึ่งต่ำกว่าระดับคาดการณ์ที่ 110,000-115,000 ตำแหน่งอย่างมีนัยสำคัญ ประกอบกับตัวเลขเดือนพฤษภาคมถูกปรับลดลงเหลือ 129,000 ตำแหน่ง ในขณะที่อัตราการว่างงานลดลงเล็กน้อยมาอยู่ที่ 4.2% ข้อมูลนี้ส่งผลให้นักลงทุนสถาบันประเมินว่าเศรษฐกิจกำลังอยู่ในสภาวะชะลอตัวอย่างนุ่มนวล (Soft Landing) และลดแรงกดดันต่อธนาคารกลางสหรัฐฯ (Fed) ภายใต้การนำของประธาน Fed คนใหม่ **Kevin Warsh** (ซึ่งเข้ารับตำแหน่งเมื่อวันที่ 22 พฤษภาคม 2026) ที่เพิ่งแสดงท่าทีเน้นย้ำความเป็นอิสระของธนาคารกลางและมุ่งมั่นสู่เป้าหมายเงินเฟ้อ 2% ในการประชุม Sintra Forum ของ ECB ปัจจุบันเครื่องมือ CME FedWatch ชี้ว่า โอกาสที่ Fed จะคงอัตราดอกเบี้ยในการประชุมเดือนกรกฎาคมนี้ อยู่ที่ระดับ **76%**
+แต่นอกจากความผันผวนนี้ ตลาดยังตรวจพบความคึกคักผิดปกติในกระดานมืดหรือ Dark Pool และตลาดออปชันส์ ในหุ้นเด่นอย่าง **SanDisk (SNDK)** ที่พุ่งทะยานรับเป้าหมายราคาใหม่ $3,000 และ **IREN Limited (IREN)** ที่ถูกดึงเข้าร่วมบิดดีลดาต้าเซ็นเตอร์ยักษ์ใหญ่มูลค่า 1.5 หมื่นล้านดอลลาร์ในออสเตรเลีย ขณะที่ยักษ์ใหญ่อวกาศอย่าง **SpaceX (SPCX)** กำลังจะถูกจัดเข้าคำนวณในดัชนี Nasdaq-100 ในวันพรุ่งนี้!
 
-### ปรากฏการณ์การหมุนเวียนกลุ่มอุตสาหกรรม (The Brutal July Rotation)
-ความกังวลว่าการลงทุนในโครงสร้างพื้นฐานปัญญาประดิษฐ์เริ่มเข้าสู่จุดสูงสุด (AI Capex-Peak Fears) ประกอบกับแรงกดดันด้านต้นทุนชิปหน่วยความจำที่เพิ่มขึ้น ได้กระตุ้นให้สถาบันขนาดใหญ่เร่งล้างสถานะในกลุ่มอุตสาหกรรมที่คึกคักเกินไป (Crowded Trades) 
-* **ดัชนีอุตสาหกรรมดาวโจนส์ (DJIA)** ปิดตัวที่ระดับสูงสุดเป็นประวัติการณ์ที่ **52,900.07 จุด** (ทำสถิติปิดสูงสุดครั้งที่ 20 ของปี 2026) นำโดยหุ้นกลุ่มคุณค่าและหุ้นปันผลสูง (Dividend-paying Value Stocks) ที่ได้ประโยชน์จากแนวโน้มดอกเบี้ยขาลง
-* ในทางตรงกันข้าม **Nasdaq** และกลุ่มเทคโนโลยีขนาดใหญ่ถูกดึงตัวลงอย่างชัดเจน นำโดยกลุ่มเครื่องมือผลิตเซมิคอนดักเตอร์ (Chip Equipment) เช่น Teradyne (-13.6%), KLA (-11.5%) และ Lam Research (-10.2%)
-* ดัชนี **iShares Semiconductor ETF (SOXX)** ดิ่งลงกว่า **5.42%** และดัชนี **iShares MSCI USA Momentum Factor ETF (MTUM)** ร่วงลง **3.36%** บ่งชี้สัญญาณทางสถิติว่าเดือนกรกฎาคมมักเป็นเดือนที่ย่ำแย่ที่สุดสำหรับกลยุทธ์ Momentum
+สวัสดีครับแฟน ๆ **เสพข่าวก่อนเทรด หุ้นอเมริกา** ทุกท่าน ยินดีต้อนรับเข้าสู่ช่วง **วาฬขยับ ตลาดสะเทือน** ประจำวันที่ 6 กรกฎาคม 2569 กับผม [ชื่อผู้ดำเนินรายการ] ครับ วันนี้เราจะพาไปแกะรอยกระแสเงินทุนสะสมและสัญญาลับของวาฬสถาบันรอบล่าสุด เพื่อวิเคราะห์ว่า Smart Money กำลังคิดอะไร และตลาดจะตอบสนองอย่างไรในคืนนี้ ไปติดตามพร้อมกันเลยครับ!"
 
 ---
 
-## 2. พฤติกรรมธุรกรรมนอกกระดานหลัก (Dark Pool & Block Trade Activity)
-
-จากรายงานโครงสร้างตลาดล่าสุดในครึ่งแรกของปี 2026 ปริมาณการซื้อขายนอกตลาดหลัก (Off-Exchange / Dark Pool Transactions) ในสหรัฐฯ คิดเป็นสัดส่วนสูงถึง **44.5% ของปริมาณการซื้อขายทั้งหมด** สถาบันการเงินและกองทุนเฮดจ์ฟันด์หันมาพึ่งพา Dark Pool เพิ่มขึ้นเพื่อปกปิดร่องรอยการปรับพอร์ตโฟลิโอขนาดใหญ่ (Sector Rotation) โดยหลีกเลี่ยงผลกระทบเชิงลบต่อราคาตลาด (Market Impact)
-
-ในสัปดาห์ที่ผ่านมา สถาบันได้ใช้เทคโนโลยี AI-driven analytics ในการตรวจจับความคล้ายคลึงกันของการตั้งราคา และเลือกที่จะกระจายคำสั่งซื้อขายประเภท Block Trade ไปยังสถาบันการเงินหลายแห่งพร้อมกันเพื่อเก็บสะสมหุ้นกลุ่มปลอดภัย (Defensive) เช่น สาธารณูปโภค (Utilities), สินค้าอุปโภคบริโภคพื้นฐาน (Consumer Staples) และการแพทย์ (Healthcare) ขณะที่ทยอยระบายชิ้นส่วนเทคโนโลยีออกมาอย่างเป็นระบบ
-
----
-
-## 3. เจาะลึกสถานะธุรกรรมสัญญาสิทธิผิดปกติ (Unusual Options Activity) และหุ้นรายตัว
-
-```
-+--------+---------------+-------------+-------------+------------------------------------+-------------------------------------------+
-| Ticker |  Price (USD)  |  24H Change |  Daily RSI  |       Options Net Premium (USD)    |             Notable Strike & Expiry       |
-+--------+---------------+-------------+-------------+------------------------------------+-------------------------------------------+
-|  NVDA  |    $194.83    |   -1.39%    |    41.20    | Bearish Skew / Put Buying dominant | Protective Put Hedging                    |
-|  TSLA  |    $393.45    |   -7.49%    |    36.27    | Highly Active / Balanced           | Active Put/Call volume                    |
-|  SMCI  |    $27.22     |   -1.55%    |    37.66    | -$2,235,225 (Bearish Bias)         | Aug 21, 2026 $31 Call (9,406 contracts)   |
-|  TEM   |    $60.27     |   -2.16%    |    49.60    | Neutral to Bearish                 | Hold Ratings / CEO Inside Sales ($9.6M)   |
-|  SOUN  |    $6.55      |   -1.95%    |    49.00    | Neutral to Bearish                 | Acquisition of LivePerson (VWAP-collar)   |
-|  ASTS  |    $85.13     |   -1.13%    |    49.63    | Implied Volatility elevated        | Jul 10, 2026 ±$9.66 Expected Move         |
-|  RKLB  |    $100.46    |   +0.39%    |    52.93    | Neutral to Bullish                 | Iridium Acquisition / Neutron Launch      |
-+--------+---------------+-------------+-------------+------------------------------------+-------------------------------------------+
-```
-*(หมายเหตุ: ข้อมูลอ้างอิงปิดตลาด ณ วันที่ 2 กรกฎาคม 2026 ก่อนช่วงวันหยุดสุดสัปดาห์วันชาติสหรัฐฯ)*
-
-### NVIDIA (NVDA) & AMD
-ทั้งสองบริษัทเผชิญกับแรงขายทำกำไรอย่างชัดเจนในฐานะผู้นำกลุ่มเซมิคอนดักเตอร์ที่เผชิญภาวะ "Overcrowded" โดย NVDA ปรับตัวลดลง 1.39% ปิดที่ $194.83 (Daily RSI อยู่ที่ 41.20) สัญญาณจากตลาดออปชันส์แสดงถึงระดับ Volatility Skew ที่เอียงไปทางฝั่งฝากซื้อพุท (Put Buying) สถาบันเริ่มซื้อออปชันเพื่อเป็นหลักประกันป้องกันความเสียหาย (Protective Collar) บ่งบอกว่ากองทุนขนาดใหญ่ไม่ได้มองว่านี่เป็นเพียงการปรับฐานระยะสั้น แต่เป็นการเตรียมความพร้อมสำหรับกรอบการแกว่งตัวด้านล่างที่กว้างขึ้น ท่ามกลางข่าวการเปิดสถานะ Short ของ Michael Burry ใน NVDA
-
-### Super Micro Computer (SMCI)
-ราคาปิดล่าสุดอยู่ที่ **$27.22** (ลดลง 1.55% ในรอบวัน และร่วงหนักตามกลุ่ม AI Infrastructure โดย Daily RSI อยู่ที่ 37.66) 
-* **ข้อมูลตัวเลขธุรกรรมออปชันส์:** ปริมาณสัญญาคงค้าง (Open Interest) อยู่ที่ 2.53 ล้านสัญญา มูลค่า Net Premium สุทธิเป็นลบถึง **-$2,235,225** สะท้อนภาพรวมตลาดที่เป็นลบอย่างชัดเจน (Bearish) จากความกังวลเรื่องการเพิ่มทุน $7 พันล้านเหรียญที่ทำให้เกิดความกังวลเรื่องการเจือจางหุ้น (Dilution)
-* **พฤติกรรมสัญญาล่าสุด:** พบการทำธุรกรรมขนาดใหญ่ในสัญญา **Call Option Strike $31.00 หมดอายุวันที่ 21 สิงหาคม 2026** จำนวน **9,406 สัญญา** คิดเป็นมูลค่าหมุนเวียนรวมกว่า $2.5 ล้าน คาดว่าเป็นการตั้งสถานะแบบ Covered Call ของสถาบันเพื่อสร้างกระแสเงินสดในสภาวะตลาดไซด์เวย์ดาวน์ หรือเป็นจังหวะเข้าเก็งกำไรช่วงสั้นเมื่อราคาเกิดสภาวะ Oversold ทางเทคนิค
-
-### Tesla (TSLA)
-หุ้นปรับตัวร่วงลงรุนแรงถึง **7.49%** ปิดที่ **$393.45** (Daily RSI ลดลงมาอยู่ที่ 36.27 ใกล้เขต Oversold) แม้ว่าบริษัทจะรายงานยอดส่งมอบรถยนต์ไตรมาส 2/2026 ที่ 480,126 คัน ซึ่งสูงกว่าคาดการณ์ของตลาดที่ 406,024 คันอย่างมาก แต่ราคาหุ้นกลับเผชิญแรงขายทำกำไรแบบ "Sell the News" ประกอบกับความกังวลเรื่องการแข่งขันที่รุนแรงจาก BYD และการปรับเพิ่มงบลงทุน CapEx ปี 2026 เป็นกว่า $2.5 หมื่นล้านเหรียญเพื่อเร่งพัฒนา Dojo และหุ่นยนต์ ในส่วนของสัญญาสิทธิ (Options Activity) พบบล็อกเทรดหนาแน่นทั้งในฝั่ง Put และ Call แสดงให้เห็นว่าสถาบันกำลังปรับสถานะอย่างเร่งด่วนเพื่อสอดรับกับผลตอบแทนของพันธบัตรและทิศทางค่าเงินเยนที่แข็งค่าขึ้น
-
-### Tempus AI (TEM)
-หุ้นปิดที่ระดับ **$60.27** (ลดลง 2.16% ในรอบวัน โดย Daily RSI อยู่ที่ 49.60) แม้จะมีแรงบวกขึ้นมาสั้น ๆ จากแรงขับเคลื่อนด้านข้อมูลสุขภาพและพันธมิตรใหม่ด้านโรคมะเร็ง แต่ภาพรวมเริ่มถูกปกคลุมด้วยปัจจัยลบ:
-* **ข้อมูล Insider Trading:** รายงาน Form 144 ระบุว่ากลุ่มผู้บริหารระดับสูง นำโดยหน่วยงานที่เชื่อมโยงกับ CEO Eric Lefkofsky (ผ่าน Gray Media และ Blue Media) ได้ทำการเสนอขายหุ้นออกมามูลค่ารวมกว่า **$9.6 ล้าน** ในวันที่ 29 มิถุนายน 2026 และส่งผลให้ยอดการขายของคนใน (Insider Selling) ในรอบ 3 เดือนที่ผ่านมาพุ่งสูงถึง **$19.8 ล้าน**
-* **มุมมองนักวิเคราะห์:** Freedom Capital Markets เริ่มต้นวิเคราะห์ด้วยคำแนะนำเพียง "Hold" โดยให้เป้าหมายราคาอนุรักษ์นิยมที่ **$59.00** ส่งผลให้สถาบันลดระดับความเร่งในการเข้าซื้อ และหันมาประเมินความคุ้มค่าด้านมูลค่าหุ้น (Valuation Checks) ที่ค่อนข้างตึงตัวที่ระดับ Forward P/E สูงถึง 91.89 เท่า
-
-### SoundHound AI (SOUN)
-ปิดที่ระดับ **$6.55** (ลดลง 1.95% โดย Daily RSI อยู่ที่ 49.00) บริษัทเพิ่งประกาศสัญญาล่าสุดในการเข้าซื้อกิจการ LivePerson ด้วยดีลโครงสร้างแลกหุ้นแบบมีเงื่อนไขกรอบราคา (VWAP-linked stock deal) มูลค่า $42.78 ล้าน ควบคู่กับการเปิดตัวแพลตฟอร์ม OASYS Agentic AI ทว่าราคาหุ้นในรอบ 30 วันยังคงปรับตัวลดลง 18.23% สถาบันการเงินระบุว่า มูลค่าหุ้นปัจจุบันที่ Market Cap $2.8 พันล้านเหรียญนั้นค่อนข้างแพงเกินไป (Rich Valuation) ทำให้แรงเข้าซื้อของสถาบันชะลอตัวลงเพื่อรอดูผลงานในไตรมาส 2
-
-### AST SpaceMobile (ASTS) & Rocket Lab (RKLB)
-กลุ่มอุตสาหกรรมอวกาศ (Space Infrastructure) ได้รับกระแสความสนใจอย่างล้นหลามในช่วงฤดูร้อนปี 2026 หลังจากประสบความสำเร็จครั้งประวัติศาสตร์ของ SpaceX ในการทำ IPO มูลค่าระดมทุนสูงถึง $8.6 หมื่นล้านเหรียญ และมีมูลค่าบริษัทหลังควบรวมกับ xAI แตะระดับ $1.25 ล้านล้านเหรียญ (และทะยานทะลุ $2 ล้านล้านเหรียญในเวลาต่อมา)
-* **AST SpaceMobile (ASTS):** ปิดล่าสุดที่ **$85.13** (ลดลง 1.13% โดย Daily RSI อยู่ที่ 49.63) ตลาดออปชันส์ส่งสัญญาณความผันผวนสูงมาก โดยสัญญาที่จะหมดอายุในวันที่ 10 กรกฎาคม 2026 มีค่าความผันผวนที่คาดหวัง (Expected Move) สูงถึง **±$9.66 (หรือคิดเป็น 11.3%)** ครอบคลุมกรอบราคา $75.84 ถึง $95.16 กองทุนสถาบันมองว่า ASTS เป็นตัวเลือกที่ดีในระยะยาว (Long-duration optionality) ในการปฏิวัติโครงสร้างพื้นฐานโทรคมนาคมโลก (Direct-to-Device) แม้ความเสี่ยงด้านเสถียรภาพทางการเงินและการเลื่อนกำหนดส่ง BlueBird Constellation จะยังคงมีอยู่
-* **Rocket Lab (RKLB):** ปิดล่าสุดที่ **$100.46** (เพิ่มขึ้น 0.39% ในรอบวัน และ Daily RSI อยู่ที่ 52.93) ได้รับแรงหนุนอย่างมหาศาลจากการประกาศเข้าซื้อกิจการ Iridium Communications (IRDM) เพื่อสร้างบริษัทอวกาศแบบครบวงจร (Vertically Integrated Space Powerhouse) และการได้รับเลือกในโครงการความมั่นคงทางทหารของสหรัฐฯ (Space Defense - Golden Dome Project) สถาบันมองว่า RKLB มีฐานะทางการเงินที่แข็งแกร่งและเสี่ยงน้อยกว่าในการเป็นโครงสร้างพื้นฐานอวกาศเชิงพาณิชย์ โดยมีเป้าหมายราคาจาก KeyBanc สูงถึง $135.00
+## ตารางสรุปสัญญาณวาฬรายวัน (Daily Whale Flow Summary)
+| หุ้น | สัญญาณวาฬ | Bullish/Bearish | Volume ผิดปกติ | Options Flow | ความเสี่ยง |
+| :--- | :--- | :---: | :---: | :--- | :--- |
+| **SNDK** | Bernstein อัปเป้า $3,000 บล็อกเทรดช้อนซื้อสะสมกระดานมืด | **Bullish** | 4.5 เท่า | Call Sweeps หนาแน่น เก็งกำไรส่วนต่างราคา | ราคาอยู่ระดับสูงเกินไป เสี่ยงปรับฐานสั้น |
+| **IREN** | ติดโผบิดโครงการดาต้าเซ็นเตอร์ Anthropic $15B ในออสเตรเลีย | **Bullish** | 5.2 เท่า | Call Options ไหลเข้าที่ Strike $45 สัญญาปลายปี | ความผันผวนจากการระดมทุนและ Dilution |
+| **RKLB** | สถาบันไล่ซื้อรับดีล IRDM และโครงการทหาร Golden Dome | **Bullish** | 3.5 เท่า | Call Sweeps Strike $105 & $120 สัญญาระยะยาว | แรงขายทำกำไรระยะสั้นตามแนวต้าน |
+| **SPCX** | กองทุนใหญ่เตรียมพอร์ตรับเข้าคำนวณดัชนี Nasdaq-100 พรุ่งนี้ | **Mixed** | 1.8 เท่า | Put/Call สมดุล ดักความผันผวนวันเข้าดัชนี | ข้อกังวลเรื่องมูลค่า Valuation แตะ $2 ล้านล้าน |
+| **TSLA** | ยอดส่งมอบ Q2 ผ่านเกณฑ์ แต่โดนสถาบันเทขาย Sell the News | **Bearish** | 2.8 เท่า | Put Sweeps Strike $370 หนุนปริมาณพุทพุ่ง | มาร์จิ้นตึงตัวจากการลดราคากลุ่ม EV |
+| **NVDA** | พันธมิตร Foxconn รายงานรายได้เด่น แต่สถาบันซื้อพุท Hedging | **Mixed** | 1.2 เท่า | Put Skew สูงขึ้น / สัญญา Protective Put หนาแน่น | ความกังวลฟองสบู่และ short position ของ Burry |
+| **SMCI** | หมุนเงินออกจาก AI Hardware หนีแรงเจือจางหุ้น $7 ทศวรรษ | **Bearish** | 2.1 เท่า | Covered Call Strike $31 (9,406 สัญญา) ทำเงินสด | ความเสี่ยงคดีความและกฎหมายส่งออกชิป AI |
+| **TEM** | ผู้บริหารเทขายหุ้นรวม $9.6M และนักวิเคราะห์ให้เป้า Hold $59 | **Bearish** | 1.5 เท่า | Put Options ไหลเข้าบริเวณ Strike $55 | Valuation แพงจัด Forward P/E 91.89 เท่า |
+| **SOUN** | ประกาศฮุบกิจการ LivePerson แบบใช้กรอบราคาแลกเปลี่ยนหุ้น | **Bearish** | 1.1 เท่า | สัญญา Put volume สูงขึ้น เน้นบีบกรอบราคาล่าง | มูลค่าบริษัทแพงกว่าผลงานจริงในปัจจุบัน |
+| **ASTS** | วาฬดักเก็บสะสมสัญญาระยะยาวรับโครงสร้างพื้นฐาน Direct-to-Device | **Bullish** | 2.2 เท่า | Expected Move สูงถึง ±$9.66 (หมดอายุ 10 ก.ค.) | ความล่าช้าในการจัดส่งดาวเทียม BlueBird |
 
 ---
 
-## 4. ทิศทางกระแสเงินทุนและการหมุนเวียนรายกลุ่มอุตสาหกรรม (Sector Rotation Outlook)
+## เจาะลึกร่องรอยวาฬ 5 มิติสำคัญ (In-Depth Analysis)
+### 1) เงินทุนไหลเข้า/ออก กลุ่มอุตสาหกรรม (Sector Rotation)
+"มิติแรกครับ ทิศทางการย้ายพอร์ตของ Smart Money หรือ **Sector Rotation** ในรอบ 24 ชั่วโมงที่ผ่านมา สะท้อนภาพ **Risk-On Selective** ที่แปลกประหลาดครับ:
+*   **เซกเตอร์ที่เงินไหลเข้าเด่นชัด:** คือกลุ่ม **Mega-Cap Value และ Dividend Stocks** สถาบันหมุนเงินเข้าหาหุ้นปลอดภัยที่มีกระแสเงินสดมั่นคง เช่น สาธารณูปโภค (Utilities) และพลังงาน เช่น Phillips 66 (PSX) เพื่อตั้งรับเศรษฐกิจชะลอตัว นอกจากนี้กลุ่ม **Space Infrastructure** หรืออุตสาหกรรมอวกาศกลับมาพุ่งแรงเป็นประวัติศาสตร์ รับกระแสการควบรวมกิจการของ Rocket Lab และการเข้าคำนวณดัชนีของ SpaceX ครับ
+*   **เซกเตอร์ที่โดนล้างพอร์ตหนัก:** คือกลุ่มเซมิคอนดักเตอร์ต้นน้ำและอุปกรณ์ผลิตชิป (Chip Equipment) ครับ ดัชนีเซมิคอนดักเตอร์ร่วงหนัก 5.42% นำโดยแรงขายใน Teradyne และ Lam Research เนื่องจากสถาบันกังวลประเด็น 'AI Capex-Peak' หรือความกลัวว่าจุดพีคของการลงทุนฮาร์ดแวร์ AI ได้ผ่านพ้นไปแล้วในครึ่งปีแรกนั่นเองครับ"
 
-แนวโน้มความเคลื่อนไหวของเม็ดเงินสถาบัน (Smart Money) สำหรับสัปดาห์นี้ มีทิศทางการกระจายตัวออกจากกลุ่มที่มีความหนาแน่นสูงไปสู่กลุ่มอื่น ๆ ดังนี้:
+### 2) หุ้นที่มี Block Trade / Dark Pool / Unusual Options Activity สูงผิดปกติ (Whale Anomalies)
+"มิติที่สอง มาดูหุ้นที่มีธุรกรรมนอกกระดานหลักสูงผิดปกติกันครับ:
+*   **SanDisk (SNDK):** หลังจากสถาบันวิจัยของ Bernstein ประกาศปรับเป้าหมายราคาสู่ระดับสูงถึง **$3,000** ตลาดพบวอลุ่มซื้อบล็อกเทรดผิดปกติในกระดานมืดหรือ Dark Pool สูงถึง **4.5 เท่า** พร้อม Call Options Sweeps จำนวนมาก บ่งชี้ว่ามีกองทุนไล่เก็บสะสมสัญญาสิทธิซื้ออย่างบ้าคลั่งครับ
+*   **Super Micro Computer (SMCI):** ราคาไหลลงมาปิดที่ $27.22 ท่ามกลางความกังวลเรื่องการเพิ่มทุน $7 พันล้านดอลลาร์ ล่าสุดตรวจพบความเคลื่อนไหวออปชันส์ที่น่าสนใจมาก คือสัญญา **Call Option Strike $31.00 หมดอายุ 21 สิงหาคม 2569 ถูกทำรายการถึง 9,406 สัญญา** มูลค่าสัญญากว่า 2.5 ล้านดอลลาร์ คาดว่านี่เป็นการทำ **Covered Call** ของสถาบันรายใหญ่ เพื่อเก็บเบี้ยค่าพรีเมียมสร้างกระแสเงินสดในระหว่างที่ราคาหุ้นเป็นทิศทางไซด์เวย์ดาวน์ครับ!"
 
-1. **AI & Semiconductor (ปรับลดน้ำหนัก - Underweight):** สถาบันกำลังจำกัดความเสี่ยง (Derisking) จากสภาวะตึงตัวด้านราคาและต้นทุนอุปกรณ์ที่เพิ่มขึ้น และมองหาจุดกลับตัวเชิงเทคนิคอลหลังเกิดภาวะ Oversold ในระยะสั้น
-2. **Space & Defense (เพิ่มน้ำหนักเป็นบางส่วน - Selective Overweight):** เป็นกลุ่มดาวรุ่งของปี 2026 ได้รับอานิสงส์เชิงบวกจากกรณีการจดทะเบียนของ SpaceX และความจำเป็นเชิงยุทธศาสตร์ระดับชาติ รวมถึงดีลควบรวมกิจการขนาดใหญ่ของ Rocket Lab
-3. **Small-Cap & Biotech (ทยอยสะสม - Accumulation):** หุ้นกลุ่มที่มีขนาดเล็กและกลุ่มชีวภาพเริ่มได้รับความน่าสนใจหลังจากตัวเลขแรงงานที่เย็นตัวลง ช่วยปิดโอกาสการปรับขึ้นดอกเบี้ยของ Fed นำไปสู่สภาวะต้นทุนทางการเงินที่ผ่อนคลายลงในอนาคตอันใกล้
-4. **Value & Cyclicals (เพิ่มน้ำหนัก - Overweight):** สถาบันโยกย้ายเงินลงทุนเข้าสู่กลุ่มอสังหาริมทรัพย์, พลังงาน, สินค้าอุปโภคบริโภคพื้นฐาน, และสถาบันการเงิน เพื่อรับมือกับภาพรวมเศรษฐกิจที่เติบโตอย่างมั่นคงในลักษณะปลอดภัย
+### 3) วิเคราะห์จิตวิทยาของวาฬ: “เก็บ” หรือ “เท” (Institutional Psychology)
+"มิติที่สาม เจาะลึกกลยุทธ์เก็บพอร์ตและทำกำไรของวาฬรอบนี้ครับ:
+*   **Sell the News / Profit Taking:** ในกรณีของ **Tesla (TSLA)** แม้ตัวเลขยอดส่งมอบรถยนต์ไตรมาส 2 จะเอาชนะคาดการณ์ไปแบบขาดลอยที่ 480,126 คัน แต่จิตวิทยาของวาฬสถาบันมองว่าราคาหุ้น YTD ที่ดีดขึ้นรับข่าวก่อนหน้านี้ตอบรับข่าวดีไปมากแล้ว ประกอบกับงบลงทุน CapEx ที่สูงขึ้น จึงเลือกทำการขายทำกำไรระยะสั้น ดึงราคาดิ่งลง 7.49% มาอยู่ที่ $393.45 เพื่อปรับสมดุลพอร์ต
+*   **Defensive Hedging & Inside Selling:** หุ้น **Tempus AI (TEM)** ร่วงลงปิดที่ $60.27 หลังตรวจพบข้อมูลการรายงานขายหุ้นของผู้บริหารระดับสูงผ่านแบบฟอร์ม Form 144 มูลค่ารวมกว่า **$9.6 ล้านดอลลาร์** นำโดยผู้เชื่อมโยงกับ CEO Eric Lefkofsky ส่งผลให้กองทุนต่าง ๆ ชะลอการซื้อสะสมทันที เนื่องจากราคานี้เทรดอยู่บน Valuation ที่ค่อนข้างแพงเกินระดับทั่วไปครับ"
 
-**สรุปกลยุทธ์ตามสไตล์สถาบัน:** 
-นักลงทุนควรหลีกเลี่ยงการไล่ราคาในกลุ่มอุตสาหกรรมเทคโนโลยีที่เพิ่งผ่านพ้นจุดสูงสุดของราคา และเน้นการกระจายพอร์ตการลงทุน (Broadening) ไปยังหุ้นกลุ่มที่มีค่าเบต้าต่ำ (Low Beta) หรือกลุ่มอุตสาหกรรมที่ได้ประโยชน์จากวัฏจักรดอกเบี้ยขาลงและการกระจายตัวของเศรษฐกิจ เพื่อรักษาเสถียรภาพของพอร์ตในเดือนกรกฎาคม 2026 นี้
+### 4) ธีมเด่นที่กองทุนเก็งกำไรในสัปดาห์นี้ (Hedge Funds Theme Radar)
+"มิติที่สี่ ธีมหลักที่ Hedge Funds กำลังรุมจัดทัพในสัปดาห์นี้:
+1.  **Space Industry & Index Inclusion:** ดีลประวัติศาสตร์ของ Rocket Lab (RKLB) ที่ขยับซื้อ Iridium (IRDM) และการที่ SpaceX (SPCX) เตรียมจัดเข้าคำนวณดัชนี Nasdaq-100 พรุ่งนี้ ทำให้เกิดกระแสการไล่ช้อนธีม Space Infrastructure เพื่อทำ Alpha เอาชนะตลาด
+2.  **Fintech & Consumer Platform Recovery:** กองทุนสถาบันกำลังขยับเก็บหุ้นแพลตฟอร์มรายย่อยอย่าง **IREN** และ **SoFi** เพื่อรองรับการเปลี่ยนผ่านของทิศทางอัตราดอกเบี้ยและนโยบายการเงินสหรัฐฯ
+3.  **DRAM & High-Bandwidth Memory (HBM) Dip Buying:** กลุ่มชิปหน่วยความจำเช่น Micron (MU) เริ่มมีแรงช้อนซื้อกลับหลังพิจารณาว่าความต้องการหน่วยความจำ HBM สำหรับ AI จะยังคงขาดแคลนไปจนถึงปี 2028 ครับ"
+
+### 5) หุ้นที่มีสัญญาณ “วาฬเข้า” & สัญญาดักหน้า (Institutional Signals)
+"มิติที่ห้า หุ้นที่มีสัญญาณสถาบันเข้าที่เด่นชัดที่สุด:
+*   **AST SpaceMobile (ASTS):** แม้ราคาจะร่วงลงสั้น ๆ มาปิดที่ $85.13 แต่ตรวจพบระดับความผันผวนที่คาดหวังในตลาดออปชันส์ (Expected Move) สูงผิดปกติถึง **±$9.66 หรือ 11.3%** สำหรับรอบสัญญาวันที่ 10 กรกฎาคมนี้ บ่งชี้ว่าสถาบันกำลังวางสถานะกวาดซื้อสัญญาเพื่อเก็งกำไรและสะสมระยะยาวรับโครงข่ายดาวเทียม Direct-to-Device 
+*   **Rocket Lab (RKLB):** ประคองตัวบวกสวนตลาดมาปิดที่ $100.46 จากการสะสมของสถาบันที่เชื่อมั่นในจรวด Neutron และการได้รับโครงการอวกาศทหารของสหรัฐฯ (Golden Dome Project) ราคาหุ้นมีสัญญาณแข็งแกร่งและโอกาสทะลุเป้าหมายราคา $135.00 ตามการคาดการณ์ของนักวิเคราะห์ครับ"
 
 ---
 
-## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- [citadelsecurities.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGCXFcHvfj-_WS7yQmj3lNpIAyis_G7D6PezedzGvR4HlhVsQWSHRX8EAV5Vx5VMZKZXLwIoOaXieg878a_yABtsDddFNhQZi9dggh5AxfUkY1p9Kk2Sof9rTn-xwFxU9NhxFD-0P02kLT2iL4UljEzYtywuzAmPltadbrG5NBtTBI4gfUP_3JScFf6MF6lC83hscIReTZWHGMuwZ56JFJE8W6B3A==)
-- [tradingkey.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE4IAdnAnevbb7xQ3P8StqSsP-_hA_SYn1IJ3VuWt8BrQRCU0jHRUWdXl5TrFvOC0YBHo4Qntd1WFh_b30X968_NaCj-yAIuONKmRCRWw4MyLy94Nk1HS5nwxv5sA8x5th_Xa8GjjZj4RrucWADyMKXnk9tu7__VGW8nyrgVQMzclkkQbIz6pk=)
-- [financefeeds.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgwbNHEI3zH9stUFQMoenLCGEaaEVi_IHa_S8nQ4ycsYVPHbxz9WGhy_7vnIclxJ9hiz3DXI-7I2P9vAY19gIR-uFezANvRAHv1sHrxB2D_BRhdk-DLi6PMVlfixm8eMHXTt8hzHKeBCPmhBpeTureV22drMq57HZQU8iuMMr64lY_YXk2PckPCanZe4rxjO1aB1sePWyAxwNX3Wc=)
-- [disruptionbanking.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWDXwj0RpwRrxQprHGMhmO70eW-VPQakr9d178PqS0HK-YrRLvlvGhCkZYq3nfp7j34AOSonnvfOpkKT7U7NjEo1uAyYeQfqxRAphlDULcjnywX0yhDTLwNGd7NksbcXvp5V9OozP7BFRZiEH_OZQYUfRJHbZ1e4mY3tUYW0UXhHpfn_CVkd7zbL1jg5cjT2FzPac87N4bK8r8IeQiI0IznXyBCtAbHDc8MVIkM5zVrrO3LEnlTEFfe5474A==)
-- [ig.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfJ2KdnOqq22r9f-GCH3iv54hbdXbNzFzo-vdn4iUSG4sDysbNQnDo96XJYTL8cIeJiP-uRsywklIoQr-qK0Qf8EL1aNYAiJGvIW5f_fSFO2UHPqZPS42F32BmnKm6rRZTUzFQbrOpNITb2Fc-13FHJlSqGpZr-9n0yrwbMrz8X5wfVtCsXfPyuWQ=)
-- [businessinsider.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2ptrBER1c1nF_s5d8sMOFCw23twaTgfX-eJ_41mUSlIvsjgia8m8Ng7B5HTQbJnqChU5gevOoH_wx_Iv77xBo0J8CT1BfQ7DqFkvNJ9a2oXwfRAhsjpza3dwzosZrdCblzhR-Q-QwZkH6pIUYiRiOnSxYgA1VOcmgOdKfTacS_AphYpribPr1f502rFpzKYBpNohk-b-_VSrmB1Qb8A==)
-- [biggo.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHVi-KjyIrJbXjAud0jcf1IB7xqeQTiat7PnE6A_h331x_vDgOA-wgemNXwD7vizbulOVyQsOEatXc41-qHVpfusbaDE9XgZVAq8Od5M91xGCKdKQasqY-KjOiCas4iTUmAd39LrHyFFbcvZ3EZmqfqRkg2TZER2cXB)
-- [intelmarketresearch.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEzIjLIz8jrwyzKShvtKWMAN5Ie4b9B0NVO88ptmK68MDVLHG2LmF6ldwjQzpZc5W7EMtFHgM67n53shXLUfOH9SkGcni6JmN7o1QZt-ls-wRsGwsoLy9zB7YZxDPsM8NeZ1wPp58RGYfaErc336T3CMxa6T5Au9ssBOoCmsCjssPqcEjlbdw3ClDGv17WGjUWy4kr_rnf56kuSSEENjIyQrIPiK8uj)
-- [liquidityfinder.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH_MXdhqCalzn-9__lgMHAImhpooM442heUmpEYutkgynaGti-_mqZxaSza8Q2Y5m_r5cgLxUMgIlYycf3t37KnIx4CcoQfkyHcFk1iVvxy62oPKYO0AWKhcvdfshiaR1fpIWhSe8miPjKjCnaQ-RO9d1Sq0sucXKvW8v5phe3MCDxn9VXi5kbuWwpEJPE7KkgjxgHQRyOfp4A4dXAi-VusmHaF2rrfgw9RADAQXln8IJzyDm71RNU=)
-- [perplexity.ai](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrlxjXPAt1U1XVAPuZIlmVVGr0sVoruY7vtCQkrYN8xAFFdLKMPnKHuJGI-MvDZngKu_sG7cMfJ5qeCM37cW-3Drd2xG7neJte2QActTfMEzXjfvWZ008=)
-- [trendspider.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEm4XHrGtY5I_hHGe0fGyduhIBwXJE8wpTnbaAXIgMr71opWVPayQ9rlTSQBLH28ixIxjqFL6WM6Ze-9vpaP85TMHAEZAIpLy_h7ZTlpq3QvDwxSc_h5ah_I0prUtS2VVsswAy4mBbcFAmFoaj_b_g=)
-- [optioncharts.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFx4WPYfouOz_u6UON1tgXb9EwUlT7UJ8oRxHfrU3VtsKpDpaWUy1380PCnwvHS0ftjjEeStmmBo6GmDORMnY9HFn8Q4MwGgUc3T0SRgFE0qNIdA19SvtQXHGL0bWf8Lrmq)
-- [futunn.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPOdt3x0rQ9O7re-er1xCmCEcrtQQasNZDTjuqSSTZKS3maDzNXMzqkS2BQXNc7gyUbUAJu9utWNAM87mlsjhV43-BvMrnp00o7gEMrT4SUngpqfBmW1hZV9f9WC-iMSPqOR6BmHiXUAbjBmHyoW8AGXKjqAprhrVXSzOhpdXYuwZyRaKB3pI2Vu_xo1zmXIxY6g==)
-- [unusualwhales.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF2NPOknBl4qtpgSktDAOG4LXRBgujy1oH2sD4Png1cwESYWiY-WXtkiL0Vjs-yUZ36gI4JrfNoKQwRq_1ZP87zsbWkIqr9ttm7fqQAXgQjQJymcvJZYP4ImdVyxQ9LCyXbGQ==)
-- [robinhood.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFINCgI3acNq5oS8_jeumUXe_0Up6V-9LQtpTzGkQ_hJTv4ISufDKE1RV0ycfjC2hoD39FBrwIvnMlOPe8bT8kTnP7HEgwrtiTYGACL_gJ7QBdp3lhFKrBIu9hwUw==)
-- [simplywall.st](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFqaiWgVlsLmUIuW7YgiSTnJx_c9VE0Cn0sYRlYUjIUalx8hXE-1l3850QxubsWC7l0fDICvXBUsCIxvp9Y1qNS5fy9EnYUNLUgcg-Uy0rAezU-gDTyVxsc1mltYLrODuNSO_xqbkV0lpBlVlfi7bNII13aeBg8JD2R6m4fVv2jwwKqUTrBlMrIl3XFaaRr0thl9JmbFebPIhKLcjxIcuJd9YCcZSkbJw9_bmuxPaQU5aOEF03664X_8mTc26m1UtlVaXPy)
-- [perplexity.ai](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGHOAc1qnVPaBy_6PMYgIwJbrGu8habGVWWGM2HjCQehewhYrO8Jk7XFfnhKXclcrL4vJYaKEZiiwK-t9P0nOHVuRtzm404StUax6rglmLH5_Yg8POF7gaSBw0=)
-- [stocktitan.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH3voYjdTExj_n1y9Jx6ikW9j0jO8_d1VZBmcWijamRY1aYQIXtDtcT_PLA5QiYZ6wZA2WD8gRAF-V6fSZ11izLsivbP3BpOhl6aLDLABYhvcX1tXHC98VMmtSZh8V0i2Q7eAJcY4bgZt0rKdRyb7qqtoMo60YRSRdgyQdsoSHBLtXHeECEKaygB0NKFmhU)
-- [gurufocus.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFaA-IOtX0LUFnayFjH12XGKM-mCXYsAPIfSA3VBTBBu1KKFWkKopPZP6kUnMonn6K0uaPsfiiQyBwilWj6qIBqNkoypxlwzwNqUhuUoyT6D_SmpjKra7nLhrhPczyKtGNHCpIIHSzCf5_UCLHtGb9Vp9j3eFWOpZ8TEsH6oeo_dgdkdAKQMne3aOim_KqiJdzDJYOLsRaySUnKqvZds7Rb)
-- [intellectia.ai](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEemg2YHUD0dx4QjAumPP_yeWfqz_A4MiE7EdnK76YykClegWxaQToyou8qUfCaeTynkFX7aCOQoUO4SRy2Caql_fyAGW3LfxjY9wyupd0me6AZS-A23yiC3bgGlIxpGxE=)
-- [stocktitan.net](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHtfUD8_mny3MsFx0-n-vMFVJWv4zoFedUw9AmCw82lwtTVZAjQ1MUHRxf8NqE7u3ePRj6Nf2sIKd_YRldiST3aK_gDMxxS94D-BZwz7KXGzCRgg8g2F8RZRGSTtPLoPcsdWx6CcNdMq-jVzPB5yhPum1qGKTaQos5ySrDDxE0zRWhPc4czTIyC8OZscyH2M5fgg6rw_NGwuH8eUUXmrW37HgrXfKlOex88M8THxCUPYVGCgkYJ)
-- [simplywall.st](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHhY4LKpdrjNPLlA-8lvn_N01m0Oiz3ra5CeUf-sNoVVk58uBKjEKgyD-HITlMoHCSkhJ-aTf9oPuJmWPmDwiaOvgjXjKzyCWgSIDRB_AVkYzzzJC0w8SpNjBfb6OCt36099qRWwsSucz0H1KDmFk9BpUo-KWBdWFqPjkA3PzYV8ZmEyz2n_CZ5SfnboDlAik6TsvuFbn-G2qKkknrUkNPrxIL-BRM6F0zi4hpqoUWB9scN2P221Y-2R4M2)
-- [marketbeat.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKp_9zz6lkLj63A6L463gLaSHPHzKB_lcGV-mBmlk31twhPVzYnEz99C_1PDCw8M4ep_NqOQfLyLWT-mVvo8e-0pPzbM_MmgAktBjlLrq6mBgPqzzbwdEuOwqVvVXlnPziTNIS1UORknnssxft0KYCSjyN82RB3dfKIR92x91IpPX44oCfn6K5OOUTj7CNl3_SoYVJ4leF8NF7yRs=)
-- [fool.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEZXHLac_QXE10rrTQhX5F8ThE8AkdCTKZ3taQLTL9kwWl-PEZjrNJIEvIFw4DIKzt17rfqm9l_XFIu8UJ3R2huX4cND_HpCZU1XvR5jAH15fUlFLo6-sEIrn8vfemkbjG_x2G1gMTpAArdwhJjdBglGYkOIa6n_PAbTDP4ASTqCvxhyhZler2q)
-- [stocktwits.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHEs_MdH_wvcvCUN7ataSLSmYE6r_orFrdP1d19rGhyHqy96zkLtE1wa-LvdUf0YuyhwaaTq1twhIBW7nAmzAXIZn8AaqeTUsVZAz9kIQl9QeaUR-vTA2gSYWHd5_9p-FvzvEji9sR_rMlZEk4Wc0oQU19w2bXtROy5hPKCl25jJbXAwBf7_zOB4KDKkimYofuWkS-1i6Ma69A-KKcqlnuS8_WZRJkDPz0hjQ==)
-- [stockanalysis.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFryHVuiOVX5CyiwdbuPSyqON0UEhPJww2HEe-RnRKsytSDqmB-XlNNYulSGTq7t7Nk_hCDeBASeAd_B3svPRvdMPVLyStDpbEl1whSLjpUCt2QK9h0_eaHBDP6-QZtI-wGZK0=)
-- [optioncharts.io](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEyc9fc39uLlJyJBfLj-L8_AvU-5xjlf1UFwd-86HCcKriyXp_4X0UjI7qydir24IY0F10ESlzuQ99UC5jD7SaevUnXutE30j9KJhoeaVI-2eTnQXHG7068g8YD5FsD5ToMVLqSvlt7)
-- [youtube.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHJlAlypXkcCN2ZsPiqI-md_PZICak_GmhuzcG7LgZ09vpIB92mrm67USafbKRGo40zV0lSbpdTZA6PG9x3vdV6tBC3UcnzdbyEcNKWNaCSCiD9zbaZlH6_IpTKftIuXII=)
-- [seekingalpha.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHcwgCI_bre_73YMn_2Cosw7XPD9V4O3cmKmn3oq6zdc_o_8PbRZGHyXzeOSnwe8a6ExAzYsEI2xNNY6Y2OtAhfxwqNicUghBXzPGjJqAfn0Ki04VPMNhu-J6UZ1O7gKB2kYthbTgU_AfUDuyMTEDFfCHOAK4CD-j8ok_DGm053lHBEnvr6o7MsvanXzkerFr15cbwwEndaR_JLp9GyRsmU6C8W2921Ur0F)
-- [zyo71.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6fbOPqcDOhojt68fPV3Ne2VWVOCwMgjGg46Wgidb9I30tFdGfnFiHT_wNzApWx9-eUTrlPEbsUh-WnIEfsmlPG3XF6ZZ2bRR-114xGIQdroCy-Ac_gBa4Rw29pQxJOfB7SWoCvKTnW62FgL-cxaQmQlw=)
-- [fool.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGJbvisDyFp_3Fa5NcQRbVTOmkf8Iv9zNH8YbraqK7QBPRHoRJk_laslkM405Q8hdGhCNtFMDidh7W-yFQWKkx_1fpE9XlWJvTgYj6gcgqDVCQyhKRIqv8JyGX6g0gAZBB9dcxMlL9wgMf_7EHEUZlPtO31eTe5UbSNmQYdu8Zr2UpOlX5x5q35S0Z8I9mHISOK67QeFnoA8tlxuh31YBvwT07_MPbYzlpHamXNtMIbOvo=)
+## 4️⃣ 🧠 SUMMARY & ACTION PLAN (ช่วงสรุปท้ายรายการ)
+"สรุปภาพรวมแผนการลงทุนในค่ำคืนนี้เพื่อความเข้าใจในการจัดพอร์ตครับ:
+*   **ธีมหลักที่วาฬกำลังเล่น:** วาฬกำลังกระจายความเสี่ยงออกจากเซมิคอนดักเตอร์ ไปสะสม **Space Infrastructure (RKLB/SPCX)** และหุ้นกลุ่มคุณค่าเทคโนโลยีขนาดใหญ่ รวมถึงกองทุนการแพทย์และสินค้าอุปโภคบริโภค
+*   **โหมดของตลาดตอนนี้:** อยู่ในสภาวะ **Risk-On Selective** โดยดัชนีหลักประคองตัวดี แต่อาจมีความผันผวนระหว่างสัปดาห์จากรายงานผลการประชุม FOMC Minutes ในวันพุธนี้ครับ
+*   **หุ้นที่น่าจับตาที่สุดคืนนี้:**
+    1.  **SanDisk (SNDK):** ติดตามโมเมนตัมพรีมาร์เก็ต หากประคองตัวยืนเหนือ $1,750 ได้อย่างแข็งแกร่ง มีโอกาสไล่ราคาต่อรับเป้าหมาย PT อัปเกรด
+    2.  **Rocket Lab (RKLB):** เป็นเป้าหมายหลักของ Smart Money หากราคายืนเหนือระดับจิตวิทยา $100.00 ได้ต่อเนื่อง สัญญา Call Option จะช่วยทำหน้าที่เป็นตัวเร่งราคาให้ไปต่อครับ
+*   **หุ้นที่เสี่ยงโดนเทหรือควรระวัง:** **Super Micro (SMCI)** และ **Tempus AI (TEM)** แนะนำระมัดระวังแรงเทขายเพิ่มเติมจากสภาวะสั่นคลอนของสัดส่วนหุ้นเจือจาง และยอดการระบายหุ้นจากฝั่งผู้บริหารระดับสูง (Insider Sales)
+*   **สิ่งที่นักลงทุนต้องระวังคืนนี้:** ระวังความผันผวนของการหมุนเวียนกลุ่มอุตสาหกรรมในวันเปิดตลาดวันแรกหลังวันหยุดวันชาติสหรัฐฯ แนะนำเน้นช้อนซื้อหุ้นกลุ่มแกร่งเมื่อเกิดจังหวะย่อตัว และบริหารความเสี่ยงเลเวอเรจในพอร์ตอย่างรอบคอบที่สุดครับ!"
+
+---
+
+## 🏁 OUTRO & PROMOTION
+"หากแฟน ๆ ชื่นชอบข้อมูลเจาะลึกพฤติกรรมและการวางหมากของวาฬระดับโลกแบบนี้ อย่าลืมกด Like กด Share และกด Subscribe ช่อง **เสพข่าวก่อนเทรด หุ้นอเมริกา** ของเราไว้ด้วยนะครับ!
+
+เพื่อไม่ให้พลาดโอกาสและจังหวะการทำกำไรเชิงลึก เราขอแนะนำช่วงรายการพิเศษของเรา:
+*   **สรุปจบ ทันโลกหุ้น** และ **Hot Stock วันนี้** เกาะติดกระแสข่าวการเงินรายวัน
+*   **วาฬขยับ ตลาดสะเทือน** และ **หมีโดนบีบ** แกะรอยความเคลื่อนไหวสถาบันและ Short Squeeze
+*   **หุ้นพุ่งก่อนตลาดเปิด** และ **Oversold Opportunity** คัดหาหุ้นกลับตัวและโมเมนตัมพรีมาร์เก็ต
+*   **Cosmic Trade Signal** และ **Small Cap Radar** เพื่อมองหาหุ้นดาวรุ่งตัวเล็กชาร์ตแรง!
+
+และห้ามพลาดกับสรุปกลยุทธ์วิเคราะห์รายสัปดาห์ใน **Global Market Recap**, **What’s Next for Market**, **Economic Calendar**, **เหลียวหลังมามองหุ้นไทย** และ **Astro Economy Weekly** ที่มีให้รับชมทุกวันอาทิตย์ครับ!
+
+วันนี้ผมและทีมงานช่วง **วาฬขยับ ตลาดสะเทือน** ขอตัวลาทุกท่านไปก่อน ขอให้ทุกท่านโชคดีกับการลงทุนในค่ำคืนนี้ สวัสดีครับ"
+
+*(ข้อสงวนสิทธิ์: ข้อมูลที่นำเสนอในบทวิเคราะห์และสคริปต์นี้จัดทำขึ้นเพื่อการวิเคราะห์ธุรกรรมสถาบันเท่านั้น ไม่ถือเป็นคำชี้ชวนในการซื้อขายหลักทรัพย์หรือสินทรัพย์ดิจิทัล ผู้ลงทุนควรทำความเข้าใจความเสี่ยงก่อนตัดสินใจลงทุนทุกครั้ง)*

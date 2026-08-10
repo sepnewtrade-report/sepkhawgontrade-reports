@@ -72,7 +72,7 @@ function processScripts() {
     }
 
     // Match whale_flow_YYYY_MM_DD.md
-    const whaleMatch = file.match(/whale_flow_(\d{4}_\d{2}_\d{2})\.md/);
+    const whaleMatch = file.match(/^whale_flow_(\d{4}_\d{2}_\d{2})\.md/);
     if (whaleMatch) {
       dateStr = whaleMatch[1].replace(/_/g, '-');
       targetFilename = `whale_flow_analysis_${whaleMatch[1]}.md`; // Prefix maps to 'Whale Flow' ('วาฬขยับ ตลาดสะเทือน')
