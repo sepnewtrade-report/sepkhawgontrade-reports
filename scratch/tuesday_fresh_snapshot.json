@@ -1,0 +1,134 @@
+{
+  "SP500": {
+    "symbol": "^GSPC",
+    "price": 7753.11,
+    "change_pct": -0.06,
+    "volume": 2686909000
+  },
+  "NASDAQ": {
+    "symbol": "^IXIC",
+    "price": 26605.36,
+    "change_pct": -0.32,
+    "volume": 6892937000
+  },
+  "DOW": {
+    "symbol": "^DJI",
+    "price": 53975.98,
+    "change_pct": -0.11,
+    "volume": 413895987
+  },
+  "GOLD": {
+    "symbol": "GC=F",
+    "price": 4458.9,
+    "change_pct": 2.72,
+    "volume": 1967
+  },
+  "VIX": {
+    "symbol": "^VIX",
+    "price": 15.46,
+    "change_pct": 3.76,
+    "volume": 0
+  },
+  "US10Y": {
+    "symbol": "^TNX",
+    "price": 4.7,
+    "change_pct": 0.84,
+    "volume": 0
+  },
+  "OIL": {
+    "symbol": "CL=F",
+    "price": 82.1,
+    "change_pct": 5.01,
+    "volume": 1046
+  },
+  "BITCOIN": {
+    "symbol": "BTC-USD",
+    "price": 63921.5,
+    "change_pct": -1.42,
+    "volume": 22513059840
+  },
+  "MSFT": {
+    "symbol": "MSFT",
+    "price": 506.06,
+    "change_pct": 1.21,
+    "volume": 31137345
+  },
+  "AAPL": {
+    "symbol": "AAPL",
+    "price": 308.26,
+    "change_pct": -1.62,
+    "volume": 43391681
+  },
+  "NVDA": {
+    "symbol": "NVDA",
+    "price": 217.55,
+    "change_pct": -2.86,
+    "volume": 108135773
+  },
+  "AMZN": {
+    "symbol": "AMZN",
+    "price": 278.09,
+    "change_pct": 1.32,
+    "volume": 34530747
+  },
+  "GOOGL": {
+    "symbol": "GOOGL",
+    "price": 357.52,
+    "change_pct": 0.91,
+    "volume": 18914905
+  },
+  "META": {
+    "symbol": "META",
+    "price": 594.92,
+    "change_pct": 0.48,
+    "volume": 14317252
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "price": 330.88,
+    "change_pct": 0.7,
+    "volume": 24364376
+  },
+  "AVGO": {
+    "symbol": "AVGO",
+    "price": 422.4,
+    "change_pct": -1.25,
+    "volume": 13766512
+  },
+  "PLTR": {
+    "symbol": "PLTR",
+    "price": 175.23,
+    "change_pct": 1.87,
+    "volume": 55252372
+  },
+  "AMD": {
+    "symbol": "AMD",
+    "price": 469.56,
+    "change_pct": -2.86,
+    "volume": 19283602
+  },
+  "SMCI": {
+    "symbol": "SMCI",
+    "price": 31.46,
+    "change_pct": 1.06,
+    "volume": 54395598
+  },
+  "TTWO": {
+    "symbol": "TTWO",
+    "price": 253.57,
+    "change_pct": 2.87,
+    "volume": 3691463
+  },
+  "LLY": {
+    "symbol": "LLY",
+    "price": 1231.94,
+    "change_pct": 3.9,
+    "volume": 3005651
+  },
+  "DDOG": {
+    "symbol": "DDOG",
+    "price": 260.78,
+    "change_pct": 11.48,
+    "volume": 8413479
+  }
+}
