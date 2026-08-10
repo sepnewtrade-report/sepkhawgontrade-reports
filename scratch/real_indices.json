@@ -1,0 +1,32 @@
+{
+  "S&P 500": {
+    "symbol": "^GSPC",
+    "price": 7753.11,
+    "change_pct": -0.06
+  },
+  "Nasdaq Composite": {
+    "symbol": "^IXIC",
+    "price": 26605.36,
+    "change_pct": -0.32
+  },
+  "Dow Jones": {
+    "symbol": "^DJI",
+    "price": 53975.98,
+    "change_pct": -0.11
+  },
+  "Gold": {
+    "symbol": "GC=F",
+    "price": 4459.2,
+    "change_pct": 2.73
+  },
+  "VIX": {
+    "symbol": "^VIX",
+    "price": 15.46,
+    "change_pct": 3.76
+  },
+  "10Y Yield": {
+    "symbol": "^TNX",
+    "price": 4.7,
+    "change_pct": 0.84
+  }
+}
