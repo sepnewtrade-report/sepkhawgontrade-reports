@@ -1,0 +1,137 @@
+{
+  "PLTR": {
+    "name": "Palantir Technologies Inc.",
+    "price": 175.23,
+    "change_pct": 1.87,
+    "volume": 55252372,
+    "revenue_growth": 92.8,
+    "earnings_growth": 215.4,
+    "pe": 149.77
+  },
+  "SMCI": {
+    "name": "Super Micro Computer, Inc.",
+    "price": 31.46,
+    "change_pct": 1.06,
+    "volume": 54395598,
+    "revenue_growth": 122.7,
+    "earnings_growth": 326.0,
+    "pe": 16.56
+  },
+  "TTWO": {
+    "name": "Take-Two Interactive Software, ",
+    "price": 253.57,
+    "change_pct": 2.87,
+    "volume": 3691463,
+    "revenue_growth": 2.0,
+    "earnings_growth": 0.0,
+    "pe": 0.0
+  },
+  "ANET": {
+    "name": "Arista Networks, Inc.",
+    "price": 191.52,
+    "change_pct": 1.51,
+    "volume": 4457437,
+    "revenue_growth": 37.7,
+    "earnings_growth": 35.7,
+    "pe": 60.8
+  },
+  "DIS": {
+    "name": "Walt Disney Company (The)",
+    "price": 103.18,
+    "change_pct": -1.65,
+    "volume": 6845434,
+    "revenue_growth": 6.8,
+    "earnings_growth": -48.3,
+    "pe": 21.27
+  },
+  "LLY": {
+    "name": "Eli Lilly and Company",
+    "price": 1231.94,
+    "change_pct": 3.9,
+    "volume": 3005651,
+    "revenue_growth": 47.7,
+    "earnings_growth": 26.2,
+    "pe": 41.4
+  },
+  "ELF": {
+    "name": "e.l.f. Beauty, Inc.",
+    "price": 95.24,
+    "change_pct": -3.3,
+    "volume": 2247136,
+    "revenue_growth": 35.5,
+    "earnings_growth": 93.1,
+    "pe": 97.18
+  },
+  "DDOG": {
+    "name": "Datadog, Inc.",
+    "price": 260.78,
+    "change_pct": 11.48,
+    "volume": 8413479,
+    "revenue_growth": 35.6,
+    "earnings_growth": 1498.5,
+    "pe": 532.2
+  },
+  "SHOP": {
+    "name": "Shopify Inc.",
+    "price": 155.18,
+    "change_pct": 2.38,
+    "volume": 10622501,
+    "revenue_growth": 33.7,
+    "earnings_growth": 68.1,
+    "pe": 104.15
+  },
+  "OXY": {
+    "name": "Occidental Petroleum Corporatio",
+    "price": 58.65,
+    "change_pct": 4.9,
+    "volume": 7425208,
+    "revenue_growth": 53.4,
+    "earnings_growth": 964.9,
+    "pe": 17.3
+  },
+  "RBLX": {
+    "name": "Roblox Corporation",
+    "price": 37.05,
+    "change_pct": -1.96,
+    "volume": 14165969,
+    "revenue_growth": 35.9,
+    "earnings_growth": 0.0,
+    "pe": 0.0
+  },
+  "ABNB": {
+    "name": "Airbnb, Inc.",
+    "price": 184.7,
+    "change_pct": 3.72,
+    "volume": 8603091,
+    "revenue_growth": 16.5,
+    "earnings_growth": 33.4,
+    "pe": 42.17
+  },
+  "UPST": {
+    "name": "Upstart Holdings, Inc.",
+    "price": 30.21,
+    "change_pct": -2.83,
+    "volume": 3690793,
+    "revenue_growth": 42.3,
+    "earnings_growth": 211.2,
+    "pe": 58.1
+  },
+  "HIMS": {
+    "name": "Hims & Hers Health, Inc.",
+    "price": 31.77,
+    "change_pct": 0.57,
+    "volume": 16101097,
+    "revenue_growth": 3.8,
+    "earnings_growth": 0.0,
+    "pe": 0.0
+  },
+  "CELH": {
+    "name": "Celsius Holdings, Inc.",
+    "price": 27.21,
+    "change_pct": -2.02,
+    "volume": 18289843,
+    "revenue_growth": 10.6,
+    "earnings_growth": -56.9,
+    "pe": 118.3
+  }
+}
