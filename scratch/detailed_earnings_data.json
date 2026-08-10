@@ -1,0 +1,156 @@
+{
+  "MSFT": {
+    "price": 506.06,
+    "change_pct": 1.21,
+    "volume": 31137345,
+    "rsi": 84.5,
+    "market_cap_B": 3757.77,
+    "trailing_pe": 28.19,
+    "forward_pe": 21.56,
+    "revenue_growth_pct": 17.7,
+    "earnings_growth_pct": 31.7
+  },
+  "AAPL": {
+    "price": 308.26,
+    "change_pct": -1.62,
+    "volume": 43391681,
+    "rsi": 37.21,
+    "market_cap_B": 4498.8,
+    "trailing_pe": 35.39,
+    "forward_pe": 32.41,
+    "revenue_growth_pct": 16.4,
+    "earnings_growth_pct": 28.7
+  },
+  "NVDA": {
+    "price": 217.55,
+    "change_pct": -2.86,
+    "volume": 108135773,
+    "rsi": 57.47,
+    "market_cap_B": 5269.28,
+    "trailing_pe": 33.26,
+    "forward_pe": 16.88,
+    "revenue_growth_pct": 85.2,
+    "earnings_growth_pct": 214.5
+  },
+  "META": {
+    "price": 594.92,
+    "change_pct": 0.48,
+    "volume": 14317252,
+    "rsi": 35.21,
+    "market_cap_B": 1515.56,
+    "trailing_pe": 22.42,
+    "forward_pe": 16.93,
+    "revenue_growth_pct": 28.0,
+    "earnings_growth_pct": -13.4
+  },
+  "AMZN": {
+    "price": 278.09,
+    "change_pct": 1.32,
+    "volume": 34530747,
+    "rsi": 65.93,
+    "market_cap_B": 2999.57,
+    "trailing_pe": 22.37,
+    "forward_pe": 26.92,
+    "revenue_growth_pct": 19.6,
+    "earnings_growth_pct": 242.3
+  },
+  "GOOGL": {
+    "price": 357.52,
+    "change_pct": 0.91,
+    "volume": 18914905,
+    "rsi": 54.25,
+    "market_cap_B": 4372.45,
+    "trailing_pe": 17.92,
+    "forward_pe": 24.26,
+    "revenue_growth_pct": 24.2,
+    "earnings_growth_pct": 294.0
+  },
+  "TSLA": {
+    "price": 330.88,
+    "change_pct": 0.7,
+    "volume": 24364376,
+    "rsi": 31.35,
+    "market_cap_B": 1306.83,
+    "trailing_pe": 306.37,
+    "forward_pe": 149.1,
+    "revenue_growth_pct": 25.5,
+    "earnings_growth_pct": -3.0
+  },
+  "PLTR": {
+    "price": 175.23,
+    "change_pct": 1.87,
+    "volume": 55252372,
+    "rsi": 72.63,
+    "market_cap_B": 421.09,
+    "trailing_pe": 149.77,
+    "forward_pe": 75.9,
+    "revenue_growth_pct": 92.8,
+    "earnings_growth_pct": 215.4
+  },
+  "AMD": {
+    "price": 469.56,
+    "change_pct": -2.86,
+    "volume": 19283602,
+    "rsi": 37.59,
+    "market_cap_B": 766.54,
+    "trailing_pe": 119.79,
+    "forward_pe": 30.37,
+    "revenue_growth_pct": 50.1,
+    "earnings_growth_pct": 159.5
+  },
+  "SMCI": {
+    "price": 31.46,
+    "change_pct": 1.06,
+    "volume": 54395598,
+    "rsi": 63.81,
+    "market_cap_B": 20.35,
+    "trailing_pe": 16.56,
+    "forward_pe": 9.5,
+    "revenue_growth_pct": 122.7,
+    "earnings_growth_pct": 326.0
+  },
+  "AVGO": {
+    "price": 422.4,
+    "change_pct": -1.25,
+    "volume": 13766512,
+    "rsi": 67.56,
+    "market_cap_B": 2009.6,
+    "trailing_pe": 70.52,
+    "forward_pe": 21.63,
+    "revenue_growth_pct": 47.9,
+    "earnings_growth_pct": 85.4
+  },
+  "ARM": {
+    "price": 267.85,
+    "change_pct": -5.21,
+    "volume": 3165381,
+    "rsi": 43.75,
+    "market_cap_B": 286.06,
+    "trailing_pe": 270.56,
+    "forward_pe": 87.27,
+    "revenue_growth_pct": 22.4,
+    "earnings_growth_pct": 108.3
+  },
+  "COIN": {
+    "price": 148.68,
+    "change_pct": -3.2,
+    "volume": 5466796,
+    "rsi": 32.74,
+    "market_cap_B": 39.23,
+    "trailing_pe": 0.0,
+    "forward_pe": 48.98,
+    "revenue_growth_pct": -17.3,
+    "earnings_growth_pct": 0.0
+  },
+  "NFLX": {
+    "price": 76.29,
+    "change_pct": 2.9,
+    "volume": 26747082,
+    "rsi": 79.86,
+    "market_cap_B": 317.67,
+    "trailing_pe": 23.99,
+    "forward_pe": 19.99,
+    "revenue_growth_pct": 13.4,
+    "earnings_growth_pct": 11.1
+  }
+}
