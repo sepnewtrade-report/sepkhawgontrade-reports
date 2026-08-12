@@ -12,9 +12,10 @@ const state = {
     
     // Dynamic Table State Lists
     avgCostRows: [
-        { shares: 100, price: 100.00 },
-        { shares: 50, price: 80.00 },
-        { shares: 100, price: 70.00 }
+        { type: 'buy', shares: 100, price: 100.00 },
+        { type: 'buy', shares: 50, price: 80.00 },
+        { type: 'sell', shares: 50, price: 110.00 },
+        { type: 'buy', shares: 100, price: 70.00 }
     ],
     dcaRows: [
         { shares: 50, price: 100.00 },
@@ -148,15 +149,109 @@ const CalculationEngine = {
         };
     },
 
-    calculateAverageCost(entries) {
+    calculateAverageCost(entries, commPct = 0) {
         const valid = entries.filter(e => e.shares > 0 && e.price > 0);
-        if (valid.length === 0) return { totalShares: 0, totalCost: 0, avgCost: 0 };
+        if (valid.length === 0) {
+            return {
+                totalShares: 0,
+                totalCost: 0,
+                avgCost: 0,
+                totalBuyShares: 0,
+                totalBuyCost: 0,
+                totalSellShares: 0,
+                totalSellProceeds: 0,
+                realizedPnL: 0,
+                buyCount: 0,
+                sellCount: 0,
+                beAvgCostPrice: 0,
+                beNetCashPrice: 0,
+                netCashInvested: 0,
+                isFreePosition: false
+            };
+        }
 
-        const totalShares = valid.reduce((a, b) => a + b.shares, 0);
-        const totalCost = valid.reduce((a, b) => a + (b.shares * b.price), 0);
+        let totalShares = 0;
+        let totalCost = 0;
+        let realizedPnL = 0;
+
+        let totalBuyShares = 0;
+        let totalBuyCost = 0;
+        let totalSellShares = 0;
+        let totalSellProceeds = 0;
+        let buyCount = 0;
+        let sellCount = 0;
+
+        for (const entry of valid) {
+            const shares = parseFloat(entry.shares) || 0;
+            const price = parseFloat(entry.price) || 0;
+            const type = entry.type || 'buy';
+
+            if (type === 'sell') {
+                sellCount++;
+                totalSellShares += shares;
+                totalSellProceeds += (shares * price);
+
+                if (totalShares > 0) {
+                    const currentAvgCost = totalCost / totalShares;
+                    const sharesSold = Math.min(shares, totalShares);
+                    const costOfSoldShares = sharesSold * currentAvgCost;
+                    const pnl = sharesSold * (price - currentAvgCost);
+
+                    realizedPnL += pnl;
+                    totalShares -= sharesSold;
+                    totalCost -= costOfSoldShares;
+
+                    if (totalShares <= 0.00001) {
+                        totalShares = 0;
+                        totalCost = 0;
+                    }
+                }
+            } else {
+                buyCount++;
+                totalBuyShares += shares;
+                totalBuyCost += (shares * price);
+
+                totalShares += shares;
+                totalCost += (shares * price);
+            }
+        }
+
         const avgCost = totalShares > 0 ? totalCost / totalShares : 0;
+        const cPct = parseFloat(commPct) || 0;
+        const commFactor = Math.max(0.0001, 1 - (cPct / 100));
 
-        return { totalShares, totalCost, avgCost };
+        // Break-Even Calculations
+        const beAvgCostPrice = totalShares > 0 ? (avgCost / commFactor) : 0;
+
+        const netCashInvested = totalBuyCost - totalSellProceeds;
+        let beNetCashPrice = 0;
+        let isFreePosition = false;
+
+        if (totalShares > 0) {
+            if (netCashInvested > 0) {
+                beNetCashPrice = (netCashInvested / totalShares) / commFactor;
+            } else {
+                beNetCashPrice = 0;
+                isFreePosition = true;
+            }
+        }
+
+        return {
+            totalShares,
+            totalCost,
+            avgCost,
+            totalBuyShares,
+            totalBuyCost,
+            totalSellShares,
+            totalSellProceeds,
+            realizedPnL,
+            buyCount,
+            sellCount,
+            beAvgCostPrice,
+            beNetCashPrice,
+            netCashInvested,
+            isFreePosition
+        };
     },
 
     calculateTargetPriceModeA({ entryPrice, desiredReturnPct, shares }) {
@@ -507,14 +602,26 @@ function initCalculatorListeners() {
     });
 
     // 5. Average Cost Dynamic Table Buttons
-    const avgAddBtn = document.getElementById('avg-add-row-btn');
-    if (avgAddBtn) {
-        avgAddBtn.addEventListener('click', () => {
-            state.avgCostRows.push({ shares: 50, price: 100.00 });
+    const avgAddBuyBtn = document.getElementById('avg-add-buy-btn') || document.getElementById('avg-add-row-btn');
+    if (avgAddBuyBtn) {
+        avgAddBuyBtn.addEventListener('click', () => {
+            state.avgCostRows.push({ type: 'buy', shares: 50, price: 100.00 });
             renderAverageCostTable();
             renderAverageCost();
         });
     }
+
+    const avgAddSellBtn = document.getElementById('avg-add-sell-btn');
+    if (avgAddSellBtn) {
+        avgAddSellBtn.addEventListener('click', () => {
+            state.avgCostRows.push({ type: 'sell', shares: 50, price: 100.00 });
+            renderAverageCostTable();
+            renderAverageCost();
+        });
+    }
+
+    const avgComm = document.getElementById('avg-comm-pct');
+    if (avgComm) avgComm.addEventListener('input', renderAverageCost);
 
     // 6. DCA Dynamic Table Buttons
     const dcaAddBtn = document.getElementById('dca-add-row-btn');
@@ -784,19 +891,32 @@ function renderAverageCostTable() {
     const tbody = document.getElementById('avg-cost-tbody');
     if (!tbody) return;
 
-    tbody.innerHTML = state.avgCostRows.map((r, i) => `
+    tbody.innerHTML = state.avgCostRows.map((r, i) => {
+        const itemType = r.type || 'buy';
+        return `
         <tr>
             <td>ไม้ที่ ${i + 1}</td>
+            <td>
+                <select class="type-select ${itemType === 'sell' ? 'type-sell' : 'type-buy'}" onchange="updateAvgCostRow(${i}, 'type', this.value)">
+                    <option value="buy" ${itemType !== 'sell' ? 'selected' : ''}>🟢 ซื้อ (Buy)</option>
+                    <option value="sell" ${itemType === 'sell' ? 'selected' : ''}>🔴 ขาย (Sell)</option>
+                </select>
+            </td>
             <td><input type="number" value="${r.shares}" step="1" min="0" oninput="updateAvgCostRow(${i}, 'shares', this.value)"></td>
             <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateAvgCostRow(${i}, 'price', this.value)"></td>
             <td><b>${formatCurrency(r.shares * r.price)}</b></td>
             <td><button class="del-row-btn" onclick="deleteAvgCostRow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
-    `).join('');
+    `;
+    }).join('');
 }
 
 globalObj.updateAvgCostRow = (i, field, val) => {
-    state.avgCostRows[i][field] = parseFloat(val) || 0;
+    if (field === 'type') {
+        state.avgCostRows[i][field] = val;
+    } else {
+        state.avgCostRows[i][field] = parseFloat(val) || 0;
+    }
     renderAverageCostTable();
     renderAverageCost();
 };
@@ -808,14 +928,75 @@ globalObj.deleteAvgCostRow = (i) => {
 };
 
 function renderAverageCost() {
-    const res = CalculationEngine.calculateAverageCost(state.avgCostRows);
-    document.getElementById('avg-res-cost').textContent = `${formatCurrency(res.avgCost)} / หุ้น`;
-    document.getElementById('avg-res-shares').textContent = `${formatNum(res.totalShares)} หุ้น`;
-    document.getElementById('avg-res-total-cost').textContent = formatCurrency(res.totalCost);
+    const commInput = document.getElementById('avg-comm-pct');
+    const commPct = commInput ? (parseFloat(commInput.value) || 0) : 0;
 
-    document.getElementById('avg-insight-text').innerHTML = `
-        💡 <b>Average Summary:</b> จากการเข้าซื้อรวม ${state.avgCostRows.length} ครั้ง จำนวน ${formatNum(res.totalShares)} หุ้น ทำให้ได้ราคาต้นทุนเฉลี่ยใหม่สะสมอยู่ที่ <b>${formatCurrency(res.avgCost)} ต่อหุ้น</b>
-    `;
+    const res = CalculationEngine.calculateAverageCost(state.avgCostRows, commPct);
+    
+    const costElem = document.getElementById('avg-res-cost');
+    if (costElem) costElem.textContent = `${formatCurrency(res.avgCost)} / หุ้น`;
+    
+    const sharesElem = document.getElementById('avg-res-shares');
+    if (sharesElem) sharesElem.textContent = `${formatNum(res.totalShares)} หุ้น`;
+    
+    const totalCostElem = document.getElementById('avg-res-total-cost');
+    if (totalCostElem) totalCostElem.textContent = formatCurrency(res.totalCost);
+
+    const realizedElem = document.getElementById('avg-res-realized-pnl');
+    if (realizedElem) {
+        const sign = res.realizedPnL > 0 ? '+' : '';
+        realizedElem.textContent = `${sign}${formatCurrency(res.realizedPnL)}`;
+        realizedElem.className = 'res-card-value ' + (res.realizedPnL > 0 ? 'text-green' : res.realizedPnL < 0 ? 'text-red' : '');
+    }
+
+    const proceedsElem = document.getElementById('avg-res-sell-proceeds');
+    if (proceedsElem) {
+        proceedsElem.textContent = formatCurrency(res.totalSellProceeds);
+    }
+
+    // Break-Even UI Elements
+    const beCostElem = document.getElementById('avg-res-be-cost');
+    if (beCostElem) {
+        beCostElem.textContent = res.totalShares > 0 ? `${formatCurrency(res.beAvgCostPrice)} / หุ้น` : '-';
+    }
+
+    const beNetElem = document.getElementById('avg-res-be-net');
+    const beNetDesc = document.getElementById('avg-res-be-net-desc');
+    if (beNetElem) {
+        if (res.totalShares <= 0) {
+            beNetElem.textContent = '-';
+            if (beNetDesc) beNetDesc.textContent = 'ไม่มีหุ้นคงเหลือ';
+        } else if (res.isFreePosition) {
+            beNetElem.textContent = '🎉 $0.00 (Free Shares)';
+            beNetElem.className = 'text-green font-bold';
+            if (beNetDesc) beNetDesc.textContent = 'ถอนทุนคืนครบทั้งหมดแล้ว! พอร์ตหุ้นคงเหลือฟรีไร้ต้นทุน';
+        } else {
+            beNetElem.textContent = `${formatCurrency(res.beNetCashPrice)} / หุ้น`;
+            beNetElem.className = 'text-gold font-bold';
+            if (beNetDesc) beNetDesc.textContent = `ราคาขายคืนเงินทุนสุทธิคงเหลือ ${formatCurrency(res.netCashInvested)}`;
+        }
+    }
+
+    const insightElem = document.getElementById('avg-insight-text');
+    if (insightElem) {
+        const buyInfo = `เข้าซื้อ ${res.buyCount} ครั้ง (${formatNum(res.totalBuyShares)} หุ้น)`;
+        const sellInfo = res.sellCount > 0 ? ` และขาย ${res.sellCount} ครั้ง (${formatNum(res.totalSellShares)} หุ้น)` : '';
+        const pnlSign = res.realizedPnL > 0 ? '+' : '';
+        const pnlText = res.sellCount > 0 ? ` | <b>Realized P&L จากการขาย:</b> <span class="${res.realizedPnL >= 0 ? 'text-green' : 'text-red'}"><b>${pnlSign}${formatCurrency(res.realizedPnL)}</b></span>` : '';
+
+        let breakEvenAdvice = '';
+        if (res.totalShares > 0) {
+            if (res.isFreePosition) {
+                breakEvenAdvice = `<br>🎯 <b>Break-Even Insight:</b> ยอดขายที่ผ่านมาคืนทุนครบทั้งหมดแล้ว หุ้นคงเหลืออีก <b>${formatNum(res.totalShares)} หุ้น</b> เป็นพอร์ตไร้ต้นทุน (Free Position)`;
+            } else {
+                breakEvenAdvice = `<br>🎯 <b>Break-Even Insight:</b> หากต้องการขายหุ้นที่เหลือให้<b>เท่าทุนสุทธิทั้งพอร์ต</b> ควรตั้งราคาขายที่ <b>${formatCurrency(res.beNetCashPrice)} ขึ้นไป</b> (หรือขายเฉพาะรอบที่ <b>${formatCurrency(res.beAvgCostPrice)}</b>)`;
+            }
+        }
+
+        insightElem.innerHTML = `
+            💡 <b>Average Summary:</b> จากการ${buyInfo}${sellInfo} คงเหลือหุ้น <b>${formatNum(res.totalShares)} หุ้น</b> ราคาต้นทุนเฉลี่ยสะสมคงเหลืออยู่ที่ <b>${formatCurrency(res.avgCost)} ต่อหุ้น</b> (รวมมูลค่าต้นทุนคงเหลือ ${formatCurrency(res.totalCost)})${pnlText}${breakEvenAdvice}
+        `;
+    }
 }
 
 // --- 6. DCA Calculator ---
@@ -1251,7 +1432,14 @@ globalObj.resetCalculator = (type) => {
         document.getElementById('target-a-pct').value = 20.0;
         renderTargetPrice();
     } else if (type === 'avg-cost') {
-        state.avgCostRows = [{ shares: 100, price: 100.00 }, { shares: 50, price: 80.00 }, { shares: 100, price: 70.00 }];
+        const commInput = document.getElementById('avg-comm-pct');
+        if (commInput) commInput.value = '0.00';
+        state.avgCostRows = [
+            { type: 'buy', shares: 100, price: 100.00 },
+            { type: 'buy', shares: 50, price: 80.00 },
+            { type: 'sell', shares: 50, price: 110.00 },
+            { type: 'buy', shares: 100, price: 70.00 }
+        ];
         renderAverageCostTable();
         renderAverageCost();
     } else if (type === 'dca') {

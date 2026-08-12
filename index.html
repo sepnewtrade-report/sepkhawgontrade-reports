@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="logo.png?v=4.3.0">
+    <link rel="icon" type="image/png" href="logo.png?v=4.3.1">
 
     <!-- App Styles -->
-    <link rel="stylesheet" href="styles.css?v=4.3.0">
+    <link rel="stylesheet" href="styles.css?v=4.3.1">
 </head>
 <body>
 
@@ -735,7 +735,7 @@
                     <div class="view-header">
                         <div class="view-title-wrap">
                             <h2>🔄 Average Cost Calculator</h2>
-                            <p class="view-desc">คำนวณต้นทุนเฉลี่ยสะสมจากการเข้าซื้อหุ้นหลายครั้งในราคาที่แตกต่างกัน</p>
+                            <p class="view-desc">คำนวณต้นทุนเฉลี่ยสะสมจากการเข้าซื้อและขายหุ้นหลายครั้ง</p>
                         </div>
                         <div class="view-actions">
                             <button class="tool-btn reset-btn" onclick="resetCalculator('avg-cost')"><i class="fa-solid fa-rotate-left"></i> 🔄 Reset</button>
@@ -745,17 +745,21 @@
                     <div class="calc-layout-grid">
                         <div class="panel input-panel">
                             <div class="panel-header-row">
-                                <h3 class="panel-title"><i class="fa-solid fa-list-ol"></i> ตารางรายการเข้าซื้อหุ้น</h3>
-                                <button class="add-row-btn" id="avg-add-row-btn"><i class="fa-solid fa-plus"></i> + เพิ่มรายการ</button>
+                                <h3 class="panel-title"><i class="fa-solid fa-list-ol"></i> ตารางรายการซื้อ/ขายหุ้น</h3>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="add-row-btn" id="avg-add-buy-btn"><i class="fa-solid fa-plus"></i> + ซื้อ (Buy)</button>
+                                    <button class="add-row-btn sell-btn-style" id="avg-add-sell-btn"><i class="fa-solid fa-minus"></i> - ขาย (Sell)</button>
+                                </div>
                             </div>
 
                             <div class="table-responsive">
                                 <table class="entry-table" id="avg-cost-table">
                                     <thead>
                                         <tr>
-                                            <th>ครั้งที่</th>
+                                            <th>รายการ</th>
+                                            <th>ประเภท</th>
                                             <th>จำนวนหุ้น</th>
-                                            <th>ราคาซื้อต่อหุ้น ($)</th>
+                                            <th>ราคาต่อหุ้น ($)</th>
                                             <th>รวมเงิน ($)</th>
                                             <th>ลบ</th>
                                         </tr>
@@ -765,31 +769,62 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <div class="input-field" style="margin-top: 16px;">
+                                <label for="avg-comm-pct"><i class="fa-solid fa-percent"></i> ค่าธรรมเนียมการเทรดรวมซื้อ/ขาย (%) (Commission Rate)</label>
+                                <input type="number" id="avg-comm-pct" value="0.00" step="0.01" min="0" placeholder="เช่น 0.10">
+                            </div>
                         </div>
 
                         <div class="panel result-panel">
-                            <h3 class="panel-title"><i class="fa-solid fa-calculator"></i> ต้นทุนเฉลี่ยสะสมรวม</h3>
+                            <h3 class="panel-title"><i class="fa-solid fa-calculator"></i> สรุปต้นทุนเฉลี่ยและการขาย</h3>
                             
                             <div class="hero-result-box">
-                                <span class="res-label">ราคาต้นทุนเฉลี่ยต่อหุ้น (Average Cost)</span>
-                                <div class="res-value-main text-cyan" id="avg-res-cost">$92.00 / หุ้น</div>
+                                <span class="res-label">ราคาต้นทุนเฉลี่ยคงเหลือต่อหุ้น (Avg Cost)</span>
+                                <div class="res-value-main text-cyan" id="avg-res-cost">$0.00 / หุ้น</div>
                             </div>
 
                             <div class="results-grid">
                                 <div class="res-card">
-                                    <span class="res-card-label">จำนวนหุ้นรวมทั้งหมด (Total Shares)</span>
-                                    <span class="res-card-value" id="avg-res-shares">250 หุ้น</span>
+                                    <span class="res-card-label">จำนวนหุ้นคงเหลือ (Remaining Shares)</span>
+                                    <span class="res-card-value" id="avg-res-shares">0 หุ้น</span>
                                 </div>
                                 <div class="res-card">
-                                    <span class="res-card-label">เงินลงทุนรวมทั้งหมด (Total Investment)</span>
-                                    <span class="res-card-value" id="avg-res-total-cost">$23,000.00</span>
+                                    <span class="res-card-label">มูลค่าต้นทุนคงเหลือรวม (Remaining Cost)</span>
+                                    <span class="res-card-value" id="avg-res-total-cost">$0.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">กำไร/ขาดทุนจากการขาย (Realized P&L)</span>
+                                    <span class="res-card-value text-green" id="avg-res-realized-pnl">+$0.00</span>
+                                </div>
+                                <div class="res-card">
+                                    <span class="res-card-label">ยอดรับจากการขายรวม (Total Sell Proceeds)</span>
+                                    <span class="res-card-value text-purple" id="avg-res-sell-proceeds">$0.00</span>
+                                </div>
+                            </div>
+
+                            <div class="breakdown-box" style="margin-bottom: 16px;">
+                                <h4 style="font-size: 13px; font-weight: 700; color: var(--accent-gold); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-arrows-split-up-and-left"></i> 🎯 วิเคราะห์ราคาขายเท่าทุน (Break-Even Selling Price)
+                                </h4>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                    <div style="background: var(--bg-secondary); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                        <div style="font-size: 11px; color: var(--text-muted);">ราคาขายเท่าทุนหุ้นคงเหลือ (Avg Cost BE)</div>
+                                        <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); margin-top: 2px;" id="avg-res-be-cost">$0.00 / หุ้น</div>
+                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">ขายเฉพาะหุ้นคงเหลือไม่ขาดทุน</div>
+                                    </div>
+                                    <div style="background: var(--bg-secondary); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                        <div style="font-size: 11px; color: var(--text-muted);">ราคาขายคืนทุนสุทธิรวม (Net Cash BE)</div>
+                                        <div style="font-size: 15px; font-weight: 700; color: var(--accent-gold); margin-top: 2px;" id="avg-res-be-net">$0.00 / หุ้น</div>
+                                        <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;" id="avg-res-be-net-desc">ขายหุ้นคงเหลือเพื่อให้ทั้งพอร์ตเท่าทุน</div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="insight-callout">
                                 <i class="fa-solid fa-lightbulb"></i>
                                 <div class="insight-text" id="avg-insight-text">
-                                    💡 <b>Average Summary:</b> จากการเข้าซื้อรวม 3 ครั้ง เป็นจำนวน 250 หุ้น ทำให้ได้ราคาต้นทุนเฉลี่ยใหม่สะสมอยู่ที่ <b>$92.00 ต่อหุ้น</b>
+                                    💡 <b>Average Summary:</b> สรุปการเข้าซื้อและขายหุ้นของคุณ
                                 </div>
                             </div>
                         </div>
@@ -1377,6 +1412,6 @@
     <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
     <!-- Main JavaScript Logic -->
-    <script src="app.js?v=4.0.0" defer></script>
+    <script src="app.js?v=4.3.1" defer></script>
 </body>
 </html>

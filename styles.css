@@ -883,7 +883,7 @@ html, body {
     font-weight: 600;
 }
 
-.entry-table input {
+.entry-table input, .entry-table select {
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
     border-radius: 6px;
@@ -894,7 +894,21 @@ html, body {
     width: 100%;
 }
 
-.entry-table input:focus {
+.entry-table select {
+    cursor: pointer;
+}
+
+.entry-table select.type-buy {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.entry-table select.type-sell {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+.entry-table input:focus, .entry-table select:focus {
     border-color: var(--accent-cyan);
 }
 
@@ -921,6 +935,15 @@ html, body {
 
 .add-row-btn:hover {
     background: rgba(6, 182, 212, 0.1);
+}
+
+.add-row-btn.sell-btn-style {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+}
+
+.add-row-btn.sell-btn-style:hover {
+    background: rgba(239, 68, 68, 0.1);
 }
 
 .breakdown-box {
