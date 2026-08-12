@@ -685,10 +685,101 @@ function initCalculatorListeners() {
         });
     }
 
-    // 12. Drawdown & Recovery
-    ['dd-peak', 'dd-current'].forEach(id => {
-        const input = document.getElementById(id);
-        if (input) input.addEventListener('input', renderDrawdown);
+    // Global Input Auto-Highlight on Focus
+    document.addEventListener('focusin', (e) => {
+        if (e.target && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && e.target.type !== 'radio') {
+            if (typeof e.target.select === 'function') {
+                e.target.select();
+            }
+        }
+    });
+
+    // Global Keydown Handler for Tab & Enter Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const target = e.target;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'SELECT')) {
+                e.preventDefault();
+                const focusables = Array.from(document.querySelectorAll('input:not([type="hidden"]):not([disabled]), select:not([disabled])'));
+                const index = focusables.indexOf(target);
+                if (index > -1 && index + 1 < focusables.length) {
+                    focusables[index + 1].focus();
+                    if (typeof focusables[index + 1].select === 'function') focusables[index + 1].select();
+                }
+            }
+        } else if (e.key === 'Tab' && !e.shiftKey) {
+            const target = e.target;
+            if (target && target.tagName === 'INPUT') {
+                const tr = target.closest('tr');
+                const tbody = tr ? tr.closest('tbody') : null;
+                if (tbody && tr && tr === tbody.lastElementChild) {
+                    const inputs = Array.from(tr.querySelectorAll('input:not([type="hidden"]):not([disabled])'));
+                    if (inputs.length > 0 && target === inputs[inputs.length - 1]) {
+                        if (tbody.id === 'avg-cost-tbody') {
+                            e.preventDefault();
+                            state.avgCostRows.push({ type: 'buy', shares: 50, price: 100.00 });
+                            renderAverageCostTable();
+                            renderAverageCost();
+                            setTimeout(() => {
+                                const newRow = tbody.lastElementChild;
+                                if (newRow) {
+                                    const firstInput = newRow.querySelector('input');
+                                    if (firstInput) { firstInput.focus(); firstInput.select(); }
+                                }
+                            }, 50);
+                        } else if (tbody.id === 'dca-tbody') {
+                            e.preventDefault();
+                            state.dcaRows.push({ shares: 50, price: 100.00 });
+                            renderDCATable();
+                            renderDCA();
+                            setTimeout(() => {
+                                const newRow = tbody.lastElementChild;
+                                if (newRow) {
+                                    const firstInput = newRow.querySelector('input');
+                                    if (firstInput) { firstInput.focus(); firstInput.select(); }
+                                }
+                            }, 50);
+                        } else if (tbody.id === 'me-tbody') {
+                            e.preventDefault();
+                            state.multiEntryRows.push({ allocPct: 20, price: 90.00 });
+                            renderMultiEntryTable();
+                            renderMultiEntry();
+                            setTimeout(() => {
+                                const newRow = tbody.lastElementChild;
+                                if (newRow) {
+                                    const firstInput = newRow.querySelector('input');
+                                    if (firstInput) { firstInput.focus(); firstInput.select(); }
+                                }
+                            }, 50);
+                        } else if (tbody.id === 'pa-tbody') {
+                            e.preventDefault();
+                            state.portfolioAllocRows.push({ name: 'สินทรัพย์ใหม่', value: 5000, targetPct: 10 });
+                            renderPortfolioAllocTable();
+                            renderPortfolioAlloc();
+                            setTimeout(() => {
+                                const newRow = tbody.lastElementChild;
+                                if (newRow) {
+                                    const firstInput = newRow.querySelector('input');
+                                    if (firstInput) { firstInput.focus(); firstInput.select(); }
+                                }
+                            }, 50);
+                        } else if (tbody.id === 'cd-tbody') {
+                            e.preventDefault();
+                            state.cashDeployRows.push({ allocPct: 20 });
+                            renderCashDeployTable();
+                            renderCashDeployment();
+                            setTimeout(() => {
+                                const newRow = tbody.lastElementChild;
+                                if (newRow) {
+                                    const firstInput = newRow.querySelector('input');
+                                    if (firstInput) { firstInput.focus(); firstInput.select(); }
+                                }
+                            }, 50);
+                        }
+                    }
+                }
+            }
+        }
     });
 }
 
@@ -894,30 +985,38 @@ function renderAverageCostTable() {
     tbody.innerHTML = state.avgCostRows.map((r, i) => {
         const itemType = r.type || 'buy';
         return `
-        <tr>
+        <tr data-row-index="${i}">
             <td>ไม้ที่ ${i + 1}</td>
             <td>
-                <select class="type-select ${itemType === 'sell' ? 'type-sell' : 'type-buy'}" onchange="updateAvgCostRow(${i}, 'type', this.value)">
+                <select class="type-select ${itemType === 'sell' ? 'type-sell' : 'type-buy'}" onchange="updateAvgCostRow(${i}, 'type', this.value, this)">
                     <option value="buy" ${itemType !== 'sell' ? 'selected' : ''}>🟢 ซื้อ (Buy)</option>
                     <option value="sell" ${itemType === 'sell' ? 'selected' : ''}>🔴 ขาย (Sell)</option>
                 </select>
             </td>
-            <td><input type="number" value="${r.shares}" step="1" min="0" oninput="updateAvgCostRow(${i}, 'shares', this.value)"></td>
-            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateAvgCostRow(${i}, 'price', this.value)"></td>
-            <td><b>${formatCurrency(r.shares * r.price)}</b></td>
+            <td><input type="number" value="${r.shares}" step="1" min="0" oninput="updateAvgCostRow(${i}, 'shares', this.value, this)" onfocus="this.select()"></td>
+            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateAvgCostRow(${i}, 'price', this.value, this)" onfocus="this.select()"></td>
+            <td><b id="avg-row-total-${i}">${formatCurrency(r.shares * r.price)}</b></td>
             <td><button class="del-row-btn" onclick="deleteAvgCostRow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
     `;
     }).join('');
 }
 
-globalObj.updateAvgCostRow = (i, field, val) => {
+globalObj.updateAvgCostRow = (i, field, val, el) => {
+    if (!state.avgCostRows[i]) return;
     if (field === 'type') {
         state.avgCostRows[i][field] = val;
+        if (el) {
+            el.className = `type-select ${val === 'sell' ? 'type-sell' : 'type-buy'}`;
+        }
     } else {
         state.avgCostRows[i][field] = parseFloat(val) || 0;
     }
-    renderAverageCostTable();
+    const totalEl = document.getElementById(`avg-row-total-${i}`);
+    if (totalEl) {
+        const r = state.avgCostRows[i];
+        totalEl.textContent = formatCurrency(r.shares * r.price);
+    }
     renderAverageCost();
 };
 
@@ -1005,19 +1104,24 @@ function renderDCATable() {
     if (!tbody) return;
 
     tbody.innerHTML = state.dcaRows.map((r, i) => `
-        <tr>
+        <tr data-row-index="${i}">
             <td>งวดที่ ${i + 1}</td>
-            <td><input type="number" value="${r.shares}" step="1" min="0" oninput="updateDCARow(${i}, 'shares', this.value)"></td>
-            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateDCARow(${i}, 'price', this.value)"></td>
-            <td><b>${formatCurrency(r.shares * r.price)}</b></td>
+            <td><input type="number" value="${r.shares}" step="1" min="0" oninput="updateDCARow(${i}, 'shares', this.value)" onfocus="this.select()"></td>
+            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateDCARow(${i}, 'price', this.value)" onfocus="this.select()"></td>
+            <td><b id="dca-row-total-${i}">${formatCurrency(r.shares * r.price)}</b></td>
             <td><button class="del-row-btn" onclick="deleteDCARow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
     `).join('');
 }
 
 globalObj.updateDCARow = (i, field, val) => {
+    if (!state.dcaRows[i]) return;
     state.dcaRows[i][field] = parseFloat(val) || 0;
-    renderDCATable();
+    const totalEl = document.getElementById(`dca-row-total-${i}`);
+    if (totalEl) {
+        const r = state.dcaRows[i];
+        totalEl.textContent = formatCurrency(r.shares * r.price);
+    }
     renderDCA();
 };
 
@@ -1079,18 +1183,18 @@ function renderMultiEntryTable() {
     if (!tbody) return;
 
     tbody.innerHTML = state.multiEntryRows.map((r, i) => `
-        <tr>
+        <tr data-row-index="${i}">
             <td>ไม้ที่ ${i + 1}</td>
-            <td><input type="number" value="${r.allocPct}" step="5" min="0" max="100" oninput="updateMultiEntryRow(${i}, 'allocPct', this.value)"></td>
-            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateMultiEntryRow(${i}, 'price', this.value)"></td>
+            <td><input type="number" value="${r.allocPct}" step="5" min="0" max="100" oninput="updateMultiEntryRow(${i}, 'allocPct', this.value)" onfocus="this.select()"></td>
+            <td><input type="number" value="${r.price}" step="0.01" min="0" oninput="updateMultiEntryRow(${i}, 'price', this.value)" onfocus="this.select()"></td>
             <td><button class="del-row-btn" onclick="deleteMultiEntryRow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
     `).join('');
 }
 
 globalObj.updateMultiEntryRow = (i, field, val) => {
+    if (!state.multiEntryRows[i]) return;
     state.multiEntryRows[i][field] = parseFloat(val) || 0;
-    renderMultiEntryTable();
     renderMultiEntry();
 };
 
@@ -1150,18 +1254,18 @@ function renderPortfolioAllocTable() {
     if (!tbody) return;
 
     tbody.innerHTML = state.portfolioAllocRows.map((r, i) => `
-        <tr>
-            <td><input type="text" value="${r.name}" oninput="updatePortfolioAllocRow(${i}, 'name', this.value)"></td>
-            <td><input type="number" value="${r.value}" step="1000" min="0" oninput="updatePortfolioAllocRow(${i}, 'value', this.value)"></td>
-            <td><input type="number" value="${r.targetPct}" step="5" min="0" max="100" oninput="updatePortfolioAllocRow(${i}, 'targetPct', this.value)"></td>
+        <tr data-row-index="${i}">
+            <td><input type="text" value="${r.name}" oninput="updatePortfolioAllocRow(${i}, 'name', this.value)" onfocus="this.select()"></td>
+            <td><input type="number" value="${r.value}" step="1000" min="0" oninput="updatePortfolioAllocRow(${i}, 'value', this.value)" onfocus="this.select()"></td>
+            <td><input type="number" value="${r.targetPct}" step="5" min="0" max="100" oninput="updatePortfolioAllocRow(${i}, 'targetPct', this.value)" onfocus="this.select()"></td>
             <td><button class="del-row-btn" onclick="deletePortfolioAllocRow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
     `).join('');
 }
 
 globalObj.updatePortfolioAllocRow = (i, field, val) => {
+    if (!state.portfolioAllocRows[i]) return;
     state.portfolioAllocRows[i][field] = field === 'name' ? val : (parseFloat(val) || 0);
-    renderPortfolioAllocTable();
     renderPortfolioAlloc();
 };
 
@@ -1319,17 +1423,17 @@ function renderCashDeployTable() {
     if (!tbody) return;
 
     tbody.innerHTML = state.cashDeployRows.map((r, i) => `
-        <tr>
+        <tr data-row-index="${i}">
             <td>ไม้ที่ ${i + 1}</td>
-            <td><input type="number" value="${r.allocPct}" step="5" min="0" max="100" oninput="updateCashDeployRow(${i}, 'allocPct', this.value)"></td>
+            <td><input type="number" value="${r.allocPct}" step="5" min="0" max="100" oninput="updateCashDeployRow(${i}, 'allocPct', this.value)" onfocus="this.select()"></td>
             <td><button class="del-row-btn" onclick="deleteCashDeployRow(${i})"><i class="fa-solid fa-trash-can"></i></button></td>
         </tr>
     `).join('');
 }
 
 globalObj.updateCashDeployRow = (i, field, val) => {
+    if (!state.cashDeployRows[i]) return;
     state.cashDeployRows[i][field] = parseFloat(val) || 0;
-    renderCashDeployTable();
     renderCashDeployment();
 };
 
