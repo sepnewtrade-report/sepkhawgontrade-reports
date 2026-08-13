@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ผ่านการปรับปรุงโครงสร้างรายงานและระเบียบวิธี (Methodology) ตรงตามมาตรฐานการวิเคราะห์การเงินระดับสูง แยกสถิติ Spot/Futures และระบุที่มาอย่างชัดเจน",
+  "audit_log": [
+    {
+      "item": "การแยกประเภทราคาทองคำ",
+      "status": "corrected",
+      "details": "แยกการรายงานระหว่าง Spot Gold (XAU/USD $4,469.00) และ COMEX Gold Futures เพื่อความถูกต้องเชิงโครงสร้างตลาด"
+    },
+    {
+      "item": "การอธิบายรายงาน CPI",
+      "status": "corrected",
+      "details": "ระบุแหล่งอ้างอิงจากรายงาน BLS โดยตรง และระบุคำอธิบายชะลอตัว YoY 0.1 percentage point อย่างถูกต้อง"
+    },
+    {
+      "item": "ระเบียบวิธีดัชนีทางเทคนิคัล (RSI & MACD)",
+      "status": "info_added",
+      "details": "เพิ่มคำชี้แจงระเบียบวิธีคำนวณว่าเป็นการคำนวณผ่านสถิติ Daily Close Price (RSI 14, MACD 12,26,9) ไม่แอบอ้างว่าเป็น Official Exchange Metric"
+    },
+    {
+      "item": "การกำหนดกรอบเวลาสำหรับรายงาน Pre-Market",
+      "status": "corrected",
+      "details": "ปรับเปลี่ยนจาก 'Tonight Outlook' เป็น 'Today US Market Pre-Open Setup' เพื่อให้สอดคล้องกับเวลาอ่านในประเทศไทย"
+    },
+    {
+      "item": "การแยกประเภท Catalyst",
+      "status": "corrected",
+      "details": "แยกตารางระหว่าง 24h Catalyst (ข่าวขับเคลื่อนในรอบวัน) และ Structural Narrative (ปัจจัยพื้นฐานระยะยาว)"
+    }
+  ]
+}
