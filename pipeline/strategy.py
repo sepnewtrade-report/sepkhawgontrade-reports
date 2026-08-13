@@ -235,11 +235,14 @@ class OptionsScreenStrategy(BaseStrategy):
             
         hv_30 = opts_data.get("hv_30", 0.35)
         current_price = fund.get("current_price")
+        tech = data.get("technicals", {})
+        rsi = tech.get("rsi", 50.0)
         
         results = {
             "ticker": ticker,
             "price": current_price,
             "hv_30": hv_30,
+            "rsi": rsi,
             "short_term_candidates": [],
             "medium_term_candidates": []
         }

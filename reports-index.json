@@ -1,13 +1,23 @@
 [
   {
-    "title": "Performance Review & Post-Market Recap: 2026-08-13",
-    "filename": "bot_stats_2026_08_13.md",
-    "path": "bot_stats_2026_08_13.md",
-    "category": "Bot Trade Stats",
-    "categoryThai": "Bot Trade Stats",
+    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-13",
+    "filename": "options_screen_analysis_2026_08_13.md",
+    "path": "options_screen_analysis_2026_08_13.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
     "date": "2026-08-13",
-    "timestamp": 1786622238357.4155,
-    "size": 2137
+    "timestamp": 1786623027473.9246,
+    "size": 355360
+  },
+  {
+    "title": "บทวิเคราะห์ Hot Stock วันนี้ (US Viral Stock Analysis) — 2026-08-13",
+    "filename": "us_viral_stock_analysis_2026_08_13.md",
+    "path": "us_viral_stock_analysis_2026_08_13.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-13",
+    "timestamp": 1786622592525.0815,
+    "size": 9040
   },
   {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-08-13",
@@ -16,18 +26,58 @@
     "category": "Bot Trade Todays",
     "categoryThai": "Bot Trade Todays",
     "date": "2026-08-13",
-    "timestamp": 1786622200441.7764,
+    "timestamp": 1786622405427.5295,
     "size": 6394
   },
   {
-    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-13",
-    "filename": "options_screen_analysis_2026_08_13.md",
-    "path": "options_screen_analysis_2026_08_13.md",
-    "category": "Options Selection Screen",
-    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "title": "🚀 บทวิเคราะห์หุ้นพุ่งก่อนตลาดเปิด (Pre-Market Top Gainers Analysis) — 2026-08-13",
+    "filename": "us_pre_market_analysis_2026_08_13.md",
+    "path": "us_pre_market_analysis_2026_08_13.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
     "date": "2026-08-13",
-    "timestamp": 1786622172008.3008,
-    "size": 354388
+    "timestamp": 1786622399716.0955,
+    "size": 7476
+  },
+  {
+    "title": "🐋 บทวิเคราะห์ วาฬขยับ ตลาดสะเทือน (Institutional Whale Flow Analysis) — 2026-08-13",
+    "filename": "whale_flow_analysis_2026_08_13.md",
+    "path": "whale_flow_analysis_2026_08_13.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-13",
+    "timestamp": 1786622397004.271,
+    "size": 5963
+  },
+  {
+    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-13",
+    "filename": "market_summary_2026_08_13.md",
+    "path": "market_summary_2026_08_13.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-13",
+    "timestamp": 1786622395000.0176,
+    "size": 4538
+  },
+  {
+    "title": "📡 บทวิเคราะห์ Small Cap Radar (High-Growth & Momentum Stocks) — 2026-08-13",
+    "filename": "small_cap_research_2026_08_13.md",
+    "path": "small_cap_research_2026_08_13.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-13",
+    "timestamp": 1786622331246.0632,
+    "size": 6528
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-13",
+    "filename": "bot_stats_2026_08_13.md",
+    "path": "bot_stats_2026_08_13.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-13",
+    "timestamp": 1786622238357.4155,
+    "size": 2137
   },
   {
     "title": "🐋 วาฬทองคำ รายวัน",
@@ -40,16 +90,6 @@
     "size": 19624
   },
   {
-    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-13",
-    "filename": "market_summary_2026_08_13.md",
-    "path": "market_summary_2026_08_13.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-13",
-    "timestamp": 1786573441954.1013,
-    "size": 9686
-  },
-  {
     "title": "☄️ COSMIC TRADE SIGNAL PRO — JUNE 2026",
     "filename": "cosmic_trade_signal_pro_june_2026.md",
     "path": "cosmic_trade_signal_pro_june_2026.md",
@@ -58,6 +98,26 @@
     "date": "June 2026",
     "timestamp": 1786544200100.0984,
     "size": 52069
+  },
+  {
+    "title": "🐳 รายงานวิเคราะห์รอยเท้าวาฬและกระแสเงินทุนสถาบัน (Whale Flow Analysis) — 2026-08-12",
+    "filename": "whale_flow_analysis_2026_08_12.md",
+    "path": "whale_flow_analysis_2026_08_12.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-12",
+    "timestamp": 1786622338511.61,
+    "size": 10554
+  },
+  {
+    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-12",
+    "filename": "market_summary_2026_08_12.md",
+    "path": "market_summary_2026_08_12.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-12",
+    "timestamp": 1786622338501.1833,
+    "size": 4392
   },
   {
     "title": "🐳 รายงานวิเคราะห์รอยเท้าวาฬและกระแสเงินทุนสถาบัน (Whale Flow Analysis) — 2026-08-12",
@@ -220,16 +280,6 @@
     "size": 10311
   },
   {
-    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-12",
-    "filename": "market_summary_2026_08_12.md",
-    "path": "market_summary_2026_08_12.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-12",
-    "timestamp": 1786544200126.3845,
-    "size": 7466
-  },
-  {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-08-12",
     "filename": "bot_trade_2026_08_12.md",
     "path": "bot_trade_2026_08_12.md",
@@ -360,6 +410,16 @@
     "size": 1113
   },
   {
+    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-10",
+    "filename": "market_summary_2026_08_10.md",
+    "path": "market_summary_2026_08_10.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-10",
+    "timestamp": 1786622338500.9246,
+    "size": 1458
+  },
+  {
     "title": "🐋 บทวิเคราะห์วาฬขยับ ตลาดสะเทือน (Whale Flow Analysis) — 2026-08-10",
     "filename": "whale_flow_analysis_2026_08_10.md",
     "path": "whale_flow_analysis_2026_08_10.md",
@@ -408,16 +468,6 @@
     "date": "2026-08-10",
     "timestamp": 1786544200144.0566,
     "size": 4123
-  },
-  {
-    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-10",
-    "filename": "market_summary_2026_08_10.md",
-    "path": "market_summary_2026_08_10.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-10",
-    "timestamp": 1786544200125.9832,
-    "size": 1458
   },
   {
     "title": "🪙 บทวิเคราะห์วาฬทองคำ รายวัน (Gold Whale Flow) — 2026-08-10",
@@ -690,6 +740,16 @@
     "size": 6846
   },
   {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-07",
+    "filename": "market_summary_2026_08_07.md",
+    "path": "market_summary_2026_08_07.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-07",
+    "timestamp": 1786622338500.6816,
+    "size": 5990
+  },
+  {
     "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow - Daily) ประจำวันที่ 07 สิงหาคม 2026",
     "filename": "whale_flow_analysis_2026_08_07.md",
     "path": "whale_flow_analysis_2026_08_07.md",
@@ -740,16 +800,6 @@
     "size": 335242
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-07",
-    "filename": "market_summary_2026_08_07.md",
-    "path": "market_summary_2026_08_07.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-07",
-    "timestamp": 1786544200125.6685,
-    "size": 5990
-  },
-  {
     "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow - Daily) ประจำวันที่ 07 สิงหาคม 2026",
     "filename": "gold_whale_flow_2026_08_07.md",
     "path": "gold_whale_flow_2026_08_07.md",
@@ -758,6 +808,16 @@
     "date": "2026-08-07",
     "timestamp": 1786544200111.1587,
     "size": 19790
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-06",
+    "filename": "market_summary_2026_08_06.md",
+    "path": "market_summary_2026_08_06.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-06",
+    "timestamp": 1786622338500.1553,
+    "size": 5913
   },
   {
     "title": "🐋 Whale Flow Analysis | รายงานวิเคราะห์การเคลื่อนย้ายเงินทุนสถาบันรายใหญ่ ประจำวันที่ 06 สิงหาคม 2026",
@@ -810,14 +870,14 @@
     "size": 9642
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-06",
-    "filename": "market_summary_2026_08_06.md",
-    "path": "market_summary_2026_08_06.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-05",
+    "filename": "market_summary_2026_08_05.md",
+    "path": "market_summary_2026_08_05.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-06",
-    "timestamp": 1786544200125.2285,
-    "size": 5913
+    "date": "2026-08-05",
+    "timestamp": 1786622338499.891,
+    "size": 6018
   },
   {
     "title": "🐋 Whale Flow Analysis | รายงานวิเคราะห์การเคลื่อนย้ายเงินทุนสถาบันรายใหญ่ ประจำวันที่ 05 สิงหาคม 2026",
@@ -870,14 +930,14 @@
     "size": 7853
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-05",
-    "filename": "market_summary_2026_08_05.md",
-    "path": "market_summary_2026_08_05.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-04",
+    "filename": "market_summary_2026_08_04.md",
+    "path": "market_summary_2026_08_04.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-05",
-    "timestamp": 1786544200124.8296,
-    "size": 6018
+    "date": "2026-08-04",
+    "timestamp": 1786622338499.5408,
+    "size": 5966
   },
   {
     "title": "🐋 Whale Flow Analysis | รายงานวิเคราะห์การเคลื่อนย้ายเงินทุนสถาบันรายใหญ่ ประจำวันที่ 04 สิงหาคม 2026",
@@ -930,14 +990,14 @@
     "size": 6234
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-04",
-    "filename": "market_summary_2026_08_04.md",
-    "path": "market_summary_2026_08_04.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-03",
+    "filename": "market_summary_2026_08_03.md",
+    "path": "market_summary_2026_08_03.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-04",
-    "timestamp": 1786544200124.416,
-    "size": 5966
+    "date": "2026-08-03",
+    "timestamp": 1786622338499.027,
+    "size": 3636
   },
   {
     "title": "🐋 Whale Flow Analysis | สแกนพฤติกรรมสถาบันและวาฬใหญ่ประจำวันที่ 03 สิงหาคม 2026",
@@ -988,16 +1048,6 @@
     "date": "2026-08-03",
     "timestamp": 1786544200142.1685,
     "size": 433267
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-08-03",
-    "filename": "market_summary_2026_08_03.md",
-    "path": "market_summary_2026_08_03.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-03",
-    "timestamp": 1786544200123.5146,
-    "size": 3636
   },
   {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-08-03",
@@ -1390,6 +1440,16 @@
     "size": 1910
   },
   {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-29",
+    "filename": "market_summary_2026_07_29.md",
+    "path": "market_summary_2026_07_29.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-29",
+    "timestamp": 1786622338498.6375,
+    "size": 19860
+  },
+  {
     "title": "🐳 Whale Flow Analysis: Daily Institutional Footprints & Unusual Activity",
     "filename": "whale_flow_analysis_2026_07_29.md",
     "path": "whale_flow_analysis_2026_07_29.md",
@@ -1438,16 +1498,6 @@
     "date": "2026-07-29",
     "timestamp": 1786544200141.1516,
     "size": 5209
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-29",
-    "filename": "market_summary_2026_07_29.md",
-    "path": "market_summary_2026_07_29.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-29",
-    "timestamp": 1786544200122.8933,
-    "size": 19860
   },
   {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-07-29",
@@ -2350,6 +2400,16 @@
     "size": 8183
   },
   {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-17",
+    "filename": "market_summary_2026_07_17.md",
+    "path": "market_summary_2026_07_17.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-17",
+    "timestamp": 1786622338498.1438,
+    "size": 30806
+  },
+  {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
     "filename": "us_viral_stock_analysis_2026_07_17.md",
     "path": "us_viral_stock_analysis_2026_07_17.md",
@@ -2390,16 +2450,6 @@
     "size": 400444
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-17",
-    "filename": "market_summary_2026_07_17.md",
-    "path": "market_summary_2026_07_17.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-17",
-    "timestamp": 1786544200121.1782,
-    "size": 30806
-  },
-  {
     "title": "Performance Review & Post-Market Recap: 2026-07-17",
     "filename": "bot_stats_2026_07_17.md",
     "path": "bot_stats_2026_07_17.md",
@@ -2408,6 +2458,16 @@
     "date": "2026-07-17",
     "timestamp": 1786544200093.3467,
     "size": 1539
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-16",
+    "filename": "market_summary_2026_07_16.md",
+    "path": "market_summary_2026_07_16.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-16",
+    "timestamp": 1786622338497.8018,
+    "size": 42336
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -2460,16 +2520,6 @@
     "size": 7389
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-16",
-    "filename": "market_summary_2026_07_16.md",
-    "path": "market_summary_2026_07_16.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-16",
-    "timestamp": 1786544200120.99,
-    "size": 42336
-  },
-  {
     "title": "Performance Review & Post-Market Recap: 2026-07-16",
     "filename": "bot_stats_2026_07_16.md",
     "path": "bot_stats_2026_07_16.md",
@@ -2478,6 +2528,16 @@
     "date": "2026-07-16",
     "timestamp": 1786544200093.2646,
     "size": 1759
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-15",
+    "filename": "market_summary_2026_07_15.md",
+    "path": "market_summary_2026_07_15.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-15",
+    "timestamp": 1786622338497.3813,
+    "size": 39108
   },
   {
     "title": "🐋 วาฬขยับ ตลาดสะเทือน — 2026-07-15",
@@ -2530,16 +2590,6 @@
     "size": 38555
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-15",
-    "filename": "market_summary_2026_07_15.md",
-    "path": "market_summary_2026_07_15.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-15",
-    "timestamp": 1786544200120.2566,
-    "size": 39108
-  },
-  {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-07-15",
     "filename": "bot_trade_2026_07_15.md",
     "path": "bot_trade_2026_07_15.md",
@@ -2558,6 +2608,16 @@
     "date": "2026-07-15",
     "timestamp": 1786544200093.1824,
     "size": 1539
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-14",
+    "filename": "market_summary_2026_07_14.md",
+    "path": "market_summary_2026_07_14.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-14",
+    "timestamp": 1786622338496.9978,
+    "size": 38644
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -2598,16 +2658,6 @@
     "date": "2026-07-14",
     "timestamp": 1786544200170.261,
     "size": 38025
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-14",
-    "filename": "market_summary_2026_07_14.md",
-    "path": "market_summary_2026_07_14.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-14",
-    "timestamp": 1786544200119.9304,
-    "size": 38644
   },
   {
     "title": "รายงานวิเคราะห์เปรียบเทียบโครงสร้างเนื้อหาและกลยุทธ์การลงทุนของคลิปวิดีโอประจำวันที่ 14 กรกฎาคม 2026",
@@ -2656,8 +2706,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-07-13",
-    "timestamp": 1786544200759.2163,
+    "timestamp": 1786622338511.1663,
     "size": 25532
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-13",
+    "filename": "market_summary_2026_07_13.md",
+    "path": "market_summary_2026_07_13.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-13",
+    "timestamp": 1786622338496.631,
+    "size": 35095
   },
   {
     "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ (Weekly Economic & Macro Event Report)",
@@ -2698,16 +2758,6 @@
     "date": "2026-07-13",
     "timestamp": 1786544200726.4988,
     "size": 61132
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-13",
-    "filename": "market_summary_2026_07_13.md",
-    "path": "market_summary_2026_07_13.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-13",
-    "timestamp": 1786544200119.5088,
-    "size": 35095
   },
   {
     "title": "พลังชิปหมื่นล้านจุดชนวนเทคฯ รอบใหม่ และ มรสุมขัดแย้งช่องแคบฮอร์มุซ: What's Next for Markets — 12 กรกฎาคม 2026",
@@ -2796,7 +2846,7 @@
     "category": "Global Market Recap",
     "categoryThai": "Global Market Recap",
     "date": "2026-07-10",
-    "timestamp": 1786544200110.6597,
+    "timestamp": 1786622338506.559,
     "size": 38242
   },
   {
@@ -2806,8 +2856,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-07-08",
-    "timestamp": 1786544200758.9106,
+    "timestamp": 1786622338510.7073,
     "size": 26425
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-08",
+    "filename": "market_summary_2026_07_08.md",
+    "path": "market_summary_2026_07_08.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-08",
+    "timestamp": 1786622338495.842,
+    "size": 31439
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -2840,14 +2900,14 @@
     "size": 51660
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-08",
-    "filename": "market_summary_2026_07_08.md",
-    "path": "market_summary_2026_07_08.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-07",
+    "filename": "market_summary_2026_07_07.md",
+    "path": "market_summary_2026_07_07.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-08",
-    "timestamp": 1786544200119.0515,
-    "size": 31439
+    "date": "2026-07-07",
+    "timestamp": 1786622338495.45,
+    "size": 32075
   },
   {
     "title": "Pre-Market US Stock Catalyst & Intelligence Report",
@@ -2880,24 +2940,24 @@
     "size": 32672
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-07",
-    "filename": "market_summary_2026_07_07.md",
-    "path": "market_summary_2026_07_07.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-07",
-    "timestamp": 1786544200118.7307,
-    "size": 32075
-  },
-  {
     "title": "🐋 วาฬขยับ ตลาดสะเทือน — 2026-07-06",
     "filename": "whale_flow_analysis_2026_07_06.md",
     "path": "whale_flow_analysis_2026_07_06.md",
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-07-06",
-    "timestamp": 1786544200758.6304,
+    "timestamp": 1786622338510.1394,
     "size": 24171
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-06",
+    "filename": "market_summary_2026_07_06.md",
+    "path": "market_summary_2026_07_06.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-06",
+    "timestamp": 1786622338495.1023,
+    "size": 30135
   },
   {
     "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ (Weekly Economic & Macro Event Report)",
@@ -2938,16 +2998,6 @@
     "date": "2026-07-06",
     "timestamp": 1786544200177.709,
     "size": 46890
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-06",
-    "filename": "market_summary_2026_07_06.md",
-    "path": "market_summary_2026_07_06.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-06",
-    "timestamp": 1786544200118.3308,
-    "size": 30135
   },
   {
     "title": "Astro Economy Weekly Analysis: Neptune's Awakening & The Pragmatic Shift",
@@ -3090,6 +3140,36 @@
     "size": 50197
   },
   {
+    "title": "🌍 Global Market Recap — 2026-07-03",
+    "filename": "global_market_recap_thai_2026_07_03.md",
+    "path": "global_market_recap_thai_2026_07_03.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-07-03",
+    "timestamp": 1786622338506.1917,
+    "size": 34353
+  },
+  {
+    "title": "🌍 Global Market Recap — 2026-07-03",
+    "filename": "global_market_recap_2026_07_03.md",
+    "path": "global_market_recap_2026_07_03.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-07-03",
+    "timestamp": 1786622338504.8164,
+    "size": 25458
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-03",
+    "filename": "market_summary_2026_07_03.md",
+    "path": "market_summary_2026_07_03.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-03",
+    "timestamp": 1786622338494.776,
+    "size": 35238
+  },
+  {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
     "filename": "us_viral_stock_analysis_2026_07_03.md",
     "path": "us_viral_stock_analysis_2026_07_03.md",
@@ -3108,36 +3188,6 @@
     "date": "2026-07-03",
     "timestamp": 1786544200725.8179,
     "size": 41400
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-03",
-    "filename": "market_summary_2026_07_03.md",
-    "path": "market_summary_2026_07_03.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-03",
-    "timestamp": 1786544200118.1016,
-    "size": 35238
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-07-03",
-    "filename": "global_market_recap_thai_2026_07_03.md",
-    "path": "global_market_recap_thai_2026_07_03.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-07-03",
-    "timestamp": 1786544200110.3645,
-    "size": 34353
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-07-03",
-    "filename": "global_market_recap_2026_07_03.md",
-    "path": "global_market_recap_2026_07_03.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-07-03",
-    "timestamp": 1786544200108.8875,
-    "size": 25458
   },
   {
     "title": "บทวิเคราะห์เชิงลึก: KLA Corporation (NASDAQ: KLAC)",
@@ -3168,6 +3218,16 @@
     "date": "2026-07-03",
     "timestamp": 1786544200079.8916,
     "size": 51588
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-02",
+    "filename": "market_summary_2026_07_02.md",
+    "path": "market_summary_2026_07_02.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-02",
+    "timestamp": 1786622338494.4114,
+    "size": 29887
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -3210,16 +3270,6 @@
     "size": 35545
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-02",
-    "filename": "market_summary_2026_07_02.md",
-    "path": "market_summary_2026_07_02.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-02",
-    "timestamp": 1786544200117.8152,
-    "size": 29887
-  },
-  {
     "title": "รายงานการวิเคราะห์เชิงลึก: การหมุนเวียนกระแสเงินทุนสู่กลุ่ม AI Software และจุดเปลี่ยนเชิงโครงสร้างของตลาดเทคโนโลยีสหรัฐฯ",
     "filename": "custom_1782454912886_2026_07_02.md",
     "path": "custom_1782454912886_2026_07_02.md",
@@ -3256,8 +3306,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-07-01",
-    "timestamp": 1786544200758.1943,
+    "timestamp": 1786622338509.8164,
     "size": 23334
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-01",
+    "filename": "market_summary_2026_07_01.md",
+    "path": "market_summary_2026_07_01.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-07-01",
+    "timestamp": 1786622338493.605,
+    "size": 28719
   },
   {
     "title": "รายงานพิเศษ: VIP Market Strategy Watchlist",
@@ -3300,14 +3360,14 @@
     "size": 49049
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-07-01",
-    "filename": "market_summary_2026_07_01.md",
-    "path": "market_summary_2026_07_01.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-30",
+    "filename": "market_summary_2026_06_30.md",
+    "path": "market_summary_2026_06_30.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-07-01",
-    "timestamp": 1786544200117.636,
-    "size": 28719
+    "date": "2026-06-30",
+    "timestamp": 1786622338493.1326,
+    "size": 33876
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -3340,16 +3400,6 @@
     "size": 59540
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-30",
-    "filename": "market_summary_2026_06_30.md",
-    "path": "market_summary_2026_06_30.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-30",
-    "timestamp": 1786544200117.4314,
-    "size": 33876
-  },
-  {
     "title": "custom_1782454904186_2026_06_30.md",
     "filename": "custom_1782454904186_2026_06_30.md",
     "path": "custom_1782454904186_2026_06_30.md",
@@ -3366,8 +3416,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-29",
-    "timestamp": 1786544200758.0115,
+    "timestamp": 1786622338509.4207,
     "size": 24601
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-29",
+    "filename": "market_summary_2026_06_29.md",
+    "path": "market_summary_2026_06_29.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-29",
+    "timestamp": 1786622338492.408,
+    "size": 31509
   },
   {
     "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ (Weekly Economic & Macro Event Report)",
@@ -3408,16 +3468,6 @@
     "date": "2026-06-29",
     "timestamp": 1786544200176.899,
     "size": 57191
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-29",
-    "filename": "market_summary_2026_06_29.md",
-    "path": "market_summary_2026_06_29.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-29",
-    "timestamp": 1786544200117.1218,
-    "size": 31509
   },
   {
     "title": "Astro Economy Weekly Analysis: The Capricorn Full Moon & Retrograde Crossroads",
@@ -3496,7 +3546,7 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-27",
-    "timestamp": 1786544200756.7268,
+    "timestamp": 1786622338509.082,
     "size": 23472
   },
   {
@@ -3508,6 +3558,36 @@
     "date": "2026-06-27",
     "timestamp": 1786544200106.8442,
     "size": 34743
+  },
+  {
+    "title": "🌍 Global Market Recap — 2026-06-26",
+    "filename": "global_market_recap_thai_2026_06_26.md",
+    "path": "global_market_recap_thai_2026_06_26.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-06-26",
+    "timestamp": 1786622338505.847,
+    "size": 32665
+  },
+  {
+    "title": "🌍 Global Market Recap — 2026-06-26",
+    "filename": "global_market_recap_2026_06_26.md",
+    "path": "global_market_recap_2026_06_26.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-06-26",
+    "timestamp": 1786622338504.544,
+    "size": 27114
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-26",
+    "filename": "market_summary_2026_06_26.md",
+    "path": "market_summary_2026_06_26.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-26",
+    "timestamp": 1786622338492.0315,
+    "size": 29140
   },
   {
     "title": "รายงานพิเศษ: VIP Market Strategy Watchlist",
@@ -3550,36 +3630,6 @@
     "size": 51662
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-26",
-    "filename": "market_summary_2026_06_26.md",
-    "path": "market_summary_2026_06_26.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-26",
-    "timestamp": 1786544200116.9172,
-    "size": 29140
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-06-26",
-    "filename": "global_market_recap_thai_2026_06_26.md",
-    "path": "global_market_recap_thai_2026_06_26.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-06-26",
-    "timestamp": 1786544200110.088,
-    "size": 32665
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-06-26",
-    "filename": "global_market_recap_2026_06_26.md",
-    "path": "global_market_recap_2026_06_26.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-06-26",
-    "timestamp": 1786544200108.589,
-    "size": 27114
-  },
-  {
     "title": "custom_1782454912886_2026_06_26.md",
     "filename": "custom_1782454912886_2026_06_26.md",
     "path": "custom_1782454912886_2026_06_26.md",
@@ -3598,6 +3648,16 @@
     "date": "2026-06-26",
     "timestamp": 1786544200100.2158,
     "size": 25812
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-25",
+    "filename": "market_summary_2026_06_25.md",
+    "path": "market_summary_2026_06_25.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-25",
+    "timestamp": 1786622338491.667,
+    "size": 31573
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -3630,16 +3690,6 @@
     "size": 44213
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-25",
-    "filename": "market_summary_2026_06_25.md",
-    "path": "market_summary_2026_06_25.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-25",
-    "timestamp": 1786544200116.6975,
-    "size": 31573
-  },
-  {
     "title": "☄️ COSMIC TRADE SIGNAL PRO — JUNE 25, 2026",
     "filename": "cosmic_trade_signal_pro_2026_06_25.md",
     "path": "cosmic_trade_signal_pro_2026_06_25.md",
@@ -3656,8 +3706,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-24",
-    "timestamp": 1786544200756.2612,
+    "timestamp": 1786622338508.7693,
     "size": 24375
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-24",
+    "filename": "market_summary_2026_06_24.md",
+    "path": "market_summary_2026_06_24.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-24",
+    "timestamp": 1786622338491.3362,
+    "size": 29317
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -3690,14 +3750,14 @@
     "size": 60388
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-24",
-    "filename": "market_summary_2026_06_24.md",
-    "path": "market_summary_2026_06_24.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-23",
+    "filename": "market_summary_2026_06_23.md",
+    "path": "market_summary_2026_06_23.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-24",
-    "timestamp": 1786544200116.1934,
-    "size": 29317
+    "date": "2026-06-23",
+    "timestamp": 1786622338491.034,
+    "size": 28096
   },
   {
     "title": "US VIRAL & HOT STOCKS INTELLIGENCE REPORT",
@@ -3730,16 +3790,6 @@
     "size": 64992
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-23",
-    "filename": "market_summary_2026_06_23.md",
-    "path": "market_summary_2026_06_23.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-23",
-    "timestamp": 1786544200115.8293,
-    "size": 28096
-  },
-  {
     "title": "Institutional Analysis: Fundamental Oversold & Smart Money Accumulation Targets",
     "filename": "fundamental_recovery_analysis_2026_06_23.md",
     "path": "fundamental_recovery_analysis_2026_06_23.md",
@@ -3760,6 +3810,26 @@
     "size": 41318
   },
   {
+    "title": "🐋 วาฬขยับ ตลาดสะเทือน — 2026-06-22",
+    "filename": "whale_flow_analysis_2026_06_22.md",
+    "path": "whale_flow_analysis_2026_06_22.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-06-22",
+    "timestamp": 1786622338508.4204,
+    "size": 28224
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-22",
+    "filename": "market_summary_2026_06_22.md",
+    "path": "market_summary_2026_06_22.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-22",
+    "timestamp": 1786622338490.5747,
+    "size": 29009
+  },
+  {
     "title": "จุดเปลี่ยนสำคัญของตลาดหุ้นสหรัฐฯ: What's Next for Markets — 22 มิถุนายน 2026",
     "filename": "whats_next_2026_06_22.md",
     "path": "whats_next_2026_06_22.md",
@@ -3768,16 +3838,6 @@
     "date": "2026-06-22",
     "timestamp": 1786544200761.8147,
     "size": 28383
-  },
-  {
-    "title": "🐋 วาฬขยับ ตลาดสะเทือน — 2026-06-22",
-    "filename": "whale_flow_analysis_2026_06_22.md",
-    "path": "whale_flow_analysis_2026_06_22.md",
-    "category": "Whale Flow",
-    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
-    "date": "2026-06-22",
-    "timestamp": 1786544200755.3853,
-    "size": 28224
   },
   {
     "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ (Weekly Economic & Macro Event Report)",
@@ -3840,16 +3900,6 @@
     "size": 44018
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-22",
-    "filename": "market_summary_2026_06_22.md",
-    "path": "market_summary_2026_06_22.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-22",
-    "timestamp": 1786544200115.534,
-    "size": 29009
-  },
-  {
     "title": "Astro Economy Weekly Analysis: The Solstice Pivot & Sentiment Realignment",
     "filename": "astro_economy_weekly_2026_06_21.md",
     "path": "astro_economy_weekly_2026_06_21.md",
@@ -3866,8 +3916,38 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-20",
-    "timestamp": 1786544200754.9336,
+    "timestamp": 1786622338508.021,
     "size": 29823
+  },
+  {
+    "title": "🌍 Global Market Recap — 2026-06-19",
+    "filename": "global_market_recap_thai_2026_06_19.md",
+    "path": "global_market_recap_thai_2026_06_19.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-06-19",
+    "timestamp": 1786622338505.5112,
+    "size": 28953
+  },
+  {
+    "title": "🌍 Global Market Recap — 2026-06-19",
+    "filename": "global_market_recap_2026_06_19.md",
+    "path": "global_market_recap_2026_06_19.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-06-19",
+    "timestamp": 1786622338504.2703,
+    "size": 24310
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-19",
+    "filename": "market_summary_2026_06_19.md",
+    "path": "market_summary_2026_06_19.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-19",
+    "timestamp": 1786622338490.2717,
+    "size": 28547
   },
   {
     "title": "US VIRAL STOCK INTELLIGENCE REPORT",
@@ -3898,36 +3978,6 @@
     "date": "2026-06-19",
     "timestamp": 1786544200175.7544,
     "size": 60908
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-19",
-    "filename": "market_summary_2026_06_19.md",
-    "path": "market_summary_2026_06_19.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-19",
-    "timestamp": 1786544200115.1104,
-    "size": 28547
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-06-19",
-    "filename": "global_market_recap_thai_2026_06_19.md",
-    "path": "global_market_recap_thai_2026_06_19.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-06-19",
-    "timestamp": 1786544200109.7893,
-    "size": 28953
-  },
-  {
-    "title": "🌍 Global Market Recap — 2026-06-19",
-    "filename": "global_market_recap_2026_06_19.md",
-    "path": "global_market_recap_2026_06_19.md",
-    "category": "Global Market Recap",
-    "categoryThai": "Global Market Recap",
-    "date": "2026-06-19",
-    "timestamp": 1786544200108.2808,
-    "size": 24310
   },
   {
     "title": "Pre-Market US Stock Catalyst & Intelligence Report",
@@ -3976,8 +4026,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-17",
-    "timestamp": 1786544200754.539,
+    "timestamp": 1786622338507.7078,
     "size": 27171
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-17",
+    "filename": "market_summary_2026_06_17.md",
+    "path": "market_summary_2026_06_17.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-17",
+    "timestamp": 1786622338489.9617,
+    "size": 30186
   },
   {
     "title": "US VIRAL STOCK INTELLIGENCE REPORT",
@@ -4010,14 +4070,14 @@
     "size": 45211
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-17",
-    "filename": "market_summary_2026_06_17.md",
-    "path": "market_summary_2026_06_17.md",
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-16",
+    "filename": "market_summary_2026_06_16.md",
+    "path": "market_summary_2026_06_16.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-17",
-    "timestamp": 1786544200114.6887,
-    "size": 30186
+    "date": "2026-06-16",
+    "timestamp": 1786622338489.3313,
+    "size": 31009
   },
   {
     "title": "US VIRAL STOCK INTELLIGENCE REPORT",
@@ -4038,16 +4098,6 @@
     "date": "2026-06-16",
     "timestamp": 1786544200175.234,
     "size": 49651
-  },
-  {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-16",
-    "filename": "market_summary_2026_06_16.md",
-    "path": "market_summary_2026_06_16.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-16",
-    "timestamp": 1786544200114.581,
-    "size": 31009
   },
   {
     "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ (Weekly Economic & Macro Event Report)",
@@ -4076,7 +4126,7 @@
     "category": "Global Market Recap",
     "categoryThai": "Global Market Recap",
     "date": "2026-06-12",
-    "timestamp": 1786544200109.4136,
+    "timestamp": 1786622338505.2375,
     "size": 42167
   },
   {
@@ -4086,7 +4136,7 @@
     "category": "Global Market Recap",
     "categoryThai": "Global Market Recap",
     "date": "2026-06-12",
-    "timestamp": 1786544200107.994,
+    "timestamp": 1786622338504.003,
     "size": 26058
   },
   {
@@ -4116,8 +4166,18 @@
     "category": "Whale Flow",
     "categoryThai": "วาฬขยับ ตลาดสะเทือน",
     "date": "2026-06-10",
-    "timestamp": 1786544200754.4265,
+    "timestamp": 1786622338507.138,
     "size": 22238
+  },
+  {
+    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-10",
+    "filename": "market_summary_2026_06_10.md",
+    "path": "market_summary_2026_06_10.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-06-10",
+    "timestamp": 1786622338488.2896,
+    "size": 28774
   },
   {
     "title": "Small-Cap & Penny Stock Intelligence Report",
@@ -4130,23 +4190,13 @@
     "size": 18622
   },
   {
-    "title": "สรุปจบ ทันโลกหุ้น — 2026-06-10",
-    "filename": "market_summary_2026_06_10.md",
-    "path": "market_summary_2026_06_10.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-06-10",
-    "timestamp": 1786544200114.4666,
-    "size": 28774
-  },
-  {
     "title": "สรุปจบ ทันโลกหุ้น — 2026-06-08",
     "filename": "market_summary_2026_06_08.md",
     "path": "market_summary_2026_06_08.md",
     "category": "Daily Script",
     "categoryThai": "สรุปจบ ทันโลกหุ้น",
     "date": "2026-06-08",
-    "timestamp": 1786544200114.3472,
+    "timestamp": 1786622338487.6895,
     "size": 29451
   },
   {
@@ -4156,7 +4206,7 @@
     "category": "Global Market Recap",
     "categoryThai": "Global Market Recap",
     "date": "2026-06-05",
-    "timestamp": 1786544200107.742,
+    "timestamp": 1786622338503.7163,
     "size": 21707
   },
   {

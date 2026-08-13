@@ -1,10 +1,10 @@
 {
-  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-08-13.",
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-08-13. พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation - วาฬขยับ ตลาดสะเทือน & Options Edge): Found Confluence Match for MSFT (active in Whale Flow)., Found Confluence Match for AMZN (active in Whale Flow)., Found Confluence Match for NVDA (active in Whale Flow)., Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for TSM (active in Whale Flow)., Found Confluence Match for AVGO (active in Whale Flow)., Found Confluence Match for SMCI (active in Whale Flow)., Found Confluence Match for LLY (active in Whale Flow).",
   "audit_log": [
     {
       "item": "Duplication Check (Whale Flow vs Options Screen)",
       "status": "verified_ok",
-      "details": "Confluence check passed. No overlap with active Whale Flow."
+      "details": "Confluence check passed: Found Confluence Match for MSFT (active in Whale Flow)., Found Confluence Match for AMZN (active in Whale Flow)., Found Confluence Match for NVDA (active in Whale Flow)., Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for TSM (active in Whale Flow)., Found Confluence Match for AVGO (active in Whale Flow)., Found Confluence Match for SMCI (active in Whale Flow)., Found Confluence Match for LLY (active in Whale Flow). Tickers tagged for Double Confirmation."
     },
     {
       "item": "Ticker Data & Price Verification",
