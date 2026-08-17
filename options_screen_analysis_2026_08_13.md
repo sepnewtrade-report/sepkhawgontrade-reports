@@ -4,9 +4,6 @@
 
 บทวิเคราะห์ทางสถิติเพื่อคัดกรองสัญญา Option ที่มีความได้เปรียบทางสถิติสูงสุดจากตลาดโดยรวม ผ่านกระบวนการ 2 ขั้นตอน (Options-First Scanning & Stock Validation)
 
-> [!NOTE]
-> **ผลการตรวจสอบคุณภาพ (QC Audit):** ผ่านการตรวจสอบคุณภาพข้อมูล (QC Passed) สำหรับรายงานมา Scan Option กัน ประจำวันที่ 2026-08-13. พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation - วาฬขยับ ตลาดสะเทือน & Options Edge): Found Confluence Match for MSFT (active in Whale Flow)., Found Confluence Match for AMZN (active in Whale Flow)., Found Confluence Match for NVDA (active in Whale Flow)., Found Confluence Match for PLTR (active in Whale Flow)., Found Confluence Match for TSM (active in Whale Flow)., Found Confluence Match for AVGO (active in Whale Flow)., Found Confluence Match for SMCI (active in Whale Flow)., Found Confluence Match for LLY (active in Whale Flow).
-
 ## 📈 Market Context & Technical Scan (ขั้นตอนที่ 2)
 สรุปทิศทางราคาหุ้นอ้างอิงที่เข้ารอบการประเมิน แนวรับ-แนวต้านเชิงสถิติ (1-Standard Deviation Expected Move) และการตรวจสอบปัจจัยข่าวสาร Catalysts ที่สำคัญในรอบช่วงอายุสัญญา
 

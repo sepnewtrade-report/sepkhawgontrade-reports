@@ -1,0 +1,35 @@
+{
+  "overall_summary": "ตรวจสอบความถูกต้องของราคาดัชนีและราคาหุ้นรายตัว ณ วันที่ 15 สิงหาคม 2026 ผ่าน yfinance เรียบร้อยแล้ว",
+  "audit_log": [
+    {
+      "item": "S&P 500 Index (SPX)",
+      "status": "verified_ok",
+      "details": "ราคาปิด 7,785.76 (-0.17%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Nasdaq Index (NDX)",
+      "status": "verified_ok",
+      "details": "ราคาปิด 26,729.16 (-0.28%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Dow Jones Index (DJI)",
+      "status": "verified_ok",
+      "details": "ราคาปิด 53,732.41 (-0.20%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Russell 2000 (RUT)",
+      "status": "verified_ok",
+      "details": "ราคาปิด 3,068.42 (+0.51%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Spot Gold (GC=F)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $4,432.00 (+0.26%, +$11.60) แก้ไขตามข้อมูลอ้างอิงของ Investing.com เรียบร้อยแล้ว"
+    },
+    {
+      "item": "AMD",
+      "status": "verified_ok",
+      "details": "ราคาปิด $497.69 (+3.04%) แก้ไขตามข้อมูลอ้างอิงของ TradingKey เรียบร้อยแล้ว"
+    }
+  ]
+}

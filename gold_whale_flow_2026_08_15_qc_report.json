@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ตรวจสอบความถูกต้องของราคาทองคำ โลหะเงิน และหุ้นเหมืองทองคำ ณ วันที่ 15 สิงหาคม 2026 ผ่าน yfinance เรียบร้อยแล้ว",
+  "audit_log": [
+    {
+      "item": "Spot Gold (GC=F)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $4,432.00/oz (+0.26%, +$11.60) แก้ไขตามข้อมูลอ้างอิงเรียบร้อยแล้ว"
+    },
+    {
+      "item": "Spot Silver (SI=F)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $64.82/oz (-0.07%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "GDX (Gold Miners ETF)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $89.97 (+1.93%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Newmont (NEM)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $117.76 (+3.13%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    },
+    {
+      "item": "Agnico Eagle (AEM)",
+      "status": "verified_ok",
+      "details": "ราคาปิด $186.46 (+3.38%) ถูกต้องตรงตามข้อมูลตลาดจริง"
+    }
+  ]
+}

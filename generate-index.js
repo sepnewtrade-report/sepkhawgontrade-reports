@@ -129,8 +129,9 @@ function scanDir(dir, relativeDir = '') {
     const stat = fs.statSync(filePath);
 
     if (stat.isDirectory()) {
-      // Exclude hidden folders, node_modules, and .agents
-      if (!file.startsWith('.') && file !== 'node_modules' && file !== '.agents') {
+      // Exclude hidden folders, node_modules, venvs, and scratch
+      const ignoredDirs = ['node_modules', '.agents', 'venv', '.venv', 'fresh_venv', 'test_venv', 'tmp_venv', 'scratch'];
+      if (!file.startsWith('.') && !ignoredDirs.includes(file)) {
         results = results.concat(scanDir(filePath, relPath));
       }
     } else if (file.endsWith('.md')) {

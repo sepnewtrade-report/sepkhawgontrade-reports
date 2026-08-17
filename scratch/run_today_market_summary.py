@@ -4,12 +4,10 @@ import json
 import subprocess
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VENV_PYTHON = os.path.join(ROOT_DIR, "venv", "bin", "python3")
-if not os.path.exists(VENV_PYTHON):
-    VENV_PYTHON = sys.executable
+VENV_PYTHON = os.path.join(ROOT_DIR, "venv", "bin", "python")
 
 TEMPLATES_JSON = os.path.join(ROOT_DIR, "notebooklm-manager", "templates.json")
-TARGET_DATE = "2026-08-12"
+TARGET_DATE = "2026-08-14"
 TARGET_DATE_UNDERSCORE = TARGET_DATE.replace("-", "_")
 
 def load_templates():

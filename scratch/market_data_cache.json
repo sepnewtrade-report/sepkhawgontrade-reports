@@ -1,0 +1,68 @@
+{
+  "S&P 500": {
+    "ticker": "^GSPC",
+    "price": 7785.76,
+    "prev": 7798.99,
+    "change_pct": -0.17
+  },
+  "Nasdaq Composite": {
+    "ticker": "^IXIC",
+    "price": 26729.16,
+    "prev": 26803.03,
+    "change_pct": -0.28
+  },
+  "Dow Jones": {
+    "ticker": "^DJI",
+    "price": 53732.41,
+    "prev": 53839.99,
+    "change_pct": -0.2
+  },
+  "Russell 2000": {
+    "ticker": "^RUT",
+    "price": 3068.42,
+    "prev": 3052.85,
+    "change_pct": 0.51
+  },
+  "US 10Y Yield": {
+    "ticker": "^TNX",
+    "price": 4.7,
+    "prev": 4.64,
+    "change_pct": 1.19
+  },
+  "VIX": {
+    "ticker": "^VIX",
+    "price": 14.25,
+    "prev": 14.63,
+    "change_pct": -2.6
+  },
+  "Gold": {
+    "ticker": "GC=F",
+    "price": 4380.4,
+    "prev": 4363.6,
+    "change_pct": 0.38
+  },
+  "WTI Oil": {
+    "ticker": "CL=F",
+    "price": 82.4,
+    "prev": 81.25,
+    "change_pct": 1.42
+  },
+  "Brent Oil": {
+    "ticker": "BZ=F",
+    "price": 88.52,
+    "prev": 87.07,
+    "change_pct": 1.67
+  },
+  "Bitcoin": {
+    "ticker": "BTC-USD",
+    "price": 63007.88,
+    "prev": 63402.17,
+    "change_pct": -0.62
+  },
+  "US Dollar Index": {
+    "ticker": "DX-Y.NYB",
+    "price": 99.67,
+    "prev": 99.96,
+    "change_pct": -0.29
+  }
+}

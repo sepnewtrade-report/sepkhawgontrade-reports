@@ -4,11 +4,9 @@
 
 รายงานวิเคราะห์ร่องรอยการเคลื่อนย้ายเงินทุนของนักลงทุนสถาบันขนาดใหญ่ (Institutional Smart Money & Dark Pool Flow) ประจำวันพฤหัสบดีที่ 13 สิงหาคม 2026
 
----
-
 ## 📊 ตารางสรุปพฤติกรรมเงินทุนสถาบัน (Whale Flow Tracker)
 
-| Ticker | ชื่อบริษัท | ราคาล่าสุด ($) | การเปลี่ยนแปลง (%) | RSI (14) | Institutional Volume | สัญญาณพฤติกรรมสถาบัน (Institutional Action) |
+| Ticker | ชื่อบริษัท | ราคาล่าสุด ($) | การเปลี่ยนแปลง (%) | RSI (14) | Volume (1D) | สัญญาณพฤติกรรมสถาบัน (Institutional Action) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **NVDA** | NVIDIA Corp. | **$224.09** | 📈 **+3.03%** | 61.20 | 108.5M | 🐋 **Aggressive Accumulation**: แรงซื้อสะสมผ่าน Dark Pool หนาแน่นรับแนวโน้มชิป Blackwell [ที่มา: MarketWatch] |
 | **TSM** | TSMC | **$429.15** | 📈 **+1.68%** | 62.50 | 9.5M | 🐋 **Institutional Buy Flow**: แรงหนุนจากอัตราการใช้กำลังการผลิต 3nm/2nm เต็ม 100% [ที่มา: Reuters] |

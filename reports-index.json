@@ -1,13 +1,453 @@
 [
   {
+    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-17",
+    "filename": "options_screen_analysis_2026_08_17.md",
+    "path": "options_screen_analysis_2026_08_17.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "date": "2026-08-17",
+    "timestamp": 1786968404165.0222,
+    "size": 378518
+  },
+  {
+    "title": "us_pre_market_analysis_2026_08_17.md",
+    "filename": "us_pre_market_analysis_2026_08_17.md",
+    "path": "us_pre_market_analysis_2026_08_17.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-17",
+    "timestamp": 1786968087788.9446,
+    "size": 40439
+  },
+  {
+    "title": "Top Buy Signals & Pre-Market Scan: 2026-08-17",
+    "filename": "bot_trade_2026_08_17.md",
+    "path": "bot_trade_2026_08_17.md",
+    "category": "Bot Trade Todays",
+    "categoryThai": "Bot Trade Todays",
+    "date": "2026-08-17",
+    "timestamp": 1786968006386.1985,
+    "size": 5857
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-17",
+    "filename": "bot_stats_2026_08_17.md",
+    "path": "bot_stats_2026_08_17.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-17",
+    "timestamp": 1786920209484.02,
+    "size": 1461
+  },
+  {
+    "title": "us_viral_stock_analysis_2026_08_17.md",
+    "filename": "us_viral_stock_analysis_2026_08_17.md",
+    "path": "us_viral_stock_analysis_2026_08_17.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-17",
+    "timestamp": 1786891108769.3313,
+    "size": 24052
+  },
+  {
+    "title": "🐻 Bear Squeeze Analysis: รายงานสแกนหุ้นหมีโดนบีบ (Short Squeeze Weekly) ประจำวันที่ 16 สิงหาคม 2026",
+    "filename": "short_squeeze_2026_08_16.md",
+    "path": "short_squeeze_2026_08_16.md",
+    "category": "Bear Squeeze",
+    "categoryThai": "หมีโดนบีบ",
+    "date": "2026-08-16",
+    "timestamp": 1786850716158.5774,
+    "size": 22381
+  },
+  {
+    "title": "🔮 บทวิเคราะห์ทิศทางและแนวโน้มตลาด What's Next for Market",
+    "filename": "whats_next_2026_08_16.md",
+    "path": "whats_next_2026_08_16.md",
+    "category": "What's Next for Market",
+    "categoryThai": "What's Next for Market",
+    "date": "2026-08-16",
+    "timestamp": 1786845830381.2734,
+    "size": 11756
+  },
+  {
+    "title": "🇹🇭 เหลียวหลังมามองหุ้นไทย (Thai Stock Weekly Recap) — 2026-08-16",
+    "filename": "thai_stock_2026_08_16.md",
+    "path": "thai_stock_2026_08_16.md",
+    "category": "Thai Stock Analysis",
+    "categoryThai": "เหลียวหลังมามองหุ้นไทย",
+    "date": "2026-08-16",
+    "timestamp": 1786844837104.8733,
+    "size": 24678
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-16",
+    "filename": "bot_stats_2026_08_16.md",
+    "path": "bot_stats_2026_08_16.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-16",
+    "timestamp": 1786833013021.149,
+    "size": 2072
+  },
+  {
+    "title": "🔮 บทวิเคราะห์ทิศทางและแนวโน้มตลาด What's Next for Market",
+    "filename": "whats_next_2026_08_15.md",
+    "path": "whats_next_2026_08_15.md",
+    "category": "What's Next for Market",
+    "categoryThai": "What's Next for Market",
+    "date": "2026-08-15",
+    "timestamp": 1786845830382.2568,
+    "size": 11756
+  },
+  {
+    "title": "📅 ปฏิทินวิเคราะห์เหตุการณ์เศรษฐกิจรายสัปดาห์ & รายงานผลประกอบการ (Weekly Economic & Earnings Calendar)",
+    "filename": "weekly_economic_calendar_2026_08_15.md",
+    "path": "weekly_economic_calendar_2026_08_15.md",
+    "category": "Economic Calendar",
+    "categoryThai": "Economic Calendar",
+    "date": "2026-08-15",
+    "timestamp": 1786806158469.1282,
+    "size": 30049
+  },
+  {
+    "title": "Top Buy Signals & Pre-Market Scan: 2026-08-15",
+    "filename": "bot_trade_2026_08_15.md",
+    "path": "bot_trade_2026_08_15.md",
+    "category": "Bot Trade Todays",
+    "categoryThai": "Bot Trade Todays",
+    "date": "2026-08-15",
+    "timestamp": 1786795204824.9028,
+    "size": 5857
+  },
+  {
+    "title": "VIP Market Strategy Watchlist (Prompt v.3 - Quantitative Scenario Planning & Risk-Aware Framework)",
+    "filename": "vip_watchlist_2026_08_15.md",
+    "path": "vip_watchlist_2026_08_15.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-08-15",
+    "timestamp": 1786778295959.5227,
+    "size": 9884
+  },
+  {
+    "title": "🐋 รายงานพิเศษ VP WhaleZoomKepHoonARai (วาฬซุ่มเก็บหุ้นอะไร)",
+    "filename": "vp_whalezoomkephoonarai_2026_08_15.md",
+    "path": "MEMBERSHIP CONTENT SYSTEM/vp_whalezoomkephoonarai_2026_08_15.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-08-15",
+    "timestamp": 1786773241760.005,
+    "size": 2300
+  },
+  {
+    "title": "📡 รายงานพิเศษ VP TOP OPPORTUNITY RADAR",
+    "filename": "vp_top_opportunity_radar_2026_08_15.md",
+    "path": "MEMBERSHIP CONTENT SYSTEM/vp_top_opportunity_radar_2026_08_15.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-08-15",
+    "timestamp": 1786773241759.928,
+    "size": 2223
+  },
+  {
+    "title": "🥇 สรุปบทวิเคราะห์กระแสเงินทุนวาฬทองคำรายสัปดาห์ Gold Whale Flow Weekly",
+    "filename": "gold_whale_flow_weekly_2026_08_15.md",
+    "path": "gold_whale_flow_weekly_2026_08_15.md",
+    "category": "Gold Whale Flow",
+    "categoryThai": "วาฬทองคำ รายวัน",
+    "date": "2026-08-15",
+    "timestamp": 1786773241759.637,
+    "size": 3165
+  },
+  {
+    "title": "🪐 บทวิเคราะห์โหราศาสตร์การเงินรายสัปดาห์ Astro Economy Weekly",
+    "filename": "astro_economy_weekly_2026_08_15.md",
+    "path": "astro_economy_weekly_2026_08_15.md",
+    "category": "Astro Economy Weekly",
+    "categoryThai": "Astro Economy Weekly",
+    "date": "2026-08-15",
+    "timestamp": 1786773241759.5513,
+    "size": 3824
+  },
+  {
+    "title": "🌍 บทวิเคราะห์เชิงลึกรายสัปดาห์ Global Market Recap & Strategic Outlook",
+    "filename": "global_market_recap_thai_2026_08_15.md",
+    "path": "global_market_recap_thai_2026_08_15.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-08-15",
+    "timestamp": 1786773241759.237,
+    "size": 7647
+  },
+  {
+    "title": "🌍 บทวิเคราะห์เชิงลึกรายสัปดาห์ Global Market Recap & Strategic Outlook",
+    "filename": "global_market_recap_2026_08_15.md",
+    "path": "global_market_recap_2026_08_15.md",
+    "category": "Global Market Recap",
+    "categoryThai": "Global Market Recap",
+    "date": "2026-08-15",
+    "timestamp": 1786773241758.602,
+    "size": 7647
+  },
+  {
+    "title": "🐳 VP WHALEZOOM: Premium Institutional Flow Radar ประจำวันที่ 15 สิงหาคม 2026",
+    "filename": "vp_whalezoomkephoonarai_2026_08_15.md",
+    "path": "vp_whalezoomkephoonarai_2026_08_15.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-08-15",
+    "timestamp": 1786771297923.372,
+    "size": 5411
+  },
+  {
+    "title": "🚀 VP TOP OPPORTUNITY RADAR: High-Conviction Setups & Scenario Briefing ประจำวันที่ 15 สิงหาคม 2026",
+    "filename": "vp_top_opportunity_radar_2026_08_15.md",
+    "path": "vp_top_opportunity_radar_2026_08_15.md",
+    "category": "Other Reports",
+    "categoryThai": "รายงานทั่วไป",
+    "date": "2026-08-15",
+    "timestamp": 1786771297923.0732,
+    "size": 8287
+  },
+  {
+    "title": "⚡ Cosmic Trade Signal & Short Squeeze Radar — 2026-08-15",
+    "filename": "short_squeeze_analysis_2026_08_15.md",
+    "path": "short_squeeze_analysis_2026_08_15.md",
+    "category": "Bear Squeeze",
+    "categoryThai": "หมีโดนบีบ",
+    "date": "2026-08-15",
+    "timestamp": 1786771219645.0762,
+    "size": 1048
+  },
+  {
+    "title": "📉 Oversold Opportunity Report — 2026-08-15",
+    "filename": "oversold_opportunity_report_2026_08_15.md",
+    "path": "oversold_opportunity_report_2026_08_15.md",
+    "category": "Oversold Opportunity",
+    "categoryThai": "Oversold Opportunity",
+    "date": "2026-08-15",
+    "timestamp": 1786771219644.9312,
+    "size": 1094
+  },
+  {
+    "title": "🇹🇭 เหลียวหลังมามองหุ้นไทย (Thai Stock Weekly Recap) — 2026-08-15",
+    "filename": "thai_stock_2026_08_15.md",
+    "path": "thai_stock_2026_08_15.md",
+    "category": "Thai Stock Analysis",
+    "categoryThai": "เหลียวหลังมามองหุ้นไทย",
+    "date": "2026-08-15",
+    "timestamp": 1786771219644.778,
+    "size": 1889
+  },
+  {
+    "title": "มา Scan Option กัน (Options Selection Screen Analysis) — 2026-08-15",
+    "filename": "options_screen_analysis_2026_08_15.md",
+    "path": "options_screen_analysis_2026_08_15.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "date": "2026-08-15",
+    "timestamp": 1786771219643.2876,
+    "size": 1284
+  },
+  {
+    "title": "🐋 วาฬขยับ ตลาดสะเทือน (Whale Flow & Institutional Money Flow) — 2026-08-15",
+    "filename": "whale_flow_analysis_2026_08_15.md",
+    "path": "whale_flow_analysis_2026_08_15.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-15",
+    "timestamp": 1786771219643.1465,
+    "size": 1658
+  },
+  {
+    "title": "📡 Small Cap Radar & High Growth Stocks Analysis — 2026-08-15",
+    "filename": "small_cap_research_2026_08_15.md",
+    "path": "small_cap_research_2026_08_15.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-15",
+    "timestamp": 1786771219643.066,
+    "size": 1507
+  },
+  {
+    "title": "บทวิเคราะห์ Hot Stock วันนี้ & Social Media Sentiment — 2026-08-15",
+    "filename": "us_viral_stock_analysis_2026_08_15.md",
+    "path": "us_viral_stock_analysis_2026_08_15.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-15",
+    "timestamp": 1786771219642.974,
+    "size": 2117
+  },
+  {
+    "title": "🚀 บทวิเคราะห์หุ้นพุ่งก่อนตลาดเปิด (Pre-Market Top Gainers Analysis) — 2026-08-15",
+    "filename": "us_pre_market_analysis_2026_08_15.md",
+    "path": "us_pre_market_analysis_2026_08_15.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-15",
+    "timestamp": 1786771219642.807,
+    "size": 3912
+  },
+  {
+    "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow - Daily)",
+    "filename": "gold_whale_flow_2026_08_15.md",
+    "path": "gold_whale_flow_2026_08_15.md",
+    "category": "Gold Whale Flow",
+    "categoryThai": "วาฬทองคำ รายวัน",
+    "date": "2026-08-15",
+    "timestamp": 1786753984531.7842,
+    "size": 16554
+  },
+  {
+    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-15",
+    "filename": "market_summary_2026_08_15.md",
+    "path": "market_summary_2026_08_15.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-15",
+    "timestamp": 1786753797438.4778,
+    "size": 7489
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-15",
+    "filename": "bot_stats_2026_08_15.md",
+    "path": "bot_stats_2026_08_15.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-15",
+    "timestamp": 1786747051181.0518,
+    "size": 2204
+  },
+  {
+    "title": "🚀 บทวิเคราะห์หุ้นพุ่งเตรียมพร้อมก่อนเปิดตลาด (Pre-Market / Pre-Open Surge Movers Briefing) — 2026-08-14",
+    "filename": "us_pre_market_analysis_2026_08_14.md",
+    "path": "us_pre_market_analysis_2026_08_14.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-14",
+    "timestamp": 1786709000485.171,
+    "size": 9859
+  },
+  {
+    "title": "Top Buy Signals & Pre-Market Scan: 2026-08-14",
+    "filename": "bot_trade_2026_08_14.md",
+    "path": "bot_trade_2026_08_14.md",
+    "category": "Bot Trade Todays",
+    "categoryThai": "Bot Trade Todays",
+    "date": "2026-08-14",
+    "timestamp": 1786708805126.887,
+    "size": 6956
+  },
+  {
+    "title": "📡 บทวิเคราะห์ Small Cap Radar (High-Growth & Momentum Stocks Briefing) — 2026-08-14",
+    "filename": "small_cap_research_2026_08_14.md",
+    "path": "small_cap_research_2026_08_14.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-14",
+    "timestamp": 1786705365399.72,
+    "size": 10198
+  },
+  {
+    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-14",
+    "filename": "options_screen_analysis_2026_08_14.md",
+    "path": "options_screen_analysis_2026_08_14.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "date": "2026-08-14",
+    "timestamp": 1786704922227.2622,
+    "size": 8415
+  },
+  {
+    "title": "🐋 บทวิเคราะห์ วาฬขยับ ตลาดสะเทือน (Institutional Whale Flow Analysis) — 2026-08-14",
+    "filename": "whale_flow_analysis_2026_08_14.md",
+    "path": "whale_flow_analysis_2026_08_14.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-14",
+    "timestamp": 1786704918332.6707,
+    "size": 8295
+  },
+  {
+    "title": "บทวิเคราะห์ Hot Stock วันนี้ (US Viral Stock Analysis) — 2026-08-14",
+    "filename": "us_viral_stock_analysis_2026_08_14.md",
+    "path": "us_viral_stock_analysis_2026_08_14.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-14",
+    "timestamp": 1786692823191.4773,
+    "size": 9659
+  },
+  {
+    "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow - Daily)",
+    "filename": "gold_whale_flow_2026_08_14.md",
+    "path": "gold_whale_flow_2026_08_14.md",
+    "category": "Gold Whale Flow",
+    "categoryThai": "วาฬทองคำ รายวัน",
+    "date": "2026-08-14",
+    "timestamp": 1786669947071.1975,
+    "size": 17848
+  },
+  {
+    "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-14",
+    "filename": "market_summary_2026_08_14.md",
+    "path": "market_summary_2026_08_14.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-14",
+    "timestamp": 1786666970279.968,
+    "size": 6988
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-14",
+    "filename": "bot_stats_2026_08_14.md",
+    "path": "bot_stats_2026_08_14.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-14",
+    "timestamp": 1786660971430.5535,
+    "size": 2133
+  },
+  {
+    "title": "📡 บทวิเคราะห์ Small Cap Radar (High-Growth & Momentum Stocks Briefing) — 2026-08-13",
+    "filename": "small_cap_research_2026_08_13.md",
+    "path": "small_cap_research_2026_08_13.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-13",
+    "timestamp": 1786628685921.8547,
+    "size": 7803
+  },
+  {
+    "title": "🚀 บทวิเคราะห์หุ้นพุ่งเตรียมพร้อมก่อนเปิดตลาด (Pre-Market / Pre-Open Surge Movers Briefing) — 2026-08-13",
+    "filename": "us_pre_market_analysis_2026_08_13.md",
+    "path": "us_pre_market_analysis_2026_08_13.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-13",
+    "timestamp": 1786623320529.1333,
+    "size": 8783
+  },
+  {
     "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-13",
     "filename": "options_screen_analysis_2026_08_13.md",
     "path": "options_screen_analysis_2026_08_13.md",
     "category": "Options Selection Screen",
     "categoryThai": "คัดกรองสัญญาณออปชั่น",
     "date": "2026-08-13",
-    "timestamp": 1786623027473.9246,
-    "size": 355360
+    "timestamp": 1786623106622.5977,
+    "size": 354422
+  },
+  {
+    "title": "🐋 บทวิเคราะห์ วาฬขยับ ตลาดสะเทือน (Institutional Whale Flow Analysis) — 2026-08-13",
+    "filename": "whale_flow_analysis_2026_08_13.md",
+    "path": "whale_flow_analysis_2026_08_13.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-13",
+    "timestamp": 1786623103262.3936,
+    "size": 5949
   },
   {
     "title": "บทวิเคราะห์ Hot Stock วันนี้ (US Viral Stock Analysis) — 2026-08-13",
@@ -30,26 +470,6 @@
     "size": 6394
   },
   {
-    "title": "🚀 บทวิเคราะห์หุ้นพุ่งก่อนตลาดเปิด (Pre-Market Top Gainers Analysis) — 2026-08-13",
-    "filename": "us_pre_market_analysis_2026_08_13.md",
-    "path": "us_pre_market_analysis_2026_08_13.md",
-    "category": "Pre-Market Analysis",
-    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
-    "date": "2026-08-13",
-    "timestamp": 1786622399716.0955,
-    "size": 7476
-  },
-  {
-    "title": "🐋 บทวิเคราะห์ วาฬขยับ ตลาดสะเทือน (Institutional Whale Flow Analysis) — 2026-08-13",
-    "filename": "whale_flow_analysis_2026_08_13.md",
-    "path": "whale_flow_analysis_2026_08_13.md",
-    "category": "Whale Flow",
-    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
-    "date": "2026-08-13",
-    "timestamp": 1786622397004.271,
-    "size": 5963
-  },
-  {
     "title": "บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-13",
     "filename": "market_summary_2026_08_13.md",
     "path": "market_summary_2026_08_13.md",
@@ -58,16 +478,6 @@
     "date": "2026-08-13",
     "timestamp": 1786622395000.0176,
     "size": 4538
-  },
-  {
-    "title": "📡 บทวิเคราะห์ Small Cap Radar (High-Growth & Momentum Stocks) — 2026-08-13",
-    "filename": "small_cap_research_2026_08_13.md",
-    "path": "small_cap_research_2026_08_13.md",
-    "category": "Small Cap Radar",
-    "categoryThai": "Small Cap Radar",
-    "date": "2026-08-13",
-    "timestamp": 1786622331246.0632,
-    "size": 6528
   },
   {
     "title": "Performance Review & Post-Market Recap: 2026-08-13",
@@ -180,46 +590,6 @@
     "size": 8146
   },
   {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "test_venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200649.3726,
-    "size": 1096
-  },
-  {
-    "title": "NCSA Open Source License",
-    "filename": "LICENSE.md",
-    "path": "test_venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200320.3147,
-    "size": 3511
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "test_venv/lib/python3.9/site-packages/markdown-3.9.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200238.3396,
-    "size": 1650
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "test_venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200233.8784,
-    "size": 1541
-  },
-  {
     "title": "📡 Small Cap Radar | รายงานสแกนหุ้นเล็กศักยภาพสูงประจำวันที่ 12 สิงหาคม 2026",
     "filename": "small_cap_research_2026_08_12.md",
     "path": "small_cap_research_2026_08_12.md",
@@ -248,26 +618,6 @@
     "date": "2026-08-12",
     "timestamp": 1786544200171.2283,
     "size": 10178
-  },
-  {
-    "title": "test_report.md",
-    "filename": "test_report.md",
-    "path": "scratch/test_report.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200169.0786,
-    "size": 15059
-  },
-  {
-    "title": "test_api.md",
-    "filename": "test_api.md",
-    "path": "scratch/test_api.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-12",
-    "timestamp": 1786544200168.6978,
-    "size": 11000
   },
   {
     "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-12",
@@ -498,26 +848,6 @@
     "date": "2026-08-10",
     "timestamp": 1786544200094.5417,
     "size": 2071
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "venv/lib/python3.9/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-10",
-    "timestamp": 1786362746949.9324,
-    "size": 1508
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "venv/lib/python3.9/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-08-10",
-    "timestamp": 1786362746618.6714,
-    "size": 1518
   },
   {
     "title": "หุ้นสหรัฐฯ พุ่งชนสถิติสูงสุดใหม่รับคาดการณ์ Fed ลดดอกเบี้ย หลังตัวเลขจ้างงานทรุด-จับตา CPI สัปดาห์หน้า: What's Next for Markets — 9 สิงหาคม 2026",
@@ -1330,36 +1660,6 @@
     "size": 1539
   },
   {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-31",
-    "timestamp": 1785494400256.5112,
-    "size": 1541
-  },
-  {
-    "title": "NCSA Open Source License",
-    "filename": "LICENSE.md",
-    "path": "venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-31",
-    "timestamp": 1785494399448.49,
-    "size": 3511
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-31",
-    "timestamp": 1785494399168.5874,
-    "size": 1096
-  },
-  {
     "title": "🇺🇸 US Viral Stock Analysis: เจาะลึกหุ้นกระแสแรง (ประจำวันที่ 30 กรกฎาคม 2026)",
     "filename": "us_viral_stock_analysis_2026_07_30.md",
     "path": "us_viral_stock_analysis_2026_07_30.md",
@@ -1998,36 +2298,6 @@
     "date": "2026-07-23",
     "timestamp": 1786544200093.643,
     "size": 1964
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "tmp_venv/lib/python3.9/site-packages/idna-3.18.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-23",
-    "timestamp": 1784807786576.166,
-    "size": 1541
-  },
-  {
-    "title": "NCSA Open Source License",
-    "filename": "LICENSE.md",
-    "path": "tmp_venv/lib/python3.9/site-packages/numpy/random/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-23",
-    "timestamp": 1784807785520.2495,
-    "size": 3511
-  },
-  {
-    "title": "LICENSE.md",
-    "filename": "LICENSE.md",
-    "path": "tmp_venv/lib/python3.9/site-packages/soupsieve-2.8.4.dist-info/licenses/LICENSE.md",
-    "category": "Other Reports",
-    "categoryThai": "รายงานทั่วไป",
-    "date": "2026-07-23",
-    "timestamp": 1784807785229.5532,
-    "size": 1096
   },
   {
     "title": "🐋 Whale Flow Analysis: เจาะลึกร่องรอยเงินสถาบัน (ประจำวันที่ 22 กรกฎาคม 2026)",
