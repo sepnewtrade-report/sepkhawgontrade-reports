@@ -140,7 +140,20 @@ def main():
         ]
         for sym, q in live_quotes.items():
             chg_str = f"+{q['change']:.2f}%" if q['change'] >= 0 else f"{q['change']:.2f}%"
-            live_lines.append(f"- **{sym}**: ราคาล่าสุด = **${q['price']:.2f}** ({chg_str}), Daily RSI (14) = {q['rsi']:.1f}, MACD = {q['macd']:.3f}")
+            hv_30d = 25.0
+            try:
+                import yfinance as yf
+                import numpy as np
+                import math
+                h_hv = yf.Ticker(sym).history(period="2mo")['Close'].dropna()
+                if len(h_hv) >= 15:
+                    log_r = np.log(h_hv / h_hv.shift(1)).dropna()
+                    val = float(log_r.std() * np.sqrt(252) * 100.0)
+                    if not math.isnan(val) and val > 0:
+                        hv_30d = val
+            except Exception:
+                pass
+            live_lines.append(f"- **{sym}**: ราคาล่าสุด = **${q['price']:.2f}** ({chg_str}), Daily RSI (14) = {q['rsi']:.1f}, MACD = {q['macd']:.3f}, HV 30D = {hv_30d:.1f}%")
         live_context_str = "\n".join(live_lines)
 
     # Base System Instruction for financial report style compliance

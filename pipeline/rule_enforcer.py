@@ -340,6 +340,19 @@ def process_file(file_path, auto_correct=True):
                 content, tab_mod = update_tables(content, ticker, live_data)
                 # Update text blocks
                 content, txt_mod = update_text_block_prices(content, ticker, live_data)
+                # Fix nan% HV
+                if "nan%" in content and ticker in content:
+                    try:
+                        import yfinance as yf, numpy as np, math
+                        h_hv = yf.Ticker(ticker).history(period="2mo")['Close'].dropna()
+                        if len(h_hv) >= 15:
+                            log_r = np.log(h_hv / h_hv.shift(1)).dropna()
+                            val = float(log_r.std() * np.sqrt(252) * 100.0)
+                            if not math.isnan(val) and val > 0:
+                                content = re.sub(rf'({ticker}.*?HV 30 วัน\): )\s*nan%', rf'\g<1>{val:.1f}%', content, flags=re.DOTALL)
+                                content = content.replace("HV 30 วัน): nan%", f"HV 30 วัน): {val:.1f}%")
+                    except Exception:
+                        pass
                 
                 if tab_mod or txt_mod:
                     errors.append(f"Prices/percentage metrics for ticker {ticker} were updated to live values.")

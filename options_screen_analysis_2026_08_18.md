@@ -12,7 +12,7 @@
 
 ### 📌 AAPL
 - **ราคาหุ้นปัจจุบัน:** $305.59 (RSI 14: 43.6)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 29.5% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 29.5% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 21 วัน - 1 Standard Deviation):** +/-$21.84
   - **แนวต้านสถิติ (Upper Target):** $327.43
   - **แนวรับสถิติ (Lower Target):** $283.75
@@ -20,7 +20,7 @@
 
 ### 📌 MSFT
 - **ราคาหุ้นปัจจุบัน:** $480.35 (RSI 14: 71.0)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 33.1% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 33.1% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 22 วัน - 1 Standard Deviation):** +/-$39.06
   - **แนวต้านสถิติ (Upper Target):** $519.41
   - **แนวรับสถิติ (Lower Target):** $441.29
@@ -28,7 +28,7 @@
 
 ### 📌 GOOGL
 - **ราคาหุ้นปัจจุบัน:** $344.00 (RSI 14: 46.8)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 33.4% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 33.4% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 25 วัน - 1 Standard Deviation):** +/-$30.24
   - **แนวต้านสถิติ (Upper Target):** $374.24
   - **แนวรับสถิติ (Lower Target):** $313.76
@@ -36,7 +36,7 @@
 
 ### 📌 AMZN
 - **ราคาหุ้นปัจจุบัน:** $261.31 (RSI 14: 53.5)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 36.5% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 36.5% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 21 วัน - 1 Standard Deviation):** +/-$23.13
   - **แนวต้านสถิติ (Upper Target):** $284.44
   - **แนวรับสถิติ (Lower Target):** $238.18
@@ -44,7 +44,7 @@
 
 ### 📌 NVDA
 - **ราคาหุ้นปัจจุบัน:** $225.01 (RSI 14: 63.1)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 41.1% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 41.1% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 27 วัน - 1 Standard Deviation):** +/-$25.17
   - **แนวต้านสถิติ (Upper Target):** $250.18
   - **แนวรับสถิติ (Lower Target):** $199.84
@@ -52,7 +52,7 @@
 
 ### 📌 AMD
 - **ราคาหุ้นปัจจุบัน:** $506.00 (RSI 14: 53.6)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 68.7% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 68.7% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 20 วัน - 1 Standard Deviation):** +/-$80.37
   - **แนวต้านสถิติ (Upper Target):** $586.37
   - **แนวรับสถิติ (Lower Target):** $425.63
@@ -60,7 +60,7 @@
 
 ### 📌 PLTR
 - **ราคาหุ้นปัจจุบัน:** $172.55 (RSI 14: 68.3)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 53.7% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 53.7% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 25 วัน - 1 Standard Deviation):** +/-$24.43
   - **แนวต้านสถิติ (Upper Target):** $196.98
   - **แนวรับสถิติ (Lower Target):** $148.12
@@ -68,7 +68,7 @@
 
 ### 📌 TSM
 - **ราคาหุ้นปัจจุบัน:** $430.97 (RSI 14: 54.4)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 45.2% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 45.2% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 20 วัน - 1 Standard Deviation):** +/-$45.04
   - **แนวต้านสถิติ (Upper Target):** $476.01
   - **แนวรับสถิติ (Lower Target):** $385.93
@@ -76,7 +76,7 @@
 
 ### 📌 META
 - **ราคาหุ้นปัจจุบัน:** $568.97 (RSI 14: 47.7)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 43.2% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 43.2% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 21 วัน - 1 Standard Deviation):** +/-$59.55
   - **แนวต้านสถิติ (Upper Target):** $628.52
   - **แนวรับสถิติ (Lower Target):** $509.42
@@ -84,7 +84,7 @@
 
 ### 📌 AVGO
 - **ราคาหุ้นปัจจุบัน:** $392.43 (RSI 14: 46.4)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 55.6% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 55.6% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 21 วัน - 1 Standard Deviation):** +/-$51.92
   - **แนวต้านสถิติ (Upper Target):** $444.35
   - **แนวรับสถิติ (Lower Target):** $340.51
@@ -92,7 +92,7 @@
 
 ### 📌 SMCI
 - **ราคาหุ้นปัจจุบัน:** $38.28 (RSI 14: 70.8)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 91.5% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 91.5% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 25 วัน - 1 Standard Deviation):** +/-$9.23
   - **แนวต้านสถิติ (Upper Target):** $47.51
   - **แนวรับสถิติ (Lower Target):** $29.05
@@ -100,7 +100,7 @@
 
 ### 📌 MRVL
 - **ราคาหุ้นปัจจุบัน:** $234.33 (RSI 14: 53.6)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 97.1% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 97.1% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 22 วัน - 1 Standard Deviation):** +/-$55.86
   - **แนวต้านสถิติ (Upper Target):** $290.19
   - **แนวรับสถิติ (Lower Target):** $178.47
@@ -108,7 +108,7 @@
 
 ### 📌 LLY
 - **ราคาหุ้นปัจจุบัน:** $1183.16 (RSI 14: 50.3)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 41.4% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 41.4% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 20 วัน - 1 Standard Deviation):** +/-$113.28
   - **แนวต้านสถิติ (Upper Target):** $1296.44
   - **แนวรับสถิติ (Lower Target):** $1069.88
@@ -116,7 +116,7 @@
 
 ### 📌 TSLA
 - **ราคาหุ้นปัจจุบัน:** $339.30 (RSI 14: 48.8)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 48.0% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 48.0% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 22 วัน - 1 Standard Deviation):** +/-$39.98
   - **แนวต้านสถิติ (Upper Target):** $379.28
   - **แนวรับสถิติ (Lower Target):** $299.32
@@ -124,7 +124,7 @@
 
 ### 📌 NFLX
 - **ราคาหุ้นปัจจุบัน:** $76.02 (RSI 14: 61.9)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 35.9% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 35.9% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 30 วัน - 1 Standard Deviation):** +/-$7.83
   - **แนวต้านสถิติ (Upper Target):** $83.85
   - **แนวรับสถิติ (Lower Target):** $68.19
@@ -132,7 +132,7 @@
 
 ### 📌 QCOM
 - **ราคาหุ้นปัจจุบัน:** $162.18 (RSI 14: 46.8)
-- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 50.1% vs Historical Volatility (HV 30 วัน): nan%
+- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: 50.1% vs Historical Volatility (HV 30 วัน): 36.5%
 - **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move 28 วัน - 1 Standard Deviation):** +/-$22.61
   - **แนวต้านสถิติ (Upper Target):** $184.79
   - **แนวรับสถิติ (Lower Target):** $139.57
