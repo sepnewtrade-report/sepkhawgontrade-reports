@@ -112,9 +112,11 @@ def main():
     model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 
     # Pre-fetch live market quotes for major candidates BEFORE Stage 1
-    pre_fetched_tickers = ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL', 'RDDT', 'HOOD', 'SOFI', 'OPEN', 'AMAT', 'MRVL', 'AVGO']
+    pre_fetched_tickers = ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL', 'RDDT', 'HOOD', 'SOFI', 'OPEN', 'AMAT', 'MRVL', 'AVGO', 'RXRX', 'SDGR', 'ABSI', 'RLAY', 'CRSP', 'NTLA', 'BEAM']
     if "gold" in args.template_id.lower():
         pre_fetched_tickers.extend(['GC=F', 'GLD', 'IAU', 'DX-Y.NYB', '^TNX', 'GDX', 'NEM', 'GOLD'])
+    if "small" in args.template_id.lower():
+        pre_fetched_tickers.extend(['RXRX', 'SDGR', 'ABSI', 'RLAY', 'CRSP', 'NTLA', 'BEAM'])
     
     # Extract any extra tickers explicitly mentioned in --prompt
     prompt_tickers = re.findall(r'\b[A-Z]{2,5}\b', args.prompt)
