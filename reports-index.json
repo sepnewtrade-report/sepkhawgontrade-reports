@@ -1,5 +1,75 @@
 [
   {
+    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-18",
+    "filename": "options_screen_analysis_2026_08_18.md",
+    "path": "options_screen_analysis_2026_08_18.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "date": "2026-08-18",
+    "timestamp": 1787053046297.8044,
+    "size": 374289
+  },
+  {
+    "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow Daily)",
+    "filename": "gold_whale_flow_2026_08_18.md",
+    "path": "gold_whale_flow_2026_08_18.md",
+    "category": "Gold Whale Flow",
+    "categoryThai": "วาฬทองคำ รายวัน",
+    "date": "2026-08-18",
+    "timestamp": 1787011082220.0933,
+    "size": 8597
+  },
+  {
+    "title": "🌍 บทวิเคราะห์สรุปจบ ทันโลกหุ้น (Daily Market Summary) — 2026-08-18",
+    "filename": "market_summary_2026_08_18.md",
+    "path": "market_summary_2026_08_18.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-18",
+    "timestamp": 1787011082219.609,
+    "size": 9425
+  },
+  {
+    "title": "Performance Review & Post-Market Recap: 2026-08-18",
+    "filename": "bot_stats_2026_08_18.md",
+    "path": "bot_stats_2026_08_18.md",
+    "category": "Bot Trade Stats",
+    "categoryThai": "Bot Trade Stats",
+    "date": "2026-08-18",
+    "timestamp": 1787005803766.08,
+    "size": 2075
+  },
+  {
+    "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow Daily)",
+    "filename": "gold_whale_flow_2026_08_17.md",
+    "path": "gold_whale_flow_2026_08_17.md",
+    "category": "Gold Whale Flow",
+    "categoryThai": "วาฬทองคำ รายวัน",
+    "date": "2026-08-17",
+    "timestamp": 1786972839065.013,
+    "size": 40812
+  },
+  {
+    "title": "small_cap_research_2026_08_17.md",
+    "filename": "small_cap_research_2026_08_17.md",
+    "path": "small_cap_research_2026_08_17.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-17",
+    "timestamp": 1786968675719.8643,
+    "size": 19332
+  },
+  {
+    "title": "whale_flow_analysis_2026_08_17.md",
+    "filename": "whale_flow_analysis_2026_08_17.md",
+    "path": "whale_flow_analysis_2026_08_17.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-17",
+    "timestamp": 1786968515053.7224,
+    "size": 17415
+  },
+  {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-08-17",
     "filename": "bot_trade_2026_08_17.md",
     "path": "bot_trade_2026_08_17.md",

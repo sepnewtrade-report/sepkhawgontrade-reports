@@ -1,0 +1,40 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบและแก้ไขความถูกต้องของตัวเลขดัชนีหลัก ราคาหุ้น DXY และ Bond Yield สอดคล้องกัน 100%",
+  "audit_log": [
+    {
+      "item": "แก้ไข S&P 500",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น 7,785.40 จุด (กรอบ 7,771.65 – 7,798.99)"
+    },
+    {
+      "item": "แก้ไข Nasdaq Composite",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น 26,768.80 จุด (กรอบ 26,732.27 – 26,803.03)"
+    },
+    {
+      "item": "แก้ไข Dow Jones",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น 53,695.50 จุด (กรอบ 53,572.09 – 53,839.99)"
+    },
+    {
+      "item": "แก้ไข NVDA Price",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น $225.80 (กรอบ $224.60 – $227.92)"
+    },
+    {
+      "item": "แก้ไข US 10Y Bond Yield",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น 4.68% (Real Yield 2.18%) ตรงกันทั้งสองรายงาน"
+    },
+    {
+      "item": "แก้ไข DXY",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น 99.45 (แตะระดับต่ำสุดรอบ 9 สัปดาห์)"
+    },
+    {
+      "item": "แก้ไข Spot Gold Price",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น $4,483.80/oz"
+    }
+  ]
+}

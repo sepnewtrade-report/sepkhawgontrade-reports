@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบและแก้ไขความถูกต้องของตัวเลข DXY, NEM, GDX, GDXJ และ Bond Yield สอดคล้อง 100%",
+  "audit_log": [
+    {
+      "item": "แก้ไข DXY (Dollar Index)",
+      "status": "corrected",
+      "details": "ปรับปรุงจาก 102.45 เป็น 99.45 (จุดต่ำสุดรอบ 9 สัปดาห์)"
+    },
+    {
+      "item": "แก้ไข NEM (Newmont Corp)",
+      "status": "corrected",
+      "details": "ปรับปรุงจาก $62.80 เป็น $121.18 (กรอบ $118.64–$121.36)"
+    },
+    {
+      "item": "แก้ไข GDX & GDXJ",
+      "status": "corrected",
+      "details": "ปรับปรุง GDX เป็น $92.15 และ GDXJ เป็น $106.40"
+    },
+    {
+      "item": "แก้ไข AEM (Agnico Eagle)",
+      "status": "corrected",
+      "details": "ปรับปรุงเป็น $148.50"
+    },
+    {
+      "item": "ความสอดคล้อง Bond Yield",
+      "status": "verified_ok",
+      "details": "อ้างอิง US 10Y Yield 4.68% และ Real Yield 2.18% สอดคล้องกับรายงานสรุปจบ 100%"
+    }
+  ]
+}

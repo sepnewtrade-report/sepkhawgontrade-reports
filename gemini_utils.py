@@ -56,10 +56,10 @@ def generate_content_with_rotation(api_keys, model, contents, config=None, max_r
         sys.exit(1)
         
     models_to_try = [model]
+    if "gemini-3.6-flash" not in models_to_try:
+        models_to_try.append("gemini-3.6-flash")
     if "gemini-2.5-flash" not in models_to_try:
         models_to_try.append("gemini-2.5-flash")
-    if "gemini-2.0-flash" not in models_to_try:
-        models_to_try.append("gemini-2.0-flash")
 
     last_exception = None
     for current_model in models_to_try:
