@@ -1,5 +1,65 @@
 [
   {
+    "title": "us_viral_stock_analysis_2026_08_18.md",
+    "filename": "us_viral_stock_analysis_2026_08_18.md",
+    "path": "us_viral_stock_analysis_2026_08_18.md",
+    "category": "Hot Stock วันนี้",
+    "categoryThai": "Hot Stock วันนี้",
+    "date": "2026-08-18",
+    "timestamp": 1787054234547.0125,
+    "size": 25460
+  },
+  {
+    "title": "🌍 บทวิเคราะห์สรุปจบ ทันโลกหุ้น (Daily Market Summary) — 2026-08-18",
+    "filename": "market_summary_2026_08_18.md",
+    "path": "market_summary_2026_08_18.md",
+    "category": "Daily Script",
+    "categoryThai": "สรุปจบ ทันโลกหุ้น",
+    "date": "2026-08-18",
+    "timestamp": 1787054224050.1672,
+    "size": 9598
+  },
+  {
+    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-18",
+    "filename": "options_screen_analysis_2026_08_18.md",
+    "path": "options_screen_analysis_2026_08_18.md",
+    "category": "Options Selection Screen",
+    "categoryThai": "คัดกรองสัญญาณออปชั่น",
+    "date": "2026-08-18",
+    "timestamp": 1787054043875.151,
+    "size": 374288
+  },
+  {
+    "title": "us_pre_market_analysis_2026_08_18.md",
+    "filename": "us_pre_market_analysis_2026_08_18.md",
+    "path": "us_pre_market_analysis_2026_08_18.md",
+    "category": "Pre-Market Analysis",
+    "categoryThai": "หุ้นพุ่งก่อนตลาดเปิด",
+    "date": "2026-08-18",
+    "timestamp": 1787054034192.9602,
+    "size": 39163
+  },
+  {
+    "title": "whale_flow_analysis_2026_08_18.md",
+    "filename": "whale_flow_analysis_2026_08_18.md",
+    "path": "whale_flow_analysis_2026_08_18.md",
+    "category": "Whale Flow",
+    "categoryThai": "วาฬขยับ ตลาดสะเทือน",
+    "date": "2026-08-18",
+    "timestamp": 1787054031459.9465,
+    "size": 17856
+  },
+  {
+    "title": "small_cap_research_2026_08_18.md",
+    "filename": "small_cap_research_2026_08_18.md",
+    "path": "small_cap_research_2026_08_18.md",
+    "category": "Small Cap Radar",
+    "categoryThai": "Small Cap Radar",
+    "date": "2026-08-18",
+    "timestamp": 1787053261880.6428,
+    "size": 13723
+  },
+  {
     "title": "Top Buy Signals & Pre-Market Scan: 2026-08-18",
     "filename": "bot_trade_2026_08_18.md",
     "path": "bot_trade_2026_08_18.md",
@@ -10,16 +70,6 @@
     "size": 5287
   },
   {
-    "title": "รายงานคัดกรองสัญญา Option (Options Selection Screen) - ประจำวันที่ 2026-08-18",
-    "filename": "options_screen_analysis_2026_08_18.md",
-    "path": "options_screen_analysis_2026_08_18.md",
-    "category": "Options Selection Screen",
-    "categoryThai": "คัดกรองสัญญาณออปชั่น",
-    "date": "2026-08-18",
-    "timestamp": 1787053046297.8044,
-    "size": 374289
-  },
-  {
     "title": "🐋 วาฬทองคำ รายวัน (Gold Whale Flow Daily)",
     "filename": "gold_whale_flow_2026_08_18.md",
     "path": "gold_whale_flow_2026_08_18.md",
@@ -28,16 +78,6 @@
     "date": "2026-08-18",
     "timestamp": 1787011082220.0933,
     "size": 8597
-  },
-  {
-    "title": "🌍 บทวิเคราะห์สรุปจบ ทันโลกหุ้น (Daily Market Summary) — 2026-08-18",
-    "filename": "market_summary_2026_08_18.md",
-    "path": "market_summary_2026_08_18.md",
-    "category": "Daily Script",
-    "categoryThai": "สรุปจบ ทันโลกหุ้น",
-    "date": "2026-08-18",
-    "timestamp": 1787011082219.609,
-    "size": 9425
   },
   {
     "title": "Performance Review & Post-Market Recap: 2026-08-18",

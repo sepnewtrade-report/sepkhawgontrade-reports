@@ -27,7 +27,7 @@
 
 | Ticker | ชื่อบริษัท | ราคาปิดล่าสุด ($) | การเปลี่ยนแปลง (%) | RSI (14) | MACD | Volume | บทบาทต่อตลาด (Market Role) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **NVDA** | NVIDIA Corporation | **$225.80** | +2.45% | 62.80 | +3.12 | 48.5M | แรงซื้อชิป AI Blackwell ขยายตัวรับงบ Data Center (กรอบวัน $224.60–$227.92) |
+ | **NVDA** | NVIDIA Corporation | **$225.80** | -0.07% | 62.80 | +3.12 | 48.5M | แรงซื้อชิป AI Blackwell ขยายตัวรับงบ Data Center (กรอบวัน $224.60–$227.92) | 
 | **MSFT** | Microsoft Corporation | **$493.50** | +0.75% | 61.50 | +2.95 | 19.2M | การเติบโตของบริการ Azure Cloud & Copilot Ecosystem |
 | **AAPL** | Apple Inc. | **$302.20** | +0.65% | 45.20 | -3.20 | 31.5M | ทรงตัวสะสมพลัง รอการเปิดตัวอุปกรณ์ฟีเจอร์ AI รุ่นใหม่ |
 | **AMZN** | Amazon.com Inc. | **$271.40** | +1.15% | 61.20 | +2.40 | 24.1M | อุปสงค์ธุรกิจ AWS Cloud และบริการ AI Bedrock เติบโตแกร่ง |
@@ -63,3 +63,9 @@
   - **Risk Management**: บริหารจัดการความเสี่ยง ติดตามข่าวสารความตึงเครียดในตะวันออกกลางและการประกาศตัวเลขเศรษฐกิจถัดไป
 
 [แหล่งข้อมูลอ้างอิง: Bloomberg Markets, CNBC US Market Recap, TradingView]
+
+---
+
+## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
+- [Yahoo Finance](https://finance.yahoo.com/)
+- [TradingView](https://www.tradingview.com/)
