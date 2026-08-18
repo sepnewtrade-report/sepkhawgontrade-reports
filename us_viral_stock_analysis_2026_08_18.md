@@ -12,9 +12,9 @@
 |:-------|:-------------|:----------|:-----------------|:---------|:-------|:-------|:-------------|
 | RDDT   | Reddit Inc.  | $164.50   | -7.63%           | 48.4     | -4.228 | สูงกว่าค่าเฉลี่ย | ร่วงหนักสวนทางข่าวดี Reddit ถูกเพิ่มเข้าดัชนี S&P 500 วันนี้ สะท้อน "Sell the News" และแรงขายทำกำไร. |
 | MSTR   | MicroStrategy| $97.68    | +4.99%           | 49.2     | -1.761 | สูงกว่าค่าเฉลี่ย | ตอบรับราคา Bitcoin ที่ฟื้นตัวขึ้นเล็กน้อย 2.2% สู่ระดับ $65,000 หนุนโดยนักลงทุนสถาบัน. |
-| AMAT   | Applied Materials | $535.31 | +5.55%           | 50.1     | -6.307 | สูงกว่าค่าเฉลี่ย | อานิสงส์จากอุตสาหกรรมเซมิคอนดักเตอร์ที่แข็งแกร่งและการลงทุนในโครงสร้างพื้นฐาน AI. |
-| MRVL   | Marvell Technology | $234.33 | +5.54%           | 58.2     | 0.346  | สูงกว่าค่าเฉลี่ย | ได้รับแรงหนุนจากการเติบโตของ Cloud และ AI Data Center คาดการณ์ผลประกอบการที่ดีขึ้น. |
-| SMCI   | Super Micro Computer | $38.28 | -3.92%           | 65.6     | 2.250  | สูงกว่าค่าเฉลี่ย | แรงขายทำกำไรหลังพุ่งขึ้นแรงก่อนหน้า RSI ยังอยู่ในโซน Overbought ชี้ถึงการพักฐาน. |
+| HOOD   | Robinhood    | $96.25    | +0.72%           | 49.7     | 0.125  | สูงกว่าค่าเฉลี่ย | วอลลุ่มการเทรดรายย่อยคึกคัก อานิสงส์จากกระแสการเทรด Crypto และ Options ในแอปพลิเคชัน. |
+| MRVL   | Marvell Tech | $234.33   | +5.54%           | 58.2     | 0.346  | สูงกว่าค่าเฉลี่ย | ได้รับแรงหนุนจากการเติบโตของ Cloud และ AI Data Center คาดการณ์ผลประกอบการที่ดีขึ้น. |
+| SOFI   | SoFi Tech    | $18.31    | +0.11%           | 55.5     | 0.089  | สูงกว่าค่าเฉลี่ย | การเติบโตของยอดสินเชื่อและฐานผู้ใช้งานแอปพลิเคชัน FinTech ทรงตัวในระดับสูง. |
 | COIN   | Coinbase Global | $150.55 | +1.40%           | 46.1     | -3.397 | สูงกว่าค่าเฉลี่ย | ได้รับผลบวกจากการฟื้นตัวของ Bitcoin และข่าวดีในอุตสาหกรรม Crypto ท่ามกลางการเพิ่มขึ้นของวอลลุ่ม. |
 | PLTR   | Palantir Technologies | $172.55 | -0.86%           | 66.7     | 12.516 | ใกล้เคียงค่าเฉลี่ย | แรงขายทำกำไรหลังราคาวิ่งขึ้นต่อเนื่อง RSI ยังคงสูง บ่งชี้ถึงการชะลอตัวในระยะสั้น. |
 | OPEN   | Opendoor Technologies | $3.54 | -2.75%           | 39.4     | -0.234 | สูงกว่าค่าเฉลี่ย | ความกังวลในภาคอสังหาริมทรัพย์และภาวะเศรษฐกิจมหภาคที่ยังไม่แน่นอน กดดันหุ้นกลุ่ม Tech อสังหาฯ. |
@@ -23,8 +23,8 @@
 
 *   **RDDT (Reddit Inc.)**: **ของจริงแต่เจอ Sell the News.** การที่ Reddit ถูกเพิ่มเข้าดัชนี S&P 500 ในวันนี้ (18 ส.ค. 2569) ถือเป็นข่าวดีเชิงโครงสร้างที่สำคัญและเป็นของจริง. ปกติแล้วหุ้นที่เข้าดัชนี S&P 500 มักจะปรับตัวขึ้นจากการเข้าซื้อของกองทุนดัชนี อย่างไรก็ตาม การร่วงลงอย่างรุนแรงถึง 7.63% ในวันนี้ ชี้ให้เห็นถึงปรากฏการณ์ "Buy the Rumor, Sell the News" ที่นักลงทุนรายย่อยและนักเก็งกำไรได้เข้าซื้อมาก่อนหน้าและเทขายทำกำไรเมื่อข่าวจริงออกมา. นอกจากนี้อาจมีแรงขายจากนักลงทุนที่เห็นว่าราคาได้สะท้อนข่าวดีไปมากแล้ว. โมเมนตัมระยะสั้นจึงเป็นขาลงและควรระมัดระวังเป็นอย่างยิ่ง.
 *   **MSTR (MicroStrategy)**: **ของจริงจากกระแส Bitcoin.** การปรับตัวขึ้นของ MSTR กว่า 4.99% สะท้อนความสัมพันธ์โดยตรงกับราคา Bitcoin ที่ฟื้นตัวขึ้นเล็กน้อยสู่ระดับ $65,000. MSTR ถือครอง Bitcoin จำนวนมาก ทำให้หุ้นของบริษัทกลายเป็นตัวแทน (proxy) ที่นักลงทุนสามารถเข้าถึงการเคลื่อนไหวของราคา Bitcoin ได้. โมเมนตัมยังคงอยู่ตราบเท่าที่ Bitcoin ยังรักษาระดับได้ และเงินใหญ่ยังคงให้ความสนใจในสินทรัพย์ดิจิทัล.
-*   **AMAT (Applied Materials) & MRVL (Marvell Technology)**: **ของจริงจากโครงสร้าง AI.** การพุ่งขึ้นของหุ้นเซมิคอนดักเตอร์ทั้งสองตัวนี้กว่า 5% ชี้ให้เห็นถึงความต้องการที่แข็งแกร่งในอุตสาหกรรมเซมิคอนดักเตอร์ โดยเฉพาะจากภาคส่วน Cloud และ AI Data Center. การลงทุนในโครงสร้างพื้นฐาน AI ยังคงเป็นธีมหลักที่ขับเคลื่อนตลาด เทคโนโลยีทั้ง AMAT และ MRVL เป็นฟันเฟืองสำคัญในการพัฒนาชิปและอุปกรณ์ที่จำเป็นสำหรับ AI. โมเมนตัมระยะกลางถึงยาวค่อนข้างแข็งแกร่ง ตราบใดที่ธีม AI ยังคงเป็นตัวขับเคลื่อนหลักของตลาด. Smart Money ยังคงมองหาโอกาสในกลุ่มนี้.
-*   **SMCI (Super Micro Computer)**: **กระแสชั่วคราวและแรงทำกำไร.** แม้จะเป็นหุ้นที่อยู่ในธีม AI แต่การร่วงลง 3.92% ในวันนี้หลังจากการวิ่งขึ้นอย่างร้อนแรงก่อนหน้า บ่งชี้ถึงการพักฐานและแรงขายทำกำไรที่เข้ามา. RSI ที่ 65.6 ยังคงอยู่ในโซน Overbought แม้จะลดลงมาบ้างแล้ว บ่งบอกว่านักลงทุนบางส่วนอาจมองว่าราคาวิ่งขึ้นเร็วเกินไป. ควรจับตาดูการทรงตัวและสัญญาณกลับตัวอย่างใกล้ชิดก่อนเข้าลงทุน.
+*   **HOOD (Robinhood) & SOFI (SoFi Technologies)**: **ของจริงจากกระแส FinTech & Retail Trading.** การเพิ่มขึ้นของวอลลุ่มเทรดในแอปพลิเคชันสะท้อนว่านักลงทุนรายย่อยยังคงซื้อขายคึกคัก โดยเฉพาะในตลาดคริปโทและออปชัน หนุนให้ราคายืนบวกได้อย่างแข็งแกร่ง.
+*   **MRVL (Marvell Technology)**: **ของจริงจากโครงสร้าง AI.** การพุ่งขึ้นกว่า 5% ชี้ให้เห็นถึงความต้องการที่แข็งแกร่งในอุตสาหกรรมเซมิคอนดักเตอร์ โดยเฉพาะจากภาคส่วน Cloud และ AI Data Center.
 *   **PLTR (Palantir Technologies)**: **พักฐานหลังวิ่งแรง.** ราคา PLTR ปรับลดลงเล็กน้อยที่ -0.86% แต่ RSI ยังคงอยู่ในระดับสูงถึง 66.7 ซึ่งเป็นสัญญาณเตือนของการ Overbought. แม้จะมีสัญญาใหม่ๆ และบทบาทในการเป็นผู้นำด้าน AI สำหรับภาครัฐและเอกชน แต่การที่ราคาวิ่งขึ้นมามากทำให้มีแรงขายทำกำไรเข้ามา. โมเมนตัมระยะสั้นอาจชะลอตัวลง แต่พื้นฐานยังแข็งแกร่งระยะยาว.
 
 ---
@@ -32,7 +32,7 @@
 🚀 **Viral Momentum Analysis**
 
 *   **Momentum Continuation**: **AMAT, MRVL, MSTR, COIN** – หุ้นเหล่านี้แสดงโมเมนตัมขาขึ้นที่ต่อเนื่อง โดยมีปัจจัยพื้นฐานและกระแสข่าวหนุนชัดเจน. สำหรับ AMAT และ MRVL คือธีม AI และเซมิคอนดักเตอร์ ส่วน MSTR และ COIN ได้รับอานิสงส์โดยตรงจากการฟื้นตัวของ Bitcoin.
-*   **Pump & Dump Risk / Profit Taking**: **RDDT, SMCI, PLTR** – RDDT แสดงอาการ "Sell the News" ชัดเจน ซึ่งอาจบ่งชี้ถึงการเข้าซื้อโดยนักเก็งกำไรจำนวนมากก่อนหน้านี้. SMCI และ PLTR กำลังเผชิญกับแรงขายทำกำไรหลังจากราคาพุ่งขึ้นร้อนแรง ทำให้มีโอกาสพักฐานหรืออาจมีความเสี่ยงหากกระแสคลายตัว.
+*   **Pump & Dump Risk / Profit Taking**: **RDDT, PLTR** – RDDT แสดงอาการ "Sell the News" ชัดเจน ซึ่งอาจบ่งชี้ถึงการเข้าซื้อโดยนักเก็งกำไรจำนวนมากก่อนหน้านี้. PLTR กำลังเผชิญกับแรงขายทำกำไรหลังจากราคาพุ่งขึ้นร้อนแรง ทำให้มีโอกาสพักฐานหรืออาจมีความเสี่ยงหากกระแสคลายตัว.
 *   **Oversold Bounce Potential**: **OPEN** – ราคาลดลงอย่างต่อเนื่องจน RSI เข้าใกล้โซน Oversold (39.4) อาจเป็นจังหวะที่น่าสนใจสำหรับนักลงทุนที่มองหาการฟื้นตัวในระยะสั้น หากมีข่าวดีหรือ sentiment ภาคอสังหาริมทรัพย์ดีขึ้น.
 
 ---
@@ -52,7 +52,7 @@
 🧠 **Smart Money vs Retail**
 
 *   **หุ้นที่เงินใหญ่เข้า**: **AMAT, MRVL** ดูเหมือนจะเป็นหุ้นที่ Smart Money ยังคงสะสมและถือครองเพื่อการเติบโตระยะยาวในธีม AI และเซมิคอนดักเตอร์ ซึ่งมีพื้นฐานรองรับและแนวโน้มอุตสาหกรรมที่ชัดเจน.
-*   **หุ้นที่ Retail FOMO**: **RDDT, PLTR, SMCI** มีแนวโน้มที่จะเห็น Retail FOMO (Fear Of Missing Out) เข้าไปไล่ราคาในช่วงก่อนหน้าอย่างมีนัยสำคัญ. โดยเฉพาะ RDDT ที่แสดงอาการ "Sell the News" ซึ่งเป็นลักษณะเฉพาะของตลาดที่ขับเคลื่อนโดยนักลงทุนรายย่อย. PLTR และ SMCI อาจเห็นการลดความร้อนแรงลงเมื่อ Smart Money เริ่มขายทำกำไร.
+*   **หุ้นที่ Retail FOMO**: **RDDT, PLTR** มีแนวโน้มที่จะเห็น Retail FOMO (Fear Of Missing Out) เข้าไปไล่ราคาในช่วงก่อนหน้าอย่างมีนัยสำคัญ. โดยเฉพาะ RDDT ที่แสดงอาการ "Sell the News" ซึ่งเป็นลักษณะเฉพาะของตลาดที่ขับเคลื่อนโดยนักลงทุนรายย่อย. PLTR อาจเห็นการลดความร้อนแรงลงเมื่อ Smart Money เริ่มขายทำกำไร.
 *   **หุ้นที่เริ่ม Distribution**: **RDDT** อาจกำลังอยู่ในช่วง Distribution โดยเฉพาะหลังจากการถูกเพิ่มเข้า S&P 500 ซึ่งเป็นโอกาสที่นักลงทุนสถาบันบางรายจะปรับพอร์ตหรือทำกำไรเช่นกัน.
 
 ---
@@ -82,7 +82,7 @@
 **สรุป: หุ้นที่ต้องจับตาในคืนนี้**
 
 *   **หุ้นที่ต้องจับตาที่สุด**: **RDDT** ด้วยการเคลื่อนไหวที่ผิดปกติสวนทางกับข่าวดี จะเป็นบทเรียนสำคัญของการรับมือกับข่าวและการเก็งกำไร.
-*   **หุ้นที่เสี่ยงที่สุด**: **RDDT** และ **SMCI** จากแรงขายทำกำไรที่เข้ามาอย่างรุนแรงและ RSI ที่ยังสูง.
+*   **หุ้นที่เสี่ยงที่สุด**: **RDDT** จากแรงขายทำกำไรที่เข้ามาอย่างรุนแรง.
 *   **Theme ที่ตลาดกำลังเล่น**: AI และ Semiconductor ยังคงเป็นแกนหลักที่แข็งแกร่ง พร้อมกับการฟื้นตัวของกระแส Crypto.
 
 อย่าลืมกด Like กด Share และกด Follow เพจ "เสพข่าวก่อนเทรด หุ้นอเมริกา" เพื่อไม่พลาดทุกข่าวสารและบทวิเคราะห์เชิงลึกก่อนใคร! และ Comment หุ้นที่คุณกำลังลุ้นคืนนี้มาแลกเปลี่ยนกันได้เลยครับ!
@@ -97,10 +97,15 @@
 3.  MicroStrategy's stock performance correlated with Bitcoin's price movements.
 4.  Applied Materials benefits from strong demand in semiconductor industry and AI infrastructure.
 5.  Marvell Technology's growth driven by Cloud and AI Data Center investments.
-6.  Super Micro Computer (SMCI) experiencing profit-taking after recent surge, RSI indicating overbought conditions.
-7.  Palantir Technologies (PLTR) showing signs of profit-taking, RSI remains high.
-8.  AI and Semiconductor sectors remain key market drivers amidst profit-taking.
-9.  Discussions on RDDT's price action dominate social media platforms like WallStreetBets and X.
-10. Institutional investors showing continued interest in AMAT and MRVL for long-term growth.
-11. Strong fundamental backing for AMAT and MRVL in the AI and semiconductor themes.
-12. RDDT potentially undergoing distribution phase post-S&P 500 inclusion, indicating institutional rebalancing.
+6.  Palantir Technologies (PLTR) showing signs of profit-taking, RSI remains high.
+7.  AI and Semiconductor sectors remain key market drivers amidst profit-taking.
+8.  Discussions on RDDT's price action dominate social media platforms like WallStreetBets and X.
+9.  Institutional investors showing continued interest in AMAT and MRVL for long-term growth.
+10. Strong fundamental backing for AMAT and MRVL in the AI and semiconductor themes.
+11. RDDT potentially undergoing distribution phase post-S&P 500 inclusion, indicating institutional rebalancing.
+
+---
+
+## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
+- [Yahoo Finance](https://finance.yahoo.com/)
+- [TradingView](https://www.tradingview.com/)
