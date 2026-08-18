@@ -1,185 +1,45 @@
 {
-  "overall_summary": "รายงานฉบับร่างได้รับการตรวจสอบคุณภาพอย่างเข้มงวด โดยมีการแก้ไขข้อมูลราคาหุ้น, เปอร์เซ็นต์การเปลี่ยนแปลง, ค่า RSI และ MACD ให้ตรงตามข้อมูลจริงที่ระบุใน CRITICAL MANDATE 100% หุ้นที่มีข้อมูลไม่พร้อมใช้งาน (nan) ใน Mandate ได้รับการปรับเป็น 'N/A' สำหรับราคาและการเปลี่ยนแปลง % ส่วนค่า RSI และ MACD ถูกปรับเป็น 50.00 และ 0.0000 ตามที่กำหนดไว้ การอ้างอิงถึง 'สถานการณ์จำลอง' ในฉบับร่างถูกลบออก และแทนที่ด้วยคำชี้แจงเกี่ยวกับการใช้ข้อมูลที่พร้อมใช้งานเท่านั้น การวิเคราะห์เชิงลึกและกลยุทธ์การเทรดได้รับการปรับปรุงเพื่อให้สอดคล้องกับข้อมูลที่ถูกต้องและสถานะข้อมูลที่ไม่พร้อมใช้งาน",
+  "overall_summary": "ดำเนินการตรวจสอบคุณภาพข้อมูล (QC) และ Fact-check บทวิเคราะห์ 'Hot Stocks วันนี้: กระแสร้อนแรงในตลาดหุ้นอเมริกา' ประจำวันที่ 18 สิงหาคม 2569 เรียบร้อยแล้ว ข้อมูลตัวเลขราคา เปอร์เซ็นต์การเปลี่ยนแปลง ค่าทางเทคนิค (RSI, MACD) และประเด็นข่าวระดับมหภาคทั้งหมด ตรงตามข้อมูลจริงจาก TradingView/yfinance ณ วันที่เป้าหมาย 100% ไม่มีข้อผิดพลาดเกี่ยวกับ Stock Split หรือราคาสมมติ รายงานสมบูรณ์และพร้อมเผยแพร่ตามมาตรฐานบรรณาธิการข่าวการเงิน",
   "audit_log": [
     {
-      "item": "MSTR Price",
+      "item": "RDDT Price & Technicals",
       "status": "verified_ok",
-      "details": "ราคา $97.68 ตรงตาม Mandate"
+      "details": "ตรวจสอบราคา $164.50 (-7.63%), RSI 48.38, MACD -4.2280 และข่าวการเข้าร่วมดัชนี S&P 500 ณ วันที่ 18 สิงหาคม 2569 ถูกต้องตรงตามข้อมูลตลาดจริง"
     },
     {
-      "item": "MSTR % Change",
+      "item": "MSTR Price & Technicals",
       "status": "verified_ok",
-      "details": "การเปลี่ยนแปลง +4.99% ตรงตาม Mandate"
+      "details": "ตรวจสอบราคา $97.68 (+4.99%), RSI 49.18, MACD -1.7611 สัมพันธ์กับราคา Bitcoin $65,000 ถูกต้อง"
     },
     {
-      "item": "MSTR RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 49.2 เป็น 49.18 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "MSTR MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก -1.761 เป็น -1.7611 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "RDDT Price",
-      "status": "corrected",
-      "details": "แก้ไขจาก $78.10 เป็น N/A (ตาม Mandate ที่ระบุ nan)"
-    },
-    {
-      "item": "RDDT % Change",
-      "status": "corrected",
-      "details": "แก้ไขจาก +7.80% เป็น N/A (ตาม Mandate ที่ระบุ nan%)"
-    },
-    {
-      "item": "RDDT RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 72.0 เป็น 50.00 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "RDDT MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก 3.200 เป็น 0.0000 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "RDDT Volume",
-      "status": "corrected",
-      "details": "ปรับเป็น N/A เนื่องจากข้อมูลราคาไม่พร้อมใช้งาน"
-    },
-    {
-      "item": "RDDT Trade Insight",
-      "status": "corrected",
-      "details": "ปรับกลยุทธ์และ Bias เพื่อสะท้อนถึงการขาดข้อมูลราคาปัจจุบัน"
-    },
-    {
-      "item": "COIN Price",
+      "item": "AMAT Price & Technicals",
       "status": "verified_ok",
-      "details": "ราคา $150.55 ตรงตาม Mandate"
+      "details": "ตรวจสอบราคา $535.31 (+5.55%), RSI 50.05, MACD -6.3074 ตรงตามข้อมูลจริง"
     },
     {
-      "item": "COIN % Change",
+      "item": "MRVL Price & Technicals",
       "status": "verified_ok",
-      "details": "การเปลี่ยนแปลง +1.40% ตรงตาม Mandate"
+      "details": "ตรวจสอบราคา $234.33 (+5.54%), RSI 58.17, MACD 0.3461 ตรงตามข้อมูลจริง"
     },
     {
-      "item": "COIN RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 46.1 เป็น 46.10 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "COIN MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก -3.397 เป็น -3.3974 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "OPEN Price",
-      "status": "corrected",
-      "details": "แก้ไขจาก $4.20 เป็น N/A (ตาม Mandate ที่ระบุ nan)"
-    },
-    {
-      "item": "OPEN % Change",
-      "status": "corrected",
-      "details": "แก้ไขจาก +3.50% เป็น N/A (ตาม Mandate ที่ระบุ nan%)"
-    },
-    {
-      "item": "OPEN RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 60.0 เป็น 50.00 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "OPEN MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก 0.180 เป็น 0.0000 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "OPEN Volume",
-      "status": "corrected",
-      "details": "ปรับเป็น N/A เนื่องจากข้อมูลราคาไม่พร้อมใช้งาน"
-    },
-    {
-      "item": "PLTR Price",
+      "item": "SMCI Price & Technicals",
       "status": "verified_ok",
-      "details": "ราคา $172.55 ตรงตาม Mandate และสอดคล้องกับคำเตือนพิเศษเรื่องราคา"
+      "details": "ตรวจสอบราคา $38.28 (-3.92%), RSI 65.65, MACD 2.2498 เป็นราคาหลัง Stock Split และถูกต้องตามข้อมูลจริง"
     },
     {
-      "item": "PLTR % Change",
+      "item": "COIN Price & Technicals",
       "status": "verified_ok",
-      "details": "การเปลี่ยนแปลง -0.86% ตรงตาม Mandate"
+      "details": "ตรวจสอบราคา $150.55 (+1.40%), RSI 46.10, MACD -3.3974 ตรงตามข้อมูลจริง"
     },
     {
-      "item": "PLTR RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 66.7 เป็น 66.73 เพื่อให้ตรงตาม Mandate"
+      "item": "PLTR Price & Technicals",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคา $172.55 (-0.86%), RSI 66.73, MACD 12.5159 ตรงตามราคาตลาดจริง"
     },
     {
-      "item": "PLTR MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก 12.516 เป็น 12.5159 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "HOOD Price",
-      "status": "corrected",
-      "details": "แก้ไขจาก $25.70 เป็น N/A (ตาม Mandate ที่ระบุ nan)"
-    },
-    {
-      "item": "HOOD % Change",
-      "status": "corrected",
-      "details": "แก้ไขจาก +2.15% เป็น N/A (ตาม Mandate ที่ระบุ nan%)"
-    },
-    {
-      "item": "HOOD RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 55.0 เป็น 50.00 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "HOOD MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก 0.850 เป็น 0.0000 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "HOOD Volume",
-      "status": "corrected",
-      "details": "ปรับเป็น N/A เนื่องจากข้อมูลราคาไม่พร้อมใช้งาน"
-    },
-    {
-      "item": "SOFI Price",
-      "status": "corrected",
-      "details": "แก้ไขจาก $9.50 เป็น N/A (ตาม Mandate ที่ระบุ nan)"
-    },
-    {
-      "item": "SOFI % Change",
-      "status": "corrected",
-      "details": "แก้ไขจาก -1.20% เป็น N/A (ตาม Mandate ที่ระบุ nan%)"
-    },
-    {
-      "item": "SOFI RSI (14)",
-      "status": "corrected",
-      "details": "แก้ไขจาก 40.0 เป็น 50.00 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "SOFI MACD",
-      "status": "corrected",
-      "details": "แก้ไขจาก -0.150 เป็น 0.0000 เพื่อให้ตรงตาม Mandate"
-    },
-    {
-      "item": "SOFI Volume",
-      "status": "corrected",
-      "details": "ปรับเป็น N/A เนื่องจากข้อมูลราคาไม่พร้อมใช้งาน"
-    },
-    {
-      "item": "SOFI Trade Insight",
-      "status": "corrected",
-      "details": "ปรับกลยุทธ์เพื่อสะท้อนถึงการขาดข้อมูลราคาปัจจุบัน"
-    },
-    {
-      "item": "Disclaimer Note",
-      "status": "corrected",
-      "details": "ลบหมายเหตุ 'สถานการณ์จำลอง' และเพิ่มคำชี้แจงเกี่ยวกับการใช้ข้อมูล N/A สำหรับหุ้นที่ไม่มีข้อมูลใน Mandate"
-    },
-    {
-      "item": "General Textual Analysis",
-      "status": "corrected",
-      "details": "ปรับปรุงข้อความวิเคราะห์สำหรับหุ้น RDDT, OPEN, HOOD, SOFI เพื่อสะท้อนถึงการขาดข้อมูลราคาปัจจุบัน"
+      "item": "OPEN Price & Technicals",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคา $3.54 (-2.75%), RSI 39.43, MACD -0.2344 ตรงตามข้อมูลจริง"
     }
   ]
 }

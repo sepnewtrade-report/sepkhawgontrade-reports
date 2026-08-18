@@ -38,6 +38,7 @@ def extract_tickers_from_markdown(text):
     return [t for t in candidates if t not in EXCLUDED]
 
 def get_live_quote(ticker):
+    import math
     exchanges = ["NASDAQ", "NYSE", "AMEX", "BATS"]
     for exchange in exchanges:
         try:
@@ -53,12 +54,12 @@ def get_live_quote(ticker):
             change = indicators.get("change")
             rsi = indicators.get("RSI", 50.0)
             macd = indicators.get("MACD.macd", 0.0)
-            if price is not None and price > 0:
+            if price is not None and not math.isnan(price) and price > 0:
                 return {
-                    "price": price,
-                    "change": change if change is not None else 0.0,
-                    "rsi": rsi if rsi is not None else 50.0,
-                    "macd": macd if macd is not None else 0.0
+                    "price": float(price),
+                    "change": float(change) if change is not None and not math.isnan(change) else 0.0,
+                    "rsi": float(rsi) if rsi is not None and not math.isnan(rsi) else 50.0,
+                    "macd": float(macd) if macd is not None and not math.isnan(macd) else 0.0
                 }
         except Exception:
             continue
@@ -66,17 +67,28 @@ def get_live_quote(ticker):
     try:
         import yfinance as yf
         t = yf.Ticker(ticker)
-        h = t.history(period="5d")
-        if not h.empty:
-            price = float(h['Close'].iloc[-1])
-            prev = float(h['Close'].iloc[-2]) if len(h) > 1 else price
-            change = ((price - prev) / prev) * 100.0 if prev > 0 else 0.0
+        price = getattr(t.fast_info, 'last_price', None)
+        prev = getattr(t.fast_info, 'previous_close', None)
+        if price is not None and not math.isnan(price) and price > 0:
+            change = ((price - prev) / prev) * 100.0 if prev and prev > 0 and not math.isnan(prev) else 0.0
             return {
-                "price": price,
-                "change": change,
+                "price": float(price),
+                "change": float(change),
                 "rsi": 50.0,
                 "macd": 0.0
             }
+        h = t.history(period="5d").dropna(subset=['Close'])
+        if not h.empty:
+            price = float(h['Close'].iloc[-1])
+            prev = float(h['Close'].iloc[-2]) if len(h) > 1 else price
+            if not math.isnan(price) and price > 0:
+                change = ((price - prev) / prev) * 100.0 if prev > 0 and not math.isnan(prev) else 0.0
+                return {
+                    "price": price,
+                    "change": change,
+                    "rsi": 50.0,
+                    "macd": 0.0
+                }
     except Exception:
         pass
     return None
@@ -100,9 +112,17 @@ def main():
     model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 
     # Pre-fetch live market quotes for major candidates BEFORE Stage 1
-    pre_fetched_tickers = ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL']
+    pre_fetched_tickers = ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL', 'RDDT', 'HOOD', 'SOFI', 'OPEN', 'AMAT', 'MRVL', 'AVGO']
     if "gold" in args.template_id.lower():
         pre_fetched_tickers.extend(['GC=F', 'GLD', 'IAU', 'DX-Y.NYB', '^TNX', 'GDX', 'NEM', 'GOLD'])
+    
+    # Extract any extra tickers explicitly mentioned in --prompt
+    prompt_tickers = re.findall(r'\b[A-Z]{2,5}\b', args.prompt)
+    for pt in prompt_tickers:
+        if pt not in pre_fetched_tickers and pt not in ['N/A', 'FOR', 'AND', 'THE', 'HOT', 'NEW', 'NOT', 'OPEN']:
+            pre_fetched_tickers.append(pt)
+    if 'OPEN' not in pre_fetched_tickers:
+        pre_fetched_tickers.append('OPEN')
 
     live_quotes = {}
     print("[Pre-fetch] Gathering real-time market data from TradingView/yfinance...")
