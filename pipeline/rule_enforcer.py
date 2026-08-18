@@ -212,14 +212,14 @@ def update_tables(content, ticker, live_data):
                         # Price column match (e.g., ราคาล่าสุด, ราคาหุ้น, Current Price)
                         price_keywords = ["ราคาล่าสุด", "ราคาหุ้น", "current price", "ราคาปิด"]
                         if any(kw in col_header for kw in price_keywords):
-                            if re.match(r'^\$?\d+(?:\.\d+)?$', col_val) or col_val.startswith("$"):
+                            if re.match(r'^\$?\d+(?:\.\d+)?$', col_val) or col_val.startswith("$") or col_val.strip().upper() in ["N/A", "NA", "-", "NONE", "NULL", ""]:
                                 cols[idx] = f"${price:.2f}"
                                 row_modified = True
                                 
                         # Change % column match (e.g., การเปลี่ยนแปลง, % Change)
                         change_keywords = ["การเปลี่ยนแปลง", "change %", "% change"]
                         if any(kw in col_header for kw in change_keywords) and not any(kw in col_header for kw in ["short", "float", "interest", "rsi", "iv", "implied", "prob", "itm"]):
-                            if re.match(r'^[+-]?\d+(?:\.\d+)?%?$', col_val) or col_val.endswith("%"):
+                            if re.match(r'^[+-]?\d+(?:\.\d+)?%?$', col_val) or col_val.endswith("%") or col_val.strip().upper() in ["N/A", "NA", "-", "NONE", "NULL", ""]:
                                 cols[idx] = change_str
                                 row_modified = True
                                 
