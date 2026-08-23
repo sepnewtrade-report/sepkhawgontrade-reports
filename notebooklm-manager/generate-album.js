@@ -797,15 +797,14 @@ function getJS() {
       const modalHtml = '<div class="modal-overlay show" id="add-template-modal" onclick="if(event.target===this)closeAddModal()">'+
         '<div class="modal-content" style="max-width:720px" onclick="event.stopPropagation()">'+
           '<div class="modal-header"><div class="modal-title-group"><span class="modal-icon">➕</span><div><h2>เพิ่มรายการผลิตคลิปใหม่</h2><span class="modal-id">สร้างรายการแบบแผนคัดสรรและวิเคราะห์ด้วย NotebookLM</span></div></div><button class="modal-close" onclick="closeAddModal()">&times;</button></div>'+
-          '<div class="modal-body">'+
             '<form onsubmit="submitNewTemplate(event)">'+
               '<div class="form-group">'+
-                '<label class="form-label">ID ของรายการ (ภาษาอังกฤษ เช่น this_weeks_watchlist):</label>'+
-                '<input type="text" class="form-input" id="new-template-id" placeholder="ตัวอย่าง: this_weeks_watchlist" required>'+
+                '<label class="form-label">ชื่อรายการ (เช่น This Week’s Watchlist — หุ้นอเมริกา):</label>'+
+                '<input type="text" class="form-input" id="new-template-name" placeholder="ตัวอย่าง: This Week’s Watchlist — หุ้นอเมริกา" oninput="autoGenerateId()" required>'+
               '</div>'+
               '<div class="form-group">'+
-                '<label class="form-label">ชื่อรายการ (เช่น This Week’s Watchlist — หุ้นอเมริกา):</label>'+
-                '<input type="text" class="form-input" id="new-template-name" placeholder="ตัวอย่าง: This Week’s Watchlist — หุ้นอเมริกา" required>'+
+                '<label class="form-label">ID ของรายการ <span style="font-size:.78rem;color:#818cf8;margin-left:6px">⚡ สร้างให้อัตโนมัติ</span>:</label>'+
+                '<input type="text" class="form-input" id="new-template-id" placeholder="ระบบจะสร้าง ID ให้อัตโนมัติ..." readonly style="background:rgba(255,255,255,0.05);color:var(--primary-light);cursor:default">'+
               '</div>'+
               '<div class="form-group">'+
                 '<label class="form-label">Prompt ค้นหาข่าว (Search Prompt):</label>'+
