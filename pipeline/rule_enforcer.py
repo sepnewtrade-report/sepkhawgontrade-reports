@@ -21,7 +21,7 @@ EXCLUDED_TICKERS = {
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
     'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
     'AIP', 'FAA', 'GPU', 'CME', 'COMEX', 'NYMEX', 'ICE', 'CBOE', 'EIA', 'IEA', 'ECB', 'BOJ', 'BOE',
-    'ARPAC', 'GMV', 'ARR', 'BMO', 'AMC', 'EUV', 'HBM', 'NPL', 'X', 'ATS', 'WGC', 'GDX', 'GDXJ', 'DXY', 'ICT', 'OI', 'COT', 'AEM', 'KGC', 'AU', 'SGE', 'LBMA'
+    'ARPAC', 'GMV', 'ARR', 'BMO', 'AMC', 'EUV', 'HBM', 'NPL', 'X', 'ATS', 'WGC', 'GDX', 'GDXJ', 'DXY', 'ICT', 'OI', 'COT', 'AEM', 'KGC', 'AU', 'SGE', 'LBMA', 'GOLD', 'PBOC', 'RBI'
 }
 
 TICKER_MAP = {
@@ -32,7 +32,6 @@ TICKER_MAP = {
     "NDX": "^IXIC",
     "RUT": "^RUT",
     "BTC": "BTC-USD",
-    "GOLD": "GC=F",
     "OIL": "BZ=F",
     "WTI": "CL=F",
     "BRENT": "BZ=F",
@@ -466,7 +465,10 @@ def main():
     # Automatic Groq AI QC Audit step (Runs by default unless --skip-ai-qc is passed)
     if not args.skip_ai_qc and processed_files:
         try:
-            from groq_validator import audit_report_with_ai
+            try:
+                from pipeline.groq_validator import audit_report_with_ai
+            except ImportError:
+                from groq_validator import audit_report_with_ai
             print("\n🤖 Initiating Automatic Groq AI Quality Control Audit on verified reports...")
             for fpath in processed_files:
                 audit_report_with_ai(fpath)

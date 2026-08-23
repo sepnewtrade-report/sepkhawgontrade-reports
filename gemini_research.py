@@ -39,6 +39,25 @@ def extract_tickers_from_markdown(text):
 
 def get_live_quote(ticker):
     import math
+    # Index/Commodity/Macro symbols should bypass TradingView exchange loop and use yfinance directly
+    if ticker.startswith("^") or "=F" in ticker or "-" in ticker or ticker in ["DX-Y.NYB", "GC=F", "CL=F", "BZ=F", "^GSPC", "^IXIC", "^DJI", "^VIX", "^TNX"]:
+        try:
+            import yfinance as yf
+            t = yf.Ticker(ticker)
+            h = t.history(period="5d").dropna(subset=['Close'])
+            if not h.empty:
+                price = float(h['Close'].iloc[-1])
+                prev = float(h['Close'].iloc[-2]) if len(h) > 1 else price
+                change = ((price - prev) / prev) * 100.0 if prev > 0 and not math.isnan(prev) else 0.0
+                return {
+                    "price": float(price),
+                    "change": float(change),
+                    "rsi": 50.0,
+                    "macd": 0.0
+                }
+        except Exception as e:
+            print(f"Error fetching macro ticker {ticker} via yfinance: {e}")
+
     exchanges = ["NASDAQ", "NYSE", "AMEX", "BATS"]
     for exchange in exchanges:
         try:
@@ -111,10 +130,12 @@ def main():
 
     model_name = os.environ.get("GEMINI_MODEL", "gemini-2.5-pro")
 
-    # Pre-fetch live market quotes for major candidates BEFORE Stage 1
-    pre_fetched_tickers = ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL', 'RDDT', 'HOOD', 'SOFI', 'OPEN', 'AMAT', 'MRVL', 'AVGO', 'RXRX', 'SDGR', 'ABSI', 'RLAY', 'CRSP', 'NTLA', 'BEAM']
+    # ALWAYS include Macro Indices, Commodities, and FX in pre-fetched tickers
+    macro_tickers = ['^GSPC', '^IXIC', '^DJI', '^VIX', '^TNX', 'DX-Y.NYB', 'GC=F', 'CL=F', 'BZ=F', 'BTC-USD']
+    pre_fetched_tickers = list(macro_tickers) + ['NVDA', 'PLTR', 'SMCI', 'TSLA', 'AMD', 'INTC', 'COIN', 'MSTR', 'MRNA', 'AAPL', 'AMZN', 'MSFT', 'META', 'GOOGL', 'RDDT', 'HOOD', 'SOFI', 'OPEN', 'AMAT', 'MRVL', 'AVGO']
+
     if "gold" in args.template_id.lower():
-        pre_fetched_tickers.extend(['GC=F', 'GLD', 'IAU', 'DX-Y.NYB', '^TNX', 'GDX', 'NEM', 'GOLD'])
+        pre_fetched_tickers.extend(['GLD', 'IAU', 'GDX', 'NEM', 'GOLD'])
     if "small" in args.template_id.lower():
         pre_fetched_tickers.extend(['RXRX', 'SDGR', 'ABSI', 'RLAY', 'CRSP', 'NTLA', 'BEAM'])
     
@@ -134,48 +155,54 @@ def main():
             live_quotes[sym] = q
             print(f"  - {sym}: Price=${q['price']:.2f}, Change={q['change']:.2f}%, RSI={q['rsi']:.1f}")
 
+    symbol_names = {
+        '^GSPC': 'S&P 500 Index',
+        '^IXIC': 'Nasdaq Composite Index',
+        '^DJI': 'Dow Jones Industrial Average',
+        '^VIX': 'VIX Index (ดัชนีความกลัว)',
+        '^TNX': 'US 10-Year Treasury Yield (%)',
+        'DX-Y.NYB': 'US Dollar Index (DXY)',
+        'GC=F': 'Spot Gold (XAU/USD) ($/oz)',
+        'CL=F': 'WTI Crude Oil ($/bbl)',
+        'BZ=F': 'Brent Crude Oil ($/bbl)',
+        'BTC-USD': 'Bitcoin ($)'
+    }
+
     live_context_str = ""
     if live_quotes:
         live_lines = [
-            "\n[CRITICAL MANDATE - ข้อมูลราคาและตัวชี้วัดเทคนิคัลจริง ณ ปัจจุบัน จาก TRADINGVIEW / YAHOO FINANCE]:",
-            "คุณต้องใช้ราคาจริงล่าสุดและตัวเลข % การเปลี่ยนแปลงจากตารางนี้อย่างเคร่งครัด 100% ห้ามเดาตัวเลข ห้ามใช้ราคาทองคำเก่าในอดีต (เช่น $2,380/oz) หรือราคาเก่าก่อน Stock Split เด็ดขาด สำหรับราคาทองคำ Spot/Futures (GC=F / XAUUSD) และ DXY / Bond Yield ต้องอ้างอิงจากตารางนี้เป็นหลัก:"
+            "\n[CRITICAL MANDATE - ข้อมูลราคาจริงและดัชนีตลาดล่าสุด 100% ณ ปัจจุบัน (ปี 2026) จาก YAHOO FINANCE / TRADINGVIEW]:",
+            "คุณต้องใช้ราคาจริงล่าสุดและตัวเลข % การเปลี่ยนแปลงจากตารางนี้อย่างเคร่งครัด 100% ห้ามเดาตัวเลขเก่าปี 2024 เด็ดขาด (เช่น S&P 500 ต้องอยู่ในระดับ ~7,600-7,800 จุด, Nasdaq ~26,000 จุด, Dow Jones ~53,000 จุด, ทองคำ Spot Gold ~$4,300-4,400/oz, US 10Y Yield ~4.7%):"
         ]
         for sym, q in live_quotes.items():
             chg_str = f"+{q['change']:.2f}%" if q['change'] >= 0 else f"{q['change']:.2f}%"
-            hv_30d = 25.0
-            try:
-                import yfinance as yf
-                import numpy as np
-                import math
-                h_hv = yf.Ticker(sym).history(period="2mo")['Close'].dropna()
-                if len(h_hv) >= 15:
-                    log_r = np.log(h_hv / h_hv.shift(1)).dropna()
-                    val = float(log_r.std() * np.sqrt(252) * 100.0)
-                    if not math.isnan(val) and val > 0:
-                        hv_30d = val
-            except Exception:
-                pass
-            live_lines.append(f"- **{sym}**: ราคาล่าสุด = **${q['price']:.2f}** ({chg_str}), Daily RSI (14) = {q['rsi']:.1f}, MACD = {q['macd']:.3f}, HV 30D = {hv_30d:.1f}%")
+            sname = symbol_names.get(sym, sym)
+            live_lines.append(f"- **{sname} ({sym})**: ราคา/ระดับล่าสุด = **{q['price']:.2f}** ({chg_str}), Daily RSI = {q['rsi']:.1f}")
         live_context_str = "\n".join(live_lines)
 
-    # Base System Instruction for financial report style compliance
+    # Base System Instruction for financial report style compliance & 4 Financial Intelligence Pillars
     system_instruction = (
-        "คุณคือหัวหน้านักวิเคราะห์การเงินระดับสูงของช่อง 'เสพข่าวก่อนเทรด หุ้นอเมริกา' "
-        "งานของคุณคือทำ Deep Research และเขียนรายงานวิเคราะห์สถานการณ์ตลาดหุ้นและทองคำอย่างมืออาชีพ\n\n"
-        "ข้อกำหนดในการเขียนที่ต้องปฏิบัติตามอย่างเคร่งครัด:\n"
-        "1. เขียนเป็นภาษาไทยด้วยน้ำเสียงที่เป็นทางการ น่าเชื่อถือ และวิเคราะห์เชิงลึกแบบสถาบันการเงิน\n"
-        "2. ห้ามใช้สัญลักษณ์เกี่ยวกับบทสคริปต์วิดีโอหรือ youtube โดยเด็ดขาด เช่น วงเล็บเหลี่ยมบอกกล้อง/ท่าทาง [กล้องซูม], "
-        "เวลาแนะนำ *(เวลาแนะนำ: 01:20)*, หรือป้ายบทพูด เช่น **บทพูด:**, **ผู้ดำเนินรายการ:**, **Host:** เป็นต้น\n"
-        "3. หัวข้อหลักของรายงานต้องสะท้อนเนื้อหาและไม่ควรใช้คำว่า 'สคริปต์', 'บทพูด', 'youtube' หรือ 'script'\n"
-        "4. ใช้แหล่งข้อมูลจากการค้นหาผ่านเครื่องมือ Google Search Grounding ที่กำหนดให้ เพื่ออ้างอิงข้อมูลปัจจุบัน ข่าวสารรอบด้าน และตัวเลขจริง\n"
-        f"5. ข้อมูลราคาหุ้น ราคาทองคำ (XAU/USD / GC=F) ดัชนีทางเทคนิคัล (เช่น RSI, EMA) และปัจจัยข่าวสารทั้งหมด ต้องสอดคล้องตรงตามปีและเดือน ณ วันที่เป้าหมายของรายงาน ({args.date}) อย่างเคร่งครัด ห้ามใช้ข้อมูลเก่าข้ามปีหรือข้ามเดือนจากอดีตเด็ดขาด เพื่อความแม่นยำสูงสุดของบทวิเคราะห์\n"
-        "6. หากมีการแสดงตารางรายชื่อหุ้นหรือทองคำ ให้แสดงในรูปแบบตาราง Markdown โดยต้องมีคอลัมน์ดัชนีชี้วัดทางเทคนิคัลหลักอย่างชัดเจน ได้แก่ Ticker, ชื่อสินทรัพย์, ราคาล่าสุด, การเปลี่ยนแปลง %, RSI (14), MACD, Volume, และ เหตุผลประกอบ เสมอ\n"
-        "7. ห้ามใส่ข้อความ 'N/A' หรือเดาตัวเลขในตารางราคาหุ้นเด็ดขาด หุ้นทุกตัวที่วิเคราะห์ต้องใช้ตัวเลขราคาปิดล่าสุดจริงจากตาราง TRADINGVIEW LIVE QUOTES ข้างต้นเท่านั้น\n"
-        "8. ห้ามสร้างข่าวลือปลอม ข่าวสมมติ หรือดีลธุรกิจที่ไม่มีอยู่จริงขึ้นมาเด็ดขาด ข่าวสารและ Catalyst ทั้งหมดต้องได้รับการยืนยันจาก Google Search Grounding ที่เป็นข่าวจริง ณ วันเป้าหมายเท่านั้น (เช่น ข่าว Reddit เข้า S&P 500) หากไม่มีข่าวใหญ่ ให้ระบุว่าเป็นปัจจัยตาม Sentiment ตลาด หรือ Technical Price Action ห้ามแต่งข่าวลือเด็ดขาด\n"
+        "คุณคือ '🌎 นักสืบหัวเห็ด' (Global Financial Intelligence Agent) หน่วยข่าวกรองระดับสูงของช่อง 'เสพข่าวก่อนเทรด หุ้นอเมริกา'\n"
+        "ปรัชญาหลักของช่องคือ:\n"
+        "'We don't just report what happened. We connect the evidence, decode the signals, and anticipate what comes next.'\n"
+        "(เราไม่ได้เพียงรายงานว่าเกิดอะไรขึ้น แต่เชื่อมโยงหลักฐาน ถอดรหัสสัญญาณ และวางภาพสิ่งที่อาจเกิดขึ้นต่อไป)\n\n"
+        "หน้าที่ของคุณคือสืบค้นข้อมูลตาม 4 Financial Intelligence Pillars:\n"
+        "1. ☀️ Market Intelligence (สรุปจบ ทันโลกหุ้น): ตอบคำถาม 'วันนี้เกิดอะไรขึ้น?' + ถอดรหัสทำไมมันเกิดและพรุ่งนี้จับตาอะไร\n"
+        "2. 🐋 Smart Money Intelligence (วาฬขยับ ตลาดสะเทือน): ตอบคำถาม 'เงินใหญ่กำลังทำอะไร?' ผ่าน ETF Flow, Options Flow, Dark Pool, Short Interest, Volume\n"
+        "3. 🥇 Gold Intelligence (วาฬทองคำ): ตอบคำถาม 'Macro & Risk กำลังบอกอะไร?' ผ่านสถิติ Central Banks, COMEX, Gold ETF, Yield, DXY และเชื่อมกลับสู่ตลาดหุ้นในตอนท้าย\n"
+        "4. 🔮 Strategic Intelligence (Weekly Market Outlook): ตอบคำถาม 'สัปดาห์หน้าจะเกิดอะไรขึ้น?' ผ่าน Base/Bull/Bear Scenarios\n\n"
+        "ทุกข้อมูลที่สืบค้นต้องสะท้อนกฎ 4 Universal Questions Filter: (1) WHAT? เกิดอะไรขึ้น (2) WHY? ทำไมถึงเกิด (3) SO WHAT? สำคัญอย่างไร (4) WHAT'S NEXT? ต่อไปต้องจับตาอะไร\n"
+        "และระบุ Confidence Level (🟢 High: 80-100%, 🟡 Medium: 50-79%, 🔴 Low: 1-49%) ให้แก่ทุกสัญญาณสำคัญเสมอ\n\n"
+        "ข้อกำหนดในการสืบค้นและรายงานดิบ (Phase 1 — Discovery):\n"
+        "1. ใช้ Prompt การค้นหาประจำรายการจาก Web App Album ผลิตคลิป v.1 เป็นฐานหลักในการสืบค้น\n"
+        "2. รวบรวมข้อมูลให้ครอบคลุม 8 มิติหลัก: U.S. Market, Macro, Rates/FX, Commodities, Precious Metals, Crypto, Corporate, Geopolitics\n"
+        "3. สร้างผลลัพธ์ในรูปแบบ **RAW INTELLIGENCE PACK** จัดกลุ่มเป็นแต่ละ EVENT (ระบุ Headline, Source, Primary Source, Time, Asset, Potential Impact, Confidence Level)\n"
+        "4. เขียนเป็นภาษาไทยด้วยน้ำเสียงที่เป็นทางการ น่าเชื่อถือ แบบสถาบันการเงิน ห้ามใช้สัญลักษณ์สคริปต์วิดีโอ YouTube เช่น [กล้องซูม], **บทพูด:** เด็ดขาด\n"
+        f"5. ข้อมูลราคาหุ้น ราคาทองคำ และตัวชี้วัดเทคนิเคิล ต้องตรงตามปีและเดือน ณ วันที่เป้าหมาย ({args.date}) 100%\n"
         f"{live_context_str}\n"
     )
 
-    # Load template information from notebooklm-manager/templates.json
+    # Load template information from notebooklm-manager/templates.json (Web App Album ผลิตคลิป v.1)
     template_data = None
     templates_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "notebooklm-manager", "templates.json")
     if os.path.exists(templates_path):
@@ -194,40 +221,40 @@ def main():
         report_prompt = template_data.get("reportPromptV3") or template_data.get("reportPromptV2") or template_data.get("reportPrompt", "")
         search_prompt_tmpl = template_data.get("searchPromptV3") or template_data.get("searchPromptV2") or template_data.get("searchPrompt", "")
         
-        show_type_instr = f"เขียนรายงานบทวิเคราะห์เชิงลึก {tmpl_name}\n\n[ข้อกำหนดและคำสั่งเฉพาะรายงานนี้]:\n{report_prompt}"
+        show_type_instr = f"สืบค้นข้อมูลข่าวตาม Prompt ประจำรายการ '{tmpl_name}' จาก Web App Album ผลิตคลิป v.1\n\n[คำสั่งค้นหาเฉพาะรายการ]:\n{search_prompt_tmpl}\n\n[ข้อกำหนดการจัดรูปบทวิเคราะห์]:\n{report_prompt}"
         if args.prompt.strip().lower() == "auto" or not args.prompt.strip():
             args.prompt = search_prompt_tmpl
     elif args.template_id == "daily":
         show_type_instr = (
-            "เขียนรายงานสรุปภาวะตลาดหุ้นประจำวัน (Daily Market Summary)\n"
+            "สืบค้นข้อมูลสรุปภาวะตลาดหุ้นประจำวัน (Daily Market Summary) จาก Web App Album ผลิตคลิป v.1\n"
             "เน้นประเด็นเศรษฐกิจมหภาค ข้อมูลผลประกอบการบริษัท และดัชนีสำคัญ S&P 500, Nasdaq, Dow Jones ในรอบ 24 ชั่วโมงที่ผ่านมา"
         )
     elif args.template_id == "weekly":
         show_type_instr = (
-            "เขียนรายงานบทวิเคราะห์เชิงลึกรายสัปดาห์ (Weekly Global Market Recap)\n"
-            "เน้นสรุปเหตุการณ์ตลาดและนโยบายการเงินรอบสัปดาห์ที่ผ่านมา สัญญาณเงินเฟ้อ และแนวโน้มปัจจัยเชิงกลยุทธ์ที่จะมีผลต่อดัชนีสหรัฐฯ ในสัปดาห์ถัดไป"
+            "สืบค้นข้อมูลบทวิเคราะห์เชิงลึกรายสัปดาห์ (Weekly Global Market Recap) จาก Web App Album ผลิตคลิป v.1\n"
+            "เน้นสรุปเหตุการณ์ตลาดและนโยบายการเงินรอบสัปดาห์ที่ผ่านมา สัญญาณเงินเฟ้อ และแนวโน้มปัจจัยเชิงกลยุทธ์ที่จะมีผลต่อดัชนีสหรัฐฯ"
         )
     elif args.template_id == "whale":
         show_type_instr = (
-            "เขียนรายงานวิเคราะห์กระแสเงินทุนสถาบันและกองทุนขนาดใหญ่ (Whale Flow Analysis)\n"
+            "สืบค้นข้อมูลกระแสเงินทุนสถาบันและกองทุนขนาดใหญ่ (Whale Flow Analysis) จาก Web App Album ผลิตคลิป v.1\n"
             "เน้นความเคลื่อนไหวการเก็บของหรือเทขายหุ้นของวาฬ/สถาบัน รายงาน 13F ล่าสุด และข้อมูล Insider Trading"
         )
     else:
-        show_type_instr = f"เขียนรายงานบทวิเคราะห์เชิงลึกในหัวข้อ {args.template_id}"
+        show_type_instr = f"สืบค้นข้อมูลบทวิเคราะห์เชิงลึกในหัวข้อ {args.template_id} จาก Web App Album ผลิตคลิป v.1"
 
     user_prompt = (
-        f"ประเภทรายงานที่ต้องการสร้าง: {show_type_instr}\n"
-        f"วันที่ของรายงาน: {args.date}\n"
-        f"คำสั่งค้นหาข้อมูลและเนื้อหาข่าว: {args.prompt}\n\n"
-        f"กรุณาใช้ความสามารถในการทำวิจัยเชิงลึก (Deep Research) ผ่าน Google Search เพื่อรวบรวมข่าวสารและตัวเลขล่าสุด "
-        f"จากนั้นเขียนรายงานตามคำสั่งข้างต้น โดยต้องแทรกหัวข้อโลโก้ของช่องไว้ที่บรรทัดแรกสุดของผลลัพธ์ในรูปแบบโค้ด HTML ดังนี้:\n"
+        f"ประเภทรายการที่รัน: {show_type_instr}\n"
+        f"วันที่เป้าหมายของรายงาน: {args.date}\n"
+        f"คำสั่งค้นหาจาก Web App Album: {args.prompt}\n\n"
+        f"กรุณาใช้ความสามารถในการทำวิจัยเชิงลึก (Deep Research) ผ่าน Google Search เพื่อสืบค้นข่าวและ Primary Sources ให้ครบถ้วน "
+        f"จากนั้นสร้าง **RAW INTELLIGENCE PACK** และบทวิเคราะห์ โดยต้องแทรกหัวข้อโลโก้ของช่องไว้ที่บรรทัดแรกสุดของผลลัพธ์ในรูปแบบโค้ด HTML ดังนี้:\n"
         f'<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>\n\n'
         f"ตามด้วยเนื้อหาบทวิเคราะห์เชิงลึกที่เป็นทางการทันที\n\n"
         f"{live_context_str}"
     )
 
     try:
-        print(f"[Stage 1] Generating draft report using model: {model_name}...")
+        print(f"[Phase 1: Discovery] Gathering Raw Intelligence Pack using model: {model_name} (Prompt Source: Web App Album v.1)...")
         
         # Configure model and tools in new google-genai style
         config = types.GenerateContentConfig(
@@ -244,7 +271,7 @@ def main():
         
         draft_content = response.text
         if not draft_content:
-            raise Exception("Gemini returned empty response in Stage 1")
+            raise Exception("Gemini returned empty response in Phase 1 Discovery")
 
         # Extract search grounding sources
         sources = []
@@ -267,8 +294,8 @@ def main():
 
         print(f"[Stage 1] Found {len(sources)} grounding sources.")
 
-        # Stage 2: Quality Control (QC) Step
-        print(f"[Stage 2] Starting Quality Control (QC) Step...")
+        # Phase 2: Fact Check (🛡️ QC Expert) & Phase 3: Editorial Synthesis (🧠 Chief Financial Editor)
+        print(f"[Phase 2: Fact Check & Phase 3: Editorial Synthesis] Executing QC Audit Gate & Chief Editor Synthesis...")
         
         # Extract tickers and fetch TradingView quotes
         tickers = extract_tickers_from_markdown(draft_content)
@@ -298,33 +325,33 @@ def main():
             tv_context = ""
         
         qc_system_instruction = (
-            "คุณคือหัวหน้าฝ่ายตรวจสอบคุณภาพข้อมูล (QC Inspector) และบรรณาธิการข่าวการเงินระดับสูงของช่อง 'เสพข่าวก่อนเทรด หุ้นอเมริกา'\n"
-            "หน้าที่ของคุณคือตรวจสอบความถูกต้องของข้อมูล (Fact-check) และตัวเลขราคาในรายงานที่ได้รับอย่างเด็ดขาด\n\n"
-            "เกณฑ์การตรวจสอบคุณภาพอย่างเข้มงวด:\n"
-            "1. ตรวจสอบราคาหุ้นและ % การเปลี่ยนแปลงในรายงานทั้งหมดกับข้อมูลราคาจริง ณ ปัจจุบัน (TradingView Live Quotes)\n"
-            "   - **คำเตือนพิเศษเรื่อง Stock Split & Price Accuracy**: ตรวจสอบว่า NVDA ต้องอยู่ช่วง ~$225 (ไม่ใช่ $1,200+), SMCI ต้องอยู่ช่วง ~$39-40 (ไม่ใช่ $900+), PLTR ต้องอยู่ช่วง ~$174 (ไม่ใช่ $27), MRNA ต้องอยู่ช่วง ~$63-64 (ไม่ใช่ $112+)\n"
-            "   - หากพบราคาผิดในรายงานดราฟต์ คุณต้องทำการแก้ไขตัวเลขราคาในตาราง ในเนื้อหาเจาะลึก และในกลยุทธ์แนวรับแนวต้าน (เช่น PLTR แนวต้านต้องไม่อ้างอิง $28 แต่ต้องสอดคล้องกับราคาจริงระดับ $174) ให้ถูกต้องตรงตามราคาจริง 100%\n"
-            "2. **ห้ามอ้างว่า 'เป็นรายงานวันอนาคตจึงไม่ต้องแก้ไขตัวเลข'** เป็นอันขาด! แม้ Target Date จะเป็นวันพรุ่งนี้ แต่ baseline ของราคาต้องมาจากราคาตลาดปิดล่าสุดจริงจาก TradingView เสมอ\n"
-            "3. รักษารูปแบบและโครงสร้างภาษาเขียนแบบมืออาชีพทางการเงิน ห้ามมีสัญลักษณ์เกี่ยวกับบทสคริปต์วิดีโอหรือ YouTube เช่น วงเล็บเหลี่ยมบอกกล้อง/ป้ายบทพูดเด็ดขาด\n"
-            "4. ห้ามใส่ข้อความเกริ่นนำ ข้อความอธิบายขั้นตอนการตรวจสอบ หรือคำชี้แจงเกี่ยวกับการ QC ให้แสดงผลเป็นรายงานตัวจริงทันที โดยเริ่มต้นที่โลโก้ช่อง HTML ที่อยู่ในฉบับร่างดั้งเดิม\n"
-            "5. หากรายงานแสดงตารางสัญญาณซื้อหรือตารางสรุปหุ้นเด่น ตารางนั้นต้องอยู่ในรูปแบบ Markdown ที่มีคอลัมน์ดัชนีชี้วัดหลัก: Ticker, ชื่อบริษัท, ราคาล่าสุด, การเปลี่ยนแปลง %, RSI (14), MACD, Volume, และ เหตุผลประกอบ เสมอ\n"
-            "6. ผลลัพธ์ใน final_report_content ต้องเป็นเนื้อหารายงานฉบับสมบูรณ์ที่ผ่านการ QC และปรับปรุงแก้ไขตัวเลขราคาเป็นราคาจริงทั้งหมดเรียบร้อยแล้ว"
+            "คุณคือระบบสังเคราะห์ '🛡️ QC Expert' และ '🧠 Chief Financial Editor' ของช่อง 'เสพข่าวก่อนเทรด หุ้นอเมริกา'\n"
+            "ปฏิบัติงานตามสายพานข่าว Financial Intelligence Pipeline โดยมีขั้นตอนดังนี้:\n\n"
+            "[PHASE 2 — FACT CHECK (🛡️ QC Expert Gate)]:\n"
+            "1. ตรวจสอบข้อมูลดิบใน Raw Intelligence Pack แบบ Claim-by-Claim ติด Label สรุปสถานะ: VERIFIED, PARTIALLY VERIFIED, INCORRECT, REJECTED\n"
+            "2. บังคับใช้ราคาปิดล่าสุดและตัวชี้วัดจาก TradingView Live Quotes 100% ห้ามใช้ราคาเก่าก่อน Stock Split\n\n"
+            "[PHASE 3 — EDITORIAL INTELLIGENCE (🧠 Chief Financial Editor)]:\n"
+            "1. บังคับใช้กฎ DNA กลาง: ทุกการวิเคราะห์ต้องประกอบด้วย (1) 🔎 Evidence (หลักฐาน) ➔ (2) 🧠 Interpretation (การตีความ) ➔ (3) 🎯 Implication (นัยต่อการลงทุน)\n"
+            "2. แทรก Confidence Level ให้แก่สัญญาณสำคัญเสมอ (🟢 High: 80-100%, 🟡 Medium: 50-79%, 🔴 Low: 1-49%)\n"
+            "3. บังคับตอบ 4 Universal Questions Filter: WHAT? ➔ WHY? ➔ SO WHAT? ➔ WHAT'S NEXT?\n"
+            "4. สร้าง Cross-Asset Impact Engine เชื่อมโยงสายธารข่าวระหว่าง Market, Smart Money, Gold และ Strategic Scenarios (Base / Bull / Bear Case)\n"
+            "5. ห้ามมีสัญลักษณ์เกี่ยวกับบทสคริปต์วิดีโอ YouTube เช่น [กล้องซูม], *(เวลาแนะนำ)*, **บทพูด:** เด็ดขาด"
         )
         
         sources_text = "\n".join([f"- {title}: {url}" for title, url in sources]) if sources else "ไม่มีแหล่งข้อมูลอ้างอิง"
         
         qc_user_prompt = (
-            f"รายงานที่ต้องทำการตรวจสอบ (Draft Report):\n"
+            f"ข้อมูลดิบจาก Phase 1 Discovery (Raw Intelligence Pack):\n"
             f"======================================\n"
             f"{draft_content}\n"
             f"======================================\n\n"
-            f"วันที่กำหนดสำหรับรายงานนี้ (Target Date): {args.date}\n"
-            f"คำสั่งค้นหาเดิม: {args.prompt}\n\n"
-            f"แหล่งอ้างอิงข้อมูลเว็บของฉบับร่าง:\n"
+            f"วันที่เป้าหมายของรายงาน (Target Date): {args.date}\n"
+            f"คำสั่งสืบค้นเดิม: {args.prompt}\n\n"
+            f"แหล่งอ้างอิงข้อมูลเว็บ:\n"
             f"{sources_text}\n"
             f"{tv_context}\n\n"
-            f"โปรดดำเนินการตรวจสอบและแก้ไขจุดที่คลาดเคลื่อน ข้อมูลล้าสมัย ดัชนี RSI ที่ไม่ถูกต้อง หรือกรอบเวลาของปีและเดือนที่ไม่ตรงกับ Target Date ({args.date}) ทั้งหมด "
-            f"โดยเฉพาะการใช้ Google Search ค้นหาราคาหุ้นและ Daily RSI ณ ปัจจุบันของ Tickers ในรายงาน จากนั้นเขียนและแสดงผลลัพธ์เป็นรายงานฉบับสมบูรณ์ที่ผ่านการ QC และแก้ไขตัวเลขทั้งหมดแล้ว"
+            f"โปรดดำเนินการ QC Fact-check (Phase 2) และเรียบเรียงเป็น Final Report สังเคราะห์เชิงลึก (Phase 3 & 4) ตามโครงสร้างรายการ 'เสพข่าวก่อนเทรด หุ้นอเมริกา' "
+            f"ให้เสร็จสิ้นสมบูรณ์ พร้อมสรุป audit_log ลงใน QCReport"
         )
         
         qc_config = types.GenerateContentConfig(
@@ -364,7 +391,19 @@ def main():
         if tv_quotes:
             for t, q in tv_quotes.items():
                 real_p = q['price']
-                if t == 'NVDA':
+                if t == '^GSPC' or t == 'SPX':
+                    final_content = re.sub(r'5,5\d\d\.\d+|5,4\d\d\.\d+', f"{real_p:,.2f}", final_content)
+                elif t == '^IXIC' or t == 'NDX':
+                    final_content = re.sub(r'18,2\d\d\.\d+|18,1\d\d\.\d+|17,9\d\d\.\d+', f"{real_p:,.2f}", final_content)
+                elif t == '^DJI' or t == 'DJIA':
+                    final_content = re.sub(r'39,4\d\d\.\d+|39,3\d\d\.\d+', f"{real_p:,.2f}", final_content)
+                elif t == 'GC=F' or t == 'GOLD':
+                    final_content = re.sub(r'\$2,3\d\d\.\d+|\$2,400\.\d+', f"${real_p:,.2f}", final_content)
+                elif t == 'DX-Y.NYB' or t == 'DXY':
+                    final_content = re.sub(r'105\.\d+|104\.\d+', f"{real_p:.2f}", final_content)
+                elif t == '^TNX':
+                    final_content = re.sub(r'4\.35%|4\.30%', f"{real_p:.2f}%", final_content)
+                elif t == 'NVDA':
                     final_content = re.sub(r'\$1,?250\.\d+|\$1,?200\.\d+|\$1,?2\d\d\.\d+', f"${real_p:.2f}", final_content)
                 elif t == 'SMCI':
                     final_content = re.sub(r'\$985\.\d+|\$9\d\d\.\d+', f"${real_p:.2f}", final_content)

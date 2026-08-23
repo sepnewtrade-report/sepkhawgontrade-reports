@@ -4,49 +4,43 @@ const path = require('path');
 const WORKSPACE_DIR = __dirname;
 const OUTPUT_FILE = path.join(WORKSPACE_DIR, 'reports-index.json');
 
-// Map of file prefixes to friendly categories (Thai/English)
+// Map of file prefixes to 4 Financial Intelligence Pillars
 const CATEGORY_MAP = {
-  'us_pre_market_analysis': { name: 'Pre-Market Analysis', thai: 'หุ้นพุ่งก่อนตลาดเปิด' },
-  'daily_script': { name: 'Daily Script', thai: 'บทวิเคราะห์รายวัน' },
-  'cosmic_trade_signal_pro': { name: 'Cosmic Trade Signal', thai: 'Cosmic Trade Signal' },
-  'small_cap_research': { name: 'Small Cap Radar', thai: 'Small Cap Radar' },
-  'us_viral_stock_analysis': { name: 'Hot Stock วันนี้', thai: 'Hot Stock วันนี้' },
-  'weekly_economic_calendar': { name: 'Economic Calendar', thai: 'Economic Calendar' },
-  'weekly_script_thai': { name: 'Weekly Script (Thai)', thai: 'บทวิเคราะห์รายสัปดาห์ (ไทย)' },
-  'weekly_script': { name: 'Weekly Script', thai: 'บทวิเคราะห์รายสัปดาห์' },
-  'whale_flow': { name: 'Whale Flow', thai: 'วาฬขยับ ตลาดสะเทือน' },
-  'oversold_opportunity_report': { name: 'Oversold Opportunity', thai: 'Oversold Opportunity' },
-  'bear_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
-  'short_squeeze': { name: 'Bear Squeeze', thai: 'หมีโดนบีบ' },
-  'whats_next': { name: "What's Next for Market", thai: "What's Next for Market" },
-  'thai_stock': { name: 'Thai Stock Analysis', thai: 'เหลียวหลังมามองหุ้นไทย' },
-  'astro_economy_weekly': { name: 'Astro Economy Weekly', thai: 'Astro Economy Weekly' },
-  'options_screen_analysis': { name: 'Options Selection Screen', thai: 'คัดกรองสัญญาณออปชั่น' },
-  'gold_whale_flow': { name: 'Gold Whale Flow', thai: 'วาฬทองคำ รายวัน' }
+  // ☀️ 1. Market Intelligence (สรุปจบ ทันโลกหุ้น)
+  'us_pre_market_analysis': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'daily_script': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'market_summary': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'us_viral_stock_analysis': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'global_market_recap': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'equity_research_report': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+  'us_equity_research_report': { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' },
+
+  // 🐋 2. Smart Money Intelligence (วาฬขยับ ตลาดสะเทือน)
+  'whale_flow': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'options_screen_analysis': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'short_squeeze': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'bear_squeeze': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'oversold_opportunity_report': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'cosmic_trade_signal_pro': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+  'small_cap_research': { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' },
+
+  // 🥇 3. Gold Intelligence (วาฬทองคำ)
+  'gold_whale_flow': { name: 'Gold Intelligence', thai: 'วาฬทองคำ' },
+
+  // 🔮 4. Strategic Intelligence (Weekly Market Outlook)
+  'whats_next': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },
+  'weekly_script': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },
+  'weekly_script_thai': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },
+  'weekly_economic_calendar': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },
+  'astro_economy_weekly': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },
+  'thai_stock': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' }
 };
 
 function getCategory(filename, title) {
   const lowercase = filename.toLowerCase();
-  const titleLower = (title || "").toLowerCase();
 
-  if (lowercase.startsWith('bot_trade_')) {
-    return { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' };
-  }
-
-  if (lowercase.startsWith('bot_stats_')) {
-    return { name: 'Bot Trade Stats', thai: 'Bot Trade Stats' };
-  }
-
-  if (lowercase.startsWith('market_summary')) {
-    if (titleLower.includes('top buy') || titleLower.includes('bot trade') || titleLower.includes('สัญญาณซื้อ') || titleLower.includes('บอทเทรด')) {
-      return { name: 'Bot Trade Todays', thai: 'Bot Trade Todays' };
-    } else {
-      return { name: 'Daily Script', thai: 'สรุปจบ ทันโลกหุ้น' };
-    }
-  }
-
-  if (lowercase.startsWith('global_market_recap')) {
-    return { name: 'Global Market Recap', thai: 'Global Market Recap' };
+  if (lowercase.startsWith('bot_trade_') || lowercase.startsWith('bot_stats_')) {
+    return { name: 'Smart Money Intelligence', thai: 'วาฬขยับ ตลาดสะเทือน' };
   }
 
   for (const prefix in CATEGORY_MAP) {
@@ -54,7 +48,7 @@ function getCategory(filename, title) {
       return CATEGORY_MAP[prefix];
     }
   }
-  return { name: 'Other Reports', thai: 'รายงานทั่วไป' };
+  return { name: 'Market Intelligence', thai: 'สรุปจบ ทันโลกหุ้น' };
 }
 
 function parseDate(filename) {

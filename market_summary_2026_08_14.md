@@ -41,9 +41,3 @@
 - [Reuters: S&P 500 Hits All-Time High as Wholesale Inflation Cools (Aug 13, 2026)](https://www.reuters.com)
 - [Bloomberg: US Stocks Surge to Record High; Treasury Yields Ease Following PPI Data (Aug 13, 2026)](https://www.bloomberg.com)
 - [CNBC: Wall Street Pre-Market Recap & Fed Interest Rate Expectations (Aug 14, 2026)](https://www.cnbc.com)
-
----
-
-## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- [Yahoo Finance (Aug 13-14, 2026)](https://finance.yahoo.com/)
-- [TradingView Market Data (Aug 13-14, 2026)](https://www.tradingview.com/)

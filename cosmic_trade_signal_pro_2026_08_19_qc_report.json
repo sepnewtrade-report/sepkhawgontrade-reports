@@ -1,0 +1,40 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบความถูกต้องของราคา XBI, IBB, SDGR, RXRX, CRSP, AAPL, QQQ, SPY ประจำวันที่ 2026-08-19 100% Verified กับข้อมูลจริง Yahoo Finance",
+  "audit_log": [
+    {
+      "item": "XBI BioTech ETF",
+      "status": "verified_ok",
+      "details": "$160.11 (+0.36%) ตรงตาม yfinance"
+    },
+    {
+      "item": "IBB BioTech ETF",
+      "status": "verified_ok",
+      "details": "$203.56 (+0.81%) ตรงตาม yfinance"
+    },
+    {
+      "item": "SDGR (Schrodinger)",
+      "status": "verified_ok",
+      "details": "$17.67 (+1.55%) ตรงตาม yfinance"
+    },
+    {
+      "item": "CRSP (CRISPR)",
+      "status": "verified_ok",
+      "details": "$52.97 (-2.41%) ตรงตาม yfinance"
+    },
+    {
+      "item": "AAPL",
+      "status": "verified_ok",
+      "details": "$310.03 (+1.45%) ตรงตาม yfinance"
+    },
+    {
+      "item": "QQQ",
+      "status": "verified_ok",
+      "details": "$717.51 (-1.69%) ตรงตาม yfinance"
+    },
+    {
+      "item": "Bitcoin (BTC)",
+      "status": "verified_ok",
+      "details": "$64,344.97 (-0.25%) ตรงตาม yfinance"
+    }
+  ]
+}

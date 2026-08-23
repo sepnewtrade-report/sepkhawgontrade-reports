@@ -1,0 +1,45 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบความถูกต้องของราคา Spot Gold, Silver, AEM, NEM, GOLD, GLD, GDX, GDXJ ประจำวันที่ 2026-08-19 100% Verified กับข้อมูลจริง Yahoo Finance",
+  "audit_log": [
+    {
+      "item": "Spot Gold (GC=F)",
+      "status": "verified_ok",
+      "details": "$4,383.90/oz (-0.77%) ตรงตาม yfinance"
+    },
+    {
+      "item": "Spot Silver (XAGUSD=X)",
+      "status": "verified_ok",
+      "details": "$65.80/oz (-1.08%) ตรงตาม yfinance"
+    },
+    {
+      "item": "AEM (Agnico Eagle Mines)",
+      "status": "verified_ok",
+      "details": "$186.94 (-0.97%) ตรงตาม yfinance (แก้ไขตัวเลขแล้ว)"
+    },
+    {
+      "item": "NEM (Newmont Corp)",
+      "status": "verified_ok",
+      "details": "$115.98 (-3.62%) ตรงตาม yfinance"
+    },
+    {
+      "item": "GLD (SPDR Gold ETF)",
+      "status": "verified_ok",
+      "details": "$398.55 (-1.71%) ตรงตาม yfinance"
+    },
+    {
+      "item": "GDX (Gold Miners ETF)",
+      "status": "verified_ok",
+      "details": "$88.95 (-3.20%) ตรงตาม yfinance"
+    },
+    {
+      "item": "GDXJ (Junior Miners ETF)",
+      "status": "verified_ok",
+      "details": "$115.42 (-4.12%) ตรงตาม yfinance"
+    },
+    {
+      "item": "GOLD (Barrick Gold)",
+      "status": "verified_ok",
+      "details": "$41.84 (-7.82%) ตรงตาม yfinance"
+    }
+  ]
+}

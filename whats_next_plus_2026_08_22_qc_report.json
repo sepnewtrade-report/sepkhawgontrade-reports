@@ -1,0 +1,25 @@
+{
+  "overall_summary": "การตรวจสอบคุณภาพเนื้อหาและการ Fact-check ข้อมูลตลาดการเงิน ณ วันที่ 22 สิงหาคม 2026 เสร็จสิ้นอย่างสมบูรณ์ โดยได้ปรับปรุงข้อมูลราคาปิด เปอร์เซ็นต์การเปลี่ยนแปลง ค่า RSI (14) และ MACD ของดัชนีหลักและหุ้นรายตัว ให้ตรงตามข้อมูล TradingView / yfinance 100% พร้อมวิเคราะห์ตามโครงสร้าง DNA (Evidence -> Interpretation -> Implication) และตอบโจทย์ Universal Questions (WHAT, WHY, SO WHAT, WHAT'S NEXT) อย่างครบถ้วนโดยไม่มีสคริปต์วิดีโอปะปน",
+  "audit_log": [
+    {
+      "item": "ดัชนีหลัก S&P 500, Nasdaq, Dow Jones",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคาปิดและ % Change ตรงตามข้อมูล TradingView Live (^GSPC: 7674.37 +0.43%, ^IXIC: 26180.46 +0.43%, ^DJI: 53277.01 +0.98%)"
+    },
+    {
+      "item": "หุ้นกลุ่ม Strategic Watchlist (NVDA, PLTR, TSLA, MRNA, HOOD, AVGO ฯลฯ)",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคาปิด ค่า Daily RSI (14) และ MACD ตรงตามข้อมูล TradingView Live เช่น NVDA ($214.72, RSI 51.01), PLTR ($179.94, RSI 69.41), MRNA ($145.13, RSI 71.60)"
+    },
+    {
+      "item": "ดัชนีค่าเงินดอลลาร์ (DXY)",
+      "status": "corrected",
+      "details": "ปรับปรุง % Change ของ DXY เป็น -0.10% ที่ระดับ 98.80 จุด ให้ตรงกับข้อมูล TradingView Live"
+    },
+    {
+      "item": "ราคาทองคำ (GC=F) และน้ำมันดิบ (CL=F, BZ=F)",
+      "status": "verified_ok",
+      "details": "ตรวจสอบราคาทองคำ $4624.10 (+2.39%), น้ำมันดิบ WTI $87.06 (-0.88%) และ Brent $94.39 (+0.65%) ตรงตามข้อมูลสืบค้นล่าสุด"
+    }
+  ]
+}

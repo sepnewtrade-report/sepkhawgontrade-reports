@@ -2,6 +2,10 @@
 
 # 📊 บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-15
 
+<p align="center"><img src="Logo master.png" alt="SepKhawGonTrade Logo" width="150" /></p>
+
+# 📊 บทวิเคราะห์สรุปจบ ทันโลกหุ้น — 2026-08-15
+
 สคริปต์รายการสรุปจบ ทันโลกหุ้น ประจำวันเสาร์ที่ 15 สิงหาคม 2026 (สรุปภาพรวมตลาดหุ้นสหรัฐฯ ปิดรอบสัปดาห์ / Post-Market & Weekend Review)
 
 ## 🎙️ 1. OPENING — Market Hook

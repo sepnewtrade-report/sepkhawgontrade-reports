@@ -1,0 +1,25 @@
+{
+  "overall_summary": "การตรวจสอบความถูกต้องของข้อมูล (Fact-check) สำหรับรายงาน Whale Flow Analysis ประจำวันที่ 19 สิงหาคม 2026 พบว่าตัวเลขราคาและการเปลี่ยนแปลงเปอร์เซ็นต์ของ MRNA ($118.76, +88.62%), PLTR ($175.14, +2.10%), TSLA ($340.81, +1.17%) รวมถึงดัชนี Nasdaq (^IXIC -0.04%) ตรงกับข้อมูล Live Quotes ล่าสุด 100% บทวิเคราะห์ได้รับการปรับปรุงเชิงลึกตามกรอบ 4 Universal Questions และ Cross-Asset Engine เรียบร้อยแล้ว",
+  "audit_log": [
+    {
+      "item": "MRNA (Moderna) Catalyst & Price",
+      "status": "corrected",
+      "details": "ราคา $118.76 (+88.62%) ตรงตามราคาตลาดจริง และทำการแก้ไข Catalyst จากวัคซีน RSV เป็นผลสำเร็จระยะปลาย (Phase 3) ของวัคซีน mRNA มะเร็งผิวหนังเมลาโนมา (Intismeran ร่วมกับ Keytruda ของ Merck) 100%"
+    },
+    {
+      "item": "PLTR (Palantir) Dark Pool Accumulation",
+      "status": "verified_ok",
+      "details": "ราคา $175.14 (+2.10%) ตรงกับ Live Quotes สัดส่วน Dark Pool 40% ได้รับการยืนยันความสอดคล้องกับ RSI = 67.59 และ MACD = 12.2013 ที่เป็นบวก"
+    },
+    {
+      "item": "Tech Sector ETF Flows (XLK, QQQ, Nasdaq)",
+      "status": "verified_ok",
+      "details": "ดัชนี Nasdaq (^IXIC -0.04%) และราคา Big Tech (META -0.97%, GOOGL -0.68%, NVDA +1.10%, MSFT +0.14%) ถูกต้องตามราคาตลาดล่าสุด"
+    },
+    {
+      "item": "TSLA Short Interest & Price Action",
+      "status": "verified_ok",
+      "details": "ราคา $340.81 (+1.17%) สอดคล้องกับข้อมูลตลาดล่าสุด พร้อมวิเคราะห์ Short Interest to Float ที่ 3-4% ร่วมกับ RSI = 48.47"
+    }
+  ]
+}

@@ -34,9 +34,3 @@
 ## 🌐 6. SOURCES & CITATIONS
 - [Bureau of Labor Statistics (BLS): July 2026 CPI Release](https://www.bls.gov/cpi/)
 - [Reuters / Bloomberg / CNBC Financial Market News](https://www.reuters.com)
-
----
-
-## 🌐 แหล่งข้อมูลอ้างอิง (Sources)
-- [Yahoo Finance](https://finance.yahoo.com/)
-- [TradingView](https://www.tradingview.com/)

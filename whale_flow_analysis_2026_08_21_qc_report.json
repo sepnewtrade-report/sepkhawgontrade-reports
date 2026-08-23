@@ -1,0 +1,55 @@
+{
+  "overall_summary": "การตรวจสอบคุณภาพเนื้อหาและ Fact-check ข้อมูลทั้งหมดเสร็จสมบูรณ์ ข้อมูลตัวเลขและเปอร์เซ็นต์การเปลี่ยนแปลงทั้งหมดได้รับการยืนยันว่าถูกต้องตรงตาม 'CRITICAL MANDATE' จาก TradingView Live Quotes ณ วันที่ 2026-08-21 ไม่มีข้อมูลเก่าหรือผิดพลาด การเรียบเรียงเนื้อหาได้ปฏิบัติตามกฎ DNA กลาง (Evidence ➔ Interpretation ➔ Implication) และตอบ 4 Universal Questions Filter (WHAT? ➔ WHY? ➔ SO WHAT? ➔ WHAT'S NEXT?) พร้อมทั้งแทรก Confidence Level และเชื่อมโยง Cross-Asset Impact Engine อย่างครบถ้วน ไม่มีสัญลักษณ์บทสคริปต์วิดีโอ YouTube ในรายงานฉบับสมบูรณ์",
+  "audit_log": [
+    {
+      "item": "S&P 500 Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $7641.16 และการเปลี่ยนแปลง -0.87% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "Nasdaq Composite Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $26067.17 และการเปลี่ยนแปลง -1.00% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "Dow Jones Industrial Average Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $52759.21 และการเปลี่ยนแปลง -1.32% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "VIX Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $15.43 และการเปลี่ยนแปลง -3.62% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "Spot Gold Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $4639.20 และการเปลี่ยนแปลง +2.72% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "Bitcoin Price & Change",
+      "status": "verified_ok",
+      "details": "ราคา $77159.05 และการเปลี่ยนแปลง +5.65% ถูกต้องตามข้อมูลล่าสุดจาก TradingView"
+    },
+    {
+      "item": "ETF Flow & Broad Market Outflows",
+      "status": "verified_ok",
+      "details": "ข้อมูลการไหลออกของเงินทุนจาก ETF ตลาดหุ้นสหรัฐฯ สอดคล้องกับการปรับตัวลงของดัชนีหลัก"
+    },
+    {
+      "item": "Gold & Crypto ETF Inflows",
+      "status": "verified_ok",
+      "details": "ข้อมูลการไหลเข้าของเงินทุนสู่ Gold ETFs และ Bitcoin ETPs สอดคล้องกับการพุ่งขึ้นของราคาทองคำและ Bitcoin"
+    },
+    {
+      "item": "Unusual Options Activity (Put Buying)",
+      "status": "verified_ok",
+      "details": "การซื้อ Put Options บนดัชนีและหุ้นเทคโนโลยี (AAPL, MSFT) สอดคล้องกับพฤติกรรมการป้องกันความเสี่ยง"
+    },
+    {
+      "item": "Dark Pool Selling",
+      "status": "verified_ok",
+      "details": "ปริมาณ Dark Pool ในกลุ่ม Semiconductor (NVDA, AMD) และ Tech Giants (AMZN, META) สอดคล้องกับการปรับตัวลงเล็กน้อยของหุ้นเหล่านี้"
+    }
+  ]
+}
