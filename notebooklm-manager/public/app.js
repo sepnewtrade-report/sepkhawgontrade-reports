@@ -330,6 +330,17 @@ function setupEventListeners() {
     // Save prompts to database button
     btnSavePrompts.addEventListener('click', handleSavePrompts);
 
+    // Add new template button (+)
+    if (btnAddTemplate) {
+        btnAddTemplate.addEventListener('click', handleAddNewTemplate);
+    }
+
+    // Add new version button (+)
+    const btnAddVersionTab = document.getElementById('btn-add-version-tab');
+    if (btnAddVersionTab) {
+        btnAddVersionTab.addEventListener('click', handleAddNewVersionTab);
+    }
+
     // Start workflow button
     btnRunWorkflow.addEventListener('click', handleRunWorkflow);
 
@@ -1175,7 +1186,7 @@ function loadPromptsForActiveTemplate() {
 // Map frontend data-prompt-type attributes & active version to templates.json fields
 function getPromptKey(type) {
     const ver = state.activePromptVersion || 'v1';
-    const suffix = ver === 'v1' ? '' : (ver === 'v2' ? 'V2' : 'V3');
+    const suffix = ver === 'v1' ? '' : ver.toUpperCase();
     switch (type) {
         case 'search': return 'searchPrompt' + suffix;
         case 'audio': return 'audioPrompt' + suffix;
@@ -1185,11 +1196,12 @@ function getPromptKey(type) {
     }
 }
 
-// Switch prompt version tabs (v1, v2, v3) inside the prompt editor
+// Switch prompt version tabs inside the prompt editor
 function switchPromptVersion(version) {
     updatePromptState(promptTextarea.value);
     state.activePromptVersion = version;
-    versionTabBtns.forEach(btn => {
+    const allVerBtns = document.querySelectorAll('.version-tab-btn');
+    allVerBtns.forEach(btn => {
         if (btn.getAttribute('data-version') === version) {
             btn.classList.add('active');
             btn.style.background = 'rgba(99,102,241,0.2)';
@@ -1241,6 +1253,72 @@ function updateCharCounter(text) {
     const len = text.length;
     charCounter.style.color = 'var(--text-secondary)';
     charCounter.innerHTML = `${len.toLocaleString()} ตัวอักษร`;
+}
+
+// Add new template handler (+)
+async function handleAddNewTemplate() {
+    const tName = prompt('พิมพ์ชื่อรายการผลิตคลิปใหม่ (เช่น This Week’s Watchlist — หุ้นอเมริกา):');
+    if (!tName || !tName.trim()) return;
+    
+    const tId = prompt('พิมพ์ ID ของรายการ (ภาษาอังกฤษ เช่น this_weeks_watchlist):', tName.trim().toLowerCase().replace(/\s+/g, '_'));
+    if (!tId || !tId.trim()) return;
+
+    const cleanId = tId.trim().toLowerCase().replace(/\s+/g, '_');
+    const cleanName = tName.trim();
+
+    try {
+        const resp = await fetch('/api/add-template', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: cleanId, name: cleanName, searchPrompt: '', audioPrompt: '', reportPrompt: '', infoPrompt: '' })
+        });
+        const result = await resp.json();
+        if (result.success) {
+            showToast('🎉 เพิ่มรายการใหม่ "' + cleanName + '" เรียบร้อย!');
+            if (typeof fetchTemplates === 'function') await fetchTemplates();
+            if (workflowTemplateSelect) {
+                workflowTemplateSelect.value = cleanId;
+                handleTemplateChange(cleanId);
+            }
+        } else {
+            showToast(result.error || 'เกิดข้อผิดพลาดในการเพิ่มรายการ', true);
+        }
+    } catch(err) {
+        showToast('เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์', true);
+    }
+}
+
+// Add new prompt version tab handler (+)
+function handleAddNewVersionTab() {
+    const vName = prompt('ระบุชื่อ Version ใหม่ที่ต้องการเพิ่ม (เช่น V4, V5):', 'V4');
+    if (!vName || !vName.trim()) return;
+    
+    let cleanVer = vName.trim().toLowerCase();
+    if (!cleanVer.startsWith('v')) {
+        cleanVer = 'v' + cleanVer;
+    }
+    
+    const container = document.getElementById('version-tabs-container');
+    const addBtn = document.getElementById('btn-add-version-tab');
+    if (!container || !addBtn) return;
+
+    let existingBtn = container.querySelector(`[data-version="${cleanVer}"]`);
+    if (!existingBtn) {
+        const newBtn = document.createElement('button');
+        newBtn.className = 'version-tab-btn';
+        newBtn.setAttribute('data-version', cleanVer);
+        newBtn.style.cssText = 'padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer;';
+        newBtn.textContent = 'Version ' + cleanVer.replace('v', '').toUpperCase();
+        
+        newBtn.addEventListener('click', () => {
+            switchPromptVersion(cleanVer);
+        });
+        
+        container.insertBefore(newBtn, addBtn);
+    }
+    
+    switchPromptVersion(cleanVer);
+    showToast('✨ สลับไปยัง ' + cleanVer.toUpperCase() + ' เรียบร้อย — พิมพ์ Prompt แล้วกดบันทึก');
 }
 
 // Save prompt templates to server
