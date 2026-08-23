@@ -3,8 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Album รายการผลิตคลิป — เสพข่าวก่อนเทรด หุ้นอเมริกา</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    // Automatic Cache Buster & Storage Cleaner
+    (function() {
+      const BUILD_ID = "BUILD_1787457963385";
+      const lastBuild = localStorage.getItem("ALBUM_LAST_BUILD");
+      if (lastBuild !== BUILD_ID) {
+        localStorage.setItem("ALBUM_LAST_BUILD", BUILD_ID);
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (let name of names) caches.delete(name);
+          });
+        }
+      }
+    })();
+  </script>
   <style>
 
     :root {
@@ -195,7 +213,7 @@
 
     <header class="page-header">
       <h1>
-        <img src="logo-mascot.png" class="header-logo" alt="Logo">
+        <img src="logo-mascot.png?v=1787457963385" class="header-logo" alt="Logo">
         <span class="header-text">Album รายการผลิตคลิป</span>
       </h1>
       <p>รวบรวมทุกรายการผลิตคลิปผ่าน NotebookLM พร้อมระบบเพิ่มรายการใหม่และจัดการ Prompt Version</p>
@@ -212,7 +230,7 @@
     <div class="no-results" id="no-results">ไม่พบรายการที่ค้นหา</div>
     <footer class="page-footer">
       <p>🎙️ เสพข่าวก่อนเทรด หุ้นอเมริกา — Album Manager</p>
-      <p>อัปเดตล่าสุด: 23 สิงหาคม 2569 เวลา 10:43</p>
+      <p>อัปเดตล่าสุด: 23 สิงหาคม 2569 เวลา 11:06</p>
     </footer>
   </div>
 
@@ -513,7 +531,6 @@
           return;
         }
       } catch (err) {
-        // Fallback for static client mode
         DATA.templates.push(newTmpl);
         render();
         closeAddModal();
@@ -585,7 +602,6 @@
           return;
         }
       } catch (e) {
-        // Fallback for static mode
         DATA.templates[templateIdx][promptType] = value;
         saveBtn.textContent = '✅ บันทึกแล้ว!';
         saveBtn.classList.add('saved');

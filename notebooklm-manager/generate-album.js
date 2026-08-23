@@ -74,7 +74,12 @@ const server = http.createServer((req, res) => {
       imgPath = path.join(__dirname, 'public', 'logo-mascot.png');
     }
     if (fs.existsSync(imgPath)) {
-      res.writeHead(200, { 'Content-Type': 'image/png' });
+      res.writeHead(200, { 
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      });
       res.end(fs.readFileSync(imgPath));
     } else {
       res.writeHead(404);
@@ -95,7 +100,10 @@ const server = http.createServer((req, res) => {
     try {
       const templates = loadTemplates();
       const workflows = loadWorkflows();
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.writeHead(200, { 
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-cache, no-store, must-revalidate'
+      });
       res.end(JSON.stringify({ templates, workflows }));
     } catch (e) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -210,9 +218,14 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Serve HTML page
+  // Serve HTML page with strict No-Cache Headers
   if (parsed.pathname === '/' || parsed.pathname === '/index.html') {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.writeHead(200, { 
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
     res.end(generateHtml(isPaused));
     return;
   }
@@ -223,7 +236,7 @@ const server = http.createServer((req, res) => {
       const projectRoot = path.join(__dirname, '..');
       exportAlbumHtml();
       const output = execSync(
-        'node generate-index.js && git add . && git commit -m "Update album prompts and templates" && git push origin main && git push origin main:gh-pages',
+        'node generate-index.js && git add . && git commit -m "Update album prompts and templates [No-Cache]" && git push origin main && git push origin main:gh-pages',
         { cwd: projectRoot, encoding: 'utf8', timeout: 30000 }
       );
       console.log('🚀 Deploy สำเร็จ!');
@@ -272,6 +285,7 @@ function generateHtml(paused) {
   const templates = loadTemplates();
   const workflows = loadWorkflows();
 
+  const timeStamp = Date.now();
   const generatedDate = new Date().toLocaleDateString('th-TH', {
     year: 'numeric', month: 'long', day: 'numeric',
     hour: '2-digit', minute: '2-digit'
@@ -297,8 +311,26 @@ function generateHtml(paused) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Album รายการผลิตคลิป — เสพข่าวก่อนเทรด หุ้นอเมริกา</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    // Automatic Cache Buster & Storage Cleaner
+    (function() {
+      const BUILD_ID = "BUILD_${timeStamp}";
+      const lastBuild = localStorage.getItem("ALBUM_LAST_BUILD");
+      if (lastBuild !== BUILD_ID) {
+        localStorage.setItem("ALBUM_LAST_BUILD", BUILD_ID);
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (let name of names) caches.delete(name);
+          });
+        }
+      }
+    })();
+  </script>
   <style>
 ${getCSS()}
   </style>
@@ -320,7 +352,7 @@ ${getCSS()}
 
     <header class="page-header">
       <h1>
-        <img src="logo-mascot.png" class="header-logo" alt="Logo">
+        <img src="logo-mascot.png?v=${timeStamp}" class="header-logo" alt="Logo">
         <span class="header-text">Album รายการผลิตคลิป</span>
       </h1>
       <p>รวบรวมทุกรายการผลิตคลิปผ่าน NotebookLM พร้อมระบบเพิ่มรายการใหม่และจัดการ Prompt Version</p>
@@ -820,7 +852,6 @@ function getJS() {
           return;
         }
       } catch (err) {
-        // Fallback for static client mode
         DATA.templates.push(newTmpl);
         render();
         closeAddModal();
@@ -892,7 +923,6 @@ function getJS() {
           return;
         }
       } catch (e) {
-        // Fallback for static mode
         DATA.templates[templateIdx][promptType] = value;
         saveBtn.textContent = '✅ บันทึกแล้ว!';
         saveBtn.classList.add('saved');
