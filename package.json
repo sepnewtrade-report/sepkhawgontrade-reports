@@ -1,0 +1,10 @@
+{
+  "name": "sepkhawgontrade-reports",
+  "version": "1.0.0",
+  "description": "SepKhawGonTrade Reports & Album Web App",
+  "scripts": {
+    "build": "node generate-index.js",
+    "start": "node notebooklm-manager/generate-album.js"
+  },
+  "private": true
+}

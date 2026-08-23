@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "node generate-index.js",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "/album",
+      "dest": "/album.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
