@@ -126,30 +126,26 @@ const server = http.createServer((req, res) => {
         }
         const templates = loadTemplates();
         const cleanId = id.trim().toLowerCase().replace(/\s+/g, '_');
-        if (templates.some(t => t.id === cleanId)) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: `รายการ ID "${cleanId}" มีอยู่แล้วในระบบ` }));
-          return;
+        
+        let newTemplate = templates.find(t => t.id === cleanId);
+        if (!newTemplate) {
+          newTemplate = {
+            id: cleanId,
+            name: name.trim(),
+            searchPrompt: searchPrompt || '',
+            audioPrompt: audioPrompt || '',
+            reportPrompt: reportPrompt || '',
+            infoPrompt: infoPrompt || ''
+          };
+          templates.push(newTemplate);
+        } else {
+          newTemplate.name = name.trim();
+          if (searchPrompt) newTemplate.searchPrompt = searchPrompt;
+          if (audioPrompt) newTemplate.audioPrompt = audioPrompt;
+          if (reportPrompt) newTemplate.reportPrompt = reportPrompt;
+          if (infoPrompt) newTemplate.infoPrompt = infoPrompt;
         }
 
-        const newTemplate = {
-          id: cleanId,
-          name: name.trim(),
-          searchPrompt: searchPrompt || '',
-          audioPrompt: audioPrompt || '',
-          reportPrompt: reportPrompt || '',
-          infoPrompt: infoPrompt || '',
-          searchPromptV2: '',
-          audioPromptV2: '',
-          reportPromptV2: '',
-          infoPromptV2: '',
-          searchPromptV3: '',
-          audioPromptV3: '',
-          reportPromptV3: '',
-          infoPromptV3: ''
-        };
-
-        templates.push(newTemplate);
         saveTemplates(templates);
         exportAlbumHtml();
 
@@ -183,15 +179,7 @@ const server = http.createServer((req, res) => {
           search: 'searchPrompt', 
           audio: 'audioPrompt', 
           report: 'reportPrompt', 
-          info: 'infoPrompt',
-          searchV2: 'searchPromptV2', 
-          audioV2: 'audioPromptV2', 
-          reportV2: 'reportPromptV2', 
-          infoV2: 'infoPromptV2',
-          searchV3: 'searchPromptV3', 
-          audioV3: 'audioPromptV3', 
-          reportV3: 'reportPromptV3', 
-          infoV3: 'infoPromptV3'
+          info: 'infoPrompt'
         };
 
         let key = keyMap[promptType];
@@ -237,7 +225,7 @@ const server = http.createServer((req, res) => {
       exportAlbumHtml();
       const output = execSync(
         'node generate-index.js && git add . && git commit -m "Update album prompts and templates [No-Cache]" && git push origin main && git push origin main:gh-pages && git push web main:gh-pages && git push calc main:gh-pages && git push freshcalc main:gh-pages',
-        { cwd: projectRoot, encoding: 'utf8', timeout: 30000 }
+        { cwd: projectRoot, encoding: 'utf8', timeout: 35000 }
       );
       console.log('🚀 Deploy สำเร็จ!');
       res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -316,21 +304,6 @@ function generateHtml(paused) {
   <meta http-equiv="Expires" content="0">
   <title>Album รายการผลิตคลิป — เสพข่าวก่อนเทรด หุ้นอเมริกา</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    // Automatic Cache Buster & Storage Cleaner
-    (function() {
-      const BUILD_ID = "BUILD_${timeStamp}";
-      const lastBuild = localStorage.getItem("ALBUM_LAST_BUILD");
-      if (lastBuild !== BUILD_ID) {
-        localStorage.setItem("ALBUM_LAST_BUILD", BUILD_ID);
-        if ('caches' in window) {
-          caches.keys().then(names => {
-            for (let name of names) caches.delete(name);
-          });
-        }
-      }
-    })();
-  </script>
   <style>
 ${getCSS()}
   </style>
@@ -568,6 +541,33 @@ function getJS() {
     let activeVersion = 'v1';
     let currentDetailIdx = null;
 
+    function saveLocalState() {
+      try {
+        localStorage.setItem('custom_templates_v2', JSON.stringify(DATA.templates));
+      } catch(e){}
+    }
+
+    function loadLocalState() {
+      try {
+        const saved = localStorage.getItem('custom_templates_v2');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            parsed.forEach(pt => {
+              const existingIdx = DATA.templates.findIndex(t => t.id === pt.id);
+              if (existingIdx >= 0) {
+                DATA.templates[existingIdx] = Object.assign({}, DATA.templates[existingIdx], pt);
+              } else {
+                DATA.templates.push(pt);
+              }
+            });
+          }
+        }
+      } catch(e){}
+    }
+
+    loadLocalState();
+
     function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
     function getIcon(id,name) {
       const n=(name||'').toLowerCase();
@@ -666,6 +666,22 @@ function getJS() {
       });
     }
 
+    function getPromptPropKey(promptType) {
+      const keyMap = { 
+        search: 'searchPrompt', 
+        audio: 'audioPrompt', 
+        report: 'reportPrompt', 
+        info: 'infoPrompt'
+      };
+      if (keyMap[promptType]) return keyMap[promptType];
+
+      const match = promptType.match(/^(search|audio|report|info)(V\d+)$/i);
+      if (match) {
+        return match[1] + 'Prompt' + match[2].toUpperCase();
+      }
+      return promptType;
+    }
+
     window.switchVersion = function(ver) {
       activeVersion = ver.toLowerCase();
       openDetail(currentDetailIdx);
@@ -674,14 +690,22 @@ function getJS() {
     window.addNewVersion = function(templateIdx) {
       const vName = prompt('ระบุชื่อ Version ใหม่ที่ต้องการเพิ่ม (เช่น V4, V5):', 'V4');
       if (!vName) return;
-      const cleanVer = vName.trim().toLowerCase();
+      let cleanVer = vName.trim().toLowerCase();
       if (!cleanVer.startsWith('v')) {
-        showToast('❌ ชื่อ Version ต้องขึ้นต้นด้วย V (เช่น V4)', true);
-        return;
+        cleanVer = 'v' + cleanVer;
       }
       activeVersion = cleanVer;
+      
+      const t = DATA.templates[templateIdx];
+      const suffix = cleanVer.toUpperCase();
+      if (t['searchPrompt' + suffix] === undefined) t['searchPrompt' + suffix] = '';
+      if (t['audioPrompt' + suffix] === undefined) t['audioPrompt' + suffix] = '';
+      if (t['reportPrompt' + suffix] === undefined) t['reportPrompt' + suffix] = '';
+      if (t['infoPrompt' + suffix] === undefined) t['infoPrompt' + suffix] = '';
+
+      saveLocalState();
       openDetail(templateIdx);
-      showToast('✨ เพิ่ม ' + cleanVer.toUpperCase() + ' เรียบร้อย — พิมพ์ Prompt และกด Save เพื่อบันทึก');
+      showToast('✨ เพิ่ม ' + cleanVer.toUpperCase() + ' เรียบร้อย — พิมพ์ Prompt แล้วกด Save เพื่อบันทึก');
     }
 
     function openDetail(idx) {
@@ -837,6 +861,16 @@ function getJS() {
         infoPrompt: infoPrompt || ''
       };
 
+      const existingIdx = DATA.templates.findIndex(t => t.id === cleanId);
+      if (existingIdx >= 0) {
+        DATA.templates[existingIdx] = Object.assign(DATA.templates[existingIdx], newTmpl);
+      } else {
+        DATA.templates.push(newTmpl);
+      }
+      saveLocalState();
+      render();
+      closeAddModal();
+
       try {
         const resp = await fetch('/api/add-template', {
           method: 'POST',
@@ -845,17 +879,11 @@ function getJS() {
         });
         const result = await resp.json();
         if (result.success) {
-          DATA.templates.push(result.template);
-          render();
-          closeAddModal();
           showToast('🎉 เพิ่มรายการใหม่ "' + name + '" เรียบร้อย!');
           return;
         }
       } catch (err) {
-        DATA.templates.push(newTmpl);
-        render();
-        closeAddModal();
-        showToast('🎉 เพิ่มรายการใหม่ "' + name + '" เรียบร้อย (Client Mode)');
+        showToast('🎉 เพิ่มรายการใหม่ "' + name + '" เรียบร้อย!');
       }
     }
 
@@ -893,43 +921,35 @@ function getJS() {
       saveBtn.disabled = true;
       saveBtn.textContent = '⏳ กำลังบันทึก...';
 
+      const propKey = getPromptPropKey(promptType);
+      DATA.templates[templateIdx][propKey] = value;
+      saveLocalState();
+
+      saveBtn.textContent = '✅ บันทึกแล้ว!';
+      saveBtn.classList.add('saved');
+      showToast('💾 บันทึก Prompt สำเร็จ!');
+
+      const section = ta.closest('.prompt-section');
+      const statusEl = section.querySelector('.prompt-status');
+      if (statusEl) statusEl.textContent = value.trim() ? '✅ ตั้งค่าแล้ว' : '⬜ ยังไม่ได้ตั้ง';
+
+      ta.classList.toggle('no-data', !value.trim());
+
+      setTimeout(() => {
+        saveBtn.textContent = '💾 Save';
+        saveBtn.classList.remove('saved');
+        saveBtn.disabled = false;
+      }, 2000);
+
+      render();
+
       try {
-        const resp = await fetch('/api/save-prompt', {
+        await fetch('/api/save-prompt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ templateId, promptType, value })
         });
-        const result = await resp.json();
-        if (result.success) {
-          const propKey = result.key || promptType;
-          DATA.templates[templateIdx][propKey] = value;
-
-          saveBtn.textContent = '✅ บันทึกแล้ว!';
-          saveBtn.classList.add('saved');
-          showToast('💾 บันทึก Prompt สำเร็จ!');
-
-          const section = ta.closest('.prompt-section');
-          const statusEl = section.querySelector('.prompt-status');
-          if (statusEl) statusEl.textContent = value.trim() ? '✅ ตั้งค่าแล้ว' : '⬜ ยังไม่ได้ตั้ง';
-
-          ta.classList.toggle('no-data', !value.trim());
-
-          setTimeout(() => {
-            saveBtn.textContent = '💾 Save';
-            saveBtn.classList.remove('saved');
-          }, 2000);
-
-          render();
-          return;
-        }
-      } catch (e) {
-        DATA.templates[templateIdx][promptType] = value;
-        saveBtn.textContent = '✅ บันทึกแล้ว!';
-        saveBtn.classList.add('saved');
-        showToast('💾 บันทึก Prompt สำเร็จ (Client Mode)');
-        setTimeout(() => { saveBtn.textContent = '💾 Save'; saveBtn.disabled = false; }, 2000);
-        render();
-      }
+      } catch (e) {}
     }
 
     function filterCards() {
