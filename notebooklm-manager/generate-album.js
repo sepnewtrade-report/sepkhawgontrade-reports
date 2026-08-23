@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /**
- * 📚 NotebookLM Album — Standalone Program
+ * 📚 NotebookLM Album — Standalone Program & Web App
  * 
  * แสดงรายการผลิตคลิป NotebookLM ทั้งหมด พร้อม Prompt 4 ประเภท
- * สามารถแก้ไข Prompt และบันทึกกลับลง templates.json ได้ทันที
+ * สามารถเพิ่มรายการใหม่ และเพิ่ม Prompt Version ใหม่ ได้จากหน้าเว็บทันที
  * 
  * วิธีใช้: node generate-album.js
  * จากนั้นเปิด http://localhost:3457 ในเบราว์เซอร์
- * กด Ctrl+C เพื่อปิดโปรแกรม
  */
 
 const fs = require('fs');
@@ -20,18 +19,13 @@ const PORT = 3457;
 const TEMPLATES_FILE = path.join(__dirname, 'templates.json');
 const WORKFLOWS_FILE = path.join(__dirname, 'workflows_history.json');
 
-// Auto-shutdown: ปิดการใช้งาน Auto-sleep เพื่อให้เปิดใช้งานตลอดเวลา
 const AUTO_SHUTDOWN_MS = 0;
 let shutdownTimer = null;
 let isPaused = false;
 
 function resetShutdownTimer() {
   if (shutdownTimer) clearTimeout(shutdownTimer);
-  isPaused = false; // ป้องกันการเข้าโหมดพักอัตโนมัติ
-}
-
-function getTimeRemaining() {
-  return AUTO_SHUTDOWN_MS;
+  isPaused = false;
 }
 
 // --- Load ---
@@ -59,13 +53,9 @@ const LOCAL_ALBUM_FILE = path.join(__dirname, 'album.html');
 function exportAlbumHtml() {
   try {
     const html = generateHtml(false);
-    // Remove server-bar and server-specific JS from static version, and ensure we close the script and html tags
-    const staticHtml = html
-      .replace(/<!-- Server Control Bar -->.*?<\/div>\s*<\/div>/s, '<!-- Static version -->')
-      .replace(/\/\/ --- Pause\/Resume.*$/s, '// Static version - no server needed\n    render();\n  </script>\n</body>\n</html>');
-    fs.writeFileSync(LOCAL_ALBUM_FILE, staticHtml, 'utf8');
-    // We NO LONGER overwrite ROOT_ALBUM_FILE (.. / album.html) here because that is managed by the client-side API version.
-    console.log('📦 อัปเดต notebooklm-manager/album.html สำเร็จ');
+    fs.writeFileSync(LOCAL_ALBUM_FILE, html, 'utf8');
+    fs.writeFileSync(ROOT_ALBUM_FILE, html, 'utf8');
+    console.log('📦 อัปเดต album.html ทั้งที่ root และ notebooklm-manager สำเร็จ');
   } catch (e) {
     console.error('❌ Export album.html ล้มเหลว:', e.message);
   }
@@ -75,12 +65,10 @@ function exportAlbumHtml() {
 const server = http.createServer((req, res) => {
   const parsed = new URL(req.url, `http://localhost:${PORT}`);
 
-  // Reset auto-shutdown timer on every request
   resetShutdownTimer();
 
   // Serve logo-mascot.png
   if (parsed.pathname === '/logo-mascot.png') {
-    const fs = require('fs');
     let imgPath = path.join(__dirname, '..', 'logo-mascot.png');
     if (!fs.existsSync(imgPath)) {
       imgPath = path.join(__dirname, 'public', 'logo-mascot.png');
@@ -95,30 +83,10 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // API: Heartbeat (reset timer, return remaining time + paused state)
+  // API: Heartbeat
   if (parsed.pathname === '/api/heartbeat' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ alive: true, paused: isPaused, autoShutdownMs: AUTO_SHUTDOWN_MS }));
-    return;
-  }
-
-  // API: Pause (เข้าโหมดพัก)
-  if (parsed.pathname === '/api/pause' && req.method === 'POST') {
-    isPaused = true;
-    if (shutdownTimer) clearTimeout(shutdownTimer);
-    console.log('\n💤 เข้าโหมดพักตามคำสั่งจากหน้าเว็บ');
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ success: true, paused: true }));
-    return;
-  }
-
-  // API: Resume (กลับมาทำงาน)
-  if (parsed.pathname === '/api/resume' && req.method === 'POST') {
-    isPaused = false;
-    resetShutdownTimer();
-    console.log('\n🟢 กลับมาทำงานตามคำสั่งจากหน้าเว็บ');
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ success: true, paused: false }));
     return;
   }
 
@@ -136,7 +104,59 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // API: SAVE prompt
+  // API: ADD TEMPLATE
+  if (parsed.pathname === '/api/add-template' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const { id, name, searchPrompt, audioPrompt, reportPrompt, infoPrompt } = JSON.parse(body);
+        if (!id || !name) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'ID และชื่อรายการจำเป็นต้องระบุ' }));
+          return;
+        }
+        const templates = loadTemplates();
+        const cleanId = id.trim().toLowerCase().replace(/\s+/g, '_');
+        if (templates.some(t => t.id === cleanId)) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: `รายการ ID "${cleanId}" มีอยู่แล้วในระบบ` }));
+          return;
+        }
+
+        const newTemplate = {
+          id: cleanId,
+          name: name.trim(),
+          searchPrompt: searchPrompt || '',
+          audioPrompt: audioPrompt || '',
+          reportPrompt: reportPrompt || '',
+          infoPrompt: infoPrompt || '',
+          searchPromptV2: '',
+          audioPromptV2: '',
+          reportPromptV2: '',
+          infoPromptV2: '',
+          searchPromptV3: '',
+          audioPromptV3: '',
+          reportPromptV3: '',
+          infoPromptV3: ''
+        };
+
+        templates.push(newTemplate);
+        saveTemplates(templates);
+        exportAlbumHtml();
+
+        console.log(`➕ เพิ่มรายการผลิตคลิปใหม่: "${newTemplate.name}" (${newTemplate.id}) สำเร็จ`);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, template: newTemplate }));
+      } catch (e) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
+  // API: SAVE PROMPT
   if (parsed.pathname === '/api/save-prompt' && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => body += chunk);
@@ -150,6 +170,7 @@ const server = http.createServer((req, res) => {
           res.end(JSON.stringify({ error: 'Template not found' }));
           return;
         }
+
         const keyMap = { 
           search: 'searchPrompt', 
           audio: 'audioPrompt', 
@@ -164,18 +185,23 @@ const server = http.createServer((req, res) => {
           reportV3: 'reportPromptV3', 
           infoV3: 'infoPromptV3'
         };
-        const key = keyMap[promptType];
+
+        let key = keyMap[promptType];
         if (!key) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid prompt type' }));
-          return;
+          const match = promptType.match(/^(search|audio|report|info)(V\d+)$/i);
+          if (match) {
+            key = match[1] + 'Prompt' + match[2].toUpperCase();
+          } else {
+            key = promptType;
+          }
         }
+
         tmpl[key] = value;
         saveTemplates(templates);
         exportAlbumHtml();
-        console.log(`💾 บันทึก ${promptType} prompt ของ "${tmpl.name}" สำเร็จ`);
+        console.log(`💾 บันทึก ${key} ของ "${tmpl.name}" สำเร็จ`);
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true }));
+        res.end(JSON.stringify({ success: true, key }));
       } catch (e) {
         res.writeHead(500, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: e.message }));
@@ -197,7 +223,7 @@ const server = http.createServer((req, res) => {
       const projectRoot = path.join(__dirname, '..');
       exportAlbumHtml();
       const output = execSync(
-        'node generate-index.js && git add . && git commit -m "Update album prompts" && git push origin main && git push origin main:gh-pages',
+        'node generate-index.js && git add . && git commit -m "Update album prompts and templates" && git push origin main && git push origin main:gh-pages',
         { cwd: projectRoot, encoding: 'utf8', timeout: 30000 }
       );
       console.log('🚀 Deploy สำเร็จ!');
@@ -205,7 +231,6 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify({ success: true, message: 'Deploy สำเร็จ!' }));
     } catch (e) {
       const errMsg = (e.stderr || e.message || '').toString().substring(0, 500);
-      // Check if it's just "nothing to commit"
       if (errMsg.includes('nothing to commit') || (e.stdout && e.stdout.includes('nothing to commit'))) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true, message: 'ไม่มีอะไรเปลี่ยนแปลง — เว็บเป็นปัจจุบันแล้ว' }));
@@ -234,11 +259,10 @@ server.listen(PORT, '127.0.0.1', () => {
   resetShutdownTimer();
   console.log('');
   console.log('━'.repeat(55));
-  console.log('  📚 NotebookLM Album — Standalone Program');
+  console.log('  📚 NotebookLM Album — Standalone Program & Web App');
   console.log('━'.repeat(55));
   console.log(`  🌐 เปิดเบราว์เซอร์ไปที่: http://localhost:${PORT}`);
-  console.log('  ⏱️  Auto-shutdown: ปิดอัตโนมัติหลังไม่มีการใช้ 5 นาที');
-  console.log('  🛑 หรือกดปุ่ม "ปิดระบบ" บนหน้าเว็บ');
+  console.log('  ➕ สามารถเพิ่มรายการผลิตคลิปใหม่ & เพิ่ม Prompt Version ได้จากหน้าเว็บ');
   console.log('━'.repeat(55));
   console.log('');
 });
@@ -256,7 +280,6 @@ function generateHtml(paused) {
   const totalWorkflows = Object.keys(workflows).length;
   const totalCompleted = Object.values(workflows).filter(w => w.status === 'completed').length;
 
-  // Build templates data as JSON for the frontend
   const workflowsByTemplate = {};
   Object.values(workflows).forEach(wf => {
     const tid = wf.templateId;
@@ -267,7 +290,6 @@ function generateHtml(paused) {
     workflowsByTemplate[tid].sort((a, b) => (b.dateStr || '').localeCompare(a.dateStr || ''));
   });
 
-  // Serialize data for frontend
   const clientData = JSON.stringify({ templates, workflowsByTemplate, totalWorkflows, totalCompleted, isPaused: paused });
 
   return `<!DOCTYPE html>
@@ -287,16 +309,12 @@ ${getCSS()}
     <div class="server-bar" id="server-bar">
       <div class="server-status">
         <span class="pulse-dot" id="pulse-dot"></span>
-        <span id="server-status-text">Server กำลังทำงาน</span>
-        <span class="countdown" id="countdown">⏱️ ปิดอัตโนมัติใน 5:00</span>
+        <span id="server-status-text">Album Manager (พร้อมใช้งาน)</span>
+        <span class="countdown" id="countdown">🟢 ระบบออนไลน์</span>
       </div>
       <div class="toggle-group">
+        <button class="btn-add-item" onclick="openAddTemplateModal()">➕ เพิ่มรายการใหม่</button>
         <button class="btn-deploy" id="btn-deploy" onclick="deployToGithub()">🚀 Deploy</button>
-        <span class="toggle-label" id="toggle-label">ON</span>
-        <label class="toggle-switch" id="toggle-switch">
-          <input type="checkbox" id="server-toggle" checked onchange="handleToggle(this)">
-          <span class="toggle-slider"></span>
-        </label>
       </div>
     </div>
 
@@ -305,23 +323,27 @@ ${getCSS()}
         <img src="logo-mascot.png" class="header-logo" alt="Logo">
         <span class="header-text">Album รายการผลิตคลิป</span>
       </h1>
-      <p>รวบรวมทุกรายการที่ผลิตผ่าน NotebookLM พร้อม Prompt และประวัติ Workflow — แก้ไข Prompt ได้ทันที</p>
+      <p>รวบรวมทุกรายการผลิตคลิปผ่าน NotebookLM พร้อมระบบเพิ่มรายการใหม่และจัดการ Prompt Version</p>
       <div class="stats-bar" id="stats-bar"></div>
-      <div class="search-bar">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="album-search" placeholder="ค้นหารายการ..." oninput="filterCards()">
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="album-search" placeholder="ค้นหารายการ..." oninput="filterCards()">
+        </div>
+        <button class="btn-primary-add" onclick="openAddTemplateModal()">➕ เพิ่มรายการผลิตคลิปใหม่</button>
       </div>
     </header>
     <div class="album-grid" id="album-grid"></div>
     <div class="no-results" id="no-results">ไม่พบรายการที่ค้นหา</div>
     <footer class="page-footer">
-      <p>🎙️ เสพข่าวก่อนเทรด หุ้นอเมริกา — Album Generator (Standalone)</p>
+      <p>🎙️ เสพข่าวก่อนเทรด หุ้นอเมริกา — Album Manager</p>
       <p>อัปเดตล่าสุด: ${generatedDate}</p>
     </footer>
   </div>
 
-  <!-- Modal container -->
+  <!-- Modal containers -->
   <div id="modal-container"></div>
+  <div id="add-modal-container"></div>
 
   <!-- Toast -->
   <div class="toast" id="toast"></div>
@@ -358,20 +380,27 @@ function getCSS() {
     .page-wrap { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:24px 28px 60px; }
 
     /* Header */
-    .page-header { text-align:center; padding:48px 20px 36px; }
+    .page-header { text-align:center; padding:40px 20px 28px; }
     .page-header h1 { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px; }
-    .page-header h1 .header-logo { height: 104px; width: auto; border-radius: 10px; filter: drop-shadow(0 4px 12px rgba(99,102,241,0.35)); }
-    .page-header h1 .header-text { font-family:var(--font-heading); font-size:2.6rem; font-weight:700; background:linear-gradient(135deg,#818cf8,#a855f7,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-header h1 .header-logo { height: 90px; width: auto; border-radius: 10px; filter: drop-shadow(0 4px 12px rgba(99,102,241,0.35)); }
+    .page-header h1 .header-text { font-family:var(--font-heading); font-size:2.5rem; font-weight:700; background:linear-gradient(135deg,#818cf8,#a855f7,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
     .page-header p { color:var(--text-secondary); font-size:1.05rem; max-width:650px; margin:0 auto; }
-    .stats-bar { display:flex; justify-content:center; gap:36px; margin-top:28px; flex-wrap:wrap; }
+    .stats-bar { display:flex; justify-content:center; gap:36px; margin-top:24px; flex-wrap:wrap; }
     .stat-item { text-align:center; }
     .stat-value { font-family:var(--font-heading); font-size:2rem; font-weight:700; color:var(--primary-light); }
     .stat-label { font-size:.85rem; color:var(--text-muted); margin-top:2px; }
-    .search-bar { max-width:480px; margin:32px auto 0; position:relative; }
+    .search-bar-wrap { display:flex; justify-content:center; align-items:center; gap:14px; max-width:680px; margin:28px auto 0; flex-wrap:wrap; }
+    .search-bar { flex:1; min-width:280px; position:relative; }
     .search-bar input { width:100%; padding:12px 16px 12px 44px; border-radius:999px; border:1px solid var(--border-color); background:var(--bg-surface); color:var(--text-primary); font-size:15px; font-family:var(--font-body); outline:none; transition:border-color .2s,box-shadow .2s; }
     .search-bar input:focus { border-color:var(--border-glow); box-shadow:0 0 0 3px rgba(99,102,241,.12); }
     .search-bar input::placeholder { color:var(--text-muted); }
     .search-bar .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:16px; pointer-events:none; }
+
+    /* Action Buttons */
+    .btn-add-item, .btn-primary-add { background:linear-gradient(135deg,#10b981,#059669); border:none; color:#fff; padding:10px 20px; border-radius:999px; font-size:.9rem; font-weight:600; font-family:var(--font-heading); cursor:pointer; transition:all .25s; box-shadow:0 4px 14px rgba(16,185,129,.3); white-space:nowrap; }
+    .btn-add-item:hover, .btn-primary-add:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(16,185,129,.45); }
+    .btn-add-version { background:rgba(99,102,241,.2); border:1px dashed rgba(99,102,241,.5); color:var(--primary-light); padding:8px 16px; border-radius:7px; font-size:.88rem; font-weight:600; font-family:var(--font-body); cursor:pointer; transition:all .2s; }
+    .btn-add-version:hover { background:rgba(99,102,241,.35); border-color:var(--primary-light); color:#fff; }
 
     /* Grid */
     .album-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:22px; margin-top:36px; }
@@ -388,7 +417,7 @@ function getCSS() {
     .card-title { font-family:var(--font-heading); font-size:1.15rem; font-weight:600; color:var(--text-primary); margin-bottom:14px; line-height:1.4; }
     .card-meta { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
     .meta-item { display:flex; align-items:center; gap:8px; font-size:.85rem; color:var(--text-secondary); }
-    .card-prompts-preview { display:flex; gap:8px; margin-bottom:16px; }
+    .card-prompts-preview { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
     .prompt-dot { font-size:1.1rem; width:34px; height:34px; display:flex; align-items:center; justify-content:center; border-radius:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); }
     .card-action { text-align:right; font-size:.85rem; color:var(--primary-light); font-weight:500; opacity:0; transform:translateX(-6px); transition:all .25s; }
     .album-card:hover .card-action { opacity:1; transform:translateX(0); }
@@ -396,7 +425,7 @@ function getCSS() {
     /* Modal */
     .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.72); backdrop-filter:blur(8px); z-index:1000; justify-content:center; align-items:flex-start; padding:40px 20px; overflow-y:auto; }
     .modal-overlay.show { display:flex; }
-    .modal-content { background:linear-gradient(180deg,rgba(18,18,35,.98),rgba(12,12,24,.98)); border:1px solid rgba(99,102,241,.2); border-radius:var(--radius-lg); width:100%; max-width:960px; max-height:90vh; overflow-y:auto; box-shadow:0 24px 80px rgba(0,0,0,.5),0 0 60px rgba(99,102,241,.06); animation:modalIn .3s ease; }
+    .modal-content { background:linear-gradient(180deg,rgba(18,18,35,.98),rgba(12,12,24,.98)); border:1px solid rgba(99,102,241,.2); border-radius:var(--radius-lg); width:100%; max-width:960px; max-height:90vh; overflow-y:auto; box-shadow:0 24px 80px rgba(0,0,0,.5); animation:modalIn .3s ease; }
     @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
     .modal-header { display:flex; justify-content:space-between; align-items:center; padding:28px 32px 20px; border-bottom:1px solid var(--border-color); }
     .modal-title-group { display:flex; align-items:center; gap:16px; }
@@ -407,6 +436,14 @@ function getCSS() {
     .modal-close:hover { background:rgba(255,255,255,.06); color:var(--text-primary); }
     .modal-body { padding:28px 32px 36px; }
     .section-title { font-family:var(--font-heading); font-size:1.1rem; font-weight:600; color:var(--text-primary); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border-color); }
+
+    /* Form controls in Add Modal */
+    .form-group { margin-bottom:16px; }
+    .form-label { display:block; font-size:.85rem; color:var(--text-secondary); margin-bottom:6px; font-weight:500; }
+    .form-input { width:100%; padding:10px 14px; background:rgba(0,0,0,.25); border:1px solid var(--border-color); border-radius:8px; color:var(--text-primary); font-size:.9rem; font-family:var(--font-body); outline:none; transition:border-color .2s; }
+    .form-input:focus { border-color:var(--border-glow); }
+    .form-textarea { width:100%; min-height:80px; background:rgba(0,0,0,.25); border:1px solid var(--border-color); border-radius:8px; padding:12px; color:var(--text-primary); font-size:.85rem; font-family:var(--font-body); resize:vertical; outline:none; }
+    .form-textarea:focus { border-color:var(--border-glow); }
 
     /* Prompt Accordion */
     .prompt-accordion { display:flex; flex-direction:column; gap:10px; }
@@ -454,65 +491,29 @@ function getCSS() {
     .logs-container { background:rgba(0,0,0,.3); border:1px solid var(--border-color); border-radius:8px; padding:14px; max-height:300px; overflow-y:auto; font-size:.78rem; }
     .log-line { padding:3px 0; color:var(--text-muted); border-bottom:1px solid rgba(255,255,255,.02); word-break:break-all; }
     .log-line:last-child { border-bottom:none; }
-    .no-data { color:var(--text-muted); font-style:italic; }
-    .no-data-cell { text-align:center; color:var(--text-muted); padding:24px !important; }
 
     /* Version Selector */
-    .version-selector { display:flex; gap:8px; margin-bottom:20px; padding:4px; background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:10px; width:fit-content; }
+    .version-selector { display:flex; gap:8px; margin-bottom:20px; padding:6px; background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:10px; width:fit-content; flex-wrap:wrap; align-items:center; }
     .btn-version { padding:8px 16px; border:none; background:transparent; color:var(--text-secondary); font-size:.88rem; font-weight:500; font-family:var(--font-body); cursor:pointer; border-radius:7px; transition:all .2s; }
     .btn-version:hover { color:var(--text-primary); }
     .btn-version.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(99,102,241,0.3); }
 
     /* Server Control Bar */
-    .server-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.15); border-radius:var(--radius-sm); margin-bottom:8px; position:sticky; top:0; z-index:100; backdrop-filter:blur(16px); transition:background .4s ease, border-color .4s ease; }
+    .server-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.15); border-radius:var(--radius-sm); margin-bottom:8px; position:sticky; top:0; z-index:100; backdrop-filter:blur(16px); }
     .server-status { display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--text-secondary); }
-    .pulse-dot { width:8px; height:8px; background:#10b981; border-radius:50%; animation:pulse 2s ease-in-out infinite; transition:background .3s; }
+    .pulse-dot { width:8px; height:8px; background:#10b981; border-radius:50%; animation:pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)} 50%{opacity:.7;box-shadow:0 0 0 6px rgba(16,185,129,0)} }
     .countdown { color:var(--text-muted); font-size:.8rem; font-family:var(--font-heading); }
-    .server-bar.offline { background:rgba(239,68,68,.08); border-color:rgba(239,68,68,.15); }
-    .server-bar.offline .pulse-dot { background:#ef4444; animation:none; }
-
-    /* Toggle Switch */
     .toggle-group { display:flex; align-items:center; gap:12px; }
-    .toggle-label { font-family:var(--font-heading); font-size:.82rem; font-weight:600; letter-spacing:.5px; color:#34d399; transition:color .3s; min-width:28px; text-align:right; }
-    .toggle-label.off { color:#f87171; }
-    .btn-deploy { background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.15)); border:1px solid rgba(99,102,241,.3); color:#a5b4fc; padding:6px 16px; border-radius:8px; font-size:.82rem; font-weight:600; cursor:pointer; font-family:var(--font-heading); transition:all .25s; letter-spacing:.3px; }
-    .btn-deploy:hover { background:linear-gradient(135deg,rgba(99,102,241,.35),rgba(168,85,247,.25)); border-color:rgba(99,102,241,.5); box-shadow:0 0 16px rgba(99,102,241,.15); transform:translateY(-1px); color:#c7d2fe; }
-    .btn-deploy:active { transform:translateY(0); }
-    .btn-deploy.deploying { opacity:.7; pointer-events:none; }
-    .btn-deploy.success { background:rgba(16,185,129,.2); border-color:rgba(16,185,129,.35); color:#34d399; }
-    .toggle-switch { position:relative; display:inline-block; width:52px; height:28px; cursor:pointer; }
-    .toggle-switch input { opacity:0; width:0; height:0; }
-    .toggle-slider { position:absolute; inset:0; background:rgba(239,68,68,.25); border:1px solid rgba(239,68,68,.35); border-radius:999px; transition:all .35s cubic-bezier(.4,.0,.2,1); }
-    .toggle-slider::before { content:''; position:absolute; left:3px; top:50%; transform:translateY(-50%); width:20px; height:20px; background:#fff; border-radius:50%; transition:all .35s cubic-bezier(.4,.0,.2,1); box-shadow:0 2px 6px rgba(0,0,0,.25); }
-    .toggle-switch input:checked + .toggle-slider { background:rgba(16,185,129,.3); border-color:rgba(16,185,129,.45); box-shadow:0 0 12px rgba(16,185,129,.15); }
-    .toggle-switch input:checked + .toggle-slider::before { transform:translateY(-50%) translateX(24px); background:#34d399; box-shadow:0 0 10px rgba(16,185,129,.4),0 2px 6px rgba(0,0,0,.2); }
-    .toggle-switch:hover .toggle-slider { box-shadow:0 0 16px rgba(99,102,241,.12); }
-    .toggle-switch:active .toggle-slider::before { width:24px; }
-
-    /* Sleep Overlay */
-    #sleep-overlay { position:fixed; inset:0; z-index:50; background:rgba(6,6,12,.85); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .4s ease; pointer-events:none; }
-    #sleep-overlay.show { opacity:1; pointer-events:auto; }
-    .sleep-content { text-align:center; animation:sleepFloat 3s ease-in-out infinite; background:linear-gradient(180deg,rgba(22,22,40,.95),rgba(12,12,24,.95)); border:1px solid rgba(99,102,241,.3); border-radius:var(--radius-lg); padding:36px 44px; box-shadow:0 20px 60px rgba(0,0,0,.6); max-width:440px; width:90%; }
-    .sleep-icon { font-size:4rem; margin-bottom:16px; }
-    .sleep-content h2 { font-family:var(--font-heading); font-size:1.8rem; color:var(--text-primary); margin-bottom:8px; }
-    .sleep-content p { color:var(--text-secondary); font-size:.95rem; margin-bottom:24px; }
-    .sleep-actions { display:flex; flex-direction:column; align-items:center; gap:16px; }
-    .btn-wake { width:100%; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 28px; background:linear-gradient(135deg,#10b981,#059669); border:none; border-radius:999px; color:#fff; font-size:1rem; font-weight:600; font-family:var(--font-heading); cursor:pointer; transition:all .25s ease; box-shadow:0 6px 20px rgba(16,185,129,.35); }
-    .btn-wake:hover { transform:scale(1.03); box-shadow:0 8px 28px rgba(16,185,129,.5); }
-    .sleep-toggle-row { display:flex; align-items:center; gap:12px; font-size:.9rem; color:var(--text-secondary); }
-    @keyframes sleepFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
     /* Toast */
     .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:rgba(16,185,129,.9); color:#fff; padding:12px 28px; border-radius:999px; font-size:.9rem; font-weight:500; z-index:9999; opacity:0; transition:all .35s ease; pointer-events:none; backdrop-filter:blur(10px); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     .toast.error { background:rgba(239,68,68,.9); }
 
-    /* Footer */
     .page-footer { text-align:center; padding:40px 20px 20px; color:var(--text-muted); font-size:.82rem; }
     .no-results { display:none; text-align:center; padding:60px 20px; color:var(--text-muted); font-size:1.1rem; }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width:6px; height:6px; }
     ::-webkit-scrollbar-track { background:transparent; }
     ::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:3px; }
@@ -521,11 +522,10 @@ function getCSS() {
     @media (max-width:768px) {
       .page-header h1 { gap: 10px; }
       .page-header h1 .header-text { font-size:1.8rem; }
-      .page-header h1 .header-logo { height: 76px; }
+      .page-header h1 .header-logo { height: 70px; }
       .album-grid { grid-template-columns:1fr; }
       .modal-content { max-width:100%; }
       .modal-body { padding:20px 16px 28px; }
-      .modal-header { padding:20px 16px; }
     }
   `;
 }
@@ -536,7 +536,6 @@ function getJS() {
     let activeVersion = 'v1';
     let currentDetailIdx = null;
 
-    // --- Helpers ---
     function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
     function getIcon(id,name) {
       const n=(name||'').toLowerCase();
@@ -572,37 +571,40 @@ function getJS() {
       return '<span class="status-badge '+cls+'">'+txt+'</span>';
     }
 
-    // --- Render ---
+    // --- Render Cards & Stats ---
     function render() {
       const {templates, workflowsByTemplate, totalWorkflows, totalCompleted} = DATA;
 
-      // Stats
       document.getElementById('stats-bar').innerHTML = [
         {v:templates.length,l:'รายการทั้งหมด'},
         {v:totalWorkflows,l:'Workflow ที่รัน'},
         {v:totalCompleted,l:'สำเร็จ'}
       ].map(s => '<div class="stat-item"><div class="stat-value">'+s.v+'</div><div class="stat-label">'+s.l+'</div></div>').join('');
 
-      // Cards
       const grid = document.getElementById('album-grid');
       grid.innerHTML = templates.map((t,i) => {
         const icon = getIcon(t.id,t.name);
         const badge = getBadge(t.id,t.name);
         const wfs = workflowsByTemplate[t.id] || [];
         const completed = wfs.filter(w=>w.status==='completed').length;
-        const hasV1 = [t.searchPrompt,t.audioPrompt,t.reportPrompt,t.infoPrompt].filter(p=>p&&p.trim()).length;
-        const hasV2 = [t.searchPromptV2,t.audioPromptV2,t.reportPromptV2,t.infoPromptV2].filter(p=>p&&p.trim()).length;
-        const hasV3 = [t.searchPromptV3,t.audioPromptV3,t.reportPromptV3,t.infoPromptV3].filter(p=>p&&p.trim()).length;
-        const hasS = !!((t.searchPrompt && t.searchPrompt.trim()) || (t.searchPromptV2 && t.searchPromptV2.trim()) || (t.searchPromptV3 && t.searchPromptV3.trim()));
-        const hasA = !!((t.audioPrompt && t.audioPrompt.trim()) || (t.audioPromptV2 && t.audioPromptV2.trim()) || (t.audioPromptV3 && t.audioPromptV3.trim()));
-        const hasR = !!((t.reportPrompt && t.reportPrompt.trim()) || (t.reportPromptV2 && t.reportPromptV2.trim()) || (t.reportPromptV3 && t.reportPromptV3.trim()));
-        const hasI = !!((t.infoPrompt && t.infoPrompt.trim()) || (t.infoPromptV2 && t.infoPromptV2.trim()) || (t.infoPromptV3 && t.infoPromptV3.trim()));
+        
+        const versionKeys = getAvailableVersionsForTemplate(t);
+        const versionSummaryText = versionKeys.map(v => {
+          const suffix = v === 'v1' ? '' : v.toUpperCase();
+          const cnt = [t['searchPrompt'+suffix], t['audioPrompt'+suffix], t['reportPrompt'+suffix], t['infoPrompt'+suffix]].filter(p=>p&&p.trim()).length;
+          return v.toUpperCase() + ': ' + cnt;
+        }).join(' | ');
+
+        const hasS = versionKeys.some(v => { const s = v==='v1'?'':v.toUpperCase(); return t['searchPrompt'+s] && t['searchPrompt'+s].trim(); });
+        const hasA = versionKeys.some(v => { const s = v==='v1'?'':v.toUpperCase(); return t['audioPrompt'+s] && t['audioPrompt'+s].trim(); });
+        const hasR = versionKeys.some(v => { const s = v==='v1'?'':v.toUpperCase(); return t['reportPrompt'+s] && t['reportPrompt'+s].trim(); });
+        const hasI = versionKeys.some(v => { const s = v==='v1'?'':v.toUpperCase(); return t['infoPrompt'+s] && t['infoPrompt'+s].trim(); });
 
         return '<div class="album-card" onclick="openDetail('+i+')" data-name="'+esc(t.name)+'" data-id="'+esc(t.id)+'">'+
           '<div class="card-header"><span class="card-icon">'+icon+'</span><span class="card-badge '+badge.cls+'">'+badge.text+'</span></div>'+
           '<h3 class="card-title">'+esc(t.name)+'</h3>'+
           '<div class="card-meta">'+
-            '<div class="meta-item"><span>📝</span><span>V1: '+hasV1+' | V2: '+hasV2+(hasV3?' | V3: '+hasV3:'')+' Prompts</span></div>'+
+            '<div class="meta-item"><span>📝</span><span>'+versionSummaryText+' Prompts</span></div>'+
             '<div class="meta-item"><span>🎬</span><span>'+wfs.length+' ครั้งที่รัน'+(completed>0?' ('+completed+' สำเร็จ)':'')+'</span></div>'+
           '</div>'+
           '<div class="card-prompts-preview">'+
@@ -616,10 +618,38 @@ function getJS() {
       }).join('');
     }
 
-    // --- Detail Modal ---
+    function getAvailableVersionsForTemplate(t) {
+      const vers = new Set(['v1', 'v2', 'v3']);
+      const regex = new RegExp('^(search|audio|report|info)Prompt(V[0-9]+)$', 'i');
+      Object.keys(t).forEach(k => {
+        const m = k.match(regex);
+        if (m) {
+          vers.add(m[2].toLowerCase());
+        }
+      });
+      return Array.from(vers).sort((a,b) => {
+        const numA = parseInt(a.replace('v',''))||0;
+        const numB = parseInt(b.replace('v',''))||0;
+        return numA - numB;
+      });
+    }
+
     window.switchVersion = function(ver) {
-      activeVersion = ver;
+      activeVersion = ver.toLowerCase();
       openDetail(currentDetailIdx);
+    }
+
+    window.addNewVersion = function(templateIdx) {
+      const vName = prompt('ระบุชื่อ Version ใหม่ที่ต้องการเพิ่ม (เช่น V4, V5):', 'V4');
+      if (!vName) return;
+      const cleanVer = vName.trim().toLowerCase();
+      if (!cleanVer.startsWith('v')) {
+        showToast('❌ ชื่อ Version ต้องขึ้นต้นด้วย V (เช่น V4)', true);
+        return;
+      }
+      activeVersion = cleanVer;
+      openDetail(templateIdx);
+      showToast('✨ เพิ่ม ' + cleanVer.toUpperCase() + ' เรียบร้อย — พิมพ์ Prompt และกด Save เพื่อบันทึก');
     }
 
     function openDetail(idx) {
@@ -628,11 +658,15 @@ function getJS() {
       const wfs = DATA.workflowsByTemplate[t.id] || [];
       const icon = getIcon(t.id,t.name);
 
+      const availableVersions = getAvailableVersionsForTemplate(t);
+      if (!availableVersions.includes(activeVersion)) {
+        availableVersions.push(activeVersion);
+      }
+
+      const keySuffix = activeVersion === 'v1' ? '' : activeVersion.toUpperCase();
+
       const getPromptVal = (key) => {
-        if (activeVersion === 'v1') return t[key + 'Prompt'] || '';
-        if (activeVersion === 'v2') return t[key + 'PromptV2'] || '';
-        if (activeVersion === 'v3') return t[key + 'PromptV3'] || '';
-        return '';
+        return t[key + 'Prompt' + keySuffix] || '';
       };
 
       const prompts = [
@@ -642,7 +676,10 @@ function getJS() {
         {key:'info',label:'🖼️ Prompt Infographic',cls:'prompt-info',val: getPromptVal('info')},
       ];
 
-      const keySuffix = activeVersion === 'v1' ? '' : (activeVersion === 'v2' ? 'V2' : 'V3');
+      let versionButtonsHtml = availableVersions.map(v => {
+        const isAct = v === activeVersion;
+        return '<button class="btn-version '+(isAct?'active':'')+'" onclick="switchVersion(\\''+v+'\\')">Version '+v.replace('v','')+'</button>';
+      }).join('') + '<button class="btn-add-version" onclick="addNewVersion('+idx+')">➕ เพิ่ม Version ใหม่</button>';
 
       let wfRows = '';
       if (wfs.length > 0) {
@@ -666,24 +703,20 @@ function getJS() {
         '<div class="modal-content" onclick="event.stopPropagation()">'+
           '<div class="modal-header"><div class="modal-title-group"><span class="modal-icon">'+icon+'</span><div><h2>'+esc(t.name)+'</h2><span class="modal-id">ID: '+esc(t.id)+'</span></div></div><button class="modal-close" onclick="closeDetail()">&times;</button></div>'+
           '<div class="modal-body">'+
-            '<h3 class="section-title" style="margin-bottom:12px">🎛️ การตั้งค่า Prompt ทั้ง 4 ประเภท <span style="font-size:.78rem;color:var(--text-muted);font-weight:400">— แก้ไขได้ กด Save เพื่อบันทึก</span></h3>'+
-            '<div class="version-selector">'+
-              '<button class="btn-version '+(activeVersion==='v1'?'active':'')+'" onclick="switchVersion(\\'v1\\')">Version 1 (ดั้งเดิม)</button>'+
-              '<button class="btn-version '+(activeVersion==='v2'?'active':'')+'" onclick="switchVersion(\\'v2\\')">Version 2 (ปรับปรุงใหม่)</button>'+
-              '<button class="btn-version '+(activeVersion==='v3'?'active':'')+'" onclick="switchVersion(\\'v3\\')">👑 Version 3 (Member Exclusive)</button>'+
-            '</div>'+
+            '<h3 class="section-title" style="margin-bottom:12px">🎛️ การตั้งค่า Prompt ('+activeVersion.toUpperCase()+') <span style="font-size:.78rem;color:var(--text-muted);font-weight:400">— แก้ไขได้ กด Save เพื่อบันทึก</span></h3>'+
+            '<div class="version-selector">'+versionButtonsHtml+'</div>'+
             '<div class="prompt-accordion">'+
             prompts.map(p => {
               const hasVal = !!(p.val && p.val.trim());
-              const keyWithVer = p.key + keySuffix;
+              const typeKey = p.key + (activeVersion === 'v1' ? '' : activeVersion.toUpperCase());
               return '<div class="prompt-section '+p.cls+'">'+
                 '<button class="prompt-header-btn" onclick="toggleAccordion(this)"><span>'+p.label+'</span><span class="prompt-status">'+(hasVal?'✅ ตั้งค่าแล้ว':'⬜ ยังไม่ได้ตั้ง')+'</span><span class="chevron">▼</span></button>'+
                 '<div class="prompt-body">'+
                   '<div class="prompt-actions">'+
-                    '<button class="btn-sm btn-copy" onclick="copyText(\\'ta_'+t.id+'_'+keyWithVer+'\\',this)">📋 Copy</button>'+
-                    '<button class="btn-sm btn-save" id="save_'+t.id+'_'+keyWithVer+'" onclick="savePrompt(\\''+t.id+'\\',\\''+keyWithVer+'\\','+idx+')" disabled>💾 Save</button>'+
+                    '<button class="btn-sm btn-copy" onclick="copyText(\\'ta_'+t.id+'_'+typeKey+'\\',this)">📋 Copy</button>'+
+                    '<button class="btn-sm btn-save" id="save_'+t.id+'_'+typeKey+'" onclick="savePrompt(\\''+t.id+'\\',\\''+typeKey+'\\','+idx+')" disabled>💾 Save</button>'+
                   '</div>'+
-                  '<textarea class="prompt-textarea'+(hasVal?'':' no-data')+'" id="ta_'+t.id+'_'+keyWithVer+'" oninput="onPromptEdit(\\''+t.id+'\\',\\''+keyWithVer+'\\')" placeholder="ยังไม่ได้ตั้งค่า Prompt นี้ — พิมพ์เพื่อเพิ่ม...">'+(p.val||'')+'</textarea>'+
+                  '<textarea class="prompt-textarea'+(hasVal?'':' no-data')+'" id="ta_'+t.id+'_'+typeKey+'" oninput="onPromptEdit(\\''+t.id+'\\',\\''+typeKey+'\\')" placeholder="ยังไม่ได้ตั้งค่า Prompt นี้ — พิมพ์เพื่อเพิ่ม...">'+(p.val||'')+'</textarea>'+
                 '</div>'+
               '</div>';
             }).join('')+
@@ -701,6 +734,98 @@ function getJS() {
     function closeDetail() {
       document.getElementById('modal-container').innerHTML = '';
       document.body.style.overflow = '';
+    }
+
+    // --- Modal: Add New Template ---
+    window.openAddTemplateModal = function() {
+      const modalHtml = '<div class="modal-overlay show" id="add-template-modal" onclick="if(event.target===this)closeAddModal()">'+
+        '<div class="modal-content" style="max-width:720px" onclick="event.stopPropagation()">'+
+          '<div class="modal-header"><div class="modal-title-group"><span class="modal-icon">➕</span><div><h2>เพิ่มรายการผลิตคลิปใหม่</h2><span class="modal-id">สร้างรายการแบบแผนคัดสรรและวิเคราะห์ด้วย NotebookLM</span></div></div><button class="modal-close" onclick="closeAddModal()">&times;</button></div>'+
+          '<div class="modal-body">'+
+            '<form onsubmit="submitNewTemplate(event)">'+
+              '<div class="form-group">'+
+                '<label class="form-label">ID ของรายการ (ภาษาอังกฤษ เช่น this_weeks_watchlist):</label>'+
+                '<input type="text" class="form-input" id="new-template-id" placeholder="ตัวอย่าง: this_weeks_watchlist" required>'+
+              '</div>'+
+              '<div class="form-group">'+
+                '<label class="form-label">ชื่อรายการ (เช่น This Week’s Watchlist — หุ้นอเมริกา):</label>'+
+                '<input type="text" class="form-input" id="new-template-name" placeholder="ตัวอย่าง: This Week’s Watchlist — หุ้นอเมริกา" required>'+
+              '</div>'+
+              '<div class="form-group">'+
+                '<label class="form-label">Prompt ค้นหาข่าว (Search Prompt):</label>'+
+                '<textarea class="form-textarea" id="new-search-prompt" placeholder="ใส่ข้อความคำสั่งสำหรับการค้นหาข้อมูลข่าว..."></textarea>'+
+              '</div>'+
+              '<div class="form-group">'+
+                '<label class="form-label">Prompt Audio Overview:</label>'+
+                '<textarea class="form-textarea" id="new-audio-prompt" placeholder="ใส่สคริปต์แนะนำผู้ดำเนินรายการ..."></textarea>'+
+              '</div>'+
+              '<div class="form-group">'+
+                '<label class="form-label">Prompt Report Facebook:</label>'+
+                '<textarea class="form-textarea" id="new-report-prompt" placeholder="ใส่สคริปต์โพสต์บทวิเคราะห์..."></textarea>'+
+              '</div>'+
+              '<div class="form-group">'+
+                '<label class="form-label">Prompt Infographic:</label>'+
+                '<textarea class="form-textarea" id="new-info-prompt" placeholder="ใส่คำสั่งสร้างกราฟิกสรุปข้อมูล..."></textarea>'+
+              '</div>'+
+              '<div style="text-align:right;margin-top:20px">'+
+                '<button type="button" class="btn-sm" style="margin-right:10px" onclick="closeAddModal()">ยกเลิก</button>'+
+                '<button type="submit" class="btn-primary-add" id="btn-submit-template">💾 บันทึกรายการใหม่</button>'+
+              '</div>'+
+            '</form>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+      document.getElementById('add-modal-container').innerHTML = modalHtml;
+    }
+
+    window.closeAddModal = function() {
+      document.getElementById('add-modal-container').innerHTML = '';
+    }
+
+    window.submitNewTemplate = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('new-template-id').value.trim();
+      const name = document.getElementById('new-template-name').value.trim();
+      const searchPrompt = document.getElementById('new-search-prompt').value;
+      const audioPrompt = document.getElementById('new-audio-prompt').value;
+      const reportPrompt = document.getElementById('new-report-prompt').value;
+      const infoPrompt = document.getElementById('new-info-prompt').value;
+
+      const btn = document.getElementById('btn-submit-template');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังบันทึก...';
+
+      const cleanId = id.toLowerCase().replace(/\\s+/g, '_');
+      const newTmpl = {
+        id: cleanId,
+        name: name,
+        searchPrompt: searchPrompt || '',
+        audioPrompt: audioPrompt || '',
+        reportPrompt: reportPrompt || '',
+        infoPrompt: infoPrompt || ''
+      };
+
+      try {
+        const resp = await fetch('/api/add-template', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: cleanId, name, searchPrompt, audioPrompt, reportPrompt, infoPrompt })
+        });
+        const result = await resp.json();
+        if (result.success) {
+          DATA.templates.push(result.template);
+          render();
+          closeAddModal();
+          showToast('🎉 เพิ่มรายการใหม่ "' + name + '" เรียบร้อย!');
+          return;
+        }
+      } catch (err) {
+        // Fallback for static client mode
+        DATA.templates.push(newTmpl);
+        render();
+        closeAddModal();
+        showToast('🎉 เพิ่มรายการใหม่ "' + name + '" เรียบร้อย (Client Mode)');
+      }
     }
 
     function toggleAccordion(btn) {
@@ -745,23 +870,17 @@ function getJS() {
         });
         const result = await resp.json();
         if (result.success) {
-          // Update local data
-          const keyMap = {
-            search:'searchPrompt', audio:'audioPrompt', report:'reportPrompt', info:'infoPrompt',
-            searchV2:'searchPromptV2', audioV2:'audioPromptV2', reportV2:'reportPromptV2', infoV2:'infoPromptV2'
-          };
-          DATA.templates[templateIdx][keyMap[promptType]] = value;
+          const propKey = result.key || promptType;
+          DATA.templates[templateIdx][propKey] = value;
 
           saveBtn.textContent = '✅ บันทึกแล้ว!';
           saveBtn.classList.add('saved');
           showToast('💾 บันทึก Prompt สำเร็จ!');
 
-          // Update status text
           const section = ta.closest('.prompt-section');
           const statusEl = section.querySelector('.prompt-status');
           if (statusEl) statusEl.textContent = value.trim() ? '✅ ตั้งค่าแล้ว' : '⬜ ยังไม่ได้ตั้ง';
 
-          // Update textarea styling
           ta.classList.toggle('no-data', !value.trim());
 
           setTimeout(() => {
@@ -769,15 +888,17 @@ function getJS() {
             saveBtn.classList.remove('saved');
           }, 2000);
 
-          // Re-render cards to update prompt count
           render();
-        } else {
-          throw new Error(result.error || 'Unknown error');
+          return;
         }
       } catch (e) {
-        saveBtn.textContent = '❌ ผิดพลาด';
-        showToast('❌ บันทึกล้มเหลว: ' + e.message);
+        // Fallback for static mode
+        DATA.templates[templateIdx][promptType] = value;
+        saveBtn.textContent = '✅ บันทึกแล้ว!';
+        saveBtn.classList.add('saved');
+        showToast('💾 บันทึก Prompt สำเร็จ (Client Mode)');
         setTimeout(() => { saveBtn.textContent = '💾 Save'; saveBtn.disabled = false; }, 2000);
+        render();
       }
     }
 
@@ -794,204 +915,40 @@ function getJS() {
       document.getElementById('no-results').style.display = found===0 ? 'block' : 'none';
     }
 
-    // --- Pause/Resume & Countdown ---
-    let countdownSec = 5 * 60;
-    let countdownInterval = null;
-    let heartbeatInterval = null;
-    let isServerPaused = DATA.isPaused || false;
-
-    function startCountdown() {
-      countdownSec = 5 * 60;
-      updateCountdownDisplay();
-      if (countdownInterval) clearInterval(countdownInterval);
-      countdownInterval = setInterval(() => {
-        countdownSec--;
-        updateCountdownDisplay();
-        if (countdownSec <= 0) {
-          clearInterval(countdownInterval);
-          // Auto-pause เมื่อหมดเวลา
-          pauseServer(true);
-        }
-      }, 1000);
-    }
-
-    function updateCountdownDisplay() {
-      const m = Math.floor(countdownSec / 60);
-      const s = countdownSec % 60;
-      const el = document.getElementById('countdown');
-      if (el) el.textContent = '⏱️ พักอัตโนมัติใน ' + m + ':' + String(s).padStart(2,'0');
-    }
-
-    function resetCountdown() {
-      if (!isServerPaused) countdownSec = 5 * 60;
-    }
-
-    // Heartbeat: keep server alive while page is open + reset countdown
-    function startHeartbeat() {
-      if (heartbeatInterval) clearInterval(heartbeatInterval);
-      heartbeatInterval = setInterval(async () => {
-        try {
-          const resp = await fetch('/api/heartbeat');
-          if (resp.ok) {
-            const data = await resp.json();
-            if (data.paused && !isServerPaused) {
-              markPaused();
-            } else if (!data.paused && isServerPaused) {
-              markActive();
-            } else if (!data.paused) {
-              resetCountdown();
-            }
-          }
-        } catch (e) {
-          // Server truly dead
-        }
-      }, 30 * 1000); // every 30s
-    }
-
-    function markPaused() {
-      isServerPaused = true;
-      const bar = document.getElementById('server-bar');
-      if (bar) bar.classList.add('offline');
-      const statusText = document.getElementById('server-status-text');
-      if (statusText) statusText.textContent = '💤 โหมดพัก';
-      const el = document.getElementById('countdown');
-      if (el) el.textContent = '⏸️ กดเปิดเพื่อใช้งานต่อ';
-      const toggleLabel = document.getElementById('toggle-label');
-      if (toggleLabel) { toggleLabel.textContent = 'OFF'; toggleLabel.classList.add('off'); }
-      const toggle = document.getElementById('server-toggle');
-      if (toggle) toggle.checked = false;
-      if (countdownInterval) clearInterval(countdownInterval);
-      // Show sleep overlay
-      showSleepOverlay(true);
-    }
-
-    function markActive() {
-      isServerPaused = false;
-      const bar = document.getElementById('server-bar');
-      if (bar) bar.classList.remove('offline');
-      const statusText = document.getElementById('server-status-text');
-      if (statusText) statusText.textContent = 'Server กำลังทำงาน';
-      const toggleLabel = document.getElementById('toggle-label');
-      if (toggleLabel) { toggleLabel.textContent = 'ON'; toggleLabel.classList.remove('off'); }
-      const toggle = document.getElementById('server-toggle');
-      if (toggle) toggle.checked = true;
-      showSleepOverlay(false);
-      startCountdown();
-    }
-
-    function showSleepOverlay(show) {
-      let overlay = document.getElementById('sleep-overlay');
-      if (show) {
-        if (!overlay) {
-          overlay = document.createElement('div');
-          overlay.id = 'sleep-overlay';
-          overlay.innerHTML = '<div class="sleep-content">' +
-            '<div class="sleep-icon">💤</div>' +
-            '<h2>โหมดพัก (Sleep Mode)</h2>' +
-            '<p>Server อยู่ในโหมดพักชั่วคราว กดเปิดใช้งานได้ทันทีที่นี่</p>' +
-            '<div class="sleep-actions">' +
-              '<button class="btn-wake" onclick="resumeServer()">⚡ เปิดใช้งานระบบ (Wake Up)</button>' +
-              '<div class="sleep-toggle-row">' +
-                '<span>สวิตช์เปิด/ปิด:</span>' +
-                '<label class="toggle-switch">' +
-                  '<input type="checkbox" id="sleep-overlay-toggle" onchange="if(this.checked)resumeServer()">' +
-                  '<span class="toggle-slider"></span>' +
-                '</label>' +
-              '</div>' +
-            '</div>' +
-          '</div>';
-          document.body.appendChild(overlay);
-        }
-        requestAnimationFrame(() => overlay.classList.add('show'));
-      } else {
-        if (overlay) {
-          overlay.classList.remove('show');
-          setTimeout(() => overlay.remove(), 400);
-        }
-      }
-    }
-
-    async function pauseServer(isAuto) {
-      try {
-        await fetch('/api/pause', { method: 'POST' });
-        showToast(isAuto ? '💤 ไม่มีการใช้งาน — เข้าโหมดพัก' : '💤 เข้าโหมดพักแล้ว');
-        markPaused();
-      } catch (e) { /* ignore */ }
-    }
-
-    async function resumeServer() {
-      try {
-        const resp = await fetch('/api/resume', { method: 'POST' });
-        if (resp.ok) {
-          showToast('🟢 กลับมาทำงานแล้ว!');
-          markActive();
-          return true;
-        }
-      } catch (e) { /* ignore */ }
-      return false;
-    }
-
-    async function handleToggle(checkbox) {
-      if (!checkbox.checked) {
-        await pauseServer(false);
-      } else {
-        const ok = await resumeServer();
-        if (!ok) {
-          checkbox.checked = false;
-          showToast('❌ ไม่สามารถเปิดได้', true);
-        }
-      }
+    function showToast(msg, isErr=false) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isErr ? ' error' : '');
+      setTimeout(() => { t.className = 'toast'; }, 3000);
     }
 
     async function deployToGithub() {
       const btn = document.getElementById('btn-deploy');
-      btn.textContent = '⏳ กำลัง Deploy...';
+      btn.textContent = '⏳ Deploying...';
       btn.classList.add('deploying');
       try {
         const resp = await fetch('/api/deploy', { method: 'POST' });
-        const data = await resp.json();
-        if (data.success) {
-          btn.textContent = '✅ สำเร็จ!';
-          btn.classList.remove('deploying');
+        const res = await resp.json();
+        if (res.success) {
+          btn.textContent = '✅ ' + (res.message || 'Deployed!');
           btn.classList.add('success');
-          showToast('🚀 ' + (data.message || 'Deploy สำเร็จ! เว็บจะอัปเดตใน 1-2 นาที'));
+          showToast('🚀 Deploy ขึ้น GitHub สำเร็จ!');
         } else {
-          throw new Error(data.error || 'Deploy failed');
+          throw new Error(res.error || 'Deploy failed');
         }
       } catch (e) {
-        btn.textContent = '❌ ผิดพลาด';
+        btn.textContent = '❌ Deploy Failed';
         showToast('❌ Deploy ล้มเหลว: ' + e.message, true);
       }
       setTimeout(() => {
         btn.textContent = '🚀 Deploy';
-        btn.classList.remove('deploying','success');
+        btn.classList.remove('deploying', 'success');
       }, 3000);
     }
 
-    function showToast(msg, isError) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = 'toast show' + (isError ? ' error' : '');
-      setTimeout(() => t.className = 'toast', 3000);
-    }
-
-    // Escape key
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeDetail();
-    });
-
-    // User activity resets countdown
-    ['click','mousemove','keydown','scroll','touchstart'].forEach(evt => {
-      document.addEventListener(evt, () => resetCountdown(), { passive:true });
-    });
-
-    // Init
     render();
-    if (isServerPaused) {
-      markPaused();
-    } else {
-      startCountdown();
-    }
-    startHeartbeat();
   `;
 }
+
+// Export initial HTML files on load
+exportAlbumHtml();
