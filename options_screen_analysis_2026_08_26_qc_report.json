@@ -19,7 +19,7 @@
     {
       "item": "Earnings Calendar & Catalyst Audit Gate",
       "status": "🟢 VERIFIED",
-      "details": "Verified earnings calendar for all tickers. Flagged events: NVDA (Earnings on 2026-08-27 inside contract period -> High IV Crush risk); AVGO (Earnings on 2026-09-03 inside contract period -> High IV Crush risk); MRVL (Earnings on 2026-08-28 inside contract period -> High IV Crush risk)"
+      "details": "Verified earnings calendar for all tickers. Flagged events: NVDA (Earnings on 2026-08-26 inside contract period -> High IV Crush risk); AVGO (Earnings on 2026-09-02 inside contract period -> High IV Crush risk); MRVL (Earnings on 2026-08-27 inside contract period -> High IV Crush risk)"
     },
     {
       "item": "Fact-checking & Information Sourcing Gate",

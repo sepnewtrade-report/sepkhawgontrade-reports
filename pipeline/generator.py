@@ -238,7 +238,7 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             content += f"  - **แนวรับสถิติ (Lower Target):** ${support:.2f}\n"
             
             if has_earnings_overlap:
-                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** 🚨 **พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในวันที่ {matching_edate}** ซึ่งอยู่ในช่วงอายุสัญญา Option (IV ปัจจุบัน {avg_iv:.1%} สะท้อนความผันผวนล่วงหน้ารับงบการเงิน) **มีความเสี่ยงสูงมากจากปรากฏการณ์ IV Crush (พรีเมียมยุบตัวรุนแรงหลังงบออก)**\n\n"
+                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** 🚨 **พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในวันที่ {matching_edate} (หลังตลาดปิด / After Market Close)** ซึ่งอยู่ในช่วงอายุสัญญา Option (IV ปัจจุบัน {avg_iv:.1%} สะท้อนความผันผวนล่วงหน้ารับงบการเงิน) **มีความเสี่ยงสูงมากจากปรากฏการณ์ IV Crush (พรีเมียมยุบตัวรุนแรงหลังงบออก)**\n\n"
             else:
                 content += f"- **Catalyst & ปัจจัยความเสี่ยง:** ไม่พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในช่วงอายุสัญญา ทำให้ลดความเสี่ยงจากปรากฏการณ์ IV Crush (ความผันผวนดิ่งลงหลังข่าวยุติ) ได้อย่างมีนัยสำคัญ\n\n"
             

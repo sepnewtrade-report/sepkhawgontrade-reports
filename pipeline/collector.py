@@ -25,7 +25,8 @@ def fetch_single_ticker(ticker):
             info = {}
         # Get important fundamentals for scanning
         current_price = info.get("currentPrice") or info.get("regularMarketPrice") or hist['Close'].iloc[-1]
-        # Fetch Earnings Calendar dates from yfinance
+        # Fetch Earnings Calendar dates from yfinance (adjusted -1 day for US AMC release date)
+        from datetime import timedelta
         earnings_dates = []
         try:
             cal = t.calendar
@@ -34,11 +35,17 @@ def fetch_single_ticker(ticker):
                 if isinstance(ed_list, list):
                     for d in ed_list:
                         if hasattr(d, "strftime"):
-                            earnings_dates.append(d.strftime("%Y-%m-%d"))
+                            us_release = d - timedelta(days=1)
+                            earnings_dates.append(us_release.strftime("%Y-%m-%d"))
                         elif isinstance(d, str):
-                            earnings_dates.append(d)
+                            try:
+                                dt_obj = datetime.strptime(d, "%Y-%m-%d").date() - timedelta(days=1)
+                                earnings_dates.append(dt_obj.strftime("%Y-%m-%d"))
+                            except Exception:
+                                earnings_dates.append(d)
                 elif hasattr(ed_list, "strftime"):
-                    earnings_dates.append(ed_list.strftime("%Y-%m-%d"))
+                    us_release = ed_list - timedelta(days=1)
+                    earnings_dates.append(us_release.strftime("%Y-%m-%d"))
         except Exception as e:
             print(f"Error fetching calendar for {ticker}: {e}")
 
