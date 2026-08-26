@@ -25,6 +25,23 @@ def fetch_single_ticker(ticker):
             info = {}
         # Get important fundamentals for scanning
         current_price = info.get("currentPrice") or info.get("regularMarketPrice") or hist['Close'].iloc[-1]
+        # Fetch Earnings Calendar dates from yfinance
+        earnings_dates = []
+        try:
+            cal = t.calendar
+            if isinstance(cal, dict):
+                ed_list = cal.get("Earnings Date") or cal.get("Earnings Dates") or []
+                if isinstance(ed_list, list):
+                    for d in ed_list:
+                        if hasattr(d, "strftime"):
+                            earnings_dates.append(d.strftime("%Y-%m-%d"))
+                        elif isinstance(d, str):
+                            earnings_dates.append(d)
+                elif hasattr(ed_list, "strftime"):
+                    earnings_dates.append(ed_list.strftime("%Y-%m-%d"))
+        except Exception as e:
+            print(f"Error fetching calendar for {ticker}: {e}")
+
         fundamentals = {
             "market_cap": info.get("marketCap"),
             "short_interest_ratio": info.get("shortPercentOfFloat") or info.get("shortRatio"),
@@ -34,7 +51,8 @@ def fetch_single_ticker(ticker):
             "sector": info.get("sector", "Other"),
             "industry": info.get("industry", "Other"),
             "current_price": current_price,
-            "prev_close": info.get("previousClose") or info.get("regularMarketPreviousClose") or hist['Close'].iloc[-2]
+            "prev_close": info.get("previousClose") or info.get("regularMarketPreviousClose") or hist['Close'].iloc[-2],
+            "earnings_dates": earnings_dates
         }
         
         # Prepare historical data DataFrame dict
@@ -57,6 +75,7 @@ def fetch_single_ticker(ticker):
             
         options_data = {
             "hv_30": hv_30,
+            "earnings_dates": earnings_dates,
             "short_term": None,
             "medium_term": None
         }

@@ -197,11 +197,36 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             support = price - expected_move
             resistance = price + expected_move
             
+            # Check Earnings Date overlap for this ticker
+            edates = sig.get("earnings_dates", [])
+            has_earnings_overlap = False
+            matching_edate = None
+            
+            if edates:
+                try:
+                    dt_report = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    max_exp_date = max((c.get("expiration") for c in cands if c.get("expiration")), default=None)
+                    if max_exp_date:
+                        dt_max_exp = datetime.strptime(max_exp_date, "%Y-%m-%d").date()
+                        for ed in edates:
+                            try:
+                                dt_ed = datetime.strptime(ed, "%Y-%m-%d").date()
+                                if dt_report <= dt_ed <= dt_max_exp:
+                                    has_earnings_overlap = True
+                                    matching_edate = ed
+                                    break
+                            except Exception:
+                                pass
+                except Exception:
+                    pass
+
             # Store in dict for the trade setup section
             ticker_info[ticker] = {
                 "price": price,
                 "expected_move": expected_move,
-                "rsi": rsi
+                "rsi": rsi,
+                "has_earnings_overlap": has_earnings_overlap,
+                "matching_edate": matching_edate
             }
             
             confluence_str = " (🔥 Double Confirmation - Whale Flow)" if is_confluence else ""
@@ -211,7 +236,11 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             content += f"- **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move {avg_dte:.0f} วัน - 1 Standard Deviation):** +/-${expected_move:.2f}\n"
             content += f"  - **แนวต้านสถิติ (Upper Target):** ${resistance:.2f}\n"
             content += f"  - **แนวรับสถิติ (Lower Target):** ${support:.2f}\n"
-            content += f"- **Catalyst & ปัจจัยความเสี่ยง:** ไม่พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในช่วงอายุสัญญา ทำให้ลดความเสี่ยงจากปรากฏการณ์ IV Crush (ความผันผวนดิ่งลงหลังข่าวยุติ) ได้อย่างมีนัยสำคัญ\n\n"
+            
+            if has_earnings_overlap:
+                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** 🚨 **พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในวันที่ {matching_edate}** ซึ่งอยู่ในช่วงอายุสัญญา Option (IV ปัจจุบัน {avg_iv:.1%} สะท้อนความผันผวนล่วงหน้ารับงบการเงิน) **มีความเสี่ยงสูงมากจากปรากฏการณ์ IV Crush (พรีเมียมยุบตัวรุนแรงหลังงบออก)**\n\n"
+            else:
+                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** ไม่พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในช่วงอายุสัญญา ทำให้ลดความเสี่ยงจากปรากฏการณ์ IV Crush (ความผันผวนดิ่งลงหลังข่าวยุติ) ได้อย่างมีนัยสำคัญ\n\n"
             
         content += "\n"
         
@@ -250,15 +279,37 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             ticker = cand["ticker"]
             o_type = cand["type"]
             strike = cand["strike"]
+            exp = cand["expiration"]
             dte = cand["dte"]
             premium = cand["premium"]
             theta = cand["theta"]
+            iv = cand["iv"]
             
-            t_info = ticker_info.get(ticker, {"price": 100.0, "expected_move": 5.0, "rsi": 50.0})
+            t_info = ticker_info.get(ticker, {"price": 100.0, "expected_move": 5.0, "rsi": 50.0, "has_earnings_overlap": False, "matching_edate": None})
             price_val = t_info["price"]
             expected_move_val = t_info["expected_move"]
+            has_earnings = t_info.get("has_earnings_overlap", False)
+            matching_edate = t_info.get("matching_edate")
             
-            content += f"### 💡 Trade Setup: {ticker} {o_type} ${strike:.2f} ({dte} วัน)\n"
+            contract_has_earnings = False
+            if has_earnings and matching_edate and exp:
+                try:
+                    dt_report = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    dt_cand_exp = datetime.strptime(exp, "%Y-%m-%d").date()
+                    dt_ed = datetime.strptime(matching_edate, "%Y-%m-%d").date()
+                    if dt_report <= dt_ed <= dt_cand_exp:
+                        contract_has_earnings = True
+                except Exception:
+                    pass
+            
+            content += f"### 💡 Trade Setup: {ticker} {o_type} ${strike:.2f} ({dte} วัน - หมดอายุ {exp})\n"
+            
+            if contract_has_earnings:
+                content += f"- **🚨 คำเตือนพิเศษเหตุการณ์ประกาศงบ (Earnings & IV Crush Warning):**\n"
+                content += f"  - สัญญานี้ครอบคลุมวันประกาศงบการเงิน ({matching_edate}) ตลาดตั้งราคาความผันผวนล่วงหน้าสูงมาก (IV: {iv:.1%})\n"
+                content += f"  - **สำหรับ Option Buyer:** มีความเสี่ยงสูงมากจาก **IV Crush (ราคา Option Premium ดิ่งลงอย่างรวดเร็วหลังงบออก)** แนะนำให้ปิดสถานะล่วงหน้าก่อนงบออก หรือหลีกเลี่ยงการถือครอง Outright Option ข้ามคืนงบออก\n"
+                content += f"  - **สำหรับ Option Seller (แนะนำ Credit Spread):** เหมาะกับการใช้กลยุทธ์ Defined-Risk Spread (เช่น Credit Spread) เพื่อใช้ประโยชน์จากการลดลงของ IV และ Time Decay หลังข่าวยุติ\n"
+                
             content += f"- **กลยุทธ์แนะนำ (Suggested Execution):** \n"
             if o_type == "CALL":
                 content += f"  - **สำหรับ Option Buyer:** การซื้อ Outright Call Option สำหรับหุ้นแม่ที่มีเทรนด์ขาขึ้นเด่น แนะนำให้จับตาการเข้าซื้อในจังหวะราคาย่อตัวหาแนวรับ ${price_val - expected_move_val/2:.2f} เพื่อลดต้นทุนพรีเมียม\n"

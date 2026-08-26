@@ -243,6 +243,7 @@ class OptionsScreenStrategy(BaseStrategy):
             "price": current_price,
             "hv_30": hv_30,
             "rsi": rsi,
+            "earnings_dates": opts_data.get("earnings_dates", []) or fund.get("earnings_dates", []),
             "short_term_candidates": [],
             "medium_term_candidates": []
         }
