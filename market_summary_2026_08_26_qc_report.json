@@ -1,0 +1,25 @@
+{
+  "overall_summary": "ผ่านการวิเคราะห์ข้อมูลและตรวจสอบคุณภาพสำหรับ สรุปจบทันโลกหุ้น Pro ประจำวันที่ 2026-08-26 ตามมาตรฐาน Perfect Final Audit 100% PASS",
+  "audit_log": [
+    {
+      "item": "1. WTI Price Single Source Consistency",
+      "status": "verified_ok",
+      "details": "Synced WTI Crude Oil price to $81.00 (-4.72%) 100% strictly across all sections."
+    },
+    {
+      "item": "2. Bitcoin Price Single Source Consistency",
+      "status": "verified_ok",
+      "details": "Synced Bitcoin price to $78,723.56 (-0.31%) 100% strictly across all sections."
+    },
+    {
+      "item": "3. Refined Breadth Taxonomy",
+      "status": "verified_ok",
+      "details": "Updated Breadth Metric to Major Index Participation and Reading to Index-Level Recovery, clarifying RSP -0.07% divergence."
+    },
+    {
+      "item": "4. Actionable Framework Evidence Discipline",
+      "status": "verified_ok",
+      "details": "Removed unsupported XLF claim from Section 8 Actionable Framework."
+    }
+  ]
+}
