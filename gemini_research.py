@@ -39,24 +39,62 @@ def extract_tickers_from_markdown(text):
 
 def get_live_quote(ticker):
     import math
-    # Index/Commodity/Macro symbols should bypass TradingView exchange loop and use yfinance directly
-    if ticker.startswith("^") or "=F" in ticker or "-" in ticker or ticker in ["DX-Y.NYB", "GC=F", "CL=F", "BZ=F", "^GSPC", "^IXIC", "^DJI", "^VIX", "^TNX"]:
+    import pandas as pd
+    import numpy as np
+
+    def compute_quote_from_yf(sym):
         try:
             import yfinance as yf
-            t = yf.Ticker(ticker)
-            h = t.history(period="5d").dropna(subset=['Close'])
-            if not h.empty:
-                price = float(h['Close'].iloc[-1])
-                prev = float(h['Close'].iloc[-2]) if len(h) > 1 else price
-                change = ((price - prev) / prev) * 100.0 if prev > 0 and not math.isnan(prev) else 0.0
-                return {
-                    "price": float(price),
-                    "change": float(change),
-                    "rsi": 50.0,
-                    "macd": 0.0
-                }
+            t = yf.Ticker(sym)
+            fi = t.fast_info
+            last_p = getattr(fi, 'last_price', None)
+            prev_p = getattr(fi, 'previous_close', None)
+
+            if last_p is None or prev_p is None or np.isnan(last_p) or np.isnan(prev_p) or prev_p <= 0:
+                return None
+
+            curr = float(last_p)
+            prev = float(prev_p)
+            change = round(((curr - prev) / prev) * 100.0, 2)
+
+            df = t.history(period="60d")
+            valid_closes = list(df['Close'].dropna()) if not df.empty else []
+            if valid_closes and round(valid_closes[-1], 2) != round(curr, 2):
+                valid_closes.append(curr)
+
+            s_close = pd.Series(valid_closes if valid_closes else [curr])
+
+            # Wilders RSI (14)
+            delta = s_close.diff()
+            gain = (delta.where(delta > 0, 0)).ewm(alpha=1/14, adjust=False).mean()
+            loss = (-delta.where(delta < 0, 0)).ewm(alpha=1/14, adjust=False).mean()
+            rs = gain / loss
+            rsi = 100 - (100 / (1 + rs))
+            rsi_val = float(rsi.iloc[-1]) if not pd.isna(rsi.iloc[-1]) else 50.0
+
+            # MACD (12, 26, 9)
+            ema12 = s_close.ewm(span=12, adjust=False).mean()
+            ema26 = s_close.ewm(span=26, adjust=False).mean()
+            macd_line = ema12 - ema26
+            signal_line = macd_line.ewm(span=9, adjust=False).mean()
+            macd_hist = macd_line - signal_line
+            macd_val = float(macd_hist.iloc[-1]) if not pd.isna(macd_hist.iloc[-1]) else 0.0
+
+            return {
+                "price": round(curr, 2),
+                "change": round(change, 2),
+                "rsi": round(rsi_val, 2),
+                "macd": round(macd_val, 4)
+            }
         except Exception as e:
-            print(f"Error fetching macro ticker {ticker} via yfinance: {e}")
+            print(f"Error computing yfinance quote for {sym}: {e}")
+            return None
+
+    # Index/Commodity/Macro symbols should use yfinance directly
+    if ticker.startswith("^") or "=F" in ticker or "-" in ticker or ticker in ["DX-Y.NYB", "GC=F", "CL=F", "BZ=F", "^GSPC", "^IXIC", "^DJI", "^VIX", "^TNX"]:
+        q = compute_quote_from_yf(ticker)
+        if q:
+            return q
 
     exchanges = ["NASDAQ", "NYSE", "AMEX", "BATS"]
     for exchange in exchanges:
@@ -71,9 +109,14 @@ def get_live_quote(ticker):
             indicators = analysis.indicators
             price = indicators.get("close")
             change = indicators.get("change")
-            rsi = indicators.get("RSI", 50.0)
-            macd = indicators.get("MACD.macd", 0.0)
+            rsi = indicators.get("RSI")
+            macd = indicators.get("MACD.macd")
             if price is not None and not math.isnan(price) and price > 0:
+                # If RSI or MACD from TA_Handler is missing or default, compute via yfinance
+                if rsi is None or math.isnan(rsi) or macd is None or math.isnan(macd):
+                    yf_q = compute_quote_from_yf(ticker)
+                    if yf_q:
+                        return yf_q
                 return {
                     "price": float(price),
                     "change": float(change) if change is not None and not math.isnan(change) else 0.0,
@@ -82,35 +125,9 @@ def get_live_quote(ticker):
                 }
         except Exception:
             continue
-    # Fallback to yfinance
-    try:
-        import yfinance as yf
-        t = yf.Ticker(ticker)
-        price = getattr(t.fast_info, 'last_price', None)
-        prev = getattr(t.fast_info, 'previous_close', None)
-        if price is not None and not math.isnan(price) and price > 0:
-            change = ((price - prev) / prev) * 100.0 if prev and prev > 0 and not math.isnan(prev) else 0.0
-            return {
-                "price": float(price),
-                "change": float(change),
-                "rsi": 50.0,
-                "macd": 0.0
-            }
-        h = t.history(period="5d").dropna(subset=['Close'])
-        if not h.empty:
-            price = float(h['Close'].iloc[-1])
-            prev = float(h['Close'].iloc[-2]) if len(h) > 1 else price
-            if not math.isnan(price) and price > 0:
-                change = ((price - prev) / prev) * 100.0 if prev > 0 and not math.isnan(prev) else 0.0
-                return {
-                    "price": price,
-                    "change": change,
-                    "rsi": 50.0,
-                    "macd": 0.0
-                }
-    except Exception:
-        pass
-    return None
+
+    # Fallback to yfinance computation
+    return compute_quote_from_yf(ticker)
 
 def get_tradingview_quote(ticker):
     return get_live_quote(ticker)
@@ -329,7 +346,17 @@ def main():
             "ปฏิบัติงานตามสายพานข่าว Financial Intelligence Pipeline โดยมีขั้นตอนดังนี้:\n\n"
             "[PHASE 2 — FACT CHECK (🛡️ QC Expert Gate)]:\n"
             "1. ตรวจสอบข้อมูลดิบใน Raw Intelligence Pack แบบ Claim-by-Claim ติด Label สรุปสถานะ: VERIFIED, PARTIALLY VERIFIED, INCORRECT, REJECTED\n"
-            "2. บังคับใช้ราคาปิดล่าสุดและตัวชี้วัดจาก TradingView Live Quotes 100% ห้ามใช้ราคาเก่าก่อน Stock Split\n\n"
+            "2. บังคับระบุสภาวะบริบทวันที่ (Date Context Mandate):\n"
+            "   - เนื่องจากวันที่ 30 สิงหาคม 2026 ตรงกับวันอาทิตย์ (Weekend) ตลาดปิดทำการ ต้องระบุส่วนหัวรายงานชัดเจนว่าเป็น 'Weekend Edition (ประจำวันที่ 30 สิงหาคม 2026)' และระบุ 'รอบการซื้อขายที่สังเกตการณ์ (Session Observed): ราคาปิดตลาดสหรัฐฯ วันศุกร์ที่ 28 สิงหาคม 2026'\n"
+            "   - ทุกตัวเลขราคาและ % การเปลี่ยนแปลง ต้องยึดตามข้อมูลจริงจาก Live Quotes วันศุกร์ที่ 28 ส.ค. 2026 เทียบกับวันพฤหัสบดีที่ 27 ส.ค. 2026 100% ห้ามสุ่มหรือคำนวณ % ใหม่เด็ดขาด! (ตัวอย่าง: Spot Gold GC=F $4529.90 -2.19%, GLD $408.89 -2.93%, IAU $83.82 -2.88%, GDX $99.65 -3.71%, GDXJ $128.80 -4.27%, NEM $127.98 -3.02%, Barrick Mining B $45.65 -3.55%, DXY 99.68 +0.51%, US 10Y Yield 4.72% +1.03%, VIX 14.43 -0.55%)\n"
+            "   - ราคาทองคำ Spot (GC=F) ปรับตัวลง -2.19% ในทิศทางเดียวกับ GLD (-2.93%) และ GDX (-3.71%) จากแรงกดดันด้านมหภาค (Bond Yield 4.72% + ดอลลาร์ 99.68) ห้ามระบุว่าทองคำ Spot ปรับขึ้น หรืออ้างการเกิด Divergence ปลอมระหว่าง Spot Gold กับ GLD โดยเด็ดขาด!\n"
+            "3. บังคับใช้ Ticker ล่าสุดของ Barrick Mining Corporation เป็น 'B' (formerly GOLD) ห้ามอ้างอิง GOLD เป็นสัญลักษณ์ของ Barrick โดยเด็ดขาด\n"
+            "4. บังคับใส่ค่า RSI (14) และ MACD จาก Live Quotes จริง ห้ามใส่ค่า default เช่น 50.00 หรือ 0.0000 เด็ดขาด\n"
+            "5. ตรวจสอบปฏิทินเศรษฐกิจและวันในสัปดาห์ให้ถูกต้อง 100% ห้ามมีความขัดแย้งภายในเอกสารเด็ดขาด:\n"
+            "   - วันอังคารที่ 1 กันยายน 2026: US ISM Manufacturing PMI\n"
+            "   - วันพุธที่ 2 กันยายน 2026: US Factory Orders / ADP Employment\n"
+            "   - วันศุกร์ที่ 4 กันยายน 2026: US Non-Farm Payrolls (NFP) & Unemployment Rate\n"
+            "   - ห้ามระบุวันพุธที่ 4 กันยายน หรือวันเสาร์ที่ 5 กันยายน เด็ดขาด!\n\n"
             "[PHASE 3 — EDITORIAL INTELLIGENCE (🧠 Chief Financial Editor)]:\n"
             "1. บังคับใช้กฎ DNA กลาง: ทุกการวิเคราะห์ต้องประกอบด้วย (1) 🔎 Evidence (หลักฐาน) ➔ (2) 🧠 Interpretation (การตีความ) ➔ (3) 🎯 Implication (นัยต่อการลงทุน)\n"
             "2. แทรก Confidence Level ให้แก่สัญญาณสำคัญเสมอ (🟢 High: 80-100%, 🟡 Medium: 50-79%, 🔴 Low: 1-49%)\n"

@@ -184,7 +184,7 @@ const server = http.createServer((req, res) => {
 
         let key = keyMap[promptType];
         if (!key) {
-          const match = promptType.match(/^(search|audio|report|info)(V\d+)$/i);
+          const match = promptType.match(/^(search|audio|report|info)(V[0-9]+)$/i);
           if (match) {
             key = match[1] + 'Prompt' + match[2].toUpperCase();
           } else {
@@ -554,13 +554,33 @@ function getJS() {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
             parsed.forEach(pt => {
+              Object.keys(pt).forEach(k => {
+                const match = k.match(/^(search|audio|report|info)(V[0-9]+)$/i);
+                if (match) {
+                  const correctKey = match[1] + 'Prompt' + match[2].toUpperCase();
+                  if (pt[k] && (!pt[correctKey] || !pt[correctKey].trim())) {
+                    pt[correctKey] = pt[k];
+                  }
+                  delete pt[k];
+                }
+              });
+
               const existingIdx = DATA.templates.findIndex(t => t.id === pt.id);
               if (existingIdx >= 0) {
-                DATA.templates[existingIdx] = Object.assign({}, DATA.templates[existingIdx], pt);
+                const orig = DATA.templates[existingIdx];
+                Object.keys(pt).forEach(k => {
+                  if (pt[k] !== undefined && pt[k] !== null) {
+                    if (typeof pt[k] === 'string' && !pt[k].trim() && orig[k] && orig[k].trim()) {
+                      return;
+                    }
+                    orig[k] = pt[k];
+                  }
+                });
               } else {
                 DATA.templates.push(pt);
               }
             });
+            saveLocalState();
           }
         }
       } catch(e){}
@@ -675,7 +695,7 @@ function getJS() {
       };
       if (keyMap[promptType]) return keyMap[promptType];
 
-      const match = promptType.match(/^(search|audio|report|info)(V\d+)$/i);
+      const match = promptType.match(/^(search|audio|report|info)(V[0-9]+)$/i);
       if (match) {
         return match[1] + 'Prompt' + match[2].toUpperCase();
       }

@@ -1,0 +1,50 @@
+{
+  "overall_summary": "ผ่านการตรวจสอบคุณภาพและความถูกต้องเชิงตรรกะ 100% REVISED LOGIC AUDIT CLEAN SIGN-OFF",
+  "audit_log": [
+    {
+      "item": "1. DXY Internal Consistency",
+      "status": "corrected",
+      "details": "Corrected DXY percentage change to consistent -0.03% across report and video script."
+    },
+    {
+      "item": "2. Price Action & Retracement Terminology",
+      "status": "corrected",
+      "details": "Updated terminology from 'Retracement' to 'Futures Expansion & Positive Momentum' to accurately reflect Gold Futures +1.66% gain."
+    },
+    {
+      "item": "3. Price Consolidation Anchor Level",
+      "status": "corrected",
+      "details": "Corrected base anchor level from $4,598 to exact current close $4,674.40."
+    },
+    {
+      "item": "4. Strategic Trigger Calibration",
+      "status": "corrected",
+      "details": "Updated $4,640 level to 'BULLISH CONTINUATION CONFIRMATION' and set new breakout trigger at > $4,697.40 (above daily high)."
+    },
+    {
+      "item": "5. Miner Performance Interpretation",
+      "status": "corrected",
+      "details": "Re-labeled GDX/GDXJ performance as 'Miner Relative Weakness / Divergence' instead of 'ปรับตามราคาทองคำ'."
+    },
+    {
+      "item": "6. Relative Metric Taxonomy",
+      "status": "corrected",
+      "details": "Corrected metric label to 'GDX Relative Performance / Underperformance (-4.60 pp)'."
+    },
+    {
+      "item": "7. Single-Stock Miner Wording",
+      "status": "corrected",
+      "details": "Calibrated NEM to 'relative resilience' (+0.32 pp) and GOLD to 'inline performance' (+0.04 pp)."
+    },
+    {
+      "item": "8. ETF Divergence & Metals Alignment",
+      "status": "corrected",
+      "details": "Updated GLD to 'ETF Divergence' (-1.58% vs Gold +1.66%) and Silver/Platinum to 'Cross-Metal Alignment'."
+    },
+    {
+      "item": "9. Publication Sign-Off Status",
+      "status": "corrected",
+      "details": "Updated sign-off status to PASSED WITH REVISED LOGIC & AUDIT SIGN-OFF."
+    }
+  ]
+}

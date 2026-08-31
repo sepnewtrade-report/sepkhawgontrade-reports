@@ -26,6 +26,7 @@ const CATEGORY_MAP = {
 
   // 🥇 3. Gold Intelligence (วาฬทองคำ)
   'gold_whale_flow': { name: 'Gold Intelligence', thai: 'วาฬทองคำ' },
+  'gold_game_pro': { name: 'Gold Intelligence', thai: 'วาฬทองคำ' },
 
   // 🔮 4. Strategic Intelligence (Weekly Market Outlook)
   'whats_next': { name: 'Strategic Intelligence', thai: 'Weekly Market Outlook' },

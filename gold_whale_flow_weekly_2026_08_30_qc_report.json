@@ -1,0 +1,30 @@
+{
+  "overall_summary": "ดำเนินการ Fact-Check (QC Expert Gate) และบรรณาธิการเชิงกลยุทธ์ (Chief Financial Editor) เรียบร้อยแล้ว โดยแก้ไข Ticker ของ Barrick Mining Corporation เป็น 'B' ปรับแก้ตัวเลขราคา เปอร์เซ็นต์การเปลี่ยนแปลง ค่า RSI (14) และ MACD ให้ตรงตาม Live Quotes วันศุกร์ที่ 28 สิงหาคม 2569 ครบถ้วน ระบุสภาวะบริบทตลาด Weekend Edition พร้อมตรวจสอบความถูกต้องของปฏิทินเศรษฐกิจช่วงต้นเดือนกันยายน 2569 100%",
+  "audit_log": [
+    {
+      "item": "Header Context & Date Mandate",
+      "status": "corrected",
+      "details": "เพิ่มระบุส่วนหัวรายงานเป็น 'Weekend Edition (ประจำวันที่ 30 สิงหาคม 2026)' และกำหนด 'รอบการซื้อขายที่สังเกตการณ์ (Session Observed): ราคาปิดตลาดสหรัฐฯ วันศุกร์ที่ 28 สิงหาคม 2026' เนื่องจากวันที่ 30 ส.ค. 2026 เป็นวันอาทิตย์"
+    },
+    {
+      "item": "Barrick Mining Corporation Ticker",
+      "status": "corrected",
+      "details": "เปลี่ยนสัญลักษณ์ Ticker จาก GOLD เป็น 'B' (formerly GOLD) ตามกฎบังคับของระบบ"
+    },
+    {
+      "item": "Technical Indicators (RSI & MACD)",
+      "status": "corrected",
+      "details": "อัปเดตค่า RSI(14) และ MACD จริงจาก Live Quotes เช่น GC=F (RSI 62.45, MACD 10.1092), GLD (RSI 54.68, MACD 0.6468), GDX (RSI 63.09, MACD 0.7073), B (RSI 56.43, MACD 0.0791), DXY (RSI 48.80, MACD 0.0412), US10Y (RSI 56.38, MACD -0.0050), VIX (RSI 42.70, MACD -0.0002)"
+    },
+    {
+      "item": "Spot Gold & ETF Correlation",
+      "status": "verified_ok",
+      "details": "ยืนยัน Spot Gold GC=F ($4529.90, -2.19%) สอดคล้องไปในทิศทางเดียวกับ GLD ($408.89, -2.93%) และ GDX ($99.65, -3.71%) โดยถูกกดดันจาก Bond Yield 4.72% และ DXY 99.68 ไม่มี Divergence ปลอม"
+    },
+    {
+      "item": "Macro Economic Calendar",
+      "status": "verified_ok",
+      "details": "ตรวจสอบลำดับวันในปฏิทินเศรษฐกิจถูกต้อง: วันอังคารที่ 1 ก.ย. (ISM Manufacturing PMI), วันพุธที่ 2 ก.ย. (ADP / Factory Orders), วันศุกร์ที่ 4 ก.ย. (NFP & Unemployment Rate)"
+    }
+  ]
+}

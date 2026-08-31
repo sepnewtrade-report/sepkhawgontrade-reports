@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Paths to venv executables and profiles
 const VENV_PYTHON = path.join(__dirname, '..', '.venv', 'bin', 'python');
 const VENV_NOTEBOOKLM = path.join(__dirname, '..', '.venv', 'bin', 'notebooklm');
+const CLI_CMD = `"${VENV_PYTHON}" "${VENV_NOTEBOOKLM}"`;
 const SCRIPT_PATH = path.join(__dirname, '..', 'delete_notebooks.py');
 const PROFILES_DIR = path.join(os.homedir(), '.notebooklm', 'profiles');
 const TEMPLATES_FILE = path.join(__dirname, 'templates.json');
@@ -72,7 +73,7 @@ function sanitizeName(name) {
 // Helper to get active profile name from CLI
 function getActiveProfile() {
   return new Promise((resolve) => {
-    exec(`"${VENV_NOTEBOOKLM}" profile list --json`, (error, stdout) => {
+    exec(`${CLI_CMD} profile list --json`, (error, stdout) => {
       if (error) {
         console.error('Error getting active profile:', error);
         return resolve('default');
@@ -145,7 +146,7 @@ function isQuotaError(err) {
 // Helper to get authenticated profiles from the CLI
 async function getAuthenticatedProfiles() {
   try {
-    const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" profile list --json`);
+    const listRes = await runCmd(`${CLI_CMD} profile list --json`);
     const data = JSON.parse(listRes.stdout);
     const active = data.active || 'default';
     const authenticated = data.profiles
@@ -296,7 +297,7 @@ app.post('/api/login', async (req, res) => {
   const activeProfile = await getActiveProfile();
   console.log(`Triggering login flow for profile: ${activeProfile}...`);
   
-  const loginProc = spawn(VENV_NOTEBOOKLM, ['login'], {
+  const loginProc = spawn(VENV_PYTHON, [VENV_NOTEBOOKLM, 'login'], {
     detached: true,
     stdio: 'ignore'
   });
@@ -308,7 +309,7 @@ app.post('/api/login', async (req, res) => {
 
 // Get all profiles list
 app.get('/api/profiles', (req, res) => {
-  exec(`"${VENV_NOTEBOOKLM}" profile list --json`, (error, stdout, stderr) => {
+  exec(`${CLI_CMD} profile list --json`, (error, stdout, stderr) => {
     if (error) {
       console.error('Error listing profiles:', stderr);
       return res.status(500).json({ success: false, error: stderr || error.message });
@@ -330,7 +331,7 @@ app.post('/api/profiles/switch', (req, res) => {
     return res.status(400).json({ success: false, error: 'Invalid profile name' });
   }
   
-  exec(`"${VENV_NOTEBOOKLM}" profile switch "${name}"`, (error, stdout, stderr) => {
+  exec(`${CLI_CMD} profile switch "${name}"`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error switching profile to ${name}:`, stderr);
       return res.status(500).json({ success: false, error: stderr || error.message });
@@ -346,17 +347,17 @@ app.post('/api/profiles/create', (req, res) => {
     return res.status(400).json({ success: false, error: 'Invalid profile name' });
   }
   
-  exec(`"${VENV_NOTEBOOKLM}" profile create "${name}"`, (error, stdout, stderr) => {
+  exec(`${CLI_CMD} profile create "${name}"`, (error, stdout, stderr) => {
     if (error) {
       return res.status(500).json({ success: false, error: stderr || error.message });
     }
     
-    exec(`"${VENV_NOTEBOOKLM}" profile switch "${name}"`, (switchErr, switchOut, switchStderr) => {
+    exec(`${CLI_CMD} profile switch "${name}"`, (switchErr, switchOut, switchStderr) => {
       if (switchErr) {
         return res.status(500).json({ success: false, error: switchStderr || switchErr.message });
       }
       
-      const loginProc = spawn(VENV_NOTEBOOKLM, ['login'], {
+      const loginProc = spawn(VENV_PYTHON, [VENV_NOTEBOOKLM, 'login'], {
         detached: true,
         stdio: 'ignore'
       });
@@ -374,7 +375,7 @@ app.post('/api/profiles/delete', (req, res) => {
     return res.status(400).json({ success: false, error: 'Cannot delete default' });
   }
   
-  exec(`echo y | "${VENV_NOTEBOOKLM}" profile delete "${name}"`, (error, stdout, stderr) => {
+  exec(`echo y | ${CLI_CMD} profile delete "${name}"`, (error, stdout, stderr) => {
     if (error) {
       return res.status(500).json({ success: false, error: stderr || error.message });
     }
@@ -828,6 +829,77 @@ app.post('/api/templates/save', (req, res) => {
     }
     res.json({ success: true, message: 'Templates saved successfully' });
   });
+});
+
+// Save Single Prompt Version (Web App Album)
+app.post('/api/save-prompt', (req, res) => {
+  try {
+    const { templateId, promptType, value } = req.body;
+    let templates = [];
+    if (fs.existsSync(TEMPLATES_FILE)) {
+      templates = JSON.parse(fs.readFileSync(TEMPLATES_FILE, 'utf8'));
+    }
+    const tmpl = templates.find(t => t.id === templateId);
+    if (!tmpl) {
+      return res.status(404).json({ error: 'Template not found' });
+    }
+
+    const keyMap = { 
+      search: 'searchPrompt', 
+      audio: 'audioPrompt', 
+      report: 'reportPrompt', 
+      info: 'infoPrompt'
+    };
+
+    let key = keyMap[promptType];
+    if (!key) {
+      const match = promptType.match(/^(search|audio|report|info)(V[0-9]+)$/i);
+      if (match) {
+        key = match[1] + 'Prompt' + match[2].toUpperCase();
+      } else {
+        key = promptType;
+      }
+    }
+
+    tmpl[key] = value;
+    fs.writeFileSync(TEMPLATES_FILE, JSON.stringify(templates, null, 2), 'utf8');
+    console.log(`💾 บันทึก ${key} ของ "${tmpl.name}" สำเร็จ (via Express)`);
+    res.json({ success: true, key });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Add New Template (Web App Album)
+app.post('/api/add-template', (req, res) => {
+  try {
+    const { id, name, searchPrompt, audioPrompt, reportPrompt, infoPrompt } = req.body;
+    let templates = [];
+    if (fs.existsSync(TEMPLATES_FILE)) {
+      templates = JSON.parse(fs.readFileSync(TEMPLATES_FILE, 'utf8'));
+    }
+    const cleanId = id.toLowerCase().replace(/\s+/g, '_');
+    const existingIdx = templates.findIndex(t => t.id === cleanId);
+    const newTmpl = {
+      id: cleanId,
+      name,
+      searchPrompt: searchPrompt || '',
+      audioPrompt: audioPrompt || '',
+      reportPrompt: reportPrompt || '',
+      infoPrompt: infoPrompt || ''
+    };
+
+    if (existingIdx >= 0) {
+      templates[existingIdx] = Object.assign(templates[existingIdx], newTmpl);
+    } else {
+      templates.push(newTmpl);
+    }
+    fs.writeFileSync(TEMPLATES_FILE, JSON.stringify(templates, null, 2), 'utf8');
+    console.log(`➕ เพิ่ม/อัปเดตรายการ "${name}" (ID: ${cleanId}) สำเร็จ (via Express)`);
+    res.json({ success: true, template: newTmpl });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // Get Workflow Run Status
@@ -1404,7 +1476,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         if (w.resumeWorkflow) {
           try {
             addWorkflowLog(workflowId, `กำลังสแกนค้นหา Notebook เดิมสำหรับหัวข้อ: "${notebookTitle}"...`);
-            const listRes = await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" list --json`);
+            const listRes = await runCmd(`${CLI_CMD} -p "${currentProfile}" list --json`);
             const notebooksData = JSON.parse(listRes.stdout);
             if (notebooksData && Array.isArray(notebooksData.notebooks)) {
               const existingNotebook = notebooksData.notebooks.find(n => n.title === notebookTitle);
@@ -1421,7 +1493,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         
         if (!notebookId) {
           addWorkflowLog(workflowId, `ไม่พบ Notebook เดิม หรือผู้เลือกตั้งค่าให้เริ่มใหม่ กำลังสร้าง Notebook ใหม่: "${notebookTitle}"...`);
-          const createRes = await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" create "${notebookTitle}"`);
+          const createRes = await runCmd(`${CLI_CMD} -p "${currentProfile}" create "${notebookTitle}"`);
           const match = createRes.stdout.match(/Created notebook:\s+([a-f0-9-]+)\s+-/);
           if (!match) {
             throw new Error('ไม่สามารถค้นหา Notebook ID จากผลลัพธ์ของคำสั่งได้:\n' + createRes.stdout);
@@ -1438,7 +1510,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         if (w.resumeWorkflow && notebookId) {
           try {
             addWorkflowLog(workflowId, `กำลังตรวจสอบแหล่งข้อมูลใน Notebook...`);
-            const sourcesRes = await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" source list -n ${notebookId} --json`);
+            const sourcesRes = await runCmd(`${CLI_CMD} -p "${currentProfile}" source list -n ${notebookId} --json`);
             const sourcesList = JSON.parse(sourcesRes.stdout);
             if (sourcesList && Array.isArray(sourcesList.sources) && sourcesList.sources.length > 0) {
               hasSources = true;
@@ -1462,7 +1534,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           
           const fileToUpload = tempTxtFilePath || w.actualFilePath;
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" source add -n ${notebookId} --title "${w.actualSourceTitle}" "${fileToUpload}"`);
+            await runCmd(`${CLI_CMD} -p "${currentProfile}" source add -n ${notebookId} --title "${w.actualSourceTitle}" "${fileToUpload}"`);
           } finally {
             if (tempTxtFilePath) {
               try {
@@ -1532,7 +1604,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         } else if (w.resumeWorkflow) {
           try {
             addWorkflowLog(workflowId, `พยายามดาวน์โหลดไฟล์เสียงที่มีอยู่ใน Notebook...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`, 1, 1000);
+            await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`, 1, 1000);
             addWorkflowLog(workflowId, `ดาวน์โหลดไฟล์เสียงสำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputAudioPath}`);
             audioSuccess = true;
           } catch (dlErr) {
@@ -1546,12 +1618,12 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           const tempAudioPromptPath = path.join(__dirname, `temp_prompt_audio_${Date.now()}.txt`);
           fs.writeFileSync(tempAudioPromptPath, resolvedAudioPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
+            await runCmd(`${CLI_CMD} -p "${currentProfile}" generate audio -n ${notebookId} --format deep-dive --language th --wait --prompt-file "${tempAudioPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempAudioPromptPath); } catch (_) {}
           }
           addWorkflowLog(workflowId, `เสียงสนทนาประมวลผลเสร็จสิ้น กำลังดาวน์โหลดไฟล์เสียง...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`);
+          await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download audio -n ${notebookId} --latest --force "${w.outputAudioPath}"`);
           addWorkflowLog(workflowId, `ดาวน์โหลดเสียงสำเร็จและเซฟไว้ที่: ${w.outputAudioPath}`);
         }
         
@@ -1567,7 +1639,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           } else if (w.resumeWorkflow) {
             try {
               addWorkflowLog(workflowId, `พยายามดาวน์โหลดรายงานโพสต์ Facebook ที่มีอยู่ใน Notebook...`);
-              await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`, 1, 1000);
+              await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`, 1, 1000);
               fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
               addWorkflowLog(workflowId, `ดาวน์โหลดรายงานโพสต์ Facebook สำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputReportPath}`);
               reportSuccess = true;
@@ -1584,12 +1656,12 @@ async function runWorkflowPipelineFromStep3(workflowId) {
             const tempReportPromptPath = path.join(__dirname, `temp_prompt_report_${Date.now()}.txt`);
             fs.writeFileSync(tempReportPromptPath, resolvedReportPrompt, 'utf8');
             try {
-              await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
+              await runCmd(`${CLI_CMD} -p "${currentProfile}" generate report -n ${notebookId} --format custom --language th --wait --prompt-file "${tempReportPromptPath}"`);
             } finally {
               try { fs.unlinkSync(tempReportPromptPath); } catch (_) {}
             }
             addWorkflowLog(workflowId, `รายงานประมวลผลเสร็จสิ้น กำลังดาวน์โหลดเนื้อหารายงาน...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`);
+            await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download report -n ${notebookId} --latest --force "${w.outputReportPath}"`);
             addWorkflowLog(workflowId, `บันทึกรายงานสำรองสำเร็จไว้ที่: ${w.outputReportPath}`);
             
             fbPostContent = fs.readFileSync(w.outputReportPath, 'utf8');
@@ -1611,7 +1683,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
         } else if (w.resumeWorkflow) {
           try {
             addWorkflowLog(workflowId, `พยายามดาวน์โหลดอินโฟกราฟิกที่มีอยู่ใน Notebook...`);
-            await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`, 1, 1000);
+            await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`, 1, 1000);
             addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จรูปสำเร็จและเซฟไว้ที่: ${w.outputInfoPath}`);
             infoSuccess = true;
           } catch (dlErr) {
@@ -1627,12 +1699,12 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           const tempInfoPromptPath = path.join(__dirname, `temp_prompt_info_${Date.now()}.txt`);
           fs.writeFileSync(tempInfoPromptPath, resolvedInfoPrompt, 'utf8');
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
+            await runCmd(`${CLI_CMD} -p "${currentProfile}" generate infographic -n ${notebookId} --orientation landscape --detail standard --language th --wait --prompt-file "${tempInfoPromptPath}"`);
           } finally {
             try { fs.unlinkSync(tempInfoPromptPath); } catch (_) {}
           }
           addWorkflowLog(workflowId, `รูปภาพอินโฟกราฟิกประมวลผลเสร็จสิ้น กำลังดาวน์โหลดรูปภาพ...`);
-          await runCmdWithRetry(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`);
+          await runCmdWithRetry(`${CLI_CMD} -p "${currentProfile}" download infographic -n ${notebookId} --latest --force "${w.outputInfoPath}"`);
           addWorkflowLog(workflowId, `ดาวน์โหลดรูปภาพอินโฟกราฟิกสำเร็จและเซฟไว้ที่: ${w.outputInfoPath}`);
         }
         
@@ -1668,7 +1740,7 @@ async function runWorkflowPipelineFromStep3(workflowId) {
           addWorkflowLog(workflowId, `🔄 กำลังสลับบัญชีอัตโนมัติไปยังบัญชีถัดไป: '${nextProfile}'...`);
           
           try {
-            await runCmd(`"${VENV_NOTEBOOKLM}" -p "${currentProfile}" profile switch "${nextProfile}"`);
+            await runCmd(`${CLI_CMD} -p "${currentProfile}" profile switch "${nextProfile}"`);
             currentProfile = nextProfile;
             addWorkflowLog(workflowId, `✅ สลับบัญชีสำเร็จเป็น '${nextProfile}'! จะเริ่มกระบวนการประมวลผลใหม่อีกครั้ง...`);
           } catch (switchErr) {

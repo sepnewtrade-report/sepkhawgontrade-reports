@@ -21,7 +21,7 @@ EXCLUDED_TICKERS = {
     'NASDAQ', 'SPY', 'QQQ', 'DIA', 'IWM', 'QC', 'XLE', 'FCF', 'ROI',
     'IV', 'P', 'C', 'ITM', 'OTM', 'ATM', 'ATH', 'ATL', 'T', 'Q', 'Y', 'M',
     'AIP', 'FAA', 'GPU', 'CME', 'COMEX', 'NYMEX', 'ICE', 'CBOE', 'EIA', 'IEA', 'ECB', 'BOJ', 'BOE',
-    'ARPAC', 'GMV', 'ARR', 'BMO', 'AMC', 'EUV', 'HBM', 'NPL', 'X', 'ATS', 'WGC', 'GDX', 'GDXJ', 'DXY', 'ICT', 'OI', 'COT', 'AEM', 'KGC', 'AU', 'SGE', 'LBMA', 'GOLD', 'PBOC', 'RBI'
+    'ARPAC', 'GMV', 'ARR', 'BMO', 'AMC', 'EUV', 'HBM', 'NPL', 'X', 'ATS', 'WGC', 'GDX', 'GDXJ', 'DXY', 'ICT', 'OI', 'COT', 'AEM', 'KGC', 'AU', 'SGE', 'LBMA', 'GOLD', 'PBOC', 'RBI', 'CROSS', 'FINAL', 'MEGA', 'TOP', 'RISK', 'SMART', 'IAM', 'WHAT', 'BIG', 'SAAR'
 }
 
 TICKER_MAP = {
