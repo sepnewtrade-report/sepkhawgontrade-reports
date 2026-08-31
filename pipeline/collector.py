@@ -91,7 +91,7 @@ def fetch_single_ticker(ticker):
         # Fetch Options Chain Data if available
         expirations = t.options
         if expirations:
-            today = datetime.today()
+            today = datetime.strptime(datetime.today().strftime("%Y-%m-%d"), "%Y-%m-%d")
             short_exp = None
             short_dte = None
             med_exp = None
@@ -103,13 +103,13 @@ def fetch_single_ticker(ticker):
                     exp_date = datetime.strptime(exp, "%Y-%m-%d")
                     dte = (exp_date - today).days
                     
-                    # Short-term (1-5 DTE)
+                    # Short-term (1-7 DTE)
                     if 1 <= dte <= 7:
                         if short_dte is None or dte < short_dte:
                             short_dte = dte
                             short_exp = exp
                             
-                    # Medium-term (30-45 DTE)
+                    # Medium-term (28-50 DTE)
                     if 28 <= dte <= 50:
                         if med_dte is None or abs(dte - 37) < abs(med_dte - 37):
                             med_dte = dte

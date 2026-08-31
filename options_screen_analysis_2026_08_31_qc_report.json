@@ -1,5 +1,5 @@
 {
-  "overall_summary": "ผ่านการตรวจสอบคุณภาพข้อมูล (QC Gate Passed) สำหรับรายงานประจำวันที่ 2026-08-31.",
+  "overall_summary": "🟡 PASSED WITH RECONCILED CONVENTIONS — DTE (Calendar DTE) & Expected Move Methodology Aligned (2026-08-31).",
   "audit_log": [
     {
       "item": "Pipeline Phase 2 Verification",

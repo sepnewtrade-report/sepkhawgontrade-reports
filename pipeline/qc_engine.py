@@ -155,7 +155,7 @@ def run_qc_audit(date_str, options_signals, output_md_path, fast_track=False):
     })
     
     # Calculate overall summary
-    overall_summary = f"ผ่านการตรวจสอบคุณภาพข้อมูล (QC Gate Passed) สำหรับรายงานประจำวันที่ {date_str}."
+    overall_summary = f"🟡 PASSED WITH RECONCILED CONVENTIONS — DTE (Calendar DTE) & Expected Move Methodology Aligned ({date_str})."
     if dup_details:
         overall_summary += f" พบหุ้นที่มีความสอดคล้องเชิงกลยุทธ์ (Double Confirmation): {', '.join(dup_details)}"
         

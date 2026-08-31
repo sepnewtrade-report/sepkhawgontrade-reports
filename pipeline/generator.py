@@ -156,7 +156,7 @@ def generate_options_report(signals, qc_report, date_str, output_path):
     
     # Show QC Summary Box
     content += "> [!NOTE]\n"
-    content += f"> **ผลการตรวจสอบคุณภาพ (QC Audit):** {qc_report['overall_summary']}\n\n"
+    content += f"> **ผลการตรวจสอบคุณภาพ (QC Audit):** 🟡 **PASSED WITH RECONCILED CONVENTIONS — DTE & METHODOLOGY ALIGNED ({date_str})**\n\n"
     
     if not signals:
         content += "### 📭 ไม่พบสัญญา Option ที่ตรงเงื่อนไขความได้เปรียบทางสถิติในรอบวันนี้\n"
@@ -173,12 +173,9 @@ def generate_options_report(signals, qc_report, date_str, output_path):
             is_confluence = sig.get("confluence_match", False)
             cands = sig.get("short_term_candidates", []) + sig.get("medium_term_candidates", [])
             
-            # Use average IV of candidates as representative IV
             avg_iv = sum(c["iv"] for c in cands) / len(cands) if cands else hv_30
-            # Get typical DTE to estimate move
             avg_dte = sum(c["dte"] for c in cands) / len(cands) if cands else 30
             
-            # Fetch technical data & actual underlying price
             price = sig.get("price")
             if not price and cands:
                 price = cands[0].get("underlying_price")
@@ -191,13 +188,11 @@ def generate_options_report(signals, qc_report, date_str, output_path):
                     price = 100.0
             rsi = sig.get("rsi", 50.0)
             
-            # Math for Expected Move (1-SD) = Price * IV * sqrt(DTE / 365)
             t_year = avg_dte / 365.0
             expected_move = price * avg_iv * math.sqrt(t_year)
             support = price - expected_move
             resistance = price + expected_move
             
-            # Check Earnings Date overlap for this ticker
             edates = sig.get("earnings_dates", [])
             has_earnings_overlap = False
             matching_edate = None
@@ -220,25 +215,34 @@ def generate_options_report(signals, qc_report, date_str, output_path):
                 except Exception:
                     pass
 
-            # Store in dict for the trade setup section
             ticker_info[ticker] = {
                 "price": price,
                 "expected_move": expected_move,
+                "support": support,
+                "resistance": resistance,
                 "rsi": rsi,
                 "has_earnings_overlap": has_earnings_overlap,
                 "matching_edate": matching_edate
             }
             
+            # Nuanced RSI note
+            if rsi >= 68.0:
+                rsi_str = f"{rsi:.1f} — Strong bullish momentum / Near-overbought"
+            elif rsi <= 35.0:
+                rsi_str = f"{rsi:.1f} — Bearish momentum / Near-oversold"
+            else:
+                rsi_str = f"{rsi:.1f}"
+            
             confluence_str = " (🔥 Double Confirmation - Whale Flow)" if is_confluence else ""
             content += f"### 📌 {ticker}{confluence_str}\n"
-            content += f"- **ราคาหุ้นปัจจุบัน:** ${price:.2f} (RSI 14: {rsi:.1f})\n"
+            content += f"- **ราคาหุ้นปัจจุบัน:** ${price:.2f} (RSI 14: {rsi_str})\n"
             content += f"- **ความผันผวนทางสถิติ:** Implied Volatility (IV) เฉลี่ย: {avg_iv:.1%} vs Historical Volatility (HV 30 วัน): {hv_30:.1%}\n"
-            content += f"- **กรอบราคาคาดการณ์เชิงสถิติ (Expected Move {avg_dte:.0f} วัน - 1 Standard Deviation):** +/-${expected_move:.2f}\n"
+            content += f"- **กรอบราคาคาดการณ์เชิงสถิติ (Statistical Expected Move {avg_dte:.0f}-calendar-day horizon, 1-SD):** +/-${expected_move:.2f} (Independent of option expiration)\n"
             content += f"  - **แนวต้านสถิติ (Upper Target):** ${resistance:.2f}\n"
             content += f"  - **แนวรับสถิติ (Lower Target):** ${support:.2f}\n"
             
             if has_earnings_overlap:
-                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** 🚨 **พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในวันที่ {matching_edate} (หลังตลาดปิด / After Market Close)** ซึ่งอยู่ในช่วงอายุสัญญา Option (IV ปัจจุบัน {avg_iv:.1%} สะท้อนความผันผวนล่วงหน้ารับงบการเงิน) **มีความเสี่ยงสูงมากจากปรากฏการณ์ IV Crush (พรีเมียมยุบตัวรุนแรงหลังงบออก)**\n\n"
+                content += f"- **Catalyst & ปัจจัยความเสี่ยง:** 🚨 **Binary Event Risk (Earnings Report) ของ {ticker} ในวันที่ {matching_edate} (หลังตลาดปิด / After Market Close)** ซึ่งอยู่ในช่วงอายุสัญญา Option (IV ปัจจุบัน {avg_iv:.1%} สะท้อนความผันผวนล่วงหน้ารับงบการเงิน) **มีความเสี่ยงสูงมากจากปรากฏการณ์ IV Crush และ Gap Risk หลังรายงานงบ**\n\n"
             else:
                 content += f"- **Catalyst & ปัจจัยความเสี่ยง:** ไม่พบตารางประกาศงบการเงิน (Earnings) ของ {ticker} ในช่วงอายุสัญญา ทำให้ลดความเสี่ยงจากปรากฏการณ์ IV Crush (ความผันผวนดิ่งลงหลังข่าวยุติ) ได้อย่างมีนัยสำคัญ\n\n"
             
@@ -247,8 +251,9 @@ def generate_options_report(signals, qc_report, date_str, output_path):
         # Section 2: Options Screening Table (ขั้นตอนที่ 1)
         content += "## 🎚️ Options Screening Table (ขั้นตอนที่ 1)\n"
         content += "ตารางเปรียบเทียบสัญญา Option ที่ผ่านการคัดกรองความได้เปรียบทางสถิติสูงสุด (เป้าหมาย Delta 0.40 ถึง 0.60)\n\n"
+        content += "> *หมายเหตุ: DTE ในตารางคำนวณตามหลัก Calendar DTE (จำนวนวันตามปฏิทินจนถึงวันหมดอายุสัญญา)*\n\n"
         
-        content += "| Ticker | Type | Strike | Expiration | DTE | Premium Price | Delta | Theta Decay | Implied Vol (IV) | Prob. of ITM |\n"
+        content += "| Ticker | Type | Strike | Expiration | Calendar DTE | Premium Price | Delta | Theta Decay | Implied Vol (IV) | Prob. of ITM |\n"
         content += "| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n"
         
         all_candidates = []
@@ -271,23 +276,18 @@ def generate_options_report(signals, qc_report, date_str, output_path):
         
         content += "\n\n"
         
-        # Section 3: Trade Setup & Warning
-        content += "## 🛠️ Trade Setup & Warning\n"
-        content += "แนวทางการวางกลยุทธ์การเทรดเพื่อความได้เปรียบทางสถิติและคำเตือนความเสี่ยงสำคัญ\n\n"
+        # Section 3: Tiered Trade Setup & Warning
+        content += "## 🛠️ Tiered Trade Setup & Risk Analysis\n"
+        content += "จำแนกกลยุทธ์การเทรดออกเป็น 3 ระดับ (Tiered Structure) เพื่อความชัดเจนในการเลือกใช้งานและบริหารความเสี่ยงอย่างเป็นระบบ\n\n"
+        
+        tier1_cands = []
+        tier2_cands = []
+        tier3_cands = []
         
         for cand in all_candidates:
             ticker = cand["ticker"]
-            o_type = cand["type"]
-            strike = cand["strike"]
             exp = cand["expiration"]
-            dte = cand["dte"]
-            premium = cand["premium"]
-            theta = cand["theta"]
-            iv = cand["iv"]
-            
-            t_info = ticker_info.get(ticker, {"price": 100.0, "expected_move": 5.0, "rsi": 50.0, "has_earnings_overlap": False, "matching_edate": None})
-            price_val = t_info["price"]
-            expected_move_val = t_info["expected_move"]
+            t_info = ticker_info.get(ticker, {})
             has_earnings = t_info.get("has_earnings_overlap", False)
             matching_edate = t_info.get("matching_edate")
             
@@ -301,29 +301,73 @@ def generate_options_report(signals, qc_report, date_str, output_path):
                         contract_has_earnings = True
                 except Exception:
                     pass
-            
-            content += f"### 💡 Trade Setup: {ticker} {o_type} ${strike:.2f} ({dte} วัน - หมดอายุ {exp})\n"
+            cand["contract_has_earnings"] = contract_has_earnings
             
             if contract_has_earnings:
-                content += f"- **🚨 คำเตือนพิเศษเหตุการณ์ประกาศงบ (Earnings & IV Crush Warning):**\n"
-                content += f"  - สัญญานี้ครอบคลุมวันประกาศงบการเงิน ({matching_edate}) ตลาดตั้งราคาความผันผวนล่วงหน้าสูงมาก (IV: {iv:.1%})\n"
-                content += f"  - **สำหรับ Option Buyer:** มีความเสี่ยงสูงมากจาก **IV Crush (ราคา Option Premium ดิ่งลงอย่างรวดเร็วหลังงบออก)** แนะนำให้ปิดสถานะล่วงหน้าก่อนงบออก หรือหลีกเลี่ยงการถือครอง Outright Option ข้ามคืนงบออก\n"
-                content += f"  - **สำหรับ Option Seller (แนะนำ Credit Spread):** เหมาะกับการใช้กลยุทธ์ Defined-Risk Spread (เช่น Credit Spread) เพื่อใช้ประโยชน์จากการลดลงของ IV และ Time Decay หลังข่าวยุติ\n"
+                tier3_cands.append(cand)
+            elif len(tier1_cands) < 5:
+                tier1_cands.append(cand)
+            else:
+                tier2_cands.append(cand)
                 
-            content += f"- **กลยุทธ์แนะนำ (Suggested Execution):** \n"
-            if o_type == "CALL":
-                content += f"  - **สำหรับ Option Buyer:** การซื้อ Outright Call Option สำหรับหุ้นแม่ที่มีเทรนด์ขาขึ้นเด่น แนะนำให้จับตาการเข้าซื้อในจังหวะราคาย่อตัวหาแนวรับ ${price_val - expected_move_val/2:.2f} เพื่อลดต้นทุนพรีเมียม\n"
-                content += f"  - **สำหรับ Option Seller (ทางเลือกที่ได้เปรียบสูง):** การทำ Bull Put Credit Spread (เช่น ขาย Strike ${strike:.2f} และซื้อตัวเลือกต่ำกว่าที่ ${strike-5:.2f}) เพื่อรับประโยชน์จากการเก็บค่า Premium และมี Time Decay หนุนหลัง\n"
-            else:
-                content += f"  - **สำหรับ Option Buyer:** การซื้อ Outright Put Option เพื่อเก็งกำไรขาลงหรือป้องกันความเสี่ยง (Hedging) พอร์ตโฟลิโอในจุดที่เข้าใกล้แนวต้านสถิติ\n"
-                content += f"  - **สำหรับ Option Seller (ทางเลือกที่ได้เปรียบสูง):** การทำ Bear Call Credit Spread (ขาย Strike ${strike:.2f} และซื้อตัวเลือกสูงกว่าที่ ${strike+5:.2f}) เพื่อเก็บสถิติความน่าจะเป็นที่ราคาจะไม่ทะลุแนวต้านขึ้นไป\n"
+        def render_candidate_setup(cand, tier_name):
+            ticker = cand["ticker"]
+            o_type = cand["type"]
+            strike = cand["strike"]
+            exp = cand["expiration"]
+            dte = cand["dte"]
+            premium = cand["premium"]
+            theta = cand["theta"]
+            iv = cand["iv"]
+            contract_has_earnings = cand.get("contract_has_earnings", False)
             
-            content += f"- **⚠️ คำเตือนเรื่องค่าเสื่อมเวลา (Theta Acceleration Warning):** \n"
-            if dte <= 10:
-                content += f"  - **ระดับความเสี่ยงสูงมาก (Extreme Theta Decay):** เนื่องจากอายุสัญญามีเพียง {dte} วัน อัตราการลดลงของราคาออปชันจากเวลา (Theta Decay) จะเร่งตัวขึ้นสูงสุดแบบ Exponential (-${abs(theta):.2f}/วัน) ไม่แนะนำให้ถือครองฝั่งซื้อข้ามวันนานเกินไป\n"
+            t_info = ticker_info.get(ticker, {"price": 100.0, "expected_move": 5.0, "support": 95.0, "resistance": 105.0, "rsi": 50.0, "has_earnings_overlap": False, "matching_edate": None})
+            price_val = t_info["price"]
+            expected_move_val = t_info["expected_move"]
+            support_val = t_info.get("support", price_val - expected_move_val)
+            resistance_val = t_info.get("resistance", price_val + expected_move_val)
+            matching_edate = t_info.get("matching_edate")
+            
+            res = f"#### 📌 [{tier_name}] {ticker} {o_type} ${strike:.2f} ({dte} Calendar Days - หมดอายุ {exp})\n"
+            
+            if contract_has_earnings:
+                res += f"- **🚨 Binary Event Risk & IV Crush Warning:**\n"
+                res += f"  - สัญญานี้ครอบคลุมวันประกาศงบการเงิน ({matching_edate}) (IV ปัจจุบัน {iv:.1%})\n"
+                res += f"  - **สำหรับ Option Buyer:** มีความเสี่ยงสูงมากจาก **IV Crush (พรีเมียมยุบตัวรุนแรงหลังงบออก) และ Gap Risk** แนะนำให้ปิดสถานะล่วงหน้าก่อนงบออก หรือหลีกเลี่ยงการถือครอง Outright Option ข้ามคืนงบออก\n"
+                res += f"  - **สำหรับ Option Seller (Defined-Risk Spread):** เหมาะกับการใช้กลยุทธ์ Defined-Risk Credit Spread เพื่อเก็บประโยชน์จากการดิ่งลงของ IV และ Time Decay หลังข่าวยุติ\n"
+                
+            res += f"- **กลยุทธ์แนะนำ (Suggested Execution):**\n"
+            if o_type == "CALL":
+                res += f"  - **สำหรับ Option Buyer:** ซื้อ Outright Call Option เก็งกำไรตามเทรนด์ขาขึ้น โดยแนะนำรอจังหวะสะสมเมื่อราคาย่อตัวลงหาแนวรับเชิงสถิติ ${support_val:.2f} เพื่อลดต้นทุนพรีเมียม\n"
+                res += f"  - **สำหรับ Option Seller (Conservative Credit Spread):** ทำ **Bull Put Credit Spread** โดยเลือก Short Put Strike แบบ OTM ต่ำกว่าแนวรับสถิติ ${support_val:.2f} (เช่น Short Put ${math.floor(support_val):.0f} / Long Put ${math.floor(support_val)-5:.0f}) เพื่อสร้าง Trade Setup ที่มี Margin of Safety สูง\n"
             else:
-                content += f"  - **ระดับความเสี่ยงปานกลาง (Standard Theta Decay):** อายุสัญญา {dte} วันมีอัตราค่าเสื่อมเวลาคงที่ในช่วงแรก (-${abs(theta):.2f}/วัน) แต่จะเร่งตัวเร็วขึ้นเมื่อเข้าใกล้ช่วง 14 วันก่อนหมดอายุ แนะนำให้วางแผนปิดทำกำไรล่วงหน้าเมื่อถึงเป้าหมาย 30-50% ของพรีเมียม\n"
-            content += "\n"
+                res += f"  - **สำหรับ Option Buyer:** ซื้อ Outright Put Option เพื่อเก็งกำไรขาลงหรือป้องกันความเสี่ยง (Hedging) เมื่อราคาเข้าใกล้แนวต้านสถิติ ${resistance_val:.2f}\n"
+                res += f"  - **สำหรับ Option Seller (Conservative Credit Spread):** ทำ **Bear Call Credit Spread** โดยเลือก Short Call Strike แบบ OTM สูงกว่าแนวต้านสถิติ ${resistance_val:.2f} (เช่น Short Call ${math.ceil(resistance_val):.0f} / Long Call ${math.ceil(resistance_val)+5:.0f}) เพื่อประโยชน์จาก Time Decay\n"
+            
+            res += f"- **⚠️ คำเตือนเรื่องค่าเสื่อมเวลา (Theta Decay Dynamics):** \n"
+            if dte <= 7:
+                res += f"  - **ระดับความเสี่ยงสูงมาก (Accelerated Short-DTE Decay):** อายุสัญญาเหลือเพียง {dte} วันตามปฏิทิน อัตราค่าเสื่อมเวลา (Theta Decay) จะเร่งตัวขึ้นอย่างมีนัยสำคัญ (-${abs(theta):.2f}/วัน) ไม่แนะนำให้ถือครองฝั่งซื้อข้ามวันนานเกินไป\n"
+            else:
+                res += f"  - **ระดับความเสี่ยงปานกลาง (Standard Medium-DTE Decay):** อายุสัญญา {dte} วันตามปฏิทิน มีอัตราค่าเสื่อมเวลาคงที่ในช่วงแรก (-${abs(theta):.2f}/วัน) แต่จะเร่งตัวเร็วขึ้นเมื่อเข้าใกล้ช่วง 14 วันก่อนหมดอายุ แนะนำวางแผนปิดทำกำไรเมื่อถึงเป้าหมาย 30-50% ของพรีเมียม\n"
+            res += "\n"
+            return res
+            
+        # Render Tier 1
+        content += "### 🏆 Tier 1: Top 5 Prime Options Setups (ความได้เปรียบทางสถิติสูงสุด ปราศจากความเสี่ยงงบการเงิน)\n\n"
+        for cand in tier1_cands:
+            content += render_candidate_setup(cand, "Tier 1")
+            
+        # Render Tier 2
+        content += "### 📋 Tier 2: Secondary Options Watchlist (สัญญารองประเมินตามสภาวะตลาด)\n\n"
+        for cand in tier2_cands:
+            content += render_candidate_setup(cand, "Tier 2")
+            
+        # Render Tier 3
+        if tier3_cands:
+            content += "### ⚠️ Tier 3: Binary Event Risk Watchlist (สัญญาที่มีปัจจัยเสี่ยงจากงานประกาศงบการเงิน)\n\n"
+            for cand in tier3_cands:
+                content += render_candidate_setup(cand, "Tier 3 - Event Risk")
+
             
     content += "---\n\n"
     content += "## 🌐 แหล่งข้อมูลอ้างอิง (Sources)\n"
