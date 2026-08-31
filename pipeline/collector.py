@@ -73,10 +73,11 @@ def fetch_single_ticker(ticker):
         }
         
         # Calculate 30-day Historical Volatility (HV)
-        closes = hist['Close'].values
+        closes = hist['Close'].dropna().values
         if len(closes) >= 21:
             log_returns = np.log(closes[1:] / closes[:-1])
-            hv_30 = float(np.std(log_returns) * np.sqrt(252))
+            std_val = float(np.std(log_returns))
+            hv_30 = float(std_val * np.sqrt(252)) if not np.isnan(std_val) and std_val > 0 else 0.35
         else:
             hv_30 = 0.35  # fallback
             
